@@ -17,6 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(loginSuccess), name: .notificationLoginSuccess, object: nil)
+
+
         return true
     }
 
@@ -88,6 +92,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+    // MARK: - Login success notification
+    
+    @objc func loginSuccess(){
+        let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
+        let mfslidemenuContainer = mainStoryBoard.instantiateViewController(withIdentifier: "MFSideMenuContainerViewController") as!MFSideMenuContainerViewController
+        self.window?.rootViewController = nil
+        self.window?.rootViewController = mfslidemenuContainer
+        
+        let centerNavigationController = mainStoryBoard.instantiateViewController(withIdentifier: "navigationController") as! UINavigationController
+        
+        let leftMenuController = mainStoryBoard.instantiateViewController(withIdentifier: "LeftMenuViewController") as! LeftMenuViewController
+        
+        mfslidemenuContainer.leftMenuViewController = leftMenuController
+        mfslidemenuContainer.centerViewController  = centerNavigationController
+        
+    }
 
+    
 }
 
