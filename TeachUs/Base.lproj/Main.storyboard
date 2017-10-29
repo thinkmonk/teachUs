@@ -27,7 +27,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p2b-x3-pn3">
                                 <rect key="frame" x="40" y="318" width="295" height="30"/>
-                                <state key="normal" title="Teacher"/>
+                                <state key="normal" title="Professor"/>
                                 <connections>
                                     <action selector="loginProfessor:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IjK-lk-RXz"/>
                                 </connections>

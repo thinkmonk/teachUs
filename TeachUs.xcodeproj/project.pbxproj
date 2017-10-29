@@ -16,10 +16,14 @@
 		18A627F51F90F9880099C106 /* TeachUsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A627F41F90F9880099C106 /* TeachUsTests.swift */; };
 		18A628001F90F9880099C106 /* TeachUsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A627FF1F90F9880099C106 /* TeachUsUITests.swift */; };
 		620B195E52A0E8351C79F40C /* Pods_TeachUs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9BB4C9AF04CE7C6C6179D7 /* Pods_TeachUs.framework */; };
+		810610B71FA5F4ED0067273E /* OtpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810610B61FA5F4ED0067273E /* OtpView.swift */; };
+		810610B91FA5F4FB0067273E /* OtpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 810610B81FA5F4FB0067273E /* OtpView.xib */; };
+		810610BC1FA65ED20067273E /* Loader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 810610BB1FA65ED20067273E /* Loader.xib */; };
+		810610BE1FA65EE00067273E /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810610BD1FA65EE00067273E /* Loader.swift */; };
+		810610C01FA65FB30067273E /* LoadingActivityHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810610BF1FA65FB30067273E /* LoadingActivityHUD.swift */; };
+		810610C21FA660890067273E /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810610C11FA660890067273E /* Connectivity.swift */; };
 		8137EF531FA109B500045D97 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8137EF521FA109B500045D97 /* LoginViewController.swift */; };
 		8137EF551FA10AD400045D97 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8137EF541FA10AD400045D97 /* Constants.swift */; };
-		8137EF571FA10B4500045D97 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8137EF561FA10B4500045D97 /* TextField.swift */; };
-		8137EF5A1FA10BF000045D97 /* RoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8137EF591FA10BF000045D97 /* RoundedTextField.swift */; };
 		8137EF5C1FA10D6A00045D97 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8137EF5B1FA10D6A00045D97 /* UIView.swift */; };
 		81727B8B1F9E6CB8006433E8 /* MFSideMenuShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 81727B841F9E6CB7006433E8 /* MFSideMenuShadow.m */; };
 		81727B8C1F9E6CB8006433E8 /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 81727B851F9E6CB7006433E8 /* UIViewController+MFSideMenuAdditions.m */; };
@@ -28,6 +32,9 @@
 		81727B921F9E70CC006433E8 /* LeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81727B911F9E70CC006433E8 /* LeftMenuViewController.swift */; };
 		81727B941F9E70EE006433E8 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81727B931F9E70EE006433E8 /* HomeViewController.swift */; };
 		81AE8A061F9FC37B00D49749 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AE8A051F9FC37B00D49749 /* BaseViewController.swift */; };
+		81B190C01FA24E19004A8A72 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B190BF1FA24E19004A8A72 /* LoginView.swift */; };
+		81B190C21FA24E22004A8A72 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81B190C11FA24E22004A8A72 /* LoginView.xib */; };
+		81B190C41FA24F87004A8A72 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B190C31FA24F87004A8A72 /* UIButton.swift */; };
 		920A11AFAE90F34CC18391DA /* Pods_TeachUsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C6207727D93C64473349FD7 /* Pods_TeachUsTests.framework */; };
 		E978D6B26CC720493AF0211B /* Pods_TeachUsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC92E78285678FBDD7A6B3D6 /* Pods_TeachUsUITests.framework */; };
 /* End PBXBuildFile section */
@@ -66,10 +73,14 @@
 		18A627FB1F90F9880099C106 /* TeachUsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TeachUsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18A627FF1F90F9880099C106 /* TeachUsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachUsUITests.swift; sourceTree = "<group>"; };
 		18A628011F90F9880099C106 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		810610B61FA5F4ED0067273E /* OtpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpView.swift; sourceTree = "<group>"; };
+		810610B81FA5F4FB0067273E /* OtpView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OtpView.xib; sourceTree = "<group>"; };
+		810610BB1FA65ED20067273E /* Loader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Loader.xib; sourceTree = "<group>"; };
+		810610BD1FA65EE00067273E /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
+		810610BF1FA65FB30067273E /* LoadingActivityHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingActivityHUD.swift; sourceTree = "<group>"; };
+		810610C11FA660890067273E /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
 		8137EF521FA109B500045D97 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = TeachUs/Viewcontrollers/LoginViewController.swift; sourceTree = SOURCE_ROOT; };
 		8137EF541FA10AD400045D97 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		8137EF561FA10B4500045D97 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
-		8137EF591FA10BF000045D97 /* RoundedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextField.swift; sourceTree = "<group>"; };
 		8137EF5B1FA10D6A00045D97 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		81727B841F9E6CB7006433E8 /* MFSideMenuShadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSideMenuShadow.m; sourceTree = "<group>"; };
 		81727B851F9E6CB7006433E8 /* UIViewController+MFSideMenuAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MFSideMenuAdditions.m"; sourceTree = "<group>"; };
@@ -84,6 +95,9 @@
 		81727B931F9E70EE006433E8 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		817553511B457FEB4E645FC1 /* Pods-TeachUs.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeachUs.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeachUs/Pods-TeachUs.release.xcconfig"; sourceTree = "<group>"; };
 		81AE8A051F9FC37B00D49749 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		81B190BF1FA24E19004A8A72 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		81B190C11FA24E22004A8A72 /* LoginView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
+		81B190C31FA24F87004A8A72 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		9EC3F54968428454792599F1 /* Pods-TeachUsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeachUsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TeachUsTests/Pods-TeachUsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A74956C752400E08B29B3583 /* Pods-TeachUsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeachUsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeachUsTests/Pods-TeachUsTests.release.xcconfig"; sourceTree = "<group>"; };
 		AA2E9E74DAD261463331175E /* Pods-TeachUsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeachUsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TeachUsUITests/Pods-TeachUsUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -192,6 +206,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		810610BA1FA65EAE0067273E /* Loader */ = {
+			isa = PBXGroup;
+			children = (
+				810610BB1FA65ED20067273E /* Loader.xib */,
+				810610BD1FA65EE00067273E /* Loader.swift */,
+				810610BF1FA65FB30067273E /* LoadingActivityHUD.swift */,
+			);
+			path = Loader;
+			sourceTree = "<group>";
+		};
 		8137EF511FA1099D00045D97 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
@@ -203,7 +227,6 @@
 		8137EF581FA10BBF00045D97 /* CustomClass */ = {
 			isa = PBXGroup;
 			children = (
-				8137EF591FA10BF000045D97 /* RoundedTextField.swift */,
 			);
 			path = CustomClass;
 			sourceTree = "<group>";
@@ -223,6 +246,8 @@
 		813EC7691F9BA46200F11A12 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				810610BA1FA65EAE0067273E /* Loader */,
+				81B190BE1FA24DA5004A8A72 /* Login */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -239,8 +264,8 @@
 			isa = PBXGroup;
 			children = (
 				81727B8F1F9E6EB1006433E8 /* Notification.swift */,
-				8137EF561FA10B4500045D97 /* TextField.swift */,
 				8137EF5B1FA10D6A00045D97 /* UIView.swift */,
+				81B190C31FA24F87004A8A72 /* UIButton.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -262,6 +287,7 @@
 		813EC76E1F9BA50C00F11A12 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				810610C11FA660890067273E /* Connectivity.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -287,6 +313,17 @@
 				81727B851F9E6CB7006433E8 /* UIViewController+MFSideMenuAdditions.m */,
 			);
 			path = "Side Menu";
+			sourceTree = "<group>";
+		};
+		81B190BE1FA24DA5004A8A72 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				81B190BF1FA24E19004A8A72 /* LoginView.swift */,
+				81B190C11FA24E22004A8A72 /* LoginView.xib */,
+				810610B61FA5F4ED0067273E /* OtpView.swift */,
+				810610B81FA5F4FB0067273E /* OtpView.xib */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		B143BFC92E5D3AB57FBFE4E4 /* Pods */ = {
@@ -421,7 +458,10 @@
 			files = (
 				18A627EA1F90F9870099C106 /* LaunchScreen.storyboard in Resources */,
 				18A627E71F90F9870099C106 /* Assets.xcassets in Resources */,
+				810610BC1FA65ED20067273E /* Loader.xib in Resources */,
+				810610B91FA5F4FB0067273E /* OtpView.xib in Resources */,
 				18A627E21F90F9870099C106 /* Main.storyboard in Resources */,
+				81B190C21FA24E22004A8A72 /* LoginView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -586,17 +626,21 @@
 			files = (
 				81727B8B1F9E6CB8006433E8 /* MFSideMenuShadow.m in Sources */,
 				81727B8D1F9E6CB8006433E8 /* MFSideMenuContainerViewController.m in Sources */,
+				810610C21FA660890067273E /* Connectivity.swift in Sources */,
 				81727B901F9E6EB1006433E8 /* Notification.swift in Sources */,
 				18A627DF1F90F9870099C106 /* LoginSelectViewController.swift in Sources */,
 				81727B8C1F9E6CB8006433E8 /* UIViewController+MFSideMenuAdditions.m in Sources */,
-				8137EF571FA10B4500045D97 /* TextField.swift in Sources */,
+				81B190C41FA24F87004A8A72 /* UIButton.swift in Sources */,
+				810610B71FA5F4ED0067273E /* OtpView.swift in Sources */,
 				81AE8A061F9FC37B00D49749 /* BaseViewController.swift in Sources */,
+				810610BE1FA65EE00067273E /* Loader.swift in Sources */,
 				81727B941F9E70EE006433E8 /* HomeViewController.swift in Sources */,
+				81B190C01FA24E19004A8A72 /* LoginView.swift in Sources */,
 				18A627DD1F90F9870099C106 /* AppDelegate.swift in Sources */,
 				81727B921F9E70CC006433E8 /* LeftMenuViewController.swift in Sources */,
+				810610C01FA65FB30067273E /* LoadingActivityHUD.swift in Sources */,
 				8137EF5C1FA10D6A00045D97 /* UIView.swift in Sources */,
 				18A627E51F90F9870099C106 /* TeachUs.xcdatamodeld in Sources */,
-				8137EF5A1FA10BF000045D97 /* RoundedTextField.swift in Sources */,
 				8137EF531FA109B500045D97 /* LoginViewController.swift in Sources */,
 				8137EF551FA10AD400045D97 /* Constants.swift in Sources */,
 			);

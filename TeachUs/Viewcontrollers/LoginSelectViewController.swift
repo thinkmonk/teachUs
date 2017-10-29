@@ -16,7 +16,7 @@ enum LoginUserType {
 
 class LoginSelectViewController: BaseViewController {
 
-    var userTyoe:LoginUserType!
+    var userType:LoginUserType!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,17 +36,17 @@ class LoginSelectViewController: BaseViewController {
     }
 
     @IBAction func loginStudent(_ sender: Any) {
-        self.userTyoe = LoginUserType.Student
+        self.userType = LoginUserType.Student
         self.performSegue(withIdentifier: Constants.segues.toLoginView, sender: self)
     }
     
     @IBAction func loginProfessor(_ sender: Any) {
-        self.userTyoe = LoginUserType.Professor
+        self.userType = LoginUserType.Professor
         self.performSegue(withIdentifier: Constants.segues.toLoginView, sender: self)
     }
 
     @IBAction func loginCollege(_ sender: Any) {
-        self.userTyoe = LoginUserType.College
+        self.userType = LoginUserType.College
         self.performSegue(withIdentifier: Constants.segues.toLoginView, sender: self)
     }
 
@@ -56,8 +56,8 @@ class LoginSelectViewController: BaseViewController {
             let backItem = UIBarButtonItem()
             backItem.title = "Back"
             navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
-            if let destinationVC:LoginViewController = segue.destination as! LoginViewController {
-                destinationVC.usertype = self.userTyoe
+            if let destinationVC:LoginViewController = segue.destination as? LoginViewController {
+                destinationVC.usertype = self.userType
             }
             
 
