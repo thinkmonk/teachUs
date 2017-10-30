@@ -12,6 +12,7 @@ class LoginViewController: BaseViewController {
 
     var studentLoginView:LoginView!
     var StudentOtpView:OtpView!
+    var collegeLogin:CollegeLogin!
     var username:String = ""
     
     var usertype:LoginUserType!
@@ -46,7 +47,13 @@ class LoginViewController: BaseViewController {
             studentLoginView.setUpView()
             studentLoginView.showView(inView: self.view)
             studentLoginView.delegate = self
-        default:
+            break
+        case .College:
+            collegeLogin = CollegeLogin.instanceFromNib() as! CollegeLogin
+            collegeLogin.delegate = self
+            collegeLogin.setUpView()
+            collegeLogin.showView(inView: self.view)
+            collegeLogin.setUpSelectCollegeView()
             break
         }
         
@@ -106,6 +113,22 @@ extension LoginViewController:OtpDelegate{
     }
     
     func verifyOtp() {
+        
+    }
+}
+
+extension LoginViewController:CollegeLoginDelegate{
+    func sendCollegeOtp() {
+        showEnterOtpView()
+    }
+    
+    func showEnterOtpView(){
+        if(self.collegeLogin != nil){
+            collegeLogin.setUpVerifyOtpView()
+        }
+    }
+    
+    func verifyCollegeOtp() {
         
     }
 }

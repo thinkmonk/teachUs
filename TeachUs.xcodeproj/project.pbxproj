@@ -31,6 +31,8 @@
 		81727B901F9E6EB1006433E8 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81727B8F1F9E6EB1006433E8 /* Notification.swift */; };
 		81727B921F9E70CC006433E8 /* LeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81727B911F9E70CC006433E8 /* LeftMenuViewController.swift */; };
 		81727B941F9E70EE006433E8 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81727B931F9E70EE006433E8 /* HomeViewController.swift */; };
+		81A523951FA7955600B3B557 /* CollegeLogin.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81A523941FA7955600B3B557 /* CollegeLogin.xib */; };
+		81A523971FA7956100B3B557 /* CollegeLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A523961FA7956100B3B557 /* CollegeLogin.swift */; };
 		81AE8A061F9FC37B00D49749 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AE8A051F9FC37B00D49749 /* BaseViewController.swift */; };
 		81B190C01FA24E19004A8A72 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B190BF1FA24E19004A8A72 /* LoginView.swift */; };
 		81B190C21FA24E22004A8A72 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81B190C11FA24E22004A8A72 /* LoginView.xib */; };
@@ -94,6 +96,8 @@
 		81727B911F9E70CC006433E8 /* LeftMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftMenuViewController.swift; sourceTree = "<group>"; };
 		81727B931F9E70EE006433E8 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		817553511B457FEB4E645FC1 /* Pods-TeachUs.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeachUs.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeachUs/Pods-TeachUs.release.xcconfig"; sourceTree = "<group>"; };
+		81A523941FA7955600B3B557 /* CollegeLogin.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollegeLogin.xib; sourceTree = "<group>"; };
+		81A523961FA7956100B3B557 /* CollegeLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeLogin.swift; sourceTree = "<group>"; };
 		81AE8A051F9FC37B00D49749 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		81B190BF1FA24E19004A8A72 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		81B190C11FA24E22004A8A72 /* LoginView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
@@ -322,6 +326,8 @@
 				81B190C11FA24E22004A8A72 /* LoginView.xib */,
 				810610B61FA5F4ED0067273E /* OtpView.swift */,
 				810610B81FA5F4FB0067273E /* OtpView.xib */,
+				81A523961FA7956100B3B557 /* CollegeLogin.swift */,
+				81A523941FA7955600B3B557 /* CollegeLogin.xib */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -459,6 +465,7 @@
 				18A627EA1F90F9870099C106 /* LaunchScreen.storyboard in Resources */,
 				18A627E71F90F9870099C106 /* Assets.xcassets in Resources */,
 				810610BC1FA65ED20067273E /* Loader.xib in Resources */,
+				81A523951FA7955600B3B557 /* CollegeLogin.xib in Resources */,
 				810610B91FA5F4FB0067273E /* OtpView.xib in Resources */,
 				18A627E21F90F9870099C106 /* Main.storyboard in Resources */,
 				81B190C21FA24E22004A8A72 /* LoginView.xib in Resources */,
@@ -641,6 +648,7 @@
 				810610C01FA65FB30067273E /* LoadingActivityHUD.swift in Sources */,
 				8137EF5C1FA10D6A00045D97 /* UIView.swift in Sources */,
 				18A627E51F90F9870099C106 /* TeachUs.xcdatamodeld in Sources */,
+				81A523971FA7956100B3B557 /* CollegeLogin.swift in Sources */,
 				8137EF531FA109B500045D97 /* LoginViewController.swift in Sources */,
 				8137EF551FA10AD400045D97 /* Constants.swift in Sources */,
 			);
