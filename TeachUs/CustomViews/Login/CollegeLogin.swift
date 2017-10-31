@@ -17,8 +17,9 @@ protocol CollegeLoginDelegate {
 class CollegeLogin: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     
     @IBOutlet weak var viewCollege: UIView!
-    @IBOutlet weak var labelCollegeName: UILabel!
     @IBOutlet weak var buttonSelectCollege: UIButton!
+    @IBOutlet weak var textfieldCollegeName: UITextField!
+    
     
     @IBOutlet weak var viewsendOtp: UIView!
     
@@ -37,7 +38,7 @@ class CollegeLogin: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     var delegate:CollegeLoginDelegate!
     var userType:LoginUserType!
     let picker = UIPickerView()
-    var pickerDataSourceArray = ["Bangladesh","India","Pakistan","USA"]
+    var pickerDataSourceArray = ["Bangladesh","India","Pakistan","USA","Bangladesh","India","Pakistan","USA","Bangladesh","India","Pakistan","USA"]
     var mobileNumber = ""
 
     
@@ -55,10 +56,14 @@ class CollegeLogin: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
             .map { $0.characters.count == 10 }
             .share(replay: 1) // without this map would be executed once for each binding, rx is stateless by default
         
-        mobileNumberValid
-            .bind(to: buttonSendOtp.rx.isHidden)
-            .disposed(by: disposeBag)
-
+        mobileNumberValid.subscribe(onNext:{ isValid in
+            if(isValid){
+                self.buttonSendOtp.alpha = 1;
+            }
+            else{
+                self.buttonSendOtp.alpha = 0;
+            }
+        }).disposed(by: disposeBag)
     }
     
     func setUpView(){
@@ -73,26 +78,43 @@ class CollegeLogin: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         self.buttonVerifyOtp.roundedRedButton()
     }
     
+    @IBAction func showCollegeView(_ sender: Any) {
+        self.textfieldCollegeName.becomeFirstResponder()
+    }
     
     func setUpSelectCollegeView(){
         self.viewsendOtp.alpha = 0
         self.viewVerifyOtp.alpha = 0
         
-        picker.delegate = self
-        picker.dataSource = self
 
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.setUpColleges(_:)))
         self.viewCollege.addGestureRecognizer(tap)
         self.viewCollege.isUserInteractionEnabled = true
 
-        self.picker.frame = CGRect(x: 0.0, y: (self.height()-280), width: self.width(), height: 280.0)
-        self.addSubview(self.picker)
-        self.picker.isHidden = true
+        self.picker.showsSelectionIndicator = true
+        self.picker.delegate = self
+        self.picker.dataSource = self
+        self.picker.frame = CGRect(x: 0.0, y: 0, width: self.width(), height: 216)
+        
+        let toolBar = UIToolbar()
+        toolBar.barStyle = UIBarStyle.default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1)
+        toolBar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(donePicker))
+        
+        toolBar.setItems([doneButton], animated: true)
+        toolBar.isUserInteractionEnabled = true
+        self.textfieldCollegeName.becomeFirstResponder()
+        self.textfieldCollegeName.inputView = picker
+        self.textfieldCollegeName.inputAccessoryView = toolBar
+
     }
+    
     
     @objc func setUpColleges(_ sender: UITapGestureRecognizer) {
         self.viewsendOtp.alpha = 0
-        self.picker.isHidden = false
     }
     
     
@@ -153,9 +175,11 @@ class CollegeLogin: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         return pickerDataSourceArray[row]
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        labelCollegeName.text = pickerDataSourceArray[row]
-        self.picker.isHidden = true
-        self.endEditing(false)
+        self.textfieldCollegeName.text = pickerDataSourceArray[row]
+    }
+    
+    @objc func donePicker(){
+        self.textfieldCollegeName.resignFirstResponder()
         self.viewsendOtp.alpha = 1
     }
 }

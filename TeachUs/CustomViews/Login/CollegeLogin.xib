@@ -20,12 +20,12 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bht-Rs-iKA">
                     <rect key="frame" x="15" y="20" width="345" height="35"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="College" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JUQ-CO-GxI">
-                            <rect key="frame" x="10" y="9" width="290" height="18"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Select a college." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="88n-8l-pjm">
+                            <rect key="frame" x="15" y="8.5" width="290" height="17"/>
                             <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hwj-RS-mbG">
                             <rect key="frame" x="310" y="6.5" width="20" height="22"/>
                             <constraints>
@@ -33,16 +33,19 @@
                                 <constraint firstAttribute="height" constant="22" id="gNY-aX-UBO"/>
                             </constraints>
                             <state key="normal" image="dropdown"/>
+                            <connections>
+                                <action selector="showCollegeView:" destination="iN0-l3-epB" eventType="touchUpInside" id="QY5-By-Rgy"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="JUQ-CO-GxI" firstAttribute="centerY" secondItem="hwj-RS-mbG" secondAttribute="centerY" id="IID-eG-zM9"/>
-                        <constraint firstItem="JUQ-CO-GxI" firstAttribute="leading" secondItem="Bht-Rs-iKA" secondAttribute="leading" constant="10" id="PA4-iG-4xl"/>
-                        <constraint firstItem="hwj-RS-mbG" firstAttribute="leading" secondItem="JUQ-CO-GxI" secondAttribute="trailing" constant="10" id="bcC-J1-rg1"/>
+                        <constraint firstItem="hwj-RS-mbG" firstAttribute="centerY" secondItem="88n-8l-pjm" secondAttribute="centerY" id="MRq-Fy-xxj"/>
                         <constraint firstAttribute="trailing" secondItem="hwj-RS-mbG" secondAttribute="trailing" constant="15" id="jva-2X-IVk"/>
-                        <constraint firstItem="JUQ-CO-GxI" firstAttribute="centerY" secondItem="Bht-Rs-iKA" secondAttribute="centerY" id="mZa-XK-epI"/>
+                        <constraint firstItem="88n-8l-pjm" firstAttribute="leading" secondItem="Bht-Rs-iKA" secondAttribute="leading" constant="15" id="ocA-Nf-BBO"/>
+                        <constraint firstItem="hwj-RS-mbG" firstAttribute="leading" secondItem="88n-8l-pjm" secondAttribute="trailing" constant="5" id="uGA-PB-ACz"/>
                         <constraint firstAttribute="height" constant="35" id="wgP-cC-p5c"/>
+                        <constraint firstItem="88n-8l-pjm" firstAttribute="centerY" secondItem="Bht-Rs-iKA" secondAttribute="centerY" id="yLS-aY-sA7"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oo3-jm-3j8">
@@ -157,11 +160,11 @@
                 <outlet property="buttonSelectCollege" destination="hwj-RS-mbG" id="qTC-o6-DnX"/>
                 <outlet property="buttonSendOtp" destination="VR9-6U-ajU" id="kwI-7c-UI7"/>
                 <outlet property="buttonVerifyOtp" destination="9D3-rh-1LY" id="Kae-YN-abt"/>
-                <outlet property="labelCollegeName" destination="JUQ-CO-GxI" id="m8h-Rb-4AT"/>
                 <outlet property="labelMobileNumber" destination="agf-v7-lu0" id="05e-FP-Wfg"/>
                 <outlet property="stackViewEnterOTp" destination="7Hx-Jh-wGI" id="ClM-Vt-IgM"/>
                 <outlet property="textFieldMobileNumber" destination="FzZ-yn-JJ7" id="Aa0-LD-tXQ"/>
                 <outlet property="textFieldOtp" destination="Zw7-uq-Msu" id="kkO-PA-XaK"/>
+                <outlet property="textfieldCollegeName" destination="88n-8l-pjm" id="kxz-5m-rNh"/>
                 <outlet property="viewCollege" destination="Bht-Rs-iKA" id="JA9-78-lsz"/>
                 <outlet property="viewMobileNumberTf" destination="Msb-dC-bFg" id="oTl-Wc-cjw"/>
                 <outlet property="viewVerifyOtp" destination="zEM-kO-hsL" id="eps-9P-B25"/>
