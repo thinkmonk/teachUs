@@ -17,4 +17,23 @@ public struct Constants {
         static let themeRed = UIColor(red: 198/255, green: 0/255, blue: 0/255, alpha: 1)
         static let themeBlue = UIColor(red: 52/255, green: 175/255, blue: 255/255, alpha: 1)
     }
+    
+    struct viewControllerId {
+        static let professorAttendance = "ProfessorAttedanceViewControllerID"
+        static let professorSyllabusStatus = "SyllabusStatusListViewControllerId"
+        static let professorLogs = "ProfessorLogsListViewControllerId"
+    }
+    
+    struct UserDefaults {
+        static let accesToken = "AppUserAccessToken"
+        static let userId = "UserId"
+    }
+    
+    struct NumberConstants {
+        static let homeTabBarHeight = 40.0;
+    }
+    
+    struct CustomCellId {
+        static let ProfessorCollegeList = "professorCollegeList"
+    }
 }

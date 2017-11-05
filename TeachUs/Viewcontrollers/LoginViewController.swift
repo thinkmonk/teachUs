@@ -113,7 +113,7 @@ extension LoginViewController:OtpDelegate{
     }
     
     func verifyOtp() {
-        
+        NotificationCenter.default.post(name: .notificationLoginSuccess, object: nil)
     }
 }
 
@@ -129,6 +129,6 @@ extension LoginViewController:CollegeLoginDelegate{
     }
     
     func verifyCollegeOtp() {
-        
+        NotificationCenter.default.post(name: .notificationLoginSuccess, object: nil)
     }
 }
