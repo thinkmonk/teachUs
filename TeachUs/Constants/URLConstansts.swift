@@ -10,12 +10,12 @@ import Foundation
 public struct URLConstants{
 
     struct BaseUrl {
-        static let baseURL = "http://ec2-34-215-84-223.us-west-2.compute.amazonaws.com:8081/teachus/"
+        static let baseURL = "http://ec2-34-215-84-223.us-west-2.compute.amazonaws.com:8081/teachus"
     }
     
     struct TecacherURL {
-        static let collegeSummary = BaseUrl.baseURL + "teacher/getCollegeSummary/"
-        static let getEnrolledStudents = BaseUrl.baseURL + "teacher/getEnrolledStudentList"
+        static let collegeSummary = BaseUrl.baseURL + "/teacher/getCollegeSummary/"
+        static let getEnrolledStudents = BaseUrl.baseURL + "/teacher/getEnrolledStudentList"
     }
     
     struct StudentURL {

@@ -57,6 +57,20 @@ class ProfessorAttedanceViewController: BaseViewController {
     func makeCollegesTableView(){
         viewCollegeList = CollegeList.instanceFromNib() as! CollegeList
         viewCollegeList.setUpTableView(arrayCollegeList!)
+        viewCollegeList.delegate = self
         viewCollegeList.showView(self.view)
     }
+}
+
+extension ProfessorAttedanceViewController:CollegeListDelegate{
+    
+    func selectedSubject(_ subject: CollegeSubjects) {
+            let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+
+            let destinationVC:StudentsListViewController =  storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.studentList) as! StudentsListViewController
+            destinationVC.subject = subject
+            
+            self.parentNavigationController?.pushViewController(destinationVC, animated: true)
+    }
+    
 }

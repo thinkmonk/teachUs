@@ -162,10 +162,10 @@
             </objects>
             <point key="canvasLocation" x="2729" y="1415"/>
         </scene>
-        <!--View Controller-->
+        <!--Students List View Controller-->
         <scene sceneID="08M-2Z-7A0">
             <objects>
-                <viewController storyboardIdentifier="newViewControllerId" id="J2l-lX-T3q" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StudentAttedanceViewControllerId" id="J2l-lX-T3q" customClass="StudentsListViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TUi-sU-dPL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

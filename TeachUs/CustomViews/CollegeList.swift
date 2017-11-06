@@ -8,11 +8,16 @@
 
 import UIKit
 
+protocol CollegeListDelegate {
+    func selectedSubject(_ collegeSubject:CollegeSubjects)
+}
+
 class CollegeList: UIView {
 
     @IBOutlet weak var tableviewCollegeList: UITableView!
     let nibCollegeListCell = "ProfessorCollegeListTableViewCell"
     var arrayDataSource : [College] = []
+    var delegate:CollegeListDelegate!
     
     func showView(_ inView:UIView){
         self.alpha = 0.0
@@ -74,7 +79,8 @@ extension CollegeList:UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: tableView.sectionHeaderHeight))
         
-        let labelTitle = UILabel(frame: CGRect(x: 15.0, y: headerView.height()/2, width: headerView.width(), height: 20))
+        let labelTitle = UILabel(frame: CGRect(x: 15.0, y: headerView.height()/2, width: headerView.width(), height: 15))
+        labelTitle.center.y = headerView.centerY()
         labelTitle.textAlignment = .left
         labelTitle.textColor = UIColor.white
         labelTitle.text = self.arrayDataSource[section].name
@@ -94,4 +100,9 @@ extension CollegeList:UITableViewDelegate, UITableViewDataSource{
         return 44.0
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if(delegate != nil){
+            delegate.selectedSubject(self.arrayDataSource[indexPath.section].collegeSubjects[indexPath.row])
+        }
+    }
 }

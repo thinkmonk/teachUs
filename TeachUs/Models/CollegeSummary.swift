@@ -79,6 +79,5 @@ public class CollegeSubjects:Mappable{
         self.section <- map["secion"]
         self.enrolledStudentListUrl <- map["enrolledStudentListUrl"]
     }
-
     
 }
