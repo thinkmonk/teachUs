@@ -22,6 +22,8 @@
 		810610BE1FA65EE00067273E /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810610BD1FA65EE00067273E /* Loader.swift */; };
 		810610C01FA65FB30067273E /* LoadingActivityHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810610BF1FA65FB30067273E /* LoadingActivityHUD.swift */; };
 		810610C21FA660890067273E /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810610C11FA660890067273E /* Connectivity.swift */; };
+		8126312A1FB2289200CD80D6 /* AttendanceStudentListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812631281FB2289200CD80D6 /* AttendanceStudentListTableViewCell.swift */; };
+		8126312B1FB2289200CD80D6 /* AttendanceStudentListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 812631291FB2289200CD80D6 /* AttendanceStudentListTableViewCell.xib */; };
 		8137EF531FA109B500045D97 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8137EF521FA109B500045D97 /* LoginViewController.swift */; };
 		8137EF551FA10AD400045D97 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8137EF541FA10AD400045D97 /* Constants.swift */; };
 		8137EF5C1FA10D6A00045D97 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8137EF5B1FA10D6A00045D97 /* UIView.swift */; };
@@ -106,6 +108,8 @@
 		810610BD1FA65EE00067273E /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		810610BF1FA65FB30067273E /* LoadingActivityHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingActivityHUD.swift; sourceTree = "<group>"; };
 		810610C11FA660890067273E /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
+		812631281FB2289200CD80D6 /* AttendanceStudentListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceStudentListTableViewCell.swift; sourceTree = "<group>"; };
+		812631291FB2289200CD80D6 /* AttendanceStudentListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AttendanceStudentListTableViewCell.xib; sourceTree = "<group>"; };
 		8137EF521FA109B500045D97 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = TeachUs/Viewcontrollers/LoginViewController.swift; sourceTree = SOURCE_ROOT; };
 		8137EF541FA10AD400045D97 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8137EF5B1FA10D6A00045D97 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
@@ -451,6 +455,8 @@
 			children = (
 				81F78EAA1FB0DFE600A016B0 /* AttendanceCalenderTableViewCell.swift */,
 				81F78EAB1FB0DFE600A016B0 /* AttendanceCalenderTableViewCell.xib */,
+				812631281FB2289200CD80D6 /* AttendanceStudentListTableViewCell.swift */,
+				812631291FB2289200CD80D6 /* AttendanceStudentListTableViewCell.xib */,
 			);
 			path = "Mark Attendance";
 			sourceTree = "<group>";
@@ -585,6 +591,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8126312B1FB2289200CD80D6 /* AttendanceStudentListTableViewCell.xib in Resources */,
 				81F78EAD1FB0DFE600A016B0 /* AttendanceCalenderTableViewCell.xib in Resources */,
 				18A627EA1F90F9870099C106 /* LaunchScreen.storyboard in Resources */,
 				81C208521FAF4182003D366D /* ProfessorCollegeListTableViewCell.xib in Resources */,
@@ -772,6 +779,7 @@
 				81C208511FAF4182003D366D /* ProfessorCollegeListTableViewCell.swift in Sources */,
 				81D7CE9A1FAB9A1D00C4375E /* UserManager.swift in Sources */,
 				81727B8C1F9E6CB8006433E8 /* UIViewController+MFSideMenuAdditions.m in Sources */,
+				8126312A1FB2289200CD80D6 /* AttendanceStudentListTableViewCell.swift in Sources */,
 				81D7CE831FAB8E5D00C4375E /* CAPSPageMenu+UIGestureRecognizerDelegate.swift in Sources */,
 				81A80EDB1FAE14A400DDFFA1 /* NetworkHandler.swift in Sources */,
 				81D7CE841FAB8E5D00C4375E /* CAPSPageMenu+UIConfiguration.swift in Sources */,
