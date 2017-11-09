@@ -44,6 +44,12 @@ class HomeViewController: BaseViewController {
         // or use pageMenu controller in you view hierachy as desired
         self.view.addSubview(pageMenu!.view)
         
+        self.title = "\(UserManager.sharedUserManager.userFullName)"
+        
+        let buttonHamburger = UIBarButtonItem(image: UIImage(named: Constants.Images.hamburger), style: .plain, target: self, action: #selector(HomeViewController.hamburgerAction))
+        self.navigationItem.leftBarButtonItem  = buttonHamburger
+
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,6 +59,12 @@ class HomeViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.addColorToNavBarText(color: UIColor.white)
+    }
+    
+    @objc func hamburgerAction() {
+        self.menuContainerViewController.toggleLeftSideMenuCompletion(nil)
+//        pageMenu?.moveToPage(2)
     }
 
     func makeDataSource(){

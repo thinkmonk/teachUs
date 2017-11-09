@@ -14,6 +14,12 @@ class UserManager{
     var user:LoginUserType!
     var isAdmin = false
     var isSuperAdmin = false;
+    var userName:String = ""
+    var userMiddleName:String = ""
+    var userLastName:String = ""
+    var userFullName:String{
+        return "\(self.userName) \(self.userMiddleName) \(self.userLastName)"
+    }
     
     func setAccessToken(_ token:String){
         UserDefaults.standard.set(token, forKey: Constants.UserDefaults.accesToken)

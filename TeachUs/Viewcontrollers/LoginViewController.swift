@@ -90,7 +90,7 @@ extension LoginViewController:LoginDelegate{
     
     func setUpOtpView(){
         StudentOtpView = OtpView.instanceFromNib() as! OtpView
-        StudentOtpView.username = self.username
+        StudentOtpView.username = UserManager.sharedUserManager.userFullName
         StudentOtpView.mobileNumber = "+919619201282 isko set kar"
         StudentOtpView.userType = self.usertype
         StudentOtpView.setUpSendOtpView()

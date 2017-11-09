@@ -13,6 +13,10 @@ public struct Constants {
         static let toLoginView = "loginSelect"
     }
     
+    struct Images {
+        static let hamburger = "hamburger"
+    }
+    
     struct  colors {
         static let themeRed = UIColor(red: 198/255, green: 0/255, blue: 0/255, alpha: 1)
         static let themeBlue = UIColor(red: 52/255, green: 175/255, blue: 255/255, alpha: 1)

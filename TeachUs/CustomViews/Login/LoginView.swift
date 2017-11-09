@@ -114,6 +114,9 @@ class LoginView: UIView, UITextFieldDelegate {
     
     @IBAction func submitUserDetails(_ sender: Any) {
         if(self.delegate != nil){
+            UserManager.sharedUserManager.userName = self.textfieldFirstName.text!
+            UserManager.sharedUserManager.userMiddleName = self.textfieldMiddleName.text!
+            UserManager.sharedUserManager.userLastName = self.textfieldSurname.text!
             delegate.submitDetails()
         }
     }
