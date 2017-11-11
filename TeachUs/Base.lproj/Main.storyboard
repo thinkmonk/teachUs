@@ -169,13 +169,28 @@
                     <view key="view" contentMode="scaleToFill" id="TUi-sU-dPL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CXL-DI-gCU">
+                                <rect key="frame" x="15" y="64" width="345" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="CXL-DI-gCU" firstAttribute="bottom" secondItem="ppD-0d-IwX" secondAttribute="bottom" id="CY9-nO-DyH"/>
+                            <constraint firstAttribute="trailing" secondItem="CXL-DI-gCU" secondAttribute="trailing" constant="15" id="T5B-Yc-1eL"/>
+                            <constraint firstItem="CXL-DI-gCU" firstAttribute="leading" secondItem="ppD-0d-IwX" secondAttribute="leading" constant="15" id="w57-cM-jfU"/>
+                            <constraint firstItem="CXL-DI-gCU" firstAttribute="top" secondItem="ppD-0d-IwX" secondAttribute="top" id="yPM-rL-bGR"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="ppD-0d-IwX"/>
                     </view>
+                    <connections>
+                        <outlet property="tableStudentList" destination="CXL-DI-gCU" id="cX0-fS-LfW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bwb-EL-Y4c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3577" y="1415"/>
+            <point key="canvasLocation" x="3500" y="1415"/>
         </scene>
         <!--Syllabus Status List View Controller-->
         <scene sceneID="ZrB-nX-ZAd">

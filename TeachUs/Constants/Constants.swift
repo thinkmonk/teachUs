@@ -40,5 +40,10 @@ public struct Constants {
     
     struct CustomCellId {
         static let ProfessorCollegeList = "professorCollegeList"
+        static let AttendanceCalenderTableViewCellId = "AttendanceCalenderTableViewCellId"
+        static let AttendanceStudentListTableViewCellId = "AttendanceStudentListTableViewCellId"
+        static let DefaultSelectionTableViewCellId = "DefaultSelectionTableViewCellId"
+        static let AttendanceCountTableViewCellId = "AttendanceCountTableViewCellId"
+
     }
 }

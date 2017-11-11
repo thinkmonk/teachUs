@@ -9,7 +9,12 @@
 import UIKit
 
 class AttendanceCalenderTableViewCell: UITableViewCell {
-
+    @IBOutlet weak var textFieldFromTime: UITextField!
+    @IBOutlet weak var textFieldToTime: UITextField!
+    @IBOutlet weak var textFieldNumberOfLectures: UITextField!
+    @IBOutlet weak var buttonEdit: UIButton!
+    @IBOutlet weak var labelDate: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
