@@ -39,7 +39,10 @@
 		81727B901F9E6EB1006433E8 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81727B8F1F9E6EB1006433E8 /* Notification.swift */; };
 		81727B921F9E70CC006433E8 /* LeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81727B911F9E70CC006433E8 /* LeftMenuViewController.swift */; };
 		81727B941F9E70EE006433E8 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81727B931F9E70EE006433E8 /* HomeViewController.swift */; };
+		817BDAE51FB898C700492822 /* ButtonWithIndexPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817BDAE41FB898C700492822 /* ButtonWithIndexPath.swift */; };
 		818C26081FB6FAFF002638E5 /* StudentAttendance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818C26071FB6FAFF002638E5 /* StudentAttendance.swift */; };
+		819216EB1FB81BA6009B56C0 /* ViewNumberPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 819216E91FB81BA5009B56C0 /* ViewNumberPicker.xib */; };
+		819216EC1FB81BA6009B56C0 /* ViewNumberPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819216EA1FB81BA6009B56C0 /* ViewNumberPicker.swift */; };
 		819AADEF1FB6DBBD0061C471 /* DefaultSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819AADED1FB6DBBD0061C471 /* DefaultSelectionTableViewCell.swift */; };
 		819AADF01FB6DBBD0061C471 /* DefaultSelectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 819AADEE1FB6DBBD0061C471 /* DefaultSelectionTableViewCell.xib */; };
 		819AADF31FB6F88F0061C471 /* AttendanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819AADF21FB6F88F0061C471 /* AttendanceManager.swift */; };
@@ -141,7 +144,10 @@
 		81727B911F9E70CC006433E8 /* LeftMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftMenuViewController.swift; sourceTree = "<group>"; };
 		81727B931F9E70EE006433E8 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		817553511B457FEB4E645FC1 /* Pods-TeachUs.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeachUs.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeachUs/Pods-TeachUs.release.xcconfig"; sourceTree = "<group>"; };
+		817BDAE41FB898C700492822 /* ButtonWithIndexPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWithIndexPath.swift; sourceTree = "<group>"; };
 		818C26071FB6FAFF002638E5 /* StudentAttendance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentAttendance.swift; sourceTree = "<group>"; };
+		819216E91FB81BA5009B56C0 /* ViewNumberPicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewNumberPicker.xib; sourceTree = "<group>"; };
+		819216EA1FB81BA6009B56C0 /* ViewNumberPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewNumberPicker.swift; sourceTree = "<group>"; };
 		819AADED1FB6DBBD0061C471 /* DefaultSelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSelectionTableViewCell.swift; sourceTree = "<group>"; };
 		819AADEE1FB6DBBD0061C471 /* DefaultSelectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DefaultSelectionTableViewCell.xib; sourceTree = "<group>"; };
 		819AADF21FB6F88F0061C471 /* AttendanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceManager.swift; sourceTree = "<group>"; };
@@ -317,6 +323,7 @@
 			isa = PBXGroup;
 			children = (
 				81D7CE6B1FAB8D5700C4375E /* Page Menu */,
+				817BDAE41FB898C700492822 /* ButtonWithIndexPath.swift */,
 			);
 			path = CustomClass;
 			sourceTree = "<group>";
@@ -503,6 +510,8 @@
 				810FAC591FB7549400945DD6 /* AttendanceCountTableViewCell.xib */,
 				812C34EF1FB794DB0048DD3C /* ViewDatePicker.swift */,
 				812C34F11FB794E30048DD3C /* ViewDatePicker.xib */,
+				819216EA1FB81BA6009B56C0 /* ViewNumberPicker.swift */,
+				819216E91FB81BA5009B56C0 /* ViewNumberPicker.xib */,
 			);
 			path = "Mark Attendance";
 			sourceTree = "<group>";
@@ -641,6 +650,7 @@
 				8126312B1FB2289200CD80D6 /* AttendanceStudentListTableViewCell.xib in Resources */,
 				81F78EAD1FB0DFE600A016B0 /* AttendanceCalenderTableViewCell.xib in Resources */,
 				18A627EA1F90F9870099C106 /* LaunchScreen.storyboard in Resources */,
+				819216EB1FB81BA6009B56C0 /* ViewNumberPicker.xib in Resources */,
 				81C208521FAF4182003D366D /* ProfessorCollegeListTableViewCell.xib in Resources */,
 				18A627E71F90F9870099C106 /* Assets.xcassets in Resources */,
 				810610BC1FA65ED20067273E /* Loader.xib in Resources */,
@@ -834,6 +844,7 @@
 				8126312A1FB2289200CD80D6 /* AttendanceStudentListTableViewCell.swift in Sources */,
 				81D7CE831FAB8E5D00C4375E /* CAPSPageMenu+UIGestureRecognizerDelegate.swift in Sources */,
 				81A80EDB1FAE14A400DDFFA1 /* NetworkHandler.swift in Sources */,
+				819216EC1FB81BA6009B56C0 /* ViewNumberPicker.swift in Sources */,
 				81D7CE841FAB8E5D00C4375E /* CAPSPageMenu+UIConfiguration.swift in Sources */,
 				81C208561FAF627F003D366D /* StudentsListViewController.swift in Sources */,
 				81B190C41FA24F87004A8A72 /* UIButton.swift in Sources */,
@@ -861,6 +872,7 @@
 				18A627E51F90F9870099C106 /* TeachUs.xcdatamodeld in Sources */,
 				81A523971FA7956100B3B557 /* CollegeLogin.swift in Sources */,
 				8137EF531FA109B500045D97 /* LoginViewController.swift in Sources */,
+				817BDAE51FB898C700492822 /* ButtonWithIndexPath.swift in Sources */,
 				8137EF551FA10AD400045D97 /* Constants.swift in Sources */,
 				81D7CE821FAB8E5D00C4375E /* MenuItemView.swift in Sources */,
 			);

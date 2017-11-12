@@ -22,9 +22,15 @@ class DefaultSelectionTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         buttons = [buttonPresent,buttonAbsent]
+        self.markDefaultAttendance(self.buttonPresent)
         // Initialization code
     }
 
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        self.buttonPresent.dropShadow()
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
@@ -37,32 +43,32 @@ class DefaultSelectionTableViewCell: UITableViewCell {
         for btn in buttons{
             if btn == button{
                 btn.makeButtonwith(background: .white, fontColor: .red, cornerRadius: nil, borderColor: nil, borderWidth: nil)
+                btn.dropShadow()
             }
             else{
                 btn.makeButtonwith(background: .white, fontColor: .black, cornerRadius: nil, borderColor: nil, borderWidth: nil)
+                btn.removeDropShadow()
             }
-            
-            if(btn != selectedButton){
-                selectedButton = btn
-                if(delegate != nil){
-                    //100 - present
-                    //101 - absent
-                    
-                    switch btn.tag{
-                    case 100:
-                        self.delegate.selectDefaultAttendance(true)
-                        break
-                    case 101:
-                        self.delegate.selectDefaultAttendance(false)
-                        break
-                    default:
-                        break
-                    }
-                }
+        }
+        
+        if(button != selectedButton){
+            selectedButton = button
+            if(delegate != nil){
+                //100 - present
+                //101 - absent
                 
+                switch button.tag{
+                case 100:
+                    self.delegate.selectDefaultAttendance(true)
+                    break
+                case 101:
+                    self.delegate.selectDefaultAttendance(false)
+                    break
+                default:
+                    break
+                }
             }
             
         }
-        
     }
 }

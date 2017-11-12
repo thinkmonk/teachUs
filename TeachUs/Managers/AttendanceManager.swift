@@ -11,7 +11,8 @@ import RxSwift
 import RxCocoa
 
 class AttendanceManager {
-    let sharedAttendanceManager = AttendanceManager()
+    
+    static let sharedAttendanceManager = AttendanceManager()
     var arrayStudents : Variable<[StudentAttendance]> = Variable([])
     let disposeBag = DisposeBag()
     var presentCount:Int {

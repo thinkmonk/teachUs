@@ -8,32 +8,14 @@
 
 import UIKit
 
-class ViewDatePicker: UIView {
+class ViewNumberPicker: UIView {
 
-    @IBOutlet weak var picker: UIDatePicker!
+    @IBOutlet weak var picker: UIPickerView!
     @IBOutlet weak var buttonOk: UIButton!
     @IBOutlet weak var viewPickerBackground: UIView!
-    
-    var dateString:String{
-        let date = picker.date
-        let dateFormatter: DateFormatter = DateFormatter()
-        // Set date format
-        dateFormatter.dateFormat = "dd MMMM"
-        // Apply date format
-        let selectedDate: String = dateFormatter.string(from: date)
-        return selectedDate
-    }
-    
-    var timeString:String{
-        let date = picker.date
-        let dateFormatter: DateFormatter = DateFormatter()
-        // Set date format
-        dateFormatter.dateFormat = "h:mm a"
-        // Apply date format
-        let selectedDate: String = dateFormatter.string(from: date)
-        return selectedDate
+    var pickerData: [String] = []
+    var selectedValue:String = "1"
 
-    }
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -45,9 +27,13 @@ class ViewDatePicker: UIView {
         super.init(coder: aDecoder)
     }
     
-    func setUpPicker(type:UIDatePickerMode){
-        picker.timeZone = NSTimeZone.local
-        picker.datePickerMode = type
+    func setUpPicker(){
+        for i in 1...10{
+            pickerData.append("\(i)")
+        }
+        picker.selectRow(0, inComponent: 1, animated: true)
+        picker.delegate = self
+        picker.dataSource = self
         picker.backgroundColor = UIColor.white
         self.buttonOk.roundedRedButton()
     }
@@ -72,7 +58,26 @@ class ViewDatePicker: UIView {
     }
     
     class func instanceFromNib() -> UIView {
-        return UINib(nibName: "ViewDatePicker", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! UIView
+        return UINib(nibName: "ViewNumberPicker", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! UIView
     }
 
+}
+
+extension ViewNumberPicker : UIPickerViewDelegate, UIPickerViewDataSource{
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return self.pickerData.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerData[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.selectedValue = pickerData[row]
+    }
+    
 }

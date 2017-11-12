@@ -8,6 +8,8 @@
 
 import UIKit
 import ObjectMapper
+import RxCocoa
+import RxSwift
 
 class StudentsListViewController: BaseViewController {
 
@@ -18,7 +20,11 @@ class StudentsListViewController: BaseViewController {
     var datePicker: ViewDatePicker!
     var toTimePicker: ViewDatePicker!
     var fromTimePicker: ViewDatePicker!
-    
+    var numberPicker:ViewNumberPicker!
+    private var openProfileIndexPath: IndexPath = IndexPath(row: -1, section: 0)
+
+    let disposeBag = DisposeBag()
+
     @IBOutlet weak var tableStudentList: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +39,6 @@ class StudentsListViewController: BaseViewController {
         self.tableStudentList.register(UINib(nibName: "DefaultSelectionTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.DefaultSelectionTableViewCellId)
         self.tableStudentList.register(UINib(nibName: "AttendanceCountTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.AttendanceCountTableViewCellId)
 
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,7 +48,6 @@ class StudentsListViewController: BaseViewController {
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 
@@ -87,23 +91,21 @@ class StudentsListViewController: BaseViewController {
         calenderDataSource.isSelected = false
         arrayDataSource.append(calenderDataSource)
         
-        /*
         let defaultSelectionDataSource = AttendanceDatasource(celType: .defaultSelection, attachedObject: nil)
         defaultSelectionDataSource.isSelected = false
         arrayDataSource.append(defaultSelectionDataSource)
         
-        
         let presentCountDataSource = AttendanceDatasource(celType: .attendanceCount, attachedObject: nil)
         presentCountDataSource.isSelected = false
         arrayDataSource.append(presentCountDataSource)
-        
+        AttendanceManager.sharedAttendanceManager.arrayStudents.value.removeAll()
         for student in arrayStudentsDetails{
             let studentAttendance:StudentAttendance = StudentAttendance(student, self.defaultAttendanceForAllStudents)
             let studentDetailDataSource = AttendanceDatasource(celType: .studentProfile, attachedObject: studentAttendance)
             studentDetailDataSource.isSelected = false
+            AttendanceManager.sharedAttendanceManager.arrayStudents.value.append(studentAttendance)
             arrayDataSource.append(studentDetailDataSource)
         }
-         */
         
         self.tableStudentList.reloadData()
     }
@@ -123,16 +125,15 @@ extension StudentsListViewController:DefaultAttendanceSelectionDelegate{
 extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.arrayDataSource.count
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellDataSource = arrayDataSource[indexPath.row]
-        var maincell : UITableViewCell?
+        let cellDataSource = arrayDataSource[indexPath.section]
         switch cellDataSource.AttendanceCellType! {
         case .calender:
             let cell:AttendanceCalenderTableViewCell  = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.AttendanceCalenderTableViewCellId, for: indexPath) as! AttendanceCalenderTableViewCell
@@ -167,25 +168,129 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
             if(self.fromTimePicker != nil){
                 cell.textFieldFromTime.text =  "\(self.fromTimePicker.timeString)"
             }
+            
+            // number of lectures
+            let numberPickerTap = UITapGestureRecognizer(target: self, action: #selector(StudentsListViewController.showNumberPicker))
+            tap.numberOfTapsRequired = 1
+            cell.textFieldNumberOfLectures.tag = indexPath.row
+            cell.textFieldNumberOfLectures.isUserInteractionEnabled = true
+            cell.textFieldNumberOfLectures.addGestureRecognizer(numberPickerTap)
+            if(self.numberPicker != nil){
+                cell.textFieldNumberOfLectures.text =  "\(self.numberPicker.selectedValue)"
+            }
 
             cell.selectionStyle = .none
-            maincell = cell
             return cell
-        default:
-            break
+            
+        case .defaultSelection:
+            let cell:DefaultSelectionTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.DefaultSelectionTableViewCellId, for: indexPath) as! DefaultSelectionTableViewCell
+
+            cell.delegate = self
+            cell.selectionStyle = .none
+            return cell
+            
+        case .attendanceCount:
+            let cell:AttendanceCountTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.AttendanceCountTableViewCellId, for: indexPath) as! AttendanceCountTableViewCell
+            let presentStudents = AttendanceManager.sharedAttendanceManager.arrayStudents.value.filter{$0.isPrsent == true}
+            cell.labelAttendanceCount.text = "\(presentStudents.count)"
+
+            cell.selectionStyle = .none
+
+            return cell
+            
+        case .studentProfile:
+            
+            let cell : AttendanceStudentListTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.AttendanceStudentListTableViewCellId, for: indexPath) as! AttendanceStudentListTableViewCell
+            let object:StudentAttendance = cellDataSource.attachedObject! as! StudentAttendance
+            cell.labelName.text = object.student?.studentName
+            cell.labelRollNumber.text = "\(object.student?.studentRollNo! ?? 0)"
+            cell.labelAttendanceCount.text = "\(object.student?.totalLecture! ?? 0)"
+            cell.labelAttendancePercent.text = "\(object.student?.percentage! ?? 0) %"
+            cell.labelLastLectureAttendance.text = object.student?.lastLecture != nil ? object.student?.lastLecture! : "NIL"
+            cell.clipsToBounds = true
+            
+            
+            //TODO:  -3 is for previous sections (calender, default selection, attendance count ) <- IMPORTANT
+            
+            cell.buttonAttendance.isSelected = AttendanceManager.sharedAttendanceManager.arrayStudents.value[indexPath.section-3].isPrsent
+            cell.buttonAttendance.addTarget(self, action: #selector(StudentsListViewController.markAttendance), for: .touchUpInside)
+            cell.buttonAttendance.indexPath = indexPath
+            cell.setUpCell()
+//            cell.setUpRx()
+//            if(openProfileIndexPath != nil)
+//            {
+//                if(openProfileIndexPath.section == indexPath.section){
+//                    cell.isExpanded = true
+//                    cell.viewAttendanceDetails.alpha = 1
+//                }else{
+//                    cell.isExpanded = false
+//                    cell.viewAttendanceDetails.alpha = 0
+//                }
+//            }else{
+//                cell.isExpanded = false
+//                cell.viewAttendanceDetails.alpha = 0
+//            }
+            cell.selectionStyle = .none
+            return cell
         }
-        return maincell!
     }
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let cellDataSource = arrayDataSource[indexPath.row]
+        let cellDataSource = arrayDataSource[indexPath.section]
         switch cellDataSource.AttendanceCellType! {
         case .calender:
             return 205
-        default:
-            return 50
+            
+        case .defaultSelection:
+            return 75
+            
+        case .attendanceCount:
+            return 40
+
+        case .studentProfile:
+            if(indexPath.section == openProfileIndexPath.section)
+            {
+                return 200
+            }
+            else{
+                return 100
+            }
         }
+}
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cellDataSource = arrayDataSource[indexPath.section]
+
+        if(cellDataSource.AttendanceCellType! == .studentProfile){
+            self.openProfileIndexPath = indexPath
+            let cell:AttendanceStudentListTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.AttendanceStudentListTableViewCellId, for: indexPath) as! AttendanceStudentListTableViewCell
+            tableView.beginUpdates()
+            cell.isExpanded = true
+            tableView.endUpdates()
+
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        let cellDataSource = arrayDataSource[section]
+        switch cellDataSource.AttendanceCellType! {
+            
+        case .defaultSelection,
+         .attendanceCount:
+            return 0
+            
+        default:
+            return 20
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.width(), height: 22))
+        headerView.backgroundColor = UIColor.clear
+        
+        return headerView
+
     }
     
     @objc func textFieldDidChange(_ textField:UITextField) {
@@ -227,6 +332,19 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
         }
     }
     
+    @objc func showNumberPicker(){
+        if(numberPicker == nil){
+            numberPicker = ViewNumberPicker.instanceFromNib() as! ViewNumberPicker
+            numberPicker.setUpPicker()
+            numberPicker.showView(inView: self.view)
+            numberPicker.buttonOk.addTarget(self, action: #selector(StudentsListViewController.dismissNumberPicker), for: .touchUpInside)
+            
+        }else{
+            numberPicker.showView(inView: self.view)
+        }
+
+    }
+    
     @objc func dismissFromTimePicker(){
         if(fromTimePicker != nil)
         {
@@ -249,7 +367,34 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
             self.makeDataSource()
         }
     }
-
+    
+    @objc func dismissNumberPicker(){
+        if(numberPicker != nil){
+            numberPicker.alpha = 0
+            numberPicker.removeFromSuperview()
+            self.makeDataSource()
+        }
+    }
+    
+    
+    @objc func markAttendance(_ sender:ButtonWithIndexPath){
+        if(sender.isSelected){ //-3 is for previous sections (calender, default selection, attendance count )
+            AttendanceManager.sharedAttendanceManager.arrayStudents.value[sender.indexPath.section - 3].isPrsent = false
+            sender.setTitle("Absent", for: .normal)
+            sender.backgroundColor = UIColor.rgbColor(126, 132, 155)
+            sender.setTitleColor(UIColor.white, for: .normal)
+            
+        }
+        else{
+            AttendanceManager.sharedAttendanceManager.arrayStudents.value[sender.indexPath.section - 3].isPrsent = true
+            sender.setTitle("Present", for: .selected)
+            sender.backgroundColor = UIColor.rgbColor(198, 0, 60)
+            sender.setTitleColor(UIColor.white, for: .selected)
+        }
+        sender.isSelected = !sender.isSelected
+        let indexPath = IndexPath(row: 0, section: 2)
+        self.tableStudentList.reloadRows(at: [indexPath], with: .fade)
+    }
 }
 
 
