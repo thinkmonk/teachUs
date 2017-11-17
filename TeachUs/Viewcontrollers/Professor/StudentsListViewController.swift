@@ -21,11 +21,20 @@ class StudentsListViewController: BaseViewController {
     var toTimePicker: ViewDatePicker!
     var fromTimePicker: ViewDatePicker!
     var numberPicker:ViewNumberPicker!
+    var calenderFloatingView:ViewCalenderTop!
     private var openProfileIndexPath: IndexPath = IndexPath(row: -1, section: 0)
 
     let disposeBag = DisposeBag()
 
     @IBOutlet weak var tableStudentList: UITableView!
+    @IBOutlet weak var buttonSubmit: UIButton!
+    @IBOutlet weak var topConstraintButtonSubmit: NSLayoutConstraint!
+    
+    
+    //TODO:- COMAPRE textfield value of the cell
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if(subject != nil)
@@ -38,6 +47,7 @@ class StudentsListViewController: BaseViewController {
         self.tableStudentList.register(UINib(nibName: "AttendanceStudentListTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.AttendanceStudentListTableViewCellId)
         self.tableStudentList.register(UINib(nibName: "DefaultSelectionTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.DefaultSelectionTableViewCellId)
         self.tableStudentList.register(UINib(nibName: "AttendanceCountTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.AttendanceCountTableViewCellId)
+        setUpcalenderView()
 
     }
     
@@ -45,12 +55,13 @@ class StudentsListViewController: BaseViewController {
         super.viewWillAppear(animated)
         self.addGradientToNavBar()
         self.addColorToNavBarText(color: UIColor.white)
+        self.buttonSubmit.themeRedButton()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-
+    
     func getEnrolledStudentsList(){
         let manager = NetworkHandler()
         //"http://ec2-34-215-84-223.us-west-2.compute.amazonaws.com:8081/teachus/teacher/getEnrolledStudentList/Zmlyc3ROYW1lPURldmVuZHJhLG1pZGRsZU5hbWU9QSxsYXN0TmFtZT1GYWRuYXZpcyxyb2xsPVBST0ZFU1NPUixpZD0x?professorId=1&subjectId=1"
@@ -104,22 +115,38 @@ class StudentsListViewController: BaseViewController {
             let studentDetailDataSource = AttendanceDatasource(celType: .studentProfile, attachedObject: studentAttendance)
             studentDetailDataSource.isSelected = false
             AttendanceManager.sharedAttendanceManager.arrayStudents.value.append(studentAttendance)
+
             arrayDataSource.append(studentDetailDataSource)
+
         }
-        
+        self.addCalenderValues()
         self.tableStudentList.reloadData()
     }
-
-}
-
-//MARK:- Default Attendance Selection Delegate
-
-extension StudentsListViewController:DefaultAttendanceSelectionDelegate{
-    func selectDefaultAttendance(_ attendance: Bool) {
-        self.defaultAttendanceForAllStudents = attendance
-        self.makeDataSource()
+    
+    func setUpcalenderView(){
+        calenderFloatingView = ViewCalenderTop.instanceFromNib() as! ViewCalenderTop
+        
+        let y = (self.navigationController?.navigationBar.height())! + UIApplication.shared.statusBarFrame.size.height
+        calenderFloatingView.frame = CGRect(x: 0.0, y: (y), width: self.view.width(), height: 60.0)
+        self.view.addSubview(calenderFloatingView)
+        self.addCalenderValues()
+        self.calenderFloatingView.alpha = 0
+        
     }
+    func addCalenderValues(){
+        if(calenderFloatingView != nil){
+            if(self.toTimePicker != nil && self.fromTimePicker != nil && self.numberPicker != nil && self.datePicker != nil){
+                calenderFloatingView.labelDate.text = "\(self.datePicker.dateString)"
+                calenderFloatingView.labelTime.text = "From \(self.fromTimePicker.timeString) to \(self.toTimePicker.timeString) "
+                calenderFloatingView.labelNumberOfLectures.text = "Number of lectures: \(self.numberPicker.selectedValue.value)"
+            }
+
+        }
+    }
+
 }
+
+
 
 //MARK:- table view Delegate
 extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource{
@@ -176,9 +203,10 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
             cell.textFieldNumberOfLectures.isUserInteractionEnabled = true
             cell.textFieldNumberOfLectures.addGestureRecognizer(numberPickerTap)
             if(self.numberPicker != nil){
-                cell.textFieldNumberOfLectures.text =  "\(self.numberPicker.selectedValue)"
+                cell.textFieldNumberOfLectures.text =  "\(self.numberPicker.selectedValue.value)"
             }
-
+            cell.delegate = self
+            cell.setUpRx()
             cell.selectionStyle = .none
             return cell
             
@@ -293,9 +321,15 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
 
     }
     
-    @objc func textFieldDidChange(_ textField:UITextField) {
-        print("lalala lallala lalalal")
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if(section == arrayDataSource.count-1){
+            return 40
+        }
+        return 0
     }
+    
+    //MARK:- Picker view methods for number and date.
+    
     @objc func showDatePicker(){
         if(datePicker == nil){
             datePicker = ViewDatePicker.instanceFromNib() as! ViewDatePicker
@@ -376,7 +410,7 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
         }
     }
     
-    
+    //MARK:- Mark attendance for a student
     @objc func markAttendance(_ sender:ButtonWithIndexPath){
         if(sender.isSelected){ //-3 is for previous sections (calender, default selection, attendance count )
             AttendanceManager.sharedAttendanceManager.arrayStudents.value[sender.indexPath.section - 3].isPrsent = false
@@ -397,6 +431,47 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
     }
 }
 
+
+//MARK:- Default Attendance Selection Delegate
+
+extension StudentsListViewController:DefaultAttendanceSelectionDelegate{
+    func selectDefaultAttendance(_ attendance: Bool) {
+        self.defaultAttendanceForAllStudents = attendance
+        self.makeDataSource()
+    }
+}
+
+//MARK:- Calender delegate methods
+
+extension StudentsListViewController:AttendanceCalenderTableViewCellDelegate{
+    func showSubmit() {
+        self.topConstraintButtonSubmit.constant = 0
+        UIView.animate(withDuration: 0.3) {
+            self.topConstraintButtonSubmit.constant -= self.buttonSubmit.height()
+        }
+    }
+    
+    func hideSubmit() {
+        self.topConstraintButtonSubmit.constant = -self.buttonSubmit.height()
+        UIView.animate(withDuration: 0.3) {
+            self.topConstraintButtonSubmit.constant = 0
+        }
+    }
+}
+
+extension StudentsListViewController:UIScrollViewDelegate{
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y > 210 {
+            print("offset increment = \(scrollView.contentOffset.y)")
+            self.calenderFloatingView.alpha = (scrollView.contentOffset.y/260)
+//        } else if scrollView.contentOffset.y < 320  {
+        }else{
+            print("offset  decrement = \(scrollView.contentOffset.y)")
+            self.calenderFloatingView.alpha = ((scrollView.contentOffset.y - 210)/260)
+        }
+    }
+
+}
 
 
 

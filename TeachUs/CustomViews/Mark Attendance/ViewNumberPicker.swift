@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 class ViewNumberPicker: UIView {
 
@@ -14,7 +16,7 @@ class ViewNumberPicker: UIView {
     @IBOutlet weak var buttonOk: UIButton!
     @IBOutlet weak var viewPickerBackground: UIView!
     var pickerData: [String] = []
-    var selectedValue:String = "1"
+    var selectedValue = Variable<String>("1")
 
     /*
     // Only override draw() if you perform custom drawing.
@@ -77,7 +79,7 @@ extension ViewNumberPicker : UIPickerViewDelegate, UIPickerViewDataSource{
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.selectedValue = pickerData[row]
+        self.selectedValue.value = pickerData[row]
     }
     
 }

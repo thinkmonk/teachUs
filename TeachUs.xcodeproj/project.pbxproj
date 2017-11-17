@@ -77,6 +77,8 @@
 		81D7CE9A1FAB9A1D00C4375E /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D7CE991FAB9A1D00C4375E /* UserManager.swift */; };
 		81F78EAC1FB0DFE600A016B0 /* AttendanceCalenderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F78EAA1FB0DFE600A016B0 /* AttendanceCalenderTableViewCell.swift */; };
 		81F78EAD1FB0DFE600A016B0 /* AttendanceCalenderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81F78EAB1FB0DFE600A016B0 /* AttendanceCalenderTableViewCell.xib */; };
+		81FFB0B31FBEE0CD00C32097 /* ViewCalenderTop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FFB0B21FBEE0CD00C32097 /* ViewCalenderTop.swift */; };
+		81FFB0B51FBEE0EB00C32097 /* ViewCalenderTop.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81FFB0B41FBEE0EB00C32097 /* ViewCalenderTop.xib */; };
 		920A11AFAE90F34CC18391DA /* Pods_TeachUsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C6207727D93C64473349FD7 /* Pods_TeachUsTests.framework */; };
 		E978D6B26CC720493AF0211B /* Pods_TeachUsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC92E78285678FBDD7A6B3D6 /* Pods_TeachUsUITests.framework */; };
 /* End PBXBuildFile section */
@@ -182,6 +184,8 @@
 		81D7CE991FAB9A1D00C4375E /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		81F78EAA1FB0DFE600A016B0 /* AttendanceCalenderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceCalenderTableViewCell.swift; sourceTree = "<group>"; };
 		81F78EAB1FB0DFE600A016B0 /* AttendanceCalenderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AttendanceCalenderTableViewCell.xib; sourceTree = "<group>"; };
+		81FFB0B21FBEE0CD00C32097 /* ViewCalenderTop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCalenderTop.swift; sourceTree = "<group>"; };
+		81FFB0B41FBEE0EB00C32097 /* ViewCalenderTop.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewCalenderTop.xib; sourceTree = "<group>"; };
 		9EC3F54968428454792599F1 /* Pods-TeachUsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeachUsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TeachUsTests/Pods-TeachUsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A74956C752400E08B29B3583 /* Pods-TeachUsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeachUsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeachUsTests/Pods-TeachUsTests.release.xcconfig"; sourceTree = "<group>"; };
 		AA2E9E74DAD261463331175E /* Pods-TeachUsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeachUsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TeachUsUITests/Pods-TeachUsUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -512,6 +516,8 @@
 				812C34F11FB794E30048DD3C /* ViewDatePicker.xib */,
 				819216EA1FB81BA6009B56C0 /* ViewNumberPicker.swift */,
 				819216E91FB81BA5009B56C0 /* ViewNumberPicker.xib */,
+				81FFB0B21FBEE0CD00C32097 /* ViewCalenderTop.swift */,
+				81FFB0B41FBEE0EB00C32097 /* ViewCalenderTop.xib */,
 			);
 			path = "Mark Attendance";
 			sourceTree = "<group>";
@@ -646,6 +652,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81FFB0B51FBEE0EB00C32097 /* ViewCalenderTop.xib in Resources */,
 				819AADF01FB6DBBD0061C471 /* DefaultSelectionTableViewCell.xib in Resources */,
 				8126312B1FB2289200CD80D6 /* AttendanceStudentListTableViewCell.xib in Resources */,
 				81F78EAD1FB0DFE600A016B0 /* AttendanceCalenderTableViewCell.xib in Resources */,
@@ -868,6 +875,7 @@
 				81D7CE801FAB8E5D00C4375E /* CAPSPageMenu.swift in Sources */,
 				810610C01FA65FB30067273E /* LoadingActivityHUD.swift in Sources */,
 				8137EF5C1FA10D6A00045D97 /* UIView.swift in Sources */,
+				81FFB0B31FBEE0CD00C32097 /* ViewCalenderTop.swift in Sources */,
 				81A80EDF1FAF3DAD00DDFFA1 /* CollegeList.swift in Sources */,
 				18A627E51F90F9870099C106 /* TeachUs.xcdatamodeld in Sources */,
 				81A523971FA7956100B3B557 /* CollegeLogin.swift in Sources */,

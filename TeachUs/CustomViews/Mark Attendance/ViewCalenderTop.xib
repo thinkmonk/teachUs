@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ViewCalenderTop" customModule="TeachUs" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="287" height="60"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TUq-jG-cB0">
+                    <rect key="frame" x="0.0" y="0.0" width="287" height="60"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="uHr-xk-1I7">
+                            <rect key="frame" x="10" y="12" width="147" height="36"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4is-mm-5se">
+                                    <rect key="frame" x="0.0" y="0.0" width="32.5" height="18"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of lectures" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pxP-xS-Zlm">
+                                    <rect key="frame" x="0.0" y="18" width="132" height="18"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SnL-D6-dGo">
+                            <rect key="frame" x="157" y="12" width="1" height="36"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="1" id="i3w-5P-QdZ"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lecture timing" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X8U-j3-mJt">
+                            <rect key="frame" x="183.5" y="12" width="93.5" height="36"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="X8U-j3-mJt" secondAttribute="trailing" constant="10" id="1rQ-0F-0za"/>
+                        <constraint firstItem="X8U-j3-mJt" firstAttribute="width" secondItem="TUq-jG-cB0" secondAttribute="width" multiplier="0.35" constant="-6.9499999999999886" id="KZY-x0-mcj"/>
+                        <constraint firstItem="uHr-xk-1I7" firstAttribute="centerY" secondItem="TUq-jG-cB0" secondAttribute="centerY" id="Lga-Od-vte"/>
+                        <constraint firstItem="uHr-xk-1I7" firstAttribute="width" secondItem="TUq-jG-cB0" secondAttribute="width" multiplier="0.55" constant="-10.850000000000023" id="Oam-ei-cpu"/>
+                        <constraint firstItem="uHr-xk-1I7" firstAttribute="leading" secondItem="TUq-jG-cB0" secondAttribute="leading" constant="10" id="PXZ-LF-RFt"/>
+                        <constraint firstItem="X8U-j3-mJt" firstAttribute="centerY" secondItem="TUq-jG-cB0" secondAttribute="centerY" id="W3W-qR-pde"/>
+                        <constraint firstItem="SnL-D6-dGo" firstAttribute="centerY" secondItem="uHr-xk-1I7" secondAttribute="centerY" id="a27-Xr-Ghr"/>
+                        <constraint firstItem="SnL-D6-dGo" firstAttribute="height" secondItem="uHr-xk-1I7" secondAttribute="height" id="b4v-JX-sOC"/>
+                        <constraint firstItem="SnL-D6-dGo" firstAttribute="leading" secondItem="uHr-xk-1I7" secondAttribute="trailing" id="hy1-xI-PYX"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="TUq-jG-cB0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="GNr-za-14P"/>
+                <constraint firstAttribute="bottom" secondItem="TUq-jG-cB0" secondAttribute="bottom" id="Kwr-lY-Qb9"/>
+                <constraint firstItem="TUq-jG-cB0" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="OTb-0b-nB4"/>
+                <constraint firstAttribute="trailing" secondItem="TUq-jG-cB0" secondAttribute="trailing" id="fba-V3-iUt"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="labelDate" destination="4is-mm-5se" id="JSb-CM-Yhj"/>
+                <outlet property="labelNumberOfLectures" destination="pxP-xS-Zlm" id="CwO-AY-86h"/>
+                <outlet property="labelTime" destination="X8U-j3-mJt" id="4RI-WH-hcw"/>
+                <outlet property="viewBackGround" destination="TUq-jG-cB0" id="AZO-Lt-v6e"/>
+            </connections>
+            <point key="canvasLocation" x="-9.5" y="346.5"/>
+        </view>
+    </objects>
+</document>
