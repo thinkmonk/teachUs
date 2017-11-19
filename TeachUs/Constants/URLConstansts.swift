@@ -16,6 +16,8 @@ public struct URLConstants{
     struct TecacherURL {
         static let collegeSummary = BaseUrl.baseURL + "/teacher/getCollegeSummary/"
         static let getEnrolledStudents = BaseUrl.baseURL + "/teacher/getEnrolledStudentList"
+        static let getTopics = BaseUrl.baseURL + "/teacher/getTopics/"
+        static let getSyllabusSummary = BaseUrl.baseURL + "/teacher/getSyllabusSummary/"
     }
     
     struct StudentURL {

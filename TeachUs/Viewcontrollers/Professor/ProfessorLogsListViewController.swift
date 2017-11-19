@@ -9,6 +9,7 @@
 import UIKit
 
 class ProfessorLogsListViewController: UIViewController {
+    var parentNavigationController : UINavigationController?
 
     override func viewDidLoad() {
         super.viewDidLoad()

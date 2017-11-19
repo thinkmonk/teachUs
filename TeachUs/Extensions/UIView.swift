@@ -115,6 +115,21 @@ extension UIView {
             self.makeEdgesRoundedWith(radius: 10.0)
         }
     
+    func makeTopEdgesRounded(){
+        let maskLayer = CAShapeLayer()
+        maskLayer.path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: [.topLeft, .topRight], cornerRadii: CGSize(width: 10, height: 10)).cgPath
+        self.layer.mask = maskLayer
+
+    }
+    func makeBottomEdgesRounded(){
+        let maskLayer = CAShapeLayer()
+        maskLayer.path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: [.bottomLeft, .bottomRight], cornerRadii: CGSize(width: 10, height: 10)).cgPath
+        self.layer.mask = maskLayer
+        
+    }
+
+    
+    
     func dropShadow(scale: Bool = true) {
         self.layer.masksToBounds = false
         self.layer.shadowColor = UIColor.black.cgColor

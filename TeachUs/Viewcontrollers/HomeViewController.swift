@@ -79,11 +79,15 @@ class HomeViewController: BaseViewController {
             
             let professorSyllabusStatusVC = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorSyllabusStatus) as! SyllabusStatusListViewController
             professorSyllabusStatusVC.title = "Syllabus Status"
+            professorSyllabusStatusVC.parentNavigationController = self.navigationController
+
             controllersArray.append(professorSyllabusStatusVC)
             
             
             let professorLogsListVC = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorLogs) as! ProfessorLogsListViewController
             professorLogsListVC.title = "Logs"
+            professorLogsListVC.parentNavigationController = self.navigationController
+
             controllersArray.append(professorLogsListVC)
             
             break

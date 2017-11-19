@@ -29,8 +29,21 @@ public class EnrolledStudentDetail :Mappable{
         self.studentId <- map["studentId"]
         self.studentRollNo <- map["studentRollNo"]
         self.lectureAttended <- map["lectureAttended"]
-        self.percentage <- map["percentage"]
-        self.totalLecture <- map["totalLecture"]
+        
+        if((map.JSON["percentage"]) != nil){
+            self.percentage <- map["percentage"]
+        }
+        else{
+            self.percentage = 0
+        }
+
+        
+        if((map.JSON["totalLecture"]) != nil){
+            self.totalLecture <- map["totalLecture"]
+        }
+        else{
+            self.totalLecture = 0
+        }
         self.subjectId <- map["subjectId"]
         self.studentName <- map["studentName"]
         self.studentLastName <- map["studentLastName"]

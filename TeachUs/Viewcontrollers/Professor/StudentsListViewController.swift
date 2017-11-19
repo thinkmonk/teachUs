@@ -22,9 +22,12 @@ class StudentsListViewController: BaseViewController {
     var fromTimePicker: ViewDatePicker!
     var numberPicker:ViewNumberPicker!
     var calenderFloatingView:ViewCalenderTop!
+    var viewConfirmAttendance:ViewConfirmAttendance!
+    
     private var openProfileIndexPath: IndexPath = IndexPath(row: -1, section: 0)
 
     let disposeBag = DisposeBag()
+    
 
     @IBOutlet weak var tableStudentList: UITableView!
     @IBOutlet weak var buttonSubmit: UIButton!
@@ -48,6 +51,7 @@ class StudentsListViewController: BaseViewController {
         self.tableStudentList.register(UINib(nibName: "DefaultSelectionTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.DefaultSelectionTableViewCellId)
         self.tableStudentList.register(UINib(nibName: "AttendanceCountTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.AttendanceCountTableViewCellId)
         setUpcalenderView()
+        initDatPicker()
 
     }
     
@@ -143,10 +147,17 @@ class StudentsListViewController: BaseViewController {
 
         }
     }
-
+    
+    @IBAction func submitAttendance(_ sender: UIButton) {
+        if(viewConfirmAttendance == nil){
+            viewConfirmAttendance = ViewConfirmAttendance.instanceFromNib() as! ViewConfirmAttendance
+            viewConfirmAttendance.delegate = self
+        }
+        let presentStudents = AttendanceManager.sharedAttendanceManager.arrayStudents.value.filter{$0.isPrsent == true}
+        viewConfirmAttendance.labelStudentCount.text = "\(presentStudents.count)"
+        viewConfirmAttendance.showView(inView: UIApplication.shared.keyWindow!)
+    }
 }
-
-
 
 //MARK:- table view Delegate
 extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource{
@@ -330,17 +341,21 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
     
     //MARK:- Picker view methods for number and date.
     
-    @objc func showDatePicker(){
+    
+    func initDatPicker(){
         if(datePicker == nil){
             datePicker = ViewDatePicker.instanceFromNib() as! ViewDatePicker
             datePicker.setUpPicker(type: .date)
-            datePicker.showView(inView: self.view)
             datePicker.buttonOk.addTarget(self, action: #selector(StudentsListViewController.dismissDatePicker), for: .touchUpInside)
+            
+            datePicker.picker.minimumDate = NSCalendar.current.date(byAdding: .month, value: -6, to: Date())
+            datePicker.picker.maximumDate = NSCalendar.current.date(byAdding: .day, value: 1, to: Date())
 
         }
-        else{
+    }
+    
+    @objc func showDatePicker(){
             datePicker.showView(inView: self.view)
-        }
     }
     
     @objc func showFromTimePicker(){
@@ -462,18 +477,24 @@ extension StudentsListViewController:AttendanceCalenderTableViewCellDelegate{
 extension StudentsListViewController:UIScrollViewDelegate{
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y > 210 {
-            print("offset increment = \(scrollView.contentOffset.y)")
             self.calenderFloatingView.alpha = (scrollView.contentOffset.y/260)
 //        } else if scrollView.contentOffset.y < 320  {
         }else{
-            print("offset  decrement = \(scrollView.contentOffset.y)")
             self.calenderFloatingView.alpha = ((scrollView.contentOffset.y - 210)/260)
         }
     }
-
 }
 
-
-
-
-
+extension StudentsListViewController:ViewConfirmAttendanceDelegate{
+    func confirmAttendance() {
+        self.performSegue(withIdentifier: Constants.segues.markPortionCompleted, sender: self)
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == Constants.segues.markPortionCompleted){
+            let destinationVC:MarkCompletedPortionViewController = segue.destination as! MarkCompletedPortionViewController
+            destinationVC.subjectId = self.subject.subjectId!
+        }
+    }
+}

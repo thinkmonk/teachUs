@@ -11,10 +11,16 @@ import Foundation
 public struct Constants {
     struct segues {
         static let toLoginView = "loginSelect"
+        static let markPortionCompleted = "markPortionCompleted"
+        static let syllabusStatusDetails = "syllabusStatusDetails"
+        static let SyllabusDetails = "toSyllabusDetails"
     }
     
     struct Images {
         static let hamburger = "hamburger"
+        static let syllabusInProgress = "In_progress"
+        static let syllabusCompleted = "completed"
+        static let syllabusNotStarted = "Not_Started"
     }
     
     struct  colors {
@@ -27,6 +33,7 @@ public struct Constants {
         static let professorSyllabusStatus = "SyllabusStatusListViewControllerId"
         static let professorLogs = "ProfessorLogsListViewControllerId"
         static let studentList = "StudentAttedanceViewControllerId"
+        static let syllabusDetails = "SyllabusDetailsViewControllerId"
     }
     
     struct UserDefaults {
@@ -44,6 +51,8 @@ public struct Constants {
         static let AttendanceStudentListTableViewCellId = "AttendanceStudentListTableViewCellId"
         static let DefaultSelectionTableViewCellId = "DefaultSelectionTableViewCellId"
         static let AttendanceCountTableViewCellId = "AttendanceCountTableViewCellId"
-
+        static let TopicDetailsTableViewCellId = "TopicDetailsTableViewCellId"
+        static let SyllabusStatusTableViewCellId = "SyllabusStatusTableViewCellId"
+        static let SyllabusDetailsTableViewCellId = "SyllabusDetailsTableViewCellId"
     }
 }

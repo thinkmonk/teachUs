@@ -35,5 +35,26 @@ extension UIButton{
         let fontColor:UIColor = UIColor.white
         self.makeButtonwith(background: bgColor, fontColor: fontColor, cornerRadius: self.height()/2, borderColor: nil, borderWidth: 0.0)
     }
+    
+    
+    func selectedDefaultButton(){
+        let bgColor:UIColor = UIColor.lightGray
+        let fontColor:UIColor = UIColor.white
+        self.makeButtonwith(background: bgColor, fontColor: fontColor, cornerRadius: nil, borderColor: nil, borderWidth: 0.0)
+
+    }
+    
+    func selectedRedButton(){
+        let bgColor:UIColor = UIColor.red
+        let fontColor:UIColor = UIColor.white
+        self.makeButtonwith(background: bgColor, fontColor: fontColor, cornerRadius: nil, borderColor: nil, borderWidth: 0.0)
+
+    }
+    
+    func selectedGreenButton(){
+        let bgColor:UIColor = UIColor.green
+        let fontColor:UIColor = UIColor.white
+        self.makeButtonwith(background: bgColor, fontColor: fontColor, cornerRadius: nil, borderColor: nil, borderWidth: 0.0)
+    }
 
 }
