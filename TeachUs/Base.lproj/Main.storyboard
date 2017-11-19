@@ -19,40 +19,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xGD-tZ-V9P">
-                                <rect key="frame" x="40" y="258.5" width="295" height="30"/>
-                                <state key="normal" title="Student"/>
-                                <connections>
-                                    <action selector="loginStudent:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XRw-kQ-ZqL"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p2b-x3-pn3">
-                                <rect key="frame" x="40" y="318.5" width="295" height="30"/>
-                                <state key="normal" title="Professor"/>
-                                <connections>
-                                    <action selector="loginProfessor:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IjK-lk-RXz"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pss-52-i7s">
-                                <rect key="frame" x="40" y="378.5" width="295" height="30"/>
-                                <state key="normal" title="College"/>
-                                <connections>
-                                    <action selector="loginCollege:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0bZ-0V-FMt"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="8s5-uf-LIC">
+                                <rect key="frame" x="130.5" y="89" width="114" height="553"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xGD-tZ-V9P">
+                                        <rect key="frame" x="0.0" y="0.0" width="114" height="184.5"/>
+                                        <state key="normal" image="student_default"/>
+                                        <state key="selected" image="student_selection"/>
+                                        <connections>
+                                            <action selector="loginStudent:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XRw-kQ-ZqL"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p2b-x3-pn3">
+                                        <rect key="frame" x="0.0" y="184.5" width="114" height="184"/>
+                                        <state key="normal" image="professor_default"/>
+                                        <state key="selected" image="professor_selection"/>
+                                        <connections>
+                                            <action selector="loginProfessor:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IjK-lk-RXz"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pss-52-i7s">
+                                        <rect key="frame" x="0.0" y="368.5" width="114" height="184.5"/>
+                                        <state key="normal" image="college_default"/>
+                                        <state key="selected" image="college_selection"/>
+                                        <connections>
+                                            <action selector="loginCollege:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0bZ-0V-FMt"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="xGD-tZ-V9P" secondAttribute="trailing" constant="40" id="6fE-FL-4Vg"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="p2b-x3-pn3" secondAttribute="trailing" constant="40" id="C65-Tm-Q35"/>
-                            <constraint firstItem="p2b-x3-pn3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="G86-2X-4Pf"/>
-                            <constraint firstItem="p2b-x3-pn3" firstAttribute="top" secondItem="xGD-tZ-V9P" secondAttribute="bottom" constant="30" id="MLF-Lv-m7o"/>
-                            <constraint firstItem="xGD-tZ-V9P" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="Ora-4C-KXs"/>
-                            <constraint firstItem="p2b-x3-pn3" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="a0K-S4-aBg"/>
-                            <constraint firstItem="p2b-x3-pn3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="aOM-PX-jCV"/>
-                            <constraint firstItem="pss-52-i7s" firstAttribute="top" secondItem="p2b-x3-pn3" secondAttribute="bottom" constant="30" id="adZ-cf-Esx"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pss-52-i7s" secondAttribute="trailing" constant="40" id="ks7-uO-Ik5"/>
-                            <constraint firstItem="pss-52-i7s" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="rOR-S1-xug"/>
+                            <constraint firstItem="8s5-uf-LIC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6yU-Ov-jgv"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="8s5-uf-LIC" secondAttribute="bottom" constant="25" id="8Rj-HV-9pV"/>
+                            <constraint firstItem="8s5-uf-LIC" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="25" id="ES6-iY-vjt"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -78,7 +79,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Qs-AY-HHv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="316" y="7"/>
+            <point key="canvasLocation" x="-479" y="1415"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="0BF-4c-1c2">
@@ -161,12 +162,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uCl-hU-uNv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2729" y="1415"/>
+            <point key="canvasLocation" x="3105" y="58"/>
         </scene>
         <!--Students List View Controller-->
         <scene sceneID="08M-2Z-7A0">
             <objects>
-                <viewController storyboardIdentifier="StudentAttedanceViewControllerId" id="J2l-lX-T3q" customClass="StudentsListViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StudentsListViewControllerId" id="J2l-lX-T3q" customClass="StudentsListViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TUi-sU-dPL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -208,7 +209,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bwb-EL-Y4c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3500" y="1415"/>
+            <point key="canvasLocation" x="3876" y="58"/>
         </scene>
         <!--Mark Completed Portion View Controller-->
         <scene sceneID="DtI-dZ-PgW">
@@ -252,7 +253,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EI4-Yj-cia" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4285.6000000000004" y="1414.5427286356824"/>
+            <point key="canvasLocation" x="4662" y="58"/>
         </scene>
         <!--Syllabus Status List View Controller-->
         <scene sceneID="ZrB-nX-ZAd">
@@ -329,7 +330,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zJV-Ud-Jir" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2760.8000000000002" y="2175.562218890555"/>
+            <point key="canvasLocation" x="3137" y="819"/>
         </scene>
         <!--Professor Logs List View Controller-->
         <scene sceneID="cHg-x8-Spl">
@@ -344,7 +345,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jcA-wC-84E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2729" y="2866"/>
+            <point key="canvasLocation" x="2318" y="1555"/>
+        </scene>
+        <!--Student Attedance View Controller-->
+        <scene sceneID="y1q-wi-AKY">
+            <objects>
+                <viewController storyboardIdentifier="StudentAttedanceViewControllerId" id="zWX-EL-v7R" customClass="StudentAttedanceViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1J0-Px-Q2Y">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="8eJ-vm-8U9"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ruX-Ar-qoX"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rf2-me-st2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2318" y="2285"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="lIh-9L-ivr">
@@ -380,7 +397,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8BO-e8-Llz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1943" y="1415"/>
+            <point key="canvasLocation" x="2318" y="58"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="k2t-EA-8Ha">
@@ -398,7 +415,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NgW-S0-edY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1942" y="2176"/>
+            <point key="canvasLocation" x="2318" y="819"/>
         </scene>
         <!--Syllabus Details View Controller-->
         <scene sceneID="6Pu-FW-571">
@@ -450,7 +467,15 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bbe-Kt-btd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3500" y="2176"/>
+            <point key="canvasLocation" x="3876" y="819"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="college_default" width="114" height="114"/>
+        <image name="college_selection" width="114" height="114"/>
+        <image name="professor_default" width="114" height="114"/>
+        <image name="professor_selection" width="114" height="114"/>
+        <image name="student_default" width="112" height="112"/>
+        <image name="student_selection" width="114" height="114"/>
+    </resources>
 </document>

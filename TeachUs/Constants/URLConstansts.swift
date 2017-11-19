@@ -21,7 +21,9 @@ public struct URLConstants{
     }
     
     struct StudentURL {
-        
+        static let getAttendence =  BaseUrl.baseURL + "/student/getAttendence/"
+        static let getSyllabusSummary = BaseUrl.baseURL + "/student/getSyllabusSummary/"
+
     }
     
     struct CollegeURL {

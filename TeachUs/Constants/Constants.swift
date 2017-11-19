@@ -32,8 +32,9 @@ public struct Constants {
         static let professorAttendance = "ProfessorAttedanceViewControllerID"
         static let professorSyllabusStatus = "SyllabusStatusListViewControllerId"
         static let professorLogs = "ProfessorLogsListViewControllerId"
-        static let studentList = "StudentAttedanceViewControllerId"
+        static let studentList = "StudentsListViewControllerId"
         static let syllabusDetails = "SyllabusDetailsViewControllerId"
+        static let studentAttendace = "StudentAttedanceViewControllerId"
     }
     
     struct UserDefaults {

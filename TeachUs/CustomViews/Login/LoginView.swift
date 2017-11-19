@@ -63,7 +63,7 @@ class LoginView: UIView, UITextFieldDelegate {
     }
     
     func setUpView(){
-        switch self.userType!
+        switch UserManager.sharedUserManager.user!
         {
             case .Student:
                 self.labelTitle.text = "STUDENT"

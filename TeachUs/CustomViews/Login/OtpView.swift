@@ -52,7 +52,7 @@ class OtpView: UIView {
     
     
     func setUpSendOtpView(){
-        switch self.userType!
+        switch UserManager.sharedUserManager.user!
         {
         case .Student:
             self.labelTitle.text = "STUDENT"

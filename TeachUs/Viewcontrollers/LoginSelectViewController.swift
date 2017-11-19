@@ -36,17 +36,17 @@ class LoginSelectViewController: BaseViewController {
     }
 
     @IBAction func loginStudent(_ sender: Any) {
-        self.userType = LoginUserType.Student
+        UserManager.sharedUserManager.user = LoginUserType.Student
         self.performSegue(withIdentifier: Constants.segues.toLoginView, sender: self)
     }
     
     @IBAction func loginProfessor(_ sender: Any) {
-        self.userType = LoginUserType.Professor
+        UserManager.sharedUserManager.user = LoginUserType.Professor
         self.performSegue(withIdentifier: Constants.segues.toLoginView, sender: self)
     }
 
     @IBAction func loginCollege(_ sender: Any) {
-        self.userType = LoginUserType.College
+        UserManager.sharedUserManager.user = LoginUserType.College
         self.performSegue(withIdentifier: Constants.segues.toLoginView, sender: self)
     }
 
@@ -56,9 +56,9 @@ class LoginSelectViewController: BaseViewController {
             let backItem = UIBarButtonItem()
             backItem.title = "Back"
             navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
-            if let destinationVC:LoginViewController = segue.destination as? LoginViewController {
-                destinationVC.usertype = self.userType
-            }
+//            if let destinationVC:LoginViewController = segue.destination as? LoginViewController {
+//                destinationVC.usertype = self.userType
+//            }
             
 
         }

@@ -20,7 +20,6 @@ class HomeViewController: BaseViewController {
 
         //TODO:- Clear the following line of usermanager
         
-        UserManager.sharedUserManager.user = LoginUserType.Professor
         self.makeDataSource()
 
         let parameters: [CAPSPageMenuOption] = [
@@ -72,6 +71,7 @@ class HomeViewController: BaseViewController {
 
         switch UserManager.sharedUserManager.user! {
         case .Professor:
+            controllersArray.removeAll()
             let professorAttendanceVC = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorAttendance) as! ProfessorAttedanceViewController
             professorAttendanceVC.title = "Attendance"
             professorAttendanceVC.parentNavigationController = self.navigationController
@@ -80,9 +80,8 @@ class HomeViewController: BaseViewController {
             let professorSyllabusStatusVC = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorSyllabusStatus) as! SyllabusStatusListViewController
             professorSyllabusStatusVC.title = "Syllabus Status"
             professorSyllabusStatusVC.parentNavigationController = self.navigationController
-
+            professorSyllabusStatusVC.userType = .Professor
             controllersArray.append(professorSyllabusStatusVC)
-            
             
             let professorLogsListVC = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorLogs) as! ProfessorLogsListViewController
             professorLogsListVC.title = "Logs"
@@ -91,6 +90,22 @@ class HomeViewController: BaseViewController {
             controllersArray.append(professorLogsListVC)
             
             break
+            
+        case .Student:
+            controllersArray.removeAll()
+            let attendanceVC: StudentAttedanceViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.studentAttendace) as! StudentAttedanceViewController
+            attendanceVC.title = "Attendance"
+            attendanceVC.parentNavigationController = self.navigationController
+            controllersArray.append(attendanceVC)
+            
+            let syllabusStatusVC:SyllabusStatusListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorSyllabusStatus) as! SyllabusStatusListViewController
+            syllabusStatusVC.title = "Syllabus Status"
+            syllabusStatusVC.parentNavigationController = self.navigationController
+            syllabusStatusVC.userType = .Student
+            
+            controllersArray.append(syllabusStatusVC)
+            break
+            
             
         default:
             break;

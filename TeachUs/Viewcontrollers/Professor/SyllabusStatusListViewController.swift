@@ -13,6 +13,7 @@ class SyllabusStatusListViewController: UIViewController {
 
     @IBOutlet weak var tableViewSyllabus: UITableView!
     var parentNavigationController : UINavigationController?
+    var userType:LoginUserType!
     var arrayDataSource:[Subject] = []
 
     override func viewDidLoad() {
@@ -40,13 +41,24 @@ class SyllabusStatusListViewController: UIViewController {
     func getSyllabus(){
         let manager = NetworkHandler()
         
-        
         //http://ec2-34-215-84-223.us-west-2.compute.amazonaws.com:8081/teachus/teacher/getSyllabusSummary/Zmlyc3ROYW1lPURldmVuZHJhLG1pZGRsZU5hbWU9QSxsYXN0TmFtZT1GYWRuYXZpcyxyb2xsPVBST0ZFU1NPUixpZD0x?professorId=1&subjectId=1
-
-        manager.url = URLConstants.TecacherURL.getSyllabusSummary +
-            "\(UserManager.sharedUserManager.getAccessToken())" +
-            "?professorId=\(UserManager.sharedUserManager.getUserId())" +
-            "&subjectId=1"
+        
+        switch userType! {
+        case .Student:
+            manager.url = URLConstants.StudentURL.getSyllabusSummary +
+                "\(UserManager.sharedUserManager.getAccessToken())" +
+            "?studentId=\(UserManager.sharedUserManager.getUserId())"
+            break
+        
+        case .Professor:
+            manager.url = URLConstants.TecacherURL.getSyllabusSummary +
+                "\(UserManager.sharedUserManager.getAccessToken())" +
+            "?professorId=\(UserManager.sharedUserManager.getUserId())"
+            break
+            
+        default:
+            break
+        }
         
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         manager.apiGet(apiName: "Get Syllabus for professor", completionHandler: { (response, code) in

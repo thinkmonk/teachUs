@@ -115,7 +115,7 @@ class StudentsListViewController: BaseViewController {
         arrayDataSource.append(presentCountDataSource)
         AttendanceManager.sharedAttendanceManager.arrayStudents.value.removeAll()
         for student in arrayStudentsDetails{
-            let studentAttendance:StudentAttendance = StudentAttendance(student, self.defaultAttendanceForAllStudents)
+            let studentAttendance:MarkStudentAttendance = MarkStudentAttendance(student, self.defaultAttendanceForAllStudents)
             let studentDetailDataSource = AttendanceDatasource(celType: .studentProfile, attachedObject: studentAttendance)
             studentDetailDataSource.isSelected = false
             AttendanceManager.sharedAttendanceManager.arrayStudents.value.append(studentAttendance)
@@ -240,7 +240,7 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
         case .studentProfile:
             
             let cell : AttendanceStudentListTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.AttendanceStudentListTableViewCellId, for: indexPath) as! AttendanceStudentListTableViewCell
-            let object:StudentAttendance = cellDataSource.attachedObject! as! StudentAttendance
+            let object:MarkStudentAttendance = cellDataSource.attachedObject! as! MarkStudentAttendance
             cell.labelName.text = object.student?.studentName
             cell.labelRollNumber.text = "\(object.student?.studentRollNo! ?? 0)"
             cell.labelAttendanceCount.text = "\(object.student?.totalLecture! ?? 0)"

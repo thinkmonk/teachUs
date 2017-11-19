@@ -15,7 +15,6 @@ class LoginViewController: BaseViewController {
     var collegeLogin:CollegeLogin!
     var username:String = ""
     
-    var usertype:LoginUserType!
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
@@ -40,10 +39,10 @@ class LoginViewController: BaseViewController {
     
     func setUpLoginView(){
         
-        switch usertype! {
+        switch UserManager.sharedUserManager.user! {
         case .Student, .Professor:
             studentLoginView = LoginView.instanceFromNib() as! LoginView
-            studentLoginView.userType = self.usertype
+            studentLoginView.userType = UserManager.sharedUserManager.user!
             studentLoginView.setUpView()
             studentLoginView.showView(inView: self.view)
             studentLoginView.delegate = self
@@ -92,7 +91,7 @@ extension LoginViewController:LoginDelegate{
         StudentOtpView = OtpView.instanceFromNib() as! OtpView
         StudentOtpView.username = UserManager.sharedUserManager.userFullName
         StudentOtpView.mobileNumber = "+919619201282 isko set kar"
-        StudentOtpView.userType = self.usertype
+        StudentOtpView.userType = UserManager.sharedUserManager.user
         StudentOtpView.setUpSendOtpView()
         StudentOtpView.showRecordAvailableView(inView: self.view)
         StudentOtpView.delegate = self

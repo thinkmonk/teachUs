@@ -13,18 +13,18 @@ import RxCocoa
 class AttendanceManager {
     
     static let sharedAttendanceManager = AttendanceManager()
-    var arrayStudents : Variable<[StudentAttendance]> = Variable([])
+    var arrayStudents : Variable<[MarkStudentAttendance]> = Variable([])
     let disposeBag = DisposeBag()
     var presentCount:Int {
         let presentStudent = arrayStudents.value.filter{$0.isPrsent == true}
         return presentStudent.count
     }
     
-    func markStudentPresent(studentDetails:StudentAttendance){
+    func markStudentPresent(studentDetails:MarkStudentAttendance){
         arrayStudents.value.filter{$0.student?.studentId == studentDetails.student?.studentId}.first?.isPrsent = true
     }
     
-    func markStudentAbsent(studentDetails:StudentAttendance){
+    func markStudentAbsent(studentDetails:MarkStudentAttendance){
         arrayStudents.value.filter{$0.student?.studentId! == studentDetails.student?.studentId!}.first?.isPrsent = false
     }
     
