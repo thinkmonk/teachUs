@@ -58,6 +58,14 @@
 		81B190C01FA24E19004A8A72 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B190BF1FA24E19004A8A72 /* LoginView.swift */; };
 		81B190C21FA24E22004A8A72 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81B190C11FA24E22004A8A72 /* LoginView.xib */; };
 		81B190C41FA24F87004A8A72 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B190C31FA24F87004A8A72 /* UIButton.swift */; };
+		81B2E2D61FC35B0600E9E852 /* DPDConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B2E2CC1FC35B0600E9E852 /* DPDConstants.swift */; };
+		81B2E2D71FC35B0600E9E852 /* DPDKeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B2E2CD1FC35B0600E9E852 /* DPDKeyboardListener.swift */; };
+		81B2E2D81FC35B0600E9E852 /* DPDUIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B2E2CE1FC35B0600E9E852 /* DPDUIView+Extension.swift */; };
+		81B2E2D91FC35B0600E9E852 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 81B2E2CF1FC35B0600E9E852 /* Info.plist */; };
+		81B2E2DA1FC35B0600E9E852 /* DropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81B2E2D11FC35B0600E9E852 /* DropDownCell.xib */; };
+		81B2E2DB1FC35B0600E9E852 /* DropDown+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B2E2D31FC35B0600E9E852 /* DropDown+Appearance.swift */; };
+		81B2E2DC1FC35B0600E9E852 /* DropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B2E2D41FC35B0600E9E852 /* DropDown.swift */; };
+		81B2E2DD1FC35B0600E9E852 /* DropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B2E2D51FC35B0600E9E852 /* DropDownCell.swift */; };
 		81B69E7C1FA902BD0098F16D /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B69E7B1FA902BD0098F16D /* UITextField.swift */; };
 		81C208511FAF4182003D366D /* ProfessorCollegeListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C2084F1FAF4182003D366D /* ProfessorCollegeListTableViewCell.swift */; };
 		81C208521FAF4182003D366D /* ProfessorCollegeListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81C208501FAF4182003D366D /* ProfessorCollegeListTableViewCell.xib */; };
@@ -177,6 +185,15 @@
 		81B190BF1FA24E19004A8A72 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		81B190C11FA24E22004A8A72 /* LoginView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
 		81B190C31FA24F87004A8A72 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
+		81B2E2CA1FC35B0600E9E852 /* DropDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDown.h; sourceTree = "<group>"; };
+		81B2E2CC1FC35B0600E9E852 /* DPDConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DPDConstants.swift; sourceTree = "<group>"; };
+		81B2E2CD1FC35B0600E9E852 /* DPDKeyboardListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DPDKeyboardListener.swift; sourceTree = "<group>"; };
+		81B2E2CE1FC35B0600E9E852 /* DPDUIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DPDUIView+Extension.swift"; sourceTree = "<group>"; };
+		81B2E2CF1FC35B0600E9E852 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		81B2E2D11FC35B0600E9E852 /* DropDownCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropDownCell.xib; sourceTree = "<group>"; };
+		81B2E2D31FC35B0600E9E852 /* DropDown+Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DropDown+Appearance.swift"; sourceTree = "<group>"; };
+		81B2E2D41FC35B0600E9E852 /* DropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDown.swift; sourceTree = "<group>"; };
+		81B2E2D51FC35B0600E9E852 /* DropDownCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownCell.swift; sourceTree = "<group>"; };
 		81B69E7B1FA902BD0098F16D /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		81C2084F1FAF4182003D366D /* ProfessorCollegeListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessorCollegeListTableViewCell.swift; sourceTree = "<group>"; };
 		81C208501FAF4182003D366D /* ProfessorCollegeListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfessorCollegeListTableViewCell.xib; sourceTree = "<group>"; };
@@ -438,6 +455,7 @@
 		81727B771F9E6A0B006433E8 /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
+				81B2E2C91FC35B0600E9E852 /* DropDown */,
 				81727B781F9E6BA7006433E8 /* Side Menu */,
 				81727B8E1F9E6CEF006433E8 /* TeachUs-Bridging-Header.h */,
 			);
@@ -480,6 +498,46 @@
 				81A523941FA7955600B3B557 /* CollegeLogin.xib */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		81B2E2C91FC35B0600E9E852 /* DropDown */ = {
+			isa = PBXGroup;
+			children = (
+				81B2E2CA1FC35B0600E9E852 /* DropDown.h */,
+				81B2E2CB1FC35B0600E9E852 /* helpers */,
+				81B2E2CF1FC35B0600E9E852 /* Info.plist */,
+				81B2E2D01FC35B0600E9E852 /* resources */,
+				81B2E2D21FC35B0600E9E852 /* src */,
+			);
+			path = DropDown;
+			sourceTree = "<group>";
+		};
+		81B2E2CB1FC35B0600E9E852 /* helpers */ = {
+			isa = PBXGroup;
+			children = (
+				81B2E2CC1FC35B0600E9E852 /* DPDConstants.swift */,
+				81B2E2CD1FC35B0600E9E852 /* DPDKeyboardListener.swift */,
+				81B2E2CE1FC35B0600E9E852 /* DPDUIView+Extension.swift */,
+			);
+			path = helpers;
+			sourceTree = "<group>";
+		};
+		81B2E2D01FC35B0600E9E852 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				81B2E2D11FC35B0600E9E852 /* DropDownCell.xib */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
+		81B2E2D21FC35B0600E9E852 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				81B2E2D31FC35B0600E9E852 /* DropDown+Appearance.swift */,
+				81B2E2D41FC35B0600E9E852 /* DropDown.swift */,
+				81B2E2D51FC35B0600E9E852 /* DropDownCell.swift */,
+			);
+			path = src;
 			sourceTree = "<group>";
 		};
 		81D76B4C1FC1AA34005E861C /* Syllabus Status */ = {
@@ -722,8 +780,10 @@
 				810610B91FA5F4FB0067273E /* OtpView.xib in Resources */,
 				812C34F21FB794E30048DD3C /* ViewDatePicker.xib in Resources */,
 				18A627E21F90F9870099C106 /* Main.storyboard in Resources */,
+				81B2E2DA1FC35B0600E9E852 /* DropDownCell.xib in Resources */,
 				81B190C21FA24E22004A8A72 /* LoginView.xib in Resources */,
 				81A80EE11FAF3DCB00DDFFA1 /* CollegeList.xib in Resources */,
+				81B2E2D91FC35B0600E9E852 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -889,6 +949,7 @@
 				81727B8B1F9E6CB8006433E8 /* MFSideMenuShadow.m in Sources */,
 				81C2085A1FAF6CEB003D366D /* EnrolledStudentDetail.swift in Sources */,
 				81A80ED91FADFC6200DDFFA1 /* URLConstansts.swift in Sources */,
+				81B2E2DB1FC35B0600E9E852 /* DropDown+Appearance.swift in Sources */,
 				81D7CE811FAB8E5D00C4375E /* CAPSPageMenu+UIScrollViewDelegate.swift in Sources */,
 				81727B8D1F9E6CB8006433E8 /* MFSideMenuContainerViewController.m in Sources */,
 				81A80EDD1FAF11B700DDFFA1 /* CollegeSummary.swift in Sources */,
@@ -898,12 +959,14 @@
 				81D7CE7F1FAB8E5D00C4375E /* CAPSPageMenuConfiguration.swift in Sources */,
 				81D7CE981FAB98DB00C4375E /* ProfessorLogsListViewController.swift in Sources */,
 				18A627DF1F90F9870099C106 /* LoginSelectViewController.swift in Sources */,
+				81B2E2D71FC35B0600E9E852 /* DPDKeyboardListener.swift in Sources */,
 				812C34F01FB794DB0048DD3C /* ViewDatePicker.swift in Sources */,
 				819AADF31FB6F88F0061C471 /* AttendanceManager.swift in Sources */,
 				81C208511FAF4182003D366D /* ProfessorCollegeListTableViewCell.swift in Sources */,
 				81D7CE9A1FAB9A1D00C4375E /* UserManager.swift in Sources */,
 				81727B8C1F9E6CB8006433E8 /* UIViewController+MFSideMenuAdditions.m in Sources */,
 				810FAC5A1FB7549400945DD6 /* AttendanceCountTableViewCell.swift in Sources */,
+				81B2E2DC1FC35B0600E9E852 /* DropDown.swift in Sources */,
 				8126312A1FB2289200CD80D6 /* AttendanceStudentListTableViewCell.swift in Sources */,
 				81D7CE831FAB8E5D00C4375E /* CAPSPageMenu+UIGestureRecognizerDelegate.swift in Sources */,
 				81FFB0BB1FBF3E6B00C32097 /* MarkCompletedPortionViewController.swift in Sources */,
@@ -930,6 +993,7 @@
 				81D7CE941FAB988500C4375E /* ProfessorAttedanceViewController.swift in Sources */,
 				81B190C01FA24E19004A8A72 /* LoginView.swift in Sources */,
 				18A627DD1F90F9870099C106 /* AppDelegate.swift in Sources */,
+				81B2E2D81FC35B0600E9E852 /* DPDUIView+Extension.swift in Sources */,
 				81727B921F9E70CC006433E8 /* LeftMenuViewController.swift in Sources */,
 				81D7CE801FAB8E5D00C4375E /* CAPSPageMenu.swift in Sources */,
 				810610C01FA65FB30067273E /* LoadingActivityHUD.swift in Sources */,
@@ -939,7 +1003,9 @@
 				81A80EDF1FAF3DAD00DDFFA1 /* CollegeList.swift in Sources */,
 				18A627E51F90F9870099C106 /* TeachUs.xcdatamodeld in Sources */,
 				81A523971FA7956100B3B557 /* CollegeLogin.swift in Sources */,
+				81B2E2DD1FC35B0600E9E852 /* DropDownCell.swift in Sources */,
 				8137EF531FA109B500045D97 /* LoginViewController.swift in Sources */,
+				81B2E2D61FC35B0600E9E852 /* DPDConstants.swift in Sources */,
 				817BDAE51FB898C700492822 /* ButtonWithIndexPath.swift in Sources */,
 				81054EB41FC2263600EEE0CD /* StudentAttendance.swift in Sources */,
 				8137EF551FA10AD400045D97 /* Constants.swift in Sources */,
