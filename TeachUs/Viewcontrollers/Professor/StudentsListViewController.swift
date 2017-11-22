@@ -130,7 +130,7 @@ class StudentsListViewController: BaseViewController {
     func setUpcalenderView(){
         calenderFloatingView = ViewCalenderTop.instanceFromNib() as! ViewCalenderTop
         
-        let y = (self.navigationController?.navigationBar.height())! + UIApplication.shared.statusBarFrame.size.height
+        let y = (navBarHeight) + statusBarHeight
         calenderFloatingView.frame = CGRect(x: 0.0, y: (y), width: self.view.width(), height: 60.0)
         self.view.addSubview(calenderFloatingView)
         self.addCalenderValues()

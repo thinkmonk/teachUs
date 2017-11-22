@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LZn-5B-LbX">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -16,14 +16,14 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="LoginSelectViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="8s5-uf-LIC">
-                                <rect key="frame" x="130.5" y="89" width="114" height="553"/>
+                                <rect key="frame" x="103" y="89" width="114" height="454"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xGD-tZ-V9P">
-                                        <rect key="frame" x="0.0" y="0.0" width="114" height="184.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="114" height="151.5"/>
                                         <state key="normal" image="student_default"/>
                                         <state key="selected" image="student_selection"/>
                                         <connections>
@@ -31,7 +31,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p2b-x3-pn3">
-                                        <rect key="frame" x="0.0" y="184.5" width="114" height="184"/>
+                                        <rect key="frame" x="0.0" y="151.5" width="114" height="151"/>
                                         <state key="normal" image="professor_default"/>
                                         <state key="selected" image="professor_selection"/>
                                         <connections>
@@ -39,7 +39,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pss-52-i7s">
-                                        <rect key="frame" x="0.0" y="368.5" width="114" height="184.5"/>
+                                        <rect key="frame" x="0.0" y="302.5" width="114" height="151.5"/>
                                         <state key="normal" image="college_default"/>
                                         <state key="selected" image="college_selection"/>
                                         <connections>
@@ -71,7 +71,7 @@
             <objects>
                 <viewController storyboardIdentifier="MFSideMenuContainerViewController" id="UYc-xG-8s6" customClass="MFSideMenuContainerViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="T5p-ae-4H1">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="mnj-yn-VJ0"/>
@@ -86,7 +86,7 @@
             <objects>
                 <viewController id="XXj-oB-jWg" customClass="LoginViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="J09-fV-yer">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="tUk-JQ-v7g"/>
@@ -101,7 +101,7 @@
             <objects>
                 <viewController storyboardIdentifier="LeftMenuViewController" id="722-hi-RXJ" customClass="LeftMenuViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CRB-vk-sUi">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="uiI-1d-Hwd"/>
@@ -116,7 +116,7 @@
             <objects>
                 <viewController storyboardIdentifier="HomeViewController" id="LsU-4Y-QSC" customClass="HomeViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xci-2v-vZK">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="CGw-1k-7hg"/>
@@ -133,7 +133,7 @@
                 <navigationController storyboardIdentifier="navigationController" automaticallyAdjustsScrollViewInsets="NO" id="6NW-oj-Ik9" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="klK-6i-B5k">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -150,7 +150,7 @@
             <objects>
                 <viewController storyboardIdentifier="ProfessorAttedanceViewControllerID" id="arr-zs-JZT" customClass="ProfessorAttedanceViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LBx-hE-VyU">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="kcg-bw-I0p"/>
@@ -169,15 +169,15 @@
             <objects>
                 <viewController storyboardIdentifier="StudentsListViewControllerId" id="J2l-lX-T3q" customClass="StudentsListViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TUi-sU-dPL">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CXL-DI-gCU">
-                                <rect key="frame" x="15" y="64" width="345" height="603"/>
+                                <rect key="frame" x="15" y="64" width="290" height="504"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fpk-g3-i0s">
-                                <rect key="frame" x="0.0" y="675" width="375" height="40"/>
+                                <rect key="frame" x="0.0" y="576" width="320" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Cse-K3-B28"/>
                                 </constraints>
@@ -216,15 +216,15 @@
             <objects>
                 <viewController id="9ky-aO-ZJF" customClass="MarkCompletedPortionViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="R9M-Zi-EIx">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cX6-cB-34O">
-                                <rect key="frame" x="0.0" y="64" width="375" height="566"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="467"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vp5-uU-h6G">
-                                <rect key="frame" x="0.0" y="632" width="375" height="35"/>
+                                <rect key="frame" x="0.0" y="533" width="320" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="BNT-sI-hgs"/>
                                 </constraints>
@@ -260,29 +260,29 @@
             <objects>
                 <viewController storyboardIdentifier="SyllabusStatusListViewControllerId" id="k4R-NG-n5d" customClass="SyllabusStatusListViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Egw-dv-g9a">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jIf-fg-0cU">
-                                <rect key="frame" x="0.0" y="64" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="50"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hjK-nA-aOJ">
-                                        <rect key="frame" x="15" y="15" width="335" height="16"/>
+                                        <rect key="frame" x="15" y="15" width="280" height="5596"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hby-2B-WhA">
-                                                <rect key="frame" x="0.0" y="0.0" width="134" height="16"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="112" height="5596"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <color key="textColor" red="0.49411764705882355" green="0.51764705882352935" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No. of Lectures" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mzh-qd-qKW">
-                                                <rect key="frame" x="134" y="0.0" width="100.5" height="16"/>
+                                                <rect key="frame" x="112" y="0.0" width="84" height="5596"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <color key="textColor" red="0.49411764705882355" green="0.51764705882352935" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Completion" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agr-Ts-ogd">
-                                                <rect key="frame" x="234.5" y="0.0" width="100.5" height="16"/>
+                                                <rect key="frame" x="196" y="0.0" width="84" height="5596"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <color key="textColor" red="0.49411764705882355" green="0.51764705882352935" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -305,7 +305,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="hXi-W6-LoY">
-                                <rect key="frame" x="10" y="114" width="365" height="553"/>
+                                <rect key="frame" x="10" y="114" width="310" height="454"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
@@ -337,7 +337,7 @@
             <objects>
                 <viewController storyboardIdentifier="ProfessorLogsListViewControllerId" id="REO-40-ti2" customClass="ProfessorLogsListViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OQr-iN-ZCZ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="dSd-C3-O4p"/>
@@ -352,11 +352,11 @@
             <objects>
                 <viewController storyboardIdentifier="StudentAttedanceViewControllerId" id="zWX-EL-v7R" customClass="StudentAttedanceViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1J0-Px-Q2Y">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nz7-er-7A4" userLabel="Top View">
-                                <rect key="frame" x="0.0" y="20" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overall:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bSf-av-4U4">
                                         <rect key="frame" x="10" y="16" width="52.5" height="18"/>
@@ -371,7 +371,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f14-ab-QX1">
-                                        <rect key="frame" x="255" y="6.5" width="110" height="38"/>
+                                        <rect key="frame" x="200" y="6.5" width="110" height="38"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bvd-Nm-nqq">
                                                 <rect key="frame" x="73" y="0.0" width="17" height="38"/>
@@ -414,25 +414,25 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hqZ-cd-eTx">
-                                <rect key="frame" x="0.0" y="70" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="70" width="320" height="50"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mgr-SH-i6M">
-                                        <rect key="frame" x="15" y="15" width="345" height="16"/>
+                                        <rect key="frame" x="15" y="15" width="290" height="16"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bM9-Oe-buV">
-                                                <rect key="frame" x="0.0" y="0.0" width="138" height="16"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="116" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <color key="textColor" red="0.4941176471" green="0.51764705879999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Percentage" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dvV-22-5m0">
-                                                <rect key="frame" x="138" y="0.0" width="103.5" height="16"/>
+                                                <rect key="frame" x="116" y="0.0" width="87" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <color key="textColor" red="0.4941176471" green="0.51764705879999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Present" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T9y-wX-RtT">
-                                                <rect key="frame" x="241.5" y="0.0" width="103.5" height="16"/>
+                                                <rect key="frame" x="203" y="0.0" width="87" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <color key="textColor" red="0.4941176471" green="0.51764705879999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -455,7 +455,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="Fr5-gF-bhg">
-                                <rect key="frame" x="10" y="120" width="355" height="547"/>
+                                <rect key="frame" x="10" y="120" width="300" height="448"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
@@ -488,13 +488,60 @@
             </objects>
             <point key="canvasLocation" x="2317.5999999999999" y="2284.4077961019493"/>
         </scene>
+        <!--Teachers Rating View Controller-->
+        <scene sceneID="jJ0-JA-rQv">
+            <objects>
+                <viewController storyboardIdentifier="TeachersRatingViewControllerId" id="vsD-vA-29q" customClass="TeachersRatingViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hrl-fb-hYj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="9hh-rg-Mgw">
+                                <rect key="frame" x="15" y="64" width="290" height="494"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="1Js-vh-HWy" firstAttribute="bottom" secondItem="9hh-rg-Mgw" secondAttribute="bottom" constant="10" id="ELZ-58-ffX"/>
+                            <constraint firstItem="9hh-rg-Mgw" firstAttribute="leading" secondItem="1Js-vh-HWy" secondAttribute="leading" constant="15" id="FLi-hG-sBS"/>
+                            <constraint firstItem="1Js-vh-HWy" firstAttribute="trailing" secondItem="9hh-rg-Mgw" secondAttribute="trailing" constant="15" id="Y8F-Ki-TtF"/>
+                            <constraint firstItem="9hh-rg-Mgw" firstAttribute="top" secondItem="1Js-vh-HWy" secondAttribute="top" id="nI9-tI-Vlv"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="1Js-vh-HWy"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="JaS-ji-0NK"/>
+                    <connections>
+                        <outlet property="tableViewTeachersList" destination="9hh-rg-Mgw" id="feH-0h-bA9"/>
+                        <segue destination="hke-iy-WEB" kind="show" identifier="toViewRatings" id="yby-E0-zOr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="U3v-Kb-LLP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3293" y="3045"/>
+        </scene>
+        <!--Mark Rating View Controller-->
+        <scene sceneID="9Lh-nz-YHi">
+            <objects>
+                <viewController storyboardIdentifier="MarkRatingViewControllerId" id="hke-iy-WEB" customClass="MarkRatingViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cl8-ut-djP">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="NrL-4Q-ht0"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Da2-Ip-yql" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4305" y="3045"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="lIh-9L-ivr">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="LZn-5B-LbX" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="PW8-JJ-WUc">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -512,7 +559,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FTp-f5-e6b" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zWZ-Bj-MjH">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -530,7 +577,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3nP-yw-1Jv" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="aGQ-5q-Neb">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -547,14 +594,14 @@
             <objects>
                 <viewController storyboardIdentifier="SyllabusDetailsViewControllerId" id="kXk-Fe-ntB" customClass="SyllabusDetailsViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lm4-HO-Fhh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h9p-qc-hfz">
-                                <rect key="frame" x="0.0" y="64" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Completion" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfm-eE-zgh">
-                                        <rect key="frame" x="144" y="15" width="88" height="20.5"/>
+                                        <rect key="frame" x="116.5" y="15" width="88" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.77647058820000003" green="0.0" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -568,7 +615,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="Rsh-eL-kPQ">
-                                <rect key="frame" x="10" y="114" width="355" height="553"/>
+                                <rect key="frame" x="10" y="114" width="300" height="454"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
@@ -593,6 +640,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bbe-Kt-btd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3876" y="819"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="adN-y3-fh9">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lQQ-qa-jMX" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="aTm-PX-Abt">
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="vsD-vA-29q" kind="relationship" relationship="rootViewController" id="IMJ-1K-ypd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N60-HQ-uMM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2317.5" y="3045.4225352112676"/>
         </scene>
     </scenes>
     <resources>

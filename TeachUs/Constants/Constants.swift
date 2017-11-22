@@ -14,6 +14,7 @@ public struct Constants {
         static let markPortionCompleted = "markPortionCompleted"
         static let syllabusStatusDetails = "syllabusStatusDetails"
         static let SyllabusDetails = "toSyllabusDetails"
+        static let viewRtings = "toViewRatings"
     }
     
     struct Images {
@@ -35,6 +36,8 @@ public struct Constants {
         static let studentList = "StudentsListViewControllerId"
         static let syllabusDetails = "SyllabusDetailsViewControllerId"
         static let studentAttendace = "StudentAttedanceViewControllerId"
+        static let professorRating = "TeachersRatingViewControllerId"
+        static let MarkRating = "MarkRatingViewControllerId"
     }
     
     struct UserDefaults {
@@ -43,7 +46,8 @@ public struct Constants {
     }
     
     struct NumberConstants {
-        static let homeTabBarHeight = 40.0;
+        static let homeTabBarHeight = 40.0
+        static let navbarHeight = 65.0
     }
     
     struct CustomCellId {
@@ -55,5 +59,6 @@ public struct Constants {
         static let TopicDetailsTableViewCellId = "TopicDetailsTableViewCellId"
         static let SyllabusStatusTableViewCellId = "SyllabusStatusTableViewCellId"
         static let SyllabusDetailsTableViewCellId = "SyllabusDetailsTableViewCellId"
+        static let TeacherDetailsTableViewCellId = "TeacherDetailsTableViewCellId"
     }
 }

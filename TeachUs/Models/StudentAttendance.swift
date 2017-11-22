@@ -54,6 +54,10 @@ class  StudentAttendance:Mappable{
             for subject in subjectAttendanceArray{
                 let tempSubject = Mapper<SubjectAttendance>().map(JSON: subject)
                 self.subjectAttendance.append(tempSubject!)
+                self.subjectAttendance.append(tempSubject!)
+                self.subjectAttendance.append(tempSubject!)
+                self.subjectAttendance.append(tempSubject!)
+
             }
         }
     }
@@ -73,7 +77,13 @@ class SubjectAttendance:Mappable{
     public func mapping(map: Map) {
         self.subjectId <- map["subjectId"]
         self.subjectName <- map["subjectName"]
-        self.percentage <- map["percentage"]
+        
+        if((map.JSON["percentage"]) != nil){
+            self.percentage <- map["percentage"]
+        }
+        else{
+            self.percentage = 0
+        }
         self.presentCount <- map["presentCount"]
         self.totalCount <- map["totalCount"]
 

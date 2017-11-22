@@ -20,6 +20,13 @@ class BaseViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    var navBarHeight:CGFloat {
+        return self.navigationController!.navigationBar.frame.height
+    }
+    
+    var statusBarHeight:CGFloat{
+        return UIApplication.shared.statusBarFrame.height
+    }
     
     func addGradientToNavBar(){
          self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -27,7 +34,7 @@ class BaseViewController: UIViewController {
          self.navigationController?.navigationBar.isTranslucent = true
          self.navigationController?.navigationBar.backgroundColor = UIColor.clear
         let gradient = CAGradientLayer()
-        gradient.frame = CGRect(x: 0, y: 0, width: UIApplication.shared.statusBarFrame.width, height: UIApplication.shared.statusBarFrame.height + self.navigationController!.navigationBar.frame.height)
+        gradient.frame = CGRect(x: 0, y: 0, width: UIApplication.shared.statusBarFrame.width, height: statusBarHeight + navBarHeight)
         gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradient.endPoint = CGPoint(x: 1, y: 1)
         let color1 = UIColor(red: 116/255, green: 104/255, blue: 218/255, alpha: 1.0)
@@ -46,7 +53,7 @@ class BaseViewController: UIViewController {
         gradient.frame = CGRect(x: 0,
                                 y: 0,
                                 width: UIApplication.shared.statusBarFrame.width,
-                                height: UIApplication.shared.statusBarFrame.height + self.navigationController!.navigationBar.frame.height + CGFloat(Constants.NumberConstants.homeTabBarHeight))
+                                height: statusBarHeight + navBarHeight + CGFloat(Constants.NumberConstants.homeTabBarHeight))
         gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradient.endPoint = CGPoint(x: 1, y: 1)
         let color1 = UIColor(red: 116/255, green: 104/255, blue: 218/255, alpha: 1.0)
@@ -55,7 +62,6 @@ class BaseViewController: UIViewController {
         self.view.layer.addSublayer(gradient)
 
     }
-    
     
     func addColorToNavBarText(color: UIColor){
         let nav = self.navigationController?.navigationBar

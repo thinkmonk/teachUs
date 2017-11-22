@@ -36,7 +36,7 @@ class HomeViewController: BaseViewController {
         ]
 
         // Initialize page menu with controller array, frame, and optional parameters
-        let pageMenuFrame = CGRect(x: 0.0, y: 60.0, width: self.view.width(), height: self.view.height())
+        let pageMenuFrame = CGRect(x: 0.0, y: 60.0, width: self.view.width(), height: self.view.height()-60.0)
         pageMenu = CAPSPageMenu(viewControllers: controllersArray, frame: pageMenuFrame, pageMenuOptions: parameters)
         
         // Lastly add page menu as subview of base view controller view
@@ -102,8 +102,14 @@ class HomeViewController: BaseViewController {
             syllabusStatusVC.title = "Syllabus Status"
             syllabusStatusVC.parentNavigationController = self.navigationController
             syllabusStatusVC.userType = .Student
-            
             controllersArray.append(syllabusStatusVC)
+
+            let professorRating:TeachersRatingViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorRating) as! TeachersRatingViewController
+            professorRating.title = "Rating"
+            professorRating.parentNavigationController = self.navigationController
+
+            
+            controllersArray.append(professorRating)
             break
             
             

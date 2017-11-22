@@ -90,8 +90,6 @@ class StudentAttedanceViewController: UIViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(StudentAttedanceViewController.showMonthPicker))
         tap.numberOfTapsRequired = 1
         self.viewAttendanceMonth.addGestureRecognizer(tap)
-
-        
         
         self.labelLectureCount.text = "\(self.arrayDataSource.overallPercenage!)%  ( \(self.arrayDataSource.totalPresentCount!)/\(self.arrayDataSource.totalLecture!) )"
         self.viewHeaderBackground.alpha = self.arrayDataSource.subjectAttendance.count > 0 ? 1 : 0
