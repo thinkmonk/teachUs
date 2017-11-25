@@ -32,6 +32,7 @@ class ProfessorDetails:Mappable{
     var subjectId:String?
     var subjectName:String?
     var isRatingSubmitted:String?
+    var imageURL:String?
     
     required public init?(map: Map) {
     }
@@ -43,6 +44,9 @@ class ProfessorDetails:Mappable{
         self.subjectId <- map["subjectId"]
         self.subjectName <- map["subjectName"]
         self.isRatingSubmitted <- map["isRatingSubmitted"]
+        var imageString = ""
+        imageString <- map["image"]
+        self.imageURL = URLConstants.BaseUrl.baseURL+imageString
     }
 }
 

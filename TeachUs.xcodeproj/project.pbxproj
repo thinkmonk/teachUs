@@ -77,6 +77,16 @@
 		81C208541FAF4EF9003D366D /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C208531FAF4EF9003D366D /* UIColor.swift */; };
 		81C208561FAF627F003D366D /* StudentsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C208551FAF627F003D366D /* StudentsListViewController.swift */; };
 		81C2085A1FAF6CEB003D366D /* EnrolledStudentDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C208591FAF6CEB003D366D /* EnrolledStudentDetail.swift */; };
+		81CAD6EA1FC9AEF300B55845 /* ViewRatingInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81CAD6E91FC9AEF300B55845 /* ViewRatingInfo.xib */; };
+		81CAD6EC1FC9AF0400B55845 /* ViewRatingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CAD6EB1FC9AF0400B55845 /* ViewRatingInfo.swift */; };
+		81CCAE4D1FC805CA0070907A /* TeacherProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CCAE4B1FC805CA0070907A /* TeacherProfileTableViewCell.swift */; };
+		81CCAE4E1FC805CA0070907A /* TeacherProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81CCAE4C1FC805CA0070907A /* TeacherProfileTableViewCell.xib */; };
+		81CCAE511FC805F70070907A /* RatingTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CCAE4F1FC805F70070907A /* RatingTitleTableViewCell.swift */; };
+		81CCAE521FC805F70070907A /* RatingTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81CCAE501FC805F70070907A /* RatingTitleTableViewCell.xib */; };
+		81CCAE551FC806060070907A /* RatingTopicsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CCAE531FC806060070907A /* RatingTopicsTableViewCell.swift */; };
+		81CCAE561FC806060070907A /* RatingTopicsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81CCAE541FC806060070907A /* RatingTopicsTableViewCell.xib */; };
+		81CCAE581FC82E310070907A /* RatingDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CCAE571FC82E310070907A /* RatingDataSource.swift */; };
+		81CCAE5A1FC99C170070907A /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CCAE591FC99C170070907A /* UIImageView.swift */; };
 		81D76B4F1FC1AA4D005E861C /* SyllabusStatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D76B4D1FC1AA4D005E861C /* SyllabusStatusTableViewCell.swift */; };
 		81D76B501FC1AA4D005E861C /* SyllabusStatusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81D76B4E1FC1AA4D005E861C /* SyllabusStatusTableViewCell.xib */; };
 		81D76B521FC1D3EC005E861C /* SyllabusDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D76B511FC1D3EC005E861C /* SyllabusDetailsViewController.swift */; };
@@ -210,6 +220,16 @@
 		81C208531FAF4EF9003D366D /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		81C208551FAF627F003D366D /* StudentsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsListViewController.swift; sourceTree = "<group>"; };
 		81C208591FAF6CEB003D366D /* EnrolledStudentDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrolledStudentDetail.swift; sourceTree = "<group>"; };
+		81CAD6E91FC9AEF300B55845 /* ViewRatingInfo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewRatingInfo.xib; sourceTree = "<group>"; };
+		81CAD6EB1FC9AF0400B55845 /* ViewRatingInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRatingInfo.swift; sourceTree = "<group>"; };
+		81CCAE4B1FC805CA0070907A /* TeacherProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherProfileTableViewCell.swift; sourceTree = "<group>"; };
+		81CCAE4C1FC805CA0070907A /* TeacherProfileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TeacherProfileTableViewCell.xib; sourceTree = "<group>"; };
+		81CCAE4F1FC805F70070907A /* RatingTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingTitleTableViewCell.swift; sourceTree = "<group>"; };
+		81CCAE501FC805F70070907A /* RatingTitleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RatingTitleTableViewCell.xib; sourceTree = "<group>"; };
+		81CCAE531FC806060070907A /* RatingTopicsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingTopicsTableViewCell.swift; sourceTree = "<group>"; };
+		81CCAE541FC806060070907A /* RatingTopicsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RatingTopicsTableViewCell.xib; sourceTree = "<group>"; };
+		81CCAE571FC82E310070907A /* RatingDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingDataSource.swift; sourceTree = "<group>"; };
+		81CCAE591FC99C170070907A /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		81D76B4D1FC1AA4D005E861C /* SyllabusStatusTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyllabusStatusTableViewCell.swift; sourceTree = "<group>"; };
 		81D76B4E1FC1AA4D005E861C /* SyllabusStatusTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SyllabusStatusTableViewCell.xib; sourceTree = "<group>"; };
 		81D76B511FC1D3EC005E861C /* SyllabusDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyllabusDetailsViewController.swift; sourceTree = "<group>"; };
@@ -361,6 +381,7 @@
 			isa = PBXGroup;
 			children = (
 				810FAC561FB7518A00945DD6 /* AttendanceDataSource.swift */,
+				81CCAE571FC82E310070907A /* RatingDataSource.swift */,
 			);
 			path = "Custom DataSource";
 			sourceTree = "<group>";
@@ -428,6 +449,7 @@
 				81B190C31FA24F87004A8A72 /* UIButton.swift */,
 				81B69E7B1FA902BD0098F16D /* UITextField.swift */,
 				81C208531FAF4EF9003D366D /* UIColor.swift */,
+				81CCAE591FC99C170070907A /* UIImageView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -504,6 +526,14 @@
 			children = (
 				819BDA561FC4AD5D00DD7D2D /* TeacherDetailsTableViewCell.swift */,
 				819BDA571FC4AD5D00DD7D2D /* TeacherDetailsTableViewCell.xib */,
+				81CCAE4B1FC805CA0070907A /* TeacherProfileTableViewCell.swift */,
+				81CCAE4C1FC805CA0070907A /* TeacherProfileTableViewCell.xib */,
+				81CCAE4F1FC805F70070907A /* RatingTitleTableViewCell.swift */,
+				81CCAE501FC805F70070907A /* RatingTitleTableViewCell.xib */,
+				81CCAE531FC806060070907A /* RatingTopicsTableViewCell.swift */,
+				81CCAE541FC806060070907A /* RatingTopicsTableViewCell.xib */,
+				81CAD6EB1FC9AF0400B55845 /* ViewRatingInfo.swift */,
+				81CAD6E91FC9AEF300B55845 /* ViewRatingInfo.xib */,
 			);
 			path = "Teacher Rating";
 			sourceTree = "<group>";
@@ -796,11 +826,15 @@
 				81D76B501FC1AA4D005E861C /* SyllabusStatusTableViewCell.xib in Resources */,
 				81C208521FAF4182003D366D /* ProfessorCollegeListTableViewCell.xib in Resources */,
 				18A627E71F90F9870099C106 /* Assets.xcassets in Resources */,
+				81CCAE521FC805F70070907A /* RatingTitleTableViewCell.xib in Resources */,
 				81D76B561FC1D600005E861C /* SyllabusDetailsTableViewCell.xib in Resources */,
+				81CAD6EA1FC9AEF300B55845 /* ViewRatingInfo.xib in Resources */,
 				810610BC1FA65ED20067273E /* Loader.xib in Resources */,
 				810FAC5B1FB7549400945DD6 /* AttendanceCountTableViewCell.xib in Resources */,
 				81A523951FA7955600B3B557 /* CollegeLogin.xib in Resources */,
+				81CCAE561FC806060070907A /* RatingTopicsTableViewCell.xib in Resources */,
 				81FFB0B71FBF2D4900C32097 /* ViewConfirmAttendance.xib in Resources */,
+				81CCAE4E1FC805CA0070907A /* TeacherProfileTableViewCell.xib in Resources */,
 				810610B91FA5F4FB0067273E /* OtpView.xib in Resources */,
 				812C34F21FB794E30048DD3C /* ViewDatePicker.xib in Resources */,
 				18A627E21F90F9870099C106 /* Main.storyboard in Resources */,
@@ -982,10 +1016,12 @@
 				81727B901F9E6EB1006433E8 /* Notification.swift in Sources */,
 				81D7CE7F1FAB8E5D00C4375E /* CAPSPageMenuConfiguration.swift in Sources */,
 				81D7CE981FAB98DB00C4375E /* ProfessorLogsListViewController.swift in Sources */,
+				81CCAE5A1FC99C170070907A /* UIImageView.swift in Sources */,
 				18A627DF1F90F9870099C106 /* LoginSelectViewController.swift in Sources */,
 				81B2E2D71FC35B0600E9E852 /* DPDKeyboardListener.swift in Sources */,
 				812C34F01FB794DB0048DD3C /* ViewDatePicker.swift in Sources */,
 				819AADF31FB6F88F0061C471 /* AttendanceManager.swift in Sources */,
+				81CCAE581FC82E310070907A /* RatingDataSource.swift in Sources */,
 				81C208511FAF4182003D366D /* ProfessorCollegeListTableViewCell.swift in Sources */,
 				81D7CE9A1FAB9A1D00C4375E /* UserManager.swift in Sources */,
 				81727B8C1F9E6CB8006433E8 /* UIViewController+MFSideMenuAdditions.m in Sources */,
@@ -1014,9 +1050,11 @@
 				819AADEF1FB6DBBD0061C471 /* DefaultSelectionTableViewCell.swift in Sources */,
 				81D76B521FC1D3EC005E861C /* SyllabusDetailsViewController.swift in Sources */,
 				81D7CE921FAB987300C4375E /* StudentAttedanceViewController.swift in Sources */,
+				81CCAE4D1FC805CA0070907A /* TeacherProfileTableViewCell.swift in Sources */,
 				81D76B4F1FC1AA4D005E861C /* SyllabusStatusTableViewCell.swift in Sources */,
 				81D7CE961FAB98C300C4375E /* SyllabusStatusListViewController.swift in Sources */,
 				81D7CE941FAB988500C4375E /* ProfessorAttedanceViewController.swift in Sources */,
+				81CCAE511FC805F70070907A /* RatingTitleTableViewCell.swift in Sources */,
 				81B190C01FA24E19004A8A72 /* LoginView.swift in Sources */,
 				18A627DD1F90F9870099C106 /* AppDelegate.swift in Sources */,
 				81B2E2D81FC35B0600E9E852 /* DPDUIView+Extension.swift in Sources */,
@@ -1038,8 +1076,10 @@
 				8137EF551FA10AD400045D97 /* Constants.swift in Sources */,
 				81FFB0C21FC0278E00C32097 /* TopicDetailsTableViewCell.swift in Sources */,
 				81D76B551FC1D600005E861C /* SyllabusDetailsTableViewCell.swift in Sources */,
+				81CCAE551FC806060070907A /* RatingTopicsTableViewCell.swift in Sources */,
 				819BDA581FC4AD5D00DD7D2D /* TeacherDetailsTableViewCell.swift in Sources */,
 				81FFB0B91FBF2D5400C32097 /* ViewConfirmAttendance.swift in Sources */,
+				81CAD6EC1FC9AF0400B55845 /* ViewRatingInfo.swift in Sources */,
 				81D7CE821FAB8E5D00C4375E /* MenuItemView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

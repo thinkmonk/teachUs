@@ -38,7 +38,7 @@ class TeachersRatingViewController: BaseViewController {
     func getRatings(){
         let manager = NetworkHandler()
 
-        //http://ec2-34-215-84-223.us-west-2.compute.amazonaws.com:8081/teachus/student/getRatingsSummary/Zmlyc3ROYW1lPURldmVuZHJhLG1pZGRsZU5hbWU9QSxsYXN0TmFtZT1GYWRuYXZpcyxyb2xsPVBST0ZFU1NPUixpZD0x?studentId=1
+        //http://ec2-52-40-212-186.us-west-2.compute.amazonaws.com:8081/teachus/student/getRatingsSummary/Zmlyc3ROYW1lPURldmVuZHJhLG1pZGRsZU5hbWU9QSxsYXN0TmFtZT1GYWRuYXZpcyxyb2xsPVBST0ZFU1NPUixpZD0x?studentId=1
         
         manager.url = URLConstants.StudentURL.getRatingsSummary +
             "\(UserManager.sharedUserManager.getAccessToken())" +
@@ -115,6 +115,7 @@ extension TeachersRatingViewController:UITableViewDataSource, UITableViewDelegat
         
         cell.labelSubject.text = self.arrayDataSource[indexPath.section].subjectName
         cell.labelName.text = "\(self.arrayDataSource[indexPath.section].professorName!) \(self.arrayDataSource[indexPath.section].professorLastName!)"
+        cell.imageProfessor.imageFromServerURL(urlString: self.arrayDataSource[indexPath.section].imageURL!, defaultImage: Constants.Images.defaultProfessor)
         cell.selectionStyle = .none
         cell.accessoryType = .disclosureIndicator
         

@@ -128,7 +128,9 @@ extension UIView {
         
     }
 
-    
+    func makeViewCircular(){
+        self.makeEdgesRoundedWith(radius: self.height()/2)
+    }
     
     func dropShadow(scale: Bool = true) {
         self.layer.masksToBounds = false

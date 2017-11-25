@@ -527,9 +527,24 @@
                     <view key="view" contentMode="scaleToFill" id="cl8-ut-djP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fDZ-2Z-OLG">
+                                <rect key="frame" x="15" y="64" width="290" height="504"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="NrL-4Q-ht0" firstAttribute="trailing" secondItem="fDZ-2Z-OLG" secondAttribute="trailing" constant="15" id="Nm4-4e-zbY"/>
+                            <constraint firstItem="fDZ-2Z-OLG" firstAttribute="top" secondItem="NrL-4Q-ht0" secondAttribute="top" id="P0w-Eq-skZ"/>
+                            <constraint firstItem="fDZ-2Z-OLG" firstAttribute="bottom" secondItem="NrL-4Q-ht0" secondAttribute="bottom" id="W36-Pm-sQY"/>
+                            <constraint firstItem="fDZ-2Z-OLG" firstAttribute="leading" secondItem="NrL-4Q-ht0" secondAttribute="leading" constant="15" id="qFE-6L-KVr"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="NrL-4Q-ht0"/>
                     </view>
+                    <connections>
+                        <outlet property="tableViewTeacherRating" destination="fDZ-2Z-OLG" id="fKK-KC-OTo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Da2-Ip-yql" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

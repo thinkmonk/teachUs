@@ -22,6 +22,8 @@ public struct Constants {
         static let syllabusInProgress = "In_progress"
         static let syllabusCompleted = "completed"
         static let syllabusNotStarted = "Not_Started"
+        static let defaultProfessor = "professor_default"
+        static let studentDefault = "student_default"
     }
     
     struct  colors {
@@ -60,5 +62,9 @@ public struct Constants {
         static let SyllabusStatusTableViewCellId = "SyllabusStatusTableViewCellId"
         static let SyllabusDetailsTableViewCellId = "SyllabusDetailsTableViewCellId"
         static let TeacherDetailsTableViewCellId = "TeacherDetailsTableViewCellId"
+        static let TeacherProfileTableViewCellId = "TeacherProfileTableViewCellId"
+        static let RatingTitleTableViewCellId = "RatingTitleTableViewCellId"
+        static let RatingTopicsTableViewCellId = "RatingTopicsTableViewCellId"
+        
     }
 }
