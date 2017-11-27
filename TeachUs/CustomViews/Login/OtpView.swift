@@ -91,11 +91,11 @@ class OtpView: UIView {
     }
     
     func setUpOtpView(){
-        var editedMobileNumber = mobileNumber
-        if(editedMobileNumber.characters.count >= 13){
-            let start = editedMobileNumber.index(editedMobileNumber.startIndex, offsetBy: 3)
-            let end = editedMobileNumber.index(editedMobileNumber.endIndex, offsetBy: -5)
-            editedMobileNumber.replaceSubrange(start..<end, with: " XXX XXX ")
+        var editedMobileNumber = UserManager.sharedUserManager.getUserMobileNumber()
+        if(editedMobileNumber.characters.count >= 10){
+            let start = editedMobileNumber.index(editedMobileNumber.startIndex, offsetBy: 2)
+            let end = editedMobileNumber.index(editedMobileNumber.endIndex, offsetBy: -3)
+            editedMobileNumber.replaceSubrange(start..<end, with: "XX XXX")
             self.labelOtpMobileNUmber.text = "On \(editedMobileNumber)"
         }
     }

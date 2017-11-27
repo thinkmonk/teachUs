@@ -36,6 +36,7 @@ class TeachersRatingViewController: BaseViewController {
     }
     
     func getRatings(){
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()
 
         //http://ec2-52-40-212-186.us-west-2.compute.amazonaws.com:8081/teachus/student/getRatingsSummary/Zmlyc3ROYW1lPURldmVuZHJhLG1pZGRsZU5hbWU9QSxsYXN0TmFtZT1GYWRuYXZpcyxyb2xsPVBST0ZFU1NPUixpZD0x?studentId=1

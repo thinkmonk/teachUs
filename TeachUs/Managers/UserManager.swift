@@ -44,4 +44,17 @@ class UserManager{
         }
         return userId
     }
+    
+    func saveMobileNumber(_ mobileNumber:String){
+        UserDefaults.standard.set(mobileNumber, forKey: Constants.UserDefaults.userMobileNumber)
+        UserDefaults.standard.synchronize()
+    }
+    
+    func getUserMobileNumber() -> String{
+        guard let userMobileNumber = UserDefaults.standard.value(forKey: Constants.UserDefaults.userMobileNumber) as? String else {
+            return "1"
+        }
+        return userMobileNumber
+    }
+
 }

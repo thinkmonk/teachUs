@@ -16,6 +16,7 @@ class MarkRatingViewController: BaseViewController {
     var ratingDropDown = DropDown()
     
     @IBOutlet weak var tableViewTeacherRating: UITableView!
+    @IBOutlet weak var butonSubmit: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableViewTeacherRating.register(UINib(nibName: "TeacherProfileTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.TeacherProfileTableViewCellId)
@@ -35,6 +36,8 @@ class MarkRatingViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.butonSubmit.themeRedButton()
+        self.butonSubmit.makeEdgesRounded()
         self.addGradientToNavBar()
     }
     
@@ -56,6 +59,11 @@ class MarkRatingViewController: BaseViewController {
             arrayTableDataSource.append(topicsDataSource)
         }
         self.tableViewTeacherRating.reloadData()
+    }
+    
+    
+    @IBAction func submitFeedback(_ sender: Any) {
+        
     }
 }
 

@@ -529,20 +529,34 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fDZ-2Z-OLG">
-                                <rect key="frame" x="15" y="64" width="290" height="504"/>
+                                <rect key="frame" x="15" y="64" width="290" height="464"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FqH-Jn-9Tg">
+                                <rect key="frame" x="15" y="528" width="290" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="ccW-8p-EcG"/>
+                                </constraints>
+                                <state key="normal" title="Submit"/>
+                                <connections>
+                                    <action selector="submitFeedback:" destination="hke-iy-WEB" eventType="touchUpInside" id="Y0w-Db-aA0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="FqH-Jn-9Tg" firstAttribute="bottom" secondItem="NrL-4Q-ht0" secondAttribute="bottom" id="4Ae-NJ-zgd"/>
+                            <constraint firstItem="FqH-Jn-9Tg" firstAttribute="trailing" secondItem="fDZ-2Z-OLG" secondAttribute="trailing" id="IVj-PR-HLp"/>
                             <constraint firstItem="NrL-4Q-ht0" firstAttribute="trailing" secondItem="fDZ-2Z-OLG" secondAttribute="trailing" constant="15" id="Nm4-4e-zbY"/>
                             <constraint firstItem="fDZ-2Z-OLG" firstAttribute="top" secondItem="NrL-4Q-ht0" secondAttribute="top" id="P0w-Eq-skZ"/>
-                            <constraint firstItem="fDZ-2Z-OLG" firstAttribute="bottom" secondItem="NrL-4Q-ht0" secondAttribute="bottom" id="W36-Pm-sQY"/>
+                            <constraint firstItem="FqH-Jn-9Tg" firstAttribute="leading" secondItem="fDZ-2Z-OLG" secondAttribute="leading" id="Rsk-35-aEB"/>
+                            <constraint firstItem="FqH-Jn-9Tg" firstAttribute="top" secondItem="fDZ-2Z-OLG" secondAttribute="bottom" id="b49-tF-nou"/>
                             <constraint firstItem="fDZ-2Z-OLG" firstAttribute="leading" secondItem="NrL-4Q-ht0" secondAttribute="leading" constant="15" id="qFE-6L-KVr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="NrL-4Q-ht0"/>
                     </view>
                     <connections>
+                        <outlet property="butonSubmit" destination="FqH-Jn-9Tg" id="5GW-dI-zgZ"/>
                         <outlet property="tableViewTeacherRating" destination="fDZ-2Z-OLG" id="fKK-KC-OTo"/>
                     </connections>
                 </viewController>
