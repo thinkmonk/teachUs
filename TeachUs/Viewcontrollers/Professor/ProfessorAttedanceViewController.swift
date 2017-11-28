@@ -30,11 +30,16 @@ class ProfessorAttedanceViewController: BaseViewController {
     
     func getCollegeSummaryForProfessor(){
         let manager = NetworkHandler()
+        
+        /*
         //"http://ec2-34-215-84-223.us-west-2.compute.amazonaws.com:8081/teachus/teacher/getCollegeSummary/Zmlyc3ROYW1lPURldmVuZHJhLG1pZGRsZU5hbWU9QSxsYXN0TmFtZT1GYWRuYXZpcyxyb2xsPVBST0ZFU1NPUixpZD0x?professorId=1"
         
         manager.url = URLConstants.TecacherURL.collegeSummary +
             "\(UserManager.sharedUserManager.getAccessToken())" +
             "?professorId=\(UserManager.sharedUserManager.getUserId())"
+        */
+        
+        manager.url = URLConstants.BaseUrl.baseURL + UserManager.sharedUserManager.teacherProfile.attendenceUrl
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         manager.apiGet(apiName: "Get College Summary for professor", completionHandler: { (response, code) in
             LoadingActivityHUD.hideProgressHUD()

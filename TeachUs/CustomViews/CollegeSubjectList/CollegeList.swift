@@ -22,7 +22,7 @@ class CollegeList: UIView {
     func showView(_ inView:UIView){
         self.alpha = 0.0
         self.frame.size.width = inView.width()
-        self.frame.size.height = inView.height() - CGFloat(Constants.NumberConstants.homeTabBarHeight)
+        self.frame.size.height = inView.height()
         self.frame.origin.y = 0
         inView.addSubview(self)
         transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
@@ -85,6 +85,7 @@ extension CollegeList:UITableViewDelegate, UITableViewDataSource{
         labelTitle.textColor = UIColor.white
         labelTitle.text = self.arrayDataSource[section].name
         labelTitle.font = UIFont.systemFont(ofSize: 14.0)
+        labelTitle.numberOfLines = 0
         headerView.addSubview(labelTitle)
         
         headerView.backgroundColor = UIColor.rgbColor(52, 40, 70)

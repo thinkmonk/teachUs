@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ObjectMapper
 
 class LoginViewController: BaseViewController {
 
@@ -203,6 +204,8 @@ extension LoginViewController:OtpDelegate{
         manager.apiGet(apiName: " Generate OTP", completionHandler: { (response, code) in
             print(response)
             LoadingActivityHUD.hideProgressHUD()
+            self.saveUser(userResponse: response)
+            
             NotificationCenter.default.post(name: .notificationLoginSuccess, object: nil)
         }) { (error, code, message) in
             LoadingActivityHUD.hideProgressHUD()
@@ -210,6 +213,26 @@ extension LoginViewController:OtpDelegate{
         }
         
     }
+    
+    func saveUser(userResponse: [String:Any]){
+        switch UserManager.sharedUserManager.user! {
+        case .Professor:
+            let userProilfes = userResponse["profiles"] as! [String:Any]
+            let profileArray = userProilfes["profile"] as! [[String:Any]]
+            for user in profileArray {
+                let teacher = Mapper<TeacherProfile>().map(JSON: user)
+                teacher?.userImage = userResponse["image"] as! String
+                UserManager.sharedUserManager.teacherProfile = teacher
+            }
+            break
+            
+        case .Student:
+            break
+        default:
+            break
+        }
+    }
+    
 }
 
 extension LoginViewController:CollegeLoginDelegate{

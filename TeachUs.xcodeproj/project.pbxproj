@@ -44,6 +44,8 @@
 		818C26081FB6FAFF002638E5 /* MarkStudentAttendance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818C26071FB6FAFF002638E5 /* MarkStudentAttendance.swift */; };
 		819216EB1FB81BA6009B56C0 /* ViewNumberPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 819216E91FB81BA5009B56C0 /* ViewNumberPicker.xib */; };
 		819216EC1FB81BA6009B56C0 /* ViewNumberPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819216EA1FB81BA6009B56C0 /* ViewNumberPicker.swift */; };
+		81930B301FCDD7700002CDBE /* TeacherProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81930B2F1FCDD7700002CDBE /* TeacherProfile.swift */; };
+		81930B321FCDE2590002CDBE /* ProfessorLogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81930B311FCDE2590002CDBE /* ProfessorLogs.swift */; };
 		8194C30F1FC60DCA0077DB7B /* MarkRatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8194C30E1FC60DCA0077DB7B /* MarkRatingViewController.swift */; };
 		819AADEF1FB6DBBD0061C471 /* DefaultSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819AADED1FB6DBBD0061C471 /* DefaultSelectionTableViewCell.swift */; };
 		819AADF01FB6DBBD0061C471 /* DefaultSelectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 819AADEE1FB6DBBD0061C471 /* DefaultSelectionTableViewCell.xib */; };
@@ -186,6 +188,8 @@
 		818C26071FB6FAFF002638E5 /* MarkStudentAttendance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkStudentAttendance.swift; sourceTree = "<group>"; };
 		819216E91FB81BA5009B56C0 /* ViewNumberPicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewNumberPicker.xib; sourceTree = "<group>"; };
 		819216EA1FB81BA6009B56C0 /* ViewNumberPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewNumberPicker.swift; sourceTree = "<group>"; };
+		81930B2F1FCDD7700002CDBE /* TeacherProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherProfile.swift; sourceTree = "<group>"; };
+		81930B311FCDE2590002CDBE /* ProfessorLogs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessorLogs.swift; sourceTree = "<group>"; };
 		8194C30E1FC60DCA0077DB7B /* MarkRatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkRatingViewController.swift; sourceTree = "<group>"; };
 		819AADED1FB6DBBD0061C471 /* DefaultSelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSelectionTableViewCell.swift; sourceTree = "<group>"; };
 		819AADEE1FB6DBBD0061C471 /* DefaultSelectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DefaultSelectionTableViewCell.xib; sourceTree = "<group>"; };
@@ -473,6 +477,8 @@
 				818C26071FB6FAFF002638E5 /* MarkStudentAttendance.swift */,
 				81054EB31FC2263600EEE0CD /* StudentAttendance.swift */,
 				819BDA531FC4A66E00DD7D2D /* ProfessorDetails.swift */,
+				81930B2F1FCDD7700002CDBE /* TeacherProfile.swift */,
+				81930B311FCDE2590002CDBE /* ProfessorLogs.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1047,6 +1053,7 @@
 				810610BE1FA65EE00067273E /* Loader.swift in Sources */,
 				81C208541FAF4EF9003D366D /* UIColor.swift in Sources */,
 				81727B941F9E70EE006433E8 /* HomeViewController.swift in Sources */,
+				81930B321FCDE2590002CDBE /* ProfessorLogs.swift in Sources */,
 				819AADEF1FB6DBBD0061C471 /* DefaultSelectionTableViewCell.swift in Sources */,
 				81D76B521FC1D3EC005E861C /* SyllabusDetailsViewController.swift in Sources */,
 				81D7CE921FAB987300C4375E /* StudentAttedanceViewController.swift in Sources */,
@@ -1058,6 +1065,7 @@
 				81B190C01FA24E19004A8A72 /* LoginView.swift in Sources */,
 				18A627DD1F90F9870099C106 /* AppDelegate.swift in Sources */,
 				81B2E2D81FC35B0600E9E852 /* DPDUIView+Extension.swift in Sources */,
+				81930B301FCDD7700002CDBE /* TeacherProfile.swift in Sources */,
 				81727B921F9E70CC006433E8 /* LeftMenuViewController.swift in Sources */,
 				81D7CE801FAB8E5D00C4375E /* CAPSPageMenu.swift in Sources */,
 				810610C01FA65FB30067273E /* LoadingActivityHUD.swift in Sources */,

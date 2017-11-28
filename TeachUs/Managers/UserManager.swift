@@ -21,6 +21,9 @@ class UserManager{
         return "\(self.userName) \(self.userMiddleName) \(self.userLastName)"
     }
     
+    
+    var teacherProfile:TeacherProfile!
+    
     func setAccessToken(_ token:String){
         UserDefaults.standard.set(token, forKey: Constants.UserDefaults.accesToken)
         UserDefaults.standard.synchronize()
@@ -40,7 +43,7 @@ class UserManager{
     
     func getUserId() -> String{
         guard let userId = UserDefaults.standard.value(forKey: Constants.UserDefaults.userId) as? String else {
-            return "1"
+            return "0"
         }
         return userId
     }

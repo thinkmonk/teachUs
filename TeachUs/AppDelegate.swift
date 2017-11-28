@@ -20,6 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NotificationCenter.default.addObserver(self, selector: #selector(loginSuccess), name: .notificationLoginSuccess, object: nil)
 
+        if(UserManager.sharedUserManager.getUserId() != "0"){
+            //loginSuccess()
+        }
 
         return true
     }

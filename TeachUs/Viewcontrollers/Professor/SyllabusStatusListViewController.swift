@@ -51,9 +51,11 @@ class SyllabusStatusListViewController: UIViewController {
             break
         
         case .Professor:
-            manager.url = URLConstants.TecacherURL.getSyllabusSummary +
-                "\(UserManager.sharedUserManager.getAccessToken())" +
-            "?professorId=\(UserManager.sharedUserManager.getUserId())"
+//            manager.url = URLConstants.TecacherURL.getSyllabusSummary +
+//                "\(UserManager.sharedUserManager.getAccessToken())" +
+//            "?professorId=\(UserManager.sharedUserManager.getUserId())"
+            manager.url = URLConstants.BaseUrl.baseURL + UserManager.sharedUserManager.teacherProfile.syllabusStatusUrl
+            
             break
             
         default:
