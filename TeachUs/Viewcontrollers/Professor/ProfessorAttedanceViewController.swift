@@ -39,7 +39,7 @@ class ProfessorAttedanceViewController: BaseViewController {
             "?professorId=\(UserManager.sharedUserManager.getUserId())"
         */
         
-        manager.url = URLConstants.BaseUrl.baseURL + UserManager.sharedUserManager.teacherProfile.attendenceUrl
+        manager.url = URLConstants.BaseUrl.baseURL + UserManager.sharedUserManager.userTeacher.attendanceUrl!
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         manager.apiGet(apiName: "Get College Summary for professor", completionHandler: { (response, code) in
             LoadingActivityHUD.hideProgressHUD()

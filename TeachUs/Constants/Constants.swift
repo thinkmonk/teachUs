@@ -46,6 +46,7 @@ public struct Constants {
         static let accesToken = "AppUserAccessToken"
         static let userId = "UserId"
         static let userMobileNumber = "userMobileNumber"
+        static let loginUserType = "loginUserType"
 
     }
     

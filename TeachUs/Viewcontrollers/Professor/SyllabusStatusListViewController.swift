@@ -54,7 +54,7 @@ class SyllabusStatusListViewController: UIViewController {
 //            manager.url = URLConstants.TecacherURL.getSyllabusSummary +
 //                "\(UserManager.sharedUserManager.getAccessToken())" +
 //            "?professorId=\(UserManager.sharedUserManager.getUserId())"
-            manager.url = URLConstants.BaseUrl.baseURL + UserManager.sharedUserManager.teacherProfile.syllabusStatusUrl
+            manager.url = URLConstants.BaseUrl.baseURL + UserManager.sharedUserManager.userTeacher.syllabusStatusUrl!
             
             break
             

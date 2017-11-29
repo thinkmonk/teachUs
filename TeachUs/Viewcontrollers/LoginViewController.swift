@@ -223,6 +223,7 @@ extension LoginViewController:OtpDelegate{
                 let teacher = Mapper<TeacherProfile>().map(JSON: user)
                 teacher?.userImage = userResponse["image"] as! String
                 UserManager.sharedUserManager.teacherProfile = teacher
+                UserManager.sharedUserManager.saveTeacherToDb(teacher!)
             }
             break
             

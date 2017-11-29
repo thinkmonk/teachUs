@@ -74,6 +74,9 @@
 		81B2E2DC1FC35B0600E9E852 /* DropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B2E2D41FC35B0600E9E852 /* DropDown.swift */; };
 		81B2E2DD1FC35B0600E9E852 /* DropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B2E2D51FC35B0600E9E852 /* DropDownCell.swift */; };
 		81B69E7C1FA902BD0098F16D /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B69E7B1FA902BD0098F16D /* UITextField.swift */; };
+		81C1D8AB1FCF34F10091DA6E /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C1D8AA1FCF34F10091DA6E /* DatabaseManager.swift */; };
+		81C1D8B71FCF3AAF0091DA6E /* Teacher+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C1D8B51FCF3AAE0091DA6E /* Teacher+CoreDataClass.swift */; };
+		81C1D8B81FCF3AAF0091DA6E /* Teacher+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C1D8B61FCF3AAF0091DA6E /* Teacher+CoreDataProperties.swift */; };
 		81C208511FAF4182003D366D /* ProfessorCollegeListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C2084F1FAF4182003D366D /* ProfessorCollegeListTableViewCell.swift */; };
 		81C208521FAF4182003D366D /* ProfessorCollegeListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81C208501FAF4182003D366D /* ProfessorCollegeListTableViewCell.xib */; };
 		81C208541FAF4EF9003D366D /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C208531FAF4EF9003D366D /* UIColor.swift */; };
@@ -219,6 +222,9 @@
 		81B2E2D41FC35B0600E9E852 /* DropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDown.swift; sourceTree = "<group>"; };
 		81B2E2D51FC35B0600E9E852 /* DropDownCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownCell.swift; sourceTree = "<group>"; };
 		81B69E7B1FA902BD0098F16D /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
+		81C1D8AA1FCF34F10091DA6E /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		81C1D8B51FCF3AAE0091DA6E /* Teacher+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Teacher+CoreDataClass.swift"; sourceTree = "<group>"; };
+		81C1D8B61FCF3AAF0091DA6E /* Teacher+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Teacher+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		81C2084F1FAF4182003D366D /* ProfessorCollegeListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessorCollegeListTableViewCell.swift; sourceTree = "<group>"; };
 		81C208501FAF4182003D366D /* ProfessorCollegeListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfessorCollegeListTableViewCell.xib; sourceTree = "<group>"; };
 		81C208531FAF4EF9003D366D /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -464,6 +470,7 @@
 				81D7CE991FAB9A1D00C4375E /* UserManager.swift */,
 				819AADF21FB6F88F0061C471 /* AttendanceManager.swift */,
 				812C34EB1FB78E770048DD3C /* AttendanceCalenderManager.swift */,
+				81C1D8AA1FCF34F10091DA6E /* DatabaseManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -471,6 +478,7 @@
 		813EC76D1F9BA4FD00F11A12 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				81C1D8AC1FCF35790091DA6E /* Users */,
 				81FFB0BD1FBF468000C32097 /* SyllabusChapter.swift */,
 				81A80EDC1FAF11B700DDFFA1 /* CollegeSummary.swift */,
 				81C208591FAF6CEB003D366D /* EnrolledStudentDetail.swift */,
@@ -595,6 +603,15 @@
 				81B2E2D51FC35B0600E9E852 /* DropDownCell.swift */,
 			);
 			path = src;
+			sourceTree = "<group>";
+		};
+		81C1D8AC1FCF35790091DA6E /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				81C1D8B51FCF3AAE0091DA6E /* Teacher+CoreDataClass.swift */,
+				81C1D8B61FCF3AAF0091DA6E /* Teacher+CoreDataProperties.swift */,
+			);
+			path = Users;
 			sourceTree = "<group>";
 		};
 		81D76B4C1FC1AA34005E861C /* Syllabus Status */ = {
@@ -1023,8 +1040,10 @@
 				81D7CE7F1FAB8E5D00C4375E /* CAPSPageMenuConfiguration.swift in Sources */,
 				81D7CE981FAB98DB00C4375E /* ProfessorLogsListViewController.swift in Sources */,
 				81CCAE5A1FC99C170070907A /* UIImageView.swift in Sources */,
+				81C1D8B71FCF3AAF0091DA6E /* Teacher+CoreDataClass.swift in Sources */,
 				18A627DF1F90F9870099C106 /* LoginSelectViewController.swift in Sources */,
 				81B2E2D71FC35B0600E9E852 /* DPDKeyboardListener.swift in Sources */,
+				81C1D8B81FCF3AAF0091DA6E /* Teacher+CoreDataProperties.swift in Sources */,
 				812C34F01FB794DB0048DD3C /* ViewDatePicker.swift in Sources */,
 				819AADF31FB6F88F0061C471 /* AttendanceManager.swift in Sources */,
 				81CCAE581FC82E310070907A /* RatingDataSource.swift in Sources */,
@@ -1042,6 +1061,7 @@
 				81D7CE841FAB8E5D00C4375E /* CAPSPageMenu+UIConfiguration.swift in Sources */,
 				81C208561FAF627F003D366D /* StudentsListViewController.swift in Sources */,
 				81B190C41FA24F87004A8A72 /* UIButton.swift in Sources */,
+				81C1D8AB1FCF34F10091DA6E /* DatabaseManager.swift in Sources */,
 				818C26081FB6FAFF002638E5 /* MarkStudentAttendance.swift in Sources */,
 				810610B71FA5F4ED0067273E /* OtpView.swift in Sources */,
 				81D7CE861FAB8E9E00C4375E /* CAPSPageMenu+Options.swift in Sources */,

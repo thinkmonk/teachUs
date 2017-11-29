@@ -36,17 +36,17 @@ class LoginSelectViewController: BaseViewController {
     }
 
     @IBAction func loginStudent(_ sender: Any) {
-        UserManager.sharedUserManager.user = LoginUserType.Student
+        UserManager.sharedUserManager.setLoginUserType(.Student)
         self.performSegue(withIdentifier: Constants.segues.toLoginView, sender: self)
     }
     
     @IBAction func loginProfessor(_ sender: Any) {
-        UserManager.sharedUserManager.user = LoginUserType.Professor
+        UserManager.sharedUserManager.setLoginUserType(.Professor)
         self.performSegue(withIdentifier: Constants.segues.toLoginView, sender: self)
     }
 
     @IBAction func loginCollege(_ sender: Any) {
-        UserManager.sharedUserManager.user = LoginUserType.College
+        UserManager.sharedUserManager.setLoginUserType(.College)
         self.performSegue(withIdentifier: Constants.segues.toLoginView, sender: self)
     }
 

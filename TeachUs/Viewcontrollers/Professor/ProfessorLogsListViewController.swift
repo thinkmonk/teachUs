@@ -30,7 +30,7 @@ class ProfessorLogsListViewController: UIViewController {
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
 
         let manager = NetworkHandler()
-//        manager.url = URLConstants.BaseUrl.baseURL + UserManager.sharedUserManager.teacherProfile.logsUrl
+//        manager.url = URLConstants.BaseUrl.baseURL + UserManager.sharedUserManager.userTeacher.logsUrl
         manager.url = "http://ec2-52-40-212-186.us-west-2.compute.amazonaws.com:8081/teachus/teacher/getDateWiseSubjectLogs/Zmlyc3ROYW1lPURldmVuZHJhLG1pZGRsZU5hbWU9QSxsYXN0TmFtZT1GYWRuYXZpcyxyb2xsPVBST0ZFU1NPUixpZD0x?professorId=1&subjectId=1"
         manager.apiGet(apiName: "Get professor logs", completionHandler: { (response, code) in
             LoadingActivityHUD.hideProgressHUD()
