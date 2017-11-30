@@ -114,6 +114,7 @@ extension SyllabusStatusListViewController:UITableViewDelegate, UITableViewDataS
         cell.labelAttendancePercent.text = "\(arrayDataSource[indexPath.section].completion!)"
         cell.selectionStyle = .none
         cell.accessoryType = .disclosureIndicator
+        cell.backgroundColor = UIColor.white
         return cell
     }
     

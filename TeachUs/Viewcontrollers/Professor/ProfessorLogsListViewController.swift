@@ -12,10 +12,16 @@ import ObjectMapper
 class ProfessorLogsListViewController: UIViewController {
     var parentNavigationController : UINavigationController?
     var arrayDataSource:[ProfessorLogs]! = []
+    @IBOutlet weak var tableviewLogs: UITableView!
+    let nibCollegeListCell = "ProfessorCollegeListTableViewCell"
+
     override func viewDidLoad() {
         super.viewDidLoad()
         print("ProfessorLogsListViewController")
-        self.view.backgroundColor = UIColor.clear
+        self.tableviewLogs.backgroundColor = UIColor.clear
+        let cellNib = UINib(nibName:nibCollegeListCell, bundle: nil)
+        self.tableviewLogs.register(cellNib, forCellReuseIdentifier: Constants.CustomCellId.ProfessorCollegeList)
+
         self.getLogs()
         // Do any additional setup after loading the view.
     }
@@ -50,6 +56,75 @@ class ProfessorLogsListViewController: UIViewController {
     
     func makeTableView(){
         print(self.arrayDataSource)
+        self.tableviewLogs.delegate = self
+        self.tableviewLogs.dataSource = self
+        self.tableviewLogs.reloadData()
     }
 
+}
+
+extension ProfessorLogsListViewController:UITableViewDelegate, UITableViewDataSource{
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return self.arrayDataSource.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell:UITableViewCell!
+        if(cell == nil){
+            let collegeCell:ProfessorCollegeListTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.ProfessorCollegeList, for: indexPath) as! ProfessorCollegeListTableViewCell
+            
+            collegeCell.labelSubjectName.text = self.arrayDataSource[indexPath.section].fromTime + " to " + self.arrayDataSource[indexPath.section].toTime
+            collegeCell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell = collegeCell
+        }
+        return cell
+    }
+    /*
+     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+     return self.arrayDataSource[section].name
+     }
+     */
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: tableView.sectionHeaderHeight))
+        
+        let labelTitle = UILabel(frame: CGRect(x: 15.0, y: headerView.height()/2, width: headerView.width()-15, height: 15))
+        labelTitle.center.y = headerView.centerY()
+        labelTitle.textAlignment = .left
+        labelTitle.textColor = UIColor.white
+        labelTitle.text = "\(self.arrayDataSource[section].classId!)"
+        labelTitle.font = UIFont.systemFont(ofSize: 14.0)
+        labelTitle.numberOfLines = 0
+        headerView.addSubview(labelTitle)
+        
+        headerView.backgroundColor = UIColor.rgbColor(52, 40, 70)
+        
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 33.0
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 15.0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableviewLogs.width(), height: 15))
+        footerView.backgroundColor = UIColor.clear
+        return footerView
+
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let destinationVC:LogsDetailViewController =  storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.LogsDetail) as! LogsDetailViewController
+        destinationVC.logs = self.arrayDataSource[indexPath.section]
+        self.parentNavigationController?.pushViewController(destinationVC, animated: true)
+    }
 }

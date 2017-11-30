@@ -40,6 +40,7 @@ public struct Constants {
         static let studentAttendace = "StudentAttedanceViewControllerId"
         static let professorRating = "TeachersRatingViewControllerId"
         static let MarkRating = "MarkRatingViewControllerId"
+        static let LogsDetail = "LogsDetailViewControllerId"
     }
     
     struct UserDefaults {
@@ -68,6 +69,8 @@ public struct Constants {
         static let TeacherProfileTableViewCellId = "TeacherProfileTableViewCellId"
         static let RatingTitleTableViewCellId = "RatingTitleTableViewCellId"
         static let RatingTopicsTableViewCellId = "RatingTopicsTableViewCellId"
+        static let LogsDetailTableViewCellId = "LogsDetailTableViewCellId"
+
         
     }
 }
