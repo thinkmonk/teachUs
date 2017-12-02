@@ -24,6 +24,7 @@ public struct Constants {
         static let syllabusNotStarted = "Not_Started"
         static let defaultProfessor = "professor_default"
         static let studentDefault = "student_default"
+        static let heartFilled = "heartFilled"
     }
     
     struct  colors {

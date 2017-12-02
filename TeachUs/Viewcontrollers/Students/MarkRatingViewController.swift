@@ -9,12 +9,14 @@
 import UIKit
 
 class MarkRatingViewController: BaseViewController {
+    var parentNavigationController : UINavigationController?
 
     var arrayDataSource:[RatingDetails] = []
     var professsorDetails:ProfessorDetails!
+    var subjectId:String = ""
     var arrayTableDataSource:[RatingDataSource] = []
     var ratingDropDown = DropDown()
-    
+    var isTeacherPopular:Bool = false
     @IBOutlet weak var tableViewTeacherRating: UITableView!
     @IBOutlet weak var butonSubmit: UIButton!
     override func viewDidLoad() {
@@ -37,7 +39,7 @@ class MarkRatingViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.butonSubmit.themeRedButton()
-        self.butonSubmit.makeEdgesRounded()
+        self.butonSubmit.makeViewCircular()
         self.addGradientToNavBar()
     }
     
@@ -63,7 +65,41 @@ class MarkRatingViewController: BaseViewController {
     
     
     @IBAction func submitFeedback(_ sender: Any) {
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        let manager = NetworkHandler()
+
+        var ratings:[[String:Any]]! = []
+        for value in self.arrayDataSource{
+            var ratingTemp:[String:Any] = [:]
+            ratingTemp["criteriaId"] = "\(value.criteriaId!)"
+            ratingTemp["rating"] = "\(value.rating!)"
+            ratings.append(ratingTemp)
+        }
+        let teacherPoularString:String = self.isTeacherPopular ? "YES" : "NO"
         
+        let parameters: [String: Any] = [
+            "studentId":"\(UserManager.sharedUserManager.getUserId())",
+            "professorId":"\(self.professsorDetails.professorId!)",
+            "subjectId":"\(self.subjectId)",
+            "popular":"\(teacherPoularString)",
+            "teacherRating":ratings
+        ]
+        
+        manager.url = URLConstants.StudentURL.updateRatings +
+            "\(UserManager.sharedUserManager.getAccessToken())" +
+        "?studentId=\(UserManager.sharedUserManager.getUserId())"
+//        manager.url = URLConstants.BaseUrl.baseURL + UserManager.sharedUserManager.userStudent.ratingsUrl!
+        manager.apiPost(apiName: "Submit teacher Rating", parameters: parameters, completionHandler: { (result, code, response) in
+            LoadingActivityHUD.hideProgressHUD()
+            print(response)
+            DispatchQueue.main.async(execute: {() -> Void in
+                // If not called on the main thread then the UI doesn't invoke the parent view's viewDidAppear
+                self.navigationController?.popViewController(animated: true)
+            })
+        }) { (result, code, errorString) in
+            LoadingActivityHUD.hideProgressHUD()
+            print(errorString)
+        }
     }
 }
 
@@ -86,6 +122,11 @@ extension MarkRatingViewController: UITableViewDelegate, UITableViewDataSource{
             profileCell.imageViewProfile.imageFromServerURL(urlString: self.professsorDetails.imageURL!, defaultImage: Constants.Images.defaultProfessor)
             profileCell.selectionStyle = .none
             profileCell.imageViewProfile.makeViewCircular()
+            profileCell.buttonHeart.indexPath = indexPath
+            if(self.isTeacherPopular){
+                profileCell.buttonHeart.isSelected = true
+            }
+            profileCell.buttonHeart.addTarget(self, action: #selector(MarkRatingViewController.markTeacherPopular(_:)), for: .touchUpInside)
             return profileCell
         
         case .RatingTitle:
@@ -132,6 +173,11 @@ extension MarkRatingViewController: UITableViewDelegate, UITableViewDataSource{
             return 50
         }
 
+    }
+    
+    @objc func markTeacherPopular(_ sender: ButtonWithIndexPath){
+        self.isTeacherPopular = !self.isTeacherPopular
+        self.tableViewTeacherRating.reloadRows(at: [sender.indexPath], with: .automatic)
     }
     
     @objc func showRating(_ sender: ButtonWithIndexPath){

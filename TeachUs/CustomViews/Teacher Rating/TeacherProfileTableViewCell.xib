@@ -17,7 +17,7 @@
             <rect key="frame" x="0.0" y="0.0" width="331" height="74"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="331" height="73.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="331" height="74"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="professor_default" translatesAutoresizingMaskIntoConstraints="NO" id="dgq-6x-n7w">
@@ -44,9 +44,10 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pjN-El-sHh">
                         <rect key="frame" x="201" y="15" width="130" height="43.5"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iMM-RL-tC3">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iMM-RL-tC3" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
                                 <rect key="frame" x="78" y="8.5" width="35" height="27"/>
                                 <state key="normal" image="heart"/>
+                                <state key="selected" image="heartFilled"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Love this  lecturer" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="umA-jw-TUf">
                                 <rect key="frame" x="10" y="6" width="58" height="31.5"/>
@@ -83,7 +84,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="buttonHeart" destination="iMM-RL-tC3" id="AOj-Nf-ft0"/>
+                <outlet property="buttonHeart" destination="iMM-RL-tC3" id="ZTp-Ly-mBj"/>
                 <outlet property="imageViewProfile" destination="dgq-6x-n7w" id="9aT-6i-80Y"/>
                 <outlet property="labelTeacherSubject" destination="8lt-jW-4ES" id="MBo-e5-4lB"/>
                 <outlet property="labelteacherName" destination="2jZ-On-RJX" id="XN6-IH-Mhw"/>
@@ -93,6 +94,7 @@
     </objects>
     <resources>
         <image name="heart" width="27" height="27"/>
+        <image name="heartFilled" width="27" height="27"/>
         <image name="professor_default" width="114" height="114"/>
     </resources>
 </document>

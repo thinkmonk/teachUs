@@ -29,7 +29,7 @@ class ProfessorDetails:Mappable{
     var professorId:Int?
     var professorName:String?
     var professorLastName:String?
-    var subjectId:String?
+    var subjectId:Int?
     var subjectName:String?
     var isRatingSubmitted:String?
     var imageURL:String?

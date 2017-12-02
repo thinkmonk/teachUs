@@ -39,9 +39,11 @@ class StudentAttedanceViewController: UIViewController {
         let manager = NetworkHandler()
         
         //http://ec2-34-215-84-223.us-west-2.compute.amazonaws.com:8081/teachus/student/getAttendence/Zmlyc3ROYW1lPURldmVuZHJhLG1pZGRsZU5hbWU9QSxsYXN0TmFtZT1GYWRuYXZpcyxyb2xsPVBST0ZFU1NPUixpZD0x?studentId=1
-        manager.url = URLConstants.StudentURL.getAttendence +
-            "\(UserManager.sharedUserManager.getAccessToken())" +
-            "?studentId=\(UserManager.sharedUserManager.getUserId())"
+//        manager.url = URLConstants.StudentURL.getAttendence +
+//            "\(UserManager.sharedUserManager.getAccessToken())" +
+//            "?studentId=\(UserManager.sharedUserManager.getUserId())"
+        
+        manager.url = URLConstants.BaseUrl.baseURL + UserManager.sharedUserManager.userStudent.attendanceUrl!
         if (forMonth > 0){
             manager.url?.append("&month=\(forMonth)")
         }

@@ -45,9 +45,10 @@ class SyllabusStatusListViewController: UIViewController {
         
         switch userType! {
         case .Student:
-            manager.url = URLConstants.StudentURL.getSyllabusSummary +
-                "\(UserManager.sharedUserManager.getAccessToken())" +
-            "?studentId=\(UserManager.sharedUserManager.getUserId())"
+//            manager.url = URLConstants.StudentURL.getSyllabusSummary +
+//                "\(UserManager.sharedUserManager.getAccessToken())" +
+//            "?studentId=\(UserManager.sharedUserManager.getUserId())"
+            manager.url = URLConstants.BaseUrl.baseURL + UserManager.sharedUserManager.userStudent.sllyabusStatusUrl!
             break
         
         case .Professor:

@@ -64,7 +64,7 @@ class OtpView: UIView {
         case .College:
             break
         }
-        self.labelRecordAvailable.text = "Record of \(username) is available"
+        self.labelRecordAvailable.text = "Record of \(UserManager.sharedUserManager.userName) is available"
         self.buttonSendOtp.roundedBlueButton()
         self.buttonVerifyOtp.roundedRedButton()
         self.textFieldOtp.makeEdgesRoundedWith(radius: self.textFieldOtp.height()/2)

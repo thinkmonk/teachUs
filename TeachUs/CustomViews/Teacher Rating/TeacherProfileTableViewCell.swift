@@ -13,7 +13,8 @@ class TeacherProfileTableViewCell: UITableViewCell {
     @IBOutlet weak var imageViewProfile: UIImageView!
     @IBOutlet weak var labelteacherName: UILabel!
     @IBOutlet weak var labelTeacherSubject: UILabel!
-    @IBOutlet weak var buttonHeart: UIButton!
+    @IBOutlet weak var buttonHeart: ButtonWithIndexPath!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }

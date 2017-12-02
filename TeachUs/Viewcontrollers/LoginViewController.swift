@@ -85,6 +85,10 @@ extension LoginViewController:LoginDelegate{
     func submitDetails() {
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         self.username = self.studentLoginView.textfieldFirstName.text! + studentLoginView.textfieldSurname.text!
+        UserManager.sharedUserManager.userName = self.studentLoginView.textfieldFirstName.text!
+        UserManager.sharedUserManager.userMiddleName = self.studentLoginView.textfieldMiddleName.text!
+        UserManager.sharedUserManager.userLastName = self.studentLoginView.textfieldSurname.text!
+
         let manager = NetworkHandler()
         //http://ec2-52-40-212-186.us-west-2.compute.amazonaws.com:8081/teachus/teacher/verifyTeacher?firstName=Harsh&middleName=X&surName=Gangar
         switch UserManager.sharedUserManager.user! {
@@ -228,6 +232,18 @@ extension LoginViewController:OtpDelegate{
             break
             
         case .Student:
+            let userProilfes = userResponse["profiles"] as! [String:Any]
+            let profileArray = userProilfes["profile"] as! [[String:Any]]
+            for user in profileArray {
+                let student = Mapper<StudentProfile>().map(JSON: user)
+                
+                if(userResponse["image"] != nil){
+                    student?.userImage = userResponse["image"] as! String
+                }
+                
+                UserManager.sharedUserManager.studentProfile = student
+                UserManager.sharedUserManager.saveStudentToDb(student!)
+            }
             break
         default:
             break

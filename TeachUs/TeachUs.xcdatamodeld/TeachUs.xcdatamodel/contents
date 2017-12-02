@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13241" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Student" representedClassName="Student" syncable="YES">
+        <attribute name="attendanceUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="collegeId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="collegeName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ratingsUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="role" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sllyabusStatusUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="studentId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="studentLastName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="studentName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uploadProfilePicUrl" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Teacher" representedClassName="Teacher" syncable="YES">
         <attribute name="attendanceUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="collegeId" optional="YES" attributeType="String" syncable="YES"/>
@@ -17,5 +29,6 @@
     <elements>
         <element name="Teacher" positionX="-54" positionY="-9" width="128" height="210"/>
         <element name="User" positionX="-63" positionY="-18" width="128" height="45"/>
+        <element name="Student" positionX="-54" positionY="72" width="128" height="195"/>
     </elements>
 </model>

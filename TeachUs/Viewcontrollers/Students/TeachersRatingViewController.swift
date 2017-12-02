@@ -20,8 +20,6 @@ class TeachersRatingViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableViewTeachersList.register(UINib(nibName: "TeacherDetailsTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.TeacherDetailsTableViewCellId)
-        self.getRatings()
-        self.tableViewTeachersList.alpha = 0
 
         // Do any additional setup after loading the view.
     }
@@ -33,6 +31,15 @@ class TeachersRatingViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.tableViewTeachersList.alpha = 0
+        self.getRatings()
+
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
     }
     
     func getRatings(){
@@ -41,11 +48,13 @@ class TeachersRatingViewController: BaseViewController {
 
         //http://ec2-52-40-212-186.us-west-2.compute.amazonaws.com:8081/teachus/student/getRatingsSummary/Zmlyc3ROYW1lPURldmVuZHJhLG1pZGRsZU5hbWU9QSxsYXN0TmFtZT1GYWRuYXZpcyxyb2xsPVBST0ZFU1NPUixpZD0x?studentId=1
         
-        manager.url = URLConstants.StudentURL.getRatingsSummary +
-            "\(UserManager.sharedUserManager.getAccessToken())" +
-        "?studentId=\(UserManager.sharedUserManager.getUserId())"
+//        manager.url = URLConstants.StudentURL.getRatingsSummary +
+//            "\(UserManager.sharedUserManager.getAccessToken())" +
+//        "?studentId=\(UserManager.sharedUserManager.getUserId())"
         
-        manager.apiGet(apiName: "Get Attendance for student", completionHandler: { (response, code) in
+        manager.url = URLConstants.BaseUrl.baseURL + UserManager.sharedUserManager.userStudent.ratingsUrl!
+        
+        manager.apiGet(apiName: "Get ratings for professor", completionHandler: { (response, code) in
             LoadingActivityHUD.hideProgressHUD()
             
             guard let teachers = response["professorWise"] as? [[String:Any]] else{
@@ -111,6 +120,7 @@ extension TeachersRatingViewController:UITableViewDataSource, UITableViewDelegat
             cell.imageViewBackground.backgroundColor = UIColor.red
             cell.labelName.textColor = UIColor.red
             cell.labelSubject.textColor = UIColor.red
+            cell.isUserInteractionEnabled = false
         }
         
         
@@ -142,6 +152,8 @@ extension TeachersRatingViewController:UITableViewDataSource, UITableViewDelegat
         let destinationVC:MarkRatingViewController =  storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.MarkRating) as! MarkRatingViewController
         destinationVC.arrayDataSource = self.arrayRatingCriteriaDataSource
         destinationVC.professsorDetails = self.arrayDataSource[indexPath.section]
+        destinationVC.subjectId = "\(self.arrayDataSource[indexPath.section].subjectId!)"
+        destinationVC.parentNavigationController = self.parentNavigationController
         self.parentNavigationController?.pushViewController(destinationVC, animated: true)
     }    
 }

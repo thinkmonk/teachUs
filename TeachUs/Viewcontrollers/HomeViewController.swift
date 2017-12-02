@@ -41,7 +41,6 @@ class HomeViewController: BaseViewController {
         
         // Lastly add page menu as subview of base view controller view
         // or use pageMenu controller in you view hierachy as desired
-        self.view.addSubview(pageMenu!.view)
         
         self.title = "\(UserManager.sharedUserManager.userFullName)"
         
@@ -59,6 +58,10 @@ class HomeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.addColorToNavBarText(color: UIColor.white)
+        self.addChildViewController(pageMenu!)
+        self.view.addSubview(pageMenu!.view)
+        pageMenu?.didMove(toParentViewController: self)
+
     }
     
     @objc func hamburgerAction() {

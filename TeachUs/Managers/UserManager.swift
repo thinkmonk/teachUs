@@ -12,26 +12,40 @@ import CoreData
 class UserManager{
 //    static var userManager:UserManager!
 
-    static var sharedUserManager : UserManager {
+    static var sharedUserManager = UserManager()
+    
+    static var savedUserManager : UserManager {
         let userManager = UserManager()
-        let lastUser = DatabaseManager.getEntitesForEntityName("Teacher", sortindId: "name")
-        userManager.userTeacher = lastUser.last as? Teacher
+        if(userManager.user != nil){
+            switch userManager.user!{
+            case .Student:
+                let lastUser = DatabaseManager.getEntitesForEntityName("Student", sortindId: "name")
+                userManager.userStudent = lastUser.last as? Student
+            case .Professor:
+                let lastUser = DatabaseManager.getEntitesForEntityName("Teacher", sortindId: "name")
+                userManager.userTeacher = lastUser.last as? Teacher
+            case .College:
+                break
+            }
+            sharedUserManager = userManager
+        }
         return userManager
     }
     
-    
     var user:LoginUserType! {
-        let user = UserDefaults.standard.value(forKey: Constants.UserDefaults.loginUserType) as? String
-        switch user {
-        case "College"?:
-            return LoginUserType.College
-        case "Professor"?:
-            return LoginUserType.Professor
-        case "Student"?:
-            return LoginUserType.Student
-        default:
-            return nil
+    if let user = UserDefaults.standard.value(forKey: Constants.UserDefaults.loginUserType) as? String {
+            switch user {
+            case "College":
+                return LoginUserType.College
+            case "Professor":
+                return LoginUserType.Professor
+            case "Student":
+                return LoginUserType.Student
+            default:
+                return nil
+            }
         }
+        return nil
     }
     
     var isAdmin = false
@@ -46,6 +60,9 @@ class UserManager{
     var userTeacher:Teacher!
     var teacherProfile:TeacherProfile!
     
+    var studentProfile:StudentProfile!
+    var userStudent:Student!
+    
     func setAccessToken(_ token:String){
         UserDefaults.standard.set(token, forKey: Constants.UserDefaults.accesToken)
         UserDefaults.standard.synchronize()
@@ -53,7 +70,8 @@ class UserManager{
     
     func getAccessToken() -> String {
         guard let token = UserDefaults.standard.value(forKey: Constants.UserDefaults.accesToken) as? String else {
-            return "Zmlyc3ROYW1lPURldmVuZHJhLG1pZGRsZU5hbWU9QSxsYXN0TmFtZT1GYWRuYXZpcyxyb2xsPVBST0ZFU1NPUixpZD0x"
+//            return "Zmlyc3ROYW1lPURldmVuZHJhLG1pZGRsZU5hbWU9QSxsYXN0TmFtZT1GYWRuYXZpcyxyb2xsPVBST0ZFU1NPUixpZD0x"
+            return "Zmlyc3ROYW1lPUhhcnNoLG1pZGRsZU5hbWU9RyxzdXJOYW1lPUdhbmdhcixyb2xsPVNUVURFTlQsaWQ9NA=="
         }
         return token
     }
@@ -111,6 +129,24 @@ class UserManager{
         userTeacher.professorLastName = teacher.professorLastName
         userTeacher.collegeName = teacher.collegeName
         userTeacher.collegeId = teacher.collegeId
+        
+        self.saveDbContext()
+    }
+    
+    
+    func saveStudentToDb(_ student:StudentProfile){
+        userStudent = NSEntityDescription.insertNewObject(forEntityName: "Student", into: DatabaseManager.managedContext) as! Student
+        
+        userStudent.role = student.userRole
+        userStudent.studentId = Int16(student.studentId)
+        userStudent.studentName = student.studentName
+        userStudent.studentLastName = student.studentLastName
+        userStudent.collegeName = student.collegeName
+        userStudent.attendanceUrl = student.attendanceURL
+        userStudent.sllyabusStatusUrl = student.syllabusStatusURL
+        userStudent.ratingsUrl = student.ratingsURL
+        userStudent.uploadProfilePicUrl = student.uploadProfilePicUrl
+        
         
         self.saveDbContext()
     }
