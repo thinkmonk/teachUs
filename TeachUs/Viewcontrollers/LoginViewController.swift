@@ -221,17 +221,31 @@ extension LoginViewController:OtpDelegate{
     func saveUser(userResponse: [String:Any]){
         switch UserManager.sharedUserManager.user! {
         case .Professor:
+            UserManager.sharedUserManager.userProfilesArray.removeAll()
             let userProilfes = userResponse["profiles"] as! [String:Any]
             let profileArray = userProilfes["profile"] as! [[String:Any]]
             for user in profileArray {
-                let teacher = Mapper<TeacherProfile>().map(JSON: user)
-                teacher?.userImage = userResponse["image"] as! String
-                UserManager.sharedUserManager.teacherProfile = teacher
-                UserManager.sharedUserManager.saveTeacherToDb(teacher!)
+                let role:String = user["role"] as! String
+                if(role == "PROFESSOR"){
+                    let teacher = Mapper<TeacherProfile>().map(JSON: user)
+                    teacher?.userImage = userResponse["image"] as! String
+                    UserManager.sharedUserManager.teacherProfile = teacher
+                    UserManager.sharedUserManager.saveTeacherToDb(teacher!)
+                    UserManager.sharedUserManager.userProfilesArray.append(teacher!)
+                }
+                if(role == "SUPERADMIN"){
+                    let superAdmin = Mapper<SuperAdminProfile>().map(JSON: user)
+                    superAdmin?.userImage = userResponse["image"] as! String
+                    UserManager.sharedUserManager.superAdminProfile = superAdmin
+                    UserManager.sharedUserManager.saveSuperAdminToDb(superAdmin!)
+                    UserManager.sharedUserManager.userProfilesArray.append(superAdmin!)
+                }
+                
             }
             break
             
         case .Student:
+            UserManager.sharedUserManager.userProfilesArray.removeAll()
             let userProilfes = userResponse["profiles"] as! [String:Any]
             let profileArray = userProilfes["profile"] as! [[String:Any]]
             for user in profileArray {
@@ -240,9 +254,9 @@ extension LoginViewController:OtpDelegate{
                 if(userResponse["image"] != nil){
                     student?.userImage = userResponse["image"] as! String
                 }
-                
                 UserManager.sharedUserManager.studentProfile = student
                 UserManager.sharedUserManager.saveStudentToDb(student!)
+                UserManager.sharedUserManager.userProfilesArray.append(student!)
             }
             break
         default:

@@ -12,6 +12,16 @@
         <attribute name="studentName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uploadProfilePicUrl" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="SuperAdmin" representedClassName="SuperAdmin" syncable="YES">
+        <attribute name="adminListUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="classAttendanceUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="classSyllabusUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="collegeId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="collegeName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="courseRatingsUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eventAttendanceUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="role" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Teacher" representedClassName="Teacher" syncable="YES">
         <attribute name="attendanceUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="collegeId" optional="YES" attributeType="String" syncable="YES"/>
@@ -27,8 +37,9 @@
     </entity>
     <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class"/>
     <elements>
+        <element name="Student" positionX="-54" positionY="72" width="128" height="195"/>
         <element name="Teacher" positionX="-54" positionY="-9" width="128" height="210"/>
         <element name="User" positionX="-63" positionY="-18" width="128" height="45"/>
-        <element name="Student" positionX="-54" positionY="72" width="128" height="195"/>
+        <element name="SuperAdmin" positionX="-54" positionY="99" width="128" height="165"/>
     </elements>
 </model>

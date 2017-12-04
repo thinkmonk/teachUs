@@ -48,8 +48,9 @@ class UserManager{
         return nil
     }
     
-    var isAdmin = false
-    var isSuperAdmin = false;
+    
+    var userProfilesArray:[Any] = []
+    
     var userName:String = ""
     var userMiddleName:String = ""
     var userLastName:String = ""
@@ -57,11 +58,14 @@ class UserManager{
         return "\(self.userName) \(self.userMiddleName) \(self.userLastName)"
     }
     
-    var userTeacher:Teacher!
-    var teacherProfile:TeacherProfile!
+    var userTeacher:Teacher! //model
+    var teacherProfile:TeacherProfile! //Db model
     
-    var studentProfile:StudentProfile!
-    var userStudent:Student!
+    var studentProfile:StudentProfile! //model
+    var userStudent:Student! //Db model
+    
+    var superAdminProfile:SuperAdminProfile!
+    var userSuperAdmin:SuperAdmin!
     
     func setAccessToken(_ token:String){
         UserDefaults.standard.set(token, forKey: Constants.UserDefaults.accesToken)
@@ -146,6 +150,21 @@ class UserManager{
         userStudent.sllyabusStatusUrl = student.syllabusStatusURL
         userStudent.ratingsUrl = student.ratingsURL
         userStudent.uploadProfilePicUrl = student.uploadProfilePicUrl
+        
+        
+        self.saveDbContext()
+    }
+    
+    func saveSuperAdminToDb(_ superAdmin:SuperAdminProfile){
+        userSuperAdmin = NSEntityDescription.insertNewObject(forEntityName: "SuperAdmin", into: DatabaseManager.managedContext) as! SuperAdmin
+        userSuperAdmin.role = superAdmin.userRole
+        userSuperAdmin.collegeId = superAdmin.collegeId
+        userSuperAdmin.collegeName = superAdmin.collegeName
+        userSuperAdmin.classAttendanceUrl = superAdmin.classAttendanceURL
+        userSuperAdmin.classSyllabusUrl = superAdmin.classSyllabusUrl
+        userSuperAdmin.courseRatingsUrl = superAdmin.courseRatingsUrl
+        userSuperAdmin.eventAttendanceUrl  = superAdmin.eventAttendanceUrl
+        userSuperAdmin.adminListUrl = superAdmin.adminListUrl
         
         
         self.saveDbContext()

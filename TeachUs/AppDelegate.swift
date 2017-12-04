@@ -106,7 +106,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let centerNavigationController = mainStoryBoard.instantiateViewController(withIdentifier: "navigationController") as! UINavigationController
         
         let leftMenuController = mainStoryBoard.instantiateViewController(withIdentifier: "LeftMenuViewController") as! LeftMenuViewController
-        
+        let homeVc:HomeViewController = centerNavigationController.topViewController as! HomeViewController
+        leftMenuController.delegate = homeVc as! LeftMenuDeleagte
         mfslidemenuContainer.leftMenuViewController = leftMenuController
         mfslidemenuContainer.centerViewController  = centerNavigationController
         

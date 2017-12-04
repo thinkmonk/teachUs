@@ -42,6 +42,8 @@ public struct Constants {
         static let professorRating = "TeachersRatingViewControllerId"
         static let MarkRating = "MarkRatingViewControllerId"
         static let LogsDetail = "LogsDetailViewControllerId"
+        static let loginSelectVC = "LoginSelectViewControllerId"
+        static let LoginSelectNavBarControllerId = "LoginSelectNavBarControllerId"
     }
     
     struct UserDefaults {
@@ -71,7 +73,6 @@ public struct Constants {
         static let RatingTitleTableViewCellId = "RatingTitleTableViewCellId"
         static let RatingTopicsTableViewCellId = "RatingTopicsTableViewCellId"
         static let LogsDetailTableViewCellId = "LogsDetailTableViewCellId"
-
-        
+        static let leftMenuCell = "leftMenuCell"
     }
 }

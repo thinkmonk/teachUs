@@ -49,6 +49,9 @@
 		81727B921F9E70CC006433E8 /* LeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81727B911F9E70CC006433E8 /* LeftMenuViewController.swift */; };
 		81727B941F9E70EE006433E8 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81727B931F9E70EE006433E8 /* HomeViewController.swift */; };
 		817BDAE51FB898C700492822 /* ButtonWithIndexPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817BDAE41FB898C700492822 /* ButtonWithIndexPath.swift */; };
+		8180D9081FD3D21B00CE803F /* SuperAdminProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8180D9071FD3D21B00CE803F /* SuperAdminProfile.swift */; };
+		8180D90F1FD3D82E00CE803F /* SuperAdmin+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8180D90D1FD3D82E00CE803F /* SuperAdmin+CoreDataClass.swift */; };
+		8180D9101FD3D82E00CE803F /* SuperAdmin+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8180D90E1FD3D82E00CE803F /* SuperAdmin+CoreDataProperties.swift */; };
 		818C26081FB6FAFF002638E5 /* MarkStudentAttendance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818C26071FB6FAFF002638E5 /* MarkStudentAttendance.swift */; };
 		819216EB1FB81BA6009B56C0 /* ViewNumberPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 819216E91FB81BA5009B56C0 /* ViewNumberPicker.xib */; };
 		819216EC1FB81BA6009B56C0 /* ViewNumberPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819216EA1FB81BA6009B56C0 /* ViewNumberPicker.swift */; };
@@ -204,6 +207,9 @@
 		81727B931F9E70EE006433E8 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		817553511B457FEB4E645FC1 /* Pods-TeachUs.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeachUs.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeachUs/Pods-TeachUs.release.xcconfig"; sourceTree = "<group>"; };
 		817BDAE41FB898C700492822 /* ButtonWithIndexPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWithIndexPath.swift; sourceTree = "<group>"; };
+		8180D9071FD3D21B00CE803F /* SuperAdminProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperAdminProfile.swift; sourceTree = "<group>"; };
+		8180D90D1FD3D82E00CE803F /* SuperAdmin+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SuperAdmin+CoreDataClass.swift"; sourceTree = "<group>"; };
+		8180D90E1FD3D82E00CE803F /* SuperAdmin+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SuperAdmin+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		818C26071FB6FAFF002638E5 /* MarkStudentAttendance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkStudentAttendance.swift; sourceTree = "<group>"; };
 		819216E91FB81BA5009B56C0 /* ViewNumberPicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewNumberPicker.xib; sourceTree = "<group>"; };
 		819216EA1FB81BA6009B56C0 /* ViewNumberPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewNumberPicker.swift; sourceTree = "<group>"; };
@@ -516,6 +522,7 @@
 				81930B311FCDE2590002CDBE /* ProfessorLogs.swift */,
 				81930B2F1FCDD7700002CDBE /* TeacherProfile.swift */,
 				8126BC051FD2CB45007B6B3B /* StudentProfile.swift */,
+				8180D9071FD3D21B00CE803F /* SuperAdminProfile.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -637,6 +644,8 @@
 		81C1D8AC1FCF35790091DA6E /* Users */ = {
 			isa = PBXGroup;
 			children = (
+				8180D90D1FD3D82E00CE803F /* SuperAdmin+CoreDataClass.swift */,
+				8180D90E1FD3D82E00CE803F /* SuperAdmin+CoreDataProperties.swift */,
 				8126BC071FD2CED3007B6B3B /* Student+CoreDataClass.swift */,
 				8126BC081FD2CED3007B6B3B /* Student+CoreDataProperties.swift */,
 				81C1D8B51FCF3AAE0091DA6E /* Teacher+CoreDataClass.swift */,
@@ -1077,6 +1086,7 @@
 				18A627DF1F90F9870099C106 /* LoginSelectViewController.swift in Sources */,
 				81B2E2D71FC35B0600E9E852 /* DPDKeyboardListener.swift in Sources */,
 				81C1D8B81FCF3AAF0091DA6E /* Teacher+CoreDataProperties.swift in Sources */,
+				8180D9101FD3D82E00CE803F /* SuperAdmin+CoreDataProperties.swift in Sources */,
 				812C34F01FB794DB0048DD3C /* ViewDatePicker.swift in Sources */,
 				819AADF31FB6F88F0061C471 /* AttendanceManager.swift in Sources */,
 				81CCAE581FC82E310070907A /* RatingDataSource.swift in Sources */,
@@ -1145,7 +1155,9 @@
 				81D76B551FC1D600005E861C /* SyllabusDetailsTableViewCell.swift in Sources */,
 				81CCAE551FC806060070907A /* RatingTopicsTableViewCell.swift in Sources */,
 				819BDA581FC4AD5D00DD7D2D /* TeacherDetailsTableViewCell.swift in Sources */,
+				8180D9081FD3D21B00CE803F /* SuperAdminProfile.swift in Sources */,
 				81FFB0B91FBF2D5400C32097 /* ViewConfirmAttendance.swift in Sources */,
+				8180D90F1FD3D82E00CE803F /* SuperAdmin+CoreDataClass.swift in Sources */,
 				81CAD6EC1FC9AF0400B55845 /* ViewRatingInfo.swift in Sources */,
 				81D7CE821FAB8E5D00C4375E /* MenuItemView.swift in Sources */,
 				810E0CDB1FD03F0A006AE5BE /* LogsDetailTableViewCell.swift in Sources */,

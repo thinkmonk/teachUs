@@ -122,3 +122,9 @@ class HomeViewController: BaseViewController {
     }
 
 }
+extension HomeViewController:LeftMenuDeleagte{
+    func menuItemSelected(item:Int){
+        pageMenu?.moveToPage(item)
+    }
+
+}
