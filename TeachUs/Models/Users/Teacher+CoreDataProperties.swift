@@ -2,7 +2,7 @@
 //  Teacher+CoreDataProperties.swift
 //  TeachUs
 //
-//  Created by ios on 11/30/17.
+//  Created by ios on 12/4/17.
 //  Copyright © 2017 TeachUs. All rights reserved.
 //
 //
@@ -17,6 +17,7 @@ extension Teacher {
         return NSFetchRequest<Teacher>(entityName: "Teacher")
     }
 
+    @NSManaged public var attendanceUrl: String?
     @NSManaged public var collegeId: String?
     @NSManaged public var collegeName: String?
     @NSManaged public var image: String?
@@ -27,6 +28,6 @@ extension Teacher {
     @NSManaged public var role: String?
     @NSManaged public var syllabusStatusUrl: String?
     @NSManaged public var uploadProfilePicUrl: String?
-    @NSManaged public var attendanceUrl: String?
+    @NSManaged public var isCurrentUser: Bool
 
 }

@@ -38,8 +38,10 @@ class CollegeLogin: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     var delegate:CollegeLoginDelegate!
     var userType:LoginUserType!
     let picker = UIPickerView()
+    var arrayCollegeList :[CollegesListModel] = []
     var pickerDataSourceArray = ["Bangladesh","India","Pakistan","USA","Bangladesh","India","Pakistan","USA","Bangladesh","India","Pakistan","USA"]
     var mobileNumber = ""
+    var collegeDropdown = DropDown()
 
     
     func setUpReactive()
@@ -79,42 +81,64 @@ class CollegeLogin: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     @IBAction func showCollegeView(_ sender: Any) {
-        self.textfieldCollegeName.becomeFirstResponder()
+        self.collegeDropdown.show()
     }
     
     func setUpSelectCollegeView(){
         self.viewsendOtp.alpha = 0
         self.viewVerifyOtp.alpha = 0
         
+        self.collegeDropdown.bottomOffset = CGPoint(x: self.viewCollege.frame.origin.x, y: self.viewCollege.height())
+        self.collegeDropdown.anchorView = self.viewCollege
+        var arrayCollegeName:[String] = []
+        
+        for clg in arrayCollegeList{
+            arrayCollegeName.append(clg.collegeName)
+        }
+//        self.collegeDropdown.dataSource = arrayCollegeName
+        self.collegeDropdown.dataSource = ["10 €",
+                                           "20 €",
+                                           "30 €",
+                                           "40 €",
+                                           "50 €",
+                                           "60 €",
+                                           "70 €"]
+
+        self.collegeDropdown.selectionAction = { [unowned self] (index, item) in
+            print("\(self.arrayCollegeList[index].collegeName)")
+            
+        }
+
 
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.setUpColleges(_:)))
         self.viewCollege.addGestureRecognizer(tap)
         self.viewCollege.isUserInteractionEnabled = true
 
-        self.picker.showsSelectionIndicator = true
-        self.picker.delegate = self
-        self.picker.dataSource = self
-        self.picker.frame = CGRect(x: 0.0, y: 0, width: self.width(), height: 216)
-        
-        let toolBar = UIToolbar()
-        toolBar.barStyle = UIBarStyle.default
-        toolBar.isTranslucent = true
-        toolBar.tintColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1)
-        toolBar.sizeToFit()
-        
-        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(donePicker))
-        
-        toolBar.setItems([doneButton], animated: true)
-        toolBar.isUserInteractionEnabled = true
-        self.textfieldCollegeName.becomeFirstResponder()
-        self.textfieldCollegeName.inputView = picker
-        self.textfieldCollegeName.inputAccessoryView = toolBar
+//        self.picker.showsSelectionIndicator = true
+//        self.picker.delegate = self
+//        self.picker.dataSource = self
+//        self.picker.frame = CGRect(x: 0.0, y: 0, width: self.width(), height: 216)
+//        
+//        let toolBar = UIToolbar()
+//        toolBar.barStyle = UIBarStyle.default
+//        toolBar.isTranslucent = true
+//        toolBar.tintColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1)
+//        toolBar.sizeToFit()
+//        
+//        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(donePicker))
+//        
+//        toolBar.setItems([doneButton], animated: true)
+//        toolBar.isUserInteractionEnabled = true
+//        self.textfieldCollegeName.becomeFirstResponder()
+//        self.textfieldCollegeName.inputView = picker
+//        self.textfieldCollegeName.inputAccessoryView = toolBar
 
     }
     
     
     @objc func setUpColleges(_ sender: UITapGestureRecognizer) {
-        self.viewsendOtp.alpha = 0
+//        self.viewsendOtp.alpha = 0
+        self.collegeDropdown.show()
     }
     
     

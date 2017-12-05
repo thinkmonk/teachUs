@@ -20,7 +20,7 @@ class LeftMenuViewController: UIViewController {
     @IBOutlet weak var tableViewMenu: UITableView!
     @IBOutlet weak var buttonDropDown: UIButton!
     var delegate:LeftMenuDeleagte!
-    var arrayDataSource:[String]!
+    var arrayDataSource:[String]! = []
     
     
     var studentDataSource = ["Attendance", "Syllabus Status", "Feedback / Ratings", "Logout"]
@@ -63,7 +63,7 @@ class LeftMenuViewController: UIViewController {
     
     
     func setupDropdown(){
-        self.arrayDataSource.removeAll()
+//        self.arrayDataSource.removeAll()
         
     }
 

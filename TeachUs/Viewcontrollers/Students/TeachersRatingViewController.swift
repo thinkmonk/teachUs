@@ -120,7 +120,7 @@ extension TeachersRatingViewController:UITableViewDataSource, UITableViewDelegat
             cell.imageViewBackground.backgroundColor = UIColor.red
             cell.labelName.textColor = UIColor.red
             cell.labelSubject.textColor = UIColor.red
-            cell.isUserInteractionEnabled = false
+//            cell.isUserInteractionEnabled = false
         }
         
         

@@ -86,14 +86,12 @@ class MarkRatingViewController: BaseViewController {
         ]
         
         manager.url = URLConstants.StudentURL.updateRatings +
-            "\(UserManager.sharedUserManager.getAccessToken())" +
-        "?studentId=\(UserManager.sharedUserManager.getUserId())"
+//            "\(UserManager.sharedUserManager.getAccessToken())" +
+        "==?studentId=\(UserManager.sharedUserManager.userStudent.studentId)"
 //        manager.url = URLConstants.BaseUrl.baseURL + UserManager.sharedUserManager.userStudent.ratingsUrl!
         manager.apiPost(apiName: "Submit teacher Rating", parameters: parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
-            print(response)
             DispatchQueue.main.async(execute: {() -> Void in
-                // If not called on the main thread then the UI doesn't invoke the parent view's viewDidAppear
                 self.navigationController?.popViewController(animated: true)
             })
         }) { (result, code, errorString) in

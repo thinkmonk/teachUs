@@ -52,8 +52,22 @@ class LoginViewController: BaseViewController {
             collegeLogin = CollegeLogin.instanceFromNib() as! CollegeLogin
             collegeLogin.delegate = self
             collegeLogin.setUpView()
-            collegeLogin.showView(inView: self.view)
-            collegeLogin.setUpSelectCollegeView()
+            let manager = NetworkHandler()
+            manager.url = URLConstants.CollegeURL.getCollegeList
+            manager.apiGet(apiName: "Get College ka list", completionHandler: { (response,code ) in
+                let collegeDetails = response["collegeDetails"] as![[String:Any]]
+                var collegeArray:[CollegesListModel] = []
+                for college in collegeDetails{
+                    let tempCollege:CollegesListModel = Mapper<CollegesListModel>().map(JSON:college)!
+                    collegeArray.append(tempCollege)
+                }
+                self.collegeLogin.arrayCollegeList = collegeArray
+                self.collegeLogin.showView(inView: self.view)
+                self.collegeLogin.setUpSelectCollegeView()
+            }, failure: { (error, code , message) in
+                print(message)
+            })
+            
             break
         }
         
@@ -227,20 +241,22 @@ extension LoginViewController:OtpDelegate{
             for user in profileArray {
                 let role:String = user["role"] as! String
                 if(role == "PROFESSOR"){
-                    let teacher = Mapper<TeacherProfile>().map(JSON: user)
-                    teacher?.userImage = userResponse["image"] as! String
-                    UserManager.sharedUserManager.teacherProfile = teacher
-                    UserManager.sharedUserManager.saveTeacherToDb(teacher!)
-                    UserManager.sharedUserManager.userProfilesArray.append(teacher!)
+//                    let teacher = Mapper<TeacherProfile>().map(JSON: user)
+//                    teacher?.userImage = userResponse["image"] as! String
+//                    UserManager.sharedUserManager.teacherProfile = teacher
+//                    UserManager.sharedUserManager.userProfilesArray.append(teacher!)
+
+                    UserManager.sharedUserManager.saveUserImageURL(userResponse["image"] as! String)
+                    UserManager.sharedUserManager.saveTeacherToDb(user)
                 }
                 if(role == "SUPERADMIN"){
-                    let superAdmin = Mapper<SuperAdminProfile>().map(JSON: user)
-                    superAdmin?.userImage = userResponse["image"] as! String
-                    UserManager.sharedUserManager.superAdminProfile = superAdmin
-                    UserManager.sharedUserManager.saveSuperAdminToDb(superAdmin!)
-                    UserManager.sharedUserManager.userProfilesArray.append(superAdmin!)
-                }
+//                    let superAdmin = Mapper<SuperAdminProfile>().map(JSON: user)
+//                    UserManager.sharedUserManager.saveUserImageURL(userResponse["image"] as! String)
+//                    UserManager.sharedUserManager.superAdminProfile = superAdmin
+//                    UserManager.sharedUserManager.userProfilesArray.append(superAdmin!)
                 
+                    UserManager.sharedUserManager.saveSuperAdminToDb(user)
+                }
             }
             break
             
@@ -249,14 +265,15 @@ extension LoginViewController:OtpDelegate{
             let userProilfes = userResponse["profiles"] as! [String:Any]
             let profileArray = userProilfes["profile"] as! [[String:Any]]
             for user in profileArray {
-                let student = Mapper<StudentProfile>().map(JSON: user)
+//                let student = Mapper<StudentProfile>().map(JSON: user)
+//                UserManager.sharedUserManager.studentProfile = student
+//                UserManager.sharedUserManager.userProfilesArray.append(student)
                 
+               
                 if(userResponse["image"] != nil){
-                    student?.userImage = userResponse["image"] as! String
+                    UserManager.sharedUserManager.saveUserImageURL(userResponse["image"] as! String)
                 }
-                UserManager.sharedUserManager.studentProfile = student
-                UserManager.sharedUserManager.saveStudentToDb(student!)
-                UserManager.sharedUserManager.userProfilesArray.append(student!)
+                UserManager.sharedUserManager.saveStudentToDb(user)
             }
             break
         default:

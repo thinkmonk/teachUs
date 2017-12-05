@@ -23,8 +23,8 @@ class NetworkHandler:SessionManager{
         #endif
         
         if(Connectivity.isConnectedToInternet){
-            self.url = self.url!.trimmingCharacters(in: .whitespaces)
-            
+            self.url = self.url?.replacingOccurrences(of: " ", with: "")
+
             Alamofire.request(self.url!).validate().responseJSON { response in
                 switch response.result {
                 case .success:
@@ -80,7 +80,7 @@ class NetworkHandler:SessionManager{
         #endif
         
         if(Connectivity.isConnectedToInternet){
-            
+            self.url = self.url?.replacingOccurrences(of: " ", with: "")
             Alamofire.request(self.url!).validate().responseJSON { response in
                 switch response.result {
                 case .success:
@@ -129,7 +129,9 @@ class NetworkHandler:SessionManager{
         
         if(Connectivity.isConnectedToInternet){
             
-            
+//            self.url = self.url!.trimmingCharacters(in: .whitespaces)
+            self.url = self.url?.replacingOccurrences(of: " ", with: "")
+
             Alamofire.request(self.url!).validate().responseString(completionHandler: { (response) in
                 switch response.result{
                     

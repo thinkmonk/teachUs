@@ -51,7 +51,7 @@ public struct Constants {
         static let userId = "UserId"
         static let userMobileNumber = "userMobileNumber"
         static let loginUserType = "loginUserType"
-
+        static let userImageURL = "userImage"
     }
     
     struct NumberConstants {
@@ -74,5 +74,12 @@ public struct Constants {
         static let RatingTopicsTableViewCellId = "RatingTopicsTableViewCellId"
         static let LogsDetailTableViewCellId = "LogsDetailTableViewCellId"
         static let leftMenuCell = "leftMenuCell"
+    }
+    
+    struct UserTypeString {
+        static let Student = "STUDENT"
+        static let Professor = "PROFESSOR"
+        static let College = "COLLEGE"
+        static let SuperAdmin = "SUPERADMIN"
     }
 }

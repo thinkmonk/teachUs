@@ -20,16 +20,10 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bht-Rs-iKA">
                     <rect key="frame" x="15" y="20" width="345" height="35"/>
                     <subviews>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Select a college." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="88n-8l-pjm">
-                            <rect key="frame" x="15" y="8.5" width="290" height="17"/>
-                            <nil key="textColor"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hwj-RS-mbG">
-                            <rect key="frame" x="310" y="6.5" width="20" height="22"/>
+                            <rect key="frame" x="315" y="6.5" width="15" height="22"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="20" id="7tC-gp-jKp"/>
+                                <constraint firstAttribute="width" constant="15" id="7tC-gp-jKp"/>
                                 <constraint firstAttribute="height" constant="22" id="gNY-aX-UBO"/>
                             </constraints>
                             <state key="normal" image="dropdown"/>
@@ -37,15 +31,21 @@
                                 <action selector="showCollegeView:" destination="iN0-l3-epB" eventType="touchUpInside" id="QY5-By-Rgy"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="College Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oas-hz-HE9">
+                            <rect key="frame" x="15" y="8.5" width="295" height="18"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="hwj-RS-mbG" firstAttribute="centerY" secondItem="88n-8l-pjm" secondAttribute="centerY" id="MRq-Fy-xxj"/>
+                        <constraint firstItem="hwj-RS-mbG" firstAttribute="leading" secondItem="Oas-hz-HE9" secondAttribute="trailing" constant="5" id="fL1-oG-BJk"/>
+                        <constraint firstItem="Oas-hz-HE9" firstAttribute="centerY" secondItem="Bht-Rs-iKA" secondAttribute="centerY" id="jWf-iY-eC2"/>
                         <constraint firstAttribute="trailing" secondItem="hwj-RS-mbG" secondAttribute="trailing" constant="15" id="jva-2X-IVk"/>
-                        <constraint firstItem="88n-8l-pjm" firstAttribute="leading" secondItem="Bht-Rs-iKA" secondAttribute="leading" constant="15" id="ocA-Nf-BBO"/>
-                        <constraint firstItem="hwj-RS-mbG" firstAttribute="leading" secondItem="88n-8l-pjm" secondAttribute="trailing" constant="5" id="uGA-PB-ACz"/>
+                        <constraint firstItem="Oas-hz-HE9" firstAttribute="leading" secondItem="Bht-Rs-iKA" secondAttribute="leading" constant="15" id="ojo-3m-Agx"/>
+                        <constraint firstItem="hwj-RS-mbG" firstAttribute="centerY" secondItem="Oas-hz-HE9" secondAttribute="centerY" id="puW-yZ-eTb"/>
                         <constraint firstAttribute="height" constant="35" id="wgP-cC-p5c"/>
-                        <constraint firstItem="88n-8l-pjm" firstAttribute="centerY" secondItem="Bht-Rs-iKA" secondAttribute="centerY" id="yLS-aY-sA7"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oo3-jm-3j8">
@@ -169,7 +169,6 @@
                 <outlet property="stackViewEnterOTp" destination="7Hx-Jh-wGI" id="ClM-Vt-IgM"/>
                 <outlet property="textFieldMobileNumber" destination="FzZ-yn-JJ7" id="Aa0-LD-tXQ"/>
                 <outlet property="textFieldOtp" destination="Zw7-uq-Msu" id="kkO-PA-XaK"/>
-                <outlet property="textfieldCollegeName" destination="88n-8l-pjm" id="kxz-5m-rNh"/>
                 <outlet property="viewCollege" destination="Bht-Rs-iKA" id="JA9-78-lsz"/>
                 <outlet property="viewMobileNumberTf" destination="Msb-dC-bFg" id="oTl-Wc-cjw"/>
                 <outlet property="viewVerifyOtp" destination="zEM-kO-hsL" id="eps-9P-B25"/>
@@ -179,6 +178,6 @@
         </view>
     </objects>
     <resources>
-        <image name="dropdown" width="17" height="10"/>
+        <image name="dropdown" width="15" height="9"/>
     </resources>
 </document>

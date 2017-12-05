@@ -20,10 +20,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NotificationCenter.default.addObserver(self, selector: #selector(loginSuccess), name: .notificationLoginSuccess, object: nil)
 
-        if(UserManager.savedUserManager.getUserId() != "0"){
+//        if(UserManager.savedUserManager.getUserId() != "0"){
+//            loginSuccess()
+//        }
+        UserManager.sharedUserManager.initLoggedInUser()
+        if(UserManager.sharedUserManager.userProfilesArray.count > 0){
             loginSuccess()
         }
-
+        
         return true
     }
 

@@ -4,6 +4,7 @@
         <attribute name="attendanceUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="collegeId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="collegeName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isCurrentUser" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="ratingsUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="role" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sllyabusStatusUrl" optional="YES" attributeType="String" syncable="YES"/>
@@ -20,6 +21,7 @@
         <attribute name="collegeName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="courseRatingsUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eventAttendanceUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isCurrentUser" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="role" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Teacher" representedClassName="Teacher" syncable="YES">
@@ -27,6 +29,7 @@
         <attribute name="collegeId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="collegeName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isCurrentUser" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="logsUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="professorId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="professorLastName" optional="YES" attributeType="String" syncable="YES"/>
@@ -37,9 +40,9 @@
     </entity>
     <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class"/>
     <elements>
-        <element name="Student" positionX="-54" positionY="72" width="128" height="195"/>
-        <element name="Teacher" positionX="-54" positionY="-9" width="128" height="210"/>
+        <element name="Student" positionX="-54" positionY="72" width="128" height="210"/>
+        <element name="SuperAdmin" positionX="-54" positionY="99" width="128" height="180"/>
+        <element name="Teacher" positionX="-54" positionY="-9" width="128" height="225"/>
         <element name="User" positionX="-63" positionY="-18" width="128" height="45"/>
-        <element name="SuperAdmin" positionX="-54" positionY="99" width="128" height="165"/>
     </elements>
 </model>

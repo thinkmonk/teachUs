@@ -2,7 +2,7 @@
 //  Student+CoreDataClass.swift
 //  TeachUs
 //
-//  Created by ios on 12/2/17.
+//  Created by ios on 12/4/17.
 //  Copyright © 2017 TeachUs. All rights reserved.
 //
 //
