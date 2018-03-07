@@ -24,14 +24,13 @@
                             <rect key="frame" x="315" y="6.5" width="15" height="22"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="15" id="7tC-gp-jKp"/>
-                                <constraint firstAttribute="height" constant="22" id="gNY-aX-UBO"/>
                             </constraints>
                             <state key="normal" image="dropdown"/>
                             <connections>
                                 <action selector="showCollegeView:" destination="iN0-l3-epB" eventType="touchUpInside" id="QY5-By-Rgy"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="College Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oas-hz-HE9">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="College Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="Oas-hz-HE9">
                             <rect key="frame" x="15" y="8.5" width="295" height="18"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -165,6 +164,7 @@
                 <outlet property="buttonSelectCollege" destination="hwj-RS-mbG" id="qTC-o6-DnX"/>
                 <outlet property="buttonSendOtp" destination="VR9-6U-ajU" id="kwI-7c-UI7"/>
                 <outlet property="buttonVerifyOtp" destination="9D3-rh-1LY" id="Kae-YN-abt"/>
+                <outlet property="labelCollegeName" destination="Oas-hz-HE9" id="dxo-Kw-QsF"/>
                 <outlet property="labelMobileNumber" destination="agf-v7-lu0" id="05e-FP-Wfg"/>
                 <outlet property="stackViewEnterOTp" destination="7Hx-Jh-wGI" id="ClM-Vt-IgM"/>
                 <outlet property="textFieldMobileNumber" destination="FzZ-yn-JJ7" id="Aa0-LD-tXQ"/>

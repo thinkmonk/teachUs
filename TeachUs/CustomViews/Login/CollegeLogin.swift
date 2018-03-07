@@ -18,8 +18,7 @@ class CollegeLogin: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     
     @IBOutlet weak var viewCollege: UIView!
     @IBOutlet weak var buttonSelectCollege: UIButton!
-    @IBOutlet weak var textfieldCollegeName: UITextField!
-    
+    @IBOutlet weak var labelCollegeName: UILabel!
     
     @IBOutlet weak var viewsendOtp: UIView!
     
@@ -95,18 +94,18 @@ class CollegeLogin: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         for clg in arrayCollegeList{
             arrayCollegeName.append(clg.collegeName)
         }
-//        self.collegeDropdown.dataSource = arrayCollegeName
-        self.collegeDropdown.dataSource = ["10 €",
-                                           "20 €",
-                                           "30 €",
-                                           "40 €",
-                                           "50 €",
-                                           "60 €",
-                                           "70 €"]
-
+        self.collegeDropdown.dataSource = arrayCollegeName
+//        self.collegeDropdown.dataSource = ["10 €",
+//                                           "20 €",
+//                                           "30 €",
+//                                           "40 €",
+//                                           "50 €",
+//                                           "60 €",
+//                                           "70 €"]
+        self.collegeDropdown.backgroundColor = UIColor.white
         self.collegeDropdown.selectionAction = { [unowned self] (index, item) in
             print("\(self.arrayCollegeList[index].collegeName)")
-            
+//            self.labelCollegeName.text = 
         }
 
 
@@ -200,11 +199,11 @@ class CollegeLogin: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.textfieldCollegeName.text = pickerDataSourceArray[row]
+//        self.textfieldCollegeName.text = pickerDataSourceArray[row]
     }
     
     @objc func donePicker(){
-        self.textfieldCollegeName.resignFirstResponder()
+//        self.textfieldCollegeName.resignFirstResponder()
         self.viewsendOtp.alpha = 1
     }
 }

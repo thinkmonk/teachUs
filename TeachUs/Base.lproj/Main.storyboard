@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LZn-5B-LbX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LZn-5B-LbX">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -60,6 +60,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Login Select" id="HbF-6v-pXG"/>
                     <connections>
+                        <outlet property="viewButtonStack" destination="8s5-uf-LIC" id="8ti-F0-LBJ"/>
                         <segue destination="XXj-oB-jWg" kind="show" identifier="loginSelect" id="9Wc-wv-DcB"/>
                     </connections>
                 </viewController>
@@ -513,10 +514,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f14-ab-QX1">
-                                        <rect key="frame" x="200" y="6.5" width="110" height="38"/>
+                                        <rect key="frame" x="202" y="6.5" width="108" height="38"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bvd-Nm-nqq">
-                                                <rect key="frame" x="73" y="0.0" width="17" height="38"/>
+                                                <rect key="frame" x="73" y="0.0" width="15" height="38"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <state key="normal" image="dropdown">
                                                     <color key="titleColor" red="0.20784313725490194" green="0.15686274509803921" blue="0.28627450980392155" alpha="1" colorSpace="calibratedRGB"/>
@@ -852,7 +853,7 @@
     <resources>
         <image name="college_default" width="114" height="114"/>
         <image name="college_selection" width="114" height="114"/>
-        <image name="dropdown" width="17" height="10"/>
+        <image name="dropdown" width="15" height="9"/>
         <image name="dropdown_white" width="15" height="9"/>
         <image name="leftMenuBackground" width="1242" height="2390"/>
         <image name="professor_default" width="114" height="114"/>

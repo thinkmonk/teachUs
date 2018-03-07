@@ -10,8 +10,16 @@ import Foundation
 public struct URLConstants{
 
     struct BaseUrl {
-        static let baseURL = "http://ec2-52-40-212-186.us-west-2.compute.amazonaws.com:8081/teachus" //v2
+        static let baseURL = "http://zilliotech.com/api/teachus" //v2
 //        static let baseURL = "http://ec2-34-215-84-223.us-west-2.compute.amazonaws.com:8081/teachus"  //v1`
+    }
+    
+    struct Login {
+        static let role = BaseUrl.baseURL + "/role"
+        static let checkDetails = BaseUrl.baseURL + "/login/check_details"
+        static let sendOtp = BaseUrl.baseURL + "/login/sendotp"
+        static let verifyOtp = BaseUrl.baseURL + "/auth/verifyotp"
+        static let userDetails = BaseUrl.baseURL + "/login/user_details"
     }
     
     struct TecacherURL {

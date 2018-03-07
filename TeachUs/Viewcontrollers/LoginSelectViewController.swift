@@ -15,24 +15,43 @@ enum LoginUserType {
 }
 
 class LoginSelectViewController: BaseViewController {
-
+    @IBOutlet weak var viewButtonStack: UIStackView!
+    
     var userType:LoginUserType!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addDefaultBackGroundImage()
-        // Do any additional setup after loading the view, typically from a nib.
+        self.viewButtonStack.alpha = 0
+        self.getRoleList()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.addGradientToNavBar()
         self.addColorToNavBarText(color: UIColor.white)
+    }
+    
+    func getRoleList(){
+        let manager = NetworkHandler()
+        //http://zilliotech.com/api/teachus/role
+        manager.url = URLConstants.Login.role
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        manager.apiGet(apiName: "Get Role for all user", completionHandler: { (response, code) in
+            LoadingActivityHUD.hideProgressHUD()
+            
+            UIView.animate(withDuration: 0.5, animations: {
+                self.viewButtonStack.alpha = 1
+            })
+            
+        }) { (error, code, errorMessage) in
+            LoadingActivityHUD.hideProgressHUD()
+            print(errorMessage)
+        }
     }
 
     @IBAction func loginStudent(_ sender: Any) {

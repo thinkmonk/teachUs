@@ -54,10 +54,6 @@ class  StudentAttendance:Mappable{
             for subject in subjectAttendanceArray{
                 let tempSubject = Mapper<SubjectAttendance>().map(JSON: subject)
                 self.subjectAttendance.append(tempSubject!)
-                self.subjectAttendance.append(tempSubject!)
-                self.subjectAttendance.append(tempSubject!)
-                self.subjectAttendance.append(tempSubject!)
-
             }
         }
     }

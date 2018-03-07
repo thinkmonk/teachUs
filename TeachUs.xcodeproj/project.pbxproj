@@ -70,6 +70,7 @@
 		81A80EDF1FAF3DAD00DDFFA1 /* CollegeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A80EDE1FAF3DAD00DDFFA1 /* CollegeList.swift */; };
 		81A80EE11FAF3DCB00DDFFA1 /* CollegeList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81A80EE01FAF3DCB00DDFFA1 /* CollegeList.xib */; };
 		81AE8A061F9FC37B00D49749 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AE8A051F9FC37B00D49749 /* BaseViewController.swift */; };
+		81B0281B20506BA90045A0A2 /* UserRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B0281A20506BA90045A0A2 /* UserRole.swift */; };
 		81B190C01FA24E19004A8A72 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B190BF1FA24E19004A8A72 /* LoginView.swift */; };
 		81B190C21FA24E22004A8A72 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81B190C11FA24E22004A8A72 /* LoginView.xib */; };
 		81B190C41FA24F87004A8A72 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B190C31FA24F87004A8A72 /* UIButton.swift */; };
@@ -230,6 +231,7 @@
 		81A80EDE1FAF3DAD00DDFFA1 /* CollegeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeList.swift; sourceTree = "<group>"; };
 		81A80EE01FAF3DCB00DDFFA1 /* CollegeList.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollegeList.xib; sourceTree = "<group>"; };
 		81AE8A051F9FC37B00D49749 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		81B0281A20506BA90045A0A2 /* UserRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRole.swift; sourceTree = "<group>"; };
 		81B190BF1FA24E19004A8A72 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		81B190C11FA24E22004A8A72 /* LoginView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
 		81B190C31FA24F87004A8A72 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
@@ -529,6 +531,7 @@
 				8180D9071FD3D21B00CE803F /* SuperAdminProfile.swift */,
 				81B203C41FD5422000936F0F /* AppUser.swift */,
 				8192F5901FD7115A00982601 /* CollegesListModel.swift */,
+				81B0281A20506BA90045A0A2 /* UserRole.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1091,6 +1094,7 @@
 				81D7CE7F1FAB8E5D00C4375E /* CAPSPageMenuConfiguration.swift in Sources */,
 				81D7CE981FAB98DB00C4375E /* ProfessorLogsListViewController.swift in Sources */,
 				81CCAE5A1FC99C170070907A /* UIImageView.swift in Sources */,
+				81B0281B20506BA90045A0A2 /* UserRole.swift in Sources */,
 				18A627DF1F90F9870099C106 /* LoginSelectViewController.swift in Sources */,
 				81B2E2D71FC35B0600E9E852 /* DPDKeyboardListener.swift in Sources */,
 				812C34F01FB794DB0048DD3C /* ViewDatePicker.swift in Sources */,

@@ -54,6 +54,8 @@ class LoginViewController: BaseViewController {
             collegeLogin.setUpView()
             let manager = NetworkHandler()
             manager.url = URLConstants.CollegeURL.getCollegeList
+            LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+
             manager.apiGet(apiName: "Get College ka list", completionHandler: { (response,code ) in
                 let collegeDetails = response["collegeDetails"] as![[String:Any]]
                 var collegeArray:[CollegesListModel] = []
@@ -64,8 +66,11 @@ class LoginViewController: BaseViewController {
                 self.collegeLogin.arrayCollegeList = collegeArray
                 self.collegeLogin.showView(inView: self.view)
                 self.collegeLogin.setUpSelectCollegeView()
+                LoadingActivityHUD.hideProgressHUD()
             }, failure: { (error, code , message) in
                 print(message)
+                LoadingActivityHUD.hideProgressHUD()
+
             })
             
             break

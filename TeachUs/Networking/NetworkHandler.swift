@@ -28,11 +28,15 @@ class NetworkHandler:SessionManager{
             Alamofire.request(self.url!).validate().responseJSON { response in
                 switch response.result {
                 case .success:
-                    print("Validation Successful")
                     #if DEBUG
                         print("***** NETWORK CALL RESPONSE *****")
                         print("status code: \((response.response?.statusCode)!), responseData: \(response.result.value ?? Dictionary<String, Any>())")
                     #endif
+                    if let responseArray = response.result.value as? [Any]{
+                        let responseDict :[String:Any] = ["Role_List":responseArray]
+                        completionHandler(responseDict, (response.response?.statusCode)!)
+                        return
+                    }
                     
                     if let responseDict = response.result.value as? [String: Any]{
                         completionHandler(responseDict, (response.response?.statusCode)!)
