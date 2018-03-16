@@ -9,27 +9,54 @@
 import Foundation
 import ObjectMapper
 
+
+/*
+ 
+ {
+ "class_division" = A;
+ "class_id" = 1;
+ "course_code" = BMS;
+ "course_id" = 1;
+ semester = 1;
+ "subject_code" = RM;
+ "subject_id" = 6;
+ "subject_name" = "Risk Management";
+ year = 1;
+ "year_name" = FY;
+ }
+ */
+
 public class College:Mappable{
     
     var name:String?
-    var college_id:String?
-    var collegeSubjects  = [CollegeSubjects]()
-    
+    var classDivision:String?
+    var classId:String?
+    var courseCode:String?
+    var courseId:String?
+    var semester:String?
+    var subjectCode:String?
+    var subjectId:String?
+    var subjectName:String?
+    var year:String?
+    var yearName:String?
+//    var college_id:String?
+//    var collegeSubjects  = [CollegeSubjects]()
+
     required public init?(map: Map) {
     }
     
     public func mapping(map: Map) {
-        self.name <- map["collegeName"]
-        self.college_id <- map["collegeId"]
-        var tempSubjects:[[String:Any]] = []
-        tempSubjects <- map["subjects"]
-        if(tempSubjects.count > 0){
-            
-            for subject in tempSubjects {
-            let collegeSubject:CollegeSubjects = Mapper<CollegeSubjects>().map(JSONObject: subject)!
-            self.collegeSubjects.append(collegeSubject)
-            }
-        }
+        self.name  = "\(UserManager.sharedUserManager.appUserCollegeDetails.college_name!)"
+        self.classDivision <- map["class_division"]
+        self.classId <- map["class_id"]
+        self.courseCode <- map["course_code"]
+        self.courseId <- map["course_id"]
+        self.semester <- map["semester"]
+        self.subjectCode <- map["subject_code"]
+        self.subjectId <- map["subject_id"]
+        self.subjectName <- map["subject_name"]
+        self.year <- map["year"]
+        self.yearName <- map["year_name"]
     }
     
 }
@@ -53,21 +80,19 @@ public class College:Mappable{
  },
  */
 
-
 public class CollegeSubjects:Mappable{
     
     var classId:Int?
     var year:String?
     var semester:String?
     var courseCode:String?
-    var subjectId:Int?
+    var subjectId:String?
     var subjectName:String?
     var section:String?
     var enrolledStudentListUrl:String?
     
     required public init?(map: Map) {
     }
-    
     
     public func mapping(map: Map) {
         self.subjectName <- map["subjectName"]

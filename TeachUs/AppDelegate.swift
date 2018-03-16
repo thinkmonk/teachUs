@@ -18,16 +18,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        
+        let path = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true)
+        print("DB PATH\(path)")
+
         NotificationCenter.default.addObserver(self, selector: #selector(loginSuccess), name: .notificationLoginSuccess, object: nil)
 
-//        if(UserManager.savedUserManager.getUserId() != "0"){
+        
+//        UserManager.sharedUserManager.initLoggedInUser()
+//        if(UserManager.sharedUserManager.appUserDetails != nil){
 //            loginSuccess()
 //        }
-        UserManager.sharedUserManager.initLoggedInUser()
-        if(UserManager.sharedUserManager.userProfilesArray.count > 0){
-            loginSuccess()
-        }
-        
         return true
     }
 
@@ -102,6 +103,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Login success notification
     
     @objc func loginSuccess(){
+        UserManager.sharedUserManager.initLoggedInUser()
         let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
         let mfslidemenuContainer = mainStoryBoard.instantiateViewController(withIdentifier: "MFSideMenuContainerViewController") as!MFSideMenuContainerViewController
         self.window?.rootViewController = nil
@@ -111,12 +113,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let leftMenuController = mainStoryBoard.instantiateViewController(withIdentifier: "LeftMenuViewController") as! LeftMenuViewController
         let homeVc:HomeViewController = centerNavigationController.topViewController as! HomeViewController
-        leftMenuController.delegate = homeVc as! LeftMenuDeleagte
+        leftMenuController.delegate = homeVc as LeftMenuDeleagte
         mfslidemenuContainer.leftMenuViewController = leftMenuController
         mfslidemenuContainer.centerViewController  = centerNavigationController
-        
     }
-
-    
 }
 

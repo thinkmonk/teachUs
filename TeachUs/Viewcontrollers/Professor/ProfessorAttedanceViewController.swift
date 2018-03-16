@@ -29,24 +29,24 @@ class ProfessorAttedanceViewController: BaseViewController {
     }
     
     func getCollegeSummaryForProfessor(){
-        let manager = NetworkHandler()
-        
+        if(viewCollegeList != nil){
+            viewCollegeList.removeFromSuperview()
+        }
         /*
         //"http://ec2-34-215-84-223.us-west-2.compute.amazonaws.com:8081/teachus/teacher/getCollegeSummary/Zmlyc3ROYW1lPURldmVuZHJhLG1pZGRsZU5hbWU9QSxsYXN0TmFtZT1GYWRuYXZpcyxyb2xsPVBST0ZFU1NPUixpZD0x?professorId=1"
         
         manager.url = URLConstants.TecacherURL.collegeSummary +
             "\(UserManager.sharedUserManager.getAccessToken())" +
             "?professorId=\(UserManager.sharedUserManager.getUserId())"
-        */
+ 
         
         manager.url = URLConstants.BaseUrl.baseURL + UserManager.sharedUserManager.userTeacher.attendanceUrl!
-        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         manager.apiGet(apiName: "Get College Summary for professor", completionHandler: { (response, code) in
             LoadingActivityHUD.hideProgressHUD()
             guard let colleges = response["college"] as? [[String:Any]] else{
                 return
             }
-            
+         
             for college in colleges{
                 let tempCollege = Mapper<College>().map(JSONObject: college)
                 self.arrayCollegeList?.append(tempCollege!)
@@ -56,26 +56,57 @@ class ProfessorAttedanceViewController: BaseViewController {
             LoadingActivityHUD.hideProgressHUD()
             print(errorMessage)
         }
+  */
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        let manager = NetworkHandler()
+        manager.url = URLConstants.ProfessorURL.getClassList
+        let parameters = [
+            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)"
+        ]
+        
+        manager.apiPost(apiName: " Get Professor Class list", parameters:parameters, completionHandler: { (result, code, response) in
+            LoadingActivityHUD.hideProgressHUD()
+            guard let colleges = response["class_list"] as? [[String:Any]] else{
+                return
+            }
+            self.arrayCollegeList?.removeAll()
+            for college in colleges{
+                let tempCollege = Mapper<College>().map(JSONObject: college)
+                self.arrayCollegeList?.append(tempCollege!)
+            }
+            self.makeCollegesTableView()
+
+            
+        }) { (error, code, message) in
+            print(message)
+            LoadingActivityHUD.hideProgressHUD()
+        }
+
     }
     
     
     func makeCollegesTableView(){
-        viewCollegeList = CollegeList.instanceFromNib() as! CollegeList
+        if(viewCollegeList == nil){
+            viewCollegeList = CollegeList.instanceFromNib() as! CollegeList
+        }
         viewCollegeList.setUpTableView(arrayCollegeList!)
         viewCollegeList.delegate = self
         viewCollegeList.showView(self.view)
+        viewCollegeList.reloadAllData()
+
+        
     }
 }
 
 extension ProfessorAttedanceViewController:CollegeListDelegate{
     
-    func selectedSubject(_ subject: CollegeSubjects) {
+    func selectedSubject(_ subject: College) {
             let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
 
             let destinationVC:StudentsListViewController =  storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.studentList) as! StudentsListViewController
-            destinationVC.subject = subject
+           // destinationVC.subject = subject
             
-            self.parentNavigationController?.pushViewController(destinationVC, animated: true)
+            //self.parentNavigationController?.pushViewController(destinationVC, animated: true)
     }
     
 }

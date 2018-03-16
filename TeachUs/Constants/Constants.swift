@@ -15,6 +15,7 @@ public struct Constants {
         static let syllabusStatusDetails = "syllabusStatusDetails"
         static let SyllabusDetails = "toSyllabusDetails"
         static let viewRtings = "toViewRatings"
+        static let toLoginSelect = "toLoginSelect"
     }
     
     struct Images {

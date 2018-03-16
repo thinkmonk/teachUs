@@ -21,7 +21,7 @@ class MarkCompletedPortionViewController: BaseViewController {
     @IBOutlet weak var tableviewTopics: UITableView!
     @IBOutlet weak var buttonSubmit: UIButton!
     
-    var subjectId:Int?
+    var subjectId:String?
     var arrayDataSource:[Topic] = []
 
     override func viewDidLoad() {
@@ -51,10 +51,10 @@ class MarkCompletedPortionViewController: BaseViewController {
         
 
         //http://ec2-34-215-84-223.us-west-2.compute.amazonaws.com:8081/teachus/teacher/getTopics/Zmlyc3ROYW1lPURldmVuZHJhLG1pZGRsZU5hbWU9QSxsYXN0TmFtZT1GYWRuYXZpcyxyb2xsPVBST0ZFU1NPUixpZD0x?professorId=1&subjectId=2
-        manager.url = URLConstants.TecacherURL.getTopics +
-                    "\(UserManager.sharedUserManager.getAccessToken())" +
-                    "==?professorId=\(UserManager.sharedUserManager.getUserId())" +
-                    "&subjectId=\(self.subjectId!)"
+//        manager.url = URLConstants.TecacherURL.getTopics +
+//                    "\(UserManager.sharedUserManager.getAccessToken())" +
+//                    "==?professorId=\(UserManager.sharedUserManager.getUserId())" +
+//                    "&subjectId=\(self.subjectId!)"
 
         
 //        manager.url = URLConstants.BaseUrl.baseURL + UserManager.sharedUserManager.userTeacher.syllabusStatusUrl!

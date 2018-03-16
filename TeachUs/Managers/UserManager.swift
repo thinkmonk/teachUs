@@ -8,12 +8,16 @@
 
 import Foundation
 import CoreData
+import ObjectMapper
 
 class UserManager{
 //    static var userManager:UserManager!
 
     static var sharedUserManager = UserManager()
-    
+    var userRole:UserRole!
+    var appUserDetails:UserDetails!
+    var appUserCollegeDetails:CollegeDetails!
+    var appUserCollegeArray:[CollegeDetails]! = []
     static var savedUserManager : UserManager {
         let userManager = UserManager()
         if(userManager.user != nil){
@@ -49,12 +53,12 @@ class UserManager{
     }
     
     var userProfilesArray:[AppUser] = []
-    
+    var userEmail:String = ""
     var userName:String = ""
-    var userMiddleName:String = ""
+//    var userMiddleName:String = ""
     var userLastName:String = ""
     var userFullName:String{
-        return "\(self.userName) \(self.userMiddleName) \(self.userLastName)"
+        return "\(self.userName) \(self.userLastName)"
     }
     
     var userTeacher:Teacher! //model
@@ -74,7 +78,7 @@ class UserManager{
     func getAccessToken() -> String {
         guard let token = UserDefaults.standard.value(forKey: Constants.UserDefaults.accesToken) as? String else {
 //            return "Zmlyc3ROYW1lPURldmVuZHJhLG1pZGRsZU5hbWU9QSxsYXN0TmFtZT1GYWRuYXZpcyxyb2xsPVBST0ZFU1NPUixpZD0x"
-            return "Zmlyc3ROYW1lPUhhcnNoLG1pZGRsZU5hbWU9RyxzdXJOYW1lPUdhbmdhcixyb2xsPVNUVURFTlQsaWQ9NA=="
+            return ""
         }
         return token
     }
@@ -126,6 +130,32 @@ class UserManager{
             appuser.isActive = self.userSuperAdmin.isCurrentUser
             self.userProfilesArray.append(appuser)
         }
+        
+        
+        let user = DatabaseManager.getEntitesForEntityName("UserDetails", sortindId: "firstName")
+        if(user.count > 0){
+            self.appUserDetails = user.last as! UserDetails
+            self.userName = self.appUserDetails.firstName!
+            self.userLastName = self.appUserDetails.lastName!
+            let collegeDetailsArray = DatabaseManager.getEntitesForEntityName("CollegeDetails", sortindId: "college_name")
+            if(collegeDetailsArray.count > 0){
+                self.appUserCollegeArray = collegeDetailsArray as! [CollegeDetails]
+            }
+            self.appUserCollegeDetails = self.appUserCollegeArray.last!
+            switch self.appUserCollegeArray.first?.role_id!{
+            case "1"?:
+                UserManager.sharedUserManager.setLoginUserType(.Student)
+                break
+            case "2"?:
+                UserManager.sharedUserManager.setLoginUserType(.Professor)
+                break
+            case "3"?:
+                UserManager.sharedUserManager.setLoginUserType(.College)
+                break
+            default:
+                break
+            }
+        }
     }
     
     func setUserId(_ id:String){
@@ -164,125 +194,65 @@ class UserManager{
         return userImageURL
     }
     
-    func saveTeacherToDb(_ teacher:[String:Any]){
-        userTeacher = NSEntityDescription.insertNewObject(forEntityName: "Teacher", into: DatabaseManager.managedContext) as! Teacher
-        
-        userTeacher.role = teacher["role"] as? String
-        userTeacher.syllabusStatusUrl = teacher["syllabusStatusUrl"] as? String
-        userTeacher.logsUrl = teacher["logsUrl"] as? String
-        userTeacher.uploadProfilePicUrl = teacher["uploadProfilePicUrl"] as? String
-        userTeacher.attendanceUrl = teacher["attendenceUrl"] as? String
-        userTeacher.professorId = (teacher["professorId"] as? Int16)!
-        userTeacher.professorName = teacher["professorName"] as? String
-        userTeacher.professorLastName = teacher["professorLastName"] as? String
-        userTeacher.collegeName = teacher["collegeName"] as? String
-        userTeacher.collegeId = teacher["collegeId"] as? String
-        
-        let user = AppUser()
-        user.user = userTeacher
-        user.userType = "PROFESSOR"
-        if(self.user == LoginUserType.Professor){
-            user.isActive = true
-            userTeacher.isCurrentUser = true
-        }
-        self.userProfilesArray.append(user)
-        self.saveDbContext()
-
-    }
+/*
+     "user_details": {
+     "login_id": "19",
+     "f_name": "Jaimin ",
+     "l_name": "Shah",
+     "email": "shahjmn@gmail.com",
+     "contact": "9773608085",
+     "profile": "http://zilliotech.com/api/profile/195a9bc0c4a4ab1.jpg"
+     }
+ */
     
-    /*
-    {
-    "role": "PROFESSOR",
-    "professorId": 3,
-    "professorName": "Harsh",
-    "professorLastName": "Gangar",
-    "collegeId": "1003",
-    "collegeName": "Rajasthani Sammelans Ghanshyamdas Saraf Colle",
-    "attendenceUrl": "/teacher/getCollegeSummary/Zmlyc3ROYW1lPUhhcnNoLG1pZGRsZU5hbWU9WCxsYXN0TmFtZT1HYW5nYXIscm9sbD1QUk9GRVNTT1IsaWQ9Mw==?professorId=3",
-    "syllabusStatusUrl": "/teacher/getSyllabusSummary/Zmlyc3ROYW1lPUhhcnNoLG1pZGRsZU5hbWU9WCxsYXN0TmFtZT1HYW5nYXIscm9sbD1QUk9GRVNTT1IsaWQ9Mw==?professorId=3",
-    "logsUrl": "/teacher/getLogsSummary/Zmlyc3ROYW1lPUhhcnNoLG1pZGRsZU5hbWU9WCxsYXN0TmFtZT1HYW5nYXIscm9sbD1QUk9GRVNTT1IsaWQ9Mw==?professorId=3",
-    "uploadProfilePicUrl": "/teacher/uploadImage/Zmlyc3ROYW1lPUhhcnNoLG1pZGRsZU5hbWU9WCxsYXN0TmFtZT1HYW5nYXIscm9sbD1QUk9GRVNTT1IsaWQ9Mw==?professorId=3",
-    "uploadProfilePicBase64Url": "/teacher/uploadImageBase64/Zmlyc3ROYW1lPUhhcnNoLG1pZGRsZU5hbWU9WCxsYXN0TmFtZT1HYW5nYXIscm9sbD1QUk9GRVNTT1IsaWQ9Mw==?professorId=3"
-    }
-     */
     
-    func saveStudentToDb(_ student:[String:Any]){
-        userStudent = NSEntityDescription.insertNewObject(forEntityName: "Student", into: DatabaseManager.managedContext) as! Student
-        
-        userStudent.role = student["role"] as? String
-        userStudent.studentId = (student["studentId"] as? Int16)!
-        userStudent.studentName = student["studentName"] as? String
-        userStudent.studentLastName = student["studentLastName"] as? String
-        userStudent.collegeName = student["collegeName"] as? String
-        userStudent.collegeId = student["collegeId"] as? String
-        userStudent.attendanceUrl = student["attendenceUrl"] as? String
-        userStudent.sllyabusStatusUrl = student["syllabusStatusUrl"] as? String
-        userStudent.ratingsUrl = student["ratingsUrl"] as? String
-        userStudent.uploadProfilePicUrl = student["uploadProfilePicUrl"] as? String
-        let user = AppUser()
-        user.user = userStudent
-        user.userType = "STUDENT"
-        if(self.user == LoginUserType.Student){
-            user.isActive = true
-            userStudent.isCurrentUser = true
+    func saveUserDetailsToDb(_ userResponse:[String:Any]) {
+       DatabaseManager.deleteAllEntitiesForEntityName(name: "UserDetails")
+        guard let appUser = userResponse["user_details"] as? [String:Any]  else {
+            return
         }
-        self.userProfilesArray.append(user)
-        self.saveDbContext()
-
+        self.appUserDetails = NSEntityDescription.insertNewObject(forEntityName: "UserDetails", into: DatabaseManager.managedContext) as! UserDetails
+        self.appUserDetails.login_id = (appUser["login_id"] as! String)
+        self.appUserDetails.firstName = appUser["f_name"] as? String
+        self.appUserDetails.lastName = appUser["l_name"] as? String
+        self.appUserDetails.email = appUser["email"] as? String
+        self.appUserDetails.contact = appUser["contact"] as? String
+//        self.appUserDetails.roleId = appUser["role_id"] as? String
+        self.appUserDetails.profilePicUrl = appUser["profile"] as? String
+        guard let userCollegeArray = userResponse["colleges"] as? [[String:Any]] else {
+            self.saveDbContext()
+            return
+        }
+        DatabaseManager.deleteAllEntitiesForEntityName(name: "CollegeDetails")
+        for userCollege in userCollegeArray{
+            self.saveUserCollege(college: userCollege)
+            self.appUserCollegeDetails = self.appUserCollegeArray.first!
+        }
     }
+  
     
     /*
      {
-     "role": "STUDENT",
-     "studentId": 4,
-     "studentName": "Harsh",
-     "studentLastName": "Gangar",
-     "collegeId": "1001",
-     "collegeName": "ATHARVA COLLEGE",
-     "attendenceUrl": "/student/getAttendence/Zmlyc3ROYW1lPUhhcnNoLG1pZGRsZU5hbWU9RyxzdXJOYW1lPUdhbmdhcixyb2xsPVNUVURFTlQsaWQ9NA==?studentId=4",
-     "syllabusStatusUrl": "/student/getSyllabusSummary/Zmlyc3ROYW1lPUhhcnNoLG1pZGRsZU5hbWU9RyxzdXJOYW1lPUdhbmdhcixyb2xsPVNUVURFTlQsaWQ9NA==?studentId=4",
-     "ratingsUrl": "/student/getRatingsSummary/Zmlyc3ROYW1lPUhhcnNoLG1pZGRsZU5hbWU9RyxzdXJOYW1lPUdhbmdhcixyb2xsPVNUVURFTlQsaWQ9NA==?studentId=4",
-     "uploadProfilePicUrl": "/student/uploadImageBase64/Zmlyc3ROYW1lPUhhcnNoLG1pZGRsZU5hbWU9RyxzdXJOYW1lPUdhbmdhcixyb2xsPVNUVURFTlQsaWQ9NA==?studentId=4"
+     "role_id": "1",
+     "college_id": "1",
+     "privilege": "0",
+     "college_name": "Rajasthani Sammelan's Ghanshyamdas Saraf College",
+     "college_code": "gsc",
+     "role_name": "Student"
      }
-     ]
-    */
-    
-    func saveSuperAdminToDb(_ superAdmin:[String:Any]) {
-        userSuperAdmin = NSEntityDescription.insertNewObject(forEntityName: "SuperAdmin", into: DatabaseManager.managedContext) as! SuperAdmin
-        userSuperAdmin.role = superAdmin["role"] as? String
-        userSuperAdmin.collegeId = superAdmin["collegeId"] as? String
-        userSuperAdmin.collegeName = superAdmin["collegeName"] as? String
-        userSuperAdmin.classAttendanceUrl = superAdmin["getClassAttendanceUrl"] as? String
-        userSuperAdmin.classSyllabusUrl = superAdmin["getClassSyllabusUrl"] as? String
-        userSuperAdmin.courseRatingsUrl = superAdmin["getCourseRatingsUrl"] as? String
-        userSuperAdmin.eventAttendanceUrl = superAdmin["getEventAttendanceUrl"] as? String
-        userSuperAdmin.adminListUrl = superAdmin["getAdminListUrl"] as? String
-        let user = AppUser()
-        user.user = userSuperAdmin
-        user.userType = "SUPERADMIN"
-        if(self.user == LoginUserType.College){
-            user.isActive = true
-            userSuperAdmin.isCurrentUser = true
-        }
-        self.userProfilesArray.append(user)
-        self.saveDbContext()
+ */
+    func saveUserCollege(college:[String:Any]){
         
+        let collegeDetails:CollegeDetails = NSEntityDescription.insertNewObject(forEntityName: "CollegeDetails", into: DatabaseManager.managedContext) as! CollegeDetails
+        collegeDetails.role_id = college["role_id"] as? String
+        collegeDetails.college_id = college["college_id"] as? String
+        collegeDetails.privilege = college["privilege"] as? String
+        collegeDetails.college_name = college["college_name"] as? String
+        collegeDetails.college_code = college["college_code"] as? String
+        collegeDetails.role_name = college["role_name"] as? String
+        self.appUserCollegeArray.append(collegeDetails)
+        self.saveDbContext()
     }
-    
-    /*
-     {
-     "role": "SUPERADMIN",
-     "collegeId": "1001",
-     "collegeName": "ATHARVA COLLEGE",
-     "getClassAttendanceUrl": "/college/getClassAttendance/Zmlyc3ROYW1lPW51bGwsbWlkZGxlTmFtZT1udWxsLGxhc3ROYW1lPW51bGwscm9sbD1TVVBFUkFETUlO?collegeId=1001",
-     "getClassSyllabusUrl": "/college/getClassSyllabus/Zmlyc3ROYW1lPW51bGwsbWlkZGxlTmFtZT1udWxsLGxhc3ROYW1lPW51bGwscm9sbD1TVVBFUkFETUlO?collegeId=1001",
-     "getCourseRatingsUrl": "/college/getCourseRatings/Zmlyc3ROYW1lPW51bGwsbWlkZGxlTmFtZT1udWxsLGxhc3ROYW1lPW51bGwscm9sbD1TVVBFUkFETUlO?collegeId=1001",
-     "getEventAttendanceUrl": "/college/getEventList/Zmlyc3ROYW1lPW51bGwsbWlkZGxlTmFtZT1udWxsLGxhc3ROYW1lPW51bGwscm9sbD1TVVBFUkFETUlO?collegeId=1001",
-     "getAdminListUrl": "/college/getAdminList/Zmlyc3ROYW1lPW51bGwsbWlkZGxlTmFtZT1udWxsLGxhc3ROYW1lPW51bGwscm9sbD1TVVBFUkFETUlO?collegeId=1001"
-     }
-     
-     */
-    
     
     func saveDbContext(){
         let managedContext = DatabaseManager.managedContext

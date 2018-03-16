@@ -99,34 +99,41 @@ class LoginViewController: BaseViewController {
             }
     }
 }
+//MARK:- Login Delegate
 
 extension LoginViewController:LoginDelegate{
     func submitDetails() {
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         self.username = self.studentLoginView.textfieldFirstName.text! + studentLoginView.textfieldSurname.text!
         UserManager.sharedUserManager.userName = self.studentLoginView.textfieldFirstName.text!
-        UserManager.sharedUserManager.userMiddleName = self.studentLoginView.textfieldMiddleName.text!
         UserManager.sharedUserManager.userLastName = self.studentLoginView.textfieldSurname.text!
+        UserManager.sharedUserManager.userEmail = self.studentLoginView.textFieldEmailId.text!
 
+        
         let manager = NetworkHandler()
+        
+        let parameters:[String:Any] = ["email":UserManager.sharedUserManager.userEmail]
+        manager.url = URLConstants.Login.checkDetails
+        
+/*
         //http://ec2-52-40-212-186.us-west-2.compute.amazonaws.com:8081/teachus/teacher/verifyTeacher?firstName=Harsh&middleName=X&surName=Gangar
         switch UserManager.sharedUserManager.user! {
         case .Professor:
             manager.url = URLConstants.TecacherURL.verifyTeacher +
             "?firstName=\(self.studentLoginView.textfieldFirstName.text!)" +
-            "&middleName=\(self.studentLoginView.textfieldMiddleName.text!)" +
+            "&middleName=\(self.studentLoginView.textFieldEmailId.text!)" +
             "&surName=\(self.studentLoginView.textfieldSurname.text!)"
             
         case .Student:
             manager.url = URLConstants.StudentURL.verifyStudent +
                 "?firstName=\(self.studentLoginView.textfieldFirstName.text!)" +
-                "&middleName=\(self.studentLoginView.textfieldMiddleName.text!)" +
+                "&middleName=\(self.studentLoginView.textFieldEmailId.text!)" +
             "&surName=\(self.studentLoginView.textfieldSurname.text!)"
         default:
             manager.url = ""
         }
-        
-        
+*/
+        /*
         manager.apiGetWithAnyResponse(apiName: " VERIFY USER", completionHandler: { (response, code) in
             print(response)
             LoadingActivityHUD.hideProgressHUD()
@@ -139,7 +146,26 @@ extension LoginViewController:LoginDelegate{
             print(message)
 
         }
+        */
         
+        manager.apiPost(apiName: " VERIFY USER", parameters:parameters, completionHandler: { (result, code, response) in
+            print(response)
+            let contactString:String = response["contact"] as! String
+            let firstName:String = response["f_name"] as! String
+            let lastName:String = response["l_name"] as! String
+
+            UserManager.sharedUserManager.saveMobileNumber(contactString)
+            UserManager.sharedUserManager.userName = firstName
+            UserManager.sharedUserManager.userLastName = lastName
+            LoadingActivityHUD.hideProgressHUD()
+            self.studentLoginView.hideView()
+            self.setUpOtpView()
+
+        }) { (error, code, message) in
+            print(message)
+            LoadingActivityHUD.hideProgressHUD()
+        }
+
     }
     
     func setUpOtpView(){
@@ -153,6 +179,7 @@ extension LoginViewController:LoginDelegate{
         StudentOtpView.delegate = self
     }
 }
+//MARK:- OTP Delegate
 
 extension LoginViewController:OtpDelegate{
     func sendOtp() {
@@ -160,12 +187,12 @@ extension LoginViewController:OtpDelegate{
         
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()
-        
+        /*
         switch UserManager.sharedUserManager.user! {
         case .Professor:
             manager.url = URLConstants.TecacherURL.generateOtp +
                 "?firstName=\(self.studentLoginView.textfieldFirstName.text!)" +
-                "&middleName=\(self.studentLoginView.textfieldMiddleName.text!)" +
+                "&middleName=\(self.studentLoginView.textFieldEmailId.text!)" +
                 "&surName=\(self.studentLoginView.textfieldSurname.text!)" +
                 "&contactNumber=\(UserManager.sharedUserManager.getUserMobileNumber())"
 
@@ -173,7 +200,7 @@ extension LoginViewController:OtpDelegate{
         case .Student:
             manager.url = URLConstants.StudentURL.generateOtp +
                 "?firstName=\(self.studentLoginView.textfieldFirstName.text!)" +
-                "&middleName=\(self.studentLoginView.textfieldMiddleName.text!)" +
+                "&middleName=\(self.studentLoginView.textFieldEmailId.text!)" +
                 "&surName=\(self.studentLoginView.textfieldSurname.text!)" +
                 "&contactNumber=\(UserManager.sharedUserManager.getUserMobileNumber())"
 
@@ -181,12 +208,28 @@ extension LoginViewController:OtpDelegate{
             manager.url = ""
         }
         
-        
         manager.apiGetWithStringResponse(apiName: " Generate OTP", completionHandler: { (response, code) in
             print(response)
             LoadingActivityHUD.hideProgressHUD()
             self.showOtpView()
 
+        }) { (error, code, message) in
+            LoadingActivityHUD.hideProgressHUD()
+            print(message)
+        }
+        */
+        
+        manager.url = URLConstants.Login.sendOtp
+        let parameters:[String:Any] =
+            [
+                "email":"\(UserManager.sharedUserManager.userEmail)",
+                "role_id":"\(UserManager.sharedUserManager.userRole.roleId)",
+                "contact":"\(UserManager.sharedUserManager.getUserMobileNumber())"
+        ]
+        
+        manager.apiPost(apiName: "Generate OTP", parameters: parameters, completionHandler: { (result, code, response) in
+            LoadingActivityHUD.hideProgressHUD()
+            self.showOtpView()
         }) { (error, code, message) in
             LoadingActivityHUD.hideProgressHUD()
             print(message)
@@ -202,12 +245,13 @@ extension LoginViewController:OtpDelegate{
     }
     
     func verifyOtp() {
-        let manager = NetworkHandler()
+        
+        /*
         switch UserManager.sharedUserManager.user! {
         case .Professor:
             manager.url = URLConstants.TecacherURL.validateOtp +
                 "?firstName=\(self.studentLoginView.textfieldFirstName.text!)" +
-                "&middleName=\(self.studentLoginView.textfieldMiddleName.text!)" +
+                "&middleName=\(self.studentLoginView.textFieldEmailId.text!)" +
                 "&surName=\(self.studentLoginView.textfieldSurname.text!)" +
                 "&contactNumber=\(UserManager.sharedUserManager.getUserMobileNumber())" +
                 "&otp=\(self.StudentOtpView.textFieldOtp.text!)"
@@ -215,7 +259,7 @@ extension LoginViewController:OtpDelegate{
         case .Student:
             manager.url = URLConstants.StudentURL.validateOtp +
                 "?firstName=\(self.studentLoginView.textfieldFirstName.text!)" +
-                "&middleName=\(self.studentLoginView.textfieldMiddleName.text!)" +
+                "&middleName=\(self.studentLoginView.textFieldEmailId.text!)" +
                 "&surName=\(self.studentLoginView.textfieldSurname.text!)" +
                 "&contactNumber=\(UserManager.sharedUserManager.getUserMobileNumber())" +
                 "&otp=\(self.StudentOtpView.textFieldOtp.text!)"
@@ -234,8 +278,33 @@ extension LoginViewController:OtpDelegate{
             LoadingActivityHUD.hideProgressHUD()
             print(message)
         }
-        
+        */
+        let manager = NetworkHandler()
+        StudentOtpView.textFieldOtp.resignFirstResponder()
+        manager.url = URLConstants.Login.verifyOtp
+        let parameters:[String:Any] =
+            [
+                "email":"\(UserManager.sharedUserManager.userEmail)",
+                "role_id":"\(UserManager.sharedUserManager.userRole.roleId)",
+                "contact":"\(UserManager.sharedUserManager.getUserMobileNumber())",
+                "otp":"\(self.StudentOtpView.textFieldOtp.text!)"
+        ]
+        manager.apiPost(apiName: "Verify OTP", parameters: parameters, completionHandler: { (result, code, response) in
+            LoadingActivityHUD.hideProgressHUD()
+            let accessToken:String = response["token"] as! String
+            UserManager.sharedUserManager.setAccessToken(accessToken)
+            self.getAndSaveUserToDb()
+        }) { (error, code, message) in
+            LoadingActivityHUD.hideProgressHUD()
+            print(message)
+        }
     }
+    
+    
+    
+    
+    
+    
     
     func saveUser(userResponse: [String:Any]){
         switch UserManager.sharedUserManager.user! {
@@ -252,7 +321,7 @@ extension LoginViewController:OtpDelegate{
 //                    UserManager.sharedUserManager.userProfilesArray.append(teacher!)
 
                     UserManager.sharedUserManager.saveUserImageURL(userResponse["image"] as! String)
-                    UserManager.sharedUserManager.saveTeacherToDb(user)
+//                    UserManager.sharedUserManager.saveTeacherToDb(user)
                 }
                 if(role == "SUPERADMIN"){
 //                    let superAdmin = Mapper<SuperAdminProfile>().map(JSON: user)
@@ -260,7 +329,7 @@ extension LoginViewController:OtpDelegate{
 //                    UserManager.sharedUserManager.superAdminProfile = superAdmin
 //                    UserManager.sharedUserManager.userProfilesArray.append(superAdmin!)
                 
-                    UserManager.sharedUserManager.saveSuperAdminToDb(user)
+//                    UserManager.sharedUserManager.saveSuperAdminToDb(user)
                 }
             }
             break
@@ -278,7 +347,6 @@ extension LoginViewController:OtpDelegate{
                 if(userResponse["image"] != nil){
                     UserManager.sharedUserManager.saveUserImageURL(userResponse["image"] as! String)
                 }
-                UserManager.sharedUserManager.saveStudentToDb(user)
             }
             break
         default:
@@ -287,7 +355,7 @@ extension LoginViewController:OtpDelegate{
     }
     
 }
-
+//MARK:- College Login Delegate
 extension LoginViewController:CollegeLoginDelegate{
     func sendCollegeOtp() {
         showEnterOtpView()

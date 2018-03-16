@@ -35,20 +35,23 @@ import Foundation
 import ObjectMapper
 class  StudentAttendance:Mappable{
     
-    var totalLecture:Int?
-    var totalPresentCount: Int?
-    var overallPercenage:Int?
+    var totalLecture:String! = ""
+    var totalPresentCount: String! = ""
+    var overallPercenage:String! = ""
     var subjectAttendance:[SubjectAttendance] = []
     
     required public init?(map: Map) {
     }
     
     public func mapping(map: Map) {
-        self.totalLecture <- map["totalLecture"]
-        self.totalPresentCount <- map["totalPresentCount"]
-        self.overallPercenage <- map["overallPercenage"]
+        self.totalLecture <- map["total_lectures"]
+        self.totalPresentCount <- map["attended_lectures"]
+        self.overallPercenage <- map["overall_percentage"]
+        
+        
+        
         var subjectAttendanceArray:[[String:Any]] = []
-        subjectAttendanceArray <- map["subjectWise"]
+        subjectAttendanceArray <- map["attendancelist"]
         
         if(subjectAttendanceArray.count > 0){
             for subject in subjectAttendanceArray{
@@ -60,30 +63,22 @@ class  StudentAttendance:Mappable{
 }
 
 class SubjectAttendance:Mappable{
-    var subjectId:Int?
-    var subjectName:String?
-    var percentage:Int?
-    var presentCount:Int?
-    var totalCount:Int?
-
+    var subjectId:String! = ""
+    var subjectName:String! = ""
+    var percentage:String! = ""
+    var presentCount:String! = ""
+    var totalCount:String! = ""
+    var subjectCode:String! = ""
     required public init?(map: Map) {
         
     }
     
     public func mapping(map: Map) {
-        self.subjectId <- map["subjectId"]
-        self.subjectName <- map["subjectName"]
-        
-        if((map.JSON["percentage"]) != nil){
-            self.percentage <- map["percentage"]
-        }
-        else{
-            self.percentage = 0
-        }
-        self.presentCount <- map["presentCount"]
-        self.totalCount <- map["totalCount"]
-
-        
+        self.subjectId <- map["subject_id"]
+        self.subjectName <- map["subject_name"]
+        self.percentage <- map["percent"]
+        self.presentCount <- map["attended_lectures"]
+        self.totalCount <- map["total_lectures"]
+        self.subjectCode <- map["subject_code"]
     }
-
 }

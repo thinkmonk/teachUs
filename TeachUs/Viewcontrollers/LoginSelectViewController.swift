@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ObjectMapper
 
 enum LoginUserType {
     case Student
@@ -16,12 +17,17 @@ enum LoginUserType {
 
 class LoginSelectViewController: BaseViewController {
     @IBOutlet weak var viewButtonStack: UIStackView!
-    
+    var arrayUserRoles:[UserRole] = []
     var userType:LoginUserType!
+    var roleStudent:UserRole!
+    var roleProfessor:UserRole!
+    var roleCollege:UserRole!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addDefaultBackGroundImage()
+        self.navigationController?.navigationBar.isHidden = false
+
         self.viewButtonStack.alpha = 0
         self.getRoleList()
     }
@@ -43,6 +49,25 @@ class LoginSelectViewController: BaseViewController {
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         manager.apiGet(apiName: "Get Role for all user", completionHandler: { (response, code) in
             LoadingActivityHUD.hideProgressHUD()
+            let userRoleDict:[Any] = response["roles"] as! [Any]
+            for user in userRoleDict{
+                let userRoleDict:[String:Any] = user as! [String:Any]
+                let userRoleString:String = userRoleDict["role_name"] as! String
+                switch userRoleString{
+                case "Student":
+                    self.roleStudent = Mapper<UserRole>().map(JSONObject: user)!
+                    break
+                case "Professor":
+                    self.roleProfessor = Mapper<UserRole>().map(JSONObject: user)!
+                    break
+                case "College":
+                    self.roleCollege = Mapper<UserRole>().map(JSONObject: user)!
+                    break
+
+                default:
+                    break
+                }
+            }
             
             UIView.animate(withDuration: 0.5, animations: {
                 self.viewButtonStack.alpha = 1
@@ -56,16 +81,19 @@ class LoginSelectViewController: BaseViewController {
 
     @IBAction func loginStudent(_ sender: Any) {
         UserManager.sharedUserManager.setLoginUserType(.Student)
+        UserManager.sharedUserManager.userRole = roleStudent
         self.performSegue(withIdentifier: Constants.segues.toLoginView, sender: self)
     }
     
     @IBAction func loginProfessor(_ sender: Any) {
         UserManager.sharedUserManager.setLoginUserType(.Professor)
+        UserManager.sharedUserManager.userRole = roleProfessor
         self.performSegue(withIdentifier: Constants.segues.toLoginView, sender: self)
     }
 
     @IBAction func loginCollege(_ sender: Any) {
         UserManager.sharedUserManager.setLoginUserType(.College)
+        UserManager.sharedUserManager.userRole = roleCollege
         self.performSegue(withIdentifier: Constants.segues.toLoginView, sender: self)
     }
 
@@ -75,9 +103,6 @@ class LoginSelectViewController: BaseViewController {
             let backItem = UIBarButtonItem()
             backItem.title = "Back"
             navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
-//            if let destinationVC:LoginViewController = segue.destination as? LoginViewController {
-//                destinationVC.usertype = self.userType
-//            }
             
 
         }

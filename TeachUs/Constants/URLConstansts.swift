@@ -20,29 +20,20 @@ public struct URLConstants{
         static let sendOtp = BaseUrl.baseURL + "/login/sendotp"
         static let verifyOtp = BaseUrl.baseURL + "/auth/verifyotp"
         static let userDetails = BaseUrl.baseURL + "/login/user_details"
-    }
-    
-    struct TecacherURL {
-        static let verifyTeacher = BaseUrl.baseURL + "/teacher/verifyTeacher"
-        static let generateOtp = BaseUrl.baseURL + "/teacher/genOtp"
-        static let validateOtp = BaseUrl.baseURL + "/teacher/validateOtp"
-        static let collegeSummary = BaseUrl.baseURL + "/teacher/getCollegeSummary/"
-        static let getEnrolledStudents = BaseUrl.baseURL + "/teacher/getEnrolledStudentList"
-        static let getTopics = BaseUrl.baseURL + "/teacher/getTopics/"
-        static let getSyllabusSummary = BaseUrl.baseURL + "/teacher/getSyllabusSummary/"
+        static let updateUserProfile = BaseUrl.baseURL + "/login/update_user_profile"
     }
     
     struct StudentURL {
-        static let verifyStudent = BaseUrl.baseURL + "/student/verifyStudent"
-        static let generateOtp = BaseUrl.baseURL + "/student/genOtp"
-        static let validateOtp = BaseUrl.baseURL + "/student/validateOtp"
-        static let getAttendence =  BaseUrl.baseURL + "/student/getAttendence/"
-        static let getSyllabusSummary = BaseUrl.baseURL + "/student/getSyllabusSummary/"
-        static let getRatingsSummary = BaseUrl.baseURL + "/student/getRatingsSummary/"
-        static let updateRatings = BaseUrl.baseURL + "/student/updateRatings/"
-
-        
+        static let getClassAttendance = BaseUrl.baseURL + "/attendance/student_class_attendance"
+        static let updateRatings = "TBA"
     }
+    
+    struct ProfessorURL {
+        static let getClassList = BaseUrl.baseURL + "/attendance/classlist"
+        static let getStudentList = BaseUrl.baseURL + "/attendance/studentlist"
+        static let submitAttendance = BaseUrl.baseURL + "/attendance/submit_attendance"
+    }
+    
     
     struct CollegeURL {
         static let getCollegeList = BaseUrl.baseURL + "/college/getCollegeList"

@@ -19,12 +19,13 @@ class LoginView: UIView, UITextFieldDelegate {
     
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var textfieldFirstName: UITextField!
-    @IBOutlet weak var textfieldMiddleName: UITextField!
     @IBOutlet weak var textfieldSurname: UITextField!
     @IBOutlet weak var buttonSubmit: UIButton!
     @IBOutlet weak var viewFirstNameBg: UIView!
-    @IBOutlet weak var viewMiddleNameBg: UIView!
     @IBOutlet weak var viewSurnameBg: UIView!
+    
+    @IBOutlet weak var textFieldEmailId: UITextField!
+    @IBOutlet weak var viewemailIdBg: UIView!
 
     var disposeBag: DisposeBag! = DisposeBag()
     var delegate:LoginDelegate!
@@ -39,6 +40,8 @@ class LoginView: UIView, UITextFieldDelegate {
             name.characters.count > 0 && middleName.characters.count > 0 && surname.characters.count > 0
         }
     }
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -49,10 +52,27 @@ class LoginView: UIView, UITextFieldDelegate {
     
     func setUpReactive()
     {
+        /*
         self.textfieldFirstName.rx.text.map{ $0 ?? ""}.bind(to: self.firstNameText).disposed(by: disposeBag)
         self.textfieldMiddleName.rx.text.map { $0 ?? "" }.bind(to: self.middleNameText).disposed(by: disposeBag)
         self.textfieldSurname.rx.text.map{ $0 ?? ""}.bind(to: self.surnameText).disposed(by: disposeBag)
         self.isvalid.subscribe( onNext:{ isValid in
+            if(isValid){
+                self.buttonSubmit.alpha = 1;
+            }
+            else{
+                self.buttonSubmit.alpha = 0;
+            }
+        }).disposed(by: disposeBag)
+        */
+        
+        let isEmailValid: Observable<Bool> = textFieldEmailId.rx.text
+            .map{ text -> Bool in
+                return self.isValidEmailAddress(emailAddressString: text!)
+            }
+            .share(replay: 1)
+        
+        isEmailValid.subscribe( onNext:{ isValid in
             if(isValid){
                 self.buttonSubmit.alpha = 1;
             }
@@ -76,11 +96,11 @@ class LoginView: UIView, UITextFieldDelegate {
                 break
         }
         self.textfieldFirstName.delegate = self
-        self.textfieldMiddleName.delegate = self
+        self.textFieldEmailId.delegate = self
         self.textfieldSurname.delegate = self
 
         self.viewFirstNameBg.makeEdgesRoundedWith(radius: self.viewFirstNameBg.height()/2)
-        self.viewMiddleNameBg.makeEdgesRoundedWith(radius: self.viewMiddleNameBg.height()/2)
+        self.viewemailIdBg.makeEdgesRoundedWith(radius: self.viewemailIdBg.height()/2)
         self.viewSurnameBg.makeEdgesRoundedWith(radius: self.viewSurnameBg.height()/2)
         self.buttonSubmit.roundedRedButton()
     }
@@ -115,7 +135,7 @@ class LoginView: UIView, UITextFieldDelegate {
     @IBAction func submitUserDetails(_ sender: Any) {
         if(self.delegate != nil){
             UserManager.sharedUserManager.userName = self.textfieldFirstName.text!
-            UserManager.sharedUserManager.userMiddleName = self.textfieldMiddleName.text!
+            UserManager.sharedUserManager.userEmail = self.textFieldEmailId.text!
             UserManager.sharedUserManager.userLastName = self.textfieldSurname.text!
             delegate.submitDetails()
         }
@@ -129,6 +149,31 @@ class LoginView: UIView, UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         self.activeTextFIeld = textField
+    }
+    
+    //MARK:- Validation
+    
+    func isValidEmailAddress(emailAddressString: String) -> Bool {
+        
+        var returnValue = true
+        let emailRegEx = "[A-Z0-9a-z.-_]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,3}"
+        
+        do {
+            let regex = try NSRegularExpression(pattern: emailRegEx)
+            let nsString = emailAddressString as NSString
+            let results = regex.matches(in: emailAddressString, range: NSRange(location: 0, length: nsString.length))
+            
+            if results.count == 0
+            {
+                returnValue = false
+            }
+            
+        } catch let error as NSError {
+            print("invalid regex: \(error.localizedDescription)")
+            returnValue = false
+        }
+        
+        return  returnValue
     }
 
 }

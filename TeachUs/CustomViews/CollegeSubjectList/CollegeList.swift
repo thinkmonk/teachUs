@@ -9,7 +9,7 @@
 import UIKit
 
 protocol CollegeListDelegate {
-    func selectedSubject(_ collegeSubject:CollegeSubjects)
+    func selectedSubject(_ collegeSubject:College)
 }
 
 class CollegeList: UIView {
@@ -34,14 +34,18 @@ class CollegeList: UIView {
         
     }
     
+    func reloadAllData(){
+        self.tableviewCollegeList.reloadData()
+    }
+    
     func setUpTableView(_ dataSource:[College]){
+        self.arrayDataSource.removeAll()
         self.arrayDataSource = dataSource
         let cellNib = UINib(nibName:nibCollegeListCell, bundle: nil)
         self.tableviewCollegeList.register(cellNib, forCellReuseIdentifier: Constants.CustomCellId.ProfessorCollegeList)
 
         self.tableviewCollegeList.delegate = self
         self.tableviewCollegeList.dataSource = self
-        self.tableviewCollegeList.reloadData()
     }
     
     class func instanceFromNib() -> UIView {
@@ -57,7 +61,7 @@ extension CollegeList:UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.arrayDataSource[section].collegeSubjects.count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -65,7 +69,7 @@ extension CollegeList:UITableViewDelegate, UITableViewDataSource{
         if(cell == nil){
             let collegeCell:ProfessorCollegeListTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.ProfessorCollegeList, for: indexPath) as! ProfessorCollegeListTableViewCell
             
-            collegeCell.labelSubjectName.text = self.arrayDataSource[indexPath.section].collegeSubjects[indexPath.row].subjectName
+            collegeCell.labelSubjectName.text = self.arrayDataSource[indexPath.section].subjectName
             collegeCell.selectionStyle = UITableViewCellSelectionStyle.none
             cell = collegeCell
         }
@@ -142,7 +146,7 @@ extension CollegeList:UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if(delegate != nil){
-            delegate.selectedSubject(self.arrayDataSource[indexPath.section].collegeSubjects[indexPath.row])
+            delegate.selectedSubject(self.arrayDataSource[indexPath.section])
         }
     }
 }

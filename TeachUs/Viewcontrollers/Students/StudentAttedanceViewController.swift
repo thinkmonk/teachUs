@@ -35,9 +35,12 @@ class StudentAttedanceViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
     func getAttendance(_ forMonth:Int){
-        let manager = NetworkHandler()
-        
+        /*
         //http://ec2-34-215-84-223.us-west-2.compute.amazonaws.com:8081/teachus/student/getAttendence/Zmlyc3ROYW1lPURldmVuZHJhLG1pZGRsZU5hbWU9QSxsYXN0TmFtZT1GYWRuYXZpcyxyb2xsPVBST0ZFU1NPUixpZD0x?studentId=1
 //        manager.url = URLConstants.StudentURL.getAttendence +
 //            "\(UserManager.sharedUserManager.getAccessToken())" +
@@ -60,6 +63,34 @@ class StudentAttedanceViewController: UIViewController {
             LoadingActivityHUD.hideProgressHUD()
             print(errorMessage)
         }
+         */
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY"
+        let strYear = dateFormatter.string(from: date)
+
+        
+        let manager = NetworkHandler()
+        manager.url = URLConstants.StudentURL.getClassAttendance
+        let parameters = [
+            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+            "year":"\(strYear)",
+            "month":"\(forMonth)"
+        ]
+        
+        manager.apiPost(apiName: " Get user Attendance for month \(forMonth)", parameters:parameters, completionHandler: { (result, code, response) in
+            LoadingActivityHUD.hideProgressHUD()
+            self.arrayDataSource = Mapper<StudentAttendance>().map(JSON: response)
+            self.setUpView()
+            self.tableViewStudentAttendance.reloadData()
+            self.showTableView()
+
+            
+        }) { (error, code, message) in
+            print(message)
+            LoadingActivityHUD.hideProgressHUD()
+        }
+        
     }
     
     

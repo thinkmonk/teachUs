@@ -8,7 +8,7 @@ target 'TeachUs' do
     pod 'RxSwift',    '~> 4.0'
     pod 'RxCocoa',    '~> 4.0'
     pod 'AlamofireObjectMapper', '~> 5.0'
-
+    pod 'AlamofireImage', '~> 3.3'
 
   # Pods for TeachUs
 

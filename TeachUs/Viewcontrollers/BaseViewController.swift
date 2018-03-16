@@ -40,6 +40,7 @@ class BaseViewController: UIViewController {
         let color1 = UIColor(red: 116/255, green: 104/255, blue: 218/255, alpha: 1.0)
         let color2 = UIColor(red: 126/255, green: 74/255, blue: 187/255, alpha: 1.0)
         gradient.colors = [color1.cgColor, color2.cgColor]
+        UIApplication.shared.windows.last?.layer.addSublayer(gradient)
         self.view.layer.addSublayer(gradient)
     }
     
@@ -59,6 +60,7 @@ class BaseViewController: UIViewController {
         let color1 = UIColor(red: 116/255, green: 104/255, blue: 218/255, alpha: 1.0)
         let color2 = UIColor(red: 126/255, green: 74/255, blue: 187/255, alpha: 1.0)
         gradient.colors = [color1.cgColor, color2.cgColor]
+//        UIApplication.shared.windows.last?.layer.addSublayer(gradient)
         self.view.layer.addSublayer(gradient)
 
     }
@@ -78,6 +80,27 @@ class BaseViewController: UIViewController {
 
     }
     
+    func showAlterWithTitle(_ title:String, alertMessage:String){
+        let alert = UIAlertController(title: title, message: alertMessage, preferredStyle: UIAlertControllerStyle.alert)
+        
+        // add an action (button)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
+    }
     
+    func getAndSaveUserToDb(){
+        let manager = NetworkHandler()
+        manager.url = URLConstants.Login.userDetails
+        manager.apiPost(apiName: "Get User Details", parameters: [:], completionHandler: { (result, code, response) in
+            LoadingActivityHUD.hideProgressHUD()
+            UserManager.sharedUserManager.saveUserDetailsToDb(response)
+            NotificationCenter.default.post(name: .notificationLoginSuccess, object: nil)
+        }) { (error, code, message) in
+            LoadingActivityHUD.hideProgressHUD()
+            print(message)
+        }
+    }
 
 }
