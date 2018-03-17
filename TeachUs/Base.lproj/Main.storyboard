@@ -66,7 +66,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-138.75" y="723.59154929577471"/>
+            <point key="canvasLocation" x="-1313" y="558"/>
         </scene>
         <!--Side Menu Container View Controller-->
         <scene sceneID="PYK-Dj-WBU">
@@ -96,7 +96,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Sz-DN-ibU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="712.5" y="723.59154929577471"/>
+            <point key="canvasLocation" x="-461" y="558"/>
         </scene>
         <!--Left Menu View Controller-->
         <scene sceneID="Kvp-ji-U5b">
@@ -211,7 +211,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aIe-zO-Qza" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1417.5" y="723.59154929577471"/>
+            <point key="canvasLocation" x="244" y="558"/>
         </scene>
         <!--Edit Profile Picture View Controller-->
         <scene sceneID="Xg7-TF-Pbj">
@@ -310,7 +310,7 @@ Form Library</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oHN-Yc-U2D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2193.75" y="724.64788732394368"/>
+            <point key="canvasLocation" x="1020" y="559"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="Vd5-YR-gUR">
@@ -353,17 +353,34 @@ Form Library</string>
                     <view key="view" contentMode="scaleToFill" id="LBx-hE-VyU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="44" sectionFooterHeight="44" translatesAutoresizingMaskIntoConstraints="NO" id="XWp-cD-bd7">
+                                <rect key="frame" x="15" y="64" width="290" height="504"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="290" id="fIL-66-Goq"/>
+                                    <constraint firstAttribute="height" constant="504" id="fWq-ke-wu9"/>
+                                </constraints>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="XWp-cD-bd7" firstAttribute="leading" secondItem="kcg-bw-I0p" secondAttribute="leading" constant="15" id="OC7-PP-nbC"/>
+                            <constraint firstAttribute="trailing" secondItem="XWp-cD-bd7" secondAttribute="trailing" constant="15" id="hEn-eN-Wla"/>
+                            <constraint firstItem="XWp-cD-bd7" firstAttribute="top" secondItem="kcg-bw-I0p" secondAttribute="top" id="vs5-ub-Ock"/>
+                            <constraint firstItem="kcg-bw-I0p" firstAttribute="bottom" secondItem="XWp-cD-bd7" secondAttribute="bottom" id="yQx-od-wTx"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="kcg-bw-I0p"/>
                     </view>
                     <navigationItem key="navigationItem" id="2ya-P9-nWy"/>
                     <connections>
+                        <outlet property="tableviewCollegeList" destination="XWp-cD-bd7" id="i2G-S0-6gj"/>
                         <segue destination="J2l-lX-T3q" kind="show" identifier="markAttendance" id="8yM-mU-V7a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uCl-hU-uNv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3493" y="44"/>
+            <point key="canvasLocation" x="3549.375" y="43.309859154929576"/>
         </scene>
         <!--Students List View Controller-->
         <scene sceneID="08M-2Z-7A0">
@@ -530,7 +547,7 @@ Form Library</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zJV-Ud-Jir" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4005" y="805.9859154929577"/>
+            <point key="canvasLocation" x="3608" y="798"/>
         </scene>
         <!--Professor Logs List View Controller-->
         <scene sceneID="cHg-x8-Spl">
@@ -828,7 +845,7 @@ Form Library</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ump-qs-4Wt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1676" y="724"/>
+            <point key="canvasLocation" x="-2850" y="558"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="lIh-9L-ivr">
@@ -846,7 +863,7 @@ Form Library</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dqe-lh-pec" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-926" y="725"/>
+            <point key="canvasLocation" x="-2100" y="559"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="RGm-CL-who">
@@ -882,7 +899,7 @@ Form Library</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NgW-S0-edY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3183.75" y="805.9859154929577"/>
+            <point key="canvasLocation" x="2786" y="798"/>
         </scene>
         <!--Syllabus Details View Controller-->
         <scene sceneID="6Pu-FW-571">
@@ -934,7 +951,7 @@ Form Library</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bbe-Kt-btd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4741.875" y="805.9859154929577"/>
+            <point key="canvasLocation" x="4344" y="798"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="adN-y3-fh9">
@@ -988,7 +1005,7 @@ Form Library</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tca-an-aJl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2498" y="724"/>
+            <point key="canvasLocation" x="-3673" y="558"/>
         </scene>
     </scenes>
     <resources>

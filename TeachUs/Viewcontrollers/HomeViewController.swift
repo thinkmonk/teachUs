@@ -82,11 +82,14 @@ class HomeViewController: BaseViewController {
         case .Professor:
             controllersArray.removeAll()
             let professorAttendanceVC = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorAttendance) as! ProfessorAttedanceViewController
+            _ = professorAttendanceVC.view // dummy variable(it will be never used): to load viewController.view & it automatically calls viewController.viewDidLoad()
             professorAttendanceVC.title = "Attendance"
             professorAttendanceVC.parentNavigationController = self.navigationController
             controllersArray.append(professorAttendanceVC)
             
             let professorSyllabusStatusVC = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorSyllabusStatus) as! SyllabusStatusListViewController
+            _ = professorSyllabusStatusVC.view // dummy variable(it will be never used): to load viewController.view & it automatically calls viewController.viewDidLoad()
+
             professorSyllabusStatusVC.title = "Syllabus Status"
             professorSyllabusStatusVC.parentNavigationController = self.navigationController
             professorSyllabusStatusVC.userType = .Professor
@@ -94,6 +97,8 @@ class HomeViewController: BaseViewController {
             //controllersArray.append(professorSyllabusStatusVC)
             
             let professorLogsListVC = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorLogs) as! ProfessorLogsListViewController
+            _ = professorLogsListVC.view // dummy variable(it will be never used): to load viewController.view & it automatically calls viewController.viewDidLoad()
+
             professorLogsListVC.title = "Logs"
             professorLogsListVC.parentNavigationController = self.navigationController
 
@@ -104,17 +109,23 @@ class HomeViewController: BaseViewController {
         case .Student:
             controllersArray.removeAll()
             let attendanceVC: StudentAttedanceViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.studentAttendace) as! StudentAttedanceViewController
+            _ = attendanceVC.view // dummy variable(it will be never used): to load viewController.view & it automatically calls viewController.viewDidLoad()
+
             attendanceVC.title = "Attendance"
             attendanceVC.parentNavigationController = self.navigationController
             controllersArray.append(attendanceVC)
             
             let syllabusStatusVC:SyllabusStatusListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorSyllabusStatus) as! SyllabusStatusListViewController
+            _ = syllabusStatusVC.view // dummy variable(it will be never used): to load viewController.view & it automatically calls viewController.viewDidLoad()
             syllabusStatusVC.title = "Syllabus Status"
+            
             syllabusStatusVC.parentNavigationController = self.navigationController
             syllabusStatusVC.userType = .Student
             //controllersArray.append(syllabusStatusVC)
 
             let professorRating:TeachersRatingViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorRating) as! TeachersRatingViewController
+            _ = professorRating.view // dummy variable(it will be never used): to load viewController.view & it automatically calls viewController.viewDidLoad()
+
             professorRating.title = "Rating"
             professorRating.parentNavigationController = self.navigationController
 

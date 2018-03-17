@@ -22,7 +22,7 @@ class ProfessorLogsListViewController: UIViewController {
         let cellNib = UINib(nibName:nibCollegeListCell, bundle: nil)
         self.tableviewLogs.register(cellNib, forCellReuseIdentifier: Constants.CustomCellId.ProfessorCollegeList)
 
-        self.getLogs()
+        //self.getLogs()
         // Do any additional setup after loading the view.
     }
 

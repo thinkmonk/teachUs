@@ -21,7 +21,7 @@ class SyllabusStatusListViewController: UIViewController {
         print("SyllabusStatusListViewController")
         self.view.backgroundColor = UIColor.clear
         self.tableViewSyllabus.register(UINib(nibName: "SyllabusStatusTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.SyllabusStatusTableViewCellId)
-        self.getSyllabus()
+        //self.getSyllabus()
         self.tableViewSyllabus.alpha = 0
         self.tableViewSyllabus.estimatedRowHeight = 44.0
         self.tableViewSyllabus.rowHeight = UITableViewAutomaticDimension

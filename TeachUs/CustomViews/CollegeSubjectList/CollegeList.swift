@@ -75,35 +75,7 @@ extension CollegeList:UITableViewDelegate, UITableViewDataSource{
         }
         return cell
     }
-    /*
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return self.arrayDataSource[section].name
-    }
-    */
-    /*
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: tableView.sectionHeaderHeight))
-        
-        let labelTitle = UILabel(frame: CGRect(x: 15.0, y: headerView.height()/2, width: headerView.width()-15, height: 15))
-        labelTitle.center.y = headerView.centerY()
-        labelTitle.textAlignment = .left
-        labelTitle.textColor = UIColor.white
-        labelTitle.text = self.arrayDataSource[section].name
-        labelTitle.font = UIFont.systemFont(ofSize: 14.0)
-        labelTitle.numberOfLines = 0
-        labelTitle.preferredMaxLayoutWidth = headerView.width() - 20
-        labelTitle.lineBreakMode = .byCharWrapping
-        headerView.addSubview(labelTitle)
-        
-        headerView.backgroundColor = UIColor.rgbColor(52, 40, 70)
-        
-        return headerView
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 55.0
-    }
- */
+
     
      func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         //Need to create a label with the text we want in order to figure out height

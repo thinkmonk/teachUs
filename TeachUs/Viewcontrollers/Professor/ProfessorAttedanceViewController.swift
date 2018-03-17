@@ -13,50 +13,35 @@ class ProfessorAttedanceViewController: BaseViewController {
 
     var parentNavigationController : UINavigationController?
     var arrayCollegeList:[College]? = []
-    var viewCollegeList:CollegeList!
+//    var viewCollegeList:CollegeList!
+    
+    @IBOutlet weak var tableviewCollegeList: UITableView!
+    let nibCollegeListCell = "ProfessorCollegeListTableViewCell"
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("ProfessorAttedanceViewController")
         self.view.backgroundColor = UIColor.clear
-        getCollegeSummaryForProfessor()
-        // Do any additional setup after loading the view.
+    
+        tableviewCollegeList.delegate = self
+        tableviewCollegeList.dataSource = self
+        let cellNib = UINib(nibName:nibCollegeListCell, bundle: nil)
+        self.tableviewCollegeList.register(cellNib, forCellReuseIdentifier: Constants.CustomCellId.ProfessorCollegeList)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getCollegeSummaryForProfessor()
 
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func getCollegeSummaryForProfessor(){
-        if(viewCollegeList != nil){
-            viewCollegeList.removeFromSuperview()
-        }
-        /*
-        //"http://ec2-34-215-84-223.us-west-2.compute.amazonaws.com:8081/teachus/teacher/getCollegeSummary/Zmlyc3ROYW1lPURldmVuZHJhLG1pZGRsZU5hbWU9QSxsYXN0TmFtZT1GYWRuYXZpcyxyb2xsPVBST0ZFU1NPUixpZD0x?professorId=1"
-        
-        manager.url = URLConstants.TecacherURL.collegeSummary +
-            "\(UserManager.sharedUserManager.getAccessToken())" +
-            "?professorId=\(UserManager.sharedUserManager.getUserId())"
- 
-        
-        manager.url = URLConstants.BaseUrl.baseURL + UserManager.sharedUserManager.userTeacher.attendanceUrl!
-        manager.apiGet(apiName: "Get College Summary for professor", completionHandler: { (response, code) in
-            LoadingActivityHUD.hideProgressHUD()
-            guard let colleges = response["college"] as? [[String:Any]] else{
-                return
-            }
-         
-            for college in colleges{
-                let tempCollege = Mapper<College>().map(JSONObject: college)
-                self.arrayCollegeList?.append(tempCollege!)
-            }
-            self.makeCollegesTableView()
-        }) { (error, code, errorMessage) in
-            LoadingActivityHUD.hideProgressHUD()
-            print(errorMessage)
-        }
-  */
+        self.tableviewCollegeList.alpha = 0
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()
         manager.url = URLConstants.ProfessorURL.getClassList
@@ -66,15 +51,18 @@ class ProfessorAttedanceViewController: BaseViewController {
         
         manager.apiPost(apiName: " Get Professor Class list", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
+            self.arrayCollegeList?.removeAll()
             guard let colleges = response["class_list"] as? [[String:Any]] else{
                 return
             }
-            self.arrayCollegeList?.removeAll()
             for college in colleges{
                 let tempCollege = Mapper<College>().map(JSONObject: college)
                 self.arrayCollegeList?.append(tempCollege!)
             }
-            self.makeCollegesTableView()
+            UIView.animate(withDuration: 1.0, animations: {
+                self.tableviewCollegeList.alpha = 1
+            })
+            self.tableviewCollegeList.reloadData()
 
             
         }) { (error, code, message) in
@@ -82,31 +70,84 @@ class ProfessorAttedanceViewController: BaseViewController {
             LoadingActivityHUD.hideProgressHUD()
         }
 
-    }
-    
-    
-    func makeCollegesTableView(){
-        if(viewCollegeList == nil){
-            viewCollegeList = CollegeList.instanceFromNib() as! CollegeList
-        }
-        viewCollegeList.setUpTableView(arrayCollegeList!)
-        viewCollegeList.delegate = self
-        viewCollegeList.showView(self.view)
-        viewCollegeList.reloadAllData()
 
+    }
+    func selectedSubject(_ subject: College) {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
+        let destinationVC:StudentsListViewController =  storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.studentList) as! StudentsListViewController
+        // destinationVC.subject = subject
+        
+        //self.parentNavigationController?.pushViewController(destinationVC, animated: true)
     }
 }
 
-extension ProfessorAttedanceViewController:CollegeListDelegate{
-    
-    func selectedSubject(_ subject: College) {
-            let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-
-            let destinationVC:StudentsListViewController =  storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.studentList) as! StudentsListViewController
-           // destinationVC.subject = subject
-            
-            //self.parentNavigationController?.pushViewController(destinationVC, animated: true)
+extension ProfessorAttedanceViewController:UITableViewDataSource, UITableViewDelegate{
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.arrayCollegeList!.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell:UITableViewCell!
+        if(cell == nil){
+            let collegeCell:ProfessorCollegeListTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.ProfessorCollegeList, for: indexPath) as! ProfessorCollegeListTableViewCell
+            
+            collegeCell.labelSubjectName.text = self.arrayCollegeList![indexPath.row].subjectName
+            collegeCell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell = collegeCell
+        }
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 44.0
+    }
+    /*
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        //Need to create a label with the text we want in order to figure out height
+        let label: UILabel = createHeaderLabel(section)
+        let size = label.sizeThatFits(CGSize(width: tableView.width(), height: CGFloat.greatestFiniteMagnitude))
+        let padding: CGFloat = 20.0
+        return size.height + padding
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UITableViewHeaderFooterView()
+        let bgView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 30))
+        bgView.backgroundColor = UIColor.rgbColor(52, 40, 70)
+        headerView.backgroundView = bgView
+        let label = createHeaderLabel(section)
+        label.autoresizingMask = [.flexibleHeight]
+        //        label.backgroundColor = UIColor.rgbColor(52, 40, 70)
+        //        headerView.backgroundColor = UIColor.rgbColor(52, 40, 70)
+        
+        headerView.addSubview(label)
+        
+        return headerView
+    }
+    
+    func createHeaderLabel(_ section: Int)->UILabel {
+        let widthPadding: CGFloat = 15.0
+        let label: UILabel = UILabel(frame: CGRect(x: widthPadding, y: 0, width: tableviewCollegeList.width() - widthPadding, height: 0))
+        label.text = self.arrayCollegeList![].name// Your text here
+        label.numberOfLines = 0;
+        label.textAlignment = NSTextAlignment.left
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        label.textColor = UIColor.white
+        label.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline) //use your own font here - this font is for accessibility
+        return label
+    }
+ */
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 44.0
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.selectedSubject(self.arrayCollegeList![indexPath.row])
+    }
 }
