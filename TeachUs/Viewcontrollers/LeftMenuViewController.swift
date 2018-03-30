@@ -33,24 +33,17 @@ class LeftMenuViewController: UIViewController, UIGestureRecognizerDelegate {
 //    var professorDataSource = ["Attendance", "Syllabus Status", "Logs", "Logout"]
     var professorDataSource = ["Attendance", "Logout"]
 
-    var collegeDataSource = ["Logout"]
+    var collegeDataSource = ["Attendance","Logout"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.updateUserDetails()
+        
         tableViewMenu.delegate = self
         tableViewMenu.dataSource = self
         buttonDropDown.alpha=0
-        self.labelProfile.text = "\(UserManager.sharedUserManager.appUserCollegeDetails.college_name!)"
-        self.labelName.text = "\(UserManager.sharedUserManager.appUserDetails.firstName!)"
-        self.labelRole.text = "\(UserManager.sharedUserManager.appUserCollegeDetails.role_name!)"
-        Alamofire.request(UserManager.sharedUserManager.appUserDetails.profilePicUrl!).responseImage { response in
-            if let image = response.result.value {
-                print("image downloaded: \(image)")
-                self.buttonProfile.setImage(image, for: UIControlState.normal)
-            }
-        }
-        
-        
+
         let tap = UITapGestureRecognizer(target: self, action: #selector(LeftMenuViewController.showProfileDropDown))
         self.labelProfile.isUserInteractionEnabled = true
         self.labelProfile.addGestureRecognizer(tap)
@@ -65,6 +58,7 @@ class LeftMenuViewController: UIViewController, UIGestureRecognizerDelegate {
         if(UserManager.sharedUserManager.appUserCollegeArray.count > 1){
             buttonDropDown.alpha=1
             setupDropdown()
+
         }
         
         switch UserManager.sharedUserManager.user! {
@@ -85,7 +79,16 @@ class LeftMenuViewController: UIViewController, UIGestureRecognizerDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-        
+    
+    func getAndSetUserImage(){
+        Alamofire.request(UserManager.sharedUserManager.appUserDetails.profilePicUrl!).responseImage { response in
+            if let image = response.result.value {
+                print("image downloaded: \(image)")
+                self.buttonProfile.setImage(image, for: UIControlState.normal)
+            }
+        }
+    }
+    
     func setupDropdown(){
         self.userProfilesDropdown.anchorView = self.labelProfile
         self.userProfilesDropdown.bottomOffset = CGPoint(x: 0, y: userProfilesDropdown.height())
@@ -96,19 +99,45 @@ class LeftMenuViewController: UIViewController, UIGestureRecognizerDelegate {
         self.userProfilesDropdown.selectionAction = { [unowned self] (index, item) in
             print(item)
             UserManager.sharedUserManager.appUserCollegeDetails = UserManager.sharedUserManager.appUserCollegeArray[index]
+            self.updateUserDetails()
             let indexPath = IndexPath(row: 0, section: 0)
             self.tableViewMenu.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
             self.tableViewMenu.delegate?.tableView!(self.tableViewMenu, didSelectRowAt: indexPath)
+
         }
         DropDown.appearance().backgroundColor = UIColor.white
 
+    }
+    
+    
+    //WHEN USER CHANGES THE PROFILE from DropDown
+    func updateUserDetails(){
+        if(UserManager.sharedUserManager.appUserCollegeDetails.role_id == "3")
+        {
+            let collegeImage = UIImage(named: Constants.Images.collegeDefault)
+            self.buttonProfile.setImage(collegeImage, for: .normal)
+            self.labelName.text = "College"
+        }
+        else{
+            self.labelProfile.text = "\(UserManager.sharedUserManager.appUserCollegeDetails.college_name!)"
+            self.labelName.text = "\(UserManager.sharedUserManager.appUserDetails.firstName!)"
+            self.labelRole.text = "\(UserManager.sharedUserManager.appUserCollegeDetails.role_name!)"
+            self.getAndSetUserImage()
+        }
+        UserManager.sharedUserManager.setUserBasedOnRole()
     }
     
     @IBAction func showProfileDropDown(_ sender: Any) {
         self.userProfilesDropdown.show()
     }
     
-
+    @IBAction  func showModal() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let modalViewController:EditProfilePictureViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.EditProfilePictureViewControllerId) as! EditProfilePictureViewController
+        modalViewController.delegate = self
+        modalViewController.modalPresentationStyle = .overCurrentContext
+        present(modalViewController, animated: true, completion: nil)
+    }    
 }
 
 extension LeftMenuViewController:UITableViewDelegate, UITableViewDataSource{
@@ -138,5 +167,11 @@ extension LeftMenuViewController:UITableViewDelegate, UITableViewDataSource{
         if(delegate != nil){
             delegate.menuItemSelected(item: indexPath.row)
         }
+    }
+}
+
+extension LeftMenuViewController:editProfileDelegate{
+    func profileEdited() {
+        self.getAndSetUserImage()
     }
 }

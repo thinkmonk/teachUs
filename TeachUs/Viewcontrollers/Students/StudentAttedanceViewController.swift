@@ -8,6 +8,7 @@
 
 import UIKit
 import ObjectMapper
+import XLPagerTabStrip
 
 class StudentAttedanceViewController: UIViewController {
     var parentNavigationController : UINavigationController?
@@ -179,6 +180,10 @@ extension StudentAttedanceViewController:UITableViewDelegate, UITableViewDataSou
         cell.selectionStyle = .none
         return cell
     }
-    
-    
+}
+
+extension StudentAttedanceViewController:IndicatorInfoProvider{
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "Attendance")
+    }
 }

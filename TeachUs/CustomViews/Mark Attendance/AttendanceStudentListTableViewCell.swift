@@ -42,9 +42,8 @@ class AttendanceStudentListTableViewCell: UITableViewCell {
             self.buttonAttendance.setTitle("Absent", for: .normal)
             self.buttonAttendance.backgroundColor = UIColor.rgbColor(126, 132, 155)
             self.buttonAttendance.setTitleColor(UIColor.white, for: .normal)
-
-
         }
+        self.imageViewProfile.makeViewCircular()
     }
     
 

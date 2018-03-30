@@ -4,47 +4,10 @@
         <attribute name="college_code" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="college_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="college_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isCurrentProile" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="privilege" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="role_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="role_name" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
-    <entity name="Student" representedClassName="Student" syncable="YES">
-        <attribute name="attendanceUrl" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="collegeId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="collegeName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="isCurrentUser" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="ratingsUrl" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="role" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="sllyabusStatusUrl" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="studentId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="studentLastName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="studentName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="uploadProfilePicUrl" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
-    <entity name="SuperAdmin" representedClassName="SuperAdmin" syncable="YES">
-        <attribute name="adminListUrl" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="classAttendanceUrl" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="classSyllabusUrl" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="collegeId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="collegeName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="courseRatingsUrl" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="eventAttendanceUrl" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="isCurrentUser" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="role" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
-    <entity name="Teacher" representedClassName="Teacher" syncable="YES">
-        <attribute name="attendanceUrl" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="collegeId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="collegeName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="isCurrentUser" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="logsUrl" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="professorId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="professorLastName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="professorName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="role" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="syllabusStatusUrl" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="uploadProfilePicUrl" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="UserDetails" representedClassName="UserDetails" syncable="YES">
         <attribute name="contact" optional="YES" attributeType="String" syncable="YES"/>
@@ -56,10 +19,7 @@
         <relationship name="college" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CollegeDetails" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CollegeDetails" positionX="-54" positionY="108" width="128" height="135"/>
-        <element name="Student" positionX="-54" positionY="72" width="128" height="210"/>
-        <element name="SuperAdmin" positionX="-54" positionY="99" width="128" height="180"/>
-        <element name="Teacher" positionX="-54" positionY="-9" width="128" height="225"/>
+        <element name="CollegeDetails" positionX="-54" positionY="108" width="128" height="150"/>
         <element name="UserDetails" positionX="-63" positionY="-18" width="128" height="150"/>
     </elements>
 </model>

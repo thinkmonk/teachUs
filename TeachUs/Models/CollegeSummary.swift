@@ -80,29 +80,3 @@ public class College:Mappable{
  },
  */
 
-public class CollegeSubjects:Mappable{
-    
-    var classId:Int?
-    var year:String?
-    var semester:String?
-    var courseCode:String?
-    var subjectId:String?
-    var subjectName:String?
-    var section:String?
-    var enrolledStudentListUrl:String?
-    
-    required public init?(map: Map) {
-    }
-    
-    public func mapping(map: Map) {
-        self.subjectName <- map["subjectName"]
-        self.classId <- map["classId"]
-        self.semester <- map["semester"]
-        self.year <- map["year"]
-        self.courseCode <- map["courseCode"]
-        self.subjectId <- map["subjectId"]
-        self.section <- map["secion"]
-        self.enrolledStudentListUrl <- map["enrolledStudentListUrl"]
-    }
-    
-}

@@ -13,7 +13,7 @@ import RxSwift
 
 class StudentsListViewController: BaseViewController {
 
-    var subject:CollegeSubjects!
+    var subject:College!
     var arrayStudentsDetails:[EnrolledStudentDetail] = []
     var arrayDataSource:[AttendanceDatasource] = []
     var defaultAttendanceForAllStudents:Bool = true
@@ -67,6 +67,7 @@ class StudentsListViewController: BaseViewController {
     
     
     func getEnrolledStudentsList(){
+        /*
         let manager = NetworkHandler()
         //"http://ec2-34-215-84-223.us-west-2.compute.amazonaws.com:8081/teachus/teacher/getEnrolledStudentList/Zmlyc3ROYW1lPURldmVuZHJhLG1pZGRsZU5hbWU9QSxsYXN0TmFtZT1GYWRuYXZpcyxyb2xsPVBST0ZFU1NPUixpZD0x?professorId=1&subjectId=1"
         
@@ -90,7 +91,34 @@ class StudentsListViewController: BaseViewController {
             LoadingActivityHUD.hideProgressHUD()
             print(errorMessage)
         }
+ */
+        let manager = NetworkHandler()
+        manager.url = URLConstants.ProfessorURL.getStudentList
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        let parameters = [
+            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+            "class_id":"\(self.subject.classId!)",
+            "subject_id":"\(self.subject.subjectId!)"
+        ]
+        manager.apiPost(apiName: "Get student list", parameters:parameters, completionHandler: { (result, code, response) in
+            LoadingActivityHUD.hideProgressHUD()
+            if(code == 200){
+                
+                let studentDetailArray = response["student_list"] as! [[String:Any]]
+                for student in studentDetailArray{
+                    let studentDetail = Mapper<EnrolledStudentDetail>().map(JSON: student)
+                    self.arrayStudentsDetails.append(studentDetail!)
+                }
+                if(self.arrayStudentsDetails.count > 0){
+                    self.setUpTableView()
+                }
+            }
+        }) { (error, code, errorMessage) in
+            LoadingActivityHUD.hideProgressHUD()
+            print(errorMessage)
+        }
     }
+ 
     
     func setUpTableView(){
         print("Yoo")
@@ -242,12 +270,12 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
             let cell : AttendanceStudentListTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.AttendanceStudentListTableViewCellId, for: indexPath) as! AttendanceStudentListTableViewCell
             let object:MarkStudentAttendance = cellDataSource.attachedObject! as! MarkStudentAttendance
             cell.labelName.text = object.student?.studentName
-            cell.labelRollNumber.text = "\(object.student?.studentRollNo! ?? 0)"
-            cell.labelAttendanceCount.text = "\(object.student?.totalLecture! ?? 0)"
-            cell.labelAttendancePercent.text = "\(object.student?.percentage! ?? 0) %"
-            cell.labelLastLectureAttendance.text = object.student?.lastLecture != nil ? object.student?.lastLecture! : "NIL"
+            cell.labelRollNumber.text = "\(object.student?.studentRollNo! ?? "NA")"
+            cell.labelAttendanceCount.text = "\(object.student?.totalLecture! ?? "NA")"
+            cell.labelAttendancePercent.text = "\(object.student?.percentage! ?? "NA") %"
+            cell.labelLastLectureAttendance.text = object.student?.lastLectureAttendance != nil ? object.student?.lastLectureAttendance! : "NIL"
             cell.clipsToBounds = true
-            
+            cell.imageViewProfile.imageFromServerURL(urlString: (object.student?.imageUrl!)!, defaultImage: Constants.Images.studentDefault)
             
             //TODO:  -3 is for previous sections (calender, default selection, attendance count ) <- IMPORTANT
             
@@ -325,7 +353,7 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.width(), height: 22))
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.width(), height: 0))
         headerView.backgroundColor = UIColor.clear
         
         return headerView
@@ -348,8 +376,8 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
             datePicker.setUpPicker(type: .date)
             datePicker.buttonOk.addTarget(self, action: #selector(StudentsListViewController.dismissDatePicker), for: .touchUpInside)
             
-            datePicker.picker.minimumDate = NSCalendar.current.date(byAdding: .month, value: -6, to: Date())
-            datePicker.picker.maximumDate = NSCalendar.current.date(byAdding: .day, value: 1, to: Date())
+            datePicker.picker.minimumDate = NSCalendar.current.date(byAdding: .month, value: 0, to: Date())
+            datePicker.picker.maximumDate = NSCalendar.current.date(byAdding: .month, value: 6, to: Date())
 
         }
     }
@@ -487,7 +515,51 @@ extension StudentsListViewController:UIScrollViewDelegate{
 
 extension StudentsListViewController:ViewConfirmAttendanceDelegate{
     func confirmAttendance() {
+        /*
         self.performSegue(withIdentifier: Constants.segues.markPortionCompleted, sender: self)
+ */
+        let manager = NetworkHandler()
+        manager.url = URLConstants.ProfessorURL.submitAttendance
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        let parameters = [
+            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+            "class_id":"\(self.subject.classId!)",
+            "course_id":"\(self.subject.courseId!)",
+            "subject_id":"\(self.subject.subjectId!)",
+            "topics_covered":"1",
+            "no_of_lecture":"\(self.numberPicker.selectedValue.value)",
+            "lecture_date":"\(datePicker.postJsonDateString)",
+            "from_time":"\(fromTimePicker.postJsonTimeString)",
+            "to_time":"\(toTimePicker.postJsonTimeString)",
+            "attendance_list":"\(AttendanceManager.sharedAttendanceManager.attendanceList)"
+        ]
+        
+        manager.apiPost(apiName: "Mark student attendance", parameters:parameters, completionHandler: { (result, code, response) in
+            LoadingActivityHUD.hideProgressHUD()
+            if(code == 200){
+                
+                let alert = UIAlertController(title: nil, message: response["message"] as? String, preferredStyle: UIAlertControllerStyle.alert)
+                
+                // add an action (button)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { _ in
+                    for controller in self.navigationController!.viewControllers as Array {
+                        if controller.isKind(of: HomeViewController.self) {
+                            self.navigationController!.popToViewController(controller, animated: true)
+                            break
+                        }
+                    }
+                }))
+                
+                // show the alert
+                self.present(alert, animated: true, completion:nil)
+
+            }
+        }) { (error, code, errorMessage) in
+            LoadingActivityHUD.hideProgressHUD()
+            print(errorMessage)
+        }
+
+        
     }
     
     

@@ -9,6 +9,13 @@
 import UIKit
 import Photos
 import AVFoundation
+import MobileCoreServices
+
+
+protocol editProfileDelegate {
+   func  profileEdited()
+}
+
 
 class EditProfilePictureViewController: BaseViewController{
     @IBOutlet weak var imageViewProfilePic: UIImageView!
@@ -16,18 +23,20 @@ class EditProfilePictureViewController: BaseViewController{
     @IBOutlet weak var buttonSelectPhotoFromGallery: UIButton!
     @IBOutlet weak var buttonSelectPhotoFromCamera: UIButton!
     let picker = UIImagePickerController()
+    var delegate:editProfileDelegate?
     var profileImageUrl:String = UserManager.sharedUserManager.appUserDetails.profilePicUrl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.imageViewProfilePic.imageFromServerURL(urlString: profileImageUrl, defaultImage: Constants.Images.defaultProfessor)
         self.buttonUploadProfilePic.alpha = 0
         picker.delegate = self
 
         view.backgroundColor = UIColor.clear
         view.isOpaque = false
         self.buttonUploadProfilePic.makeEdgesRounded()
+        self.imageViewProfilePic.imageFromServerURL(urlString: profileImageUrl, defaultImage: Constants.Images.defaultProfessor)
+
         // Do any additional setup after loading the view.
     }
 
@@ -35,26 +44,48 @@ class EditProfilePictureViewController: BaseViewController{
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
 
     @IBAction func photofromLibrary(_ sender: Any) {
-        let authStatus = checkPhotoLibraryAuthorisation()
-        if(authStatus){
+//        let authStatus = checkPhotoLibraryAuthorisation()
+//        if(authStatus){
+//            //        self.present(picker, animated: true, completion: nil)
+//        }
+//        else{
+//
+//        }
+//        
+        
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
             picker.allowsEditing = false
             picker.sourceType = .photoLibrary
-            picker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
-            
+            picker.mediaTypes = [kUTTypeImage as String]
             self.present(picker, animated: true, completion: nil)
-            //        self.present(picker, animated: true, completion: nil)
         }
         else{
             self.showAlterWithTitle("Oops!", alertMessage: "Photo Library Access Not Provided")
 
         }
+        
     }
     
     @IBAction func takePhoto(_ sender: Any) {
-        let authStatus = checkCameraAuthorisation()
-        if(authStatus){
+//        let authStatus = checkCameraAuthorisation()
+//        if(authStatus){
+//            picker.allowsEditing = false
+//            picker.sourceType = UIImagePickerControllerSourceType.camera
+//            picker.cameraCaptureMode = .photo
+//            picker.modalPresentationStyle = .fullScreen
+//            self.present(picker, animated: true, completion: nil)
+//        }
+//        else{
+//            self.showAlterWithTitle("Oops!", alertMessage: "Camera Access Not Provided")
+//        }
+        
+        if UIImagePickerController.isSourceTypeAvailable(.camera){
             picker.allowsEditing = false
             picker.sourceType = UIImagePickerControllerSourceType.camera
             picker.cameraCaptureMode = .photo
@@ -63,7 +94,11 @@ class EditProfilePictureViewController: BaseViewController{
         }
         else{
             self.showAlterWithTitle("Oops!", alertMessage: "Camera Access Not Provided")
+
         }
+        
+        
+        
     }
     
     
@@ -79,10 +114,22 @@ class EditProfilePictureViewController: BaseViewController{
         let imageSizeKB = profileImage?.getSizeInKb()
         print("size of image in KB: %f ", Double(imageSizeKB!))
         if(imageSizeKB! >= 500.0){
-           profileImage = profileImage!.compressImagge()
+            do {
+                try self.imageViewProfilePic.image?.compressImage(400, completion: { (image, compressRatio) in
+                    print(image.size)
+//                    profileIm = UIImageJPEGRepresentation(image, compressRatio)
+//                    base64data = imageData?.base64EncodedString()
+                    profileImage = image
+                })
+            } catch {
+                print("Error")
+            }
+//           profileImage = profileImage!.compressImagge()
             print("compressed image size = \(profileImage?.getSizeInKb() ?? 0)")
         }
-        let imageData:NSData = UIImagePNGRepresentation(profileImage!)! as NSData
+        let imageData:NSData = UIImageJPEGRepresentation(profileImage!, 1)! as NSData
+
+//        let imageData:NSData = UIImagePNGRepresentation(profileImage!)! as NSData
         let strBase64 = imageData.base64EncodedString(options: .lineLength64Characters)
         let parameters = ["profile":"\(strBase64)"]
         let manager = NetworkHandler()
@@ -90,20 +137,18 @@ class EditProfilePictureViewController: BaseViewController{
         manager.apiPost(apiName: " Update user profile", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             if (code == 200){
-                
+                UserManager.sharedUserManager.appUserDetails.profilePicUrl  = response["profile"] as? String
+                self.dismiss(animated: true, completion: {
+                    if self.delegate != nil{
+                        self.delegate?.profileEdited()
+                    }
+                })
             }
         }) { (error, code, message) in
             print(message)
             LoadingActivityHUD.hideProgressHUD()
         }
-        
-
-    }
-    
-    
-    
-    
-    
+}
     
     func checkPhotoLibraryAuthorisation() -> Bool{
         var authStatus:Bool = false

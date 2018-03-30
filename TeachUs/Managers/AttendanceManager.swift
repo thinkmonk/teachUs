@@ -28,11 +28,13 @@ class AttendanceManager {
         arrayStudents.value.filter{$0.student?.studentId! == studentDetails.student?.studentId!}.first?.isPrsent = false
     }
     
-    func hello(){
-        arrayStudents.asObservable().subscribe { (student) in
-            let presentStudents = self.arrayStudents.value.filter{$0.isPrsent == true}
-            print(presentStudents.count)
-        }.disposed(by: disposeBag)
+    var attendanceList:String {
+        var attendance = ""
+        let presentStudents = self.arrayStudents.value.filter{$0.isPrsent == true}
+        for student in presentStudents{
+            attendance.append("\((student.student?.studentId!)!),")
+        }
+        return attendance
     }
 }
 

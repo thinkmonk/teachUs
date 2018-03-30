@@ -36,7 +36,10 @@ public struct URLConstants{
     
     
     struct CollegeURL {
-        static let getCollegeList = BaseUrl.baseURL + "/college/getCollegeList"
+        static let getCollegeList = BaseUrl.baseURL + "/college/college_list"
+        static let classAttendanceList = BaseUrl.baseURL + "/attendance/college_class_attendance"
+        static let classSubjectList = BaseUrl.baseURL + "/syllabus/subject_list"
+        static let classStudentLIst = BaseUrl.baseURL + "/attendance/student_attendance_list"
     }
     
     struct SuperAdminURL {

@@ -16,6 +16,8 @@ public struct Constants {
         static let SyllabusDetails = "toSyllabusDetails"
         static let viewRtings = "toViewRatings"
         static let toLoginSelect = "toLoginSelect"
+        static let toHomeTabVC = "toHomeTabVC"
+        static let toCollegeAttendanceDetail = "toCollegeAttendanceDetail"
     }
     
     struct Images {
@@ -26,6 +28,7 @@ public struct Constants {
         static let defaultProfessor = "professor_default"
         static let studentDefault = "student_default"
         static let heartFilled = "heartFilled"
+        static let collegeDefault = "college_default"
     }
     
     struct  colors {
@@ -45,6 +48,10 @@ public struct Constants {
         static let LogsDetail = "LogsDetailViewControllerId"
         static let loginSelectVC = "LoginSelectViewControllerId"
         static let LoginSelectNavBarControllerId = "LoginSelectNavBarControllerId"
+        static let EditProfilePictureViewControllerId = "EditProfilePictureViewControllerId"
+        static let CollegeAttendanceListViewControllerId = "CollegeAttendanceListViewControllerId"
+        static let CollegeSyllabusStatusViewControllerId = "CollegeSyllabusStatusViewControllerId"
+        static let CollegeAttedanceDetailViewControllerId = "CollegeAttedanceDetailViewControllerId"
     }
     
     struct UserDefaults {
@@ -75,6 +82,7 @@ public struct Constants {
         static let RatingTopicsTableViewCellId = "RatingTopicsTableViewCellId"
         static let LogsDetailTableViewCellId = "LogsDetailTableViewCellId"
         static let leftMenuCell = "leftMenuCell"
+        static let StudentProfileTableViewCellId = "StudentProfileTableViewCellId"
     }
     
     struct UserTypeString {

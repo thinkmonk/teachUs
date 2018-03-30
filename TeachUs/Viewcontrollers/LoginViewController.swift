@@ -57,15 +57,15 @@ class LoginViewController: BaseViewController {
             LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
 
             manager.apiGet(apiName: "Get College ka list", completionHandler: { (response,code ) in
-                let collegeDetails = response["collegeDetails"] as![[String:Any]]
+                let collegeDetails = response["college_list"] as![[String:Any]]
                 var collegeArray:[CollegesListModel] = []
                 for college in collegeDetails{
                     let tempCollege:CollegesListModel = Mapper<CollegesListModel>().map(JSON:college)!
                     collegeArray.append(tempCollege)
                 }
                 self.collegeLogin.arrayCollegeList = collegeArray
-                self.collegeLogin.showView(inView: self.view)
                 self.collegeLogin.setUpSelectCollegeView()
+                self.collegeLogin.showView(inView: self.view, yPosition: (self.statusBarHeight+self.navBarHeight+20))
                 LoadingActivityHUD.hideProgressHUD()
             }, failure: { (error, code , message) in
                 print(message)
@@ -185,8 +185,6 @@ extension LoginViewController:OtpDelegate{
     func sendOtp() {
         //http://ec2-52-40-212-186.us-west-2.compute.amazonaws.com:8081/teachus/teacher/genOtp?firstName=Harsh&middleName=X&surName=Gangar&contactNumber=9619201282
         
-        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
-        let manager = NetworkHandler()
         /*
         switch UserManager.sharedUserManager.user! {
         case .Professor:
@@ -218,7 +216,9 @@ extension LoginViewController:OtpDelegate{
             print(message)
         }
         */
-        
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        let manager = NetworkHandler()
+
         manager.url = URLConstants.Login.sendOtp
         let parameters:[String:Any] =
             [
@@ -301,11 +301,6 @@ extension LoginViewController:OtpDelegate{
     }
     
     
-    
-    
-    
-    
-    
     func saveUser(userResponse: [String:Any]){
         switch UserManager.sharedUserManager.user! {
         case .Professor:
@@ -357,17 +352,51 @@ extension LoginViewController:OtpDelegate{
 }
 //MARK:- College Login Delegate
 extension LoginViewController:CollegeLoginDelegate{
-    func sendCollegeOtp() {
-        showEnterOtpView()
+    func sendCollegeOtp(mobileNumber:String) {
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        let manager = NetworkHandler()
+        
+        manager.url = URLConstants.Login.sendOtp
+        let parameters:[String:Any] =
+            [
+                "role_id":"\(UserManager.sharedUserManager.userRole.roleId)",
+                "contact":"\(mobileNumber)"
+        ]
+        UserManager.sharedUserManager.saveMobileNumber(mobileNumber)
+        manager.apiPost(apiName: "Generate OTP", parameters: parameters, completionHandler: { (result, code, response) in
+            LoadingActivityHUD.hideProgressHUD()
+            self.showEnterOtpView()
+        }) { (error, code, message) in
+            LoadingActivityHUD.hideProgressHUD()
+            print(message)
+        }
     }
     
     func showEnterOtpView(){
         if(self.collegeLogin != nil){
             collegeLogin.setUpVerifyOtpView()
+            collegeLogin.textFieldOtp.becomeFirstResponder()
         }
     }
     
     func verifyCollegeOtp() {
-        NotificationCenter.default.post(name: .notificationLoginSuccess, object: nil)
+        let manager = NetworkHandler()
+        collegeLogin.textFieldOtp.resignFirstResponder()
+        manager.url = URLConstants.Login.verifyOtp
+        let parameters:[String:Any] =
+            [
+                "role_id":"\(UserManager.sharedUserManager.userRole.roleId)",
+                "contact":"\(UserManager.sharedUserManager.getUserMobileNumber())",
+                "otp":"\(self.collegeLogin.textFieldOtp.text!)"
+        ]
+        manager.apiPost(apiName: "Verify OTP", parameters: parameters, completionHandler: { (result, code, response) in
+            LoadingActivityHUD.hideProgressHUD()
+            let accessToken:String = response["token"] as! String
+            UserManager.sharedUserManager.setAccessToken(accessToken)
+            self.getAndSaveUserCollegeDetails()
+        }) { (error, code, message) in
+            LoadingActivityHUD.hideProgressHUD()
+            print(message)
+        }
     }
 }

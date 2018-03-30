@@ -61,7 +61,8 @@ class BaseViewController: UIViewController {
         let color2 = UIColor(red: 126/255, green: 74/255, blue: 187/255, alpha: 1.0)
         gradient.colors = [color1.cgColor, color2.cgColor]
 //        UIApplication.shared.windows.last?.layer.addSublayer(gradient)
-        self.view.layer.addSublayer(gradient)
+//        self.view.layer.addSublayer(gradient)
+        self.view.layer.insertSublayer(gradient, at: 0)
 
     }
     
@@ -80,8 +81,9 @@ class BaseViewController: UIViewController {
 
     }
     
-    func showAlterWithTitle(_ title:String, alertMessage:String){
-        let alert = UIAlertController(title: title, message: alertMessage, preferredStyle: UIAlertControllerStyle.alert)
+    func showAlterWithTitle(_ title:String?, alertMessage:String){
+        let alertTitle = title != nil ? title : nil
+        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.alert)
         
         // add an action (button)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
@@ -94,6 +96,25 @@ class BaseViewController: UIViewController {
         let manager = NetworkHandler()
         manager.url = URLConstants.Login.userDetails
         manager.apiPost(apiName: "Get User Details", parameters: [:], completionHandler: { (result, code, response) in
+            LoadingActivityHUD.hideProgressHUD()
+            UserManager.sharedUserManager.saveUserDetailsToDb(response)
+            NotificationCenter.default.post(name: .notificationLoginSuccess, object: nil)
+        }) { (error, code, message) in
+            LoadingActivityHUD.hideProgressHUD()
+            print(message)
+        }
+    }
+    
+    //For college Role
+    func getAndSaveUserCollegeDetails(){
+        let manager = NetworkHandler()
+        manager.url = URLConstants.Login.userDetails
+        let parameters:[String:Any] =
+        [
+            "role_id":"\(UserManager.sharedUserManager.userRole.roleId)",
+            "contact":"\(UserManager.sharedUserManager.getUserMobileNumber())",
+        ]
+        manager.apiPost(apiName: "Get User Details", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             UserManager.sharedUserManager.saveUserDetailsToDb(response)
             NotificationCenter.default.post(name: .notificationLoginSuccess, object: nil)

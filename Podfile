@@ -9,6 +9,8 @@ target 'TeachUs' do
     pod 'RxCocoa',    '~> 4.0'
     pod 'AlamofireObjectMapper', '~> 5.0'
     pod 'AlamofireImage', '~> 3.3'
+    pod 'XLPagerTabStrip', '~> 8.0'
+
 
   # Pods for TeachUs
 

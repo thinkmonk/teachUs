@@ -9,6 +9,7 @@
 import Foundation
 extension UIImageView {
     public func imageFromServerURL(urlString: String, defaultImage : String?) {
+        print("URL String \(urlString)")
         if let di = defaultImage {
             self.image = UIImage(named: di)
         }

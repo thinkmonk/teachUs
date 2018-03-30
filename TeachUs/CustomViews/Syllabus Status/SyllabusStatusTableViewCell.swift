@@ -15,10 +15,11 @@ class SyllabusStatusTableViewCell: UITableViewCell {
     @IBOutlet weak var labelSubject: UILabel!
     @IBOutlet weak var labelNumberOfLectures: UILabel!
     @IBOutlet weak var labelAttendancePercent: UILabel!
+    @IBOutlet weak var imageViewArrow: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        self.imageViewArrow.isHidden = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

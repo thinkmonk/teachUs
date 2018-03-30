@@ -24,11 +24,33 @@ class ViewDatePicker: UIView {
         return selectedDate
     }
     
+    var postJsonDateString:String{
+        let date = picker.date
+        let dateFormatter: DateFormatter = DateFormatter()
+        // Set date format
+        dateFormatter.dateFormat = "YYYY-MM-DD"
+        // Apply date format
+        let selectedDate: String = dateFormatter.string(from: date)
+        return selectedDate
+
+    }
+    
     var timeString:String{
         let date = picker.date
         let dateFormatter: DateFormatter = DateFormatter()
         // Set date format
         dateFormatter.dateFormat = "h:mm a"
+        // Apply date format
+        let selectedDate: String = dateFormatter.string(from: date)
+        return selectedDate
+
+    }
+    
+    var postJsonTimeString:String{
+        let date = picker.date
+        let dateFormatter: DateFormatter = DateFormatter()
+        // Set date format
+        dateFormatter.dateFormat = "HH:mm:ss"
         // Apply date format
         let selectedDate: String = dateFormatter.string(from: date)
         return selectedDate

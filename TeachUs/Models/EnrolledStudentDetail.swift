@@ -9,52 +9,93 @@
 import Foundation
 import ObjectMapper
 
+
+/*
+ 
+ {
+ "class_id": "1",
+ "student_id": "4",
+ "roll_number": "1001",
+ "f_name": "Miren",
+ "l_name": "Chetan",
+ "m_name": "Shah",
+ "email": "miren@gmail.com",
+ "gender": "male",
+ "dob": "2018-02-01",
+ "contact": "9819348451",
+ "profile": "http://zilliotech.com/api/profile/25aaaa61cb4b98.jpg",
+ "last_present": "1",
+ "lectures_attended": "4",
+ "total_lectures": "5",
+ "perecentage_att": "80"
+ 
+ 
+ 
+ "class_id": "1",
+ "student_id": "4",
+ "roll_number": "1001",
+ "f_name": "Miren",
+ "l_name": "Chetan",
+ "m_name": "Shah",
+ "email": "miren@gmail.com",
+ "gender": "male",
+ "dob": "2018-02-01",
+ "contact": "9819348451",
+ "profile": "http://zilliotech.com/api/profile/25aaaa61cb4b98.jpg",
+ "last_present": "1",
+ "lectures_attended": "8",
+ "total_lectures": "10",
+ "perecentage_att": "80"
+
+ }
+ 
+ */
+
 public class EnrolledStudentDetail :Mappable{
-    var studentId:Int?
-    var studentRollNo:Int?
-    var lectureAttended:Int?
-    var totalLecture:Int?
-    var percentage:Int?
-    var subjectId:Int?
-    var studentName:String?
-    var studentLastName:String?
-    var subject:String?
-    var imageUrl:String?
-    var lastLecture:String?
+    var classId:String? = ""
+    var studentId:String? = ""
+    var studentRollNo:String? = ""
+    var studentFirstName:String? = ""
+    var studentMiddleName:String? = ""
+    var studentLastName:String? = ""
+    var studentEmail:String? = ""
+    var studentGender:String? = ""
+    var studentDob:String? = ""
+    var studentContact:String? = ""
+    var imageUrl:String? = ""
+    var lastPresent:String? = ""
+    var lectureAttended:String? = ""
+    var totalLecture:String? = ""
+    var percentage:String? = ""
+    
+    var lastLectureAttendance:String? = ""
+    var studentName:String? = ""
+
+//    var subjectId:Int?
+//    var subject:String?
     
     required public init?(map: Map) {
     }
 
     public func mapping(map: Map) {
-        self.studentId <- map["studentId"]
-        self.studentRollNo <- map["studentRollNo"]
-        self.lectureAttended <- map["lectureAttended"]
-        
-        if((map.JSON["percentage"]) != nil){
-            self.percentage <- map["percentage"]
-        }
-        else{
-            self.percentage = 0
-        }
-
-        
-        if((map.JSON["totalLecture"]) != nil){
-            self.totalLecture <- map["totalLecture"]
-        }
-        else{
-            self.totalLecture = 0
-        }
-        self.subjectId <- map["subjectId"]
-        self.studentName <- map["studentName"]
-        self.studentLastName <- map["studentLastName"]
-        self.subject <- map["subject"]
-        var photoUrl :String = ""
-        photoUrl <- map["image"]
-        self.imageUrl = URLConstants.BaseUrl.baseURL + photoUrl
-        self.lastLecture <- map["lastLecture"]
+        self.classId <- map["class_id"]
+        self.studentId <- map["student_id"]
+        self.studentRollNo <- map["roll_number"]
+        self.studentFirstName <- map["f_name"]
+        self.studentMiddleName <- map["m_name"]
+        self.studentLastName <- map["l_name"]
+        self.studentEmail <- map["email"]
+        self.studentGender <- map["gender"]
+        self.studentDob <- map["dob"]
+        self.studentContact <- map["contact"]
+        self.imageUrl <- map["profile"]
+        self.lastPresent <- map["last_present"]
+        self.lectureAttended <- map["lectures_attended"]
+        self.totalLecture <- map["total_lectures"]
+        self.percentage <- map["perecentage_att"]
+        self.lastLectureAttendance = (self.lastPresent == "0") ? "Absent":"Present"
+        self.studentName = "\(self.studentFirstName!) \(self.studentMiddleName!) \(self.studentLastName!)"
     }
-
-
 }
 
 

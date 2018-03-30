@@ -10,7 +10,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 protocol CollegeLoginDelegate {
-    func sendCollegeOtp()
+    func sendCollegeOtp(mobileNumber:String)
     func verifyCollegeOtp()
 }
 
@@ -46,7 +46,7 @@ class CollegeLogin: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     func setUpReactive()
     {
         let otpValid = textFieldOtp.rx.text.orEmpty
-            .map { $0.characters.count > 0 }
+            .map { $0.count > 0 }
             .share(replay: 1) // without this map would be executed once for each binding, rx is stateless by default
         
         otpValid
@@ -54,7 +54,7 @@ class CollegeLogin: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
             .disposed(by: disposeBag)
         
         let mobileNumberValid = textFieldMobileNumber.rx.text.orEmpty
-            .map { $0.characters.count == 10 }
+            .map { $0.count == 10 }
             .share(replay: 1) // without this map would be executed once for each binding, rx is stateless by default
         
         mobileNumberValid.subscribe(onNext:{ isValid in
@@ -88,6 +88,7 @@ class CollegeLogin: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         self.viewVerifyOtp.alpha = 0
         
         self.collegeDropdown.bottomOffset = CGPoint(x: self.viewCollege.frame.origin.x, y: self.viewCollege.height())
+        self.collegeDropdown.width = self.viewCollege.width()
         self.collegeDropdown.anchorView = self.viewCollege
         var arrayCollegeName:[String] = []
         
@@ -95,16 +96,13 @@ class CollegeLogin: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
             arrayCollegeName.append(clg.collegeName)
         }
         self.collegeDropdown.dataSource = arrayCollegeName
-//        self.collegeDropdown.dataSource = ["10 €",
-//                                           "20 €",
-//                                           "30 €",
-//                                           "40 €",
-//                                           "50 €",
-//                                           "60 €",
-//                                           "70 €"]
         self.collegeDropdown.backgroundColor = UIColor.white
         self.collegeDropdown.selectionAction = { [unowned self] (index, item) in
             print("\(self.arrayCollegeList[index].collegeName)")
+            self.labelCollegeName.text = "\(self.arrayCollegeList[index].collegeName)"
+            self.viewsendOtp.alpha = 1
+            self.textFieldMobileNumber.becomeFirstResponder()
+
 //            self.labelCollegeName.text = 
         }
 
@@ -144,7 +142,7 @@ class CollegeLogin: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     @IBAction func sendOtp(_ sender: UIButton) {
         self.mobileNumber = self.textFieldMobileNumber.text!
         if(delegate != nil){
-            self.delegate.sendCollegeOtp()
+            self.delegate.sendCollegeOtp(mobileNumber: self.mobileNumber)
         }
     }
     
@@ -159,11 +157,10 @@ class CollegeLogin: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         }
     }
     
-    func showView(inView:UIView){
+    func showView(inView:UIView, yPosition:CGFloat){
         self.alpha = 0.0
-        self.frame.size.width = inView.width()
-        self.frame.size.height = inView.height()
-        self.frame.origin.y = 0
+        self.frame.size.width = inView.width() * 0.9
+        self.frame.origin.y = yPosition
         self.center.x = inView.centerX()
         self.setUpReactive()
         inView.addSubview(self)

@@ -18,23 +18,6 @@ class UserManager{
     var appUserDetails:UserDetails!
     var appUserCollegeDetails:CollegeDetails!
     var appUserCollegeArray:[CollegeDetails]! = []
-    static var savedUserManager : UserManager {
-        let userManager = UserManager()
-        if(userManager.user != nil){
-            switch userManager.user!{
-            case .Student:
-                let lastUser = DatabaseManager.getEntitesForEntityName("Student", sortindId: "name")
-                userManager.userStudent = lastUser.last as? Student
-            case .Professor:
-                let lastUser = DatabaseManager.getEntitesForEntityName("Teacher", sortindId: "name")
-                userManager.userTeacher = lastUser.last as? Teacher
-            case .College:
-                break
-            }
-            sharedUserManager = userManager
-        }
-        return userManager
-    }
     
     var user:LoginUserType! {
     if let user = UserDefaults.standard.value(forKey: Constants.UserDefaults.loginUserType) as? String {
@@ -102,36 +85,6 @@ class UserManager{
     
     func initLoggedInUser(){
         self.userProfilesArray.removeAll()
-        let lastUserStudent = DatabaseManager.getEntitesForEntityName("Student", sortindId: "name")
-        if(lastUserStudent.count > 0){
-            let appuser = AppUser()
-            appuser.userType = Constants.UserTypeString.Student
-            self.userStudent = lastUserStudent.last as! Student
-            appuser.isActive = self.userStudent.isCurrentUser
-            self.userProfilesArray.append(appuser)
-        }
-        
-        let lastUserProfessor = DatabaseManager.getEntitesForEntityName("Teacher", sortindId: "name")
-        if(lastUserProfessor.count > 0){
-            let appuser = AppUser()
-            appuser.userType = Constants.UserTypeString.Professor
-            self.userTeacher = lastUserProfessor.last as! Teacher
-            appuser.isActive = self.userTeacher.isCurrentUser
-            self.userProfilesArray.append(appuser)
-        }
-        
-        
-        
-        let lastUserSuperAdmin = DatabaseManager.getEntitesForEntityName("SuperAdmin", sortindId: "name")
-        if(lastUserSuperAdmin.count > 0){
-            let appuser = AppUser()
-            appuser.userType = Constants.UserTypeString.College
-            self.userSuperAdmin = lastUserSuperAdmin.last as! SuperAdmin
-            appuser.isActive = self.userSuperAdmin.isCurrentUser
-            self.userProfilesArray.append(appuser)
-        }
-        
-        
         let user = DatabaseManager.getEntitesForEntityName("UserDetails", sortindId: "firstName")
         if(user.count > 0){
             self.appUserDetails = user.last as! UserDetails
@@ -141,7 +94,15 @@ class UserManager{
             if(collegeDetailsArray.count > 0){
                 self.appUserCollegeArray = collegeDetailsArray as! [CollegeDetails]
             }
-            self.appUserCollegeDetails = self.appUserCollegeArray.last!
+            
+//            for college in appUserCollegeArray{
+//                if(college.role_id == "3"){
+//                    self.appUserCollegeDetails = college
+//                    UserManager.sharedUserManager.setLoginUserType(.College)
+//                }
+//            }
+            
+            self.appUserCollegeDetails = self.appUserCollegeArray.first!
             switch self.appUserCollegeArray.first?.role_id!{
             case "1"?:
                 UserManager.sharedUserManager.setLoginUserType(.Student)
@@ -156,6 +117,23 @@ class UserManager{
                 break
             }
         }
+    }
+    
+    //When user role is changed
+    func setUserBasedOnRole(){
+                    switch self.appUserCollegeDetails.role_id!{
+                    case "1":
+                        UserManager.sharedUserManager.setLoginUserType(.Student)
+                        break
+                    case "2":
+                        UserManager.sharedUserManager.setLoginUserType(.Professor)
+                        break
+                    case "3":
+                        UserManager.sharedUserManager.setLoginUserType(.College)
+                        break
+                    default:
+                        break
+                    }
     }
     
     func setUserId(_ id:String){

@@ -196,7 +196,7 @@ class NetworkHandler:SessionManager{
             print("URL : \(self.url!)")
             if let theJSONData = try? JSONSerialization.data(withJSONObject: parameters,options: []) {
                 let theJSONText = String(data: theJSONData,encoding: .ascii)
-//                print("parameters = \(theJSONText!)")
+                print("parameters = \(theJSONText!)")
             }
             print("Headers = \(headers!)")
             //print("parameters:\(theJSONText)")
