@@ -1211,11 +1211,8 @@ Form Library</string>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="emp-Nj-4JL">
-                                        <rect key="frame" x="124" y="0.0" width="50" height="29.5"/>
+                                        <rect key="frame" x="127" y="0.0" width="47" height="29.5"/>
                                         <color key="backgroundColor" red="0.77647058820000003" green="0.0" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="djL-cL-z3z"/>
-                                        </constraints>
                                         <inset key="contentEdgeInsets" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                         <state key="normal" title="All">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1280,83 +1277,102 @@ Form Library</string>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="rHd-Z8-EFU">
-                                <rect key="frame" x="10" y="149" width="300" height="344"/>
+                                <rect key="frame" x="10" y="149" width="300" height="339"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No records found for this Subject" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="53l-p9-iQf">
-                                <rect key="frame" x="33" y="311" width="254" height="20.5"/>
+                                <rect key="frame" x="33" y="308.5" width="254" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="26P-3H-IRe">
-                                <rect key="frame" x="10" y="498" width="300" height="30"/>
+                                <rect key="frame" x="10" y="493" width="300" height="35"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="From" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zh2-gs-L3B">
-                                        <rect key="frame" x="10" y="0.0" width="105" height="30"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6w0-9V-WTd">
-                                        <rect key="frame" x="120" y="4" width="15" height="22"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZuV-UI-2l9">
+                                        <rect key="frame" x="10" y="8.5" width="105" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" red="0.49803921568627452" green="0.51764705882352935" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6w0-9V-WTd">
+                                        <rect key="frame" x="120" y="6.5" width="15" height="22"/>
                                         <state key="normal" image="calenderRed"/>
+                                        <connections>
+                                            <action selector="showDatePicker:" destination="6hS-sx-SOz" eventType="touchUpInside" id="9Xp-14-pHU"/>
+                                        </connections>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="To" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ohZ-0Z-ZyY">
-                                        <rect key="frame" x="170" y="0.0" width="105" height="30"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HyX-P1-3Xc">
-                                        <rect key="frame" x="280" y="4" width="15" height="22"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uLq-QY-xy1">
+                                        <rect key="frame" x="170" y="8.5" width="105" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" red="0.49803921568627452" green="0.51764705882352935" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HyX-P1-3Xc">
+                                        <rect key="frame" x="280" y="6.5" width="15" height="22"/>
                                         <state key="normal" image="calenderRed"/>
+                                        <connections>
+                                            <action selector="showDatePicker:" destination="6hS-sx-SOz" eventType="touchUpInside" id="kjh-bL-KDk"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="ohZ-0Z-ZyY" firstAttribute="top" secondItem="26P-3H-IRe" secondAttribute="top" id="87c-wv-4G9"/>
-                                    <constraint firstItem="6w0-9V-WTd" firstAttribute="centerY" secondItem="Zh2-gs-L3B" secondAttribute="centerY" id="9QT-DD-qCw"/>
-                                    <constraint firstItem="Zh2-gs-L3B" firstAttribute="leading" secondItem="26P-3H-IRe" secondAttribute="leading" constant="10" id="Ayq-XJ-9m4"/>
-                                    <constraint firstAttribute="bottom" secondItem="ohZ-0Z-ZyY" secondAttribute="bottom" id="BKF-dL-hTl"/>
-                                    <constraint firstItem="ohZ-0Z-ZyY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="26P-3H-IRe" secondAttribute="leading" constant="20" symbolic="YES" id="UAa-Lr-HnV"/>
-                                    <constraint firstItem="Zh2-gs-L3B" firstAttribute="top" secondItem="26P-3H-IRe" secondAttribute="top" id="W2s-z5-QOH"/>
+                                    <constraint firstItem="HyX-P1-3Xc" firstAttribute="leading" secondItem="uLq-QY-xy1" secondAttribute="trailing" constant="5" id="N6b-Sq-08a"/>
+                                    <constraint firstItem="uLq-QY-xy1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="26P-3H-IRe" secondAttribute="leading" constant="20" symbolic="YES" id="Op5-RY-27F"/>
+                                    <constraint firstItem="uLq-QY-xy1" firstAttribute="centerY" secondItem="HyX-P1-3Xc" secondAttribute="centerY" id="QBN-pL-gel"/>
+                                    <constraint firstItem="uLq-QY-xy1" firstAttribute="width" secondItem="26P-3H-IRe" secondAttribute="width" multiplier="0.35" id="TWm-fJ-ISJ"/>
+                                    <constraint firstItem="6w0-9V-WTd" firstAttribute="centerY" secondItem="ZuV-UI-2l9" secondAttribute="centerY" id="VM8-eP-eor"/>
+                                    <constraint firstItem="ZuV-UI-2l9" firstAttribute="width" secondItem="26P-3H-IRe" secondAttribute="width" multiplier="0.35" id="XfE-vA-50K"/>
+                                    <constraint firstItem="6w0-9V-WTd" firstAttribute="leading" secondItem="ZuV-UI-2l9" secondAttribute="trailing" constant="5" id="bzu-mh-Fdw"/>
                                     <constraint firstAttribute="trailing" secondItem="HyX-P1-3Xc" secondAttribute="trailing" constant="5" id="d7D-Pl-gH7"/>
-                                    <constraint firstAttribute="height" constant="30" id="iCo-iR-ONS"/>
-                                    <constraint firstItem="HyX-P1-3Xc" firstAttribute="centerY" secondItem="ohZ-0Z-ZyY" secondAttribute="centerY" id="iqF-3E-SXG"/>
-                                    <constraint firstItem="ohZ-0Z-ZyY" firstAttribute="width" secondItem="Zh2-gs-L3B" secondAttribute="width" id="lvj-0H-6vD"/>
-                                    <constraint firstItem="Zh2-gs-L3B" firstAttribute="width" secondItem="26P-3H-IRe" secondAttribute="width" multiplier="0.35" id="wnM-Wc-SbF"/>
-                                    <constraint firstAttribute="bottom" secondItem="Zh2-gs-L3B" secondAttribute="bottom" id="xpA-2o-aOn"/>
-                                    <constraint firstItem="6w0-9V-WTd" firstAttribute="leading" secondItem="Zh2-gs-L3B" secondAttribute="trailing" constant="5" id="y1B-sb-huK"/>
-                                    <constraint firstItem="HyX-P1-3Xc" firstAttribute="leading" secondItem="ohZ-0Z-ZyY" secondAttribute="trailing" constant="5" id="yhQ-cs-xgj"/>
+                                    <constraint firstAttribute="height" constant="35" id="iCo-iR-ONS"/>
+                                    <constraint firstItem="ZuV-UI-2l9" firstAttribute="centerY" secondItem="26P-3H-IRe" secondAttribute="centerY" id="mGt-o7-QH9"/>
+                                    <constraint firstItem="ZuV-UI-2l9" firstAttribute="leading" secondItem="26P-3H-IRe" secondAttribute="leading" constant="10" id="tin-tZ-Zpt"/>
+                                    <constraint firstItem="HyX-P1-3Xc" firstAttribute="centerY" secondItem="26P-3H-IRe" secondAttribute="centerY" id="v06-3l-7Lm"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wrA-XX-sIX">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="drn-eR-pdc">
                                 <rect key="frame" x="10" y="533" width="300" height="30"/>
-                                <color key="backgroundColor" red="0.77647058820000003" green="0.0" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Mail Report">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                            </button>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SqN-Sl-gsD">
+                                        <rect key="frame" x="0.0" y="0.0" width="145" height="30"/>
+                                        <color key="backgroundColor" red="0.77647058820000003" green="0.0" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Submit">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="getAttendanceForDateRange:" destination="6hS-sx-SOz" eventType="touchUpInside" id="IRT-js-2gI"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wrA-XX-sIX">
+                                        <rect key="frame" x="155" y="0.0" width="145" height="30"/>
+                                        <color key="backgroundColor" red="0.77647058820000003" green="0.0" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Mail Report">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.92549019610000005" green="0.95294117649999999" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="wrA-XX-sIX" firstAttribute="trailing" secondItem="26P-3H-IRe" secondAttribute="trailing" id="1PC-A2-vkE"/>
                             <constraint firstItem="qlV-b9-A0K" firstAttribute="top" secondItem="0di-OD-Cdb" secondAttribute="bottom" constant="5" id="9Kn-2p-ybp"/>
                             <constraint firstItem="qlV-b9-A0K" firstAttribute="trailing" secondItem="RGR-Lt-bKE" secondAttribute="trailing" id="CuE-7u-W4K"/>
-                            <constraint firstItem="wrA-XX-sIX" firstAttribute="top" secondItem="26P-3H-IRe" secondAttribute="bottom" constant="5" id="Efj-AJ-Nlw"/>
                             <constraint firstItem="0di-OD-Cdb" firstAttribute="top" secondItem="RGR-Lt-bKE" secondAttribute="top" constant="5" id="FuA-xE-Xxe"/>
                             <constraint firstItem="RGR-Lt-bKE" firstAttribute="trailing" secondItem="rHd-Z8-EFU" secondAttribute="trailing" constant="10" id="HQ8-40-gm6"/>
-                            <constraint firstItem="wrA-XX-sIX" firstAttribute="leading" secondItem="26P-3H-IRe" secondAttribute="leading" id="K9l-SZ-fgO"/>
+                            <constraint firstItem="RGR-Lt-bKE" firstAttribute="bottom" secondItem="drn-eR-pdc" secondAttribute="bottom" constant="5" id="Ids-RF-SKa"/>
+                            <constraint firstItem="drn-eR-pdc" firstAttribute="leading" secondItem="26P-3H-IRe" secondAttribute="leading" id="Kuh-un-NgL"/>
                             <constraint firstItem="26P-3H-IRe" firstAttribute="leading" secondItem="rHd-Z8-EFU" secondAttribute="leading" id="LPK-Cq-7wu"/>
                             <constraint firstItem="26P-3H-IRe" firstAttribute="trailing" secondItem="rHd-Z8-EFU" secondAttribute="trailing" id="PGe-Pk-7TI"/>
                             <constraint firstItem="rHd-Z8-EFU" firstAttribute="leading" secondItem="RGR-Lt-bKE" secondAttribute="leading" constant="10" id="Qwx-GG-jet"/>
+                            <constraint firstItem="drn-eR-pdc" firstAttribute="top" secondItem="26P-3H-IRe" secondAttribute="bottom" constant="5" id="SbN-hz-GN3"/>
                             <constraint firstItem="53l-p9-iQf" firstAttribute="centerX" secondItem="rHd-Z8-EFU" secondAttribute="centerX" id="UGD-W9-EjG"/>
                             <constraint firstItem="26P-3H-IRe" firstAttribute="top" secondItem="rHd-Z8-EFU" secondAttribute="bottom" constant="5" id="XML-1X-EEP"/>
                             <constraint firstItem="rHd-Z8-EFU" firstAttribute="top" secondItem="qlV-b9-A0K" secondAttribute="bottom" constant="5" id="ZJX-we-9BA"/>
                             <constraint firstItem="0di-OD-Cdb" firstAttribute="leading" secondItem="RGR-Lt-bKE" secondAttribute="leading" id="b9I-Bd-g6l"/>
                             <constraint firstItem="qlV-b9-A0K" firstAttribute="leading" secondItem="RGR-Lt-bKE" secondAttribute="leading" id="lCA-Qc-6p3"/>
-                            <constraint firstItem="RGR-Lt-bKE" firstAttribute="bottom" secondItem="wrA-XX-sIX" secondAttribute="bottom" constant="5" id="ngV-ir-Hsg"/>
+                            <constraint firstItem="drn-eR-pdc" firstAttribute="trailing" secondItem="26P-3H-IRe" secondAttribute="trailing" id="t8i-qv-fsF"/>
                             <constraint firstItem="53l-p9-iQf" firstAttribute="centerY" secondItem="rHd-Z8-EFU" secondAttribute="centerY" id="vEF-bt-xis"/>
                             <constraint firstItem="0di-OD-Cdb" firstAttribute="trailing" secondItem="RGR-Lt-bKE" secondAttribute="trailing" id="vvV-hw-CnB"/>
                         </constraints>
@@ -1367,13 +1383,14 @@ Form Library</string>
                         <outlet property="buttonAllSubject" destination="emp-Nj-4JL" id="rCB-Dh-nPJ"/>
                         <outlet property="buttonDropDown" destination="qXh-an-fyb" id="BEB-9Z-46I"/>
                         <outlet property="buttonFromDate" destination="6w0-9V-WTd" id="fhh-TY-86j"/>
-                        <outlet property="buttonSubmit" destination="wrA-XX-sIX" id="inn-Sq-9qN"/>
+                        <outlet property="buttonMaiReport" destination="wrA-XX-sIX" id="Yqw-fq-ijd"/>
+                        <outlet property="buttonSubmit" destination="SqN-Sl-gsD" id="lVV-3Y-YSN"/>
                         <outlet property="buttonToDate" destination="HyX-P1-3Xc" id="fnn-t9-Yli"/>
+                        <outlet property="labelFromDate" destination="ZuV-UI-2l9" id="xnp-9j-0Qf"/>
                         <outlet property="labelNoRecordFound" destination="53l-p9-iQf" id="DfQ-PJ-cNj"/>
                         <outlet property="labelSubject" destination="2TA-Yh-mgR" id="NXe-9C-BXp"/>
+                        <outlet property="labelToDate" destination="uLq-QY-xy1" id="XOk-af-xni"/>
                         <outlet property="tableViewStudentList" destination="rHd-Z8-EFU" id="JYI-6G-V1h"/>
-                        <outlet property="textFieldFromDate" destination="Zh2-gs-L3B" id="YtR-sI-AxF"/>
-                        <outlet property="textFieldToDate" destination="ohZ-0Z-ZyY" id="Nko-iW-c5K"/>
                         <outlet property="viewSubjectName" destination="ABb-UY-aKz" id="86z-tz-Iyl"/>
                     </connections>
                 </viewController>

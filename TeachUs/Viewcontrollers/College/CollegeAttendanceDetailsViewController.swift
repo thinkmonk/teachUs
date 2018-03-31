@@ -8,12 +8,15 @@
 
 import UIKit
 import ObjectMapper
+import RxSwift
+import RxCocoa
 
 class CollegeAttendanceDetailsViewController: BaseViewController {
 
     @IBOutlet weak var buttonSubmit: UIButton!
-    @IBOutlet weak var textFieldFromDate: UITextField!
-    @IBOutlet weak var textFieldToDate: UITextField!
+    @IBOutlet weak var buttonMaiReport: UIButton!
+    @IBOutlet weak var labelFromDate: UILabel!
+    @IBOutlet weak var labelToDate: UILabel!
     @IBOutlet weak var buttonFromDate: UIButton!
     @IBOutlet weak var buttonToDate: UIButton!
     @IBOutlet weak var tableViewStudentList: UITableView!
@@ -26,29 +29,47 @@ class CollegeAttendanceDetailsViewController: BaseViewController {
     var arrayStudentList:[EnrolledStudentDetail] = []
     let collegeSubjectDropdown = DropDown()
     var collegeClass:CollegeAttendanceList!
-    
+    var fromDatePicker: ViewDatePicker!
+//    var toDatePicker: ViewDatePicker!
+    var toDate:Date!
+    var fromDate:Date!
+    var selectedSubject:CollegeSubjects!
+    var activeLabel:UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.labelNoRecordFound.alpha = 0
-        self.buttonSubmit.makeEdgesRounded()
+        self.buttonSubmit.makeViewCircular()
+        self.buttonMaiReport.makeViewCircular()
         self.addGradientToNavBar()
+        self.labelToDate.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor.rgbColor(239.0, 239.0, 239.0), thickness: 1)
+        self.labelFromDate.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor.rgbColor(239.0, 239.0, 239.0), thickness: 1)
         getSubjectList()
-        
+        self.initDatePicker()
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(CollegeAttendanceDetailsViewController.showDropDown(_:)))
         self.labelSubject.isUserInteractionEnabled = true
         self.labelSubject.addGestureRecognizer(tap)
 
         
+        let dateTap = UITapGestureRecognizer(target: self, action: #selector(CollegeAttendanceDetailsViewController.showDatePicker(_:)))
+        self.labelFromDate.isUserInteractionEnabled = true
+        self.labelFromDate.addGestureRecognizer(dateTap)
+        
+        
+        
+        let dateToTap = UITapGestureRecognizer(target: self, action: #selector(CollegeAttendanceDetailsViewController.showDatePicker(_:)))
+        self.labelToDate.isUserInteractionEnabled = true
+        self.labelToDate.addGestureRecognizer(dateToTap)
+        
         self.tableViewStudentList.register(UINib(nibName: "StudentProfileTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.StudentProfileTableViewCellId)
         self.tableViewStudentList.delegate = self
         self.tableViewStudentList.dataSource = self
-        self.tableViewStudentList.estimatedRowHeight = 80
+        self.tableViewStudentList.estimatedRowHeight = 60
         self.tableViewStudentList.rowHeight = UITableViewAutomaticDimension
         self.tableViewStudentList.alpha = 0.0
-
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -92,7 +113,7 @@ class CollegeAttendanceDetailsViewController: BaseViewController {
             self.collegeSubjectDropdown.dataSource.append(subject.subjectName!)
             
             self.collegeSubjectDropdown.selectionAction = { [unowned self] (index, item) in
-                print(item)
+                self.selectedSubject = self.arraySubjectLIst[index]
                 self.labelSubject.text = "\(self.arraySubjectLIst[index].subjectName ?? "")"
                 self.getAttendance(subject: self.arraySubjectLIst[index])
             }
@@ -110,20 +131,21 @@ class CollegeAttendanceDetailsViewController: BaseViewController {
             "subject_id":"\(subject?.subjectId! ?? "0")",
         ]
         
-        if(!(textFieldFromDate.text?.isEmpty)!)
+        if(self.fromDate != nil)
         {
-            parameters["from_date"] = textFieldFromDate.text!
+            parameters["from_date"] = labelFromDate.text!
         }
         
-        if(!(textFieldToDate.text?.isEmpty)!)
+        if(self.toDate != nil)
         {
-            parameters["from_date"] = textFieldToDate.text!
+            parameters["to_date"] = labelToDate.text!
         }
         
         manager.apiPost(apiName: " Get class Student List", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             guard let studentListArray = response["student_list"] as? [[String:Any]] else{
                 self.tableViewStudentList.reloadData()
+                self.labelNoRecordFound.text = response["message"] as? String
                 self.labelNoRecordFound.alpha = 1
                 return
             }
@@ -141,7 +163,61 @@ class CollegeAttendanceDetailsViewController: BaseViewController {
             LoadingActivityHUD.hideProgressHUD()
         }
     }
+    
+    func initDatePicker(){
+        if(fromDatePicker == nil){
+            fromDatePicker = ViewDatePicker.instanceFromNib() as! ViewDatePicker
+            fromDatePicker.setUpPicker(type: .date)
+            fromDatePicker.buttonOk.addTarget(self, action: #selector(CollegeAttendanceDetailsViewController.dismissDatePicker), for: .touchUpInside)
+            fromDatePicker.picker.minimumDate = NSCalendar.current.date(byAdding: .month, value: -6, to: Date())
+            fromDatePicker.picker.maximumDate = NSCalendar.current.date(byAdding: .month, value: 0, to: Date())
+        }
+//        if(toDatePicker == nil){
+//            toDatePicker = ViewDatePicker.instanceFromNib() as! ViewDatePicker
+//            toDatePicker.setUpPicker(type: .date)
+//            toDatePicker.buttonOk.addTarget(self, action: #selector(CollegeAttendanceDetailsViewController.dismissDatePicker), for: .touchUpInside)
+//            toDatePicker.picker.minimumDate = NSCalendar.current.date(byAdding: .month, value: -6, to: Date())
+//            toDatePicker.picker.maximumDate = NSCalendar.current.date(byAdding: .month, value: 0, to: Date())
+//        }
+    }
+    
+    
+    @IBAction func showDatePicker(_ sender: Any){
+        if let senderTap:UITapGestureRecognizer = sender as? UITapGestureRecognizer{
+            self.activeLabel = senderTap.view as! UILabel
+        }
+        
+        if let senderButton:UIButton = sender as? UIButton{
+            switch senderButton.tag{
+            case 100:
+                self.activeLabel = self.labelFromDate!
+                
+            case 101:
+                self.activeLabel = self.labelToDate!
+            default:
+                break
+            }
+        }
+        self.fromDatePicker.showView(inView: self.view)
+    }
 
+    @objc func dismissDatePicker(){
+        if(fromDatePicker != nil){
+            fromDatePicker.alpha = 0
+            fromDatePicker.removeFromSuperview()
+        }
+        self.activeLabel.text = fromDatePicker.postJsonDateString
+        switch activeLabel.tag {
+        case 100:
+            fromDate = fromDatePicker.picker.date
+            
+        case 101:
+            toDate = fromDatePicker.picker.date
+
+        default:
+            return
+        }
+    }
     
     func showTableView(){
         self.tableViewStudentList.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
@@ -158,30 +234,62 @@ class CollegeAttendanceDetailsViewController: BaseViewController {
     
     
     @IBAction func getAttendanceForAllSubjects(_ sender: Any) {
+        self.selectedSubject = nil
         self.getAttendance(subject: nil)
         self.labelSubject.text = "All Subjects"
+        
     }
+    
+    
+    @IBAction func getAttendanceForDateRange(_ sender: Any) {
+        
+        if(self.fromDate == nil){
+            self.showAlterWithTitle(nil, alertMessage: "From date not selected!")
+        }else if(self.toDate == nil){
+            self.showAlterWithTitle(nil, alertMessage: "To date not selected!")
+        }else if(self.fromDate < self.toDate){
+            self.getAttendance(subject: self.selectedSubject)
+        }else{
+            self.showAlterWithTitle("Wrong Date Range", alertMessage: "From date should be lesser than to date!")
+        }
+    }
+    
 }
 
-
+//MARK:- Table view delegate and datasource methods
 extension CollegeAttendanceDetailsViewController:UITableViewDelegate, UITableViewDataSource{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return self.arrayStudentList.count
+    }
+    
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell : StudentProfileTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.StudentProfileTableViewCellId, for: indexPath) as! StudentProfileTableViewCell
-        let object:EnrolledStudentDetail = arrayStudentList [indexPath.row]
+        let object:EnrolledStudentDetail = arrayStudentList [indexPath.section]
         cell.labelName.text = object.studentName
         cell.labelRollNumber.text = "\(object.studentRollNo! )"
         cell.labelAttendanceCount.text = "\(object.totalLecture! )"
         cell.labelAttendancePercent.text = "\(object.percentage! ) %"
         cell.clipsToBounds = true
-        print("Image URL \(object.imageUrl)")
         cell.imageViewProfile.imageFromServerURL(urlString: (object.imageUrl!), defaultImage: Constants.Images.studentDefault)
         
         cell.selectionStyle = .none
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 15
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableViewStudentList.width(), height: 15))
+        footerView.backgroundColor = UIColor.clear
+        return footerView
     }
     
     

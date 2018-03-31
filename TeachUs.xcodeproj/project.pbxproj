@@ -41,6 +41,7 @@
 		812C34EC1FB78E770048DD3C /* AttendanceCalenderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812C34EB1FB78E770048DD3C /* AttendanceCalenderManager.swift */; };
 		812C34F01FB794DB0048DD3C /* ViewDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812C34EF1FB794DB0048DD3C /* ViewDatePicker.swift */; };
 		812C34F21FB794E30048DD3C /* ViewDatePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 812C34F11FB794E30048DD3C /* ViewDatePicker.xib */; };
+		812CB758206FA01200D31C05 /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812CB757206FA01200D31C05 /* CALayer.swift */; };
 		8137EF531FA109B500045D97 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8137EF521FA109B500045D97 /* LoginViewController.swift */; };
 		8137EF551FA10AD400045D97 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8137EF541FA10AD400045D97 /* Constants.swift */; };
 		8137EF5C1FA10D6A00045D97 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8137EF5B1FA10D6A00045D97 /* UIView.swift */; };
@@ -214,6 +215,7 @@
 		812C34EB1FB78E770048DD3C /* AttendanceCalenderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceCalenderManager.swift; sourceTree = "<group>"; };
 		812C34EF1FB794DB0048DD3C /* ViewDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDatePicker.swift; sourceTree = "<group>"; };
 		812C34F11FB794E30048DD3C /* ViewDatePicker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewDatePicker.xib; sourceTree = "<group>"; };
+		812CB757206FA01200D31C05 /* CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
 		8137EF521FA109B500045D97 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = TeachUs/Viewcontrollers/LoginViewController.swift; sourceTree = SOURCE_ROOT; };
 		8137EF541FA10AD400045D97 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8137EF5B1FA10D6A00045D97 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
@@ -551,6 +553,7 @@
 				81CCAE591FC99C170070907A /* UIImageView.swift */,
 				810E0CDF1FD04E90006AE5BE /* DateString.swift */,
 				8185E3412058456500752F81 /* UIImage.swift */,
+				812CB757206FA01200D31C05 /* CALayer.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1236,6 +1239,7 @@
 				81930B301FCDD7700002CDBE /* TeacherProfile.swift in Sources */,
 				81727B921F9E70CC006433E8 /* LeftMenuViewController.swift in Sources */,
 				81D7CE801FAB8E5D00C4375E /* CAPSPageMenu.swift in Sources */,
+				812CB758206FA01200D31C05 /* CALayer.swift in Sources */,
 				810610C01FA65FB30067273E /* LoadingActivityHUD.swift in Sources */,
 				8137EF5C1FA10D6A00045D97 /* UIView.swift in Sources */,
 				81E67400205315B100321257 /* UserCollegeDetails.swift in Sources */,

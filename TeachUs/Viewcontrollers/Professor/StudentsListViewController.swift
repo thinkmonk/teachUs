@@ -376,9 +376,8 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
             datePicker.setUpPicker(type: .date)
             datePicker.buttonOk.addTarget(self, action: #selector(StudentsListViewController.dismissDatePicker), for: .touchUpInside)
             
-            datePicker.picker.minimumDate = NSCalendar.current.date(byAdding: .month, value: 0, to: Date())
-            datePicker.picker.maximumDate = NSCalendar.current.date(byAdding: .month, value: 6, to: Date())
-
+            datePicker.picker.minimumDate = NSCalendar.current.date(byAdding: .month, value: -6, to: Date())
+            datePicker.picker.maximumDate = NSCalendar.current.date(byAdding: .month, value: 0, to: Date())
         }
     }
     
