@@ -40,6 +40,13 @@ public struct URLConstants{
         static let classAttendanceList = BaseUrl.baseURL + "/attendance/college_class_attendance"
         static let classSubjectList = BaseUrl.baseURL + "/syllabus/subject_list"
         static let classStudentLIst = BaseUrl.baseURL + "/attendance/student_attendance_list"
+        static let sendAuthPassword = BaseUrl.baseURL + "/Auth/send_auth_password"
+        static let verifyauthPassword = BaseUrl.baseURL + "/Auth/verify_auth_password"
+        static let sendSmsToStudents = BaseUrl.baseURL + "/Auth/send_sms_student"
+        static let sendEmailToStudents = BaseUrl.baseURL + "/Auth/send_mail_student"
+        static let addNewEvent = BaseUrl.baseURL + "/events/add_event"
+        static let getEventlList = BaseUrl.baseURL + "/events/event_list"
+        static let getClassList = BaseUrl.baseURL + "/events/event_class_list"
     }
     
     struct SuperAdminURL {

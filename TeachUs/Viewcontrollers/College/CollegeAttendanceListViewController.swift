@@ -117,6 +117,6 @@ extension  CollegeAttendanceListViewController: UITableViewDelegate, UITableView
 
 extension CollegeAttendanceListViewController:IndicatorInfoProvider{
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "Attendance")
+        return IndicatorInfo(title: "Attendance (Reports)")
     }
 }

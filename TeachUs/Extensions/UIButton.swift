@@ -36,6 +36,11 @@ extension UIButton{
         self.makeButtonwith(background: bgColor, fontColor: fontColor, cornerRadius: self.height()/2, borderColor: nil, borderWidth: 0.0)
     }
     
+    func roundedPurpleButton(){
+        let bgColor:UIColor = Constants.colors.themePurple
+        let fontColor:UIColor = UIColor.white
+        self.makeButtonwith(background: bgColor, fontColor: fontColor, cornerRadius: self.height()/2, borderColor: nil, borderWidth: 0.0)
+    }
     
     func selectedDefaultButton(){
         let bgColor:UIColor = UIColor.lightGray

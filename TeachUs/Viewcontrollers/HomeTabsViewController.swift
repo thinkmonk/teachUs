@@ -18,12 +18,12 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
 
         settings.style.buttonBarBackgroundColor = .clear
         settings.style.buttonBarItemBackgroundColor = .clear
-        settings.style.selectedBarBackgroundColor = .clear
+        settings.style.selectedBarBackgroundColor = .white
         settings.style.buttonBarItemFont = .boldSystemFont(ofSize: 14)
-        settings.style.selectedBarHeight = 0.0
+        settings.style.selectedBarHeight = 2.0
         settings.style.buttonBarMinimumLineSpacing = 0
         settings.style.buttonBarItemTitleColor = .white
-        settings.style.buttonBarItemsShouldFillAvailiableWidth = true
+        settings.style.buttonBarItemsShouldFillAvailiableWidth = false
         settings.style.buttonBarLeftContentInset = 0
         settings.style.buttonBarRightContentInset = 0
         changeCurrentIndexProgressive = { [weak self] (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
@@ -97,11 +97,15 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
             self.controllersArray.removeAll()
             print("College")
             let collegeAttendanceListVC:CollegeAttendanceListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.CollegeAttendanceListViewControllerId) as! CollegeAttendanceListViewController
-            collegeAttendanceListVC.title = "Attendance"
+            collegeAttendanceListVC.title = "Attendance (Reports)"
             collegeAttendanceListVC.parentNavigationController = self.parentNavigationController
-
             controllersArray.append(collegeAttendanceListVC)
 
+            let eventAttendanceListVc:EventAttendanceListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.EventAttendanceListViewControllerId) as! EventAttendanceListViewController
+            eventAttendanceListVc.title = "Attendance (Events)"
+            eventAttendanceListVc.parentNavigationController = self.parentNavigationController
+            controllersArray.append(eventAttendanceListVc)
+            
             
             let collegeSyllabusStatusVC:CollegeSyllabusStatusViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.CollegeSyllabusStatusViewControllerId) as! CollegeSyllabusStatusViewController
             collegeSyllabusStatusVC.title = "Syllabus"

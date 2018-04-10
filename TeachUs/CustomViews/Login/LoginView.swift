@@ -37,7 +37,7 @@ class LoginView: UIView, UITextFieldDelegate {
 
     var isvalid:Observable<Bool>{
         return Observable.combineLatest(firstNameText.asObservable(), middleNameText.asObservable(), surnameText.asObservable()){ name, middleName, surname in
-            name.characters.count > 0 && middleName.characters.count > 0 && surname.characters.count > 0
+            name.count > 0 && middleName.count > 0 && surname.count > 0
         }
     }
     
@@ -68,17 +68,12 @@ class LoginView: UIView, UITextFieldDelegate {
         
         let isEmailValid: Observable<Bool> = textFieldEmailId.rx.text
             .map{ text -> Bool in
-                return self.isValidEmailAddress(emailAddressString: text!)
+                return text!.isValidEmailAddress()
             }
             .share(replay: 1)
         
         isEmailValid.subscribe( onNext:{ isValid in
-            if(isValid){
-                self.buttonSubmit.alpha = 1;
-            }
-            else{
-                self.buttonSubmit.alpha = 0;
-            }
+            self.buttonSubmit.alpha = isValid ? 1 : 0
         }).disposed(by: disposeBag)
     }
     
@@ -150,30 +145,4 @@ class LoginView: UIView, UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         self.activeTextFIeld = textField
     }
-    
-    //MARK:- Validation
-    
-    func isValidEmailAddress(emailAddressString: String) -> Bool {
-        
-        var returnValue = true
-        let emailRegEx = "[A-Z0-9a-z.-_]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,3}"
-        
-        do {
-            let regex = try NSRegularExpression(pattern: emailRegEx)
-            let nsString = emailAddressString as NSString
-            let results = regex.matches(in: emailAddressString, range: NSRange(location: 0, length: nsString.length))
-            
-            if results.count == 0
-            {
-                returnValue = false
-            }
-            
-        } catch let error as NSError {
-            print("invalid regex: \(error.localizedDescription)")
-            returnValue = false
-        }
-        
-        return  returnValue
-    }
-
 }

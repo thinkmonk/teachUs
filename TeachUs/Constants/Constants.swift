@@ -18,6 +18,8 @@ public struct Constants {
         static let toLoginSelect = "toLoginSelect"
         static let toHomeTabVC = "toHomeTabVC"
         static let toCollegeAttendanceDetail = "toCollegeAttendanceDetail"
+        static let toClassList = "toClassList"
+        static let toStudentList = "toStudentList"
     }
     
     struct Images {
@@ -34,6 +36,8 @@ public struct Constants {
     struct  colors {
         static let themeRed = UIColor(red: 198/255, green: 0/255, blue: 0/255, alpha: 1)
         static let themeBlue = UIColor(red: 52/255, green: 175/255, blue: 255/255, alpha: 1)
+        static let themePurple = UIColor(red: 108/255, green: 96/255, blue: 200/255, alpha: 1)
+
     }
     
     struct viewControllerId {
@@ -52,6 +56,9 @@ public struct Constants {
         static let CollegeAttendanceListViewControllerId = "CollegeAttendanceListViewControllerId"
         static let CollegeSyllabusStatusViewControllerId = "CollegeSyllabusStatusViewControllerId"
         static let CollegeAttedanceDetailViewControllerId = "CollegeAttedanceDetailViewControllerId"
+        static let CollegeAttendanceMailReportViewControllerId = "CollegeAttendanceMailReportViewControllerId"
+        static let EventAttendanceListViewControllerId = "EventAttendanceListViewControllerId"
+        static let AddNewEventViewControllerId = "AddNewEventViewControllerId"
     }
     
     struct UserDefaults {
@@ -63,7 +70,7 @@ public struct Constants {
     }
     
     struct NumberConstants {
-        static let homeTabBarHeight = 40.0
+        static let homeTabBarHeight = 44.0
         static let navbarHeight = 65.0
     }
     
@@ -83,6 +90,8 @@ public struct Constants {
         static let LogsDetailTableViewCellId = "LogsDetailTableViewCellId"
         static let leftMenuCell = "leftMenuCell"
         static let StudentProfileTableViewCellId = "StudentProfileTableViewCellId"
+        static let EventListTableViewCellId = "EventListTableViewCellId"
+        static let ClassListTableViewCellId = "ClassListTableViewCellId"
     }
     
     struct UserTypeString {

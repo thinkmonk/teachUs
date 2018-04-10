@@ -117,6 +117,7 @@ class LeftMenuViewController: UIViewController, UIGestureRecognizerDelegate {
             let collegeImage = UIImage(named: Constants.Images.collegeDefault)
             self.buttonProfile.setImage(collegeImage, for: .normal)
             self.labelName.text = "College"
+            self.labelRole.text = ""
         }
         else{
             self.labelProfile.text = "\(UserManager.sharedUserManager.appUserCollegeDetails.college_name!)"

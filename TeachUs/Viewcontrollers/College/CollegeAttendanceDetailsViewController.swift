@@ -39,6 +39,9 @@ class CollegeAttendanceDetailsViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = self.collegeClass.courseName
+        self.navigationController!.navigationBar.topItem!.title = ""
+
         self.labelNoRecordFound.alpha = 0
         self.buttonSubmit.makeViewCircular()
         self.buttonMaiReport.makeViewCircular()
@@ -240,20 +243,36 @@ class CollegeAttendanceDetailsViewController: BaseViewController {
         
     }
     
-    
-    @IBAction func getAttendanceForDateRange(_ sender: Any) {
-        
-        if(self.fromDate == nil){
-            self.showAlterWithTitle(nil, alertMessage: "From date not selected!")
-        }else if(self.toDate == nil){
-            self.showAlterWithTitle(nil, alertMessage: "To date not selected!")
+    func verifyDate() -> Bool{
+        if(self.fromDate == nil  || self.toDate == nil){
+            self.showAlterWithTitle(nil, alertMessage: "Date Range not selected!")
         }else if(self.fromDate < self.toDate){
-            self.getAttendance(subject: self.selectedSubject)
+            return true
         }else{
             self.showAlterWithTitle("Wrong Date Range", alertMessage: "From date should be lesser than to date!")
         }
+        return false
     }
     
+    
+    @IBAction func getAttendanceForDateRange(_ sender: Any) {
+        if(self.verifyDate()){
+            self.getAttendance(subject: self.selectedSubject)
+        }
+    }
+    
+    @IBAction func mailAttendanceReport(_ sender: Any) {
+        if(self.verifyDate()){
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let modalViewController:CollegeAttendanceMailReportViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.CollegeAttendanceMailReportViewControllerId) as! CollegeAttendanceMailReportViewController
+            modalViewController.collegeClass = self.collegeClass
+            modalViewController.modalPresentationStyle = .overCurrentContext
+            modalViewController.fromDate = self.fromDate != nil ? self.labelFromDate.text! : ""
+            modalViewController.toDate = self.toDate != nil ? self.labelToDate.text! : ""
+            modalViewController.delegate = self
+            present(modalViewController, animated: true, completion: nil)
+        }
+    }
 }
 
 //MARK:- Table view delegate and datasource methods
@@ -293,6 +312,13 @@ extension CollegeAttendanceDetailsViewController:UITableViewDelegate, UITableVie
     }
     
     
+}
+
+
+extension CollegeAttendanceDetailsViewController:MailReportViewControllerDelegate {
+    func  reportMailed() {
+        self.navigationController?.popViewController(animated: true)
+    }
 }
 
 

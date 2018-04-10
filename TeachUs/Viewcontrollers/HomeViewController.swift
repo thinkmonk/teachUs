@@ -23,7 +23,6 @@ class HomeViewController: BaseViewController{
 
         let buttonHamburger = UIBarButtonItem(image: UIImage(named: Constants.Images.hamburger), style: .plain, target: self, action: #selector(HomeViewController.hamburgerAction))
         self.navigationItem.leftBarButtonItem  = buttonHamburger
-        self.title = "\(UserManager.sharedUserManager.userFullName)"
 
 //        self.makeDataSource()
 //        setUpPageMenu()
@@ -39,6 +38,7 @@ class HomeViewController: BaseViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.title = "\(UserManager.sharedUserManager.userFullName)"
         self.addColorToNavBarText(color: UIColor.white)
 //        self.addChildViewController(pageMenu!)
 //        self.view.addSubview(pageMenu!.view)
@@ -68,8 +68,6 @@ class HomeViewController: BaseViewController{
         let pageMenuFrame = CGRect(x: 0.0, y: 60.0, width: self.view.width(), height: self.view.height()-60.0)
         pageMenu = CAPSPageMenu(viewControllers: controllersArray, frame: pageMenuFrame, pageMenuOptions: parameters)
         
-        // Lastly add page menu as subview of base view controller view
-        // or use pageMenu controller in you view hierachy as desired
         
         
     }
@@ -79,72 +77,6 @@ class HomeViewController: BaseViewController{
 //            self.makeDataSource()
         }
 //        pageMenu?.moveToPage(2)
-    }
-
-    func makeDataSource(){
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-
-        switch UserManager.sharedUserManager.user! {
-        case .Professor:
-            controllersArray.removeAll()
-            let professorAttendanceVC = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorAttendance) as! ProfessorAttedanceViewController
-//            _ = professorAttendanceVC.view // dummy variable(it will be never used): to load viewController.view & it automatically calls viewController.viewDidLoad()
-            professorAttendanceVC.title = "Attendance"
-            professorAttendanceVC.parentNavigationController = self.navigationController
-            controllersArray.append(professorAttendanceVC)
-            
-            let professorSyllabusStatusVC = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorSyllabusStatus) as! SyllabusStatusListViewController
-//            _ = professorSyllabusStatusVC.view // dummy variable(it will be never used): to load viewController.view & it automatically calls viewController.viewDidLoad()
-
-            professorSyllabusStatusVC.title = "Syllabus Status"
-            professorSyllabusStatusVC.parentNavigationController = self.navigationController
-            professorSyllabusStatusVC.userType = .Professor
-            
-            //controllersArray.append(professorSyllabusStatusVC)
-            
-            let professorLogsListVC = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorLogs) as! ProfessorLogsListViewController
-//            _ = professorLogsListVC.view // dummy variable(it will be never used): to load viewController.view & it automatically calls viewController.viewDidLoad()
-
-            professorLogsListVC.title = "Logs"
-            professorLogsListVC.parentNavigationController = self.navigationController
-
-            //controllersArray.append(professorLogsListVC)
-            
-            break
-            
-        case .Student:
-            controllersArray.removeAll()
-            let attendanceVC: StudentAttedanceViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.studentAttendace) as! StudentAttedanceViewController
-//            _ = attendanceVC.view // dummy variable(it will be never used): to load viewController.view & it automatically calls viewController.viewDidLoad()
-
-            attendanceVC.title = "Attendance"
-            attendanceVC.parentNavigationController = self.navigationController
-            controllersArray.append(attendanceVC)
-            
-            let syllabusStatusVC:SyllabusStatusListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorSyllabusStatus) as! SyllabusStatusListViewController
-//            _ = syllabusStatusVC.view // dummy variable(it will be never used): to load viewController.view & it automatically calls viewController.viewDidLoad()
-            syllabusStatusVC.title = "Syllabus Status"
-            
-            syllabusStatusVC.parentNavigationController = self.navigationController
-            syllabusStatusVC.userType = .Student
-            //controllersArray.append(syllabusStatusVC)
-
-            let professorRating:TeachersRatingViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorRating) as! TeachersRatingViewController
-//            _ = professorRating.view // dummy variable(it will be never used): to load viewController.view & it automatically calls viewController.viewDidLoad()
-
-            professorRating.title = "Rating"
-            professorRating.parentNavigationController = self.navigationController
-
-            
-            //controllersArray.append(professorRating)
-            break
-            
-            
-        default:
-            break;
-        }
-        
-//        self.setUpPageMenu()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -166,8 +98,7 @@ extension HomeViewController:LeftMenuDeleagte{
             child.moveToViewController(at: item)
             break
         }
-        makeDataSource()
+//        makeDataSource()
     }
 
 }
-
