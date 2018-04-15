@@ -37,8 +37,11 @@ class BaseViewController: UIViewController {
         gradient.frame = CGRect(x: 0, y: 0, width: UIApplication.shared.statusBarFrame.width, height: statusBarHeight + navBarHeight)
         gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradient.endPoint = CGPoint(x: 1, y: 1)
-        let color1 = UIColor(red: 116/255, green: 104/255, blue: 218/255, alpha: 1.0)
-        let color2 = UIColor(red: 126/255, green: 74/255, blue: 187/255, alpha: 1.0)
+//        let color1 = UIColor(red: 116/255, green: 104/255, blue: 218/255, alpha: 1.0)
+  //      let color2 = UIColor(red: 126/255, green: 74/255, blue: 187/255, alpha: 1.0)
+        let color1 = UIColor(red: 18/255, green: 63/255, blue: 148/255, alpha: 1.0)
+        let color2 = UIColor(red: 8/255, green: 47/255, blue: 136/255, alpha: 1.0)
+
         gradient.colors = [color1.cgColor, color2.cgColor]
         UIApplication.shared.windows.last?.layer.addSublayer(gradient)
         self.view.layer.addSublayer(gradient)
@@ -57,8 +60,12 @@ class BaseViewController: UIViewController {
                                 height: statusBarHeight + navBarHeight + CGFloat(Constants.NumberConstants.homeTabBarHeight))
         gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradient.endPoint = CGPoint(x: 1, y: 1)
-        let color1 = UIColor(red: 116/255, green: 104/255, blue: 218/255, alpha: 1.0)
-        let color2 = UIColor(red: 126/255, green: 74/255, blue: 187/255, alpha: 1.0)
+      //  let color1 = UIColor(red: 116/255, green: 104/255, blue: 218/255, alpha: 1.0)
+        //let color2 = UIColor(red: 126/255, green: 74/255, blue: 187/255, alpha: 1.0)
+        
+        let color1 = UIColor(red: 18/255, green: 63/255, blue: 148/255, alpha: 1.0)
+        let color2 = UIColor(red: 8/255, green: 47/255, blue: 136/255, alpha: 1.0)
+
         gradient.colors = [color1.cgColor, color2.cgColor]
 //        UIApplication.shared.windows.last?.layer.addSublayer(gradient)
 //        self.view.layer.addSublayer(gradient)
@@ -89,7 +96,7 @@ class BaseViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
         
         // show the alert
-        self.present(alert, animated: true, completion: nil)
+        UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
     }
     
     func getAndSaveUserToDb(){

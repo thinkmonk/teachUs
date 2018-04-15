@@ -26,7 +26,8 @@ class EventAttendanceClassListViewController: BaseViewController {
         self.tableViewClassList.dataSource = self
         self.tableViewClassList.delegate = self
         self.tableViewClassList.alpha = 0
-
+        
+        self.buttonConfirm.alpha = 0
         // Do any additional setup after loading the view.
     }
 
@@ -78,6 +79,15 @@ class EventAttendanceClassListViewController: BaseViewController {
             self.tableViewClassList.transform = CGAffineTransform.identity
         }
     }
+    
+    //MARK:- Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Constants.segues.toStudentList {
+            let destinatonVc:EventAttendanceStudentListViewController = segue.destination as! EventAttendanceStudentListViewController
+            destinatonVc.classList = self.arrayDataSource[self.tableViewClassList.indexPathForSelectedRow!.section]
+            destinatonVc.currentEvent = self.currentEvent
+        }
+    }
 }
 
 
@@ -111,5 +121,6 @@ extension EventAttendanceClassListViewController:UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.section)
+        self.performSegue(withIdentifier: Constants.segues.toStudentList, sender: self)
     }
 }

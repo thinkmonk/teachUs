@@ -54,7 +54,7 @@
                             <rect key="frame" x="162" y="70" width="20" height="20"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Success" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RYC-ks-DXC">
-                            <rect key="frame" x="141" y="105" width="64.5" height="20"/>
+                            <rect key="frame" x="140" y="105" width="65" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="ANL-Aw-DfL"/>
                             </constraints>

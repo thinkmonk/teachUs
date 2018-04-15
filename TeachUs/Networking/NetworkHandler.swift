@@ -198,13 +198,14 @@ class NetworkHandler:SessionManager{
                 let theJSONText = String(data: theJSONData,encoding: .ascii)
                 print("parameters = \(theJSONText!)")
             }
+            
             print("Headers = \(headers!)")
             //print("parameters:\(theJSONText)")
         #endif
         
         if(Connectivity.isConnectedToInternet){
             
-            Alamofire.request(self.url!, method: .post, parameters:parameters,encoding: URLEncoding.httpBody, headers: self.headers).validate().responseJSON {
+            Alamofire.request(self.url!, method: .post, parameters:parameters,encoding: URLEncoding.httpBody, headers: self.headers).responseJSON {
                 response in
                 switch response.result {
                 case .success:
@@ -237,5 +238,69 @@ class NetworkHandler:SessionManager{
     }
     
     
+    
+    func apiPostResponseString(apiName: String,
+                 parameters: [String: Any],
+                 completionHandler: @escaping (_ success:Bool,_ code:Int, _ response: [String:Any]) -> Void,
+                 failure: @escaping (_ success:Bool,_ code:Int, _ error: String) -> Void){
+        
+        headers = [
+            "Content-Type":"application/x-www-form-urlencoded"
+        ]
+        if(!UserManager.sharedUserManager.getAccessToken().isEmpty){
+            headers!["Authorization"] = "\(UserManager.sharedUserManager.getAccessToken())"
+        }
+        
+        #if DEBUG
+            print("***** POST NETWORK CALL DETAILS *****")
+            print("Api name: \(apiName)")
+            print("URL : \(self.url!)")
+            if let theJSONData = try? JSONSerialization.data(withJSONObject: parameters,options: []) {
+                let theJSONText = String(data: theJSONData,encoding: .ascii)
+                print("parameters = \(theJSONText!)")
+            }
+            
+            print("Headers = \(headers!)")
+            //print("parameters:\(theJSONText)")
+        #endif
+        
+        if(Connectivity.isConnectedToInternet){
+            
+            Alamofire.request(self.url!, method: .post, parameters: parameters, encoding: URLEncoding.httpBody, headers: self.headers).responseString(completionHandler: { (response) in
+                print(response)
+            })
+            
+            /*
+            Alamofire.request(self.url!, method: .post, parameters:parameters,encoding: URLEncoding.httpBody, headers: self.headers).responseString {
+                response in
+                switch response.result {
+                case .success:
+                    print(response)
+                    completionHandler(true, (response.response?.statusCode)!, response.result.value as! [String : Any])
+                    break
+                case .failure(let error):
+                    let responseError:NSError = error as NSError
+                    let errorString:String = responseError.localizedDescription
+                    let errorCode:Int = responseError.code
+                    _ = NSError(domain: "", code: 0, userInfo: nil)
+                    #if DEBUG
+                        print("***** NETWORK CALL FAILURE RESPONSE *****")
+                        print("error code: \(errorCode), error String \(errorString)")
+                    #endif
+                    failure(false, errorCode, errorString)
+                }
+            }
+            */
+            /*
+             Alamofire.request(self.url!, method: .post, parameters:parameters,encoding: URLEncoding.queryString, headers: self.headers).validate().response{ response  in
+             print(response.response!)
+             }
+             */
+            
+            
+        }else{
+            //            failure(false, 0, Constants.errorMessages.noInternetMessage);
+        }
+    }
     
 }
