@@ -9,6 +9,8 @@
 import UIKit
 import ObjectMapper
 
+
+
 class EventAttendanceClassListViewController: BaseViewController {
 
     var currentEvent:Event!
@@ -85,6 +87,7 @@ class EventAttendanceClassListViewController: BaseViewController {
         if segue.identifier == Constants.segues.toStudentList {
             let destinatonVc:EventAttendanceStudentListViewController = segue.destination as! EventAttendanceStudentListViewController
             destinatonVc.classList = self.arrayDataSource[self.tableViewClassList.indexPathForSelectedRow!.section]
+            destinatonVc.delegate = self
             destinatonVc.currentEvent = self.currentEvent
         }
     }
@@ -123,4 +126,12 @@ extension EventAttendanceClassListViewController:UITableViewDelegate, UITableVie
         print(indexPath.section)
         self.performSegue(withIdentifier: Constants.segues.toStudentList, sender: self)
     }
+}
+
+extension EventAttendanceClassListViewController:AddEventAttendanceDelegate{
+    func eventAttendanceAdded(_ message: String) {
+        self.showAlterWithTitle(nil, alertMessage: message)
+    }
+    
+    
 }

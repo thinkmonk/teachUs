@@ -59,6 +59,7 @@ public struct Constants {
         static let CollegeAttendanceMailReportViewControllerId = "CollegeAttendanceMailReportViewControllerId"
         static let EventAttendanceListViewControllerId = "EventAttendanceListViewControllerId"
         static let AddNewEventViewControllerId = "AddNewEventViewControllerId"
+        static let AddRemoveAdminViewControllerId = "AddRemoveAdminViewControllerId"
     }
     
     struct UserDefaults {

@@ -12,6 +12,10 @@ import RxSwift
 import RxCocoa
 import Alamofire
 
+protocol AddEventAttendanceDelegate {
+    func eventAttendanceAdded(_ message:String)
+}
+
 class EventAttendanceStudentListViewController: BaseViewController {
 
   //  var searchButton: UIButton!
@@ -24,6 +28,7 @@ class EventAttendanceStudentListViewController: BaseViewController {
     var arraySearchDataSource:[EventStudents] = []
     var totalParticipants :Int!
     let disposeBag = DisposeBag()
+    var delegate:AddEventAttendanceDelegate!
     
     @IBOutlet weak var labelClass: UILabel!
     @IBOutlet weak var labelTotalParticipants: UILabel!
@@ -62,8 +67,6 @@ class EventAttendanceStudentListViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
-    
     //MARK:- Outlet methods
     @IBAction func submitEventAttendance(_ sender: Any) {
 //        print(EventAttendanceManager.sharedEventAttendanceManager.attendanceListJSON)
@@ -94,15 +97,15 @@ class EventAttendanceStudentListViewController: BaseViewController {
             if (status == 200){
                 let message:String = response["message"] as! String
                 self.navigationController?.popViewController(animated: true)
-                self.showAlterWithTitle(nil, alertMessage: message)
+                if self.delegate != nil{
+                    self.delegate.eventAttendanceAdded(message)
+                }
             }
         }) { (error, code, message) in
             self.showAlterWithTitle(nil, alertMessage: message)
             LoadingActivityHUD.hideProgressHUD()
         }
-        
     }
-    
     
     func getStudentList(){
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
@@ -149,7 +152,6 @@ class EventAttendanceStudentListViewController: BaseViewController {
         }
     }
     
-    
     func showTableView(){
         self.tableViewStudentList.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
         UIView.animate(withDuration: 0.3) {
@@ -157,8 +159,6 @@ class EventAttendanceStudentListViewController: BaseViewController {
             self.tableViewStudentList.transform = CGAffineTransform.identity
         }
     }
-    
-    
     
     @objc func searchButtonTapped(_ sender: Any?) {
         self.navigationItem.rightBarButtonItem = nil

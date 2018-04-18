@@ -88,6 +88,8 @@
 		81A80EDD1FAF11B700DDFFA1 /* CollegeSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A80EDC1FAF11B700DDFFA1 /* CollegeSummary.swift */; };
 		81A80EDF1FAF3DAD00DDFFA1 /* CollegeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A80EDE1FAF3DAD00DDFFA1 /* CollegeList.swift */; };
 		81A80EE11FAF3DCB00DDFFA1 /* CollegeList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81A80EE01FAF3DCB00DDFFA1 /* CollegeList.xib */; };
+		81ACF7F320851E1700167203 /* AddRemoveAdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81ACF7F220851E1700167203 /* AddRemoveAdminViewController.swift */; };
+		81ACF7F520851EAC00167203 /* Admin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81ACF7F420851EAC00167203 /* Admin.swift */; };
 		81AE8A061F9FC37B00D49749 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AE8A051F9FC37B00D49749 /* BaseViewController.swift */; };
 		81B0281B20506BA90045A0A2 /* UserRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B0281A20506BA90045A0A2 /* UserRole.swift */; };
 		81B190C01FA24E19004A8A72 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B190BF1FA24E19004A8A72 /* LoginView.swift */; };
@@ -289,6 +291,8 @@
 		81A80EDC1FAF11B700DDFFA1 /* CollegeSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeSummary.swift; sourceTree = "<group>"; };
 		81A80EDE1FAF3DAD00DDFFA1 /* CollegeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeList.swift; sourceTree = "<group>"; };
 		81A80EE01FAF3DCB00DDFFA1 /* CollegeList.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollegeList.xib; sourceTree = "<group>"; };
+		81ACF7F220851E1700167203 /* AddRemoveAdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRemoveAdminViewController.swift; sourceTree = "<group>"; };
+		81ACF7F420851EAC00167203 /* Admin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Admin.swift; sourceTree = "<group>"; };
 		81AE8A051F9FC37B00D49749 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		81B0281A20506BA90045A0A2 /* UserRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRole.swift; sourceTree = "<group>"; };
 		81B190BF1FA24E19004A8A72 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -656,6 +660,7 @@
 				8135B89C207911CE008E3E4B /* Event.swift */,
 				81E02A3D207C972200EB6BA8 /* ClassList.swift */,
 				81E02A45207CFC6800EB6BA8 /* EventStudents.swift */,
+				81ACF7F420851EAC00167203 /* Admin.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -871,6 +876,7 @@
 				810BECD7206E65D600F560C6 /* CollegeAttendanceDetailsViewController.swift */,
 				81E3E3A820776057002CFC1D /* CollegeAttendanceMailReportViewController.swift */,
 				81E4BCE8205EA17C00674FD4 /* CollegeSyllabusStatusViewController.swift */,
+				81ACF7F220851E1700167203 /* AddRemoveAdminViewController.swift */,
 			);
 			path = College;
 			sourceTree = "<group>";
@@ -1302,6 +1308,7 @@
 				819BDA521FC4A0C500DD7D2D /* TeachersRatingViewController.swift in Sources */,
 				81E4BCEB205EA47900674FD4 /* CollegeAttendanceList.swift in Sources */,
 				81F78EAC1FB0DFE600A016B0 /* AttendanceCalenderTableViewCell.swift in Sources */,
+				81ACF7F520851EAC00167203 /* Admin.swift in Sources */,
 				81AE8A061F9FC37B00D49749 /* BaseViewController.swift in Sources */,
 				81E02A4B207D06AC00EB6BA8 /* EventStudentListTableViewCell.swift in Sources */,
 				812C34EC1FB78E770048DD3C /* AttendanceCalenderManager.swift in Sources */,
@@ -1314,6 +1321,7 @@
 				819AADEF1FB6DBBD0061C471 /* DefaultSelectionTableViewCell.swift in Sources */,
 				81A560D3205D07DC00DAE086 /* HomeViewController2.swift in Sources */,
 				81D76B521FC1D3EC005E861C /* SyllabusDetailsViewController.swift in Sources */,
+				81ACF7F320851E1700167203 /* AddRemoveAdminViewController.swift in Sources */,
 				81D7CE921FAB987300C4375E /* StudentAttedanceViewController.swift in Sources */,
 				81CCAE4D1FC805CA0070907A /* TeacherProfileTableViewCell.swift in Sources */,
 				8135B897207900D4008E3E4B /* AddNewEventViewController.swift in Sources */,

@@ -89,7 +89,6 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
             professorRating.title = "Rating"
             professorRating.parentNavigationController = self.parentNavigationController
             
-            
             //controllersArray.append(professorRating)
             break
             
@@ -106,7 +105,11 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
             eventAttendanceListVc.parentNavigationController = self.parentNavigationController
             controllersArray.append(eventAttendanceListVc)
             
-            
+            let addRemoveAdminVC:AddRemoveAdminViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.AddRemoveAdminViewControllerId) as! AddRemoveAdminViewController
+            addRemoveAdminVC.title = "Add/Remove Admin"
+            addRemoveAdminVC.parentNavigationController = self.parentNavigationController
+            controllersArray.append(addRemoveAdminVC)
+
             let collegeSyllabusStatusVC:CollegeSyllabusStatusViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.CollegeSyllabusStatusViewControllerId) as! CollegeSyllabusStatusViewController
             collegeSyllabusStatusVC.title = "Syllabus"
             collegeSyllabusStatusVC.parentNavigationController = self.parentNavigationController

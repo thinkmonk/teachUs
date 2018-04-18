@@ -49,6 +49,9 @@ public struct URLConstants{
         static let getClassList = BaseUrl.baseURL + "/events/event_class_list"
         static let getStudentList = BaseUrl.baseURL + "/events/event_student_list"
         static let markEventAttendance = BaseUrl.baseURL + "/events/add_event_attendance"
+        static let getAdminList =  BaseUrl.baseURL + "/admin/adminlist"
+        static let addAmin = BaseUrl.baseURL + "/admin/add_admin"
+        static let removeAdmin = BaseUrl.baseURL + "/admin/remove_admin"
     }
     
     struct SuperAdminURL {
