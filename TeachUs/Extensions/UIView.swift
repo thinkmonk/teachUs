@@ -115,6 +115,10 @@ extension UIView {
             self.makeEdgesRoundedWith(radius: 10.0)
         }
     
+    func makeTableCellEdgesRounded(){
+        self.makeEdgesRoundedWith(radius: 5.0)
+    }
+    
     func makeTopEdgesRounded(){
         let maskLayer = CAShapeLayer()
         maskLayer.path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: [.topLeft, .topRight], cornerRadii: CGSize(width: 10, height: 10)).cgPath
@@ -147,4 +151,19 @@ extension UIView {
     func removeDropShadow(){
         self.layer.shadowOpacity = 0
     }
+    
+    func addShadow(){
+        self.layer.cornerRadius = 5
+        
+        // border
+        self.layer.borderWidth = 1.0
+        self.layer.borderColor = UIColor.lightGray.cgColor
+        
+        // shadow
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOffset = CGSize(width: 3, height: 3)
+        self.layer.shadowOpacity = 0.1
+        self.layer.shadowRadius = 2.0
+    }
+    
 }

@@ -26,14 +26,20 @@ class ProfessorAttedanceViewController: BaseViewController {
         self.view.backgroundColor = UIColor.clear
         tableviewCollegeList.delegate = self
         tableviewCollegeList.dataSource = self
+        self.tableviewCollegeList.alpha = 0
+        self.getCollegeSummaryForProfessor()
+
         let cellNib = UINib(nibName:nibCollegeListCell, bundle: nil)
         self.tableviewCollegeList.register(cellNib, forCellReuseIdentifier: Constants.CustomCellId.ProfessorCollegeList)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getCollegeSummaryForProfessor()
-
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+//        getCollegeSummaryForProfessor()
     }
     
     override func didReceiveMemoryWarning() {
@@ -41,7 +47,6 @@ class ProfessorAttedanceViewController: BaseViewController {
     }
     
     func getCollegeSummaryForProfessor(){
-        self.tableviewCollegeList.alpha = 0
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()
         manager.url = URLConstants.ProfessorURL.getClassList

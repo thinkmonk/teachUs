@@ -17,6 +17,7 @@ class TeacherDetailsTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.makeTableCellEdgesRounded()
         // Initialization code
     }
     

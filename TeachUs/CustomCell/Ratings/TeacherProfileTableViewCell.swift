@@ -14,9 +14,13 @@ class TeacherProfileTableViewCell: UITableViewCell {
     @IBOutlet weak var labelteacherName: UILabel!
     @IBOutlet weak var labelTeacherSubject: UILabel!
     @IBOutlet weak var buttonHeart: ButtonWithIndexPath!
+    @IBOutlet weak var labelHeartDescription: UILabel!
     
+    @IBOutlet weak var viewCellBg: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.makeTableCellEdgesRounded()
+        self.viewCellBg.addShadow()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

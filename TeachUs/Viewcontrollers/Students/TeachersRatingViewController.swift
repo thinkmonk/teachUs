@@ -15,7 +15,7 @@ class TeachersRatingViewController: BaseViewController {
     var parentNavigationController : UINavigationController?
 
     var arrayDataSource:[ProfessorDetails] = []
-    var arrayRatingCriteriaDataSource:[RatingDetails] = []
+    var arrayRatingCriteriaDataSource:[ProfessorRatingDetials] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,7 +75,7 @@ class TeachersRatingViewController: BaseViewController {
             }
             
             for criteria in criteriaList{
-                let tempCriteria = Mapper<RatingDetails>().map(JSON: criteria)
+                let tempCriteria = Mapper<ProfessorRatingDetials>().map(JSON: criteria)
                 self.arrayRatingCriteriaDataSource.append(tempCriteria!)
             }
             

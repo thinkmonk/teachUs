@@ -62,7 +62,7 @@ class ProfessorDetails:Mappable{
  }
   }
  */
-
+/*
 class RatingDetails:Mappable{
     var criteriaId:Int?
     var criteria:String?
@@ -79,4 +79,6 @@ class RatingDetails:Mappable{
         self.description <- map["description"]
     }
 }
+ 
+ */
 

@@ -20,6 +20,8 @@ public struct Constants {
         static let toCollegeAttendanceDetail = "toCollegeAttendanceDetail"
         static let toClassList = "toClassList"
         static let toStudentList = "toStudentList"
+        static let toProfessorRatingList = "toProfessorRatingList"
+        static let toRatingDetails = "toRatingDetails"
     }
     
     struct Images {
@@ -60,6 +62,7 @@ public struct Constants {
         static let EventAttendanceListViewControllerId = "EventAttendanceListViewControllerId"
         static let AddNewEventViewControllerId = "AddNewEventViewControllerId"
         static let AddRemoveAdminViewControllerId = "AddRemoveAdminViewControllerId"
+        static let CollegeClassRatingListViewControllerId = "CollegeClassRatingListViewControllerId"
     }
     
     struct UserDefaults {
@@ -94,6 +97,7 @@ public struct Constants {
         static let EventListTableViewCellId = "EventListTableViewCellId"
         static let ClassListTableViewCellId = "ClassListTableViewCellId"
         static let EventStudentListTableViewCellId = "EventStudentListTableViewCellId"
+        static let ProfessorRatingProfileTableViewCellId = "ProfessorRatingProfileTableViewCellId"
     }
     
     struct UserTypeString {

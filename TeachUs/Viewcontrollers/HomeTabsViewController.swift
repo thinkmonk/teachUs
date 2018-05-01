@@ -34,7 +34,6 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
         super.viewDidLoad()
 
         self.view.bringSubview(toFront: self.view)
-
         // Do any additional setup after loading the view.
     }
 
@@ -43,18 +42,29 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    var professorArray:[UIViewController]{
+        var vcArray:[UIViewController] = []
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let professorAttendanceVC = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorAttendance) as! ProfessorAttedanceViewController
+        professorAttendanceVC.title = "Attendance"
+        professorAttendanceVC.parentNavigationController = self.parentNavigationController
+        vcArray.append(professorAttendanceVC)
+        return vcArray
+    }
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        
         switch UserManager.sharedUserManager.user! {
         case .Professor:
+            return self.professorArray
+            /*
             controllersArray.removeAll()
             let professorAttendanceVC = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorAttendance) as! ProfessorAttedanceViewController
             professorAttendanceVC.title = "Attendance"
             professorAttendanceVC.parentNavigationController = self.parentNavigationController
             controllersArray.append(professorAttendanceVC)
+            
             
             let professorSyllabusStatusVC = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorSyllabusStatus) as! SyllabusStatusListViewController
             professorSyllabusStatusVC.title = "Syllabus Status"
@@ -70,7 +80,7 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
             //controllersArray.append(professorLogsListVC)
             
             break
-            
+            */
         case .Student:
             controllersArray.removeAll()
             let attendanceVC: StudentAttedanceViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.studentAttendace) as! StudentAttedanceViewController
@@ -109,6 +119,13 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
             addRemoveAdminVC.title = "Add/Remove Admin"
             addRemoveAdminVC.parentNavigationController = self.parentNavigationController
             controllersArray.append(addRemoveAdminVC)
+            
+            let collegeRatingListVC:CollegeClassRatingListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.CollegeClassRatingListViewControllerId) as! CollegeClassRatingListViewController
+            collegeRatingListVC.title = "Ratings"
+            collegeRatingListVC.parentNavigationController = self.parentNavigationController
+            controllersArray.append(collegeRatingListVC)
+            
+
 
             let collegeSyllabusStatusVC:CollegeSyllabusStatusViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.CollegeSyllabusStatusViewControllerId) as! CollegeSyllabusStatusViewController
             collegeSyllabusStatusVC.title = "Syllabus"

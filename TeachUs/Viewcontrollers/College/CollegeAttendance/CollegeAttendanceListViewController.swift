@@ -23,7 +23,6 @@ class CollegeAttendanceListViewController: BaseViewController {
         self.tableViewCollegeAttendanceList.dataSource = self
         self.tableViewCollegeAttendanceList.alpha = 0.0
         getClassAttendance()
-        self.addDefaultBackGroundImage()
     }
 
     override func didReceiveMemoryWarning() {

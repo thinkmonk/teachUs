@@ -52,6 +52,9 @@ public struct URLConstants{
         static let getAdminList =  BaseUrl.baseURL + "/admin/adminlist"
         static let addAmin = BaseUrl.baseURL + "/admin/add_admin"
         static let removeAdmin = BaseUrl.baseURL + "/admin/remove_admin"
+        static let classRatingList = BaseUrl.baseURL + "/ratings/class_rating_list"
+        static let  ClassProfessorRatingList = BaseUrl.baseURL + "/ratings/class_professor_rating_list"
+        static let getProfessorRatingDetails = BaseUrl.baseURL + "/ratings/detailed_professor_rating"
     }
     
     struct SuperAdminURL {

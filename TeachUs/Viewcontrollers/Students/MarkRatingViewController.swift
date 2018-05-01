@@ -11,7 +11,7 @@ import UIKit
 class MarkRatingViewController: BaseViewController {
     var parentNavigationController : UINavigationController?
 
-    var arrayDataSource:[RatingDetails] = []
+    var arrayDataSource:[ProfessorRatingDetials] = []
     var professsorDetails:ProfessorDetails!
     var subjectId:String = ""
     var arrayTableDataSource:[RatingDataSource] = []
@@ -71,8 +71,8 @@ class MarkRatingViewController: BaseViewController {
         var ratings:[[String:Any]]! = []
         for value in self.arrayDataSource{
             var ratingTemp:[String:Any] = [:]
-            ratingTemp["criteriaId"] = "\(value.criteriaId!)"
-            ratingTemp["rating"] = "\(value.rating!)"
+            ratingTemp["criteriaId"] = "\(value.criteriaId)"
+            ratingTemp["rating"] = "\(value.ratings)"
             ratings.append(ratingTemp)
         }
         let teacherPoularString:String = self.isTeacherPopular ? "YES" : "NO"
@@ -134,15 +134,17 @@ extension MarkRatingViewController: UITableViewDelegate, UITableViewDataSource{
         case .RatingTopics:
             let cell : RatingTopicsTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.RatingTopicsTableViewCellId, for: indexPath) as! RatingTopicsTableViewCell
             
-            let details:RatingDetails = self.arrayDataSource[indexPath.section - 2] //-2 is fot the top to sections cells i.e. profile & title
+            let details:ProfessorRatingDetials = self.arrayDataSource[indexPath.section - 2] //-2 is fot the top to sections cells i.e. profile & title
  
-            cell.labelRatingTopic.text = "\(details.criteria!)"
-            cell.buttonRating.setTitle("\(details.rating!)", for: .normal)
+            cell.labelRatingTopic.text = "\(details.criteria)"
+            cell.buttonRating.setTitle("\(details.ratings)", for: .normal)
             cell.buttonRating.indexPath = indexPath
             cell.buttonShowInfo.indexPath = indexPath
             cell.buttonShowInfo.addTarget(self, action: #selector(MarkRatingViewController.showInfo(_:)), for: .touchUpInside)
             
             cell.buttonRating.addTarget(self, action: #selector(MarkRatingViewController.showRating(_:)), for: .touchUpInside)
+            cell.makeWhiteBackground(false)
+
             cell.selectionStyle = .none
             return cell
             
@@ -199,7 +201,7 @@ extension MarkRatingViewController: UITableViewDelegate, UITableViewDataSource{
         ]
         
         self.ratingDropDown.selectionAction = { [unowned self] (index, item) in
-            self.arrayDataSource[sender.indexPath.section-2].rating = item
+            self.arrayDataSource[sender.indexPath.section-2].ratings = item
             self.tableViewTeacherRating.reloadRows(at: [sender.indexPath], with: .fade)
 
         }

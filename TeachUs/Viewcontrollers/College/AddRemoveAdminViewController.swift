@@ -166,6 +166,7 @@ class AddRemoveAdminViewController: BaseViewController {
         self.adminDropdown.anchorView = self.viewRemoveAdminPhoneNumber
         self.adminDropdown.bottomOffset = CGPoint(x: 0, y: viewRemoveAdminPhoneNumber.height())
         self.adminDropdown.width = self.viewRemoveAdminPhoneNumber.width()
+        self.adminDropdown.dataSource.removeAll()
         for admin in self.arrayAdminList{
             self.adminDropdown.dataSource.append(admin.contact)
         }
