@@ -205,7 +205,7 @@ class NetworkHandler:SessionManager{
         
         if(Connectivity.isConnectedToInternet){
             
-            Alamofire.request(self.url!, method: .post, parameters:parameters,encoding: URLEncoding.httpBody, headers: self.headers).responseJSON {
+            Alamofire.request(self.url!, method: .post, parameters:parameters,encoding: URLEncoding.httpBody, headers: self.headers).validate().responseJSON {
                 response in
                 switch response.result {
                 case .success:

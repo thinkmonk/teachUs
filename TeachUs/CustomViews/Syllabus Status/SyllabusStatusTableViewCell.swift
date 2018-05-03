@@ -20,6 +20,7 @@ class SyllabusStatusTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.imageViewArrow.isHidden = true
+        self.makeTableCellEdgesRounded()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

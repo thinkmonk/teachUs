@@ -163,6 +163,7 @@ extension LoginViewController:LoginDelegate{
 
         }) { (error, code, message) in
             print(message)
+            self.showAlterWithTitle(nil, alertMessage: message)
             LoadingActivityHUD.hideProgressHUD()
         }
 

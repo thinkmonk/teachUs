@@ -26,11 +26,13 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
         settings.style.buttonBarItemsShouldFillAvailiableWidth = false
         settings.style.buttonBarLeftContentInset = 0
         settings.style.buttonBarRightContentInset = 0
+        /*
         changeCurrentIndexProgressive = { [weak self] (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
             guard changeCurrentIndex == true else { return }
             oldCell?.label.textColor = self?.unselectedColor
             newCell?.label.textColor = .white
         }
+ */
         super.viewDidLoad()
 
         self.view.bringSubview(toFront: self.view)
@@ -41,46 +43,32 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    var professorArray:[UIViewController]{
-        var vcArray:[UIViewController] = []
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let professorAttendanceVC = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorAttendance) as! ProfessorAttedanceViewController
-        professorAttendanceVC.title = "Attendance"
-        professorAttendanceVC.parentNavigationController = self.parentNavigationController
-        vcArray.append(professorAttendanceVC)
-        return vcArray
-    }
-    
+
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         switch UserManager.sharedUserManager.user! {
         case .Professor:
-            return self.professorArray
-            /*
+            
             controllersArray.removeAll()
             let professorAttendanceVC = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorAttendance) as! ProfessorAttedanceViewController
             professorAttendanceVC.title = "Attendance"
             professorAttendanceVC.parentNavigationController = self.parentNavigationController
             controllersArray.append(professorAttendanceVC)
             
-            
             let professorSyllabusStatusVC = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorSyllabusStatus) as! SyllabusStatusListViewController
             professorSyllabusStatusVC.title = "Syllabus Status"
             professorSyllabusStatusVC.parentNavigationController = self.parentNavigationController
             professorSyllabusStatusVC.userType = .Professor
-            
-            //controllersArray.append(professorSyllabusStatusVC)
+            controllersArray.append(professorSyllabusStatusVC)
             
             let professorLogsListVC = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorLogs) as! ProfessorLogsListViewController
             professorLogsListVC.title = "Logs"
             professorLogsListVC.parentNavigationController = self.parentNavigationController
-            
-            //controllersArray.append(professorLogsListVC)
-            
+            controllersArray.append(professorLogsListVC)
             break
-            */
+
+            
         case .Student:
             controllersArray.removeAll()
             let attendanceVC: StudentAttedanceViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.studentAttendace) as! StudentAttedanceViewController
@@ -97,9 +85,8 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
             
             let professorRating:TeachersRatingViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorRating) as! TeachersRatingViewController
             professorRating.title = "Rating"
-            professorRating.parentNavigationController = self.parentNavigationController
-            
-            //controllersArray.append(professorRating)
+            professorRating.parentNavigationController = self.parentNavigationController            
+            controllersArray.append(professorRating)
             break
             
         case .College:

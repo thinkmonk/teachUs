@@ -94,7 +94,6 @@ extension HomeViewController:LeftMenuDeleagte{
             guard let child = childViewController as? PagerTabStripViewController else {
                 continue
             }
-            child.moveToViewController(at: 0)
             child.reloadPagerTabStripView()
             child.moveToViewController(at: item)
             break

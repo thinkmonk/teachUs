@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import XLPagerTabStrip
 import ObjectMapper
 
 class TeachersRatingViewController: BaseViewController {
@@ -156,4 +157,10 @@ extension TeachersRatingViewController:UITableViewDataSource, UITableViewDelegat
         destinationVC.parentNavigationController = self.parentNavigationController
         self.parentNavigationController?.pushViewController(destinationVC, animated: true)
     }    
+}
+
+extension TeachersRatingViewController:IndicatorInfoProvider{
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "Attendance")
+    }
 }

@@ -8,6 +8,7 @@
 
 import UIKit
 import ObjectMapper
+import XLPagerTabStrip
 
 class SyllabusStatusListViewController: UIViewController {
 
@@ -21,7 +22,7 @@ class SyllabusStatusListViewController: UIViewController {
         print("SyllabusStatusListViewController")
         self.view.backgroundColor = UIColor.clear
         self.tableViewSyllabus.register(UINib(nibName: "SyllabusStatusTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.SyllabusStatusTableViewCellId)
-        //self.getSyllabus()
+        self.getSyllabus()
         self.tableViewSyllabus.alpha = 0
         self.tableViewSyllabus.estimatedRowHeight = 44.0
         self.tableViewSyllabus.rowHeight = UITableViewAutomaticDimension
@@ -40,9 +41,8 @@ class SyllabusStatusListViewController: UIViewController {
     
     func getSyllabus(){
         let manager = NetworkHandler()
-        
+        var parameters = [String:Any]()
         //http://ec2-34-215-84-223.us-west-2.compute.amazonaws.com:8081/teachus/teacher/getSyllabusSummary/Zmlyc3ROYW1lPURldmVuZHJhLG1pZGRsZU5hbWU9QSxsYXN0TmFtZT1GYWRuYXZpcyxyb2xsPVBST0ZFU1NPUixpZD0x?professorId=1&subjectId=1
-        
         switch userType! {
         case .Student:
 //            manager.url = URLConstants.StudentURL.getSyllabusSummary +
@@ -55,8 +55,8 @@ class SyllabusStatusListViewController: UIViewController {
 //            manager.url = URLConstants.TecacherURL.getSyllabusSummary +
 //                "\(UserManager.sharedUserManager.getAccessToken())" +
 //            "?professorId=\(UserManager.sharedUserManager.getUserId())"
-            manager.url = URLConstants.BaseUrl.baseURL + UserManager.sharedUserManager.userTeacher.syllabusStatusUrl!
-            
+            manager.url = URLConstants.ProfessorURL.syllabusSubjectStatus
+            parameters["college_code"] = UserManager.sharedUserManager.appUserCollegeDetails.college_code
             break
             
         default:
@@ -64,6 +64,29 @@ class SyllabusStatusListViewController: UIViewController {
         }
         
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        
+        manager.apiPost(apiName: "Get Syllabus for professor", parameters: parameters, completionHandler: { (sucess, code, response) in
+            LoadingActivityHUD.hideProgressHUD()
+            
+            guard let subjects = response["syllabus_subject_list"] as? [[String:Any]] else{
+                return
+            }
+            
+            for subject in subjects{
+                let tempSubject = Mapper<Subject>().map(JSON: subject)
+                self.arrayDataSource.append(tempSubject!)
+            }
+            self.makeTableView()
+            self.tableViewSyllabus.reloadData()
+            self.showTableView()
+
+        }) { (error, code, message) in
+            LoadingActivityHUD.hideProgressHUD()
+            print(message)
+
+        }
+        
+        /*
         manager.apiGet(apiName: "Get Syllabus for professor", completionHandler: { (response, code) in
             LoadingActivityHUD.hideProgressHUD()
             
@@ -83,6 +106,8 @@ class SyllabusStatusListViewController: UIViewController {
             LoadingActivityHUD.hideProgressHUD()
             print(errorMessage)
         }
+        
+        */
     }
     
     func makeTableView(){
@@ -110,9 +135,9 @@ extension SyllabusStatusListViewController:UITableViewDelegate, UITableViewDataS
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:SyllabusStatusTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.SyllabusStatusTableViewCellId, for: indexPath)  as! SyllabusStatusTableViewCell
-        cell.labelNumberOfLectures.text = "\(arrayDataSource[indexPath.section].numberOfLectures!)"
-        cell.labelSubject.text = "\(arrayDataSource[indexPath.section].subjectName!)"
-        cell.labelAttendancePercent.text = "\(arrayDataSource[indexPath.section].completion!)"
+        cell.labelNumberOfLectures.text = "\(arrayDataSource[indexPath.section].numberOfLectures)"
+        cell.labelSubject.text = "\(arrayDataSource[indexPath.section].subjectName)"
+        cell.labelAttendancePercent.text = "\(arrayDataSource[indexPath.section].completion)"
         cell.selectionStyle = .none
         cell.accessoryType = .disclosureIndicator
         cell.backgroundColor = UIColor.white
@@ -133,8 +158,14 @@ extension SyllabusStatusListViewController:UITableViewDelegate, UITableViewDataS
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let destinationVC:SyllabusDetailsViewController =  storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.syllabusDetails) as! SyllabusDetailsViewController
         destinationVC.arrayDataSource = self.arrayDataSource[indexPath.section].topics!
-        destinationVC.completionStatus = self.arrayDataSource[indexPath.section].completion!
+        destinationVC.completionStatus = self.arrayDataSource[indexPath.section].completion
         self.parentNavigationController?.pushViewController(destinationVC, animated: true)
     }
     
+}
+
+extension SyllabusStatusListViewController:IndicatorInfoProvider{
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "Syllabus Status")
+    }
 }

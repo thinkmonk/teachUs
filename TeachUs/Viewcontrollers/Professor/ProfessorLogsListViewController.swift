@@ -8,6 +8,7 @@
 
 import UIKit
 import ObjectMapper
+import XLPagerTabStrip
 
 class ProfessorLogsListViewController: UIViewController {
     var parentNavigationController : UINavigationController?
@@ -128,3 +129,10 @@ extension ProfessorLogsListViewController:UITableViewDelegate, UITableViewDataSo
         self.parentNavigationController?.pushViewController(destinationVC, animated: true)
     }
 }
+
+extension ProfessorLogsListViewController:IndicatorInfoProvider{
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "Logs")
+    }
+}
+

@@ -12,6 +12,23 @@ import ObjectMapper
 
 /*
  
+ //SUBJECT NEW
+ {
+ "syllabus_subject_list": [
+ {
+ "subject_id": "3",
+ "subject_code": "OR",
+ "subject_name": "Operations Research",
+ "total_lectures": "25",
+ "syllabus_percentage": "72"
+ },
+ 
+ }
+ 
+ 
+ 
+ 
+ 
  {
  "subjectWise": [
  {
@@ -92,10 +109,11 @@ class Topic:Mappable{
 
 class Subject:Mappable{
     
-    var subjectId:Int?
-    var subjectName:String?
-    var numberOfLectures:Int?
-    var completion:String?
+    var subjectId:String = ""
+    var subjectName:String = ""
+    var numberOfLectures:String = ""
+    var completion:String = ""
+    var subjectCode:String = ""
     var topics:[Topic]? = []
     
     
@@ -103,10 +121,11 @@ class Subject:Mappable{
     }
     
     public func mapping(map: Map) {
-        self.subjectId <- map["subjectId"]
-        self.subjectName <- map["subjectName"]
-        self.numberOfLectures <- map["numOfLecture"]
-        self.completion <- map["completion"]
+        self.subjectId <- map["subject_id"]
+        self.subjectName <- map["subject_name"]
+        self.numberOfLectures <- map["total_lectures"]
+        self.completion <- map["syllabus_percentage"]
+        self.subjectCode <- map["subject_code"]
         var topicArray:[[String:Any]] = []
         topicArray <- map["topicWise"]
         if(topicArray.count > 0){
