@@ -19,8 +19,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yaG-Ys-jbQ">
-                        <rect key="frame" x="10" y="13.5" width="88.5" height="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yaG-Ys-jbQ">
+                        <rect key="frame" x="10" y="13.5" width="280" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -31,6 +31,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="Lz7-KN-t5R" firstAttribute="centerY" secondItem="yaG-Ys-jbQ" secondAttribute="centerY" id="5rU-SW-Pf6"/>
+                    <constraint firstAttribute="trailing" secondItem="yaG-Ys-jbQ" secondAttribute="trailing" constant="30" id="QXA-iI-eK8"/>
                     <constraint firstAttribute="trailing" secondItem="Lz7-KN-t5R" secondAttribute="trailing" constant="15" id="fVD-WN-HRl"/>
                     <constraint firstItem="yaG-Ys-jbQ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="gjl-LE-TmG"/>
                     <constraint firstItem="yaG-Ys-jbQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="qyu-Ko-VEb"/>

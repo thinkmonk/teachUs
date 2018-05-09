@@ -19,11 +19,34 @@ import ObjectMapper
  "subject_id": "3",
  "subject_code": "OR",
  "subject_name": "Operations Research",
- "total_lectures": "25",
- "syllabus_percentage": "72"
+ "class_id": "1",
+ "course_name": "FYBMS",
+ "class_division": "A",
+ "total_lectures": "27",
+ "syllabus_percentage": "39"
  },
  
  }
+ 
+ "unit_syllabus_array": [
+ {
+ "unit_name": "Unit 01",
+ "unit_id": "1",
+ "topic_list": [
+ {
+ "topic_name": "LPP Graphical",
+ "topic_id": "1",
+ "topic_description": "",
+ "status": "2"
+ },
+ {
+ "topic_name": "LPP Simplex",
+ "topic_id": "2",
+ "topic_description": "",
+ "status": "2"
+ }
+ ]
+ },
  
  
  
@@ -54,12 +77,41 @@ import ObjectMapper
  
  */
 
+class Unit:Mappable{
+    
+    var unitId:String = ""
+    var unitName:String = ""
+    var unitNumber:String = ""
+    var topicArray:[Chapter]? = []
+    
+    required public init?(map: Map) {
+    }
+    
+    public func mapping(map: Map) {
+        self.unitId <- map["unit_id"]
+        self.unitName <- map["unit_name"]
+        var chaptersArray:[[String:Any]] = []
+        chaptersArray <- map["topic_list"]
+        
+        if(chaptersArray.count > 0){
+            for chapter in chaptersArray {
+                let tempChapter = Mapper<Chapter>().map(JSON: chapter)
+                self.topicArray?.append(tempChapter!)
+            }
+        }
+    }
+}
+
+
 class Chapter:Mappable{
     
-    var chapterId:Int?
-    var chapterNumber:String?
-    var chapterName:String?
-    var status:String?
+    var chapterName:String = ""
+    var chapterId:String = ""
+    var chapterDescription:String = ""
+    var chapterNumber:String = ""
+    var status:String = ""
+    
+    
     var setChapterStatus:String? = "Not Started"
     var chapterStatusTheme :SyllabusCompletetionType! = .NotStarted
     
@@ -67,9 +119,9 @@ class Chapter:Mappable{
     }
     
     public func mapping(map: Map) {
-        self.chapterId <- map["chapterId"]
-        self.chapterNumber <- map["chapterNumber"]
-        self.chapterName <- map["chapterNamme"]
+        self.chapterName <- map["topic_name"]
+        self.chapterId <- map["topic_id"]
+        self.chapterDescription <- map["topic_description"]
         if(map.JSON["status"] != nil){
             self.status <- map["status"]
         }else{
@@ -79,31 +131,7 @@ class Chapter:Mappable{
 }
 
 
-class Topic:Mappable{
-    
-    var topicId:Int?
-    var unitNumber:String?
-    var unitName:String?
-    var chapters:[Chapter]? = []
-    
-    required public init?(map: Map) {
-    }
-    
-    public func mapping(map: Map) {
-        self.topicId <- map["topicId"]
-        self.unitName <- map["unitName"]
-        self.unitNumber <- map["unitNumber"]
-        var chaptersArray:[[String:Any]] = []
-        chaptersArray <- map["chapterWise"]
-        
-        if(chaptersArray.count > 0){
-            for chapter in chaptersArray {
-                let tempChapter = Mapper<Chapter>().map(JSON: chapter)
-                self.chapters?.append(tempChapter!)
-            }
-        }
-    }
-}
+
 
 
 
@@ -114,7 +142,10 @@ class Subject:Mappable{
     var numberOfLectures:String = ""
     var completion:String = ""
     var subjectCode:String = ""
-    var topics:[Topic]? = []
+    var classId:String = ""
+    var classDivision:String = ""
+    var courseName:String = ""
+//    var topics:[Unit]? = []
     
     
     required public init?(map: Map){
@@ -126,14 +157,20 @@ class Subject:Mappable{
         self.numberOfLectures <- map["total_lectures"]
         self.completion <- map["syllabus_percentage"]
         self.subjectCode <- map["subject_code"]
+        self.classId <- map["class_id"]
+        self.classDivision <- map["class_division"]
+        self.courseName <- map["class_division"]
+        
+        /*
         var topicArray:[[String:Any]] = []
         topicArray <- map["topicWise"]
         if(topicArray.count > 0){
             for topic in topicArray{
-                let tempTopic = Mapper<Topic>().map(JSON: topic)
+                let tempTopic = Mapper<Unit>().map(JSON: topic)
                 self.topics?.append(tempTopic!)
             }
         }
+        */
         
     }
 }

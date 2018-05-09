@@ -22,7 +22,7 @@ class MarkCompletedPortionViewController: BaseViewController {
     @IBOutlet weak var buttonSubmit: UIButton!
     
     var subjectId:String?
-    var arrayDataSource:[Topic] = []
+    var arrayDataSource:[Unit] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +57,7 @@ class MarkCompletedPortionViewController: BaseViewController {
 //                    "&subjectId=\(self.subjectId!)"
 
         
-//        manager.url = URLConstants.BaseUrl.baseURL + UserManager.sharedUserManager.userTeacher.syllabusStatusUrl!
+        manager.url = URLConstants.ProfessorURL.topicList
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         manager.apiGet(apiName: "Get topics for professor", completionHandler: { (response, code) in
             LoadingActivityHUD.hideProgressHUD()
@@ -67,7 +67,7 @@ class MarkCompletedPortionViewController: BaseViewController {
             }
 
             for topic in topics{
-                let tempTopic = Mapper<Topic>().map(JSON: topic)
+                let tempTopic = Mapper<Unit>().map(JSON: topic)
                 self.arrayDataSource.append(tempTopic!)
             }
             self.makeTableView()
@@ -106,9 +106,9 @@ extension MarkCompletedPortionViewController:UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:TopicDetailsTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.TopicDetailsTableViewCellId, for: indexPath) as! TopicDetailsTableViewCell
         
-        let chapterCell:Chapter = self.arrayDataSource[indexPath.section].chapters![indexPath.row]
-        cell.labelChapterNumber.text = chapterCell.chapterNumber!
-        cell.labelChapterName.text = chapterCell.chapterName!
+        let chapterCell:Chapter = self.arrayDataSource[indexPath.section].topicArray![indexPath.row]
+        cell.labelChapterNumber.text = "Add Chapter number"
+        cell.labelChapterName.text = chapterCell.chapterName
         cell.labelStatus.text = chapterCell.setChapterStatus
 //        cell.buttonSetStatus.roundedBlueButton()
         cell.buttonInProgress.indexPath = indexPath
@@ -142,7 +142,7 @@ extension MarkCompletedPortionViewController:UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (self.arrayDataSource[section].chapters?.count)!
+        return (self.arrayDataSource[section].topicArray?.count)!
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -158,16 +158,16 @@ extension MarkCompletedPortionViewController:UITableViewDelegate, UITableViewDat
     
     @objc func markChapterInProgress(_ sender: ButtonWithIndexPath){
         let indexpath = sender.indexPath!
-        self.arrayDataSource[(indexpath.section)].chapters![(indexpath.row)].setChapterStatus = "In Progress"
-        self.arrayDataSource[(indexpath.section)].chapters![(indexpath.row)].chapterStatusTheme = .InProgress
+        self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].setChapterStatus = "In Progress"
+        self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].chapterStatusTheme = .InProgress
         self.tableviewTopics.reloadRows(at: [indexpath], with: .fade)
 
         
     }
     @objc func markChapterInCompleted(_ sender: ButtonWithIndexPath){
         let indexpath = sender.indexPath!
-        self.arrayDataSource[(indexpath.section)].chapters![(indexpath.row)].setChapterStatus = "Completed"
-        self.arrayDataSource[(indexpath.section)].chapters![(indexpath.row)].chapterStatusTheme = .Completed
+        self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].setChapterStatus = "Completed"
+        self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].chapterStatusTheme = .Completed
         self.tableviewTopics.reloadRows(at: [indexpath], with: .fade)
     }
 

@@ -405,16 +405,12 @@ Form Library</string>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="44" sectionFooterHeight="44" translatesAutoresizingMaskIntoConstraints="NO" id="XWp-cD-bd7">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XWp-cD-bd7">
                                 <rect key="frame" x="15" y="64" width="290" height="504"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="290" id="fIL-66-Goq"/>
-                                    <constraint firstAttribute="height" constant="504" id="fWq-ke-wu9"/>
-                                </constraints>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.92549019610000005" green="0.95294117649999999" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="XWp-cD-bd7" firstAttribute="leading" secondItem="kcg-bw-I0p" secondAttribute="leading" constant="15" id="OC7-PP-nbC"/>
                             <constraint firstAttribute="trailing" secondItem="XWp-cD-bd7" secondAttribute="trailing" constant="15" id="hEn-eN-Wla"/>
@@ -640,21 +636,54 @@ Form Library</string>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8kb-5F-kIe">
-                                <rect key="frame" x="10" y="64" width="300" height="504"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8kb-5F-kIe">
+                                <rect key="frame" x="10" y="64" width="300" height="464"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="f5p-u7-aLQ">
+                                <rect key="frame" x="0.0" y="528" width="320" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3jx-5A-9Rx">
+                                        <rect key="frame" x="0.0" y="0.0" width="160" height="40"/>
+                                        <color key="backgroundColor" red="0.77647058823529413" green="0.0" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Previous Subject">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="showLogsForPreviousSubject:" destination="1iW-gl-mHV" eventType="touchUpInside" id="obZ-AG-aEx"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pcL-QC-JkP">
+                                        <rect key="frame" x="160" y="0.0" width="160" height="40"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="Next Subject">
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="showLogsForNextSubject:" destination="1iW-gl-mHV" eventType="touchUpInside" id="pId-fW-nVP"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="pJu-dL-BiA"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.92549019610000005" green="0.95294117649999999" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="xb1-O7-1Mi" firstAttribute="bottom" secondItem="8kb-5F-kIe" secondAttribute="bottom" id="BwD-99-cuD"/>
                             <constraint firstItem="8kb-5F-kIe" firstAttribute="top" secondItem="xb1-O7-1Mi" secondAttribute="top" id="Ety-db-qeJ"/>
                             <constraint firstItem="xb1-O7-1Mi" firstAttribute="trailing" secondItem="8kb-5F-kIe" secondAttribute="trailing" constant="10" id="JdY-2L-KeN"/>
+                            <constraint firstItem="f5p-u7-aLQ" firstAttribute="top" secondItem="8kb-5F-kIe" secondAttribute="bottom" id="PBu-hZ-S87"/>
+                            <constraint firstItem="f5p-u7-aLQ" firstAttribute="leading" secondItem="xb1-O7-1Mi" secondAttribute="leading" id="QGF-Da-ZWR"/>
                             <constraint firstItem="8kb-5F-kIe" firstAttribute="leading" secondItem="xb1-O7-1Mi" secondAttribute="leading" constant="10" id="fE0-6L-s21"/>
+                            <constraint firstItem="xb1-O7-1Mi" firstAttribute="trailing" secondItem="f5p-u7-aLQ" secondAttribute="trailing" id="i1v-88-ZKJ"/>
+                            <constraint firstItem="xb1-O7-1Mi" firstAttribute="bottom" secondItem="f5p-u7-aLQ" secondAttribute="bottom" id="uUd-OJ-e82"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xb1-O7-1Mi"/>
                     </view>
                     <connections>
+                        <outlet property="buttonNextSubject" destination="pcL-QC-JkP" id="dAY-HT-xbt"/>
+                        <outlet property="buttonPreviousSubject" destination="3jx-5A-9Rx" id="At3-20-cE6"/>
                         <outlet property="tableLogsDetail" destination="8kb-5F-kIe" id="pjf-YK-a3c"/>
                     </connections>
                 </viewController>

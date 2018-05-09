@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TeachUs/Viewcontrollers/Professor/SyllabusStatusListViewController.swift"
-            timestampString = "547067394.13676"
+            filePath = "TeachUs/Extensions/DateString.swift"
+            timestampString = "547328216.23623"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
-            landmarkName = "getSyllabus()"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "getDateFromString()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TeachUs/Viewcontrollers/Professor/SyllabusStatusListViewController.swift"
-            timestampString = "547067394.13744"
+            filePath = "TeachUs/Viewcontrollers/Professor/LogsDetailViewController.swift"
+            timestampString = "547586670.919474"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "getSyllabus()"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
+            landmarkName = "showLogsForPreviousSubject(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

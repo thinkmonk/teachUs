@@ -32,9 +32,30 @@ import ObjectMapper
  ]
  }
  ]
+ 
+ 
+ "class_list": [
+ {
+ "course_name": "FYBMS - A",
+ "class_id": "1"
+ }
+ ]
+ 
  */
+class LogsClassList:Mappable{
+    var courseName:String = ""
+    var classId:String  = ""
+    
+    required init?(map: Map) {
+    }
+    
+    func mapping(map: Map) {
+        self.courseName <- map["course_name"]
+        self.classId  <- map["class_id"]
+    }
+}
 
-
+/*
 class ProfessorLogs:Mappable{
     var classId:Int!
     var fromTime:String = ""
@@ -42,7 +63,7 @@ class ProfessorLogs:Mappable{
     var noOfLecture:Int!
     var totalAttendance:Int!
     var dateTime:String = ""
-    var topics : [Topic] = []
+    var topics : [Unit] = []
     
     required public init?(map: Map) {
     }
@@ -59,10 +80,11 @@ class ProfessorLogs:Mappable{
             topicArray <- map["topicWise"]
             if(topicArray.count > 0){
                 for topic in topicArray{
-                    let tempTopic = Mapper<Topic>().map(JSON: topic)
+                    let tempTopic = Mapper<Unit>().map(JSON: topic)
                     self.topics.append(tempTopic!)
                 }
             }
         }
     }
 }
+ */

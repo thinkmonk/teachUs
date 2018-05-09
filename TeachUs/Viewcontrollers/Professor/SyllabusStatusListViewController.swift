@@ -48,7 +48,8 @@ class SyllabusStatusListViewController: UIViewController {
 //            manager.url = URLConstants.StudentURL.getSyllabusSummary +
 //                "\(UserManager.sharedUserManager.getAccessToken())" +
 //            "?studentId=\(UserManager.sharedUserManager.getUserId())"
-            manager.url = URLConstants.BaseUrl.baseURL + UserManager.sharedUserManager.userStudent.sllyabusStatusUrl!
+            manager.url = URLConstants.ProfessorURL.syllabusSubjectStatus
+            parameters["college_code"] = UserManager.sharedUserManager.appUserCollegeDetails.college_code
             break
         
         case .Professor:
@@ -114,6 +115,7 @@ class SyllabusStatusListViewController: UIViewController {
         self.tableViewSyllabus.delegate = self
         self.tableViewSyllabus.dataSource = self
     }
+    
     func showTableView(){
         self.tableViewSyllabus.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
         UIView.animate(withDuration: 0.3) {
@@ -157,8 +159,8 @@ extension SyllabusStatusListViewController:UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let destinationVC:SyllabusDetailsViewController =  storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.syllabusDetails) as! SyllabusDetailsViewController
-        destinationVC.arrayDataSource = self.arrayDataSource[indexPath.section].topics!
         destinationVC.completionStatus = self.arrayDataSource[indexPath.section].completion
+        destinationVC.selectedSubject = self.arrayDataSource[indexPath.section]
         self.parentNavigationController?.pushViewController(destinationVC, animated: true)
     }
     

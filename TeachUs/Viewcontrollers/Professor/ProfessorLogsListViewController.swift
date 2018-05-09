@@ -12,7 +12,7 @@ import XLPagerTabStrip
 
 class ProfessorLogsListViewController: UIViewController {
     var parentNavigationController : UINavigationController?
-    var arrayDataSource:[ProfessorLogs]! = []
+    var arrayDataSource:[College]! = []
     @IBOutlet weak var tableviewLogs: UITableView!
     let nibCollegeListCell = "ProfessorCollegeListTableViewCell"
 
@@ -22,8 +22,10 @@ class ProfessorLogsListViewController: UIViewController {
         self.tableviewLogs.backgroundColor = UIColor.clear
         let cellNib = UINib(nibName:nibCollegeListCell, bundle: nil)
         self.tableviewLogs.register(cellNib, forCellReuseIdentifier: Constants.CustomCellId.ProfessorCollegeList)
-
-        //self.getLogs()
+        self.tableviewLogs.estimatedRowHeight = 44.0
+        self.tableviewLogs.alpha = 0
+        self.tableviewLogs.rowHeight = UITableViewAutomaticDimension
+        self.getLogs()
         // Do any additional setup after loading the view.
     }
 
@@ -35,24 +37,28 @@ class ProfessorLogsListViewController: UIViewController {
     func getLogs(){
         
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
-
         let manager = NetworkHandler()
-//        manager.url = URLConstants.BaseUrl.baseURL + UserManager.sharedUserManager.userTeacher.logsUrl
-        manager.url = "http://ec2-52-40-212-186.us-west-2.compute.amazonaws.com:8081/teachus/teacher/getDateWiseSubjectLogs/Zmlyc3ROYW1lPURldmVuZHJhLG1pZGRsZU5hbWU9QSxsYXN0TmFtZT1GYWRuYXZpcyxyb2xsPVBST0ZFU1NPUixpZD0x?professorId=1&subjectId=1"
-        manager.apiGet(apiName: "Get professor logs", completionHandler: { (response, code) in
+        manager.url = URLConstants.ProfessorURL.getClassList
+        let parameters = [
+            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)"
+        ]
+        
+        manager.apiPost(apiName: "Get professor logs", parameters: parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
-            guard let logs = response["detail"] as? [[String:Any]] else{
+            guard let logs = response["class_list"] as? [[String:Any]] else{
                 return
             }
             for log in logs{
-                let tempLog = Mapper<ProfessorLogs>().map(JSON: log)
+                let tempLog = Mapper<College>().map(JSON: log)
                 self.arrayDataSource.append(tempLog!)
             }
             self.makeTableView()
-        }) { (error, code, errorMessage) in
+            self.showTableView()
+        }) { (success, code, mesage) in
             LoadingActivityHUD.hideProgressHUD()
-
+            print(mesage)
         }
+
     }
     
     func makeTableView(){
@@ -61,7 +67,14 @@ class ProfessorLogsListViewController: UIViewController {
         self.tableviewLogs.dataSource = self
         self.tableviewLogs.reloadData()
     }
-
+    
+    func showTableView(){
+        self.tableviewLogs.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        UIView.animate(withDuration: 0.3) {
+            self.tableviewLogs.alpha = 1.0
+            self.tableviewLogs.transform = CGAffineTransform.identity
+        }
+    }
 }
 
 extension ProfessorLogsListViewController:UITableViewDelegate, UITableViewDataSource{
@@ -78,7 +91,7 @@ extension ProfessorLogsListViewController:UITableViewDelegate, UITableViewDataSo
         if(cell == nil){
             let collegeCell:ProfessorCollegeListTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.ProfessorCollegeList, for: indexPath) as! ProfessorCollegeListTableViewCell
             
-            collegeCell.labelSubjectName.text = self.arrayDataSource[indexPath.section].fromTime + " to " + self.arrayDataSource[indexPath.section].toTime
+            collegeCell.labelSubjectName.text = self.arrayDataSource[indexPath.section].subjectName
             collegeCell.selectionStyle = UITableViewCellSelectionStyle.none
             cell = collegeCell
         }
@@ -97,7 +110,7 @@ extension ProfessorLogsListViewController:UITableViewDelegate, UITableViewDataSo
         labelTitle.center.y = headerView.centerY()
         labelTitle.textAlignment = .left
         labelTitle.textColor = UIColor.white
-        labelTitle.text = "\(self.arrayDataSource[section].classId!)"
+        labelTitle.text = ""
         labelTitle.font = UIFont.systemFont(ofSize: 14.0)
         labelTitle.numberOfLines = 0
         headerView.addSubview(labelTitle)
@@ -108,7 +121,7 @@ extension ProfessorLogsListViewController:UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 33.0
+        return 0
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -125,7 +138,9 @@ extension ProfessorLogsListViewController:UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let destinationVC:LogsDetailViewController =  storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.LogsDetail) as! LogsDetailViewController
-        destinationVC.logs = self.arrayDataSource[indexPath.section]
+        destinationVC.selectedCollege = self.arrayDataSource[indexPath.section]
+        destinationVC.allCollegeArray = self.arrayDataSource
+        destinationVC.selectedIndex = indexPath.section
         self.parentNavigationController?.pushViewController(destinationVC, animated: true)
     }
 }

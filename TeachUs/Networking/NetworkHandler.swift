@@ -187,7 +187,9 @@ class NetworkHandler:SessionManager{
             "Content-Type":"application/x-www-form-urlencoded"
         ]
         if(!UserManager.sharedUserManager.getAccessToken().isEmpty){
-            headers!["Authorization"] = "\(UserManager.sharedUserManager.getAccessToken())"
+            
+            headers!["Authorization"] =  "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6InNoYWhqbW5AZ21haWwuY29tIiwicm9sZV9pZCI6IjIifQ.-dWtc4BK7FYfM_8K_jhiu8XlNsVlHBGQ8gSa45ZRLXs"
+//            headers!["Authorization"] = "\(UserManager.sharedUserManager.getAccessToken())"
         }
 
         #if DEBUG

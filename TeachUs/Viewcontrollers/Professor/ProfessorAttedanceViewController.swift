@@ -23,7 +23,6 @@ class ProfessorAttedanceViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("ProfessorAttedanceViewController")
-        self.view.backgroundColor = UIColor.clear
         tableviewCollegeList.delegate = self
         tableviewCollegeList.dataSource = self
         self.tableviewCollegeList.alpha = 0
@@ -112,44 +111,14 @@ extension ProfessorAttedanceViewController:UITableViewDataSource, UITableViewDel
         return 44.0
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        //Need to create a label with the text we want in order to figure out height
-        let label: UILabel = createHeaderLabel(section)
-        let size = label.sizeThatFits(CGSize(width: tableView.width(), height: CGFloat.greatestFiniteMagnitude))
-        let padding: CGFloat = 20.0
-        return size.height + padding
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UITableViewHeaderFooterView()
-        let bgView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 30))
-        bgView.backgroundColor = UIColor.rgbColor(52, 40, 70)
-        headerView.backgroundView = bgView
-        let label = createHeaderLabel(section)
-        label.autoresizingMask = [.flexibleHeight]
-        //        label.backgroundColor = UIColor.rgbColor(52, 40, 70)
-        //        headerView.backgroundColor = UIColor.rgbColor(52, 40, 70)
-        
-        headerView.addSubview(label)
-        
-        return headerView
-    }
-    
-    func createHeaderLabel(_ section: Int)->UILabel {
-        let widthPadding: CGFloat = 15.0
-        let label: UILabel = UILabel(frame: CGRect(x: widthPadding, y: 0, width: tableviewCollegeList.width() - widthPadding, height: 0))
-        label.text = self.arrayCollegeList![section].name// Your text here
-        label.numberOfLines = 0;
-        label.textAlignment = NSTextAlignment.left
-        label.lineBreakMode = NSLineBreakMode.byWordWrapping
-        label.textColor = UIColor.white
-        label.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline) //use your own font here - this font is for accessibility
-        return label
-    }
- 
-    
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 44.0
+        return 15.0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableviewCollegeList.width(), height: 15))
+        footerView.backgroundColor = UIColor.clear
+        return footerView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

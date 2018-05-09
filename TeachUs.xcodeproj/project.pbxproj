@@ -78,6 +78,9 @@
 		819BDA541FC4A66E00DD7D2D /* ProfessorDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819BDA531FC4A66E00DD7D2D /* ProfessorDetails.swift */; };
 		819BDA581FC4AD5D00DD7D2D /* TeacherDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819BDA561FC4AD5D00DD7D2D /* TeacherDetailsTableViewCell.swift */; };
 		819BDA591FC4AD5D00DD7D2D /* TeacherDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 819BDA571FC4AD5D00DD7D2D /* TeacherDetailsTableViewCell.xib */; };
+		819E0B3E20A0C9C600D16847 /* ViewLogsCalender.xib in Resources */ = {isa = PBXBuildFile; fileRef = 819E0B3D20A0C9C600D16847 /* ViewLogsCalender.xib */; };
+		819E0B4020A0C9D700D16847 /* ViewLogsCalender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819E0B3F20A0C9D700D16847 /* ViewLogsCalender.swift */; };
+		81A0CDD5209F5B5C0023564B /* LogDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A0CDD4209F5B5C0023564B /* LogDetails.swift */; };
 		81A3585120820F2C00B93239 /* EventAttendanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A3585020820F2C00B93239 /* EventAttendanceManager.swift */; };
 		81A35853208282C800B93239 /* ObservableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A35852208282C800B93239 /* ObservableArray.swift */; };
 		81A523951FA7955600B3B557 /* CollegeLogin.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81A523941FA7955600B3B557 /* CollegeLogin.xib */; };
@@ -289,6 +292,9 @@
 		819BDA531FC4A66E00DD7D2D /* ProfessorDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessorDetails.swift; sourceTree = "<group>"; };
 		819BDA561FC4AD5D00DD7D2D /* TeacherDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		819BDA571FC4AD5D00DD7D2D /* TeacherDetailsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TeacherDetailsTableViewCell.xib; sourceTree = "<group>"; };
+		819E0B3D20A0C9C600D16847 /* ViewLogsCalender.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewLogsCalender.xib; sourceTree = "<group>"; };
+		819E0B3F20A0C9D700D16847 /* ViewLogsCalender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLogsCalender.swift; sourceTree = "<group>"; };
+		81A0CDD4209F5B5C0023564B /* LogDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogDetails.swift; sourceTree = "<group>"; };
 		81A3585020820F2C00B93239 /* EventAttendanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAttendanceManager.swift; sourceTree = "<group>"; };
 		81A35852208282C800B93239 /* ObservableArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableArray.swift; sourceTree = "<group>"; };
 		81A523941FA7955600B3B557 /* CollegeLogin.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollegeLogin.xib; sourceTree = "<group>"; };
@@ -604,6 +610,7 @@
 		813EC7691F9BA46200F11A12 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				819E0B3C20A0C9A400D16847 /* LogDetails */,
 				81E3E3AC207778D0002CFC1D /* AttendanceReport */,
 				8163EB092055BE3A003E4B1D /* ImagePicker */,
 				810E0CD81FD03EEE006AE5BE /* TeacherLogs */,
@@ -667,6 +674,7 @@
 				81054EB31FC2263600EEE0CD /* StudentAttendance.swift */,
 				819BDA531FC4A66E00DD7D2D /* ProfessorDetails.swift */,
 				81930B311FCDE2590002CDBE /* ProfessorLogs.swift */,
+				81A0CDD4209F5B5C0023564B /* LogDetails.swift */,
 				81930B2F1FCDD7700002CDBE /* TeacherProfile.swift */,
 				8126BC051FD2CB45007B6B3B /* StudentProfile.swift */,
 				8180D9071FD3D21B00CE803F /* SuperAdminProfile.swift */,
@@ -761,6 +769,15 @@
 				81CAD6E91FC9AEF300B55845 /* ViewRatingInfo.xib */,
 			);
 			path = "Teacher Rating";
+			sourceTree = "<group>";
+		};
+		819E0B3C20A0C9A400D16847 /* LogDetails */ = {
+			isa = PBXGroup;
+			children = (
+				819E0B3D20A0C9C600D16847 /* ViewLogsCalender.xib */,
+				819E0B3F20A0C9D700D16847 /* ViewLogsCalender.swift */,
+			);
+			path = LogDetails;
 			sourceTree = "<group>";
 		};
 		81A7D051208B64570032A1BC /* CollegeAttendance */ = {
@@ -1137,6 +1154,7 @@
 				81B190C21FA24E22004A8A72 /* LoginView.xib in Resources */,
 				81A80EE11FAF3DCB00DDFFA1 /* CollegeList.xib in Resources */,
 				81B2E2D91FC35B0600E9E852 /* Info.plist in Resources */,
+				819E0B3E20A0C9C600D16847 /* ViewLogsCalender.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1339,6 +1357,7 @@
 				81D020252059A131003742FD /* RootViewController.swift in Sources */,
 				8126312A1FB2289200CD80D6 /* AttendanceStudentListTableViewCell.swift in Sources */,
 				81D7CE831FAB8E5D00C4375E /* CAPSPageMenu+UIGestureRecognizerDelegate.swift in Sources */,
+				81A0CDD5209F5B5C0023564B /* LogDetails.swift in Sources */,
 				819BDA541FC4A66E00DD7D2D /* ProfessorDetails.swift in Sources */,
 				81FFB0BB1FBF3E6B00C32097 /* MarkCompletedPortionViewController.swift in Sources */,
 				81A80EDB1FAE14A400DDFFA1 /* NetworkHandler.swift in Sources */,
@@ -1413,6 +1432,7 @@
 				8137EF531FA109B500045D97 /* LoginViewController.swift in Sources */,
 				81B2E2D61FC35B0600E9E852 /* DPDConstants.swift in Sources */,
 				817BDAE51FB898C700492822 /* ButtonWithIndexPath.swift in Sources */,
+				819E0B4020A0C9D700D16847 /* ViewLogsCalender.swift in Sources */,
 				8194C30F1FC60DCA0077DB7B /* MarkRatingViewController.swift in Sources */,
 				81054EB41FC2263600EEE0CD /* StudentAttendance.swift in Sources */,
 				810E0CE01FD04E90006AE5BE /* DateString.swift in Sources */,
