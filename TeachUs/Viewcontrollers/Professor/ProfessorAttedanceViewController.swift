@@ -80,7 +80,7 @@ class ProfessorAttedanceViewController: BaseViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
         let destinationVC:StudentsListViewController =  storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.studentList) as! StudentsListViewController
-         destinationVC.subject = subject        
+         destinationVC.selectedCollege = subject        
         self.parentNavigationController?.pushViewController(destinationVC, animated: true)
     }
 }

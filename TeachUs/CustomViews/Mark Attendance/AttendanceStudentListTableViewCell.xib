@@ -24,26 +24,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="395" height="99.5"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="student_default" translatesAutoresizingMaskIntoConstraints="NO" id="GEu-v1-GNz">
-                                <rect key="frame" x="15" y="10" width="79.5" height="79.5"/>
+                                <rect key="frame" x="15" y="10" width="84.5" height="79.5"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="GEu-v1-GNz" secondAttribute="height" multiplier="1:1" id="rQH-NN-E2R"/>
+                                    <constraint firstAttribute="width" secondItem="GEu-v1-GNz" secondAttribute="height" multiplier="1:1" constant="5" id="rQH-NN-E2R"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="R No:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JRr-Z5-xIb">
-                                <rect key="frame" x="113.5" y="26" width="37.5" height="18"/>
+                                <rect key="frame" x="118.5" y="26" width="37.5" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jtV-v7-NYa">
-                                <rect key="frame" x="113.5" y="49" width="168.5" height="1"/>
+                                <rect key="frame" x="118.5" y="49" width="163.5" height="1"/>
                                 <color key="backgroundColor" red="0.8901960784313725" green="0.9137254901960784" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="rTA-Ph-DsE"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Student Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="tcE-Ff-41z">
-                                <rect key="frame" x="113.5" y="55" width="168.5" height="18"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Student Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="tcE-Ff-41z">
+                                <rect key="frame" x="118.5" y="55" width="163.5" height="39.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <color key="textColor" red="0.49411764705882355" green="0.51764705882352935" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -61,7 +61,7 @@
                                 </state>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2456" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sec-S4-pBQ">
-                                <rect key="frame" x="156" y="26.5" width="36.5" height="18"/>
+                                <rect key="frame" x="161" y="26.5" width="36.5" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -71,6 +71,7 @@
                         <constraints>
                             <constraint firstItem="tcE-Ff-41z" firstAttribute="trailing" secondItem="jtV-v7-NYa" secondAttribute="trailing" id="0jd-us-6QV"/>
                             <constraint firstItem="JRr-Z5-xIb" firstAttribute="leading" secondItem="jtV-v7-NYa" secondAttribute="leading" id="AG4-39-cZw"/>
+                            <constraint firstAttribute="bottom" secondItem="tcE-Ff-41z" secondAttribute="bottom" constant="5" id="BL8-f9-plY"/>
                             <constraint firstAttribute="trailing" secondItem="hAw-YR-c8E" secondAttribute="trailing" constant="15" id="JOe-Zh-rAV"/>
                             <constraint firstItem="tcE-Ff-41z" firstAttribute="leading" secondItem="jtV-v7-NYa" secondAttribute="leading" id="JpA-SF-mI7"/>
                             <constraint firstItem="hAw-YR-c8E" firstAttribute="centerY" secondItem="jtV-v7-NYa" secondAttribute="centerY" id="Ovh-nx-Cv7"/>
@@ -116,7 +117,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="XX/XX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eqI-8G-ABR">
-                                <rect key="frame" x="220" y="53" width="54" height="21"/>
+                                <rect key="frame" x="204.5" y="53" width="54" height="21"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <color key="textColor" red="0.49411764705882355" green="0.51764705882352935" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -134,7 +135,7 @@
                             <constraint firstAttribute="trailing" secondItem="0df-UH-uZw" secondAttribute="trailing" constant="15" id="3LS-v5-F8g"/>
                             <constraint firstItem="z9f-eh-Zcq" firstAttribute="leading" secondItem="4vd-bg-efg" secondAttribute="trailing" constant="5" id="75R-mL-bNg"/>
                             <constraint firstItem="0df-UH-uZw" firstAttribute="top" secondItem="4vd-bg-efg" secondAttribute="bottom" constant="8" id="AOV-4f-8Nz"/>
-                            <constraint firstItem="eqI-8G-ABR" firstAttribute="leading" secondItem="O6H-nx-yPP" secondAttribute="trailing" constant="30" id="CX5-2Z-eMU"/>
+                            <constraint firstItem="eqI-8G-ABR" firstAttribute="leading" secondItem="O6H-nx-yPP" secondAttribute="trailing" constant="15" id="CX5-2Z-eMU"/>
                             <constraint firstItem="0df-UH-uZw" firstAttribute="leading" secondItem="4vd-bg-efg" secondAttribute="leading" id="H2o-L3-4pH"/>
                             <constraint firstItem="eqI-8G-ABR" firstAttribute="centerY" secondItem="O6H-nx-yPP" secondAttribute="centerY" id="HCb-9q-4ZH"/>
                             <constraint firstItem="gcc-Ug-bU9" firstAttribute="top" secondItem="0df-UH-uZw" secondAttribute="bottom" constant="8" id="JYV-un-NRd"/>

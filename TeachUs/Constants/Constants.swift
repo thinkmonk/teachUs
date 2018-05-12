@@ -22,6 +22,7 @@ public struct Constants {
         static let toStudentList = "toStudentList"
         static let toProfessorRatingList = "toProfessorRatingList"
         static let toRatingDetails = "toRatingDetails"
+        static let toLectureReport = "toLectureReport"
     }
     
     struct Images {
@@ -72,6 +73,8 @@ public struct Constants {
         static let userMobileNumber = "userMobileNumber"
         static let loginUserType = "loginUserType"
         static let userImageURL = "userImage"
+        static let collegeName = "collegeName"
+        static let roleName = "roleName"
     }
     
     struct NumberConstants {
@@ -99,6 +102,8 @@ public struct Constants {
         static let ClassListTableViewCellId = "ClassListTableViewCellId"
         static let EventStudentListTableViewCellId = "EventStudentListTableViewCellId"
         static let ProfessorRatingProfileTableViewCellId = "ProfessorRatingProfileTableViewCellId"
+        static let LectureReportCellId = "lectureReportCellId"
+        static let LectureReportTopicsCoveredCellId = "lectureReportTopicsCoveredCellId"
     }
     
     struct UserTypeString {

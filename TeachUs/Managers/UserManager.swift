@@ -102,19 +102,44 @@ class UserManager{
 //                }
 //            }
             
-            self.appUserCollegeDetails = self.appUserCollegeArray.first!
-            switch self.appUserCollegeArray.first?.role_id!{
-            case "1"?:
-                UserManager.sharedUserManager.setLoginUserType(.Student)
-                break
-            case "2"?:
-                UserManager.sharedUserManager.setLoginUserType(.Professor)
-                break
-            case "3"?:
-                UserManager.sharedUserManager.setLoginUserType(.College)
-                break
-            default:
-                break
+            
+            guard let defaultCollegeName = UserDefaults.standard.value(forKey: Constants.UserDefaults.collegeName) as? String, let defaultRoleName = UserDefaults.standard.value(forKey: Constants.UserDefaults.roleName) as? String
+                else {
+                    self.appUserCollegeDetails = self.appUserCollegeArray.first!
+                    switch self.appUserCollegeArray.first?.role_id!{
+                    case "1"?:
+                        UserManager.sharedUserManager.setLoginUserType(.Student)
+                        break
+                    case "2"?:
+                        UserManager.sharedUserManager.setLoginUserType(.Professor)
+                        break
+                    case "3"?:
+                        UserManager.sharedUserManager.setLoginUserType(.College)
+                        break
+                    default:
+                        break
+                    }
+                return
+            }
+            
+            
+            for appuser in self.appUserCollegeArray{
+                if appuser.role_name! == defaultRoleName && appuser.college_name! == defaultCollegeName{
+                    self.appUserCollegeDetails = appuser
+                    switch appuser.role_id!{
+                    case "1":
+                        UserManager.sharedUserManager.setLoginUserType(.Student)
+                        break
+                    case "2":
+                        UserManager.sharedUserManager.setLoginUserType(.Professor)
+                        break
+                    case "3":
+                        UserManager.sharedUserManager.setLoginUserType(.College)
+                        break
+                    default:
+                        break
+                    }
+                }
             }
         }
     }
@@ -204,7 +229,6 @@ class UserManager{
         DatabaseManager.deleteAllEntitiesForEntityName(name: "CollegeDetails")
         for userCollege in userCollegeArray{
             self.saveUserCollege(college: userCollege)
-            self.appUserCollegeDetails = self.appUserCollegeArray.first!
         }
     }
   

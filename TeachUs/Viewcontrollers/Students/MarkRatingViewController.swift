@@ -71,24 +71,29 @@ class MarkRatingViewController: BaseViewController {
         var ratings:[[String:Any]]! = []
         for value in self.arrayDataSource{
             var ratingTemp:[String:Any] = [:]
-            ratingTemp["criteriaId"] = "\(value.criteriaId)"
-            ratingTemp["rating"] = "\(value.ratings)"
+            ratingTemp["criteria_id"] = "\(value.criteriaId)"
+            ratingTemp["criteria_value"] = "\(value.ratings)"
             ratings.append(ratingTemp)
         }
-        let teacherPoularString:String = self.isTeacherPopular ? "YES" : "NO"
+        var requestString = ""
+        if let theJSONData = try? JSONSerialization.data(withJSONObject: ratings,options: []) {
+            let theJSONText = String(data: theJSONData,encoding: .ascii)
+            requestString = theJSONText!
+            print("requestString = \(theJSONText!)")
+        }
+        
+        let teacherPoularString:String = self.isTeacherPopular ? "1" : "0"
         
         let parameters: [String: Any] = [
-            "studentId":"\(UserManager.sharedUserManager.getUserId())",
-            "professorId":"\(self.professsorDetails.professorId!)",
-            "subjectId":"\(self.subjectId)",
-            "popular":"\(teacherPoularString)",
-            "teacherRating":ratings
+            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+            "professor_id":"\(self.professsorDetails.professorId)",
+            "subject_id":"\(self.subjectId)",
+            "role_id":"1",
+            "like":"\(teacherPoularString)",
+            "ratings":requestString
         ]
         
-        manager.url = URLConstants.StudentURL.updateRatings +
-//            "\(UserManager.sharedUserManager.getAccessToken())" +
-        "==?studentId=\(UserManager.sharedUserManager.userStudent.studentId)"
-//        manager.url = URLConstants.BaseUrl.baseURL + UserManager.sharedUserManager.userStudent.ratingsUrl!
+        manager.url = URLConstants.StudentURL.updateRatings 
         manager.apiPost(apiName: "Submit teacher Rating", parameters: parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             DispatchQueue.main.async(execute: {() -> Void in
@@ -117,7 +122,7 @@ extension MarkRatingViewController: UITableViewDelegate, UITableViewDataSource{
             let profileCell:TeacherProfileTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.TeacherProfileTableViewCellId, for: indexPath) as! TeacherProfileTableViewCell
             profileCell.labelteacherName.text = self.professsorDetails.professorName
             profileCell.labelTeacherSubject.text = self.professsorDetails.subjectName
-            profileCell.imageViewProfile.imageFromServerURL(urlString: self.professsorDetails.imageURL!, defaultImage: Constants.Images.defaultProfessor)
+            profileCell.imageViewProfile.imageFromServerURL(urlString: self.professsorDetails.imageURL, defaultImage: Constants.Images.defaultProfessor)
             profileCell.selectionStyle = .none
             profileCell.imageViewProfile.makeViewCircular()
             profileCell.buttonHeart.indexPath = indexPath

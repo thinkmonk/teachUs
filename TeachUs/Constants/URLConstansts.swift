@@ -25,7 +25,8 @@ public struct URLConstants{
     
     struct StudentURL {
         static let getClassAttendance = BaseUrl.baseURL + "/attendance/student_class_attendance"
-        static let updateRatings = "TBA"
+        static let updateRatings = BaseUrl.baseURL + "/ratings/submit_rating"
+        static let professorRatingList = BaseUrl.baseURL + "/ratings/professor_rating_list"
     }
     
     struct ProfessorURL {
@@ -37,6 +38,8 @@ public struct URLConstants{
         static let logsClassList = BaseUrl.baseURL + "/syllabus/professor_class_list"
         static let logDetails = BaseUrl.baseURL + "/syllabus/detailed_log_subject"
         static let topicList = BaseUrl.baseURL + "/syllabus/topic_list"
+        static let submitSyllabusCovered = BaseUrl.baseURL + "/syllabus/submit_topic_covered"
+        static let getLectureReport = BaseUrl.baseURL + "/syllabus/lecture_report"
     }
     
     

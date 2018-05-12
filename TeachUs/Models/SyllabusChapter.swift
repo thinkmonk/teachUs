@@ -127,6 +127,19 @@ class Chapter:Mappable{
         }else{
             self.status = ""
         }
+        switch self.status {//status 2 is for completed topic / 1 is for inprogress
+        case "0":
+            self.chapterStatusTheme = SyllabusCompletetionType.NotStarted
+            break
+        case "1":
+            self.chapterStatusTheme = SyllabusCompletetionType.InProgress
+            break
+        case "2":
+            self.chapterStatusTheme = SyllabusCompletetionType.Completed
+            break
+        default:
+            break
+        }
     }
 }
 

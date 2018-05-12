@@ -34,10 +34,10 @@ class LeftMenuViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
 //    var studentDataSource = ["Attendance", "Syllabus Status", "Feedback / Ratings", "Logout"]
-    var studentDataSource = ["Attendance", "Logout"]
+    var studentDataSource = ["Attendance", "Syllabus", "Logout"]
 
 //    var professorDataSource = ["Attendance", "Syllabus Status", "Logs", "Logout"]
-    var professorDataSource = ["Attendance", "Logout"]
+    var professorDataSource = ["Attendance", "Syllabus", "Logs", "Logout"]
 
     var collegeDataSource = ["Attendance(Reports)","Attendance(Events)","Add/Remove Admin","Ratings","Logout"]
     
@@ -136,6 +136,7 @@ class LeftMenuViewController: UIViewController, UIGestureRecognizerDelegate {
             self.labelRole.text = "\(UserManager.sharedUserManager.appUserCollegeDetails.role_name!)"
             self.getAndSetUserImage()
         }
+        
         UserManager.sharedUserManager.setUserBasedOnRole()
     }
     
@@ -218,6 +219,9 @@ extension LeftMenuViewController:UITableViewDelegate, UITableViewDataSource{
         else{
             self.showProfileDropDown(self)
             UserManager.sharedUserManager.appUserCollegeDetails = UserManager.sharedUserManager.appUserCollegeArray[indexPath.row]
+            UserDefaults.standard.set(UserManager.sharedUserManager.appUserCollegeDetails.college_name!, forKey: Constants.UserDefaults.collegeName)
+            UserDefaults.standard.set(UserManager.sharedUserManager.appUserCollegeDetails.role_name!, forKey: Constants.UserDefaults.roleName)
+            UserDefaults.standard.synchronize()
             self.updateUserDetails()
             self.menuContainerViewController.setMenuState(MFSideMenuStateClosed, completion: nil)
             let indexPath = IndexPath(row: 0, section: 0)

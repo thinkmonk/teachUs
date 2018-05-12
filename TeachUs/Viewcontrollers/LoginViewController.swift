@@ -150,17 +150,23 @@ extension LoginViewController:LoginDelegate{
         
         manager.apiPost(apiName: " VERIFY USER", parameters:parameters, completionHandler: { (result, code, response) in
             print(response)
-            let contactString:String = response["contact"] as! String
-            let firstName:String = response["f_name"] as! String
-            let lastName:String = response["l_name"] as! String
-
-            UserManager.sharedUserManager.saveMobileNumber(contactString)
-            UserManager.sharedUserManager.userName = firstName
-            UserManager.sharedUserManager.userLastName = lastName
             LoadingActivityHUD.hideProgressHUD()
-            self.studentLoginView.hideView()
-            self.setUpOtpView()
+            
+            if (code == 200){
+                let contactString:String = response["contact"] as! String
+                let firstName:String = response["f_name"] as! String
+                let lastName:String = response["l_name"] as! String
 
+                UserManager.sharedUserManager.saveMobileNumber(contactString)
+                UserManager.sharedUserManager.userName = firstName
+                UserManager.sharedUserManager.userLastName = lastName
+                self.studentLoginView.hideView()
+                self.setUpOtpView()
+            }
+            else{
+                let message:String = response["message"] as! String
+                self.showAlterWithTitle(nil, alertMessage: message)
+            }
         }) { (error, code, message) in
             print(message)
             self.showAlterWithTitle(nil, alertMessage: message)
@@ -366,7 +372,12 @@ extension LoginViewController:CollegeLoginDelegate{
         UserManager.sharedUserManager.saveMobileNumber(mobileNumber)
         manager.apiPost(apiName: "Generate OTP", parameters: parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
-            self.showEnterOtpView()
+            if (code == 200){
+                self.showEnterOtpView()
+            }else{
+                let message:String = response["message"] as! String
+                self.showAlterWithTitle(nil, alertMessage: message)
+            }
         }) { (error, code, message) in
             LoadingActivityHUD.hideProgressHUD()
             print(message)

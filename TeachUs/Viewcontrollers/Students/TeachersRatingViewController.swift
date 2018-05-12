@@ -53,12 +53,18 @@ class TeachersRatingViewController: BaseViewController {
 //            "\(UserManager.sharedUserManager.getAccessToken())" +
 //        "?studentId=\(UserManager.sharedUserManager.getUserId())"
         
-        manager.url = URLConstants.BaseUrl.baseURL + UserManager.sharedUserManager.userStudent.ratingsUrl!
+        manager.url = URLConstants.StudentURL.professorRatingList
         
-        manager.apiGet(apiName: "Get ratings for professor", completionHandler: { (response, code) in
+        let parameters = [
+            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+            "role_id":"1"
+        ]
+        
+        
+        manager.apiPost(apiName: "Get ratings for professor", parameters: parameters, completionHandler: { (success, code, response) in
             LoadingActivityHUD.hideProgressHUD()
-            
-            guard let teachers = response["professorWise"] as? [[String:Any]] else{
+
+            guard let teachers = response["prof_list"] as? [[String:Any]] else{
                 return
             }
             
@@ -67,11 +73,11 @@ class TeachersRatingViewController: BaseViewController {
                 self.arrayDataSource.append(tempteacher!)
             }
             
-            guard let ratingCriteria = response["lookUpRatingCriteria"] as? [String:Any] else{
-                return
-            }
+//            guard let ratingCriteria = response["rating_list"] as? [String:Any] else{
+//                return
+//            }
             
-            guard let criteriaList = ratingCriteria["teacherRating"] as? [[String:Any]] else{
+            guard let criteriaList = response["rating_list"] as? [[String:Any]] else{
                 return
             }
             
@@ -82,9 +88,10 @@ class TeachersRatingViewController: BaseViewController {
             
             
             self.makeTableView()
-        }) { (error, code, errorMessage) in
+        }) { (success, code, message) in
             LoadingActivityHUD.hideProgressHUD()
-            print(errorMessage)
+            print(message)
+
         }
     }
 
@@ -117,7 +124,7 @@ extension TeachersRatingViewController:UITableViewDataSource, UITableViewDelegat
         
         cell.imageViewBackground.makeEdgesRoundedWith(radius: cell.imageViewBackground.height()/2)
         cell.imageProfessor.makeEdgesRoundedWith(radius: cell.imageProfessor.height()/2)
-        if(arrayDataSource[indexPath.section].isRatingSubmitted! == "true"){
+        if(arrayDataSource[indexPath.section].isRatingSubmitted == "1"){
             cell.imageViewBackground.backgroundColor = UIColor.red
             cell.labelName.textColor = UIColor.red
             cell.labelSubject.textColor = UIColor.red
@@ -126,8 +133,8 @@ extension TeachersRatingViewController:UITableViewDataSource, UITableViewDelegat
         
         
         cell.labelSubject.text = self.arrayDataSource[indexPath.section].subjectName
-        cell.labelName.text = "\(self.arrayDataSource[indexPath.section].professorName!) \(self.arrayDataSource[indexPath.section].professorLastName!)"
-        cell.imageProfessor.imageFromServerURL(urlString: self.arrayDataSource[indexPath.section].imageURL!, defaultImage: Constants.Images.defaultProfessor)
+        cell.labelName.text = "\(self.arrayDataSource[indexPath.section].professforFullname)"
+        cell.imageProfessor.imageFromServerURL(urlString: self.arrayDataSource[indexPath.section].imageURL, defaultImage: Constants.Images.defaultProfessor)
         cell.selectionStyle = .none
         cell.accessoryType = .disclosureIndicator
         
@@ -153,7 +160,7 @@ extension TeachersRatingViewController:UITableViewDataSource, UITableViewDelegat
         let destinationVC:MarkRatingViewController =  storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.MarkRating) as! MarkRatingViewController
         destinationVC.arrayDataSource = self.arrayRatingCriteriaDataSource
         destinationVC.professsorDetails = self.arrayDataSource[indexPath.section]
-        destinationVC.subjectId = "\(self.arrayDataSource[indexPath.section].subjectId!)"
+        destinationVC.subjectId = "\(self.arrayDataSource[indexPath.section].subjectId)"
         destinationVC.parentNavigationController = self.parentNavigationController
         self.parentNavigationController?.pushViewController(destinationVC, animated: true)
     }    
@@ -161,6 +168,6 @@ extension TeachersRatingViewController:UITableViewDataSource, UITableViewDelegat
 
 extension TeachersRatingViewController:IndicatorInfoProvider{
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "Attendance")
+        return IndicatorInfo(title: "Rating")
     }
 }

@@ -13,7 +13,7 @@ import RxSwift
 
 class StudentsListViewController: BaseViewController {
 
-    var subject:College!
+    var selectedCollege:College!
     var arrayStudentsDetails:[EnrolledStudentDetail] = []
     var arrayDataSource:[AttendanceDatasource] = []
     var defaultAttendanceForAllStudents:Bool = true
@@ -23,8 +23,9 @@ class StudentsListViewController: BaseViewController {
     var numberPicker:ViewNumberPicker!
     var calenderFloatingView:ViewCalenderTop!
     var viewConfirmAttendance:ViewConfirmAttendance!
-    
-    private var openProfileIndexPath: IndexPath = IndexPath(row: -1, section: 0)
+    var markedAttendanceId:NSNumber!
+    private var previousOpenProfileIndexPath: IndexPath = IndexPath(row: -1, section: 0)
+    private var currentOpenProfileIndexPath: IndexPath = IndexPath(row: -1, section: 0)
 
     let disposeBag = DisposeBag()
     
@@ -40,9 +41,9 @@ class StudentsListViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if(subject != nil)
+        if(selectedCollege != nil)
         {
-            self.title = subject.subjectName!
+            self.title = selectedCollege.subjectName!
             self.getEnrolledStudentsList()
         }
         
@@ -97,8 +98,8 @@ class StudentsListViewController: BaseViewController {
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let parameters = [
             "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
-            "class_id":"\(self.subject.classId!)",
-            "subject_id":"\(self.subject.subjectId!)"
+            "class_id":"\(self.selectedCollege.classId!)",
+            "subject_id":"\(self.selectedCollege.subjectId!)"
         ]
         manager.apiPost(apiName: "Get student list", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
@@ -284,9 +285,9 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
             cell.buttonAttendance.indexPath = indexPath
             cell.setUpCell()
 //            cell.setUpRx()
-//            if(openProfileIndexPath != nil)
+//            if(currentOpenProfileIndexPath != nil)
 //            {
-//                if(openProfileIndexPath.section == indexPath.section){
+//                if(currentOpenProfileIndexPath.section == indexPath.section){
 //                    cell.isExpanded = true
 //                    cell.viewAttendanceDetails.alpha = 1
 //                }else{
@@ -302,7 +303,6 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
         }
     }
     
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let cellDataSource = arrayDataSource[indexPath.section]
         switch cellDataSource.AttendanceCellType! {
@@ -316,7 +316,7 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
             return 40
 
         case .studentProfile:
-            if(indexPath.section == openProfileIndexPath.section)
+            if(indexPath.section == currentOpenProfileIndexPath.section)
             {
                 return 200
             }
@@ -330,12 +330,20 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
         let cellDataSource = arrayDataSource[indexPath.section]
 
         if(cellDataSource.AttendanceCellType! == .studentProfile){
-            self.openProfileIndexPath = indexPath
+            if(currentOpenProfileIndexPath == indexPath){
+                currentOpenProfileIndexPath = IndexPath(row: -1, section: 0)
+                let cell:AttendanceStudentListTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.AttendanceStudentListTableViewCellId, for: indexPath) as! AttendanceStudentListTableViewCell
+                tableView.beginUpdates()
+                cell.isExpanded = false
+                tableView.endUpdates()
+            }
+            else{
+            self.currentOpenProfileIndexPath = indexPath
             let cell:AttendanceStudentListTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.AttendanceStudentListTableViewCellId, for: indexPath) as! AttendanceStudentListTableViewCell
             tableView.beginUpdates()
             cell.isExpanded = true
             tableView.endUpdates()
-
+            }
         }
     }
     
@@ -522,9 +530,9 @@ extension StudentsListViewController:ViewConfirmAttendanceDelegate{
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let parameters = [
             "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
-            "class_id":"\(self.subject.classId!)",
-            "course_id":"\(self.subject.courseId!)",
-            "subject_id":"\(self.subject.subjectId!)",
+            "class_id":"\(self.selectedCollege.classId!)",
+            "course_id":"\(self.selectedCollege.courseId!)",
+            "subject_id":"\(self.selectedCollege.subjectId!)",
             "topics_covered":"1",
             "no_of_lecture":"\(self.numberPicker.selectedValue.value)",
             "lecture_date":"\(datePicker.postJsonDateString)",
@@ -533,6 +541,10 @@ extension StudentsListViewController:ViewConfirmAttendanceDelegate{
             "attendance_list":"\(AttendanceManager.sharedAttendanceManager.attendanceList)"
         ]
         
+        self.markedAttendanceId = 42
+        self.performSegue(withIdentifier: Constants.segues.markPortionCompleted, sender: self)
+
+        /*
         manager.apiPost(apiName: "Mark student attendance", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             if(code == 200){
@@ -541,31 +553,34 @@ extension StudentsListViewController:ViewConfirmAttendanceDelegate{
                 
                 // add an action (button)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { _ in
-                    for controller in self.navigationController!.viewControllers as Array {
-                        if controller.isKind(of: HomeViewController.self) {
-                            self.navigationController!.popToViewController(controller, animated: true)
-                            break
-                        }
-                    }
+                    self.markedAttendanceId = response["att_id"] as! NSNumber
+                    self.performSegue(withIdentifier: Constants.segues.markPortionCompleted, sender: self)
+
+//                    for controller in self.navigationController!.viewControllers as Array {
+//                        self.markedAttendanceId = response["att_id"]
+//                        self.performSegue(withIdentifier: Constants.segues.markPortionCompleted, sender: self)
+//                        if controller.isKind(of: HomeViewController.self) {
+//                            self.navigationController!.popToViewController(controller, animated: true)
+//                            break
+//                        }
+//                    }
                 }))
-                
                 // show the alert
                 self.present(alert, animated: true, completion:nil)
-
             }
         }) { (error, code, errorMessage) in
             LoadingActivityHUD.hideProgressHUD()
-            print(errorMessage)
+            self.showAlterWithTitle(nil, alertMessage: errorMessage)
         }
-
-        
+ */
     }
-    
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == Constants.segues.markPortionCompleted){
             let destinationVC:MarkCompletedPortionViewController = segue.destination as! MarkCompletedPortionViewController
-            destinationVC.subjectId = self.subject.subjectId!
+            destinationVC.selectedCollege = self.selectedCollege
+            destinationVC.attendanceId = self.markedAttendanceId
         }
     }
 }

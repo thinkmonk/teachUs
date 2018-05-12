@@ -81,7 +81,7 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
             
             syllabusStatusVC.parentNavigationController = self.parentNavigationController
             syllabusStatusVC.userType = .Student
-            //controllersArray.append(syllabusStatusVC)
+            controllersArray.append(syllabusStatusVC)
             
             let professorRating:TeachersRatingViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorRating) as! TeachersRatingViewController
             professorRating.title = "Rating"

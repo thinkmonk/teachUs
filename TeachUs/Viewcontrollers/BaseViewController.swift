@@ -96,7 +96,17 @@ class BaseViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
         
         // show the alert
-        UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+        
+        var rootViewController = UIApplication.shared.keyWindow?.rootViewController
+        if let navigationController = rootViewController as? UINavigationController {
+            rootViewController = navigationController.viewControllers.first
+        }
+        if (rootViewController!.isViewLoaded && (rootViewController!.view.window != nil)) {
+            rootViewController?.present(alert, animated: true, completion: nil)
+        }
+        else{
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     func getAndSaveUserToDb(){
