@@ -23,7 +23,7 @@ class LogsDetailTableViewCell: UITableViewCell {
     @IBOutlet weak var labelAttendanceCount: UILabel!
     
     @IBOutlet weak var viewTimeOfSubject: UIView!
-    @IBOutlet weak var labelTimeOfSubject: UILabel!
+    @IBOutlet weak var labelTimeOfSubmission: UILabel!
     
     
     override func awakeFromNib() {

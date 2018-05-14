@@ -102,6 +102,12 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
             eventAttendanceListVc.parentNavigationController = self.parentNavigationController
             controllersArray.append(eventAttendanceListVc)
             
+            let collegeSyllabusStatusVC:CollegeSyllabusStatusViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.CollegeSyllabusStatusViewControllerId) as! CollegeSyllabusStatusViewController
+            collegeSyllabusStatusVC.title = "Syllabus"
+            collegeSyllabusStatusVC.parentNavigationController = self.parentNavigationController
+            controllersArray.append(collegeSyllabusStatusVC)
+            
+            
             let addRemoveAdminVC:AddRemoveAdminViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.AddRemoveAdminViewControllerId) as! AddRemoveAdminViewController
             addRemoveAdminVC.title = "Add/Remove Admin"
             addRemoveAdminVC.parentNavigationController = self.parentNavigationController
@@ -111,22 +117,12 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
             collegeRatingListVC.title = "Ratings"
             collegeRatingListVC.parentNavigationController = self.parentNavigationController
             controllersArray.append(collegeRatingListVC)
-            
-
-
-            let collegeSyllabusStatusVC:CollegeSyllabusStatusViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.CollegeSyllabusStatusViewControllerId) as! CollegeSyllabusStatusViewController
-            collegeSyllabusStatusVC.title = "Syllabus"
-            collegeSyllabusStatusVC.parentNavigationController = self.parentNavigationController
-            
-//            controllersArray.append(collegeSyllabusStatusVC)
-            
             break
-            
-            
+
         }
         
         return controllersArray
-        
+
     }
 
 }

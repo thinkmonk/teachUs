@@ -15,6 +15,8 @@ class SyllabusDetailsViewController: BaseViewController {
     var arrayDataSource:[Unit] = []
     var completionStatus:String = ""
     var selectedSubject:Subject!
+    var userType:LoginUserType!
+    var selectedClassId:String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,14 +41,24 @@ class SyllabusDetailsViewController: BaseViewController {
     
     func getSyllabusDetails(){
         let manager = NetworkHandler()
-        manager.url = URLConstants.ProfessorURL.getSyllabusSuubjectDetails
         var parameters = [String:Any]()
-//        parameters["subject_id"] = "\(selectedSubject.subjectId)"
-        parameters["subject_id"] = "3"
-
-//        parameters["class_id"] = "\(selectedSubject.classId)"
-        parameters["class_id"] = "1"
+        parameters["subject_id"] = "\(selectedSubject.subjectId)"
         parameters["college_code"] = UserManager.sharedUserManager.appUserCollegeDetails.college_code
+
+        switch self.userType! {
+        case .Professor:
+            manager.url = URLConstants.ProfessorURL.getSyllabusSuubjectDetails
+            parameters["class_id"] = "\(selectedSubject.classId)"
+
+            break
+        case .College:
+            manager.url  = URLConstants.CollegeURL.getCollegeSubjectSyllabusDetails
+            parameters["class_id"] = "\(self.selectedClassId)"
+
+            break
+        default:
+            break
+        }
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
 
         manager.apiPost(apiName: "Get Syllabus  details for professor", parameters: parameters, completionHandler: { (sucess, code, response) in

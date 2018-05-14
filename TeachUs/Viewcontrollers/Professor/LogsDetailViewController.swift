@@ -113,10 +113,13 @@ class LogsDetailViewController: BaseViewController {
     func makeDataSource(){
         arrayDataSource.removeAll()
         
-        let detailsDataSource = ProfessorLogsDataSource(celType: .LogDetails, attachedObject: nil)
-        self.arrayDataSource.append(detailsDataSource)
+//        let detailsDataSource = ProfessorLogsDataSource(celType: .LogDetails, attachedObject: nil)
+//        self.arrayDataSource.append(detailsDataSource)
         
         for log in self.arrayLogsDetails{
+            let detailsDataSource = ProfessorLogsDataSource(celType: .LogDetails, attachedObject: log)
+            self.arrayDataSource.append(detailsDataSource)
+
             for unit in log.unitArray{
                 for chapter in unit.topicArray!{
                     let attachedSyllabus = LogDetailSyllabus()
@@ -182,13 +185,14 @@ extension LogsDetailViewController:UITableViewDelegate, UITableViewDataSource{
         switch cellDataSource.logsCellType! {
         case .LogDetails:
             let cell:LogsDetailTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.LogsDetailTableViewCellId, for: indexPath) as! LogsDetailTableViewCell
-            let logs:LogDetails = self.arrayLogsDetails[indexPath.row]
+            let logs:LogDetails = cellDataSource.attachedObject as! LogDetails
             cell.labelNumberOfLecs.text = "\(logs.numberOfLecture)"
             cell.labelAttendanceCount.text = "\(logs.totalStudentAttendance)"
             cell.labelLectureTime.text = "\(logs.fromTime) to \(logs.toTime)"
-            cell.viewTimeOfSubject.alpha = 0
+            cell.viewTimeOfSubject.alpha = 1
 //            let datstring = logs.dateOfSubmission.getDateFromString()
-            cell.labelDate.text = "\(logs.dateOfSubmission)"
+            cell.labelDate.text = "\(logs.lectureDate)"
+            cell.labelTimeOfSubmission.text = "\(logs.dateOfSubmission)"
             cell.selectionStyle = .none
             return cell
             
@@ -211,7 +215,7 @@ extension LogsDetailViewController:UITableViewDelegate, UITableViewDataSource{
         case .LogDetails:
             return 150
         case .SyllabusDetail:
-            return 80
+            return 100
         }
     }
 }

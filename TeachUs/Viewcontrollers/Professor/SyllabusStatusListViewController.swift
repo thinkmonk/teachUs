@@ -10,12 +10,13 @@ import UIKit
 import ObjectMapper
 import XLPagerTabStrip
 
-class SyllabusStatusListViewController: UIViewController {
+class SyllabusStatusListViewController: BaseViewController {
 
     @IBOutlet weak var tableViewSyllabus: UITableView!
     var parentNavigationController : UINavigationController?
     var userType:LoginUserType!
     var arrayDataSource:[Subject] = []
+    var selectedClassId:String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +38,9 @@ class SyllabusStatusListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if(self.userType == LoginUserType.College){
+            self.addGradientToNavBar()
+        }
     }
     
     func getSyllabus(){
@@ -45,22 +49,19 @@ class SyllabusStatusListViewController: UIViewController {
         //http://ec2-34-215-84-223.us-west-2.compute.amazonaws.com:8081/teachus/teacher/getSyllabusSummary/Zmlyc3ROYW1lPURldmVuZHJhLG1pZGRsZU5hbWU9QSxsYXN0TmFtZT1GYWRuYXZpcyxyb2xsPVBST0ZFU1NPUixpZD0x?professorId=1&subjectId=1
         switch userType! {
         case .Student:
-//            manager.url = URLConstants.StudentURL.getSyllabusSummary +
-//                "\(UserManager.sharedUserManager.getAccessToken())" +
-//            "?studentId=\(UserManager.sharedUserManager.getUserId())"
             manager.url = URLConstants.ProfessorURL.syllabusSubjectStatus
             parameters["college_code"] = UserManager.sharedUserManager.appUserCollegeDetails.college_code
             break
         
         case .Professor:
-//            manager.url = URLConstants.TecacherURL.getSyllabusSummary +
-//                "\(UserManager.sharedUserManager.getAccessToken())" +
-//            "?professorId=\(UserManager.sharedUserManager.getUserId())"
             manager.url = URLConstants.ProfessorURL.syllabusSubjectStatus
             parameters["college_code"] = UserManager.sharedUserManager.appUserCollegeDetails.college_code
             break
             
-        default:
+        case .College:
+            manager.url = URLConstants.CollegeURL.getCollegeSubjectSyllabusList
+            parameters["college_code"] = UserManager.sharedUserManager.appUserCollegeDetails.college_code
+            parameters["class_id"] = self.selectedClassId
             break
         }
         
@@ -161,6 +162,8 @@ extension SyllabusStatusListViewController:UITableViewDelegate, UITableViewDataS
         let destinationVC:SyllabusDetailsViewController =  storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.syllabusDetails) as! SyllabusDetailsViewController
         destinationVC.completionStatus = self.arrayDataSource[indexPath.section].completion
         destinationVC.selectedSubject = self.arrayDataSource[indexPath.section]
+        destinationVC.userType = self.userType
+        destinationVC.selectedClassId  = self.selectedClassId
         self.parentNavigationController?.pushViewController(destinationVC, animated: true)
     }
     

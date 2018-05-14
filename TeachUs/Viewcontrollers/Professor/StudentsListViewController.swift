@@ -541,10 +541,10 @@ extension StudentsListViewController:ViewConfirmAttendanceDelegate{
             "attendance_list":"\(AttendanceManager.sharedAttendanceManager.attendanceList)"
         ]
         
-        self.markedAttendanceId = 42
-        self.performSegue(withIdentifier: Constants.segues.markPortionCompleted, sender: self)
+//        self.markedAttendanceId = 42
+//        self.performSegue(withIdentifier: Constants.segues.markPortionCompleted, sender: self)
 
-        /*
+        
         manager.apiPost(apiName: "Mark student attendance", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             if(code == 200){
@@ -572,7 +572,6 @@ extension StudentsListViewController:ViewConfirmAttendanceDelegate{
             LoadingActivityHUD.hideProgressHUD()
             self.showAlterWithTitle(nil, alertMessage: errorMessage)
         }
- */
     }
 
     

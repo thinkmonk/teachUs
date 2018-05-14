@@ -130,8 +130,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time of subject" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XKg-1L-7uh">
-                                <rect key="frame" x="0.0" y="28" width="75" height="12"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time of submission" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XKg-1L-7uh">
+                                <rect key="frame" x="0.0" y="28" width="93.5" height="12"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -175,7 +175,7 @@
                 <outlet property="labelDate" destination="CQl-Lp-4oj" id="auR-dt-4gA"/>
                 <outlet property="labelLectureTime" destination="8uT-LX-pxb" id="0Gk-2I-VM8"/>
                 <outlet property="labelNumberOfLecs" destination="ADk-NZ-ky7" id="Ewk-jB-FNE"/>
-                <outlet property="labelTimeOfSubject" destination="Qsp-rt-BJM" id="HNn-ou-dp7"/>
+                <outlet property="labelTimeOfSubmission" destination="Qsp-rt-BJM" id="k7G-sv-huE"/>
                 <outlet property="viewAttendance" destination="t8i-LJ-lew" id="d2x-rf-dUQ"/>
                 <outlet property="viewHeader" destination="Frm-on-I6D" id="nKi-Hj-8Te"/>
                 <outlet property="viewLecTime" destination="7zo-Kg-RlP" id="EvF-d3-gmS"/>
