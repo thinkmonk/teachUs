@@ -107,6 +107,8 @@ extension ProfessorAttedanceViewController:UITableViewDataSource, UITableViewDel
         return cell
     }
     
+    
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44.0
     }
@@ -120,6 +122,21 @@ extension ProfessorAttedanceViewController:UITableViewDataSource, UITableViewDel
         footerView.backgroundColor = UIColor.clear
         return footerView
     }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if(section == 0){
+            return 15
+        }
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableviewCollegeList.width(), height: 15))
+        headerView.backgroundColor = UIColor.clear
+        return headerView
+    }
+    
+  
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.selectedSubject(self.arrayCollegeList![indexPath.section])

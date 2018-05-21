@@ -10,11 +10,19 @@ import UIKit
 
 class BaseViewController: UIViewController {
 
+    var refreshControl = UIRefreshControl()
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(BaseViewController.refresh(sender:)), for: UIControlEvents.valueChanged)
         // Do any additional setup after loading the view.
     }
 
+    @objc func refresh(sender:AnyObject) {
+        refreshControl.endRefreshing()
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

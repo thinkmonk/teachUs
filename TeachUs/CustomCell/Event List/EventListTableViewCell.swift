@@ -16,6 +16,7 @@ class EventListTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.makeTableCellEdgesRounded()
         // Initialization code
     }
 

@@ -20,11 +20,13 @@ class EventAttendanceListViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableViewEvents.register(UINib(nibName: "EventListTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.EventListTableViewCellId)
+        self.getEvents()
         self.tableViewEvents.alpha = 0
         self.tableViewEvents.delegate = self
         self.tableViewEvents.dataSource = self
         self.tableViewEvents.estimatedRowHeight = 90
         self.tableViewEvents.rowHeight = UITableViewAutomaticDimension
+        self.tableViewEvents.addSubview(refreshControl)
         // Do any additional setup after loading the view.
     }
 
@@ -35,7 +37,11 @@ class EventAttendanceListViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+    }
+    
+    override func refresh(sender: AnyObject) {
         self.getEvents()
+        super.refresh(sender: sender)
     }
     
     //MARK:- Outlet Methods
@@ -100,6 +106,7 @@ extension EventAttendanceListViewController:UITableViewDelegate, UITableViewData
         let cell:EventListTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.EventListTableViewCellId, for: indexPath) as! EventListTableViewCell
         cell.labelEventName.text = "\(self.arrayDataSource[indexPath.section].eventName)"
         cell.labelStudentCount.text = "\(self.arrayDataSource[indexPath.section].totalParticipants) Students"
+        cell.accessoryType = .disclosureIndicator
         cell.selectionStyle  = .none
         return cell
     }

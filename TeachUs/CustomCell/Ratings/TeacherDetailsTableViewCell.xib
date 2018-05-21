@@ -43,27 +43,30 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="8pA-4H-LnP">
-                        <rect key="frame" x="75" y="33.5" width="103" height="16"/>
+                        <rect key="frame" x="76" y="33.5" width="77" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="qoq-wQ-dBa">
-                        <rect key="frame" x="188" y="34" width="53" height="16"/>
+                        <rect key="frame" x="173" y="15" width="68" height="52.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="8pA-4H-LnP" firstAttribute="leading" secondItem="gNe-72-kAG" secondAttribute="trailing" constant="9" id="Etk-Q9-svC"/>
+                    <constraint firstAttribute="bottom" secondItem="13L-MR-cm4" secondAttribute="bottom" constant="15" id="7GN-v1-XtL"/>
+                    <constraint firstItem="8pA-4H-LnP" firstAttribute="leading" secondItem="gNe-72-kAG" secondAttribute="trailing" constant="10" id="Etk-Q9-svC"/>
+                    <constraint firstItem="13L-MR-cm4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15.5" id="Gks-5y-lbX"/>
                     <constraint firstItem="qoq-wQ-dBa" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="OBu-Nv-ZJ4"/>
                     <constraint firstItem="qoq-wQ-dBa" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="Oyd-Sx-39X"/>
-                    <constraint firstItem="13L-MR-cm4" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="b2m-Vj-Ij2"/>
-                    <constraint firstItem="8pA-4H-LnP" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="bUw-IY-3Ok"/>
-                    <constraint firstItem="qoq-wQ-dBa" firstAttribute="leading" secondItem="8pA-4H-LnP" secondAttribute="trailing" constant="10" id="d64-f7-Z7s"/>
+                    <constraint firstItem="qoq-wQ-dBa" firstAttribute="leading" secondItem="8pA-4H-LnP" secondAttribute="trailing" constant="20" id="d64-f7-Z7s"/>
+                    <constraint firstItem="qoq-wQ-dBa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="kkX-vO-RoH"/>
                     <constraint firstItem="13L-MR-cm4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="kl0-zd-zZM"/>
-                    <constraint firstItem="8pA-4H-LnP" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.4" id="wYD-zm-pTQ"/>
+                    <constraint firstItem="8pA-4H-LnP" firstAttribute="centerY" secondItem="13L-MR-cm4" secondAttribute="centerY" id="llq-10-JQi"/>
+                    <constraint firstAttribute="bottom" secondItem="qoq-wQ-dBa" secondAttribute="bottom" constant="15" id="wON-iU-vsY"/>
+                    <constraint firstItem="8pA-4H-LnP" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.3" id="wYD-zm-pTQ"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

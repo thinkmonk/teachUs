@@ -22,12 +22,18 @@ class CollegeAttendanceListViewController: BaseViewController {
         self.tableViewCollegeAttendanceList.delegate = self
         self.tableViewCollegeAttendanceList.dataSource = self
         self.tableViewCollegeAttendanceList.alpha = 0.0
+        self.tableViewCollegeAttendanceList.addSubview(refreshControl)
         getClassAttendance()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func refresh(sender: AnyObject) {
+        self.getClassAttendance()
+        super.refresh(sender: sender)
     }
     
     
@@ -44,6 +50,7 @@ class CollegeAttendanceListViewController: BaseViewController {
             guard let attendanceListArray = response["class_attendance_list"] as? [[String:Any]] else{
                 return
             }
+            self.arrayDataSource?.removeAll()
             for attendancelist in attendanceListArray{
                 let tempList = Mapper<CollegeAttendanceList>().map(JSONObject: attendancelist)
                 self.arrayDataSource?.append(tempList!)

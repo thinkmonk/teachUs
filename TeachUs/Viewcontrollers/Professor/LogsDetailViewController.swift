@@ -66,6 +66,7 @@ class LogsDetailViewController: BaseViewController {
         var parameters = [String:Any]()
         parameters["college_code"] = UserManager.sharedUserManager.appUserCollegeDetails.college_code
         parameters["subject_id"] = self.allCollegeArray[selectedIndex].subjectId
+        parameters["class_id"] = self.allCollegeArray[selectedIndex].classId
         if(fromDate != "" && toDate != ""){
             parameters["from_date"] = fromDate
             parameters["to_date"] =  toDate
@@ -74,6 +75,7 @@ class LogsDetailViewController: BaseViewController {
         manager.apiPost(apiName: "Get professor logs details", parameters: parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             self.arrayLogsDetails.removeAll()
+            self.title = self.allCollegeArray[self.selectedIndex].subjectName
 
             guard let logs = response["subject_logs"] as? [[String:Any]] else{
                 self.arrayDataSource.removeAll()
@@ -186,8 +188,8 @@ extension LogsDetailViewController:UITableViewDelegate, UITableViewDataSource{
         case .LogDetails:
             let cell:LogsDetailTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.LogsDetailTableViewCellId, for: indexPath) as! LogsDetailTableViewCell
             let logs:LogDetails = cellDataSource.attachedObject as! LogDetails
-            cell.labelNumberOfLecs.text = "\(logs.numberOfLecture)"
-            cell.labelAttendanceCount.text = "\(logs.totalStudentAttendance)"
+            cell.labelNumberOfLecs.text = logs.numberOfLecture
+            cell.labelAttendanceCount.text = logs.totalStudentAttendance
             cell.labelLectureTime.text = "\(logs.fromTime) to \(logs.toTime)"
             cell.viewTimeOfSubject.alpha = 1
 //            let datstring = logs.dateOfSubmission.getDateFromString()
@@ -200,7 +202,7 @@ extension LogsDetailViewController:UITableViewDelegate, UITableViewDataSource{
             let cell:SyllabusDetailsTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.SyllabusDetailsTableViewCellId, for: indexPath) as! SyllabusDetailsTableViewCell
             let chapterAttached:LogDetailSyllabus = cellDataSource.attachedObject as! LogDetailSyllabus
             cell.imageViewStatus.alpha = 0
-            cell.labelChapterNumber.text = "\(chapterAttached.unitNumber) : \(chapterAttached.unitName)"
+            cell.labelChapterNumber.text = "\(chapterAttached.unitName)"
             cell.labelChapterDetails.text = "\(chapterAttached.chapter.chapterName)"
             cell.viewSeperator.alpha = 0
             cell.selectionStyle = .none

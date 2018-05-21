@@ -43,13 +43,13 @@ import ObjectMapper
  */
 
 class LogDetails:Mappable{
-    var courseName:String = ""
-    var lectureDate:String = ""
-    var numberOfLecture:String = ""
-    var fromTime:String = ""
-    var toTime:String = ""
-    var dateOfSubmission:String = ""
-    var totalStudentAttendance:String = ""
+    var courseName:String = " "
+    var lectureDate:String = " "
+    var numberOfLecture:String = " "
+    var fromTime:String = " "
+    var toTime:String = " "
+    var dateOfSubmission:String = " "
+    var totalStudentAttendance:String = " "
     var unitArray:[Unit] = []
     
     required init?(map: Map) {

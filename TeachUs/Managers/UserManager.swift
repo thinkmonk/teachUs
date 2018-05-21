@@ -95,29 +95,39 @@ class UserManager{
                 self.appUserCollegeArray = collegeDetailsArray as! [CollegeDetails]
             }
             
-//            for college in appUserCollegeArray{
-//                if(college.role_id == "3"){
-//                    self.appUserCollegeDetails = college
-//                    UserManager.sharedUserManager.setLoginUserType(.College)
-//                }
-//            }
-            
-            
             guard let defaultCollegeName = UserDefaults.standard.value(forKey: Constants.UserDefaults.collegeName) as? String, let defaultRoleName = UserDefaults.standard.value(forKey: Constants.UserDefaults.roleName) as? String
                 else {
-                    self.appUserCollegeDetails = self.appUserCollegeArray.first!
-                    switch self.appUserCollegeArray.first?.role_id!{
-                    case "1"?:
-                        UserManager.sharedUserManager.setLoginUserType(.Student)
-                        break
-                    case "2"?:
-                        UserManager.sharedUserManager.setLoginUserType(.Professor)
-                        break
-                    case "3"?:
-                        UserManager.sharedUserManager.setLoginUserType(.College)
-                        break
-                    default:
-                        break
+                    if(self.user == nil) {
+                        self.appUserCollegeDetails = self.appUserCollegeArray.first!
+                        switch self.appUserCollegeArray.first?.role_id!{
+                        case "1"?:
+                            UserManager.sharedUserManager.setLoginUserType(.Student)
+                            break
+                        case "2"?:
+                            UserManager.sharedUserManager.setLoginUserType(.Professor)
+                            break
+                        case "3"?:
+                            UserManager.sharedUserManager.setLoginUserType(.College)
+                            break
+                        default:
+                            break
+                        }
+                    }else
+                    {
+                        for user in self.appUserCollegeArray {
+                            if user.role_id! == "1" && self.user! == LoginUserType.Student{
+                                self.appUserCollegeDetails = user
+                                break
+                            }
+                            if user.role_id! == "2" && self.user! == LoginUserType.Professor{
+                                self.appUserCollegeDetails = user
+                                break
+                            }
+                            if user.role_id! == "3" && self.user! == LoginUserType.College{
+                                self.appUserCollegeDetails = user
+                                break
+                            }
+                        }
                     }
                 return
             }

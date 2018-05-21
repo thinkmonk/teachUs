@@ -26,6 +26,10 @@ class AttendanceCalenderTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.textFieldToTime.addWhiteBottomBorder()
+        self.textFieldFromTime.addWhiteBottomBorder()
+        self.textFieldNumberOfLectures.addWhiteBottomBorder()
+        self.makeTableCellEdgesRounded()
         // Initialization code
     }
 

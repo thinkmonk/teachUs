@@ -34,13 +34,14 @@ class LeftMenuViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
 //    var studentDataSource = ["Attendance", "Syllabus Status", "Feedback / Ratings", "Logout"]
-    var studentDataSource = ["Attendance", "Syllabus", "Logout"]
+    var studentDataSource = ["Attendance", "Syllabus","Ratings", "Logout"]
 
 //    var professorDataSource = ["Attendance", "Syllabus Status", "Logs", "Logout"]
     var professorDataSource = ["Attendance", "Syllabus", "Logs", "Logout"]
 
-    var collegeDataSource = ["Attendance(Reports)","Attendance(Events)", "Syllabus Status","Add/Remove Admin","Ratings","Logout"]
-    
+    var collegeSuperAdminDataSource = ["Attendance(Reports)","Attendance(Events)", "Syllabus Status","Add/Remove Admin","Ratings","Logout"]
+    var collegeAdminDataSource = ["Attendance(Reports)", "Syllabus Status", "Logout"]
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -86,7 +87,9 @@ class LeftMenuViewController: UIViewController, UIGestureRecognizerDelegate {
             arrayDataSource = studentDataSource
             break
         case .College:
-            arrayDataSource = collegeDataSource
+//                arrayDataSource = UserManager.sharedUserManager.appUserCollegeDetails.privilege! == "1" ? collegeSuperAdminDataSource : collegeAdminDataSource
+                arrayDataSource = UserManager.sharedUserManager.appUserCollegeDetails.privilege! == "1" ? collegeSuperAdminDataSource : collegeSuperAdminDataSource
+
             break
         }
         self.tableViewMenu.reloadData()
@@ -209,7 +212,9 @@ extension LeftMenuViewController:UITableViewDelegate, UITableViewDataSource{
                 let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
                 let viewController = mainStoryboard.instantiateViewController(withIdentifier: Constants.viewControllerId.LoginSelectNavBarControllerId) as! UINavigationController
                 UIApplication.shared.keyWindow?.rootViewController = viewController
-
+                UserDefaults.standard.set(nil, forKey: Constants.UserDefaults.collegeName)
+                UserDefaults.standard.set(nil, forKey: Constants.UserDefaults.roleName)
+                UserDefaults.standard.synchronize()
             }
             self.menuContainerViewController.setMenuState(MFSideMenuStateClosed, completion: nil)
             if(delegate != nil){

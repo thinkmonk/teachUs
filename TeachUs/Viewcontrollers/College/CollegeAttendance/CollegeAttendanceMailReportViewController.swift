@@ -58,8 +58,7 @@ class CollegeAttendanceMailReportViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.buttonSubmit.roundedRedButton()
-        self.ViewFormBg.makeEdgesRounded()
-        self.viewTitleBackground.makeBottomEdgesRounded()
+//        self.viewTitleBackground.makeBottomEdgesRounded()
         self.viewEmailBg.makeEdgesRoundedWith(radius: self.viewEmailBg.height()/2)
         self.viewNumberBg.makeEdgesRoundedWith(radius: self.viewNumberBg.height()/2)
         self.labelTitle.text = " \(self.collegeClass.courseName) Report"
@@ -70,6 +69,10 @@ class CollegeAttendanceMailReportViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.ViewFormBg.makeTableCellEdgesRounded()
+    }
     //MARK:- Outlet methods
     @IBAction func dismissView(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)

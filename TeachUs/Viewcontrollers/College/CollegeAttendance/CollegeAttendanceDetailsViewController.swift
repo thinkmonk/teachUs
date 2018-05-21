@@ -46,8 +46,6 @@ class CollegeAttendanceDetailsViewController: BaseViewController {
         self.buttonSubmit.makeViewCircular()
         self.buttonMaiReport.makeViewCircular()
         self.addGradientToNavBar()
-        self.labelToDate.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor.rgbColor(239.0, 239.0, 239.0), thickness: 1)
-        self.labelFromDate.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor.rgbColor(239.0, 239.0, 239.0), thickness: 1)
         getSubjectList()
         self.initDatePicker()
         
@@ -72,12 +70,23 @@ class CollegeAttendanceDetailsViewController: BaseViewController {
         self.tableViewStudentList.estimatedRowHeight = 60
         self.tableViewStudentList.rowHeight = UITableViewAutomaticDimension
         self.tableViewStudentList.alpha = 0.0
-        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.buttonAllSubject.makeTableCellEdgesRounded()
+        self.viewSubjectName.makeTableCellEdgesRounded()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.labelToDate.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor.rgbColor(239.0, 239.0, 239.0), thickness: 1)
+        self.labelFromDate.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor.rgbColor(239.0, 239.0, 239.0), thickness: 1)
     }
     
     func getSubjectList(){
@@ -174,6 +183,16 @@ class CollegeAttendanceDetailsViewController: BaseViewController {
             fromDatePicker.buttonOk.addTarget(self, action: #selector(CollegeAttendanceDetailsViewController.dismissDatePicker), for: .touchUpInside)
             fromDatePicker.picker.minimumDate = NSCalendar.current.date(byAdding: .month, value: -6, to: Date())
             fromDatePicker.picker.maximumDate = NSCalendar.current.date(byAdding: .month, value: 0, to: Date())
+            self.toDate = Date()
+            let dateFormatter: DateFormatter = DateFormatter()
+            // Set date format
+            dateFormatter.dateFormat = "YYYY-MM-dd"
+            // Apply date format
+            self.labelToDate.text = dateFormatter.string(from: self.toDate!)
+            self.fromDate = NSCalendar.current.date(byAdding: .month, value: -1, to: Date())
+            self.labelFromDate.text = dateFormatter.string(from: self.fromDate!)
+            
+            
         }
 //        if(toDatePicker == nil){
 //            toDatePicker = ViewDatePicker.instanceFromNib() as! ViewDatePicker

@@ -177,14 +177,25 @@ class StudentsListViewController: BaseViewController {
         }
     }
     
-    @IBAction func submitAttendance(_ sender: UIButton) {
-        if(viewConfirmAttendance == nil){
-            viewConfirmAttendance = ViewConfirmAttendance.instanceFromNib() as! ViewConfirmAttendance
-            viewConfirmAttendance.delegate = self
+    func checkLectureTiming() -> Bool{
+        if(self.fromTimePicker.picker.date < self.toTimePicker.picker.date){
+            return true
+        }else{
+            self.showAlterWithTitle("Wrong Date Range", alertMessage: "From time should be lesser than to time!")
         }
-        let presentStudents = AttendanceManager.sharedAttendanceManager.arrayStudents.value.filter{$0.isPrsent == true}
-        viewConfirmAttendance.labelStudentCount.text = "\(presentStudents.count)"
-        viewConfirmAttendance.showView(inView: UIApplication.shared.keyWindow!)
+        return false
+    }
+    
+    @IBAction func submitAttendance(_ sender: UIButton) {
+        if(self.checkLectureTiming()){
+            if(viewConfirmAttendance == nil){
+                viewConfirmAttendance = ViewConfirmAttendance.instanceFromNib() as! ViewConfirmAttendance
+                viewConfirmAttendance.delegate = self
+            }
+            let presentStudents = AttendanceManager.sharedAttendanceManager.arrayStudents.value.filter{$0.isPrsent == true}
+            viewConfirmAttendance.labelStudentCount.text = "\(presentStudents.count)"
+            viewConfirmAttendance.showView(inView: UIApplication.shared.keyWindow!)
+        }
     }
 }
 
@@ -521,6 +532,8 @@ extension StudentsListViewController:UIScrollViewDelegate{
 }
 
 extension StudentsListViewController:ViewConfirmAttendanceDelegate{
+    
+    
     func confirmAttendance() {
         /*
         self.performSegue(withIdentifier: Constants.segues.markPortionCompleted, sender: self)
@@ -541,10 +554,10 @@ extension StudentsListViewController:ViewConfirmAttendanceDelegate{
             "attendance_list":"\(AttendanceManager.sharedAttendanceManager.attendanceList)"
         ]
         
-//        self.markedAttendanceId = 42
-//        self.performSegue(withIdentifier: Constants.segues.markPortionCompleted, sender: self)
+        self.markedAttendanceId = 5
+        self.performSegue(withIdentifier: Constants.segues.markPortionCompleted, sender: self)
 
-        
+        /*
         manager.apiPost(apiName: "Mark student attendance", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             if(code == 200){
@@ -572,6 +585,7 @@ extension StudentsListViewController:ViewConfirmAttendanceDelegate{
             LoadingActivityHUD.hideProgressHUD()
             self.showAlterWithTitle(nil, alertMessage: errorMessage)
         }
+        */
     }
 
     

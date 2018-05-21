@@ -25,7 +25,7 @@ import ObjectMapper
 
 class Event:Mappable{
     var eventId:String = ""
-    var eventName:String = ""
+    var eventName:String = " "
     var eventCode:String = ""
     var eventDescription:String =  ""
     var eventDate:String = ""

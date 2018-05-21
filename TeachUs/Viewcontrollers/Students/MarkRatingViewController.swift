@@ -27,6 +27,8 @@ class MarkRatingViewController: BaseViewController {
         self.makeDataSource()
         self.tableViewTeacherRating.delegate = self
         self.tableViewTeacherRating.dataSource = self
+        self.tableViewTeacherRating.backgroundColor = .clear
+        self.butonSubmit.alpha = 0
         // Do any additional setup after loading the view.
     }
 
@@ -135,6 +137,7 @@ extension MarkRatingViewController: UITableViewDelegate, UITableViewDataSource{
         case .RatingTitle:
             let ratingTitleCell :RatingTitleTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.RatingTitleTableViewCellId, for: indexPath) as! RatingTitleTableViewCell
             ratingTitleCell.selectionStyle = .none
+            ratingTitleCell.backgroundColor = .clear
             return ratingTitleCell
         case .RatingTopics:
             let cell : RatingTopicsTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.RatingTopicsTableViewCellId, for: indexPath) as! RatingTopicsTableViewCell
@@ -155,8 +158,26 @@ extension MarkRatingViewController: UITableViewDelegate, UITableViewDataSource{
             
         }
     }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if(section == 0){
+            return 15
+        }
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableViewTeacherRating.width(), height: 15))
+        headerView.backgroundColor = UIColor.clear
+        return headerView
+    }
+    
+    
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 15
+        if(section > 1){
+            return 15
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -172,7 +193,7 @@ extension MarkRatingViewController: UITableViewDelegate, UITableViewDataSource{
             return 100
 
         case .RatingTitle:
-            return 50
+            return 44
             
         case .RatingTopics:
             return 50
@@ -204,11 +225,18 @@ extension MarkRatingViewController: UITableViewDelegate, UITableViewDataSource{
             "09",
             "10"
         ]
-        
         self.ratingDropDown.selectionAction = { [unowned self] (index, item) in
             self.arrayDataSource[sender.indexPath.section-2].ratings = item
+            print( "\(self.arrayDataSource[sender.indexPath.section-2].ratings )  is  \( self.arrayDataSource[sender.indexPath.section-2].criteria)" )
             self.tableViewTeacherRating.reloadRows(at: [sender.indexPath], with: .fade)
-
+            var allRatingsGiven:Bool = true
+            for tempRating in self.arrayDataSource{
+                if tempRating.ratings == ""{
+                    allRatingsGiven = false
+                    break
+                }
+            }
+            self.butonSubmit.alpha = allRatingsGiven ? 1 : 0
         }
         self.ratingDropDown.show()
     }

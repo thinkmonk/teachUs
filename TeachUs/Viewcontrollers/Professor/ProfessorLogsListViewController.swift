@@ -10,11 +10,12 @@ import UIKit
 import ObjectMapper
 import XLPagerTabStrip
 
-class ProfessorLogsListViewController: UIViewController {
+class ProfessorLogsListViewController: BaseViewController {
     var parentNavigationController : UINavigationController?
     var arrayDataSource:[College]! = []
     @IBOutlet weak var tableviewLogs: UITableView!
     let nibCollegeListCell = "ProfessorCollegeListTableViewCell"
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,7 @@ class ProfessorLogsListViewController: UIViewController {
         self.tableviewLogs.alpha = 0
         self.tableviewLogs.rowHeight = UITableViewAutomaticDimension
         self.getLogs()
+        tableviewLogs.addSubview(refreshControl) // not required when using UITableViewController
         // Do any additional setup after loading the view.
     }
 
@@ -34,6 +36,11 @@ class ProfessorLogsListViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func refresh(sender: AnyObject) {
+        self.getLogs()
+        super.refresh(sender:sender) //this wil end the refreshing
+    }
+
     func getLogs(){
         
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
@@ -48,6 +55,7 @@ class ProfessorLogsListViewController: UIViewController {
             guard let logs = response["class_list"] as? [[String:Any]] else{
                 return
             }
+            self.arrayDataSource.removeAll()
             for log in logs{
                 let tempLog = Mapper<College>().map(JSON: log)
                 self.arrayDataSource.append(tempLog!)
@@ -104,6 +112,7 @@ extension ProfessorLogsListViewController:UITableViewDelegate, UITableViewDataSo
      */
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        /*
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: tableView.sectionHeaderHeight))
         
         let labelTitle = UILabel(frame: CGRect(x: 15.0, y: headerView.height()/2, width: headerView.width()-15, height: 15))
@@ -118,9 +127,17 @@ extension ProfessorLogsListViewController:UITableViewDelegate, UITableViewDataSo
         headerView.backgroundColor = UIColor.rgbColor(52, 40, 70)
         
         return headerView
+        */
+        
+        let headerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableviewLogs.width(), height: 15))
+        headerView.backgroundColor = UIColor.clear
+        return headerView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if(section == 0){
+            return 15
+        }
         return 0
     }
     

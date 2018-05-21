@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 import ObjectMapper
 
 enum SyllabusCompletetionType {
@@ -54,8 +55,6 @@ class MarkCompletedPortionViewController: BaseViewController {
         var parameters = [String:Any]()
         parameters["subject_id"] = "\(selectedCollege.subjectId!)"
         parameters["class_id"] = "\(selectedCollege.classId!)"
-//        parameters["subject_id"] = "3"
-//        parameters["class_id"] = "1"
         parameters["college_code"] = UserManager.sharedUserManager.appUserCollegeDetails.college_code
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
 
@@ -80,30 +79,6 @@ class MarkCompletedPortionViewController: BaseViewController {
             print(message)
             
         }
-        /*
-        manager.url = URLConstants.ProfessorURL.topicList
-        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
-        manager.apiGet(apiName: "Get topics for professor", completionHandler: { (response, code) in
-            LoadingActivityHUD.hideProgressHUD()
-            
-            guard let topics = response["topicWise"] as? [[String:Any]] else{
-                return
-            }
-
-            for topic in topics{
-                let tempTopic = Mapper<Unit>().map(JSON: topic)
-                self.arrayDataSource.append(tempTopic!)
-            }
-            self.makeTableView()
-            self.tableviewTopics.reloadData()
-            self.showTableView()
-            
-        }) { (error, code, errorMessage) in
-            LoadingActivityHUD.hideProgressHUD()
-            print(errorMessage)
-        }
- */
-         
     }
     
     func makeTableView(){
@@ -191,16 +166,19 @@ extension MarkCompletedPortionViewController:UITableViewDelegate, UITableViewDat
             cell.buttonCompleted.selectedGreenButton()
             cell.buttonInProgress.selectedDefaultButton()
             cell.labelStatus.textColor = UIColor.green
+            cell.viewDisableCell.alpha = chapterCell.isUpdated ? 0 : 1
             break
         case .InProgress:
             cell.buttonInProgress.selectedRedButton()
             cell.buttonCompleted.selectedDefaultButton()
             cell.labelStatus.textColor = UIColor.red
+            cell.viewDisableCell.alpha = 0
             break
         case .NotStarted:
             cell.buttonCompleted.selectedDefaultButton()
             cell.buttonInProgress.selectedDefaultButton()
             cell.labelStatus.textColor = UIColor.yellow
+            cell.viewDisableCell.alpha = 0
             break
         }
         cell.selectionStyle = .none
@@ -227,24 +205,64 @@ extension MarkCompletedPortionViewController:UITableViewDelegate, UITableViewDat
     }
     @objc func markChapterInProgress(_ sender: ButtonWithIndexPath){
         let indexpath = sender.indexPath!
-        
-        self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].setChapterStatus = "In Progress"
-        self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].chapterStatusTheme = .InProgress
-        let topicList = ["topic_id":"\(self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].chapterId)",
-            "status":"1" ] //status 2 is for completed topic / 1 is for inprogress
-        self.updatedTopicList.append(topicList)
-        self.tableviewTopics.reloadRows(at: [indexpath], with: .fade)
-
+        if(self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].status != "1"){
+            self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].setChapterStatus = "In Progress"
+            self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].status = "1"
+            self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].chapterStatusTheme = .InProgress
+            self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].isUpdated = true
+            let topicList = ["topic_id":"\(self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].chapterId)",
+                "status":"1" ] //status 2 is for completed topic / 1 is for inprogress
+            self.updateUnitListArray(list: topicList)
+            self.updatedTopicList.append(topicList)
+            self.tableviewTopics.reloadRows(at: [indexpath], with: .fade)
+        }else{//Not Started
+            self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].setChapterStatus = "Not Started"
+            self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].chapterStatusTheme = .NotStarted
+            self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].status = "0"
+            self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].isUpdated = true
+            let topicList = ["topic_id":"\(self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].chapterId)",
+                "status":"1" ]
+            self.updateUnitListArray(list: topicList)
+            self.tableviewTopics.reloadRows(at: [indexpath], with: .fade)
+        }
         
     }
+
     @objc func markChapterInCompleted(_ sender: ButtonWithIndexPath){
         let indexpath = sender.indexPath!
-        self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].setChapterStatus = "Completed"
-        self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].chapterStatusTheme = .Completed
-        let topicList = ["topic_id":"\(self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].chapterId)",
-            "status":"2" ] //status 2 is for completed topic / 1 is for inprogress
-        self.updatedTopicList.append(topicList)
-        self.tableviewTopics.reloadRows(at: [indexpath], with: .fade)
+        
+        if(self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].status != "2"){
+            self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].setChapterStatus = "Completed"
+            self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].chapterStatusTheme = .Completed
+            self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].status = "2"
+              self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].isUpdated = true
+            let topicList = ["topic_id":"\(self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].chapterId)",
+                "status":"2" ] //status 2 is for completed topic / 1 is for inprogress
+            self.updateUnitListArray(list: topicList)
+            self.updatedTopicList.append(topicList)
+            self.tableviewTopics.reloadRows(at: [indexpath], with: .fade)
+        }else{//Not Started
+                self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].setChapterStatus = "Not Started"
+                self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].chapterStatusTheme = .NotStarted
+            self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].status = "0"
+            self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].isUpdated = true
+                let topicList = ["topic_id":"\(self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].chapterId)",
+                    "status":"1" ]
+                self.updateUnitListArray(list: topicList)
+            self.tableviewTopics.reloadRows(at: [indexpath], with: .fade)
+        }
+    }
+    
+    func updateUnitListArray(list:[String:String]){
+        for i in 0..<updatedTopicList.count{
+            let topic = updatedTopicList[i]
+            let tempCurrentTopic = topic["topic_id"] as! String
+            let tempOuterTopic = list["topic_id"]
+            if(tempCurrentTopic == tempOuterTopic){
+                updatedTopicList.remove(at: i)
+                return
+            }
+        }
     }
 
 }

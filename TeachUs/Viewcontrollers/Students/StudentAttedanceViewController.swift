@@ -10,7 +10,7 @@ import UIKit
 import ObjectMapper
 import XLPagerTabStrip
 
-class StudentAttedanceViewController: UIViewController {
+class StudentAttedanceViewController: BaseViewController {
     var parentNavigationController : UINavigationController?
     @IBOutlet weak var viewAttendanceMonth: UIView!
     @IBOutlet weak var labelLectureCount: UILabel!
@@ -29,6 +29,7 @@ class StudentAttedanceViewController: UIViewController {
         self.tableViewStudentAttendance.delegate = self
         self.tableViewStudentAttendance.dataSource = self
         self.tableViewStudentAttendance.alpha = 0.0
+        self.tableViewStudentAttendance.addSubview(refreshControl)
         self.setUpDropDown()
     }
 
@@ -38,6 +39,11 @@ class StudentAttedanceViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+    }
+    
+    override func refresh(sender: AnyObject) {
+        self.getAttendance(0)
+        super.refresh(sender: sender)
     }
     
     func getAttendance(_ forMonth:Int){
@@ -176,7 +182,7 @@ extension StudentAttedanceViewController:UITableViewDelegate, UITableViewDataSou
         let cell:SyllabusStatusTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.SyllabusStatusTableViewCellId, for: indexPath) as! SyllabusStatusTableViewCell
         cell.labelSubject.text = self.arrayDataSource.subjectAttendance[indexPath.section].subjectName
         cell.labelNumberOfLectures.text = "\(self.arrayDataSource.subjectAttendance[indexPath.section].percentage!)%"
-        cell.labelAttendancePercent.text = "\(self.arrayDataSource.subjectAttendance[indexPath.section].presentCount!)/\(self.arrayDataSource.subjectAttendance[indexPath.row].totalCount!)"
+        cell.labelAttendancePercent.text = "\(self.arrayDataSource.subjectAttendance[indexPath.section].presentCount!)/\(self.arrayDataSource.subjectAttendance[indexPath.section].totalCount!)"
         cell.selectionStyle = .none
         return cell
     }

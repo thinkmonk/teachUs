@@ -26,14 +26,14 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
         settings.style.buttonBarItemsShouldFillAvailiableWidth = false
         settings.style.buttonBarLeftContentInset = 0
         settings.style.buttonBarRightContentInset = 0
-        /*
-        changeCurrentIndexProgressive = { [weak self] (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
-            guard changeCurrentIndex == true else { return }
-            oldCell?.label.textColor = self?.unselectedColor
-            newCell?.label.textColor = .white
-        }
- */
         super.viewDidLoad()
+        
+         changeCurrentIndexProgressive = { [weak self] (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
+         guard changeCurrentIndex == true else { return }
+         oldCell?.label.textColor = self?.unselectedColor
+         newCell?.label.textColor = .white
+         }
+         
 
         self.view.bringSubview(toFront: self.view)
         // Do any additional setup after loading the view.
@@ -96,31 +96,42 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
             collegeAttendanceListVC.title = "Attendance (Reports)"
             collegeAttendanceListVC.parentNavigationController = self.parentNavigationController
             controllersArray.append(collegeAttendanceListVC)
+            
+            //SUPER ADMIN
+//            if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "1"){
+                if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "0"){
 
-            let eventAttendanceListVc:EventAttendanceListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.EventAttendanceListViewControllerId) as! EventAttendanceListViewController
-            eventAttendanceListVc.title = "Attendance (Events)"
-            eventAttendanceListVc.parentNavigationController = self.parentNavigationController
-            controllersArray.append(eventAttendanceListVc)
+                let eventAttendanceListVc:EventAttendanceListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.EventAttendanceListViewControllerId) as! EventAttendanceListViewController
+                eventAttendanceListVc.title = "Attendance (Events)"
+                eventAttendanceListVc.parentNavigationController = self.parentNavigationController
+                controllersArray.append(eventAttendanceListVc)
+            }
             
             let collegeSyllabusStatusVC:CollegeSyllabusStatusViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.CollegeSyllabusStatusViewControllerId) as! CollegeSyllabusStatusViewController
             collegeSyllabusStatusVC.title = "Syllabus"
             collegeSyllabusStatusVC.parentNavigationController = self.parentNavigationController
             controllersArray.append(collegeSyllabusStatusVC)
             
-            
-            let addRemoveAdminVC:AddRemoveAdminViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.AddRemoveAdminViewControllerId) as! AddRemoveAdminViewController
-            addRemoveAdminVC.title = "Add/Remove Admin"
-            addRemoveAdminVC.parentNavigationController = self.parentNavigationController
-            controllersArray.append(addRemoveAdminVC)
-            
-            let collegeRatingListVC:CollegeClassRatingListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.CollegeClassRatingListViewControllerId) as! CollegeClassRatingListViewController
-            collegeRatingListVC.title = "Ratings"
-            collegeRatingListVC.parentNavigationController = self.parentNavigationController
-            controllersArray.append(collegeRatingListVC)
-            break
+            //SUPER ADMIN
+//            if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! == "1"){
+                if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "0"){
 
+                let addRemoveAdminVC:AddRemoveAdminViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.AddRemoveAdminViewControllerId) as! AddRemoveAdminViewController
+                addRemoveAdminVC.title = "Add/Remove Admin"
+                addRemoveAdminVC.parentNavigationController = self.parentNavigationController
+                controllersArray.append(addRemoveAdminVC)
+            }
+
+            //SUPER ADMIN
+//            if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! == "1"){
+            if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "0"){
+            let collegeRatingListVC:CollegeClassRatingListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.CollegeClassRatingListViewControllerId) as! CollegeClassRatingListViewController
+                collegeRatingListVC.title = "Ratings"
+                collegeRatingListVC.parentNavigationController = self.parentNavigationController
+                controllersArray.append(collegeRatingListVC)
+            }
+            break
         }
-        
         return controllersArray
 
     }

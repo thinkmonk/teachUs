@@ -15,6 +15,7 @@ class TopicDetailsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var buttonInProgress: ButtonWithIndexPath!
     @IBOutlet weak var buttonCompleted: ButtonWithIndexPath!
+    @IBOutlet weak var viewDisableCell: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

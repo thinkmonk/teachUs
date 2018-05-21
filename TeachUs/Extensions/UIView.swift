@@ -116,7 +116,7 @@ extension UIView {
         }
     
     func makeTableCellEdgesRounded(){
-        self.makeEdgesRoundedWith(radius: 5.0)
+        self.makeEdgesRoundedWith(radius: 3.0)
     }
     
     func makeTopEdgesRounded(){

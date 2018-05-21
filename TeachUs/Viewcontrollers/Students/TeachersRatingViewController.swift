@@ -21,7 +21,9 @@ class TeachersRatingViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableViewTeachersList.register(UINib(nibName: "TeacherDetailsTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.TeacherDetailsTableViewCellId)
-
+        self.tableViewTeachersList.estimatedRowHeight = 90
+        self.tableViewTeachersList.rowHeight  = UITableViewAutomaticDimension
+        self.tableViewTeachersList.addSubview(refreshControl)
         // Do any additional setup after loading the view.
     }
 
@@ -43,16 +45,14 @@ class TeachersRatingViewController: BaseViewController {
         
     }
     
+    override func refresh(sender: AnyObject) {
+        self.getRatings()
+        super.refresh(sender: sender)
+    }
+    
     func getRatings(){
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()
-
-        //http://ec2-52-40-212-186.us-west-2.compute.amazonaws.com:8081/teachus/student/getRatingsSummary/Zmlyc3ROYW1lPURldmVuZHJhLG1pZGRsZU5hbWU9QSxsYXN0TmFtZT1GYWRuYXZpcyxyb2xsPVBST0ZFU1NPUixpZD0x?studentId=1
-        
-//        manager.url = URLConstants.StudentURL.getRatingsSummary +
-//            "\(UserManager.sharedUserManager.getAccessToken())" +
-//        "?studentId=\(UserManager.sharedUserManager.getUserId())"
-        
         manager.url = URLConstants.StudentURL.professorRatingList
         
         let parameters = [
@@ -67,7 +67,7 @@ class TeachersRatingViewController: BaseViewController {
             guard let teachers = response["prof_list"] as? [[String:Any]] else{
                 return
             }
-            
+            self.arrayDataSource.removeAll()
             for teacher in teachers{
                 let tempteacher = Mapper<ProfessorDetails>().map(JSON: teacher)
                 self.arrayDataSource.append(tempteacher!)
@@ -80,7 +80,7 @@ class TeachersRatingViewController: BaseViewController {
             guard let criteriaList = response["rating_list"] as? [[String:Any]] else{
                 return
             }
-            
+            self.arrayRatingCriteriaDataSource.removeAll()
             for criteria in criteriaList{
                 let tempCriteria = Mapper<ProfessorRatingDetials>().map(JSON: criteria)
                 self.arrayRatingCriteriaDataSource.append(tempCriteria!)
@@ -121,23 +121,8 @@ extension TeachersRatingViewController:UITableViewDataSource, UITableViewDelegat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:TeacherDetailsTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.TeacherDetailsTableViewCellId, for: indexPath) as! TeacherDetailsTableViewCell
-        
-        cell.imageViewBackground.makeEdgesRoundedWith(radius: cell.imageViewBackground.height()/2)
-        cell.imageProfessor.makeEdgesRoundedWith(radius: cell.imageProfessor.height()/2)
-        if(arrayDataSource[indexPath.section].isRatingSubmitted == "1"){
-            cell.imageViewBackground.backgroundColor = UIColor.red
-            cell.labelName.textColor = UIColor.red
-            cell.labelSubject.textColor = UIColor.red
-//            cell.isUserInteractionEnabled = false
-        }
-        
-        
-        cell.labelSubject.text = self.arrayDataSource[indexPath.section].subjectName
-        cell.labelName.text = "\(self.arrayDataSource[indexPath.section].professforFullname)"
-        cell.imageProfessor.imageFromServerURL(urlString: self.arrayDataSource[indexPath.section].imageURL, defaultImage: Constants.Images.defaultProfessor)
-        cell.selectionStyle = .none
-        cell.accessoryType = .disclosureIndicator
-        
+        let details:ProfessorDetails = self.arrayDataSource[indexPath.section]
+                cell.setUpCellDetails(tempDetails: details)
         return cell
     }
     
@@ -151,8 +136,17 @@ extension TeachersRatingViewController:UITableViewDataSource, UITableViewDelegat
         return footerView
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if(section == 0){
+            return 15
+        }
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableViewTeachersList.width(), height: 15))
+        headerView.backgroundColor = UIColor.clear
+        return headerView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

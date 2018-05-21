@@ -18,6 +18,9 @@ class TeacherDetailsTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.makeTableCellEdgesRounded()
+        self.imageViewBackground.makeEdgesRoundedWith(radius: self.imageViewBackground.height()/2)
+        self.imageProfessor.makeEdgesRoundedWith(radius: self.imageProfessor.height()/2)
+
         // Initialization code
     }
     
@@ -25,6 +28,27 @@ class TeacherDetailsTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    
+    func setUpCellDetails(tempDetails:ProfessorDetails){
+        self.labelSubject.text = tempDetails.subjectName
+        self.labelName.text = "\(tempDetails.professforFullname)"
+        self.imageProfessor.imageFromServerURL(urlString: tempDetails.imageURL, defaultImage: Constants.Images.defaultProfessor)
+        self.selectionStyle = .none
+        if(tempDetails.isRatingSubmitted == "1"){
+            self.imageViewBackground.backgroundColor = .lightGray
+            self.labelName.textColor = .lightGray
+            self.labelSubject.textColor = .lightGray
+            self.isUserInteractionEnabled = false
+            self.accessoryType = .none
+        }else{
+            self.imageViewBackground.backgroundColor = .black
+            self.labelName.textColor = .black
+            self.labelSubject.textColor = .black
+            self.isUserInteractionEnabled = true
+            self.accessoryType = .disclosureIndicator
+        }
     }
     
 }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -88,18 +88,26 @@
                             <constraint firstAttribute="width" constant="1" id="Aef-kJ-Sg0"/>
                         </constraints>
                     </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9m5-K4-p9n">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="109.5"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="0.5" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="H59-at-n8m" firstAttribute="top" secondItem="NFO-he-lg1" secondAttribute="bottom" constant="5" id="19I-f5-OZx"/>
+                    <constraint firstItem="9m5-K4-p9n" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="3Qw-KO-IWP"/>
                     <constraint firstItem="DmK-sy-09J" firstAttribute="top" secondItem="H59-at-n8m" secondAttribute="bottom" constant="15" id="5hZ-xi-a9T"/>
                     <constraint firstAttribute="trailing" secondItem="D8V-tc-fvA" secondAttribute="trailing" constant="15" id="PN8-9F-h3B"/>
                     <constraint firstItem="DmB-Lt-gFg" firstAttribute="centerY" secondItem="DmK-sy-09J" secondAttribute="centerY" id="Scf-Tc-YaA"/>
                     <constraint firstItem="DmK-sy-09J" firstAttribute="leading" secondItem="H59-at-n8m" secondAttribute="leading" id="SqX-SN-dud"/>
                     <constraint firstItem="tby-Wh-REp" firstAttribute="top" secondItem="D8V-tc-fvA" secondAttribute="top" id="Tfx-Mk-7Dz"/>
+                    <constraint firstAttribute="trailing" secondItem="9m5-K4-p9n" secondAttribute="trailing" id="VWm-YC-Kb2"/>
                     <constraint firstItem="D8V-tc-fvA" firstAttribute="leading" secondItem="tby-Wh-REp" secondAttribute="trailing" constant="8" id="Ycu-tE-nz2"/>
                     <constraint firstItem="tby-Wh-REp" firstAttribute="bottom" secondItem="D8V-tc-fvA" secondAttribute="bottom" id="aai-nR-wvs"/>
                     <constraint firstItem="tby-Wh-REp" firstAttribute="leading" secondItem="H59-at-n8m" secondAttribute="trailing" constant="5" id="cF3-Xb-fqF"/>
+                    <constraint firstAttribute="bottom" secondItem="9m5-K4-p9n" secondAttribute="bottom" id="ea5-TK-dZH"/>
                     <constraint firstItem="DmB-Lt-gFg" firstAttribute="leading" secondItem="DmK-sy-09J" secondAttribute="trailing" constant="5" id="gRw-fW-aQs"/>
+                    <constraint firstItem="9m5-K4-p9n" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="gXy-rG-Zb4"/>
                     <constraint firstItem="tby-Wh-REp" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="nkx-B4-0Od"/>
                     <constraint firstItem="D8V-tc-fvA" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="qZP-dO-tjO"/>
                     <constraint firstItem="H59-at-n8m" firstAttribute="leading" secondItem="NFO-he-lg1" secondAttribute="leading" id="soe-6R-NUk"/>
@@ -115,6 +123,7 @@
                 <outlet property="labelChapterName" destination="H59-at-n8m" id="N6C-ZS-ufo"/>
                 <outlet property="labelChapterNumber" destination="NFO-he-lg1" id="qTg-LX-134"/>
                 <outlet property="labelStatus" destination="DmB-Lt-gFg" id="Z70-R6-w8o"/>
+                <outlet property="viewDisableCell" destination="9m5-K4-p9n" id="YaO-aR-IRl"/>
             </connections>
             <point key="canvasLocation" x="33" y="86"/>
         </tableViewCell>

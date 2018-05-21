@@ -22,7 +22,7 @@ class StudentProfileTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.imageViewProfile.makeViewCircular()
-
+        self.makeTableCellEdgesRounded()
         // Initialization code
     }
 

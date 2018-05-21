@@ -110,6 +110,7 @@ class Chapter:Mappable{
     var chapterDescription:String = ""
     var chapterNumber:String = ""
     var status:String = ""
+    var isUpdated:Bool = false
     
     
     var setChapterStatus:String? = "Not Started"
@@ -130,12 +131,15 @@ class Chapter:Mappable{
         switch self.status {//status 2 is for completed topic / 1 is for inprogress
         case "0":
             self.chapterStatusTheme = SyllabusCompletetionType.NotStarted
+            self.setChapterStatus = "Not Started"
             break
         case "1":
             self.chapterStatusTheme = SyllabusCompletetionType.InProgress
+            self.setChapterStatus = "In Progess"
             break
         case "2":
             self.chapterStatusTheme = SyllabusCompletetionType.Completed
+            self.setChapterStatus = "Completed"
             break
         default:
             break

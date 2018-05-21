@@ -84,8 +84,7 @@ class VerifyAuthPasswordView: UIView {
     
     func setUpUI(){
         self.buttonSubmit.roundedRedButton()
-        self.ViewFormBg.makeEdgesRounded()
-        self.viewTitleBackground.makeBottomEdgesRounded()
+        self.ViewFormBg.makeTableCellEdgesRounded()
         self.viewEmailBg.makeEdgesRoundedWith(radius: self.viewEmailBg.height()/2)
         self.viewNumberBg.makeEdgesRoundedWith(radius: self.viewNumberBg.height()/2)
         self.labelTitle.text = " \(self.collegeClass.courseName) Report"

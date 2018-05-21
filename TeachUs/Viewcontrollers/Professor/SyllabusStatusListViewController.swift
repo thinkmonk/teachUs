@@ -28,12 +28,18 @@ class SyllabusStatusListViewController: BaseViewController {
         self.tableViewSyllabus.estimatedRowHeight = 44.0
         self.tableViewSyllabus.rowHeight = UITableViewAutomaticDimension
         self.view.backgroundColor = UIColor.rgbColor(236, 243, 248)
+        self.tableViewSyllabus.addSubview(refreshControl)
 
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func refresh(sender: AnyObject) {
+        self.getSyllabus()
+        super.refresh(sender: sender)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -73,7 +79,7 @@ class SyllabusStatusListViewController: BaseViewController {
             guard let subjects = response["syllabus_subject_list"] as? [[String:Any]] else{
                 return
             }
-            
+            self.arrayDataSource.removeAll()
             for subject in subjects{
                 let tempSubject = Mapper<Subject>().map(JSON: subject)
                 self.arrayDataSource.append(tempSubject!)
