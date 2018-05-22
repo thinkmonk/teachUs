@@ -80,6 +80,7 @@ public struct Constants {
     struct NumberConstants {
         static let homeTabBarHeight = 44.0
         static let navbarHeight = 65.0
+        static let cornerRadius = 3
     }
     
     struct CustomCellId {

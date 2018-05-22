@@ -10,7 +10,7 @@ import UIKit
 
 class BaseViewController: UIViewController {
 
-    var refreshControl = UIRefreshControl()
+    var refreshControl:UIRefreshControl = UIRefreshControl()
 
     
     override func viewDidLoad() {

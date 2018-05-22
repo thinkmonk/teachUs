@@ -21,9 +21,8 @@ class CollegeClassRatingListViewController: BaseViewController {
         self.tableViewClassList.delegate = self
         self.tableViewClassList.dataSource = self
         self.tableViewClassList.alpha = 0.0
+        self.tableViewClassList.addSubview(refreshControl)
         getClassRating()
-
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,6 +30,10 @@ class CollegeClassRatingListViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func refresh(sender: AnyObject) {
+        self.getClassRating()
+        super.refresh(sender: sender)
+    }
     
     //MARK:- Class methods
     

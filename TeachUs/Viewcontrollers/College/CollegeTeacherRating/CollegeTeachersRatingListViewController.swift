@@ -25,12 +25,18 @@ class CollegeTeachersRatingListViewController: BaseViewController {
         self.tableViewCollegeTeachersList.alpha = 0
         self.tableViewCollegeTeachersList.estimatedRowHeight = 65.0
         self.tableViewCollegeTeachersList.rowHeight = UITableViewAutomaticDimension
+        self.tableViewCollegeTeachersList.addSubview(refreshControl)
         self.getRating()
 
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    override func refresh(sender: AnyObject) {
+        self.getRating()
+        super.refresh(sender: sender)
     }
     
     

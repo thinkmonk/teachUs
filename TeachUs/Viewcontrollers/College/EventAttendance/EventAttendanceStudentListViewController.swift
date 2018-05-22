@@ -34,6 +34,7 @@ class EventAttendanceStudentListViewController: BaseViewController {
     @IBOutlet weak var labelTotalParticipants: UILabel!
     @IBOutlet weak var tableViewStudentList: UITableView!
     @IBOutlet weak var buttonConfirm: UIButton!
+    @IBOutlet weak var viewHeader: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +60,7 @@ class EventAttendanceStudentListViewController: BaseViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.viewHeader.makeTableCellEdgesRounded()
         self.getStudentList()
     }
     
@@ -141,12 +143,12 @@ class EventAttendanceStudentListViewController: BaseViewController {
             
             EventAttendanceManager.sharedEventAttendanceManager.arrayStudents.value.removeAll()
             EventAttendanceManager.sharedEventAttendanceManager.arrayStudents.value = self.arrayAllStudentsDataSource
-            EventAttendanceManager.sharedEventAttendanceManager.updateCount()
-            EventAttendanceManager.sharedEventAttendanceManager.totalPresentCount.asObservable().subscribe(onNext: { (count) in
-                self.labelTotalParticipants.text = "\(count)"
-            }).disposed(by: self.disposeBag)
-            
-//            self.labelTotalParticipants.text  = "\(self.totalParticipants!)"
+//            EventAttendanceManager.sharedEventAttendanceManager.updateCount()
+//            EventAttendanceManager.sharedEventAttendanceManager.totalPresentCount.asObservable().subscribe(onNext: { (count) in
+//                self.labelTotalParticipants.text = "\(count)"
+//            }).disposed(by: self.disposeBag)
+            self.labelClass.text = self.classList.courseName
+            self.labelTotalParticipants.text  = "\(self.totalParticipants!)"
             self.tableViewStudentList.reloadData()
             self.showTableView()
             
