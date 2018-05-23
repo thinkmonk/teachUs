@@ -104,7 +104,7 @@ extension  CollegeAttendanceListViewController: UITableViewDelegate, UITableView
         cell.labelSubject.text = "\(self.arrayDataSource![indexPath.section].courseName)"
         cell.labelNumberOfLectures.text =  "\(self.arrayDataSource![indexPath.section].totalStudents)"
         cell.labelAttendancePercent.text = "\(self.arrayDataSource![indexPath.section].avgStudents)"
-        cell.imageViewArrow.isHidden = false
+        cell.accessoryType = .disclosureIndicator
         cell.selectionStyle = .none
         return cell
     }

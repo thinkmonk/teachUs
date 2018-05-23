@@ -102,6 +102,7 @@ extension ProfessorAttedanceViewController:UITableViewDataSource, UITableViewDel
             
             collegeCell.labelSubjectName.text = self.arrayCollegeList![indexPath.section].subjectName
             collegeCell.selectionStyle = UITableViewCellSelectionStyle.none
+            collegeCell.accessoryType = .disclosureIndicator
             cell = collegeCell
         }
         return cell

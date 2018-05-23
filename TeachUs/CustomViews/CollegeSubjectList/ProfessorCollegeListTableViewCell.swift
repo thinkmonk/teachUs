@@ -14,7 +14,6 @@ class ProfessorCollegeListTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.makeTableCellEdgesRounded()
-        self.labelSubjectName.textColor = UIColor.rgbColor(158, 163, 180)
         // Initialization code
     }
 

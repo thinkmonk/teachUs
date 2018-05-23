@@ -25,14 +25,9 @@
                         <color key="textColor" red="0.019607843137254902" green="0.019607843137254902" blue="0.019607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="Lz7-KN-t5R">
-                        <rect key="frame" x="297" y="14.5" width="8" height="14"/>
-                    </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Lz7-KN-t5R" firstAttribute="centerY" secondItem="yaG-Ys-jbQ" secondAttribute="centerY" id="5rU-SW-Pf6"/>
                     <constraint firstAttribute="trailing" secondItem="yaG-Ys-jbQ" secondAttribute="trailing" constant="30" id="QXA-iI-eK8"/>
-                    <constraint firstAttribute="trailing" secondItem="Lz7-KN-t5R" secondAttribute="trailing" constant="15" id="fVD-WN-HRl"/>
                     <constraint firstItem="yaG-Ys-jbQ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="gjl-LE-TmG"/>
                     <constraint firstItem="yaG-Ys-jbQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="qyu-Ko-VEb"/>
                 </constraints>
@@ -43,7 +38,4 @@
             </connections>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="arrow_right" width="8" height="14"/>
-    </resources>
 </document>

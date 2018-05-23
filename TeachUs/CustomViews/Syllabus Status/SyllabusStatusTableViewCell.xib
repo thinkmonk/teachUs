@@ -53,9 +53,6 @@
                         <color key="textColor" red="0.019607843137254902" green="0.019607843137254902" blue="0.019607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="H4R-3Y-dch">
-                        <rect key="frame" x="307" y="20" width="8" height="14"/>
-                    </imageView>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 <constraints>
@@ -63,12 +60,10 @@
                     <constraint firstItem="VAC-Lz-pQ3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="9wv-cV-Xtq"/>
                     <constraint firstItem="VAC-Lz-pQ3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Bgm-F0-eEL"/>
                     <constraint firstItem="AgM-OC-bWx" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.3" id="F37-gB-emJ"/>
-                    <constraint firstAttribute="trailing" secondItem="H4R-3Y-dch" secondAttribute="trailing" constant="5" id="FIt-63-No3"/>
                     <constraint firstItem="AgM-OC-bWx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="JEi-lc-MRl"/>
                     <constraint firstItem="1SD-OV-3Sp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="P0V-Mh-yrV"/>
                     <constraint firstItem="1SD-OV-3Sp" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.3" id="enl-9Z-5k9"/>
                     <constraint firstItem="VAC-Lz-pQ3" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.4" id="gkt-NZ-nrZ"/>
-                    <constraint firstItem="H4R-3Y-dch" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="hr2-5m-pFe"/>
                     <constraint firstAttribute="trailing" secondItem="1SD-OV-3Sp" secondAttribute="trailing" id="jRD-ut-7Ic"/>
                     <constraint firstAttribute="bottom" secondItem="1SD-OV-3Sp" secondAttribute="bottom" constant="10" id="qpH-MG-ndY"/>
                     <constraint firstAttribute="bottom" secondItem="AgM-OC-bWx" secondAttribute="bottom" constant="10" id="ucM-wD-0An"/>
@@ -78,7 +73,6 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="imageViewArrow" destination="H4R-3Y-dch" id="Bfv-p3-b18"/>
                 <outlet property="labelAttendancePercent" destination="1SD-OV-3Sp" id="vA6-yg-LJB"/>
                 <outlet property="labelNumberOfLectures" destination="AgM-OC-bWx" id="56b-R5-Y4p"/>
                 <outlet property="labelSubject" destination="7U2-21-c7u" id="tQD-UW-QNC"/>
@@ -86,7 +80,4 @@
             <point key="canvasLocation" x="35" y="60"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="arrow_right" width="8" height="14"/>
-    </resources>
 </document>

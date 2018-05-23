@@ -1754,22 +1754,22 @@ Form Library</string>
                                 <rect key="frame" x="0.0" y="64" width="320" height="50"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hEK-Lz-ntN">
-                                        <rect key="frame" x="15" y="15" width="290" height="16"/>
+                                        <rect key="frame" x="15" y="15" width="255" height="16"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BH5-vC-wFP">
-                                                <rect key="frame" x="0.0" y="0.0" width="116" height="16"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="102" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <color key="textColor" red="0.4941176471" green="0.51764705879999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Rate" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zDw-T8-7W0">
-                                                <rect key="frame" x="116" y="0.0" width="87" height="16"/>
+                                                <rect key="frame" x="102" y="0.0" width="76.5" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <color key="textColor" red="0.4941176471" green="0.51764705879999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nA4-Dc-a8g">
-                                                <rect key="frame" x="203" y="0.0" width="87" height="16"/>
+                                                <rect key="frame" x="178.5" y="0.0" width="76.5" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <color key="textColor" red="0.4941176471" green="0.51764705879999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1785,7 +1785,7 @@ Form Library</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="hEK-Lz-ntN" firstAttribute="top" secondItem="Cyq-wH-JRg" secondAttribute="top" constant="15" id="72n-Xc-JQs"/>
-                                    <constraint firstAttribute="trailing" secondItem="hEK-Lz-ntN" secondAttribute="trailing" constant="15" id="C3M-vY-PBF"/>
+                                    <constraint firstAttribute="trailing" secondItem="hEK-Lz-ntN" secondAttribute="trailing" constant="50" id="C3M-vY-PBF"/>
                                     <constraint firstAttribute="height" constant="50" id="HJM-Vg-gJG"/>
                                     <constraint firstItem="hEK-Lz-ntN" firstAttribute="leading" secondItem="Cyq-wH-JRg" secondAttribute="leading" constant="15" id="sZX-4U-Icv"/>
                                 </constraints>
@@ -1829,22 +1829,22 @@ Form Library</string>
                                 <rect key="frame" x="0.0" y="64" width="320" height="50"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IcF-Mv-bE4">
-                                        <rect key="frame" x="20" y="15" width="285" height="35"/>
+                                        <rect key="frame" x="20" y="15" width="250" height="35"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name of Lecturer &amp; Subject" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KYL-SI-8UN">
-                                                <rect key="frame" x="0.0" y="0.0" width="171" height="35"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="150" height="35"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" red="0.4941176471" green="0.51764705879999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Popularity" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbz-EI-tYu">
-                                                <rect key="frame" x="171" y="0.0" width="57" height="35"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Popularity" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbz-EI-tYu">
+                                                <rect key="frame" x="150" y="0.0" width="50" height="35"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" red="0.4941176471" green="0.51764705879999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ratings" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kzg-tf-7Ih">
-                                                <rect key="frame" x="228" y="0.0" width="57" height="35"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ratings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kzg-tf-7Ih">
+                                                <rect key="frame" x="200" y="0.0" width="50" height="35"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" red="0.4941176471" green="0.51764705879999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1873,7 +1873,7 @@ Form Library</string>
                                     <constraint firstItem="IcF-Mv-bE4" firstAttribute="leading" secondItem="yvf-Ch-Wh0" secondAttribute="leading" constant="20" id="KfR-Fb-xAN"/>
                                     <constraint firstAttribute="bottom" secondItem="IcF-Mv-bE4" secondAttribute="bottom" id="SUF-7L-Doh"/>
                                     <constraint firstAttribute="height" constant="50" id="bfd-9c-h2Y"/>
-                                    <constraint firstAttribute="trailing" secondItem="IcF-Mv-bE4" secondAttribute="trailing" constant="15" id="gop-Ez-eBV"/>
+                                    <constraint firstAttribute="trailing" secondItem="IcF-Mv-bE4" secondAttribute="trailing" constant="50" id="gop-Ez-eBV"/>
                                     <constraint firstItem="IcF-Mv-bE4" firstAttribute="top" secondItem="yvf-Ch-Wh0" secondAttribute="top" constant="15" id="htp-rn-Cfi"/>
                                 </constraints>
                             </view>

@@ -90,7 +90,7 @@ extension CollegeClassRatingListViewController:UITableViewDelegate, UITableViewD
         cell.labelSubject.text = "\(self.arrayDataSource[indexPath.section].courseName)"
         cell.labelNumberOfLectures.text = "\(self.arrayDataSource[indexPath.section].totalRate)"
         cell.labelAttendancePercent.text  = "\(self.arrayDataSource[indexPath.section].averageRating)"
-        cell.imageViewArrow.isHidden = false
+        cell.accessoryType = .disclosureIndicator
         cell.selectionStyle = .none
         return cell
     }

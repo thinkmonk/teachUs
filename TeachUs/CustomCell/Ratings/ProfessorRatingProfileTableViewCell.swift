@@ -16,7 +16,6 @@ class ProfessorRatingProfileTableViewCell: UITableViewCell {
     @IBOutlet weak var labelProfessorName: UILabel!
     @IBOutlet weak var labelPopularity: UILabel!
     @IBOutlet weak var labelRatings: UILabel!
-    @IBOutlet weak var imageViewRightArrow: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         self.imageViewProfessor.makeViewCircular()

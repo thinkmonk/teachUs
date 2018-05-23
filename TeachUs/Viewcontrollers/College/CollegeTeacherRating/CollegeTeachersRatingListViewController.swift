@@ -23,7 +23,7 @@ class CollegeTeachersRatingListViewController: BaseViewController {
         self.tableViewCollegeTeachersList.delegate = self
         self.tableViewCollegeTeachersList.dataSource = self
         self.tableViewCollegeTeachersList.alpha = 0
-        self.tableViewCollegeTeachersList.estimatedRowHeight = 65.0
+        self.tableViewCollegeTeachersList.estimatedRowHeight = 85.0
         self.tableViewCollegeTeachersList.rowHeight = UITableViewAutomaticDimension
         self.tableViewCollegeTeachersList.addSubview(refreshControl)
         self.getRating()
@@ -106,6 +106,7 @@ extension CollegeTeachersRatingListViewController:UITableViewDelegate, UITableVi
         cell.labelSubjectName.text = "\(ratingObject.subjectName)"
         cell.labelProfessorName.text = "\(ratingObject.fullname)"
         cell.imageViewProfessor.imageFromServerURL(urlString: ratingObject.imageUrl, defaultImage: Constants.Images.defaultProfessor)
+        cell.accessoryType = .disclosureIndicator
         cell.selectionStyle = .none
         return cell
     }
