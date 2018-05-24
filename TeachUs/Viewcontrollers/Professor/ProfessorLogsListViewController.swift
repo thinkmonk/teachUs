@@ -19,7 +19,6 @@ class ProfessorLogsListViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("ProfessorLogsListViewController")
         self.tableviewLogs.backgroundColor = UIColor.clear
         let cellNib = UINib(nibName:nibCollegeListCell, bundle: nil)
         self.tableviewLogs.register(cellNib, forCellReuseIdentifier: Constants.CustomCellId.ProfessorCollegeList)
@@ -101,6 +100,7 @@ extension ProfessorLogsListViewController:UITableViewDelegate, UITableViewDataSo
             
             collegeCell.labelSubjectName.text = self.arrayDataSource[indexPath.section].subjectName
             collegeCell.selectionStyle = UITableViewCellSelectionStyle.none
+            collegeCell.accessoryType = .disclosureIndicator
             cell = collegeCell
         }
         return cell

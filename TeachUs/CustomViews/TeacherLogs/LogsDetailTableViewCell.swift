@@ -30,6 +30,11 @@ class LogsDetailTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        self.viewHeader.makeTopEdgesRounded(radius: Constants.NumberConstants.cornerRadius)
+    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

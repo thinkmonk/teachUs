@@ -30,6 +30,8 @@ class AttendanceStudentListTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.makeTableCellEdgesRounded()
+        self.buttonAttendance.makeTableCellEdgesRounded()
+        self.buttonAttendance.dropShadow()
         // Initialization code
     }
     

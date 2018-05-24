@@ -171,6 +171,7 @@ class LogsDetailViewController: BaseViewController {
             self.setUpButtons()
         }
     }
+    
 }
 
 extension LogsDetailViewController:UITableViewDelegate, UITableViewDataSource{
@@ -215,9 +216,9 @@ extension LogsDetailViewController:UITableViewDelegate, UITableViewDataSource{
         let cellDataSource = arrayDataSource[indexPath.row]
         switch cellDataSource.logsCellType! {
         case .LogDetails:
-            return 150
+            return 165
         case .SyllabusDetail:
-            return 100
+            return 80
         }
     }
 }

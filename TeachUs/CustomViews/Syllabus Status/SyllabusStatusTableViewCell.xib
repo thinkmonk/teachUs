@@ -24,7 +24,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="128" height="55.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7U2-21-c7u">
-                                <rect key="frame" x="10" y="10" width="118" height="35.5"/>
+                                <rect key="frame" x="10" y="10" width="108" height="35.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -36,7 +36,7 @@
                             <constraint firstItem="7U2-21-c7u" firstAttribute="top" secondItem="VAC-Lz-pQ3" secondAttribute="top" constant="10" id="3Fh-yh-b6X"/>
                             <constraint firstItem="7U2-21-c7u" firstAttribute="leading" secondItem="VAC-Lz-pQ3" secondAttribute="leading" constant="10" id="Lb3-5C-S7F"/>
                             <constraint firstAttribute="bottom" secondItem="7U2-21-c7u" secondAttribute="bottom" constant="10" id="YaJ-bX-XIC"/>
-                            <constraint firstAttribute="trailing" secondItem="7U2-21-c7u" secondAttribute="trailing" id="bE8-JQ-cpM"/>
+                            <constraint firstAttribute="trailing" secondItem="7U2-21-c7u" secondAttribute="trailing" constant="10" id="bE8-JQ-cpM"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="XX" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AgM-OC-bWx">

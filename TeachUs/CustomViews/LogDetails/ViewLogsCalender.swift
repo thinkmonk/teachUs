@@ -13,14 +13,15 @@ protocol ViewLogsCalenderDelegate {
     func dismissCalenderView()
 }
 
-class ViewLogsCalender: UIView {
+class ViewLogsCalender: UIView, UITextFieldDelegate {
 
     @IBOutlet weak var buttonCloseView: UIButton!
-    @IBOutlet weak var textFieldFromDate: UITextField!
-    @IBOutlet weak var textFieldToDate: UITextField!
     @IBOutlet weak var buttonCalendarFromTime: UIButton!
     @IBOutlet weak var buttonCalendarToTime: UIButton!
     @IBOutlet weak var buttonSubmit: UIButton!
+    @IBOutlet weak var viewCalendarBackground: UIView!
+    @IBOutlet weak var labelFromDate: UILabel!
+    @IBOutlet weak var labelToDate: UILabel!
     var fromDatePicker: ViewDatePicker!
     var fromDate:String = ""
     var toDatePicker: ViewDatePicker!
@@ -30,10 +31,28 @@ class ViewLogsCalender: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.buttonSubmit.roundedRedButton()
-        self.textFieldFromDate.addBottomBorder()
-        self.textFieldToDate.addBottomBorder()
+        self.viewCalendarBackground.makeTableCellEdgesRounded()
         self.initFromDatePicker()
         self.initToDatePicker()
+        
+        let tapFromDate = UITapGestureRecognizer(target: self, action: #selector(ViewLogsCalender.tapFromDateFunction))
+        self.labelFromDate.isUserInteractionEnabled = true
+        self.labelFromDate.addGestureRecognizer(tapFromDate)
+        
+        let tapToDate = UITapGestureRecognizer(target: self, action: #selector(ViewLogsCalender.tapToDateFunction))
+        self.labelToDate.isUserInteractionEnabled = true
+        self.labelToDate.addGestureRecognizer(tapToDate)
+
+    }
+    
+    @objc
+    func tapFromDateFunction(sender:UITapGestureRecognizer) {
+        fromDatePicker.showView(inView: self)
+    }
+    
+    @objc
+    func tapToDateFunction(sender:UITapGestureRecognizer) {
+        toDatePicker.showView(inView: self)
     }
     
     func initFromDatePicker(){
@@ -61,7 +80,7 @@ class ViewLogsCalender: UIView {
     @objc func dismissFromDatePicker(){
         if(fromDatePicker != nil){
             self.fromDate = self.fromDatePicker.postJsonDateString
-            self.textFieldFromDate.text = fromDatePicker.dateString
+            self.labelFromDate.text = fromDatePicker.dateString
             fromDatePicker.alpha = 0
             fromDatePicker.removeFromSuperview()
         }
@@ -70,7 +89,7 @@ class ViewLogsCalender: UIView {
     @objc func dismissToDatePicker(){
         if(toDatePicker != nil){
             self.toDate = self.toDatePicker.postJsonDateString
-            self.textFieldToDate.text = toDatePicker.dateString
+            self.labelToDate.text = toDatePicker.dateString
             toDatePicker.alpha = 0
             toDatePicker.removeFromSuperview()
         }
@@ -93,6 +112,9 @@ class ViewLogsCalender: UIView {
         return false
     }
     
+    //MARK:- Text field delegate
+
+    
     @IBAction func submitDates(_ sender: Any) {
         
         if delegate != nil && self.verifyDate(){
@@ -104,13 +126,6 @@ class ViewLogsCalender: UIView {
         fromDatePicker.showView(inView: self)
     }
     @IBAction func toFromDatePickerView(_ sender: Any) {
-        toDatePicker.showView(inView: self)
-    }
-
-    @IBAction func fromTextFieldEdited(_ sender: Any) {
-        fromDatePicker.showView(inView: self)
-    }
-    @IBAction func toTextFieldEdited(_ sender: Any) {
         toDatePicker.showView(inView: self)
     }
     

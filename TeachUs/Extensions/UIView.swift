@@ -165,7 +165,7 @@ extension UIView {
     func removeDropShadow(){
         self.layer.shadowOpacity = 0
     }
-    
+
     func addShadow(){
         self.layer.cornerRadius = 5
         

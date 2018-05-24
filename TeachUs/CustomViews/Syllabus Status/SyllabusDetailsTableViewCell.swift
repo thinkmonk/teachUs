@@ -16,6 +16,7 @@ class SyllabusDetailsTableViewCell: UITableViewCell {
     @IBOutlet weak var viewSeperator: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.makeBottomEdgesRounded(radius: Constants.NumberConstants.cornerRadius)
         // Initialization code
     }
 
@@ -23,6 +24,11 @@ class SyllabusDetailsTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        self.makeBottomEdgesRounded(radius: Constants.NumberConstants.cornerRadius)
     }
     
 }

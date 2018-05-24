@@ -30,6 +30,7 @@ class AttendanceCalenderTableViewCell: UITableViewCell {
         self.textFieldFromTime.addWhiteBottomBorder()
         self.textFieldNumberOfLectures.addWhiteBottomBorder()
         self.makeTableCellEdgesRounded()
+        self.buttonEdit.dropShadow()
         // Initialization code
     }
 

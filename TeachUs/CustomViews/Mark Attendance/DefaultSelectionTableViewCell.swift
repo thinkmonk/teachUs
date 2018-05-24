@@ -23,6 +23,8 @@ class DefaultSelectionTableViewCell: UITableViewCell {
         super.awakeFromNib()
         buttons = [buttonPresent,buttonAbsent]
         self.markDefaultAttendance(self.buttonPresent)
+        self.buttonPresent.makeTableCellEdgesRounded()
+        self.buttonAbsent.makeTableCellEdgesRounded()
         // Initialization code
     }
 

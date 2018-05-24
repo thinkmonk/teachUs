@@ -53,7 +53,7 @@ class ProfessorAttedanceViewController: BaseViewController {
             "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)"
         ]
         
-        manager.apiPost(apiName: " Get Professor Class list", parameters:parameters, completionHandler: { (result, code, response) in
+        manager.apiPost(apiName: "Get Professor Class list", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             self.arrayCollegeList?.removeAll()
             guard let colleges = response["class_list"] as? [[String:Any]] else{

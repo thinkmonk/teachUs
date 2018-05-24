@@ -318,10 +318,10 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
         let cellDataSource = arrayDataSource[indexPath.section]
         switch cellDataSource.AttendanceCellType! {
         case .calender:
-            return 205
+            return 208
             
         case .defaultSelection:
-            return 75
+            return 50
             
         case .attendanceCount:
             return 40
