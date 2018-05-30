@@ -176,7 +176,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.50372623847926268" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="eHv-Ej-Fxt" firstAttribute="leading" secondItem="aAR-hT-63q" secondAttribute="leading" constant="15" id="7Lc-cI-KPV"/>
                                     <constraint firstItem="Vf5-km-JTb" firstAttribute="centerX" secondItem="aAR-hT-63q" secondAttribute="centerX" id="FUw-jg-Yeo"/>
@@ -185,6 +185,13 @@
                                     <constraint firstItem="AAW-Ai-b3y" firstAttribute="centerY" secondItem="eHv-Ej-Fxt" secondAttribute="centerY" id="gog-Zh-fLN"/>
                                     <constraint firstItem="eHv-Ej-Fxt" firstAttribute="top" secondItem="Vf5-km-JTb" secondAttribute="bottom" constant="15" id="ldr-wi-mcK"/>
                                     <constraint firstAttribute="bottom" secondItem="eHv-Ej-Fxt" secondAttribute="bottom" constant="15" id="oX9-nx-gLG"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GBp-3F-DJV" userLabel="Seperator">
+                                <rect key="frame" x="0.0" y="199" width="320" height="1"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="JCz-sG-DPr"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eU9-ki-WaB">
@@ -230,8 +237,11 @@
                             <constraint firstItem="aAR-hT-63q" firstAttribute="top" secondItem="CRB-vk-sUi" secondAttribute="top" id="PP7-34-r7p"/>
                             <constraint firstItem="uiI-1d-Hwd" firstAttribute="trailing" secondItem="gCW-AG-obA" secondAttribute="trailing" id="RL2-xC-lKJ"/>
                             <constraint firstItem="she-Ex-G8J" firstAttribute="top" secondItem="aAR-hT-63q" secondAttribute="bottom" id="V9v-o9-KKj"/>
+                            <constraint firstItem="uiI-1d-Hwd" firstAttribute="trailing" secondItem="GBp-3F-DJV" secondAttribute="trailing" id="VQi-mr-osQ"/>
                             <constraint firstItem="eU9-ki-WaB" firstAttribute="trailing" secondItem="she-Ex-G8J" secondAttribute="trailing" id="Wpo-tn-ZUe"/>
+                            <constraint firstItem="GBp-3F-DJV" firstAttribute="leading" secondItem="uiI-1d-Hwd" secondAttribute="leading" id="a2J-1t-C62"/>
                             <constraint firstItem="she-Ex-G8J" firstAttribute="leading" secondItem="uiI-1d-Hwd" secondAttribute="leading" id="dmq-TN-XTW"/>
+                            <constraint firstItem="GBp-3F-DJV" firstAttribute="top" secondItem="aAR-hT-63q" secondAttribute="bottom" id="eGI-ST-Q23"/>
                             <constraint firstItem="aAR-hT-63q" firstAttribute="leading" secondItem="uiI-1d-Hwd" secondAttribute="leading" id="gOG-K1-VMv"/>
                             <constraint firstItem="gCW-AG-obA" firstAttribute="top" secondItem="CRB-vk-sUi" secondAttribute="top" id="hlM-gx-pcU"/>
                             <constraint firstItem="eU9-ki-WaB" firstAttribute="top" secondItem="she-Ex-G8J" secondAttribute="top" id="mck-fR-Y2c"/>
@@ -566,7 +576,7 @@ Form Library</string>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cX6-cB-34O">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="531"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vp5-uU-h6G">
                                 <rect key="frame" x="0.0" y="533" width="320" height="35"/>
@@ -579,7 +589,7 @@ Form Library</string>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.92549019610000005" green="0.95294117649999999" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="cX6-cB-34O" firstAttribute="leading" secondItem="bsc-Vf-HZc" secondAttribute="leading" id="0ai-kL-9C0"/>
                             <constraint firstItem="vp5-uU-h6G" firstAttribute="top" secondItem="cX6-cB-34O" secondAttribute="bottom" constant="2" id="8qC-Aj-7OB"/>
@@ -604,17 +614,17 @@ Form Library</string>
         <!--Lecture Report View Controller-->
         <scene sceneID="Kd7-kt-ZW5">
             <objects>
-                <viewController id="dlL-dI-NqQ" customClass="LectureReportViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="dlL-dI-NqQ" customClass="LectureReportViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6n1-oS-id2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FGU-Uo-CbP">
-                                <rect key="frame" x="15" y="64" width="290" height="489"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="FGU-Uo-CbP">
+                                <rect key="frame" x="15" y="79" width="290" height="474"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="lectureReportCellId" rowHeight="65" id="yLF-jk-ywe" customClass="LectureReportTableViewCell" customModule="TeachUs" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="290" height="65"/>
+                                        <rect key="frame" x="0.0" y="1" width="290" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yLF-jk-ywe" id="nBP-5c-F2f">
                                             <rect key="frame" x="0.0" y="0.0" width="290" height="65"/>
@@ -630,18 +640,18 @@ Form Library</string>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Class:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ebw-ky-PHk">
                                                     <rect key="frame" x="45" y="15" width="215" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" red="0.69803921568627447" green="0.70980392156862748" blue="0.76470588235294112" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1y7-KV-JkO">
                                                     <rect key="frame" x="45" y="31" width="215" height="18"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                    <color key="textColor" red="0.49411764705882355" green="0.51764705882352935" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                    <color key="textColor" red="0.019607843140000001" green="0.019607843140000001" blue="0.019607843140000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kbc-SW-wJL" userLabel="seperator">
                                                     <rect key="frame" x="15" y="64" width="245" height="1"/>
-                                                    <color key="backgroundColor" red="0.69803921570000005" green="0.70980392160000005" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" red="0.69803921570000005" green="0.70980392160000005" blue="0.76470588240000004" alpha="0.50070479740061158" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="afz-D1-Mmn"/>
                                                     </constraints>
@@ -669,7 +679,7 @@ Form Library</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="lectureReportTopicsCoveredCellId" rowHeight="114" id="6IH-at-cei" customClass="LectureReportSubjectTableViewCell" customModule="TeachUs" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="93" width="290" height="114"/>
+                                        <rect key="frame" x="0.0" y="66" width="290" height="114"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6IH-at-cei" id="IkR-Ly-cjV">
                                             <rect key="frame" x="0.0" y="0.0" width="290" height="114"/>
@@ -685,25 +695,25 @@ Form Library</string>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Class:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="obg-Bp-mzW">
                                                     <rect key="frame" x="45" y="15" width="215" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" red="0.69803921570000005" green="0.70980392160000005" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D7Z-MA-SZl">
                                                     <rect key="frame" x="45" y="31" width="215" height="18"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                    <color key="textColor" red="0.4941176471" green="0.51764705879999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                    <color key="textColor" red="0.019607843140000001" green="0.019607843140000001" blue="0.019607843140000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Class:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hu4-Vs-AKx">
                                                     <rect key="frame" x="45" y="54" width="215" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" red="0.69803921570000005" green="0.70980392160000005" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ddg-m7-7kl">
                                                     <rect key="frame" x="45" y="70" width="215" height="18"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                    <color key="textColor" red="0.4941176471" green="0.51764705879999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                    <color key="textColor" red="0.019607843140000001" green="0.019607843140000001" blue="0.019607843140000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -736,7 +746,7 @@ Form Library</string>
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t5d-AU-ocX">
-                                <rect key="frame" x="85" y="513" width="150" height="30"/>
+                                <rect key="frame" x="85" y="503" width="150" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="KaM-7X-Gc4"/>
                                 </constraints>
@@ -746,8 +756,8 @@ Form Library</string>
                         <color key="backgroundColor" red="0.92549019610000005" green="0.95294117649999999" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="FGU-Uo-CbP" firstAttribute="leading" secondItem="6n1-oS-id2" secondAttribute="leading" constant="15" id="CAe-2S-dJe"/>
-                            <constraint firstItem="98g-ee-d2e" firstAttribute="bottom" secondItem="t5d-AU-ocX" secondAttribute="bottom" constant="25" id="JL2-W4-4EP"/>
-                            <constraint firstItem="FGU-Uo-CbP" firstAttribute="top" secondItem="98g-ee-d2e" secondAttribute="top" id="JPG-mE-x6v"/>
+                            <constraint firstItem="98g-ee-d2e" firstAttribute="bottom" secondItem="t5d-AU-ocX" secondAttribute="bottom" constant="35" id="JL2-W4-4EP"/>
+                            <constraint firstItem="FGU-Uo-CbP" firstAttribute="top" secondItem="98g-ee-d2e" secondAttribute="top" constant="15" id="JPG-mE-x6v"/>
                             <constraint firstItem="98g-ee-d2e" firstAttribute="bottom" secondItem="FGU-Uo-CbP" secondAttribute="bottom" constant="15" id="evz-CY-UVG"/>
                             <constraint firstItem="98g-ee-d2e" firstAttribute="trailing" secondItem="FGU-Uo-CbP" secondAttribute="trailing" constant="15" id="v7s-hF-JmW"/>
                             <constraint firstItem="t5d-AU-ocX" firstAttribute="centerX" secondItem="98g-ee-d2e" secondAttribute="centerX" id="zSy-vv-vyp"/>
@@ -1321,12 +1331,12 @@ Form Library</string>
         <!--Mark Rating View Controller-->
         <scene sceneID="9Lh-nz-YHi">
             <objects>
-                <viewController storyboardIdentifier="MarkRatingViewControllerId" id="hke-iy-WEB" customClass="MarkRatingViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MarkRatingViewControllerId" automaticallyAdjustsScrollViewInsets="NO" id="hke-iy-WEB" customClass="MarkRatingViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cl8-ut-djP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fDZ-2Z-OLG">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fDZ-2Z-OLG">
                                 <rect key="frame" x="15" y="64" width="290" height="459"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
@@ -2675,7 +2685,7 @@ Form Library</string>
         <image name="cross" width="9" height="9"/>
         <image name="dropdown" width="15" height="9"/>
         <image name="dropdown_white" width="15" height="9"/>
-        <image name="leftMenuBackground" width="1242" height="2390"/>
+        <image name="leftMenuBackground" width="998" height="2390"/>
         <image name="professor_default" width="114" height="114"/>
         <image name="professor_selection" width="114" height="114"/>
         <image name="student_default" width="112" height="112"/>

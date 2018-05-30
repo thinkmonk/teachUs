@@ -115,8 +115,8 @@ extension SyllabusDetailsViewController:UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:SyllabusDetailsTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.SyllabusDetailsTableViewCellId, for: indexPath) as! SyllabusDetailsTableViewCell
         let chapter = self.arrayDataSource[indexPath.section].topicArray![indexPath.row]
-        cell.labelChapterDetails.text = chapter.chapterName
-        cell.labelChapterNumber.text = chapter.chapterNumber
+        cell.labelChapterDetails.text = chapter.chapterNumber       //Small text
+        cell.labelChapterNumber.text = chapter.chapterName        //Big Text
         switch chapter.status {
         case "0": //Not Startted
             cell.imageViewStatus.image = UIImage(named: Constants.Images.syllabusNotStarted)
@@ -154,15 +154,15 @@ extension SyllabusDetailsViewController:UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30
+        return 45
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView:UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableSyllabusDetails.width(), height: 30.0))
+        let headerView:UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableSyllabusDetails.width(), height: 45.0))
         headerView.backgroundColor = UIColor.white
         headerView.makeEdgesRoundedWith(radius: 3.0)
         
-        let label:UILabel = UILabel(frame: CGRect(x: 15.0, y: 0.0, width: headerView.width(), height: 15))
+        let label:UILabel = UILabel(frame: CGRect(x: 15, y: 0.0, width: headerView.width(), height: 15))
         label.center.y = headerView.centerY()
         label.text = self.arrayDataSource[section].unitName
         label.font = UIFont.boldSystemFont(ofSize: 15.0)

@@ -23,28 +23,29 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y8t-kU-7j5" userLabel="Top View">
                         <rect key="frame" x="0.0" y="0.0" width="395" height="99.5"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="student_default" translatesAutoresizingMaskIntoConstraints="NO" id="GEu-v1-GNz">
-                                <rect key="frame" x="15" y="10" width="84.5" height="79.5"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaule_male" translatesAutoresizingMaskIntoConstraints="NO" id="GEu-v1-GNz">
+                                <rect key="frame" x="15" y="15" width="70" height="69.5"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="GEu-v1-GNz" secondAttribute="height" multiplier="1:1" constant="5" id="rQH-NN-E2R"/>
+                                    <constraint firstAttribute="width" secondItem="GEu-v1-GNz" secondAttribute="height" multiplier="1:1" id="Igp-8W-3Gg"/>
+                                    <constraint firstAttribute="width" constant="70" id="iXF-YH-eO9"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="R No:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JRr-Z5-xIb">
-                                <rect key="frame" x="109.5" y="26" width="37.5" height="18"/>
+                                <rect key="frame" x="95" y="26" width="37.5" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jtV-v7-NYa">
-                                <rect key="frame" x="109.5" y="49" width="172.5" height="1"/>
+                                <rect key="frame" x="95" y="49" width="187" height="1"/>
                                 <color key="backgroundColor" red="0.8901960784313725" green="0.9137254901960784" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="rTA-Ph-DsE"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Student Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="tcE-Ff-41z">
-                                <rect key="frame" x="109.5" y="55" width="172.5" height="39.5"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <rect key="frame" x="95" y="55" width="187" height="39.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <color key="textColor" red="0.019607843137254902" green="0.019607843137254902" blue="0.019607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -61,8 +62,8 @@
                                 </state>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2456" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sec-S4-pBQ">
-                                <rect key="frame" x="152" y="26.5" width="36.5" height="18"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <rect key="frame" x="137.5" y="26.5" width="38.5" height="18"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <color key="textColor" red="0.019607843137254902" green="0.019607843137254902" blue="0.019607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -81,7 +82,6 @@
                             <constraint firstItem="hAw-YR-c8E" firstAttribute="leading" secondItem="jtV-v7-NYa" secondAttribute="trailing" constant="25" id="Ufv-gG-ye7"/>
                             <constraint firstItem="tcE-Ff-41z" firstAttribute="top" secondItem="jtV-v7-NYa" secondAttribute="bottom" constant="5" id="UhK-mg-3bJ"/>
                             <constraint firstItem="jtV-v7-NYa" firstAttribute="leading" secondItem="GEu-v1-GNz" secondAttribute="trailing" constant="10" id="dlV-VT-it5"/>
-                            <constraint firstItem="GEu-v1-GNz" firstAttribute="top" secondItem="Y8t-kU-7j5" secondAttribute="top" constant="10" id="tiS-ev-dEQ"/>
                             <constraint firstItem="jtV-v7-NYa" firstAttribute="top" secondItem="JRr-Z5-xIb" secondAttribute="bottom" constant="5" id="u3A-Py-lSS"/>
                             <constraint firstItem="sec-S4-pBQ" firstAttribute="centerY" secondItem="JRr-Z5-xIb" secondAttribute="centerY" id="uNg-SE-YVy"/>
                             <constraint firstItem="GEu-v1-GNz" firstAttribute="centerY" secondItem="Y8t-kU-7j5" secondAttribute="centerY" id="w8o-Up-tc7"/>
@@ -174,6 +174,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="student_default" width="112" height="112"/>
+        <image name="defaule_male" width="145" height="145"/>
     </resources>
 </document>

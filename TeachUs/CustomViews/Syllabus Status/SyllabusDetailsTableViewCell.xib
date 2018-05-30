@@ -20,8 +20,8 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QPW-Ga-wI3">
-                        <rect key="frame" x="10" y="0.0" width="310" height="1"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <rect key="frame" x="15" y="0.0" width="295" height="1"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="0.50637901376146788" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="apE-c3-kOe"/>
                         </constraints>
@@ -47,13 +47,13 @@
                     <constraint firstItem="Igl-EC-KSK" firstAttribute="leading" secondItem="nJ4-9z-UNT" secondAttribute="leading" id="56U-3Y-WNh"/>
                     <constraint firstItem="QPW-Ga-wI3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="5qt-5a-SfE"/>
                     <constraint firstItem="Igl-EC-KSK" firstAttribute="top" secondItem="nJ4-9z-UNT" secondAttribute="bottom" constant="5" id="GQD-M5-EEA"/>
-                    <constraint firstItem="nJ4-9z-UNT" firstAttribute="leading" secondItem="QPW-Ga-wI3" secondAttribute="leading" constant="5" id="W3l-hz-dlI"/>
+                    <constraint firstItem="QPW-Ga-wI3" firstAttribute="trailing" secondItem="QEW-ZY-j4m" secondAttribute="trailing" id="PgN-HZ-EyT"/>
                     <constraint firstItem="nJ4-9z-UNT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="es5-TE-0mP"/>
                     <constraint firstItem="nJ4-9z-UNT" firstAttribute="top" secondItem="QPW-Ga-wI3" secondAttribute="bottom" constant="15" id="f2h-0J-75z"/>
                     <constraint firstAttribute="trailing" secondItem="Igl-EC-KSK" secondAttribute="trailing" constant="15" id="ly3-uk-IgT"/>
                     <constraint firstAttribute="trailing" secondItem="QEW-ZY-j4m" secondAttribute="trailing" constant="10" id="mp6-Ug-erD"/>
-                    <constraint firstAttribute="trailing" secondItem="QPW-Ga-wI3" secondAttribute="trailing" id="vGT-hS-Ik1"/>
                     <constraint firstItem="QEW-ZY-j4m" firstAttribute="centerY" secondItem="nJ4-9z-UNT" secondAttribute="centerY" id="wUu-xE-PNh"/>
+                    <constraint firstItem="QPW-Ga-wI3" firstAttribute="leading" secondItem="nJ4-9z-UNT" secondAttribute="leading" id="x7a-4C-gXK"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

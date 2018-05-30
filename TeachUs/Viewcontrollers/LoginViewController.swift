@@ -88,7 +88,7 @@ class LoginViewController: BaseViewController {
             if(self.studentLoginView != nil){
                 if((self.studentLoginView.buttonSubmit.origin().y+self.studentLoginView.origin().y) >= (self.view.height()-keyboardSize.height) && self.view.frame.origin.y == 0)
                 {
-                    self.view.frame.origin.y -= keyboardSize.height/2
+                    self.view.frame.origin.y -= keyboardSize.height/2 + 55
                 }
             }
         }
@@ -201,9 +201,15 @@ extension LoginViewController:OtpDelegate{
         ]
         manager.apiPost(apiName: "Verify OTP", parameters: parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
-            let accessToken:String = response["token"] as! String
-            UserManager.sharedUserManager.setAccessToken(accessToken)
-            self.getAndSaveUserToDb()
+            if(code == 200){
+                let accessToken:String = response["token"] as! String
+                UserManager.sharedUserManager.setAccessToken(accessToken)
+                self.getAndSaveUserToDb()
+            }
+            else{
+                let message:String = response["message"] as! String
+                self.showAlterWithTitle(nil, alertMessage: message)
+            }
         }) { (error, code, message) in
             LoadingActivityHUD.hideProgressHUD()
             print(message)

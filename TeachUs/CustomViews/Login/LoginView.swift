@@ -103,7 +103,7 @@ class LoginView: UIView, UITextFieldDelegate {
     func showView(inView:UIView){
         self.alpha = 0.0
         self.frame.size.width = inView.width() * 0.9
-        self.frame.origin.y = inView.height()*0.35
+        self.frame.origin.y = inView.height()*0.30
         self.center.x = inView.centerX()
         self.setUpReactive()
         inView.addSubview(self)

@@ -35,6 +35,7 @@ public struct Constants {
         static let heartFilled = "heartFilled"
         static let collegeDefault = "college_default"
         static let calendarWhite = "calender"
+        static let defaultMale = "defaule_male"
     }
     
     struct  colors {

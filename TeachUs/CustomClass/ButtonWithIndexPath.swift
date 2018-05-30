@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ButtonWithIndexPath: UIButton {
+open class ButtonWithIndexPath: UIButton {
     var indexPath:IndexPath! = nil
 
 }

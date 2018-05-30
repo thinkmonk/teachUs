@@ -75,7 +75,7 @@ class OtpView: UIView {
     func showRecordAvailableView(inView:UIView){
         self.alpha = 0.0
         self.frame.size.width = inView.width() * 0.95
-        self.frame.origin.y = inView.height()*0.35
+        self.frame.origin.y = inView.height()*0.30
         self.center.x = inView.centerX()
         self.setUpReactive()   //SET UP REACTIVE
         inView.addSubview(self)

@@ -287,7 +287,7 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
             cell.labelAttendancePercent.text = "\(object.student?.percentage! ?? "NA") %"
             cell.labelLastLectureAttendance.text = object.student?.lastLectureAttendance != nil ? object.student?.lastLectureAttendance! : "NIL"
             cell.clipsToBounds = true
-            cell.imageViewProfile.imageFromServerURL(urlString: (object.student?.imageUrl!)!, defaultImage: Constants.Images.studentDefault)
+            cell.imageViewProfile.imageFromServerURL(urlString: (object.student?.imageUrl!)!, defaultImage: Constants.Images.defaultMale)
             
             //TODO:  -3 is for previous sections (calender, default selection, attendance count ) <- IMPORTANT
             

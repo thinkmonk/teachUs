@@ -10,8 +10,11 @@ import Foundation
 public struct URLConstants{
 
     struct BaseUrl {
-        static let baseURL = "http://zilliotech.com/api/teachus" //v2
+        static let baseURL = "http://teachusedumation.com/api/teachus" //v3
+
+//        static let baseURL = "http://zilliotech.com/api/teachus" //v2
 //        static let baseURL = "http://ec2-34-215-84-223.us-west-2.compute.amazonaws.com:8081/teachus"  //v1`
+        //http://teachusedumation.com
     }
     
     struct Login {

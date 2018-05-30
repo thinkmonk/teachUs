@@ -165,19 +165,19 @@ extension MarkCompletedPortionViewController:UITableViewDelegate, UITableViewDat
         case .Completed:
             cell.buttonCompleted.selectedGreenButton()
             cell.buttonInProgress.selectedDefaultButton()
-            cell.labelStatus.textColor = UIColor.green
+            cell.labelStatus.textColor = UIColor.rgbColor(0.0, 143.0, 83.0) //#008F53
             cell.viewDisableCell.alpha = chapterCell.isUpdated ? 0 : 1
             break
         case .InProgress:
             cell.buttonInProgress.selectedRedButton()
             cell.buttonCompleted.selectedDefaultButton()
-            cell.labelStatus.textColor = UIColor.red
+            cell.labelStatus.textColor = UIColor.rgbColor(299.0, 0.0, 0.0)   //#E50000
             cell.viewDisableCell.alpha = 0
             break
         case .NotStarted:
             cell.buttonCompleted.selectedDefaultButton()
             cell.buttonInProgress.selectedDefaultButton()
-            cell.labelStatus.textColor = UIColor.yellow
+            cell.labelStatus.textColor = UIColor.rgbColor(126.0, 132.0, 155.0) //#7E849B
             cell.viewDisableCell.alpha = 0
             break
         }
@@ -193,8 +193,20 @@ extension MarkCompletedPortionViewController:UITableViewDelegate, UITableViewDat
         return (self.arrayDataSource[section].topicArray?.count)!
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return self.arrayDataSource[section].unitName
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return self.arrayDataSource[section].unitName
+//    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableviewTopics.width(), height: 44))
+        headerView.backgroundColor = UIColor.clear
+        
+        let labelView:UILabel  = UILabel(frame: CGRect(x: 15, y: 0, width: self.tableviewTopics.width(), height: 44))
+        labelView.center.y = headerView.centerY()
+        labelView.text = self.arrayDataSource[section].unitName
+        labelView.textColor = UIColor.rgbColor(51, 51, 51)
+        headerView.addSubview(labelView)
+        return headerView
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

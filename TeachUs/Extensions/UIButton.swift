@@ -49,21 +49,21 @@ extension UIButton{
     }
     
     func selectedDefaultButton(){
-        let bgColor:UIColor = UIColor.lightGray
+        let bgColor:UIColor = UIColor.rgbColor(126.0, 132.0, 155.0)
         let fontColor:UIColor = UIColor.white
         self.makeButtonwith(background: bgColor, fontColor: fontColor, cornerRadius: nil, borderColor: nil, borderWidth: 0.0)
 
     }
     
     func selectedRedButton(){
-        let bgColor:UIColor = UIColor.red
+        let bgColor:UIColor = UIColor.rgbColor(299.0, 0.0, 0.0) 
         let fontColor:UIColor = UIColor.white
         self.makeButtonwith(background: bgColor, fontColor: fontColor, cornerRadius: nil, borderColor: nil, borderWidth: 0.0)
 
     }
     
     func selectedGreenButton(){
-        let bgColor:UIColor = UIColor.green
+        let bgColor:UIColor = UIColor.rgbColor(0.0, 143.0, 83.0)
         let fontColor:UIColor = UIColor.white
         self.makeButtonwith(background: bgColor, fontColor: fontColor, cornerRadius: nil, borderColor: nil, borderWidth: 0.0)
     }

@@ -30,12 +30,11 @@ class ViewRatingInfo: UIView {
     
     func showView(inView:UIView){
         self.alpha = 0.0
-        self.buttonOk.roundedRedButton()
         self.frame.size.width = inView.width()
         self.frame.size.height = inView.height()
         self.center.x = inView.centerX()
         self.center.y = inView.centerY()
-        self.viewDetailsBackGround.makeEdgesRounded()
+        self.viewDetailsBackGround.makeTableCellEdgesRounded()
         inView.addSubview(self)
         
         //display the view

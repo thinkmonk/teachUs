@@ -25,7 +25,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="13L-MR-cm4">
                         <rect key="frame" x="15" y="15.5" width="52" height="52"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="student_default" translatesAutoresizingMaskIntoConstraints="NO" id="gNe-72-kAG">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaule_male" translatesAutoresizingMaskIntoConstraints="NO" id="gNe-72-kAG">
                                 <rect key="frame" x="1" y="1" width="50" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -80,6 +80,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="student_default" width="112" height="112"/>
+        <image name="defaule_male" width="145" height="145"/>
     </resources>
 </document>

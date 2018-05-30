@@ -36,6 +36,11 @@ class LectureReportViewController: BaseViewController {
         self.buttonGoToDashboard.roundedBlueButton()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.tableLectureReport.makeTableCellEdgesRounded()
+    }
+    
     @objc func goToHome(){
         for controller in self.navigationController!.viewControllers as Array {
             if controller.isKind(of: HomeViewController.self) {

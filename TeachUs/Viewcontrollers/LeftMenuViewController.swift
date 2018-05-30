@@ -187,7 +187,8 @@ extension LeftMenuViewController:UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == self.tableViewMenu{
             let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.leftMenuCell) as UITableViewCell!
-            
+            cell.textLabel?.textColor = .white
+            cell.selectionStyle = .blue
             cell.textLabel?.text = arrayDataSource[indexPath.row]
             cell.backgroundColor = UIColor.clear
             return cell
@@ -197,6 +198,8 @@ extension LeftMenuViewController:UITableViewDelegate, UITableViewDataSource{
             let college:CollegeDetails = arrayCollegeDetailsDataSource[indexPath.row]
             cell.textLabel?.text = "\(college.college_name!) (\(college.role_name!) )"
             cell.textLabel?.numberOfLines = 0
+            cell.textLabel?.textColor = .white
+            cell.selectionStyle = .blue
             cell.backgroundColor = UIColor.clear
             return cell
 

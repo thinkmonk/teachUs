@@ -33,7 +33,7 @@
                                         <color key="textColor" red="0.019607843137254902" green="0.019607843137254902" blue="0.019607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="student_default" translatesAutoresizingMaskIntoConstraints="NO" id="ipQ-eg-yNx">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaule_male" translatesAutoresizingMaskIntoConstraints="NO" id="ipQ-eg-yNx">
                                         <rect key="frame" x="10" y="5" width="50" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="Evk-6f-sbZ"/>
@@ -125,6 +125,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="student_default" width="112" height="112"/>
+        <image name="defaule_male" width="145" height="145"/>
     </resources>
 </document>
