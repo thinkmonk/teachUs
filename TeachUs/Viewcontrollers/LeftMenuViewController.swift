@@ -87,8 +87,8 @@ class LeftMenuViewController: UIViewController, UIGestureRecognizerDelegate {
             arrayDataSource = studentDataSource
             break
         case .College:
-//                arrayDataSource = UserManager.sharedUserManager.appUserCollegeDetails.privilege! == "1" ? collegeSuperAdminDataSource : collegeAdminDataSource
-                arrayDataSource = UserManager.sharedUserManager.appUserCollegeDetails.privilege! == "1" ? collegeSuperAdminDataSource : collegeSuperAdminDataSource
+                arrayDataSource = UserManager.sharedUserManager.appUserCollegeDetails.privilege! == "1" ? collegeSuperAdminDataSource : collegeAdminDataSource
+//                arrayDataSource = UserManager.sharedUserManager.appUserCollegeDetails.privilege! == "1" ? collegeSuperAdminDataSource : collegeSuperAdminDataSource
 
             break
         }

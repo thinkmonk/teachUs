@@ -88,7 +88,7 @@ class LoginViewController: BaseViewController {
             if(self.studentLoginView != nil){
                 if((self.studentLoginView.buttonSubmit.origin().y+self.studentLoginView.origin().y) >= (self.view.height()-keyboardSize.height) && self.view.frame.origin.y == 0)
                 {
-                    self.view.frame.origin.y -= keyboardSize.height/2 + 55
+                    self.view.frame.origin.y -= keyboardSize.height/2
                 }
             }
         }

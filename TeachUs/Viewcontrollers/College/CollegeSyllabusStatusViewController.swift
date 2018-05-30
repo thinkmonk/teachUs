@@ -20,6 +20,7 @@ class CollegeSyllabusStatusViewController: BaseViewController {
         self.tableviewCollegeSyllabus.delegate = self
         self.tableviewCollegeSyllabus.dataSource = self
         self.tableviewCollegeSyllabus.alpha = 0.0
+        self.tableviewCollegeSyllabus.addSubview(refreshControl)
         getClassSyllabus()
     }
 
@@ -30,6 +31,11 @@ class CollegeSyllabusStatusViewController: BaseViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func refresh(sender: AnyObject) {
+        self.getClassSyllabus()
+        super.refresh(sender: sender)
     }
     
     func getClassSyllabus(){
