@@ -131,8 +131,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aAR-hT-63q">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="199"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="Vf5-km-JTb">
-                                        <rect key="frame" x="122.5" y="41" width="75" height="110"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Vf5-km-JTb">
+                                        <rect key="frame" x="122.5" y="16" width="75" height="120"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v3b-Mh-uOM">
                                                 <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
@@ -146,13 +146,13 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IL7-sd-yj5">
-                                                <rect key="frame" x="0.0" y="75" width="75" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="80" width="75" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MPE-d0-Bjy">
-                                                <rect key="frame" x="0.0" y="95.5" width="75" height="14.5"/>
+                                                <rect key="frame" x="0.0" y="105.5" width="75" height="14.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -183,7 +183,7 @@
                                     <constraint firstAttribute="trailing" secondItem="AAW-Ai-b3y" secondAttribute="trailing" constant="10" id="JFz-Nf-YX0"/>
                                     <constraint firstItem="AAW-Ai-b3y" firstAttribute="leading" secondItem="eHv-Ej-Fxt" secondAttribute="trailing" constant="5" id="QG5-Bm-0Jl"/>
                                     <constraint firstItem="AAW-Ai-b3y" firstAttribute="centerY" secondItem="eHv-Ej-Fxt" secondAttribute="centerY" id="gog-Zh-fLN"/>
-                                    <constraint firstItem="eHv-Ej-Fxt" firstAttribute="top" secondItem="Vf5-km-JTb" secondAttribute="bottom" constant="15" id="ldr-wi-mcK"/>
+                                    <constraint firstItem="eHv-Ej-Fxt" firstAttribute="top" secondItem="Vf5-km-JTb" secondAttribute="bottom" constant="30" id="ldr-wi-mcK"/>
                                     <constraint firstAttribute="bottom" secondItem="eHv-Ej-Fxt" secondAttribute="bottom" constant="15" id="oX9-nx-gLG"/>
                                 </constraints>
                             </view>
@@ -884,7 +884,7 @@ Form Library</string>
         <!--Logs Detail View Controller-->
         <scene sceneID="xNa-PS-wrh">
             <objects>
-                <viewController storyboardIdentifier="LogsDetailViewControllerId" id="1iW-gl-mHV" customClass="LogsDetailViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LogsDetailViewControllerId" automaticallyAdjustsScrollViewInsets="NO" id="1iW-gl-mHV" customClass="LogsDetailViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="q9b-MT-MFJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1916,12 +1916,12 @@ Form Library</string>
         <!--College Professor Rating Detail View Controller-->
         <scene sceneID="sH8-sO-BCu">
             <objects>
-                <viewController id="gxf-3W-YDi" customClass="CollegeProfessorRatingDetailViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="gxf-3W-YDi" customClass="CollegeProfessorRatingDetailViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nvZ-NK-n6l">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bRv-lD-At7">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bRv-lD-At7">
                                 <rect key="frame" x="15" y="64" width="290" height="504"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
