@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "SplashScreenNew.png",
+      "filename" : "00_SplashScreen_iOS_@1x.jpg",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "00_SplashScreen_iOS_@2x.jpg",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "00_SplashScreen_iOS.jpg",
       "scale" : "3x"
     }
   ],

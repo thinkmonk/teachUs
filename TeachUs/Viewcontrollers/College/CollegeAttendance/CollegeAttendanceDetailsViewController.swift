@@ -311,7 +311,7 @@ extension CollegeAttendanceDetailsViewController:UITableViewDelegate, UITableVie
         let object:EnrolledStudentDetail = arrayStudentList [indexPath.section]
         cell.labelName.text = object.studentName
         cell.labelRollNumber.text = "\(object.studentRollNo! )"
-        cell.labelAttendanceCount.text = "\(object.totalLecture! )"
+        cell.labelAttendanceCount.text = "\(object.lectureAttended! )"
         cell.labelAttendancePercent.text = "\(object.percentage! ) %"
         cell.clipsToBounds = true
         cell.imageViewProfile.imageFromServerURL(urlString: (object.imageUrl!), defaultImage: Constants.Images.defaultMale)

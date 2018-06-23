@@ -31,7 +31,8 @@ class MarkCompletedPortionViewController: BaseViewController {
         super.viewDidLoad()
         
         self.tableviewTopics.register(UINib(nibName: "TopicDetailsTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.TopicDetailsTableViewCellId)
-
+        self.title = "Syllabus Update"
+        navigationItem.hidesBackButton = true
         self.getTopics()
         // Do any additional setup after loading the view.
     }

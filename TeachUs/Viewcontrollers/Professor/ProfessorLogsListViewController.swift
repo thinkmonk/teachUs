@@ -164,7 +164,7 @@ extension ProfessorLogsListViewController:UITableViewDelegate, UITableViewDataSo
 
 extension ProfessorLogsListViewController:IndicatorInfoProvider{
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "Logs")
+        return IndicatorInfo(title: "My Logs")
     }
 }
 

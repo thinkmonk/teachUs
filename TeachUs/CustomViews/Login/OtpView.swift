@@ -59,7 +59,7 @@ class OtpView: UIView {
             break
             
         case .Professor:
-            self.labelTitle.text = "PROFESSOR"
+            self.labelTitle.text = "LECTURER"
             break
         case .College:
             break

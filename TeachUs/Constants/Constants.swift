@@ -111,7 +111,7 @@ public struct Constants {
     
     struct UserTypeString {
         static let Student = "STUDENT"
-        static let Professor = "PROFESSOR"
+        static let Professor = "LECTURER"
         static let College = "COLLEGE"
         static let SuperAdmin = "SUPERADMIN"
     }

@@ -149,7 +149,7 @@ extension LectureReportViewController:UITableViewDelegate, UITableViewDataSource
             let cell:LectureReportTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.LectureReportCellId, for: indexPath) as! LectureReportTableViewCell
 
             cell.imageViewReportIcon.image = UIImage(named: "lectureIcon")
-            cell.labelReportTitle.text = "No. of Lectures :"
+            cell.labelReportTitle.text = "Lectures taken :"
             cell.labelReportDescription.text = lectureReportModel.numberOfLecture
             return cell
 

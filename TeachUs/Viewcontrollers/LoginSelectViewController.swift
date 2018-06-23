@@ -57,7 +57,7 @@ class LoginSelectViewController: BaseViewController {
                 case "Student":
                     self.roleStudent = Mapper<UserRole>().map(JSONObject: user)!
                     break
-                case "Professor":
+                case "Lecturer":
                     self.roleProfessor = Mapper<UserRole>().map(JSONObject: user)!
                     break
                 case "College":
