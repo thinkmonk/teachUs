@@ -87,7 +87,7 @@ extension CollegeClassRatingListViewController:UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:SyllabusStatusTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.SyllabusStatusTableViewCellId, for: indexPath) as! SyllabusStatusTableViewCell
-        cell.labelSubject.text = "\(self.arrayDataSource[indexPath.section].courseName)"
+        cell.labelSubject.text = "\(self.arrayDataSource[indexPath.section].courseName) - \(self.arrayDataSource[indexPath.section].classDivision)"
         cell.labelNumberOfLectures.text = "\(self.arrayDataSource[indexPath.section].totalRate)"
         cell.labelAttendancePercent.text  = "\(self.arrayDataSource[indexPath.section].averageRating)"
         cell.accessoryType = .disclosureIndicator
@@ -113,6 +113,8 @@ extension CollegeClassRatingListViewController:UITableViewDelegate, UITableViewD
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.segues.toProfessorRatingList{
             let destinationVC:CollegeTeachersRatingListViewController = segue.destination as! CollegeTeachersRatingListViewController
+            destinationVC.arrayClassList = self.arrayDataSource
+            destinationVC.selectedIndex = (self.tableViewClassList.indexPathForSelectedRow?.section)!
             destinationVC.ratingClass = self.arrayDataSource[(self.tableViewClassList.indexPathForSelectedRow?.section)!]
         }
     }

@@ -23,16 +23,22 @@ class AddNewEventViewController: BaseViewController {
         super.viewDidLoad()
         view.backgroundColor = .clear
         view.isOpaque = false
+        NotificationCenter.default.addObserver(self, selector: #selector(AddNewEventViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AddNewEventViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
 
         // Do any additional setup after loading the view.
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         self.buttonSubmit.themeRedButton()
         self.buttonSubmit.makeViewCircular()
         self.viewAddEventBg.makeEdgesRounded()
-        self.viewtitleBg.makeBottomEdgesRounded()
         viewtextFieldNameBg.makeEdgesRoundedWith(radius: viewtextFieldNameBg.height()/2)
     }
     
@@ -73,8 +79,6 @@ class AddNewEventViewController: BaseViewController {
     @IBAction func closeView(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
-    
-    
     //MARK:- Custom methods
     
     func setUpRx(){
@@ -89,6 +93,30 @@ class AddNewEventViewController: BaseViewController {
         }).disposed(by: disposeBag)
     }
     
+    //MARK:- Keyboard show/hide notification.
+    @objc func keyboardWillShow(notification: NSNotification) {
+        
+        if let keyboardSize = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size{
+                if((self.buttonSubmit.origin().y+self.viewAddEventBg.origin().y) >= (self.view.height()-keyboardSize.height) && self.view.frame.origin.y == 0)
+                {
+                    self.view.frame.origin.y -= keyboardSize.height/2
+                }
+            }
+        }
     
+@objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
+    }
+    
+}
 
+//MARK:- text view delegate
+extension AddNewEventViewController:UITextFieldDelegate{
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }

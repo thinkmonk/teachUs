@@ -12,13 +12,18 @@ import ObjectMapper
 class CollegeTeachersRatingListViewController: BaseViewController {
 
     @IBOutlet weak var tableViewCollegeTeachersList: UITableView!
+    @IBOutlet weak var buttonPreviousCourse: UIButton!
+    @IBOutlet weak var buttonNextCourse: UIButton!
+
     var ratingClass:RatingClassList!
     var arrayDataSource:[RatingProfessorList] = []
-    
+    var arrayClassList:[RatingClassList] = []
+
+    var selectedIndex:Int = 0
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addGradientToNavBar()
-        self.title = "\(self.ratingClass.courseName)"
         self.tableViewCollegeTeachersList.register(UINib(nibName: "ProfessorRatingProfileTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.ProfessorRatingProfileTableViewCellId)
         self.tableViewCollegeTeachersList.delegate = self
         self.tableViewCollegeTeachersList.dataSource = self
@@ -27,7 +32,7 @@ class CollegeTeachersRatingListViewController: BaseViewController {
         self.tableViewCollegeTeachersList.rowHeight = UITableViewAutomaticDimension
         self.tableViewCollegeTeachersList.addSubview(refreshControl)
         self.getRating()
-
+        self.setUpButtons()
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,13 +48,14 @@ class CollegeTeachersRatingListViewController: BaseViewController {
     //MARK:Class Methods
     
     func getRating(){
+        self.title = "\(self.arrayClassList[self.selectedIndex].courseName) \(self.arrayClassList[self.selectedIndex].classDivision)"
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()
         manager.url = URLConstants.CollegeURL.ClassProfessorRatingList
         let parameters = [
             "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
             "role_id":"\(UserManager.sharedUserManager.appUserCollegeDetails.role_id!)",
-            "class_id":"\(self.ratingClass.classId)"
+            "class_id":"\(self.arrayClassList[self.selectedIndex].classId)"
         ]
         
         manager.apiPost(apiName: " Get professor rating list", parameters:parameters, completionHandler: { (result, code, response) in
@@ -84,7 +90,41 @@ class CollegeTeachersRatingListViewController: BaseViewController {
         if segue.identifier == Constants.segues.toRatingDetails{
             let destinationVC:CollegeProfessorRatingDetailViewController = segue.destination as! CollegeProfessorRatingDetailViewController
             destinationVC.ratingProfessor = self.arrayDataSource[(self.tableViewCollegeTeachersList.indexPathForSelectedRow?.section)!]
+            destinationVC.arrayProfessorList = self.arrayDataSource
+            destinationVC.selectedProfessorIndex = (self.tableViewCollegeTeachersList.indexPathForSelectedRow?.section)!
             destinationVC.ratingClass = self.ratingClass
+        }
+    }
+    
+    
+    //MARK:- NEXT & PREVIOUS SUBJECTS
+    
+    @IBAction func showRatingForNextCourse(_ sender: Any) {
+        if (self.selectedIndex < self.arrayClassList.count-1){
+            self.selectedIndex += 1
+            self.getRating()
+            self.setUpButtons()
+        }
+    }
+    
+    @IBAction func showRatingForPreviousCourse(_ sender: Any) {
+        if (self.selectedIndex > 0){
+            self.selectedIndex -= 1
+            self.getRating()
+            self.setUpButtons()
+        }
+    }
+    
+    func setUpButtons(){
+        if  self.selectedIndex == 0 {
+            self.buttonPreviousCourse.isEnabled = false
+            self.buttonNextCourse.isEnabled = true
+        }else if self.selectedIndex == self.arrayClassList.count-1 {
+            self.buttonNextCourse.isEnabled = false
+            self.buttonPreviousCourse.isEnabled = true
+        }else{
+            self.buttonNextCourse.isEnabled = true
+            self.buttonPreviousCourse.isEnabled = true
         }
     }
 }

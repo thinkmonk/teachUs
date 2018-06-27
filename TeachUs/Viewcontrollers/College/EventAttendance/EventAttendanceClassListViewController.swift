@@ -28,7 +28,7 @@ class EventAttendanceClassListViewController: BaseViewController {
         self.tableViewClassList.dataSource = self
         self.tableViewClassList.delegate = self
         self.tableViewClassList.alpha = 0
-        
+        self.title = "\(self.currentEvent.eventName)"
         self.buttonConfirm.alpha = 0
         // Do any additional setup after loading the view.
     }
@@ -104,7 +104,7 @@ extension EventAttendanceClassListViewController:UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:ClassListTableViewCell = self.tableViewClassList.dequeueReusableCell(withIdentifier: Constants.CustomCellId.ClassListTableViewCellId, for: indexPath) as! ClassListTableViewCell
-        cell.labelClassName.text = self.arrayDataSource[indexPath.section].courseName
+        cell.labelClassName.text = "\(self.arrayDataSource[indexPath.section].courseName) - \(self.arrayDataSource[indexPath.section].classDivision)"
         cell.labelParticipantCount.text = self.arrayDataSource[indexPath.section].totalParticipants
         cell.selectionStyle = .none
         

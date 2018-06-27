@@ -25,6 +25,7 @@ class TeacherProfileTableViewCell: UITableViewCell {
     @IBOutlet weak var labelHeartDescription: UILabel!
     @IBOutlet weak var buttonHeart: FaveButton!
     @IBOutlet weak var viewCellBg: UIView!
+    @IBOutlet weak var labelPopularityValue:UILabel!
     let colors = [
         DotColors(first: color(0x7DC2F4), second: color(0xE2264D)),
         DotColors(first: color(0xF8CC61), second: color(0x9BDFBA)),
@@ -41,6 +42,7 @@ class TeacherProfileTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.labelPopularityValue.alpha = 0;
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -52,7 +52,7 @@ class EventAttendanceStudentListViewController: BaseViewController {
         searchBar = UISearchBar()
         searchBar?.showsCancelButton = true
         searchBar?.delegate = self
-        self.title = self.classList.courseName
+        self.title = "\(self.classList.courseName) - \(self.classList.classDivision)"
         
         self.buttonConfirm.themeRedButton()
         
@@ -147,7 +147,7 @@ class EventAttendanceStudentListViewController: BaseViewController {
 //            EventAttendanceManager.sharedEventAttendanceManager.totalPresentCount.asObservable().subscribe(onNext: { (count) in
 //                self.labelTotalParticipants.text = "\(count)"
 //            }).disposed(by: self.disposeBag)
-            self.labelClass.text = self.classList.courseName
+            self.labelClass.text = "\(self.classList.courseName) - \(self.classList.classDivision)"
             self.labelTotalParticipants.text  = "\(self.totalParticipants!)"
             self.tableViewStudentList.reloadData()
             self.showTableView()

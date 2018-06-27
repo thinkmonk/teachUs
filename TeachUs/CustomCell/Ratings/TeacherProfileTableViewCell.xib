@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -43,21 +43,27 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pjN-El-sHh">
-                                <rect key="frame" x="172" y="13" width="100" height="53.5"/>
+                                <rect key="frame" x="172" y="8" width="100" height="63.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iMM-RL-tC3" customClass="FaveButton" customModule="TeachUs" customModuleProvider="target">
-                                        <rect key="frame" x="35" y="0.0" width="30" height="30"/>
+                                        <rect key="frame" x="30" y="0.0" width="40" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="ESk-Kf-RPt"/>
-                                            <constraint firstAttribute="width" constant="30" id="xIc-64-obq"/>
+                                            <constraint firstAttribute="height" constant="40" id="ESk-Kf-RPt"/>
+                                            <constraint firstAttribute="width" constant="40" id="xIc-64-obq"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <state key="normal" image="heart">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WMQ-qe-CQi">
+                                        <rect key="frame" x="30" y="0.0" width="40" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favourite" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="umA-jw-TUf">
-                                        <rect key="frame" x="0.0" y="40" width="100" height="13.5"/>
+                                        <rect key="frame" x="0.0" y="50" width="100" height="13.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -67,10 +73,16 @@
                                     <constraint firstItem="iMM-RL-tC3" firstAttribute="centerX" secondItem="umA-jw-TUf" secondAttribute="centerX" id="2Lg-qC-F6i"/>
                                     <constraint firstAttribute="trailing" secondItem="umA-jw-TUf" secondAttribute="trailing" id="3ZC-kN-xiU"/>
                                     <constraint firstItem="umA-jw-TUf" firstAttribute="leading" secondItem="pjN-El-sHh" secondAttribute="leading" id="4sZ-3U-HAP"/>
+                                    <constraint firstItem="WMQ-qe-CQi" firstAttribute="width" secondItem="iMM-RL-tC3" secondAttribute="width" id="4tM-be-Zbh"/>
+                                    <constraint firstItem="WMQ-qe-CQi" firstAttribute="leading" secondItem="iMM-RL-tC3" secondAttribute="leading" id="5fw-f7-Dsm"/>
                                     <constraint firstAttribute="bottom" secondItem="umA-jw-TUf" secondAttribute="bottom" id="8mn-u1-anf"/>
+                                    <constraint firstItem="WMQ-qe-CQi" firstAttribute="trailing" secondItem="iMM-RL-tC3" secondAttribute="trailing" id="CQY-LP-Cs5"/>
                                     <constraint firstItem="iMM-RL-tC3" firstAttribute="top" secondItem="pjN-El-sHh" secondAttribute="top" id="ENG-rr-fsJ"/>
+                                    <constraint firstItem="WMQ-qe-CQi" firstAttribute="top" secondItem="iMM-RL-tC3" secondAttribute="top" id="Hpm-p4-cc5"/>
                                     <constraint firstAttribute="width" constant="100" id="PxG-cz-BC7"/>
                                     <constraint firstItem="umA-jw-TUf" firstAttribute="top" secondItem="iMM-RL-tC3" secondAttribute="bottom" constant="10" id="bAG-I4-Crh"/>
+                                    <constraint firstItem="WMQ-qe-CQi" firstAttribute="bottom" secondItem="iMM-RL-tC3" secondAttribute="bottom" id="lFn-ec-RoJ"/>
+                                    <constraint firstItem="WMQ-qe-CQi" firstAttribute="height" secondItem="iMM-RL-tC3" secondAttribute="height" id="yq5-sF-GCe"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -104,6 +116,7 @@
                 <outlet property="buttonHeart" destination="iMM-RL-tC3" id="OwA-g3-fnN"/>
                 <outlet property="imageViewProfile" destination="dgq-6x-n7w" id="9aT-6i-80Y"/>
                 <outlet property="labelHeartDescription" destination="umA-jw-TUf" id="x7b-jy-NC0"/>
+                <outlet property="labelPopularityValue" destination="WMQ-qe-CQi" id="jVd-3V-QsH"/>
                 <outlet property="labelTeacherSubject" destination="8lt-jW-4ES" id="MBo-e5-4lB"/>
                 <outlet property="labelteacherName" destination="2jZ-On-RJX" id="XN6-IH-Mhw"/>
                 <outlet property="viewCellBg" destination="yLP-Zg-gfn" id="jhz-05-XiZ"/>

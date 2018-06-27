@@ -170,6 +170,7 @@ extension SyllabusStatusListViewController:UITableViewDelegate, UITableViewDataS
         destinationVC.selectedSubject = self.arrayDataSource[indexPath.section]
         destinationVC.userType = self.userType
         destinationVC.selectedClassId  = self.selectedClassId
+        destinationVC.title = "\(arrayDataSource[indexPath.section].subjectName)"
         self.parentNavigationController?.pushViewController(destinationVC, animated: true)
     }
     

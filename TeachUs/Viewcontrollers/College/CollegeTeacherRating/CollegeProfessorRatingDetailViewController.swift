@@ -15,6 +15,13 @@ class CollegeProfessorRatingDetailViewController: BaseViewController {
     var ratingClass:RatingClassList!
     var arrayProfessorDetailsList:[ProfessorRatingDetials] = []
     var arrayTableDataSource:[RatingDataSource] = []
+    
+    var arrayProfessorList:[RatingProfessorList] = []
+    var selectedProfessorIndex = 0
+    
+    @IBOutlet weak var buttonPreviousProfessor: UIButton!
+    @IBOutlet weak var buttonNextProfessor: UIButton!
+
 
     @IBOutlet weak var tableViewRatingDetail: UITableView!
     
@@ -29,6 +36,8 @@ class CollegeProfessorRatingDetailViewController: BaseViewController {
         self.tableViewRatingDetail.dataSource = self
         self.tableViewRatingDetail.alpha = 0
         self.addGradientToNavBar()
+        self.setUpButtons()
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,8 +51,8 @@ class CollegeProfessorRatingDetailViewController: BaseViewController {
         let parameters = [
             "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
             "role_id":"\(UserManager.sharedUserManager.appUserCollegeDetails.role_id!)",
-            "subject_id":"\(self.ratingProfessor.subjectId)",
-            "professor_id":"\(self.ratingProfessor.professorId)"
+            "subject_id":"\(self.arrayProfessorList[self.selectedProfessorIndex].subjectId)",
+            "professor_id":"\(self.arrayProfessorList[self.selectedProfessorIndex].professorId)"
             
         ]
         
@@ -94,6 +103,40 @@ class CollegeProfessorRatingDetailViewController: BaseViewController {
             self.tableViewRatingDetail.transform = CGAffineTransform.identity
         }
     }
+    //MARK:- Previous & Next Professor
+    
+    
+    @IBAction func showRatingForNextProfessor(_ sender: Any) {
+        if (self.selectedProfessorIndex < self.arrayProfessorList.count-1){
+            self.selectedProfessorIndex += 1
+            self.getRatingDetails()
+            self.setUpButtons()
+        }
+    }
+    
+    @IBAction func showRatingForPreviousProfessor(_ sender: Any) {
+        if (self.selectedProfessorIndex > 0){
+            self.selectedProfessorIndex -= 1
+            self.getRatingDetails()
+            self.setUpButtons()
+        }
+    }
+    
+    
+    
+    
+    func setUpButtons(){
+        if  self.selectedProfessorIndex == 0 {
+            self.buttonPreviousProfessor.isEnabled = false
+            self.buttonNextProfessor.isEnabled = true
+        }else if self.selectedProfessorIndex == self.arrayProfessorList.count-1 {
+            self.buttonNextProfessor.isEnabled = false
+            self.buttonPreviousProfessor.isEnabled = true
+        }else{
+            self.buttonNextProfessor.isEnabled = true
+            self.buttonPreviousProfessor.isEnabled = true
+        }
+    }
 }
 
 extension CollegeProfessorRatingDetailViewController : UITableViewDelegate, UITableViewDataSource{
@@ -117,10 +160,12 @@ extension CollegeProfessorRatingDetailViewController : UITableViewDelegate, UITa
             profileCell.selectionStyle = .none
             profileCell.imageViewProfile.makeViewCircular()
             profileCell.buttonHeart.indexPath = indexPath
-            if(Int(self.ratingProfessor.popularity)! > 0){
-                profileCell.buttonHeart.isSelected = true
-            }
+            profileCell.buttonHeart.isSelected = true
             profileCell.labelHeartDescription.text = "Popularity"
+            if(Int(self.ratingProfessor.popularity)! > 0){
+                profileCell.labelPopularityValue.alpha = 1
+                profileCell.labelPopularityValue.text = "\(self.ratingProfessor.popularity)"
+            }
             profileCell.buttonHeart.isEnabled = false
             return profileCell
             

@@ -107,7 +107,7 @@ extension CollegeSyllabusStatusViewController:UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let professorSyllabusStatusVC = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorSyllabusStatus) as! SyllabusStatusListViewController
-        professorSyllabusStatusVC.title = "Syllabus Status"
+        professorSyllabusStatusVC.title = "\(self.arrayDataSource[indexPath.section].courseName)"
         professorSyllabusStatusVC.parentNavigationController = self.parentNavigationController
         professorSyllabusStatusVC.userType = LoginUserType.College
         professorSyllabusStatusVC.selectedClassId = self.arrayDataSource[indexPath.section].classId

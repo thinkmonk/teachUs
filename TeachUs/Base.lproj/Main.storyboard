@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pVO-0S-wfc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pVO-0S-wfc">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -1889,16 +1889,49 @@ Form Library</string>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="Fhb-2H-UeB">
-                                <rect key="frame" x="15" y="114" width="290" height="454"/>
+                                <rect key="frame" x="15" y="114" width="290" height="414"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="0eO-Rp-mXM">
+                                <rect key="frame" x="0.0" y="528" width="320" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r24-Kv-LWF">
+                                        <rect key="frame" x="0.0" y="0.0" width="160" height="40"/>
+                                        <color key="backgroundColor" red="0.77647058820000003" green="0.0" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Previous Course">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="showLogsForPreviousSubject:" destination="1iW-gl-mHV" eventType="touchUpInside" id="3cV-8A-ESr"/>
+                                            <action selector="showRatingForPreviousCourse:" destination="2Z3-rN-TUc" eventType="touchUpInside" id="72B-OD-f0r"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W16-BU-KuR">
+                                        <rect key="frame" x="160" y="0.0" width="160" height="40"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="Next Course">
+                                            <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="showLogsForNextSubject:" destination="1iW-gl-mHV" eventType="touchUpInside" id="Ieo-4V-yUv"/>
+                                            <action selector="showRatingForNextCourse:" destination="2Z3-rN-TUc" eventType="touchUpInside" id="7Dt-1X-IcC"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Iwf-sB-Htl"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.92549019610000005" green="0.95294117649999999" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="6LO-2e-Rmq" firstAttribute="trailing" secondItem="yvf-Ch-Wh0" secondAttribute="trailing" id="23w-EC-Q7X"/>
                             <constraint firstItem="yvf-Ch-Wh0" firstAttribute="leading" secondItem="1Go-5I-BDi" secondAttribute="leading" id="8iV-Da-ulf"/>
-                            <constraint firstItem="6LO-2e-Rmq" firstAttribute="bottom" secondItem="Fhb-2H-UeB" secondAttribute="bottom" id="WmO-Qd-1k5"/>
+                            <constraint firstItem="6LO-2e-Rmq" firstAttribute="trailing" secondItem="0eO-Rp-mXM" secondAttribute="trailing" id="Q2s-QJ-Eez"/>
+                            <constraint firstItem="6LO-2e-Rmq" firstAttribute="bottom" secondItem="0eO-Rp-mXM" secondAttribute="bottom" id="XSK-Xe-lcw"/>
                             <constraint firstItem="6LO-2e-Rmq" firstAttribute="trailing" secondItem="Fhb-2H-UeB" secondAttribute="trailing" constant="15" id="gTK-zd-OEF"/>
+                            <constraint firstItem="0eO-Rp-mXM" firstAttribute="leading" secondItem="6LO-2e-Rmq" secondAttribute="leading" id="lbi-er-Ac7"/>
+                            <constraint firstItem="0eO-Rp-mXM" firstAttribute="top" secondItem="Fhb-2H-UeB" secondAttribute="bottom" id="rsJ-iM-dsQ"/>
                             <constraint firstItem="Fhb-2H-UeB" firstAttribute="leading" secondItem="1Go-5I-BDi" secondAttribute="leading" constant="15" id="tic-nD-iK5"/>
                             <constraint firstItem="Fhb-2H-UeB" firstAttribute="top" secondItem="yvf-Ch-Wh0" secondAttribute="bottom" id="tl2-2Y-RvA"/>
                             <constraint firstItem="yvf-Ch-Wh0" firstAttribute="top" secondItem="6LO-2e-Rmq" secondAttribute="top" id="u8U-AO-v8a"/>
@@ -1906,6 +1939,8 @@ Form Library</string>
                         <viewLayoutGuide key="safeArea" id="6LO-2e-Rmq"/>
                     </view>
                     <connections>
+                        <outlet property="buttonNextCourse" destination="W16-BU-KuR" id="gLl-Jc-ldr"/>
+                        <outlet property="buttonPreviousCourse" destination="r24-Kv-LWF" id="qA1-8X-JB4"/>
                         <outlet property="tableViewCollegeTeachersList" destination="Fhb-2H-UeB" id="3jM-Jm-oBr"/>
                         <segue destination="gxf-3W-YDi" kind="show" identifier="toRatingDetails" id="W2p-tU-cWK"/>
                     </connections>
@@ -1923,13 +1958,48 @@ Form Library</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bRv-lD-At7">
-                                <rect key="frame" x="15" y="64" width="290" height="504"/>
+                                <rect key="frame" x="15" y="64" width="290" height="464"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="lhW-SF-ZHP">
+                                <rect key="frame" x="0.0" y="528" width="320" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ApD-sp-kW4">
+                                        <rect key="frame" x="0.0" y="0.0" width="160" height="40"/>
+                                        <color key="backgroundColor" red="0.77647058820000003" green="0.0" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Previous Lecturer">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="showLogsForPreviousSubject:" destination="1iW-gl-mHV" eventType="touchUpInside" id="XZ3-6Q-6Qx"/>
+                                            <action selector="showRatingForPreviousCourse:" destination="2Z3-rN-TUc" eventType="touchUpInside" id="IR3-mf-3ra"/>
+                                            <action selector="showRatingForPreviousProfessor:" destination="gxf-3W-YDi" eventType="touchUpInside" id="t9X-m6-Xc8"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8wn-sD-qR8">
+                                        <rect key="frame" x="160" y="0.0" width="160" height="40"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="Next Lecturer">
+                                            <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="showLogsForNextSubject:" destination="1iW-gl-mHV" eventType="touchUpInside" id="hpc-Ns-Vce"/>
+                                            <action selector="showRatingForNextCourse:" destination="2Z3-rN-TUc" eventType="touchUpInside" id="gTY-EF-F6y"/>
+                                            <action selector="showRatingForNextProfessor:" destination="gxf-3W-YDi" eventType="touchUpInside" id="bYA-Ti-LpH"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Esc-1m-R3B"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="Osd-1K-4G2" firstAttribute="bottom" secondItem="bRv-lD-At7" secondAttribute="bottom" id="NB3-LT-dQP"/>
+                            <constraint firstItem="lhW-SF-ZHP" firstAttribute="bottom" secondItem="Osd-1K-4G2" secondAttribute="bottom" id="0jZ-RS-BM3"/>
+                            <constraint firstItem="lhW-SF-ZHP" firstAttribute="leading" secondItem="Osd-1K-4G2" secondAttribute="leading" id="4KA-5p-f89"/>
+                            <constraint firstItem="Osd-1K-4G2" firstAttribute="trailing" secondItem="lhW-SF-ZHP" secondAttribute="trailing" id="Fm6-rA-JN9"/>
+                            <constraint firstItem="lhW-SF-ZHP" firstAttribute="top" secondItem="bRv-lD-At7" secondAttribute="bottom" id="O7C-uh-6CQ"/>
                             <constraint firstItem="bRv-lD-At7" firstAttribute="top" secondItem="Osd-1K-4G2" secondAttribute="top" id="ewX-Lc-9pc"/>
                             <constraint firstItem="bRv-lD-At7" firstAttribute="leading" secondItem="Osd-1K-4G2" secondAttribute="leading" constant="15" id="tzy-YH-Sgy"/>
                             <constraint firstItem="Osd-1K-4G2" firstAttribute="trailing" secondItem="bRv-lD-At7" secondAttribute="trailing" constant="15" id="wmL-tF-hfY"/>
@@ -1937,6 +2007,8 @@ Form Library</string>
                         <viewLayoutGuide key="safeArea" id="Osd-1K-4G2"/>
                     </view>
                     <connections>
+                        <outlet property="buttonNextProfessor" destination="8wn-sD-qR8" id="qhh-kQ-FIm"/>
+                        <outlet property="buttonPreviousProfessor" destination="ApD-sp-kW4" id="hPi-Zu-i9o"/>
                         <outlet property="tableViewRatingDetail" destination="bRv-lD-At7" id="1KZ-eI-TW8"/>
                     </connections>
                 </viewController>
@@ -2451,7 +2523,10 @@ Form Library</string>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                                        <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="DCP-4E-UVH" id="BcX-ug-02o"/>
+                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2463,7 +2538,10 @@ Form Library</string>
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="au1-Hb-Vtp">
-                                                <rect key="frame" x="15" y="135" width="270" height="30"/>
+                                                <rect key="frame" x="75" y="135" width="150" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="150" id="qgo-Gg-cTX"/>
+                                                </constraints>
                                                 <state key="normal" title="Submit"/>
                                                 <connections>
                                                     <action selector="addNewEvent:" destination="DCP-4E-UVH" eventType="touchUpInside" id="Z1h-FW-guL"/>
@@ -2476,16 +2554,15 @@ Form Library</string>
                                             <constraint firstItem="au1-Hb-Vtp" firstAttribute="top" secondItem="Sio-yf-Hl9" secondAttribute="bottom" constant="15" id="7bH-qA-vKE"/>
                                             <constraint firstAttribute="trailing" secondItem="kM8-Op-b0C" secondAttribute="trailing" id="FND-2v-0HQ"/>
                                             <constraint firstItem="Sio-yf-Hl9" firstAttribute="top" secondItem="6sO-87-iOn" secondAttribute="bottom" constant="10" id="H7k-PW-aAx"/>
+                                            <constraint firstItem="au1-Hb-Vtp" firstAttribute="centerX" secondItem="kxY-qq-DeN" secondAttribute="centerX" id="KQn-R7-I9b"/>
                                             <constraint firstAttribute="bottom" secondItem="au1-Hb-Vtp" secondAttribute="bottom" constant="30" id="U8L-xX-kPW"/>
                                             <constraint firstItem="6sO-87-iOn" firstAttribute="top" secondItem="kM8-Op-b0C" secondAttribute="bottom" constant="15" id="VgB-kw-D4N"/>
                                             <constraint firstItem="au1-Hb-Vtp" firstAttribute="height" secondItem="Sio-yf-Hl9" secondAttribute="height" id="Wd4-5X-w1u"/>
-                                            <constraint firstItem="au1-Hb-Vtp" firstAttribute="leading" secondItem="6sO-87-iOn" secondAttribute="leading" id="ZRq-Ct-oVX"/>
                                             <constraint firstAttribute="trailing" secondItem="6sO-87-iOn" secondAttribute="trailing" constant="15" id="bUS-vu-2ua"/>
                                             <constraint firstItem="Sio-yf-Hl9" firstAttribute="trailing" secondItem="6sO-87-iOn" secondAttribute="trailing" id="hbl-xT-qwc"/>
                                             <constraint firstItem="Sio-yf-Hl9" firstAttribute="leading" secondItem="6sO-87-iOn" secondAttribute="leading" id="lvc-lo-CwZ"/>
                                             <constraint firstItem="kM8-Op-b0C" firstAttribute="top" secondItem="kxY-qq-DeN" secondAttribute="top" id="nfu-bf-2rl"/>
                                             <constraint firstItem="kM8-Op-b0C" firstAttribute="leading" secondItem="kxY-qq-DeN" secondAttribute="leading" id="p45-nX-rbf"/>
-                                            <constraint firstItem="au1-Hb-Vtp" firstAttribute="trailing" secondItem="6sO-87-iOn" secondAttribute="trailing" id="vK8-Bo-ctx"/>
                                         </constraints>
                                     </view>
                                 </subviews>
