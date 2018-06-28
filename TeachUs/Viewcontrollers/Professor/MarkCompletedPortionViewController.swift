@@ -21,7 +21,7 @@ class MarkCompletedPortionViewController: BaseViewController {
 
     @IBOutlet weak var tableviewTopics: UITableView!
     @IBOutlet weak var buttonSubmit: UIButton!
-    
+    @IBOutlet weak var labelSyllabusCompletion: UILabel!
     var selectedCollege:College!
     var attendanceId:NSNumber!
     var arrayDataSource:[Unit] = []
@@ -64,6 +64,14 @@ class MarkCompletedPortionViewController: BaseViewController {
             LoadingActivityHUD.hideProgressHUD()
             
             guard let subjects = response["unit_syllabus_array"] as? [[String:Any]] else{
+                return
+            }
+            
+            if let completionPercent = response["syllabus_percentage"]
+            {
+                self.labelSyllabusCompletion.text = "Completion: \(completionPercent)%"
+            }
+            else{
                 return
             }
             
@@ -168,18 +176,26 @@ extension MarkCompletedPortionViewController:UITableViewDelegate, UITableViewDat
             cell.buttonInProgress.selectedDefaultButton()
             cell.labelStatus.textColor = UIColor.rgbColor(0.0, 143.0, 83.0) //#008F53
             cell.viewDisableCell.alpha = chapterCell.isUpdated ? 0 : 1
+//            cell.viewStatusStack.alpha = 0
+//            cell.viewwSeperator.alpha = 0
             break
         case .InProgress:
             cell.buttonInProgress.selectedRedButton()
             cell.buttonCompleted.selectedDefaultButton()
             cell.labelStatus.textColor = UIColor.rgbColor(299.0, 0.0, 0.0)   //#E50000
             cell.viewDisableCell.alpha = 0
+//            cell.viewStatusStack.alpha = 1
+//            cell.viewwSeperator.alpha = 1
+
             break
         case .NotStarted:
             cell.buttonCompleted.selectedDefaultButton()
             cell.buttonInProgress.selectedDefaultButton()
             cell.labelStatus.textColor = UIColor.rgbColor(126.0, 132.0, 155.0) //#7E849B
             cell.viewDisableCell.alpha = 0
+//            cell.viewStatusStack.alpha = 1
+//            cell.viewwSeperator.alpha = 1
+
             break
         }
         cell.selectionStyle = .none

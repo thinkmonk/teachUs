@@ -18,7 +18,7 @@ class ViewDatePicker: UIView {
         let date = picker.date
         let dateFormatter: DateFormatter = DateFormatter()
         // Set date format
-        dateFormatter.dateFormat = "dd MMMM"
+        dateFormatter.dateFormat = "dd MMMM YYYY"
         // Apply date format
         let selectedDate: String = dateFormatter.string(from: date)
         return selectedDate

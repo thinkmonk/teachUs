@@ -181,6 +181,7 @@ extension LectureReportViewController:UITableViewDelegate, UITableViewDataSource
                     stringTopicCovered = stringTopicCovered + topic.chapterName + "\n"
                 }
             }
+            cell.labelSubjectTitle.text = "Topics Covered :"
             cell.labelSubjectDescription.text = stringTopicCovered
             return cell
         }

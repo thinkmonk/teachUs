@@ -27,8 +27,10 @@ class ProfessorAttedanceViewController: BaseViewController {
         tableviewCollegeList.dataSource = self
         self.tableviewCollegeList.alpha = 0
         self.getCollegeSummaryForProfessor()
-
+        self.tableviewCollegeList.addSubview(refreshControl)
         let cellNib = UINib(nibName:nibCollegeListCell, bundle: nil)
+        self.tableviewCollegeList.estimatedRowHeight = 44
+        self.tableviewCollegeList.rowHeight = UITableViewAutomaticDimension
         self.tableviewCollegeList.register(cellNib, forCellReuseIdentifier: Constants.CustomCellId.ProfessorCollegeList)
     }
     
@@ -39,6 +41,11 @@ class ProfessorAttedanceViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 //        getCollegeSummaryForProfessor()
+    }
+    
+    override func refresh(sender: AnyObject) {
+        self.getCollegeSummaryForProfessor()
+        super.refresh(sender: sender)
     }
     
     override func didReceiveMemoryWarning() {
@@ -100,18 +107,12 @@ extension ProfessorAttedanceViewController:UITableViewDataSource, UITableViewDel
         if(cell == nil){
             let collegeCell:ProfessorCollegeListTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.ProfessorCollegeList, for: indexPath) as! ProfessorCollegeListTableViewCell
             
-            collegeCell.labelSubjectName.text = self.arrayCollegeList![indexPath.section].subjectName
+            collegeCell.labelSubjectName.text = "\(self.arrayCollegeList![indexPath.section].yearName!)\(self.arrayCollegeList![indexPath.section].courseCode!) - \(self.arrayCollegeList![indexPath.section].subjectName!) - \(self.arrayCollegeList![indexPath.section].classDivision!)"
             collegeCell.selectionStyle = UITableViewCellSelectionStyle.none
             collegeCell.accessoryType = .disclosureIndicator
             cell = collegeCell
         }
         return cell
-    }
-    
-    
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44.0
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

@@ -98,7 +98,7 @@ extension ProfessorLogsListViewController:UITableViewDelegate, UITableViewDataSo
         if(cell == nil){
             let collegeCell:ProfessorCollegeListTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.ProfessorCollegeList, for: indexPath) as! ProfessorCollegeListTableViewCell
             
-            collegeCell.labelSubjectName.text = self.arrayDataSource[indexPath.section].subjectName
+            collegeCell.labelSubjectName.text = "\(self.arrayDataSource![indexPath.section].yearName!)\(self.arrayDataSource![indexPath.section].courseCode!) - \(self.arrayDataSource![indexPath.section].subjectName!) - \(self.arrayDataSource![indexPath.section].classDivision!)"
             collegeCell.selectionStyle = UITableViewCellSelectionStyle.none
             collegeCell.accessoryType = .disclosureIndicator
             cell = collegeCell

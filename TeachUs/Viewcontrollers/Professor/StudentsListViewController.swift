@@ -193,7 +193,7 @@ class StudentsListViewController: BaseViewController {
                 viewConfirmAttendance.delegate = self
             }
             let presentStudents = AttendanceManager.sharedAttendanceManager.arrayStudents.value.filter{$0.isPrsent == true}
-            viewConfirmAttendance.labelStudentCount.text = "\(presentStudents.count)"
+            viewConfirmAttendance.labelStudentCount.text = "\(presentStudents.count)/\(AttendanceManager.sharedAttendanceManager.arrayStudents.value.count)"
             viewConfirmAttendance.showView(inView: UIApplication.shared.keyWindow!)
         }
     }
@@ -228,6 +228,7 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
             }
 
             //To time
+            cell.buttonToTime.addTarget(self, action: #selector(StudentsListViewController.showToTimePicker), for: .touchUpInside)
             let toTimeTap = UITapGestureRecognizer(target: self, action: #selector(StudentsListViewController.showToTimePicker))
             tap.numberOfTapsRequired = 1
             cell.textFieldToTime.tag = indexPath.row
@@ -238,6 +239,7 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
             }
 
             //from time
+            cell.buttonFromTime.addTarget(self, action: #selector(StudentsListViewController.showFromTimePicker), for: .touchUpInside)
             let fromTimeTap = UITapGestureRecognizer(target: self, action: #selector(StudentsListViewController.showFromTimePicker))
             tap.numberOfTapsRequired = 1
             cell.textFieldFromTime.tag = indexPath.row
@@ -248,6 +250,7 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
             }
             
             // number of lectures
+            cell.buttonNumberOfLectures.addTarget(self, action: #selector(StudentsListViewController.showNumberPicker), for: .touchUpInside)
             let numberPickerTap = UITapGestureRecognizer(target: self, action: #selector(StudentsListViewController.showNumberPicker))
             tap.numberOfTapsRequired = 1
             cell.textFieldNumberOfLectures.tag = indexPath.row

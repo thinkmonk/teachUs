@@ -575,7 +575,7 @@ Form Library</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cX6-cB-34O">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="531"/>
+                                <rect key="frame" x="0.0" y="112" width="320" height="419"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vp5-uU-h6G">
@@ -588,28 +588,49 @@ Form Library</string>
                                     <action selector="submitSyllabusStatus:" destination="9ky-aO-ZJF" eventType="touchUpInside" id="LgY-mp-y21"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jO0-e6-fLe">
+                                <rect key="frame" x="0.0" y="64" width="320" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Completion" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LOf-1R-gzN">
+                                        <rect key="frame" x="116.5" y="15" width="88" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.77647058820000003" green="0.0" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="LOf-1R-gzN" firstAttribute="centerY" secondItem="jO0-e6-fLe" secondAttribute="centerY" id="UMd-bz-5b7"/>
+                                    <constraint firstItem="LOf-1R-gzN" firstAttribute="centerX" secondItem="jO0-e6-fLe" secondAttribute="centerX" id="mZQ-5B-pa2"/>
+                                    <constraint firstAttribute="height" constant="50" id="nSV-S4-5Vb"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.92549019610000005" green="0.95294117649999999" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="cX6-cB-34O" firstAttribute="leading" secondItem="bsc-Vf-HZc" secondAttribute="leading" id="0ai-kL-9C0"/>
+                            <constraint firstItem="jO0-e6-fLe" firstAttribute="top" secondItem="bsc-Vf-HZc" secondAttribute="top" id="4gw-za-Wfd"/>
+                            <constraint firstItem="jO0-e6-fLe" firstAttribute="leading" secondItem="R9M-Zi-EIx" secondAttribute="leading" id="66f-8W-ny4"/>
                             <constraint firstItem="vp5-uU-h6G" firstAttribute="top" secondItem="cX6-cB-34O" secondAttribute="bottom" constant="2" id="8qC-Aj-7OB"/>
                             <constraint firstItem="cX6-cB-34O" firstAttribute="trailing" secondItem="bsc-Vf-HZc" secondAttribute="trailing" id="QLW-yI-wd2"/>
-                            <constraint firstItem="cX6-cB-34O" firstAttribute="top" secondItem="R9M-Zi-EIx" secondAttribute="top" id="WBg-X2-nAo"/>
                             <constraint firstItem="vp5-uU-h6G" firstAttribute="leading" secondItem="cX6-cB-34O" secondAttribute="leading" id="YXT-Mw-Np5"/>
                             <constraint firstItem="vp5-uU-h6G" firstAttribute="trailing" secondItem="cX6-cB-34O" secondAttribute="trailing" id="bKV-Na-0Hq"/>
+                            <constraint firstItem="bsc-Vf-HZc" firstAttribute="trailing" secondItem="jO0-e6-fLe" secondAttribute="trailing" id="rC6-22-Z16"/>
                             <constraint firstItem="bsc-Vf-HZc" firstAttribute="bottom" secondItem="vp5-uU-h6G" secondAttribute="bottom" id="t0c-Pg-rsa"/>
+                            <constraint firstItem="cX6-cB-34O" firstAttribute="top" secondItem="jO0-e6-fLe" secondAttribute="bottom" constant="-2" id="xsD-WO-7Lq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bsc-Vf-HZc"/>
                     </view>
                     <connections>
                         <outlet property="buttonSubmit" destination="vp5-uU-h6G" id="jdM-gE-V15"/>
+                        <outlet property="labelSyllabusCompletion" destination="LOf-1R-gzN" id="d2A-jg-o6M"/>
                         <outlet property="tableviewTopics" destination="cX6-cB-34O" id="zZN-oP-z9p"/>
                         <segue destination="dlL-dI-NqQ" kind="show" identifier="toLectureReport" id="pbG-O4-raZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EI4-Yj-cia" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5132" y="45"/>
+            <point key="canvasLocation" x="5131.875" y="44.366197183098592"/>
         </scene>
         <!--Lecture Report View Controller-->
         <scene sceneID="Kd7-kt-ZW5">

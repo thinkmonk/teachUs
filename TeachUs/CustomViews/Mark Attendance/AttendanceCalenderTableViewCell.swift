@@ -16,19 +16,26 @@ protocol AttendanceCalenderTableViewCellDelegate {
 }
 
 class AttendanceCalenderTableViewCell: UITableViewCell {
+    @IBOutlet weak var viewFromTImeBg: UIView!
     @IBOutlet weak var textFieldFromTime: UITextField!
+    @IBOutlet weak var buttonFromTime: UIButton!
+    
+    @IBOutlet weak var viewToTimeBg: UIView!
     @IBOutlet weak var textFieldToTime: UITextField!
+    @IBOutlet weak var buttonToTime: UIButton!
     @IBOutlet weak var textFieldNumberOfLectures: UITextField!
     @IBOutlet weak var buttonEdit: UIButton!
     @IBOutlet weak var labelDate: UILabel!
+    @IBOutlet weak var viewNumberOfLecturesBg: UIView!
+    @IBOutlet weak var buttonNumberOfLectures: UIButton!
     let disposeBag = DisposeBag()
     var delegate:AttendanceCalenderTableViewCellDelegate!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.textFieldToTime.addWhiteBottomBorder()
-        self.textFieldFromTime.addWhiteBottomBorder()
-        self.textFieldNumberOfLectures.addWhiteBottomBorder()
+        self.viewToTimeBg.addWhiteBottomBorder()
+        self.viewFromTImeBg.addWhiteBottomBorder()
+        self.viewNumberOfLecturesBg.addWhiteBottomBorder()
         self.makeTableCellEdgesRounded()
         self.buttonEdit.dropShadow()
         // Initialization code
