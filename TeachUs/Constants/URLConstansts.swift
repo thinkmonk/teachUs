@@ -9,12 +9,22 @@
 import Foundation
 public struct URLConstants{
 
+    struct AppUrl {
+        static let baseUrlV1 = "BASE_URL_V1"
+    }
+    
     struct BaseUrl {
-        static let baseURL = "http://teachusedumation.com/api/teachus" //v3
+//        static var baseURL = "http://teachusedumation.com/api_production/teachus" //v3
+//        #if DEBUG
+//        static var baseURL = "http://teachusedumation.com/api/teachus" //v3
+//        #endif
 
 //        static let baseURL = "http://zilliotech.com/api/teachus" //v2
 //        static let baseURL = "http://ec2-34-215-84-223.us-west-2.compute.amazonaws.com:8081/teachus"  //v1`
         //http://teachusedumation.com
+        
+        static var baseURL = (Bundle.main.object(forInfoDictionaryKey: AppUrl.baseUrlV1) as? String)!
+
     }
     
     struct Login {

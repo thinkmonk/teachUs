@@ -193,9 +193,9 @@ class NetworkHandler:SessionManager{
         }
 
         #if DEBUG
+            print("URL : \(self.url!)")
             print("***** POST NETWORK CALL DETAILS *****")
             print("Api name: \(apiName)")
-            print("URL : \(self.url!)")
             if let theJSONData = try? JSONSerialization.data(withJSONObject: parameters,options: []) {
                 let theJSONText = String(data: theJSONData,encoding: .ascii)
                 print("parameters = \(theJSONText!)")
@@ -211,7 +211,9 @@ class NetworkHandler:SessionManager{
                 response in
                 switch response.result {
                 case .success:
-                    print(response)
+                    #if DEBUG
+                        print(response)
+                    #endif
                     completionHandler(true, (response.response?.statusCode)!, response.result.value as! [String : Any])
                     break
                 case .failure(let error):

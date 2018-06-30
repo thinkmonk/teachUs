@@ -148,7 +148,20 @@ class Chapter:Mappable{
 }
 
 
-
+/*
+ 
+ {
+ "class_division" = A;
+ "class_id" = 1;
+ "course_name" = TYBMS;
+ "subject_code" = IEM;
+ "subject_id" = 2;
+ "subject_name" = "Indian Ethos in Management";
+ "syllabus_percentage" = 13;
+ "total_lectures" = 6;
+ },
+ 
+ */
 
 
 
@@ -176,7 +189,7 @@ class Subject:Mappable{
         self.subjectCode <- map["subject_code"]
         self.classId <- map["class_id"]
         self.classDivision <- map["class_division"]
-        self.courseName <- map["class_division"]
+        self.courseName <- map["course_name"]
         
         /*
         var topicArray:[[String:Any]] = []

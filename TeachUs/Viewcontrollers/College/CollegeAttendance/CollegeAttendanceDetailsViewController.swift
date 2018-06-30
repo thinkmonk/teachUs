@@ -35,6 +35,12 @@ class CollegeAttendanceDetailsViewController: BaseViewController {
     var fromDate:Date!
     var selectedSubject:CollegeSubjects!
     var activeLabel:UILabel!
+    var dateFormatter: DateFormatter {
+        let df = DateFormatter()
+        df.dateFormat = "YYYY-MMM-dd"
+        return df
+    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -135,6 +141,9 @@ class CollegeAttendanceDetailsViewController: BaseViewController {
     func getAttendance( subject:CollegeSubjects?){
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         self.arrayStudentList.removeAll()
+        // Set date format
+        let urlDateFormatter = DateFormatter()
+        urlDateFormatter.dateFormat = "YYYY-MM-dd"
         let manager = NetworkHandler()
         manager.url = URLConstants.CollegeURL.classStudentLIst
         var parameters = [
@@ -145,12 +154,12 @@ class CollegeAttendanceDetailsViewController: BaseViewController {
         
         if(self.fromDate != nil)
         {
-            parameters["from_date"] = labelFromDate.text!
+            parameters["from_date"] = urlDateFormatter.string(from: self.fromDate)
         }
         
         if(self.toDate != nil)
         {
-            parameters["to_date"] = labelToDate.text!
+            parameters["to_date"] = urlDateFormatter.string(from: self.toDate)
         }
         
         manager.apiPost(apiName: " Get class Student List", parameters:parameters, completionHandler: { (result, code, response) in
@@ -184,13 +193,9 @@ class CollegeAttendanceDetailsViewController: BaseViewController {
             fromDatePicker.picker.minimumDate = NSCalendar.current.date(byAdding: .month, value: -6, to: Date())
             fromDatePicker.picker.maximumDate = NSCalendar.current.date(byAdding: .month, value: 0, to: Date())
             self.toDate = Date()
-            let dateFormatter: DateFormatter = DateFormatter()
-            // Set date format
-            dateFormatter.dateFormat = "YYYY-MM-dd"
-            // Apply date format
-            self.labelToDate.text = dateFormatter.string(from: self.toDate!)
+            self.labelToDate.text = self.dateFormatter.string(from: self.toDate!)
             self.fromDate = NSCalendar.current.date(byAdding: .month, value: -1, to: Date())
-            self.labelFromDate.text = dateFormatter.string(from: self.fromDate!)
+            self.labelFromDate.text = self.dateFormatter.string(from: self.fromDate!)
             
             
         }
@@ -228,7 +233,7 @@ class CollegeAttendanceDetailsViewController: BaseViewController {
             fromDatePicker.alpha = 0
             fromDatePicker.removeFromSuperview()
         }
-        self.activeLabel.text = fromDatePicker.postJsonDateString
+        self.activeLabel.text = self.dateFormatter.string(from: self.fromDatePicker.picker.date)
         switch activeLabel.tag {
         case 100:
             fromDate = fromDatePicker.picker.date

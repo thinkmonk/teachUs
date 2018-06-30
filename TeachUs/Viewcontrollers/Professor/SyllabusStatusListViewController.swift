@@ -144,9 +144,12 @@ extension SyllabusStatusListViewController:UITableViewDelegate, UITableViewDataS
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:SyllabusStatusTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.SyllabusStatusTableViewCellId, for: indexPath)  as! SyllabusStatusTableViewCell
-        cell.labelNumberOfLectures.text = "\(arrayDataSource[indexPath.section].numberOfLectures)"
-        cell.labelSubject.text = "\(arrayDataSource[indexPath.section].subjectName)"
-        cell.labelAttendancePercent.text = "\(arrayDataSource[indexPath.section].completion)"
+        
+        let cellSubject = arrayDataSource[indexPath.section]
+        cell.labelNumberOfLectures.text = "\(cellSubject.numberOfLectures)"
+        cell.labelSubject.text = "\(cellSubject.courseName) - \(cellSubject.classDivision) \(cellSubject.subjectName)"
+        cell.labelSubject.text = self.userType! == LoginUserType.Professor ? "\(cellSubject.courseName) - \(cellSubject.classDivision) \(cellSubject.subjectName)" : "\(cellSubject.subjectName)"
+        cell.labelAttendancePercent.text = "\(cellSubject.completion)%"
         cell.selectionStyle = .none
         cell.accessoryType = .disclosureIndicator
         cell.backgroundColor = UIColor.white

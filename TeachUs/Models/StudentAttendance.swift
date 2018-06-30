@@ -39,6 +39,7 @@ class  StudentAttendance:Mappable{
     var totalPresentCount: String! = ""
     var overallPercenage:String! = ""
     var subjectAttendance:[SubjectAttendance] = []
+    var eventAttendance:[EventAttendance] = []
     
     required public init?(map: Map) {
     }
@@ -57,6 +58,14 @@ class  StudentAttendance:Mappable{
             for subject in subjectAttendanceArray{
                 let tempSubject = Mapper<SubjectAttendance>().map(JSON: subject)
                 self.subjectAttendance.append(tempSubject!)
+            }
+        }
+        var eventAttendanceArray:[[String:Any]] = []
+        eventAttendanceArray <- map["event_attendance_list"]
+        if(eventAttendanceArray.count > 0){
+            for eventAttendance in eventAttendanceArray{
+                let tempSubject = Mapper<EventAttendance>().map(JSON: eventAttendance)
+                self.eventAttendance.append(tempSubject!)
             }
         }
     }
@@ -82,3 +91,37 @@ class SubjectAttendance:Mappable{
         self.subjectCode <- map["subject_code"]
     }
 }
+/*
+ "event_attendance_list" =     (
+ {
+ "event_attendance" = 2;
+ "event_code" = test;
+ "event_date" = "2018-05-20";
+ "event_description" = "lorem ipsum";
+ "event_id" = 1;
+ "event_name" = Test;
+ }
+ );
+ */
+
+class EventAttendance:Mappable{
+    var eventAttendance:String = ""
+    var eventCode:String! = ""
+    var eventDate:String = ""
+    var eventDescription:String = ""
+    var eventId:String! = ""
+    var eventName:String! = ""
+    required public init?(map: Map) {
+        
+    }
+    
+    public func mapping(map: Map) {
+        self.eventAttendance <- map["event_attendance"]
+        self.eventCode <- map["event_code"]
+        self.eventDate <- map["event_date"]
+        self.eventDescription <- map["event_description"]
+        self.eventId <- map["event_id"]
+        self.eventName <- map["event_name"]
+    }
+}
+

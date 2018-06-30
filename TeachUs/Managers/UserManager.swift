@@ -132,7 +132,7 @@ class UserManager{
                 return
             }
             
-            
+            //when default user type is available
             for appuser in self.appUserCollegeArray{
                 if appuser.role_name! == defaultRoleName && appuser.college_name! == defaultCollegeName{
                     self.appUserCollegeDetails = appuser
@@ -149,6 +149,14 @@ class UserManager{
                     default:
                         break
                     }
+                }
+            }
+            
+            if(self.user! == .College || self.user! == .Professor){
+                print("Login user type college or professor")
+            }else{
+                if(self.user! == .Student){
+                    print("Login user type Student")
                 }
             }
         }

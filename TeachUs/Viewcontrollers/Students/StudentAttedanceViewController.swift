@@ -19,6 +19,7 @@ class StudentAttedanceViewController: BaseViewController {
     @IBOutlet weak var tableViewStudentAttendance: UITableView!
     @IBOutlet weak var viewHeaderBackground: UIView!
     
+    var tableDataSource:[StudentAttendanceCellDatasource]! = []
     var arrayDataSource:StudentAttendance!
     let monthDropdown = DropDown()
     
@@ -47,30 +48,6 @@ class StudentAttedanceViewController: BaseViewController {
     }
     
     func getAttendance(_ forMonth:Int){
-        /*
-        //http://ec2-34-215-84-223.us-west-2.compute.amazonaws.com:8081/teachus/student/getAttendence/Zmlyc3ROYW1lPURldmVuZHJhLG1pZGRsZU5hbWU9QSxsYXN0TmFtZT1GYWRuYXZpcyxyb2xsPVBST0ZFU1NPUixpZD0x?studentId=1
-//        manager.url = URLConstants.StudentURL.getAttendence +
-//            "\(UserManager.sharedUserManager.getAccessToken())" +
-//            "?studentId=\(UserManager.sharedUserManager.getUserId())"
-        
-        manager.url = URLConstants.BaseUrl.baseURL + UserManager.sharedUserManager.userStudent.attendanceUrl!
-        if (forMonth > 0){
-            manager.url?.append("&month=\(forMonth)")
-        }
-        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
-        manager.apiGet(apiName: "Get Attendance for student", completionHandler: { (response, code) in
-            LoadingActivityHUD.hideProgressHUD()
-            
-            self.arrayDataSource = Mapper<StudentAttendance>().map(JSON: response)
-            self.setUpView()
-            self.tableViewStudentAttendance.reloadData()
-            self.showTableView()
-            
-        }) { (error, code, errorMessage) in
-            LoadingActivityHUD.hideProgressHUD()
-            print(errorMessage)
-        }
-         */
         let date = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY"
@@ -89,15 +66,26 @@ class StudentAttedanceViewController: BaseViewController {
             LoadingActivityHUD.hideProgressHUD()
             self.arrayDataSource = Mapper<StudentAttendance>().map(JSON: response)
             self.setUpView()
-            self.tableViewStudentAttendance.reloadData()
-            self.showTableView()
-
-            
+            self.makeDataSource()            
         }) { (error, code, message) in
             print(message)
             LoadingActivityHUD.hideProgressHUD()
         }
         
+    }
+    
+    func makeDataSource(){
+        for subject in self.arrayDataSource.subjectAttendance{
+            let tempDataSource = StudentAttendanceCellDatasource(cellType: .ClassAttendance, object: subject)
+            self.tableDataSource.append(tempDataSource)
+        }
+        
+        for event in self.arrayDataSource.eventAttendance{
+            let tempDataSource = StudentAttendanceCellDatasource(cellType: .EventAttendance, object: event)
+            self.tableDataSource.append(tempDataSource)
+        }
+        self.tableViewStudentAttendance.reloadData()
+        self.showTableView()
     }
     
     
@@ -151,15 +139,15 @@ class StudentAttedanceViewController: BaseViewController {
 
 extension StudentAttedanceViewController:UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(self.arrayDataSource != nil){
+        if(self.tableDataSource != nil){
             return 1
         }
         return 0
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if(self.arrayDataSource != nil){
-            return self.arrayDataSource.subjectAttendance.count
+        if(self.tableDataSource != nil){
+            return self.tableDataSource.count
         }
         return 0
     }
@@ -177,14 +165,27 @@ extension StudentAttedanceViewController:UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //***have reused the syllabus-details cell***
-        
-        
         let cell:SyllabusStatusTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.SyllabusStatusTableViewCellId, for: indexPath) as! SyllabusStatusTableViewCell
-        cell.labelSubject.text = self.arrayDataSource.subjectAttendance[indexPath.section].subjectName
-        cell.labelNumberOfLectures.text = "\(self.arrayDataSource.subjectAttendance[indexPath.section].percentage!)%"
-        cell.labelAttendancePercent.text = "\(self.arrayDataSource.subjectAttendance[indexPath.section].presentCount!)/\(self.arrayDataSource.subjectAttendance[indexPath.section].totalCount!)"
-        cell.selectionStyle = .none
+
+        let dataSource:StudentAttendanceCellDatasource = self.tableDataSource[indexPath.section]
+        switch dataSource.attendanceCellType! {
+        case .ClassAttendance:
+            let cellData:SubjectAttendance = dataSource.attachedObject as! SubjectAttendance
+            cell.labelSubject.text = cellData.subjectName
+            cell.labelNumberOfLectures.text = "\(cellData.percentage!)%"
+            cell.labelAttendancePercent.text = "\(cellData.presentCount!)/\(cellData.totalCount!)"
+            cell.selectionStyle = .none
+            
+        case .EventAttendance:
+            let cellData:EventAttendance = dataSource.attachedObject as! EventAttendance
+            cell.labelSubject.text = cellData.eventName
+            cell.labelNumberOfLectures.text = "NA"
+            cell.labelAttendancePercent.text = "\(cellData.eventAttendance)"
+            cell.selectionStyle = .none
+            return cell
+        }
         return cell
+        
     }
 }
 

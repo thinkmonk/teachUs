@@ -40,7 +40,7 @@ class LeftMenuViewController: UIViewController, UIGestureRecognizerDelegate {
     var professorDataSource = ["Attendance", "Syllabus", "My Logs", "Logout"]
 
     var collegeSuperAdminDataSource = ["Attendance(Reports)","Attendance(Events)", "Syllabus Status","Add/Remove Admin","Ratings","Logout"]
-    var collegeAdminDataSource = ["Attendance(Reports)", "Syllabus Status", "Logout"]
+    var collegeAdminDataSource = ["Attendance(Reports)", "Attendance(Events)", "Logout"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,7 +87,7 @@ class LeftMenuViewController: UIViewController, UIGestureRecognizerDelegate {
             arrayDataSource = studentDataSource
             break
         case .College:
-                arrayDataSource = UserManager.sharedUserManager.appUserCollegeDetails.privilege! == "1" ? collegeSuperAdminDataSource : collegeAdminDataSource
+                arrayDataSource = UserManager.sharedUserManager.appUserCollegeDetails.privilege! == "0" ? collegeSuperAdminDataSource : collegeAdminDataSource
 //                arrayDataSource = UserManager.sharedUserManager.appUserCollegeDetails.privilege! == "1" ? collegeSuperAdminDataSource : collegeSuperAdminDataSource
 
             break
