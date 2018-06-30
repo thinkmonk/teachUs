@@ -216,7 +216,7 @@ extension LogsDetailViewController:UITableViewDelegate, UITableViewDataSource{
         let cellDataSource = arrayDataSource[indexPath.row]
         switch cellDataSource.logsCellType! {
         case .LogDetails:
-            return 165
+            return 180
         case .SyllabusDetail:
             return 80
         }
