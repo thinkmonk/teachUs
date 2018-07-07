@@ -95,6 +95,13 @@ class UserManager{
                 self.appUserCollegeArray = collegeDetailsArray as! [CollegeDetails]
             }
             
+            if(self.appUserCollegeArray.contains(where: {$0.role_id! == "1" }) && ((self.appUserCollegeArray.contains(where: { $0.role_id! == "2"})) || (self.appUserCollegeArray.contains(where: { $0.role_id! == "3"})))){
+                self.appUserCollegeArray = self.appUserCollegeArray.filter {$0.role_id != "1"}
+            }else{
+                self.appUserCollegeArray = self.appUserCollegeArray.filter {$0.role_id == "1"}
+
+            }
+            
             guard let defaultCollegeName = UserDefaults.standard.value(forKey: Constants.UserDefaults.collegeName) as? String, let defaultRoleName = UserDefaults.standard.value(forKey: Constants.UserDefaults.roleName) as? String
                 else {
                     if(self.user == nil) {
@@ -149,14 +156,6 @@ class UserManager{
                     default:
                         break
                     }
-                }
-            }
-            
-            if(self.user! == .College || self.user! == .Professor){
-                print("Login user type college or professor")
-            }else{
-                if(self.user! == .Student){
-                    print("Login user type Student")
                 }
             }
         }

@@ -20,8 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         let path = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true)
-        print("DB PATH\(path)")
-
+        #if DEBUG
+            print("DB PATH\(path)")
+        #endif
         NotificationCenter.default.addObserver(self, selector: #selector(loginSuccess), name: .notificationLoginSuccess, object: nil)
 
         

@@ -113,7 +113,9 @@ extension LoginViewController:LoginDelegate{
         
         let manager = NetworkHandler()
         
-        let parameters:[String:Any] = ["email":UserManager.sharedUserManager.userEmail]
+        let parameters:[String:Any] = ["email":UserManager.sharedUserManager.userEmail,
+                                       "role_id":"\(UserManager.sharedUserManager.userRole.roleId)"
+                                        ]
         manager.url = URLConstants.Login.checkDetails
         
         manager.apiPost(apiName: " VERIFY USER", parameters:parameters, completionHandler: { (result, code, response) in

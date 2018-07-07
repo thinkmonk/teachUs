@@ -148,7 +148,9 @@ class LogsDetailViewController: BaseViewController {
     func setUpButtons(){
        if  self.selectedIndex == 0 {
             buttonPreviousSubject.isEnabled = false
+            self.buttonNextSubject.isEnabled = true
         }else if self.selectedIndex == self.allCollegeArray.count-1 {
+            buttonPreviousSubject.isEnabled = true
             self.buttonNextSubject.isEnabled = false
        }else{
             self.buttonNextSubject.isEnabled = true
