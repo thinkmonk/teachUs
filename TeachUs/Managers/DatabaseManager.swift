@@ -127,7 +127,7 @@ class DatabaseManager {
         return object
     }
     
-    class func getEntitesForEntityName(name:String) -> [Any]{
+    class func getEntitesForEntityName(name:String) -> [Any] {
         var object: [Any] = []
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: name)
         fetchRequest.returnsObjectsAsFaults = false

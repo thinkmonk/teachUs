@@ -283,4 +283,38 @@ class UserManager{
         }
     }
 
+    
+    //MARK:- Offline mode
+    func getOfflineData(){
+        let manager = NetworkHandler()
+        manager.url = URLConstants.OfflineURL.getOfflineData
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        let parameters:[String:Any] = [:]
+        manager.apiPost(apiName: "Get User Details for offline mode", parameters:parameters, completionHandler: { (result, code, response) in
+            self.saveOfflineDataToDb(offlineData: response)
+        }) { (error, code, message) in
+            LoadingActivityHUD.hideProgressHUD()
+            print(message)
+        }
+    }
+    
+    func saveOfflineDataToDb(offlineData:[String:Any]){
+        let offlineDetails:TransformTrial = NSEntityDescription.insertNewObject(forEntityName: "TransformTrial", into: DatabaseManager.managedContext) as! TransformTrial
+        offlineDetails.data = offlineData as NSObject
+        self.saveDbContext()
+        getOfflineDataFromDb()
+    }
+    
+    func getOfflineDataFromDb(){
+        let dataString = DatabaseManager.getEntitesForEntityName(name: "TransformTrial")
+        let data = dataString.description.data(using: String.Encoding.utf8, allowLossyConversion: false)!
+        do{
+            let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String:AnyObject]
+            print("offline data is \(json)")
+        }catch let error as NSError
+        {
+            print(error)
+        }
+        
+    }
 }

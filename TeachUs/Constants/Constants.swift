@@ -116,3 +116,10 @@ public struct Constants {
         static let SuperAdmin = "SUPERADMIN"
     }
 }
+
+
+struct AppUserRole {
+    static let student = "1"
+    static let professor = "2"
+    static let college = "3"
+}

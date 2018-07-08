@@ -81,8 +81,8 @@ public struct URLConstants{
         static let getCollegeSubjectSyllabusDetails = BaseUrl.baseURL  + "/syllabus/college_detailed_syllabus_status"
     }
     
-    struct SuperAdminURL {
-        
+    struct OfflineURL {
+        static let getOfflineData = BaseUrl.baseURL + "/offline/get_offline"
     }
 
 }

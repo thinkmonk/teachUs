@@ -59,6 +59,7 @@
 		8137EF531FA109B500045D97 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8137EF521FA109B500045D97 /* LoginViewController.swift */; };
 		8137EF551FA10AD400045D97 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8137EF541FA10AD400045D97 /* Constants.swift */; };
 		8137EF5C1FA10D6A00045D97 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8137EF5B1FA10D6A00045D97 /* UIView.swift */; };
+		8145A68820F20A1600E4FA9A /* OfflineModel in Resources */ = {isa = PBXBuildFile; fileRef = 8145A68720F20A1600E4FA9A /* OfflineModel */; };
 		8163EB0420541D38003E4B1D /* TeachUs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8163EB0220541D38003E4B1D /* TeachUs.xcdatamodeld */; };
 		8163EB0720557AD9003E4B1D /* CollegeDetails+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8163EB0520557AD9003E4B1D /* CollegeDetails+CoreDataClass.swift */; };
 		8163EB0820557AD9003E4B1D /* CollegeDetails+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8163EB0620557AD9003E4B1D /* CollegeDetails+CoreDataProperties.swift */; };
@@ -197,6 +198,8 @@
 		81E6740B20531B4C00321257 /* UserDetails+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E6740720531B4C00321257 /* UserDetails+CoreDataProperties.swift */; };
 		81F78EAC1FB0DFE600A016B0 /* AttendanceCalenderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F78EAA1FB0DFE600A016B0 /* AttendanceCalenderTableViewCell.swift */; };
 		81F78EAD1FB0DFE600A016B0 /* AttendanceCalenderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81F78EAB1FB0DFE600A016B0 /* AttendanceCalenderTableViewCell.xib */; };
+		81FEC7FA20F10436003FBDBE /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FEC7F820F10436003FBDBE /* ReachabilityManager.swift */; };
+		81FEC7FB20F10436003FBDBE /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FEC7F920F10436003FBDBE /* Reachability.swift */; };
 		81FFB0B31FBEE0CD00C32097 /* ViewCalenderTop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FFB0B21FBEE0CD00C32097 /* ViewCalenderTop.swift */; };
 		81FFB0B51FBEE0EB00C32097 /* ViewCalenderTop.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81FFB0B41FBEE0EB00C32097 /* ViewCalenderTop.xib */; };
 		81FFB0B71FBF2D4900C32097 /* ViewConfirmAttendance.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81FFB0B61FBF2D4900C32097 /* ViewConfirmAttendance.xib */; };
@@ -286,6 +289,7 @@
 		8137EF521FA109B500045D97 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = TeachUs/Viewcontrollers/LoginViewController.swift; sourceTree = SOURCE_ROOT; };
 		8137EF541FA10AD400045D97 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8137EF5B1FA10D6A00045D97 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		8145A68720F20A1600E4FA9A /* OfflineModel */ = {isa = PBXFileReference; lastKnownFileType = folder; path = OfflineModel; sourceTree = "<group>"; };
 		8163EB0320541D38003E4B1D /* TeachUs.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TeachUs.xcdatamodel; sourceTree = "<group>"; };
 		8163EB0520557AD9003E4B1D /* CollegeDetails+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollegeDetails+CoreDataClass.swift"; sourceTree = "<group>"; };
 		8163EB0620557AD9003E4B1D /* CollegeDetails+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollegeDetails+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -431,6 +435,9 @@
 		81E6740720531B4C00321257 /* UserDetails+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDetails+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		81F78EAA1FB0DFE600A016B0 /* AttendanceCalenderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceCalenderTableViewCell.swift; sourceTree = "<group>"; };
 		81F78EAB1FB0DFE600A016B0 /* AttendanceCalenderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AttendanceCalenderTableViewCell.xib; sourceTree = "<group>"; };
+		81FEC7F820F10436003FBDBE /* ReachabilityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
+		81FEC7F920F10436003FBDBE /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		81FEC7FC20F113D7003FBDBE /* TeachUs 2(Offline).xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeachUs 2(Offline).xcdatamodel"; sourceTree = "<group>"; };
 		81FFB0B21FBEE0CD00C32097 /* ViewCalenderTop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCalenderTop.swift; sourceTree = "<group>"; };
 		81FFB0B41FBEE0EB00C32097 /* ViewCalenderTop.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewCalenderTop.xib; sourceTree = "<group>"; };
 		81FFB0B61FBF2D4900C32097 /* ViewConfirmAttendance.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewConfirmAttendance.xib; sourceTree = "<group>"; };
@@ -726,6 +733,7 @@
 		813EC76D1F9BA4FD00F11A12 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				8145A68720F20A1600E4FA9A /* OfflineModel */,
 				81E67401205318E200321257 /* UserRoles */,
 				81C1D8AC1FCF35790091DA6E /* Users */,
 				81FFB0BD1FBF468000C32097 /* SyllabusChapter.swift */,
@@ -764,6 +772,8 @@
 			children = (
 				810610C11FA660890067273E /* Connectivity.swift */,
 				81A80EDA1FAE14A400DDFFA1 /* NetworkHandler.swift */,
+				81FEC7F920F10436003FBDBE /* Reachability.swift */,
+				81FEC7F820F10436003FBDBE /* ReachabilityManager.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -1247,6 +1257,7 @@
 				81E02A42207C9E0800EB6BA8 /* ClassListTableViewCell.xib in Resources */,
 				81D76B501FC1AA4D005E861C /* SyllabusStatusTableViewCell.xib in Resources */,
 				8135B89B20790D2F008E3E4B /* EventListTableViewCell.xib in Resources */,
+				8145A68820F20A1600E4FA9A /* OfflineModel in Resources */,
 				81C208521FAF4182003D366D /* ProfessorCollegeListTableViewCell.xib in Resources */,
 				18A627E71F90F9870099C106 /* Assets.xcassets in Resources */,
 				81CCAE521FC805F70070907A /* RatingTitleTableViewCell.xib in Resources */,
@@ -1437,6 +1448,7 @@
 				81A80ED91FADFC6200DDFFA1 /* URLConstansts.swift in Sources */,
 				81B203D91FD551FF00936F0F /* Teacher+CoreDataProperties.swift in Sources */,
 				81B203DD1FD551FF00936F0F /* SuperAdmin+CoreDataProperties.swift in Sources */,
+				81FEC7FB20F10436003FBDBE /* Reachability.swift in Sources */,
 				81B2E2DB1FC35B0600E9E852 /* DropDown+Appearance.swift in Sources */,
 				81D7CE811FAB8E5D00C4375E /* CAPSPageMenu+UIScrollViewDelegate.swift in Sources */,
 				81727B8D1F9E6CB8006433E8 /* MFSideMenuContainerViewController.m in Sources */,
@@ -1460,6 +1472,7 @@
 				18A627DF1F90F9870099C106 /* LoginSelectViewController.swift in Sources */,
 				81B2E2D71FC35B0600E9E852 /* DPDKeyboardListener.swift in Sources */,
 				810BECDE206EDEE900F560C6 /* StudentProfileTableViewCell.swift in Sources */,
+				81FEC7FA20F10436003FBDBE /* ReachabilityManager.swift in Sources */,
 				812C34F01FB794DB0048DD3C /* ViewDatePicker.swift in Sources */,
 				819AADF31FB6F88F0061C471 /* AttendanceManager.swift in Sources */,
 				8135B89A20790D2F008E3E4B /* EventListTableViewCell.swift in Sources */,
@@ -1755,7 +1768,7 @@
 			baseConfigurationReference = ADA58029E3089D434D630F56 /* Pods-TeachUs.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BASE_URL_V1 = "http://teachusedumation.com/api_production/teachus";
+				BASE_URL_V1 = "http://teachusedumation.com/api/teachus";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1920,9 +1933,10 @@
 		8163EB0220541D38003E4B1D /* TeachUs.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				81FEC7FC20F113D7003FBDBE /* TeachUs 2(Offline).xcdatamodel */,
 				8163EB0320541D38003E4B1D /* TeachUs.xcdatamodel */,
 			);
-			currentVersion = 8163EB0320541D38003E4B1D /* TeachUs.xcdatamodel */;
+			currentVersion = 81FEC7FC20F113D7003FBDBE /* TeachUs 2(Offline).xcdatamodel */;
 			path = TeachUs.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

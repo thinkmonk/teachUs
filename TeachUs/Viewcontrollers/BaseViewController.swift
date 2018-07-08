@@ -120,6 +120,7 @@ class BaseViewController: UIViewController {
     func getAndSaveUserToDb(){
         let manager = NetworkHandler()
         manager.url = URLConstants.Login.userDetails
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         manager.apiPost(apiName: "Get User Details", parameters: [:], completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             UserManager.sharedUserManager.saveUserDetailsToDb(response)
@@ -139,6 +140,7 @@ class BaseViewController: UIViewController {
             "role_id":"\(UserManager.sharedUserManager.userRole.roleId)",
             "contact":"\(UserManager.sharedUserManager.getUserMobileNumber())",
         ]
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         manager.apiPost(apiName: "Get User Details", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             UserManager.sharedUserManager.saveUserDetailsToDb(response)
