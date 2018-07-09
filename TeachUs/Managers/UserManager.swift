@@ -299,6 +299,7 @@ class UserManager{
     }
     
     func saveOfflineDataToDb(offlineData:[String:Any]){
+        DatabaseManager.deleteAllEntitiesForEntityName(name: "TransformTrial")
         let offlineDetails:TransformTrial = NSEntityDescription.insertNewObject(forEntityName: "TransformTrial", into: DatabaseManager.managedContext) as! TransformTrial
         offlineDetails.data = offlineData as NSObject
         self.saveDbContext()
@@ -306,15 +307,8 @@ class UserManager{
     }
     
     func getOfflineDataFromDb(){
-        let dataString = DatabaseManager.getEntitesForEntityName(name: "TransformTrial")
-        let data = dataString.description.data(using: String.Encoding.utf8, allowLossyConversion: false)!
-        do{
-            let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String:AnyObject]
-            print("offline data is \(json)")
-        }catch let error as NSError
-        {
-            print(error)
-        }
-        
+        let dataResponse = DatabaseManager.getEntitesForEntityName(name: "TransformTrial")
+        let dataTransformable:TransformTrial = (dataResponse.last as? TransformTrial)!
+        let offlineData = dataTransformable.data!
     }
 }
