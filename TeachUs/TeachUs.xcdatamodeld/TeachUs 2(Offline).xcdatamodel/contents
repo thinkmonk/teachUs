@@ -14,23 +14,8 @@
         <attribute name="role_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="role_name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="OfflineCollege" representedClassName="OfflineCollege" syncable="YES" codeGenerationType="class">
-        <attribute name="role_id" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
-    <entity name="OfflineProfile" representedClassName="OfflineProfile" syncable="YES" codeGenerationType="class">
-        <attribute name="contact" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="f_name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="l_name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="login_id" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="profile" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="data" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserDataOffline" inverseName="profile" inverseEntity="UserDataOffline" syncable="YES"/>
-    </entity>
-    <entity name="TransformTrial" representedClassName="TransformTrial" syncable="YES" codeGenerationType="class">
+    <entity name="OfflineUserData" representedClassName="OfflineUserData" syncable="YES">
         <attribute name="data" optional="YES" attributeType="Transformable" syncable="YES"/>
-    </entity>
-    <entity name="UserDataOffline" representedClassName="UserDataOffline" syncable="YES" codeGenerationType="class">
-        <relationship name="profile" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="OfflineProfile" inverseName="data" inverseEntity="OfflineProfile" syncable="YES"/>
     </entity>
     <entity name="UserDetails" representedClassName="UserDetails" syncable="YES">
         <attribute name="contact" optional="YES" attributeType="String" syncable="YES"/>
@@ -44,10 +29,7 @@
     <elements>
         <element name="AttendanceRequest" positionX="61" positionY="-126" width="128" height="90"/>
         <element name="CollegeDetails" positionX="-128" positionY="-108" width="128" height="150"/>
-        <element name="OfflineProfile" positionX="99" positionY="72" width="128" height="148"/>
-        <element name="UserDataOffline" positionX="-119" positionY="162" width="128" height="58"/>
         <element name="UserDetails" positionX="-324" positionY="-108" width="128" height="148"/>
-        <element name="OfflineCollege" positionX="-99" positionY="45" width="128" height="58"/>
-        <element name="TransformTrial" positionX="-90" positionY="54" width="128" height="60"/>
+        <element name="OfflineUserData" positionX="-135" positionY="-54" width="128" height="60"/>
     </elements>
 </model>

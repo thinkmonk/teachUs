@@ -10,7 +10,7 @@ import UIKit
 
 class ReachabilityManager: NSObject {
     static  let shared = ReachabilityManager()  // 2. Shared instance
-    
+    var viewOffline:OfflineYesNo?
     // 3. Boolean to track network reachability
     var isNetworkAvailable : Bool {
         return reachabilityStatus != .none
@@ -28,15 +28,26 @@ class ReachabilityManager: NSObject {
         switch reachability.connection {
         case .none:
             debugPrint("Network became unreachable")
+            if(UserManager.sharedUserManager.appUserCollegeDetails != nil){
+                if (UserManager.sharedUserManager.appUserCollegeDetails.role_id! == AppUserRole.professor){
+                    print("reachability changed in professor module")
+                    viewOffline = OfflineYesNo.instanceFromNib() as? OfflineYesNo
+                    if(UIApplication.shared.keyWindow != nil){
+                        let window = UIApplication.shared.keyWindow!
+                        viewOffline?.frame = window.frame
+                        viewOffline?.buttonYes.roundedRedButton()
+                        window.addSubview(viewOffline!)
+                    }
+                }
+            }
         case .wifi:
             debugPrint("Network reachable through WiFi")
+            if(viewOffline?.superview != nil){
+                viewOffline?.removeFromSuperview()
+                viewOffline = nil
+            }
         case .cellular:
             debugPrint("Network reachable through Cellular Data")
-        }
-        if(UserManager.sharedUserManager.appUserCollegeDetails != nil){
-            if (UserManager.sharedUserManager.appUserCollegeDetails.role_id == "2"){
-                print("reachability changed in professor module")
-            }
         }
     }
     

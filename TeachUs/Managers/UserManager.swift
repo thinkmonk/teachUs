@@ -19,6 +19,14 @@ class UserManager{
     var appUserCollegeDetails:CollegeDetails!
     var appUserCollegeArray:[CollegeDetails]! = []
     
+    var offlineAppUserData:OfflineData {
+        let dataResponse = DatabaseManager.getEntitesForEntityName(name: "OfflineUserData")
+        let dataTransformable:OfflineUserData = (dataResponse.last as? OfflineUserData)!
+        let data = dataTransformable.data!
+        let offlineData = Mapper<OfflineData>().map(JSONObject: data)
+        return offlineData!
+    }
+    
     var user:LoginUserType! {
     if let user = UserDefaults.standard.value(forKey: Constants.UserDefaults.loginUserType) as? String {
             switch user {
@@ -299,16 +307,9 @@ class UserManager{
     }
     
     func saveOfflineDataToDb(offlineData:[String:Any]){
-        DatabaseManager.deleteAllEntitiesForEntityName(name: "TransformTrial")
-        let offlineDetails:TransformTrial = NSEntityDescription.insertNewObject(forEntityName: "TransformTrial", into: DatabaseManager.managedContext) as! TransformTrial
+        DatabaseManager.deleteAllEntitiesForEntityName(name: "OfflineUserData")
+        let offlineDetails:OfflineUserData = NSEntityDescription.insertNewObject(forEntityName: "OfflineUserData", into: DatabaseManager.managedContext) as! OfflineUserData
         offlineDetails.data = offlineData as NSObject
         self.saveDbContext()
-        getOfflineDataFromDb()
-    }
-    
-    func getOfflineDataFromDb(){
-        let dataResponse = DatabaseManager.getEntitesForEntityName(name: "TransformTrial")
-        let dataTransformable:TransformTrial = (dataResponse.last as? TransformTrial)!
-        let offlineData = dataTransformable.data!
     }
 }
