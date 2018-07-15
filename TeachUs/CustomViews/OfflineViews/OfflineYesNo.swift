@@ -12,7 +12,19 @@ class OfflineYesNo: UIView {
     @IBOutlet weak var buttonYes: UIButton!
     
     @IBAction func enableOfflineMode(_ sender: Any) {
+        let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
+        let mfslidemenuContainer = mainStoryBoard.instantiateViewController(withIdentifier: "MFSideMenuContainerViewController") as!MFSideMenuContainerViewController
+        self.window?.rootViewController = nil
+        self.window?.rootViewController = mfslidemenuContainer
         
+        let centerNavigationController = mainStoryBoard.instantiateViewController(withIdentifier: "offlineNavigation") as! UINavigationController
+        
+        let leftMenuController = mainStoryBoard.instantiateViewController(withIdentifier: "OfflineLeftMenuViewController") as! OfflineLeftMenuViewController
+        let homeVc:OfflineHomeViewController = centerNavigationController.topViewController as! OfflineHomeViewController
+        leftMenuController.delegate = homeVc as LeftMenuDeleagte
+        mfslidemenuContainer.leftMenuViewController = leftMenuController
+        mfslidemenuContainer.centerViewController  = centerNavigationController
+        self.removeFromSuperview()
     }
     
     

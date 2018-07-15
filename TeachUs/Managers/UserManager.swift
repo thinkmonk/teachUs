@@ -19,13 +19,8 @@ class UserManager{
     var appUserCollegeDetails:CollegeDetails!
     var appUserCollegeArray:[CollegeDetails]! = []
     
-    var offlineAppUserData:OfflineData {
-        let dataResponse = DatabaseManager.getEntitesForEntityName(name: "OfflineUserData")
-        let dataTransformable:OfflineUserData = (dataResponse.last as? OfflineUserData)!
-        let data = dataTransformable.data!
-        let offlineData = Mapper<OfflineData>().map(JSONObject: data)
-        return offlineData!
-    }
+    var offlineAppUserData:OfflineData!
+    var offlineAppuserCollegeDetails:Offline_Colleges!
     
     var user:LoginUserType! {
     if let user = UserDefaults.standard.value(forKey: Constants.UserDefaults.loginUserType) as? String {
@@ -102,7 +97,7 @@ class UserManager{
             if(collegeDetailsArray.count > 0){
                 self.appUserCollegeArray = collegeDetailsArray as! [CollegeDetails]
             }
-            
+            //remove student profile from when professor and college are logged in
             if(self.appUserCollegeArray.contains(where: {$0.role_id! == "1" }) && ((self.appUserCollegeArray.contains(where: { $0.role_id! == "2"})) || (self.appUserCollegeArray.contains(where: { $0.role_id! == "3"})))){
                 self.appUserCollegeArray = self.appUserCollegeArray.filter {$0.role_id != "1"}
             }else{
@@ -128,7 +123,7 @@ class UserManager{
                             break
                         }
                     }else
-                    {
+                    {//set up user after login type is known
                         for user in self.appUserCollegeArray {
                             if user.role_id! == "1" && self.user! == LoginUserType.Student{
                                 self.appUserCollegeDetails = user
@@ -311,5 +306,39 @@ class UserManager{
         let offlineDetails:OfflineUserData = NSEntityDescription.insertNewObject(forEntityName: "OfflineUserData", into: DatabaseManager.managedContext) as! OfflineUserData
         offlineDetails.data = offlineData as NSObject
         self.saveDbContext()
+        self.initOfflineUser()
+    }
+    
+    func initOfflineUser(){
+        let dataResponse = DatabaseManager.getEntitesForEntityName(name: "OfflineUserData")
+        let dataTransformable:OfflineUserData = (dataResponse.last as? OfflineUserData)!
+        let data = dataTransformable.data!
+        self.offlineAppUserData = Mapper<OfflineData>().map(JSONObject: data)
+        
+        self.userName = (self.offlineAppUserData.profile?.f_name!)!
+        self.userLastName = (self.offlineAppUserData.profile?.l_name!)!
+        
+        guard let defaultCollegeName = UserDefaults.standard.value(forKey: Constants.UserDefaults.offlineCollegeName) as? String
+            else {//when default offline user is not available
+                if(self.appUserCollegeDetails != nil){
+                    self.offlineAppuserCollegeDetails = self.offlineAppUserData.colleges!.filter({$0.college_name == self.appUserCollegeDetails.college_name}).first
+                }
+                
+                if(offlineAppuserCollegeDetails == nil){
+                    self.offlineAppuserCollegeDetails = self.offlineAppUserData.colleges!.first!
+                }
+
+                return
+            }
+        
+        //when default user is available
+        for college in self.offlineAppUserData.colleges!
+        {
+            if(college.college_name == defaultCollegeName){
+                self.offlineAppuserCollegeDetails = college
+            }
+        }
+        
+        // ****NO code will be executed after this (return is present in defaultcollegename initialiser) ********
     }
 }

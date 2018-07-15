@@ -23,6 +23,8 @@ public struct Constants {
         static let toProfessorRatingList = "toProfessorRatingList"
         static let toRatingDetails = "toRatingDetails"
         static let toLectureReport = "toLectureReport"
+        
+        static let toOfflineHomeTabsVC = "toOfflineHomeTabsVC"
     }
     
     struct Images {
@@ -66,6 +68,9 @@ public struct Constants {
         static let AddNewEventViewControllerId = "AddNewEventViewControllerId"
         static let AddRemoveAdminViewControllerId = "AddRemoveAdminViewControllerId"
         static let CollegeClassRatingListViewControllerId = "CollegeClassRatingListViewControllerId"
+        static let OfflineClassProfessorAttendance = "OfflineClassProfessorAttendance"
+        static let OfflineHomeViewController = "OfflineHomeViewController"
+        
     }
     
     struct UserDefaults {
@@ -76,6 +81,7 @@ public struct Constants {
         static let userImageURL = "userImage"
         static let collegeName = "collegeName"
         static let roleName = "roleName"
+        static let offlineCollegeName = "offlineCollegeName"
     }
     
     struct NumberConstants {

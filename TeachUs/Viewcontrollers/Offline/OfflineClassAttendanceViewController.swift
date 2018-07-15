@@ -1,23 +1,21 @@
 //
-//  ProfessorAttedanceViewController.swift
+//  OfflineClassAttendanceViewController.swift
 //  TeachUs
 //
-//  Created by ios on 11/2/17.
-//  Copyright © 2017 TeachUs. All rights reserved.
+//  Created by ios on 7/15/18.
+//  Copyright © 2018 TeachUs. All rights reserved.
 //
 
 import UIKit
-import ObjectMapper
 import XLPagerTabStrip
 
-class ProfessorAttedanceViewController: BaseViewController {
+class OfflineClassAttendanceViewController: BaseViewController {
 
     var parentNavigationController : UINavigationController?
-    var arrayCollegeList:[College]? = []
+    var arrayCollegeList:[Offline_Class_list]? = []
     
     @IBOutlet weak var tableviewCollegeList: UITableView!
     let nibCollegeListCell = "ProfessorCollegeListTableViewCell"
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +37,6 @@ class ProfessorAttedanceViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        getCollegeSummaryForProfessor()
     }
     
     override func refresh(sender: AnyObject) {
@@ -53,48 +50,29 @@ class ProfessorAttedanceViewController: BaseViewController {
     
     func getCollegeSummaryForProfessor(){
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
-        let manager = NetworkHandler()
-        manager.url = URLConstants.ProfessorURL.getClassList
-        let parameters = [
-            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)"
-        ]
-        
-        manager.apiPost(apiName: "Get Professor Class list", parameters:parameters, completionHandler: { (result, code, response) in
-            LoadingActivityHUD.hideProgressHUD()
-            self.arrayCollegeList?.removeAll()
-            guard let colleges = response["class_list"] as? [[String:Any]] else{
-                return
-            }
-            for college in colleges{
-                let tempCollege = Mapper<College>().map(JSONObject: college)
-                self.arrayCollegeList?.append(tempCollege!)
-            }
-            UIView.animate(withDuration: 1.0, animations: {
-                self.tableviewCollegeList.alpha = 1
-            })
-            self.tableviewCollegeList.reloadData()
-
-            
-        }) { (error, code, message) in
-            print(message)
-            LoadingActivityHUD.hideProgressHUD()
+        for offlineClass in UserManager.sharedUserManager.offlineAppuserCollegeDetails.class_list!{
+            self.arrayCollegeList?.append(offlineClass)
         }
-
-
+        UIView.animate(withDuration: 1.0, animations: {
+            self.tableviewCollegeList.alpha = 1
+        })
+        self.tableviewCollegeList.reloadData()
+        LoadingActivityHUD.hideProgressHUD()
     }
-    func selectedSubject(_ subject: College) {
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        
-        let destinationVC:StudentsListViewController =  storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.studentList) as! StudentsListViewController
-         destinationVC.selectedCollege = subject        
-        self.parentNavigationController?.pushViewController(destinationVC, animated: true)
+    
+    
+    func selectedSubject(_ subject: Offline_Class_list) {
+//        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+//        let destinationVC:StudentsListViewController =  storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.studentList) as! StudentsListViewController
+//        destinationVC.selectedCollege = subject
+//        self.parentNavigationController?.pushViewController(destinationVC, animated: true)
     }
 }
 
-extension ProfessorAttedanceViewController:UITableViewDataSource, UITableViewDelegate{
+extension OfflineClassAttendanceViewController:UITableViewDataSource, UITableViewDelegate{
     func numberOfSections(in tableView: UITableView) -> Int {
         return self.arrayCollegeList!.count
-
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -106,7 +84,7 @@ extension ProfessorAttedanceViewController:UITableViewDataSource, UITableViewDel
         if(cell == nil){
             let collegeCell:ProfessorCollegeListTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.ProfessorCollegeList, for: indexPath) as! ProfessorCollegeListTableViewCell
             
-            collegeCell.labelSubjectName.text = "\(self.arrayCollegeList![indexPath.section].yearName!)\(self.arrayCollegeList![indexPath.section].courseCode!) - \(self.arrayCollegeList![indexPath.section].subjectName!) - \(self.arrayCollegeList![indexPath.section].classDivision!)"
+            collegeCell.labelSubjectName.text = "\(self.arrayCollegeList![indexPath.section].year_name!)\(self.arrayCollegeList![indexPath.section].course_code!) - \(self.arrayCollegeList![indexPath.section].subject_name!) - \(self.arrayCollegeList![indexPath.section].class_division!)"
             collegeCell.selectionStyle = UITableViewCellSelectionStyle.none
             collegeCell.accessoryType = .disclosureIndicator
             cell = collegeCell
@@ -137,15 +115,16 @@ extension ProfessorAttedanceViewController:UITableViewDataSource, UITableViewDel
         return headerView
     }
     
-  
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.selectedSubject(self.arrayCollegeList![indexPath.section])
     }
 }
 
-extension ProfessorAttedanceViewController:IndicatorInfoProvider{
+extension OfflineClassAttendanceViewController:IndicatorInfoProvider{
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "Attendance")
     }
+
 }

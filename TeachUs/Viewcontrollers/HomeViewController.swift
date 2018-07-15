@@ -74,9 +74,7 @@ class HomeViewController: BaseViewController{
 
     @objc func hamburgerAction() {
         self.menuContainerViewController.toggleLeftSideMenuCompletion {
-//            self.makeDataSource()
         }
-//        pageMenu?.moveToPage(2)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
