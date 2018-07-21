@@ -172,6 +172,7 @@
 		81CCAE561FC806060070907A /* RatingTopicsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81CCAE541FC806060070907A /* RatingTopicsTableViewCell.xib */; };
 		81CCAE581FC82E310070907A /* RatingDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CCAE571FC82E310070907A /* RatingDataSource.swift */; };
 		81CCAE5A1FC99C170070907A /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CCAE591FC99C170070907A /* UIImageView.swift */; };
+		81CDB1E521036CB8009A4FA7 /* OfflineStudentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CDB1E421036CB8009A4FA7 /* OfflineStudentListViewController.swift */; };
 		81D020252059A131003742FD /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D020242059A131003742FD /* RootViewController.swift */; };
 		81D76B4F1FC1AA4D005E861C /* SyllabusStatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D76B4D1FC1AA4D005E861C /* SyllabusStatusTableViewCell.swift */; };
 		81D76B501FC1AA4D005E861C /* SyllabusStatusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81D76B4E1FC1AA4D005E861C /* SyllabusStatusTableViewCell.xib */; };
@@ -423,6 +424,7 @@
 		81CCAE541FC806060070907A /* RatingTopicsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RatingTopicsTableViewCell.xib; sourceTree = "<group>"; };
 		81CCAE571FC82E310070907A /* RatingDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingDataSource.swift; sourceTree = "<group>"; };
 		81CCAE591FC99C170070907A /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		81CDB1E421036CB8009A4FA7 /* OfflineStudentListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineStudentListViewController.swift; sourceTree = "<group>"; };
 		81D020242059A131003742FD /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		81D76B4D1FC1AA4D005E861C /* SyllabusStatusTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyllabusStatusTableViewCell.swift; sourceTree = "<group>"; };
 		81D76B4E1FC1AA4D005E861C /* SyllabusStatusTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SyllabusStatusTableViewCell.xib; sourceTree = "<group>"; };
@@ -636,9 +638,10 @@
 			isa = PBXGroup;
 			children = (
 				8120372020F9DA790012EE3B /* OfflineLeftMenuViewController.swift */,
-				8169D47F20FB569F0020A2D0 /* OfflineClassAttendanceViewController.swift */,
 				8169D48120FB5DF30020A2D0 /* OfflineHomeViewController.swift */,
 				8169D48320FB5DFD0020A2D0 /* OfflineTabsViewController.swift */,
+				8169D47F20FB569F0020A2D0 /* OfflineClassAttendanceViewController.swift */,
+				81CDB1E421036CB8009A4FA7 /* OfflineStudentListViewController.swift */,
 			);
 			path = Offline;
 			sourceTree = "<group>";
@@ -1665,6 +1668,7 @@
 				81A7D059208B75710032A1BC /* ProfessorRatingProfileTableViewCell.swift in Sources */,
 				81B203DC1FD551FF00936F0F /* SuperAdmin+CoreDataClass.swift in Sources */,
 				81FFB0C21FC0278E00C32097 /* TopicDetailsTableViewCell.swift in Sources */,
+				81CDB1E521036CB8009A4FA7 /* OfflineStudentListViewController.swift in Sources */,
 				81D76B551FC1D600005E861C /* SyllabusDetailsTableViewCell.swift in Sources */,
 				81E4BCE7205E9E7E00674FD4 /* CollegeAttendanceListViewController.swift in Sources */,
 				819EEC2220A60BF400487467 /* ViewLectureReport.swift in Sources */,

@@ -62,10 +62,10 @@ class OfflineClassAttendanceViewController: BaseViewController {
     
     
     func selectedSubject(_ subject: Offline_Class_list) {
-//        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-//        let destinationVC:StudentsListViewController =  storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.studentList) as! StudentsListViewController
-//        destinationVC.selectedCollege = subject
-//        self.parentNavigationController?.pushViewController(destinationVC, animated: true)
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let destinationVC:OfflineStudentListViewController =  storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.studentList) as! OfflineStudentListViewController
+        destinationVC.selectedCollege = subject
+        self.parentNavigationController?.pushViewController(destinationVC, animated: true)
     }
 }
 

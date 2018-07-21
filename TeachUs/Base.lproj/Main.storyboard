@@ -3036,10 +3036,10 @@ Form Library</string>
             </objects>
             <point key="canvasLocation" x="5754.375" y="7672.1830985915494"/>
         </scene>
-        <!--View Controller-->
+        <!--Offline Student List View Controller-->
         <scene sceneID="AaX-PJ-aGJ">
             <objects>
-                <viewController id="S4N-6e-FpJ" sceneMemberID="viewController">
+                <viewController id="S4N-6e-FpJ" customClass="OfflineStudentListViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HbA-hq-2kS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3131,6 +3131,7 @@ Form Library</string>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Z0K-GQ-aa3"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Obn-zA-ggF" userLabel="First Responder" sceneMemberID="firstResponder"/>
