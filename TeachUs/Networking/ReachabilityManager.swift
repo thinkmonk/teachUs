@@ -28,6 +28,7 @@ class ReachabilityManager: NSObject {
         switch reachability.connection {
         case .none:
             debugPrint("Network became unreachable")
+            /*
             if(UserManager.sharedUserManager.appUserCollegeDetails != nil){
                 if (UserManager.sharedUserManager.appUserCollegeDetails.role_id! == AppUserRole.professor){
                     print("reachability changed in professor module")
@@ -38,6 +39,20 @@ class ReachabilityManager: NSObject {
                         viewOffline?.buttonYes.roundedRedButton()
                         window.addSubview(viewOffline!)
                     }
+                }
+            }
+            else{
+            }
+            */
+
+            if(UserManager.sharedUserManager.user! == .Professor){
+                UserManager.sharedUserManager.initOfflineUser()
+                viewOffline = OfflineYesNo.instanceFromNib() as? OfflineYesNo
+                if(UIApplication.shared.keyWindow != nil){
+                    let window = UIApplication.shared.keyWindow!
+                    viewOffline?.frame = window.frame
+                    viewOffline?.buttonYes.roundedRedButton()
+                    window.addSubview(viewOffline!)
                 }
             }
         case .wifi:

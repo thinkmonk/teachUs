@@ -100,9 +100,6 @@ class UserManager{
             //remove student profile from when professor and college are logged in
             if(self.appUserCollegeArray.contains(where: {$0.role_id! == "1" }) && ((self.appUserCollegeArray.contains(where: { $0.role_id! == "2"})) || (self.appUserCollegeArray.contains(where: { $0.role_id! == "3"})))){
                 self.appUserCollegeArray = self.appUserCollegeArray.filter {$0.role_id != "1"}
-            }else{
-                self.appUserCollegeArray = self.appUserCollegeArray.filter {$0.role_id == "1"}
-
             }
             
             guard let defaultCollegeName = UserDefaults.standard.value(forKey: Constants.UserDefaults.collegeName) as? String, let defaultRoleName = UserDefaults.standard.value(forKey: Constants.UserDefaults.roleName) as? String
@@ -294,7 +291,14 @@ class UserManager{
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let parameters:[String:Any] = [:]
         manager.apiPost(apiName: "Get User Details for offline mode", parameters:parameters, completionHandler: { (result, code, response) in
-            self.saveOfflineDataToDb(offlineData: response)
+            if(code == 200){
+                self.saveOfflineDataToDb(offlineData: response)
+            }
+            else{
+                let message:String = response["message"] as! String
+                
+            }
+
         }) { (error, code, message) in
             LoadingActivityHUD.hideProgressHUD()
             print(message)

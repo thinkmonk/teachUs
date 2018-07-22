@@ -25,7 +25,9 @@ struct Offline_Student_list : Mappable {
 	var gender : String?
 	var dob : String?
 	var contact : String?
-
+    var studentFullName:String{
+        return "\(f_name!) \(m_name!) \(l_name!)"
+    }
 	init?(map: Map) {
 
 	}

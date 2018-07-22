@@ -108,9 +108,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     @objc func loginSuccess(){
         UserManager.sharedUserManager.initLoggedInUser()
-        if(UserManager.sharedUserManager.appUserCollegeDetails.role_id == AppUserRole.professor){
-            UserManager.sharedUserManager.getOfflineData()
-        }
         let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
         let mfslidemenuContainer = mainStoryBoard.instantiateViewController(withIdentifier: "MFSideMenuContainerViewController") as!MFSideMenuContainerViewController
         self.window?.rootViewController = nil

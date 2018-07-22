@@ -124,7 +124,13 @@ class BaseViewController: UIViewController {
         manager.apiPost(apiName: "Get User Details", parameters: [:], completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             UserManager.sharedUserManager.saveUserDetailsToDb(response)
-            NotificationCenter.default.post(name: .notificationLoginSuccess, object: nil)
+            UserManager.sharedUserManager.initLoggedInUser()
+            if(UserManager.sharedUserManager.appUserCollegeDetails.role_id == AppUserRole.professor){//check if logged-in user is a professor and fetch offline data
+                self.getOfflineData()
+            }
+            else{
+                NotificationCenter.default.post(name: .notificationLoginSuccess, object: nil)
+            }
         }) { (error, code, message) in
             LoadingActivityHUD.hideProgressHUD()
             print(message)
@@ -145,6 +151,31 @@ class BaseViewController: UIViewController {
             LoadingActivityHUD.hideProgressHUD()
             UserManager.sharedUserManager.saveUserDetailsToDb(response)
             NotificationCenter.default.post(name: .notificationLoginSuccess, object: nil)
+        }) { (error, code, message) in
+            LoadingActivityHUD.hideProgressHUD()
+            print(message)
+        }
+    }
+    
+    
+    //MARK:- offline
+    func getOfflineData(){
+        let manager = NetworkHandler()
+        manager.url = URLConstants.OfflineURL.getOfflineData
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        let parameters:[String:Any] = ["offline_count":""]
+        manager.apiPost(apiName: "Get User Details for offline mode", parameters:parameters, completionHandler: { (result, code, response) in
+            LoadingActivityHUD.hideProgressHUD()
+            if(code == 200){
+                UserManager.sharedUserManager.saveOfflineDataToDb(offlineData: response)
+                NotificationCenter.default.post(name: .notificationLoginSuccess, object: nil)
+            }
+            else{
+                let message:String = response["message"] as! String
+                self.showAlterWithTitle(nil, alertMessage: "\(message)")
+                NotificationCenter.default.post(name: .notificationLoginSuccess, object: nil)
+            }
+            
         }) { (error, code, message) in
             LoadingActivityHUD.hideProgressHUD()
             print(message)

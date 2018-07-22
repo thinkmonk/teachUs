@@ -26,7 +26,7 @@ class OfflineStudentListViewController: BaseViewController {
     var markedAttendanceId:NSNumber!
     private var previousOpenProfileIndexPath: IndexPath = IndexPath(row: -1, section: 0)
     private var currentOpenProfileIndexPath: IndexPath = IndexPath(row: -1, section: 0)
-    
+    var parameters = [String:Any]()
     let disposeBag = DisposeBag()
     
     
@@ -94,6 +94,9 @@ class OfflineStudentListViewController: BaseViewController {
 //            print(errorMessage)
 //        }
         self.arrayStudentsDetails = self.selectedCollege.student_list!
+        if(self.arrayStudentsDetails.count > 0){
+            self.setUpTableView()
+        }
     }
     
     
@@ -117,12 +120,12 @@ class OfflineStudentListViewController: BaseViewController {
         let presentCountDataSource = AttendanceDatasource(celType: .attendanceCount, attachedObject: nil)
         presentCountDataSource.isSelected = false
         arrayDataSource.append(presentCountDataSource)
-        AttendanceManager.sharedAttendanceManager.arrayStudents.value.removeAll()
+        OfflineAttendanceManager.sharedAttendanceManager.arrayStudents.value.removeAll()
         for student in arrayStudentsDetails{
             let studentAttendance:MarkStudentAttendance = MarkStudentAttendance(student, self.defaultAttendanceForAllStudents)
             let studentDetailDataSource = AttendanceDatasource(celType: .studentProfile, attachedObject: studentAttendance)
             studentDetailDataSource.isSelected = false
-            AttendanceManager.sharedAttendanceManager.arrayStudents.value.append(studentAttendance)
+            OfflineAttendanceManager.sharedAttendanceManager.arrayStudents.value.append(studentAttendance)
             
             arrayDataSource.append(studentDetailDataSource)
             
@@ -167,8 +170,8 @@ class OfflineStudentListViewController: BaseViewController {
                 viewConfirmAttendance = ViewConfirmAttendance.instanceFromNib() as! ViewConfirmAttendance
                 viewConfirmAttendance.delegate = self
             }
-            let presentStudents = AttendanceManager.sharedAttendanceManager.arrayStudents.value.filter{$0.isPrsent == true}
-            viewConfirmAttendance.labelStudentCount.text = "\(presentStudents.count)/\(AttendanceManager.sharedAttendanceManager.arrayStudents.value.count)"
+            let presentStudents = OfflineAttendanceManager.sharedAttendanceManager.arrayStudents.value.filter{$0.isPrsent == true}
+            viewConfirmAttendance.labelStudentCount.text = "\(presentStudents.count)/\(OfflineAttendanceManager.sharedAttendanceManager.arrayStudents.value.count)"
             viewConfirmAttendance.showView(inView: UIApplication.shared.keyWindow!)
         }
     }
@@ -248,7 +251,7 @@ extension OfflineStudentListViewController: UITableViewDelegate, UITableViewData
             
         case .attendanceCount:
             let cell:AttendanceCountTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.AttendanceCountTableViewCellId, for: indexPath) as! AttendanceCountTableViewCell
-            let presentStudents = AttendanceManager.sharedAttendanceManager.arrayStudents.value.filter{$0.isPrsent == true}
+            let presentStudents = OfflineAttendanceManager.sharedAttendanceManager.arrayStudents.value.filter{$0.isPrsent == true}
             cell.labelAttendanceCount.text = "\(presentStudents.count)"
             
             cell.selectionStyle = .none
@@ -259,34 +262,20 @@ extension OfflineStudentListViewController: UITableViewDelegate, UITableViewData
             
             let cell : AttendanceStudentListTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.AttendanceStudentListTableViewCellId, for: indexPath) as! AttendanceStudentListTableViewCell
             let object:MarkStudentAttendance = cellDataSource.attachedObject! as! MarkStudentAttendance
-            cell.labelName.text = object.student?.studentName
-            cell.labelRollNumber.text = "\(object.student?.studentRollNo! ?? "NA")"
-            cell.labelAttendanceCount.text = "\(object.student?.totalLecture! ?? "NA")"
-            cell.labelAttendancePercent.text = "\(object.student?.percentage! ?? "NA") %"
-            cell.labelLastLectureAttendance.text = object.student?.lastLectureAttendance != nil ? object.student?.lastLectureAttendance! : "NIL"
+            cell.labelName.text = object.offlineStudent?.studentFullName
+            cell.labelRollNumber.text = "\(object.offlineStudent?.roll_number! ?? "NA")"
+            cell.labelAttendanceCount.text = "NA"
+            cell.labelAttendancePercent.text = "NA"
+            cell.labelLastLectureAttendance.text = "NIL"
             cell.clipsToBounds = true
-            cell.imageViewProfile.imageFromServerURL(urlString: (object.student?.imageUrl!)!, defaultImage: Constants.Images.defaultMale)
+//            cell.imageViewProfile.imageFromServerURL(urlString: (object.student?.imageUrl!)!, defaultImage: Constants.Images.defaultMale)
             
             //TODO:  -3 is for previous sections (calender, default selection, attendance count ) <- IMPORTANT
             
-            cell.buttonAttendance.isSelected = AttendanceManager.sharedAttendanceManager.arrayStudents.value[indexPath.section-3].isPrsent
+            cell.buttonAttendance.isSelected = OfflineAttendanceManager.sharedAttendanceManager.arrayStudents.value[indexPath.section-3].isPrsent
             cell.buttonAttendance.addTarget(self, action: #selector(StudentsListViewController.markAttendance), for: .touchUpInside)
             cell.buttonAttendance.indexPath = indexPath
             cell.setUpCell()
-            //            cell.setUpRx()
-            //            if(currentOpenProfileIndexPath != nil)
-            //            {
-            //                if(currentOpenProfileIndexPath.section == indexPath.section){
-            //                    cell.isExpanded = true
-            //                    cell.viewAttendanceDetails.alpha = 1
-            //                }else{
-            //                    cell.isExpanded = false
-            //                    cell.viewAttendanceDetails.alpha = 0
-            //                }
-            //            }else{
-            //                cell.isExpanded = false
-            //                cell.viewAttendanceDetails.alpha = 0
-            //            }
             cell.selectionStyle = .none
             return cell
         }
@@ -452,14 +441,14 @@ extension OfflineStudentListViewController: UITableViewDelegate, UITableViewData
     //MARK:- Mark attendance for a student
     @objc func markAttendance(_ sender:ButtonWithIndexPath){
         if(sender.isSelected){ //-3 is for previous sections (calender, default selection, attendance count )
-            AttendanceManager.sharedAttendanceManager.arrayStudents.value[sender.indexPath.section - 3].isPrsent = false
+            OfflineAttendanceManager.sharedAttendanceManager.arrayStudents.value[sender.indexPath.section - 3].isPrsent = false
             sender.setTitle("Absent", for: .normal)
             sender.backgroundColor = UIColor.rgbColor(126, 132, 155)
             sender.setTitleColor(UIColor.white, for: .normal)
             
         }
         else{
-            AttendanceManager.sharedAttendanceManager.arrayStudents.value[sender.indexPath.section - 3].isPrsent = true
+            OfflineAttendanceManager.sharedAttendanceManager.arrayStudents.value[sender.indexPath.section - 3].isPrsent = true
             sender.setTitle("Present", for: .selected)
             sender.backgroundColor = UIColor.rgbColor(198, 0, 60)
             sender.setTitleColor(UIColor.white, for: .selected)
@@ -513,14 +502,8 @@ extension OfflineStudentListViewController:ViewConfirmAttendanceDelegate{
     
     
     func confirmAttendance() {
-        /*
-         self.performSegue(withIdentifier: Constants.segues.markPortionCompleted, sender: self)
-         */
-        let manager = NetworkHandler()
-        manager.url = URLConstants.ProfessorURL.submitAttendance
-        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
-        let parameters = [
-            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+        self.parameters = [
+            "college_code":"\(UserManager.sharedUserManager.offlineAppuserCollegeDetails.college_code!)",
             "class_id":"\(self.selectedCollege.class_id!)",
             "course_id":"\(self.selectedCollege.course_id!)",
             "subject_id":"\(self.selectedCollege.subject_id!)",
@@ -529,8 +512,13 @@ extension OfflineStudentListViewController:ViewConfirmAttendanceDelegate{
             "lecture_date":"\(datePicker.postJsonDateString)",
             "from_time":"\(fromTimePicker.postJsonTimeString)",
             "to_time":"\(toTimePicker.postJsonTimeString)",
-            "attendance_list":"\(AttendanceManager.sharedAttendanceManager.attendanceList)"
+            "attendance_list":"\(OfflineAttendanceManager.sharedAttendanceManager.offlineAttendanceList)"
         ]
+         self.performSegue(withIdentifier: Constants.segues.toOfflineMarkPortion, sender: self)
+        /*
+        let manager = NetworkHandler()
+        manager.url = URLConstants.ProfessorURL.submitAttendance
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         
         manager.apiPost(apiName: "Mark student attendance", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
@@ -559,14 +547,18 @@ extension OfflineStudentListViewController:ViewConfirmAttendanceDelegate{
             LoadingActivityHUD.hideProgressHUD()
             self.showAlterWithTitle(nil, alertMessage: errorMessage)
         }
+         */
+
     }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if(segue.identifier == Constants.segues.markPortionCompleted){
-//            let destinationVC:MarkCompletedPortionViewController = segue.destination as! MarkCompletedPortionViewController
-//            destinationVC.selectedCollege = self.selectedCollege
-//            destinationVC.attendanceId = self.markedAttendanceId
-//        }
+        if(segue.identifier == Constants.segues.toOfflineMarkPortion){
+            let destinationVC:OfflineMarkCompletedPortionViewController = segue.destination as! OfflineMarkCompletedPortionViewController
+            destinationVC.selectedCollege = self.selectedCollege
+            destinationVC.attendanceParameters = self.parameters
+            destinationVC.arrayDataSource = self.selectedCollege.unit_syllabus_array!
+        }
+        //        TODO: pass parameters here
     }
 }

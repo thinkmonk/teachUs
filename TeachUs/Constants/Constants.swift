@@ -24,7 +24,9 @@ public struct Constants {
         static let toRatingDetails = "toRatingDetails"
         static let toLectureReport = "toLectureReport"
         
+        
         static let toOfflineHomeTabsVC = "toOfflineHomeTabsVC"
+        static let toOfflineMarkPortion = "offlineMarkPortion"
     }
     
     struct Images {
@@ -70,6 +72,7 @@ public struct Constants {
         static let CollegeClassRatingListViewControllerId = "CollegeClassRatingListViewControllerId"
         static let OfflineClassProfessorAttendance = "OfflineClassProfessorAttendance"
         static let OfflineHomeViewController = "OfflineHomeViewController"
+        static let OfflineStudentsListViewControllerId = "OfflineStudentsListViewControllerId"
         
     }
     

@@ -3039,32 +3039,89 @@ Form Library</string>
         <!--Offline Student List View Controller-->
         <scene sceneID="AaX-PJ-aGJ">
             <objects>
-                <viewController id="S4N-6e-FpJ" customClass="OfflineStudentListViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OfflineStudentsListViewControllerId" id="S4N-6e-FpJ" customClass="OfflineStudentListViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HbA-hq-2kS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uTZ-qg-fjp">
+                                <rect key="frame" x="15" y="64" width="290" height="504"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kkD-Hr-LPS">
+                                <rect key="frame" x="0.0" y="568" width="320" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="KI5-1z-JU3"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <state key="normal" title="Submit"/>
+                                <connections>
+                                    <action selector="submitAttendance:" destination="J2l-lX-T3q" eventType="touchUpInside" id="L39-59-mHG"/>
+                                    <action selector="submitAttendance:" destination="S4N-6e-FpJ" eventType="touchUpInside" id="d41-8p-KBP"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="lj3-Ao-RcI" firstAttribute="trailing" secondItem="uTZ-qg-fjp" secondAttribute="trailing" constant="15" id="AWm-wG-0dw"/>
+                            <constraint firstAttribute="trailing" secondItem="kkD-Hr-LPS" secondAttribute="trailing" id="Baz-nN-rcx"/>
+                            <constraint firstItem="uTZ-qg-fjp" firstAttribute="top" secondItem="lj3-Ao-RcI" secondAttribute="top" id="NML-T4-uPa"/>
+                            <constraint firstItem="lj3-Ao-RcI" firstAttribute="bottom" secondItem="uTZ-qg-fjp" secondAttribute="bottom" id="bUX-33-nUx"/>
+                            <constraint firstItem="kkD-Hr-LPS" firstAttribute="top" secondItem="uTZ-qg-fjp" secondAttribute="bottom" id="giI-CL-t2u"/>
+                            <constraint firstItem="kkD-Hr-LPS" firstAttribute="leading" secondItem="HbA-hq-2kS" secondAttribute="leading" id="ngI-yw-p1e"/>
+                            <constraint firstItem="uTZ-qg-fjp" firstAttribute="leading" secondItem="lj3-Ao-RcI" secondAttribute="leading" constant="15" id="pLn-zs-JPT"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="lj3-Ao-RcI"/>
                     </view>
                     <connections>
-                        <segue destination="CiF-7c-LoA" kind="show" id="uij-9r-iE0"/>
+                        <outlet property="buttonSubmit" destination="kkD-Hr-LPS" id="pUC-cn-lBt"/>
+                        <outlet property="tableStudentList" destination="uTZ-qg-fjp" id="kbi-QM-nSQ"/>
+                        <outlet property="topConstraintButtonSubmit" destination="giI-CL-t2u" id="V3o-SO-KzK"/>
+                        <segue destination="CiF-7c-LoA" kind="show" identifier="offlineMarkPortion" id="uij-9r-iE0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gk6-kJ-4ws" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6691.875" y="7672.1830985915494"/>
         </scene>
-        <!--View Controller-->
+        <!--Offline Mark Completed Portion View Controller-->
         <scene sceneID="tyk-Bw-2q3">
             <objects>
-                <viewController id="CiF-7c-LoA" sceneMemberID="viewController">
+                <viewController id="CiF-7c-LoA" customClass="OfflineMarkCompletedPortionViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="91B-Lj-arO">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IIJ-7p-Nac">
+                                <rect key="frame" x="15" y="64" width="290" height="464"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LFY-FS-3tF">
+                                <rect key="frame" x="0.0" y="528" width="320" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="L1w-AL-tsa"/>
+                                </constraints>
+                                <state key="normal" title="Submit"/>
+                                <connections>
+                                    <action selector="submitSyllabusStatus:" destination="9ky-aO-ZJF" eventType="touchUpInside" id="jX1-ag-vn7"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="LFY-FS-3tF" firstAttribute="leading" secondItem="91B-Lj-arO" secondAttribute="leading" id="Cjz-JH-6Mx"/>
+                            <constraint firstItem="IIJ-7p-Nac" firstAttribute="top" secondItem="mZW-Dn-cki" secondAttribute="top" id="D3h-6d-YrJ"/>
+                            <constraint firstItem="LFY-FS-3tF" firstAttribute="top" secondItem="IIJ-7p-Nac" secondAttribute="bottom" id="DSo-AM-NuF"/>
+                            <constraint firstItem="IIJ-7p-Nac" firstAttribute="leading" secondItem="91B-Lj-arO" secondAttribute="leading" constant="15" id="Do7-29-Lw7"/>
+                            <constraint firstItem="mZW-Dn-cki" firstAttribute="bottom" secondItem="LFY-FS-3tF" secondAttribute="bottom" id="Lv6-La-mGd"/>
+                            <constraint firstAttribute="trailing" secondItem="LFY-FS-3tF" secondAttribute="trailing" id="QCB-Ax-NbH"/>
+                            <constraint firstItem="mZW-Dn-cki" firstAttribute="trailing" secondItem="IIJ-7p-Nac" secondAttribute="trailing" constant="15" id="WpU-ap-094"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="mZW-Dn-cki"/>
                     </view>
                     <connections>
+                        <outlet property="buttonSubmit" destination="LFY-FS-3tF" id="gVB-pF-Oxv"/>
+                        <outlet property="tableviewTopics" destination="IIJ-7p-Nac" id="dqK-kR-ZMc"/>
                         <segue destination="V5b-i0-pxf" kind="show" id="bdN-Ye-2SG"/>
                     </connections>
                 </viewController>

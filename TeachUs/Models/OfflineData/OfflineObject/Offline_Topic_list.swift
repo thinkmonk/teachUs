@@ -19,17 +19,40 @@ struct Offline_Topic_list : Mappable {
 	var topic_id : String?
 	var topic_description : String?
 	var status : String?
+    var setChapterStatus:String? = "Not Started"
+    var chapterStatusTheme :SyllabusCompletetionType! = .NotStarted
+    var isUpdated:Bool = false
 
-	init?(map: Map) {
+    init?(map: Map) {
 
-	}
+    }
 
 	mutating func mapping(map: Map) {
 
 		topic_name <- map["topic_name"]
 		topic_id <- map["topic_id"]
 		topic_description <- map["topic_description"]
-		status <- map["status"]
+        if(map.JSON["status"] != nil){
+            self.status <- map["status"]
+        }else{
+            self.status = ""
+        }
+        switch self.status {//status 2 is for completed topic / 1 is for inprogress
+        case "0":
+            self.chapterStatusTheme = SyllabusCompletetionType.NotStarted
+            self.setChapterStatus = "Not Started"
+            break
+        case "1":
+            self.chapterStatusTheme = SyllabusCompletetionType.InProgress
+            self.setChapterStatus = "In Progess"
+            break
+        case "2":
+            self.chapterStatusTheme = SyllabusCompletetionType.Completed
+            self.setChapterStatus = "Completed"
+            break
+        default:
+            break
+        }
 	}
 
 }
