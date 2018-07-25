@@ -14,7 +14,7 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct Offline_Student_list : Mappable {
+class Offline_Student_list : Mappable {
 	var class_id : String?
 	var student_id : String?
 	var roll_number : String?
@@ -28,11 +28,11 @@ struct Offline_Student_list : Mappable {
     var studentFullName:String{
         return "\(f_name!) \(m_name!) \(l_name!)"
     }
-	init?(map: Map) {
+	required init?(map: Map) {
 
 	}
 
-	mutating func mapping(map: Map) {
+    func mapping(map: Map) {
 
 		class_id <- map["class_id"]
 		student_id <- map["student_id"]

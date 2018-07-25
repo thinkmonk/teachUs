@@ -14,16 +14,16 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct Offline_Unit_syllabus_array : Mappable {
+class Offline_Unit_syllabus_array : Mappable {
 	var unit_name : String?
 	var unit_id : String?
 	var topic_list : [Offline_Topic_list]?
 
-	init?(map: Map) {
+	required init?(map: Map) {
 
 	}
 
-	mutating func mapping(map: Map) {
+    func mapping(map: Map) {
 
 		unit_name <- map["unit_name"]
 		unit_id <- map["unit_id"]

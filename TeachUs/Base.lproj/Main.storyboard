@@ -3103,6 +3103,7 @@ Form Library</string>
                                 </constraints>
                                 <state key="normal" title="Submit"/>
                                 <connections>
+                                    <action selector="submitSyllabusStatus:" destination="CiF-7c-LoA" eventType="touchUpInside" id="MmW-TP-CN9"/>
                                     <action selector="submitSyllabusStatus:" destination="9ky-aO-ZJF" eventType="touchUpInside" id="jX1-ag-vn7"/>
                                 </connections>
                             </button>

@@ -61,6 +61,14 @@ class ReachabilityManager: NSObject {
                 viewOffline?.removeFromSuperview()
                 viewOffline = nil
             }
+            
+            let dataResponse = DatabaseManager.getEntitesForEntityName(name: "OfflineApiRequest")
+            for data in dataResponse{
+                let dataTransformable:OfflineApiRequest = (data as? OfflineApiRequest)!
+                print(dataTransformable.attendanceParams!)
+                print(dataTransformable.syllabusParams!)
+            }
+
         case .cellular:
             debugPrint("Network reachable through Cellular Data")
         }

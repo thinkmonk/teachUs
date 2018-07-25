@@ -14,7 +14,7 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct Offline_Topic_list : Mappable {
+class Offline_Topic_list : Mappable {
 	var topic_name : String?
 	var topic_id : String?
 	var topic_description : String?
@@ -23,11 +23,11 @@ struct Offline_Topic_list : Mappable {
     var chapterStatusTheme :SyllabusCompletetionType! = .NotStarted
     var isUpdated:Bool = false
 
-    init?(map: Map) {
+    required init?(map: Map) {
 
     }
 
-	mutating func mapping(map: Map) {
+    func mapping(map: Map) {
 
 		topic_name <- map["topic_name"]
 		topic_id <- map["topic_id"]

@@ -318,7 +318,6 @@ class UserManager{
         let dataTransformable:OfflineUserData = (dataResponse.last as? OfflineUserData)!
         let data = dataTransformable.data!
         self.offlineAppUserData = Mapper<OfflineData>().map(JSONObject: data)
-        
         self.userName = (self.offlineAppUserData.profile?.f_name!)!
         self.userLastName = (self.offlineAppUserData.profile?.l_name!)!
         

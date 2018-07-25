@@ -14,15 +14,15 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct OfflineData : Mappable {
+class OfflineData : Mappable {
 	var profile : Offline_Profile?
 	var colleges : [Offline_Colleges]?
 
-	init?(map: Map) {
+	required init?(map: Map) {
 
 	}
 
-	mutating func mapping(map: Map) {
+    func mapping(map: Map) {
 
 		profile <- map["profile"]
 		colleges <- map["colleges"]

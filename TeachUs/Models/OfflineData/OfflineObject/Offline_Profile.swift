@@ -14,7 +14,7 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct Offline_Profile : Mappable {
+class Offline_Profile : Mappable {
 	var login_id : String?
 	var f_name : String?
 	var l_name : String?
@@ -22,11 +22,11 @@ struct Offline_Profile : Mappable {
 	var contact : String?
 	var profile : String?
 
-	init?(map: Map) {
+	required init?(map: Map) {
 
 	}
 
-	mutating func mapping(map: Map) {
+    func mapping(map: Map) {
 
 		login_id <- map["login_id"]
 		f_name <- map["f_name"]

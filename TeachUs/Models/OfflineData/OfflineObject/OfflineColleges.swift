@@ -14,7 +14,7 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct Offline_Colleges : Mappable {
+class Offline_Colleges : Mappable {
 	var role_id : String?
 	var college_id : String?
 	var privilege : String?
@@ -23,11 +23,11 @@ struct Offline_Colleges : Mappable {
 	var role_name : String?
 	var class_list : [Offline_Class_list]?
 
-	init?(map: Map) {
+    required init?(map: Map) {
 
 	}
 
-	mutating func mapping(map: Map) {
+    func mapping(map: Map) {
 
 		role_id <- map["role_id"]
 		college_id <- map["college_id"]

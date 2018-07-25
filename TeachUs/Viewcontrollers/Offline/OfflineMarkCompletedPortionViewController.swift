@@ -8,7 +8,7 @@
 
 import UIKit
 import ObjectMapper
-
+import CoreData
 
 class OfflineMarkCompletedPortionViewController:BaseViewController {
     
@@ -110,8 +110,8 @@ class OfflineMarkCompletedPortionViewController:BaseViewController {
         let manager = NetworkHandler()
         manager.url = URLConstants.ProfessorURL.submitSyllabusCovered
         var parameters = [String:Any]()
-        parameters["college_code"] = "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)"
-        parameters["att_id"] = self.attendanceId!
+        parameters["college_code"] = "\(UserManager.sharedUserManager.offlineAppuserCollegeDetails.college_code!)"
+//        parameters["att_id"] = self.attendanceId!
         let topicList = ["topic_list":self.updatedTopicList]
         var requestString  =  ""
         if let theJSONData = try? JSONSerialization.data(withJSONObject: topicList,options: []) {
@@ -120,6 +120,14 @@ class OfflineMarkCompletedPortionViewController:BaseViewController {
             print("requestString = \(theJSONText!)")
         }
         parameters["topic_list"] = requestString
+
+        let api:OfflineApiRequest = NSEntityDescription.insertNewObject(forEntityName: "OfflineApiRequest", into: DatabaseManager.managedContext) as! OfflineApiRequest
+        api.attendanceParams = self.attendanceParameters as NSObject
+        api.syllabusParams = parameters as NSObject
+        DatabaseManager.saveDbContext()
+        UserManager.sharedUserManager.offlineAppuserCollegeDetails.class_list?.filter({ $0.class_id == self.selectedCollege.class_id}).first?.unit_syllabus_array! = self.arrayDataSource
+
+        /*
         manager.apiPost(apiName: "mark syllabus professor", parameters: parameters, completionHandler: { (sucess, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             guard let status = response["status"] as? NSNumber else{
@@ -146,6 +154,7 @@ class OfflineMarkCompletedPortionViewController:BaseViewController {
             print(message)
             
         }
+        */
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
