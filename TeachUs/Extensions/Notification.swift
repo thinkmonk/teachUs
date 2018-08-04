@@ -10,5 +10,7 @@ import Foundation
 
 extension Notification.Name {
     static let notificationLoginSuccess = Notification.Name("loginSuccess")
+    static let notificationOfflineUploadSuccess = Notification.Name("offlineDataUploaded")
+
 
 }

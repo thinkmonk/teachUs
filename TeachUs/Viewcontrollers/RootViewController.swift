@@ -13,8 +13,10 @@ class RootViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addDefaultBackGroundImage()
-        checkLogin()
         self.navigationController?.navigationBar.isHidden = true
+        NotificationCenter.default.addObserver(self, selector: #selector(offlineSyncComplete), name: .notificationOfflineUploadSuccess, object: nil)
+        checkLogin()
+
         // Do any additional setup after loading the view.
     }
    
@@ -24,13 +26,23 @@ class RootViewController: BaseViewController {
     }
     
 
-    func checkLogin(){
+     func checkLogin(){
         if(!UserManager.sharedUserManager.getAccessToken().isEmpty){
-            self.getAndSaveUserToDb()
+            if(ReachabilityManager.shared.isOfflineDataAvailable){
+                ReachabilityManager.shared.networkReachbleActions()
+            }
+            else{
+                self.getAndSaveUserToDb()
+            }
         }
         else{
             self.performSegue(withIdentifier: Constants.segues.toLoginSelect, sender: self)
         }
+    }
+    
+    
+    @objc func offlineSyncComplete(){
+        self.getAndSaveUserToDb()
     }
     
     

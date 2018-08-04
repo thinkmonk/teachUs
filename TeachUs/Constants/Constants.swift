@@ -73,6 +73,7 @@ public struct Constants {
         static let OfflineClassProfessorAttendance = "OfflineClassProfessorAttendance"
         static let OfflineHomeViewController = "OfflineHomeViewController"
         static let OfflineStudentsListViewControllerId = "OfflineStudentsListViewControllerId"
+        static let UploadOfflineDataViewControllerId = "UploadOfflineDataViewControllerId"
         
     }
     

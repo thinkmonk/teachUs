@@ -3145,6 +3145,46 @@ Form Library</string>
             </objects>
             <point key="canvasLocation" x="8482.5" y="7672.1830985915494"/>
         </scene>
+        <!--Upload Offline Data View Controller-->
+        <scene sceneID="2g3-D6-8g0">
+            <objects>
+                <viewController storyboardIdentifier="UploadOfflineDataViewControllerId" id="7kL-EP-cn1" customClass="UploadOfflineDataViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JwC-wD-IdP">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="j7f-uS-Aa0">
+                                <rect key="frame" x="85" y="281.5" width="150" height="5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="5" id="T5s-wG-1Y8"/>
+                                    <constraint firstAttribute="width" constant="150" id="pPl-ZD-dMv"/>
+                                </constraints>
+                            </progressView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LzD-1r-AbJ">
+                                <rect key="frame" x="85" y="252" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="j7f-uS-Aa0" firstAttribute="top" secondItem="LzD-1r-AbJ" secondAttribute="bottom" constant="8.5" id="9ku-Vc-17M"/>
+                            <constraint firstItem="LzD-1r-AbJ" firstAttribute="leading" secondItem="j7f-uS-Aa0" secondAttribute="leading" id="FHv-VU-YGZ"/>
+                            <constraint firstItem="j7f-uS-Aa0" firstAttribute="centerY" secondItem="JwC-wD-IdP" secondAttribute="centerY" id="Lij-pX-2gF"/>
+                            <constraint firstItem="j7f-uS-Aa0" firstAttribute="centerX" secondItem="JwC-wD-IdP" secondAttribute="centerX" id="qv5-ge-RpT"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="z2z-VT-oOp"/>
+                    </view>
+                    <connections>
+                        <outlet property="labelStatus" destination="LzD-1r-AbJ" id="bOF-w4-32R"/>
+                        <outlet property="viewProgressbar" destination="j7f-uS-Aa0" id="ftq-yW-zAg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fWJ-Kt-tdE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="9433" y="7673"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Eb5-Mz-37S">
             <objects>

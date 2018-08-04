@@ -126,7 +126,19 @@ class OfflineMarkCompletedPortionViewController:BaseViewController {
         api.syllabusParams = parameters as NSObject
         DatabaseManager.saveDbContext()
         UserManager.sharedUserManager.offlineAppuserCollegeDetails.class_list?.filter({ $0.class_id == self.selectedCollege.class_id}).first?.unit_syllabus_array! = self.arrayDataSource
-
+        UserManager.sharedUserManager.updateOfflineUserData()
+        let alert = UIAlertController(title: nil, message: "Syllabus Recorded", preferredStyle: UIAlertControllerStyle.alert)
+        // add an action (button)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { _ in
+                                for controller in self.navigationController!.viewControllers as Array {
+                                    if controller.isKind(of: OfflineHomeViewController.self) {
+                                        self.navigationController!.popToViewController(controller, animated: true)
+                                        break
+                                    }
+                                }
+        }))
+        self.present(alert, animated: true, completion: nil)
+        
         /*
         manager.apiPost(apiName: "mark syllabus professor", parameters: parameters, completionHandler: { (sucess, code, response) in
             LoadingActivityHUD.hideProgressHUD()

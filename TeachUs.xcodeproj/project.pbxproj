@@ -86,6 +86,7 @@
 		81727B901F9E6EB1006433E8 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81727B8F1F9E6EB1006433E8 /* Notification.swift */; };
 		81727B921F9E70CC006433E8 /* LeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81727B911F9E70CC006433E8 /* LeftMenuViewController.swift */; };
 		81727B941F9E70EE006433E8 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81727B931F9E70EE006433E8 /* HomeViewController.swift */; };
+		8177AD992115EF8000FD4F6C /* UploadOfflineDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8177AD982115EF8000FD4F6C /* UploadOfflineDataViewController.swift */; };
 		817BDAE51FB898C700492822 /* ButtonWithIndexPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817BDAE41FB898C700492822 /* ButtonWithIndexPath.swift */; };
 		8180D9081FD3D21B00CE803F /* SuperAdminProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8180D9071FD3D21B00CE803F /* SuperAdminProfile.swift */; };
 		8185E34020581D5600752F81 /* EditProfilePictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8185E33F20581D5600752F81 /* EditProfilePictureViewController.swift */; };
@@ -341,6 +342,7 @@
 		81727B911F9E70CC006433E8 /* LeftMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftMenuViewController.swift; sourceTree = "<group>"; };
 		81727B931F9E70EE006433E8 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		817553511B457FEB4E645FC1 /* Pods-TeachUs.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeachUs.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeachUs/Pods-TeachUs.release.xcconfig"; sourceTree = "<group>"; };
+		8177AD982115EF8000FD4F6C /* UploadOfflineDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadOfflineDataViewController.swift; sourceTree = "<group>"; };
 		817BDAE41FB898C700492822 /* ButtonWithIndexPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWithIndexPath.swift; sourceTree = "<group>"; };
 		8180D9071FD3D21B00CE803F /* SuperAdminProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperAdminProfile.swift; sourceTree = "<group>"; };
 		8185E33F20581D5600752F81 /* EditProfilePictureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfilePictureViewController.swift; sourceTree = "<group>"; };
@@ -651,6 +653,7 @@
 				8169D47F20FB569F0020A2D0 /* OfflineClassAttendanceViewController.swift */,
 				81CDB1E421036CB8009A4FA7 /* OfflineStudentListViewController.swift */,
 				819D242A2104795C000EEB71 /* OfflineMarkCompletedPortionViewController.swift */,
+				8177AD982115EF8000FD4F6C /* UploadOfflineDataViewController.swift */,
 			);
 			path = Offline;
 			sourceTree = "<group>";
@@ -1621,6 +1624,7 @@
 				81CCAE4D1FC805CA0070907A /* TeacherProfileTableViewCell.swift in Sources */,
 				8135B897207900D4008E3E4B /* AddNewEventViewController.swift in Sources */,
 				810E0CDE1FD046AA006AE5BE /* ProfessorLogsDetailDataSource.swift in Sources */,
+				8177AD992115EF8000FD4F6C /* UploadOfflineDataViewController.swift in Sources */,
 				81D76B4F1FC1AA4D005E861C /* SyllabusStatusTableViewCell.swift in Sources */,
 				81D7CE961FAB98C300C4375E /* SyllabusStatusListViewController.swift in Sources */,
 				812B152F20BAA65C00693183 /* Ring.swift in Sources */,

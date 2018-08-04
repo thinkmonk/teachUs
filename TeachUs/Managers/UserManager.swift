@@ -344,4 +344,13 @@ class UserManager{
         
         // ****NO code will be executed after this (return is present in defaultcollegename initialiser) ********
     }
+    
+    func updateOfflineUserData(){
+        DatabaseManager.deleteAllEntitiesForEntityName(name: "OfflineUserData")
+        let offlineDetails:OfflineUserData = NSEntityDescription.insertNewObject(forEntityName: "OfflineUserData", into: DatabaseManager.managedContext) as! OfflineUserData
+        let modifiedData = self.offlineAppUserData.toJSON()
+        offlineDetails.data = modifiedData as NSObject
+        self.saveDbContext()
+        self.initOfflineUser()
+    }
 }

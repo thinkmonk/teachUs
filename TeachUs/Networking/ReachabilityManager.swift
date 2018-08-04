@@ -9,6 +9,18 @@
 import UIKit
 
 class ReachabilityManager: NSObject {
+    
+    var isOfflineDataAvailable:Bool{
+//        DatabaseManager.deleteAllEntitiesForEntityName(name: "OfflineApiRequest")
+//        DatabaseManager.saveDbContext()
+        let dataResponse = DatabaseManager.getEntitesForEntityName(name: "OfflineApiRequest")
+        if dataResponse.count > 1{
+            return true
+        }else{
+            return false
+        }
+    }
+    
     static  let shared = ReachabilityManager()  // 2. Shared instance
     var viewOffline:OfflineYesNo?
     // 3. Boolean to track network reachability
@@ -57,20 +69,15 @@ class ReachabilityManager: NSObject {
             }
         case .wifi:
             debugPrint("Network reachable through WiFi")
-            if(viewOffline?.superview != nil){
-                viewOffline?.removeFromSuperview()
-                viewOffline = nil
-            }
-            
-            let dataResponse = DatabaseManager.getEntitesForEntityName(name: "OfflineApiRequest")
-            for data in dataResponse{
-                let dataTransformable:OfflineApiRequest = (data as? OfflineApiRequest)!
-                print(dataTransformable.attendanceParams!)
-                print(dataTransformable.syllabusParams!)
+            if(self.isOfflineDataAvailable){
+                self.networkReachbleActions()
             }
 
         case .cellular:
             debugPrint("Network reachable through Cellular Data")
+            if(self.isOfflineDataAvailable){
+                self.networkReachbleActions()
+            }
         }
     }
     
@@ -85,6 +92,31 @@ class ReachabilityManager: NSObject {
         } catch {
             debugPrint("Could not start reachability notifier")
         }
+    }
+    
+    func networkReachbleActions(){
+        if(viewOffline?.superview != nil){
+            viewOffline?.removeFromSuperview()
+            viewOffline = nil
+        }
+        
+        let dataResponse = DatabaseManager.getEntitesForEntityName(name: "OfflineApiRequest")
+        if dataResponse.count > 1{
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let controller:UploadOfflineDataViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.UploadOfflineDataViewControllerId) as! UploadOfflineDataViewController
+            UIApplication.shared.keyWindow?.rootViewController?.present(controller, animated: true, completion: nil)
+        }
+        else{
+            
+        }
+        
+        /*
+        for data in dataResponse{
+            let dataTransformable:OfflineApiRequest = (data as? OfflineApiRequest)!
+            print(dataTransformable.attendanceParams!)
+            print(dataTransformable.syllabusParams!)
+        }
+ */
     }
     
     /// Stops monitoring the network availability status
