@@ -39,7 +39,7 @@ class UploadOfflineDataViewController: BaseViewController {
     
 
     func markAttendance(){
-        self.labelStatus.text = "Uploading data \(currentIndex) of \(self.arrayApiReqestParameters.count)..."
+        self.labelStatus.text = "Uploading data \(currentIndex+1) of \(self.arrayApiReqestParameters.count) ..."
         self.viewProgressbar.progress = Float(currentIndex/self.arrayApiReqestParameters.count)
         let dataTransformable:OfflineApiRequest = arrayApiReqestParameters[currentIndex]
         let manager = NetworkHandler()

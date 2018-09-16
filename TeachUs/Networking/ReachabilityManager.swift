@@ -14,7 +14,7 @@ class ReachabilityManager: NSObject {
 //        DatabaseManager.deleteAllEntitiesForEntityName(name: "OfflineApiRequest")
 //        DatabaseManager.saveDbContext()
         let dataResponse = DatabaseManager.getEntitesForEntityName(name: "OfflineApiRequest")
-        if dataResponse.count > 1{
+        if dataResponse.count > 0{
             return true
         }else{
             return false
@@ -101,7 +101,7 @@ class ReachabilityManager: NSObject {
         }
         
         let dataResponse = DatabaseManager.getEntitesForEntityName(name: "OfflineApiRequest")
-        if dataResponse.count > 1{
+        if dataResponse.count > 0{
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let controller:UploadOfflineDataViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.UploadOfflineDataViewControllerId) as! UploadOfflineDataViewController
             UIApplication.shared.keyWindow?.rootViewController?.present(controller, animated: true, completion: nil)
