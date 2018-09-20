@@ -1,15 +1,15 @@
 PODS:
-  - Alamofire (4.5.1)
-  - AlamofireImage (3.3.0):
-    - Alamofire (~> 4.5)
-  - AlamofireObjectMapper (5.0.0):
+  - Alamofire (4.7.3)
+  - AlamofireImage (3.4.1):
+    - Alamofire (~> 4.7)
+  - AlamofireObjectMapper (5.1.0):
     - Alamofire (~> 4.1)
-    - ObjectMapper (~> 3.0)
-  - ObjectMapper (3.0.0)
-  - RxCocoa (4.0.0):
+    - ObjectMapper (~> 3.3)
+  - ObjectMapper (3.3.0)
+  - RxCocoa (4.3.0):
     - RxSwift (~> 4.0)
-  - RxSwift (4.0.0)
-  - XLPagerTabStrip (8.0.0)
+  - RxSwift (4.3.0)
+  - XLPagerTabStrip (8.0.1)
 
 DEPENDENCIES:
   - Alamofire (~> 4.5)
@@ -19,15 +19,25 @@ DEPENDENCIES:
   - RxSwift (~> 4.0)
   - XLPagerTabStrip (~> 8.0)
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - AlamofireImage
+    - AlamofireObjectMapper
+    - ObjectMapper
+    - RxCocoa
+    - RxSwift
+    - XLPagerTabStrip
+
 SPEC CHECKSUMS:
-  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
-  AlamofireImage: 2e784dc5d00f04903a52c1d169181469c805c3df
-  AlamofireObjectMapper: 5fafc816351cbbc0d486611aaeba7461c0cbad49
-  ObjectMapper: 92230db59bf8f341a5c3a3cf0b9fbdde3cf0d87f
-  RxCocoa: d62846ca96495d862fa4c59ea7d87e5031d7340e
-  RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
-  XLPagerTabStrip: d1ab378af0923320ec0b5eab11d7b2f803d31261
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  AlamofireImage: 78d67ccbb763d87ba44b21583d2153500a195630
+  AlamofireObjectMapper: 3395e698901d8b0e6f48b7d0c43bd47875325102
+  ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
+  RxCocoa: 71b9cce833fbcb89a8eec11816dd225830c2bd3c
+  RxSwift: a9717a34df3179fe63563f76e046ad345078dd3a
+  XLPagerTabStrip: c908b17cbf42fcd2598ee1adfc49bae25444d88a
 
 PODFILE CHECKSUM: 770b69d6196d64fe89ade93dd167284bc85edd6e
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.5.3
