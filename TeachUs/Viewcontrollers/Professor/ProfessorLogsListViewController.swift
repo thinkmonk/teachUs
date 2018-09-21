@@ -59,6 +59,8 @@ class ProfessorLogsListViewController: BaseViewController {
                 let tempLog = Mapper<College>().map(JSON: log)
                 self.arrayDataSource.append(tempLog!)
             }
+            self.arrayDataSource.sort(by: { ($0.year!,$0.classDivision! ,$0.subjectName!) < ($1.year!,$0.classDivision!,$1.subjectName!) })
+
             self.makeTableView()
             self.showTableView()
         }) { (success, code, mesage) in

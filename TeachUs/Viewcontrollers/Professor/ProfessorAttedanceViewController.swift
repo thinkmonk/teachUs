@@ -70,18 +70,17 @@ class ProfessorAttedanceViewController: BaseViewController {
                 let tempCollege = Mapper<College>().map(JSONObject: college)
                 self.arrayCollegeList?.append(tempCollege!)
             }
+            self.arrayCollegeList?.sort(by: { ($0.year!,$0.classDivision! ,$0.subjectName!) < ($1.year!,$0.classDivision!,$1.subjectName!) })
+
             UIView.animate(withDuration: 1.0, animations: {
                 self.tableviewCollegeList.alpha = 1
             })
             self.tableviewCollegeList.reloadData()
 
-            
         }) { (error, code, message) in
             print(message)
             LoadingActivityHUD.hideProgressHUD()
         }
-
-
     }
     func selectedSubject(_ subject: College) {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)

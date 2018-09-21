@@ -94,12 +94,17 @@ class UserManager{
             if(collegeDetailsArray.count > 0){
                 self.appUserCollegeArray = collegeDetailsArray as! [CollegeDetails]
             }
-            
+            /*
             if(self.appUserCollegeArray.contains(where: {$0.role_id! == "1" }) && ((self.appUserCollegeArray.contains(where: { $0.role_id! == "2"})) || (self.appUserCollegeArray.contains(where: { $0.role_id! == "3"})))){
                 self.appUserCollegeArray = self.appUserCollegeArray.filter {$0.role_id != "1"}
             }else{
                 self.appUserCollegeArray = self.appUserCollegeArray.filter {$0.role_id == "1"}
 
+            }
+ */
+            //remove student profile from when professor and college are logged in
+            if(self.appUserCollegeArray.contains(where: {$0.role_id! == "1" }) && ((self.appUserCollegeArray.contains(where: { $0.role_id! == "2"})) || (self.appUserCollegeArray.contains(where: { $0.role_id! == "3"})))){
+                self.appUserCollegeArray = self.appUserCollegeArray.filter {$0.role_id != "1"}
             }
             
             guard let defaultCollegeName = UserDefaults.standard.value(forKey: Constants.UserDefaults.collegeName) as? String, let defaultRoleName = UserDefaults.standard.value(forKey: Constants.UserDefaults.roleName) as? String

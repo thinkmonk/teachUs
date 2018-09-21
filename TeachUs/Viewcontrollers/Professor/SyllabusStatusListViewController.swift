@@ -84,6 +84,8 @@ class SyllabusStatusListViewController: BaseViewController {
                 let tempSubject = Mapper<Subject>().map(JSON: subject)
                 self.arrayDataSource.append(tempSubject!)
             }
+            self.arrayDataSource.sort(by: { ($0.courseName,$0.classDivision ,$0.subjectName) < ($1.courseName,$0.classDivision,$1.subjectName) })
+
             self.makeTableView()
             self.tableViewSyllabus.reloadData()
             self.showTableView()

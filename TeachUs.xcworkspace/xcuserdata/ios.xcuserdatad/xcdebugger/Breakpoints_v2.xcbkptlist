@@ -2,4 +2,54 @@
 <Bucket
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TeachUs/Managers/UserManager.swift"
+            timestampString = "559250558.486606"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
+            landmarkName = "initLoggedInUser()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TeachUs.UserManager.initLoggedInUser() -&gt; ()"
+                  moduleName = "TeachUs"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ios/Documents/teachUs/TeachUs/Managers/UserManager.swift"
+                  timestampString = "559250558.75833"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "107"
+                  endingLineNumber = "107"
+                  offsetFromSymbolStart = "4668">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #4 (TeachUs.CollegeDetails) -&gt; Swift.Bool in TeachUs.UserManager.initLoggedInUser() -&gt; ()"
+                  moduleName = "TeachUs"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ios/Documents/teachUs/TeachUs/Managers/UserManager.swift"
+                  timestampString = "559250558.7609839"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "107"
+                  endingLineNumber = "107"
+                  offsetFromSymbolStart = "23">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
