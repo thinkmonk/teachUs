@@ -175,7 +175,8 @@ class CollegeAttendanceDetailsViewController: BaseViewController {
             for student in studentListArray{
                 let tempList = Mapper<EnrolledStudentDetail>().map(JSONObject: student)
                 self.arrayStudentList.append(tempList!)
-            }            
+            }
+            self.arrayStudentList.sort(by: { $0.studentRollNo!.localizedStandardCompare($1.studentRollNo!) == .orderedAscending})
             self.showTableView()
             self.tableViewStudentList.reloadData()
             
@@ -211,7 +212,7 @@ class CollegeAttendanceDetailsViewController: BaseViewController {
     
     @IBAction func showDatePicker(_ sender: Any){
         if let senderTap:UITapGestureRecognizer = sender as? UITapGestureRecognizer{
-            self.activeLabel = senderTap.view as! UILabel
+            self.activeLabel = senderTap.view as? UILabel
         }
         
         if let senderButton:UIButton = sender as? UIButton{
@@ -291,8 +292,13 @@ class CollegeAttendanceDetailsViewController: BaseViewController {
             let modalViewController:CollegeAttendanceMailReportViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.CollegeAttendanceMailReportViewControllerId) as! CollegeAttendanceMailReportViewController
             modalViewController.collegeClass = self.collegeClass
             modalViewController.modalPresentationStyle = .overCurrentContext
-            modalViewController.fromDate = self.fromDate != nil ? self.labelFromDate.text! : ""
-            modalViewController.toDate = self.toDate != nil ? self.labelToDate.text! : ""
+            
+            let urlDateFormatter = DateFormatter()
+            urlDateFormatter.dateFormat = "YYYY-MM-dd"
+
+            
+            modalViewController.fromDate = self.fromDate != nil ? urlDateFormatter.string(from: self.fromDate) : ""
+            modalViewController.toDate = self.toDate != nil ? urlDateFormatter.string(from: self.toDate) : ""
             modalViewController.delegate = self
             present(modalViewController, animated: true, completion: nil)
         }

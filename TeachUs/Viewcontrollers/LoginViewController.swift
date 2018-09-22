@@ -265,9 +265,16 @@ extension LoginViewController:CollegeLoginDelegate{
         ]
         manager.apiPost(apiName: "Verify OTP", parameters: parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
-            let accessToken:String = response["token"] as! String
-            UserManager.sharedUserManager.setAccessToken(accessToken)
-            self.getAndSaveUserCollegeDetails()
+            if(code == 200){
+                let accessToken:String = response["token"] as! String
+                UserManager.sharedUserManager.setAccessToken(accessToken)
+                self.getAndSaveUserCollegeDetails()
+            }
+            else{
+                let message:String = response["message"] as! String
+                self.showAlterWithTitle(nil, alertMessage: message)
+            }
+            
         }) { (error, code, message) in
             LoadingActivityHUD.hideProgressHUD()
             print(message)

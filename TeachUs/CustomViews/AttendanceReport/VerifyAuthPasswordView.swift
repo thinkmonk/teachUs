@@ -26,7 +26,9 @@ class VerifyAuthPasswordView: UIView {
     @IBOutlet weak var viewNumberBg: UIView!
     @IBOutlet weak var buttonSubmit: UIButton!
     @IBOutlet weak var viewTitleBackground: UIView!
-    @IBOutlet weak var ViewFormBg: UIView!    
+    @IBOutlet weak var ViewFormBg: UIView!
+    @IBOutlet weak var constraintEmailViewHeight: NSLayoutConstraint!
+    
     var collegeClass:CollegeAttendanceList!
     var delegate : VerifyAuthPasswordProtocol!
     var numberPasswordText =  Variable<String>("")
@@ -34,7 +36,7 @@ class VerifyAuthPasswordView: UIView {
     let disposeBag = DisposeBag()
     var isValid:Observable<Bool>{
         return Observable.combineLatest(numberPasswordText.asObservable(), emailPassWordText.asObservable()){ number, email in
-            return number.count == 4 && email.count == 4
+            return number.count == 4
         }
     }
     
@@ -83,6 +85,8 @@ class VerifyAuthPasswordView: UIView {
     }
     
     func setUpUI(){
+        self.constraintEmailViewHeight.constant = 0.0
+        self.textFieldEmail.alpha = 0
         self.buttonSubmit.roundedRedButton()
         self.ViewFormBg.makeTableCellEdgesRounded()
         self.viewEmailBg.makeEdgesRoundedWith(radius: self.viewEmailBg.height()/2)
@@ -91,7 +95,7 @@ class VerifyAuthPasswordView: UIView {
     }
     
     func setUpRX(){
-        self.textFieldEmail.rx.text.map{ $0 ?? ""}.bind(to: self.emailPassWordText).disposed(by: disposeBag)
+//        self.textFieldEmail.rx.text.map{ $0 ?? ""}.bind(to: self.emailPassWordText).disposed(by: disposeBag)
         self.textfieldNumber.rx.text.map{$0 ?? ""}.bind(to:self.numberPasswordText).disposed(by:disposeBag)
         self.isValid.subscribe(onNext: { (isValid) in
             self.buttonSubmit.alpha = isValid ? 1 : 0

@@ -77,11 +77,11 @@ class AttendanceReport: UIView {
     
     
 func setUpUI() {
-    self.titleViewBg.makeBottomEdgesRounded()
+//    self.titleViewBg.makeBottomEdgesRounded()
     self.reportViewBg.makeEdgesRounded()
     self.buttonSubmit.roundedPurpleButton()
     self.labelTitle.text = " \(self.collegeClass.courseName) Report"
-    self.buttonDissmiss.alpha = 0
+//    self.buttonDissmiss.alpha = 0
 }
     
     

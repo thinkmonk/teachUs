@@ -26,7 +26,7 @@
                   moduleName = "TeachUs"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ios/Documents/teachUs/TeachUs/Managers/UserManager.swift"
-                  timestampString = "559250558.75833"
+                  timestampString = "559303361.061305"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "107"
@@ -41,7 +41,7 @@
                   moduleName = "TeachUs"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ios/Documents/teachUs/TeachUs/Managers/UserManager.swift"
-                  timestampString = "559250558.7609839"
+                  timestampString = "559303361.063612"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "107"
@@ -49,6 +49,118 @@
                   offsetFromSymbolStart = "23">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TeachUs/Viewcontrollers/Professor/SyllabusStatusListViewController.swift"
+            timestampString = "559303360.8782361"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "getSyllabus()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TeachUs/Viewcontrollers/Professor/SyllabusStatusListViewController.swift"
+            timestampString = "559303360.878692"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "getSyllabus()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TeachUs/Viewcontrollers/Professor/SyllabusStatusListViewController.swift"
+            timestampString = "559303360.878993"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "getSyllabus()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TeachUs/Viewcontrollers/Professor/SyllabusStatusListViewController.swift"
+            timestampString = "559303360.8793041"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "getSyllabus()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TeachUs.SyllabusStatusListViewController.getSyllabus() -&gt; ()"
+                  moduleName = "TeachUs"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ios/Documents/teachUs/TeachUs/Viewcontrollers/Professor/SyllabusStatusListViewController.swift"
+                  timestampString = "559303361.089365"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "76"
+                  endingLineNumber = "76"
+                  offsetFromSymbolStart = "3905">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Bool, Swift.Int, Swift.Dictionary&lt;Swift.String, Any&gt;) -&gt; () in TeachUs.SyllabusStatusListViewController.getSyllabus() -&gt; ()"
+                  moduleName = "TeachUs"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ios/Documents/teachUs/TeachUs/Viewcontrollers/Professor/SyllabusStatusListViewController.swift"
+                  timestampString = "559303361.0915641"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "77"
+                  endingLineNumber = "77"
+                  offsetFromSymbolStart = "100">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TeachUs/Viewcontrollers/Professor/SyllabusStatusListViewController.swift"
+            timestampString = "559303370.581"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "getSyllabus()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

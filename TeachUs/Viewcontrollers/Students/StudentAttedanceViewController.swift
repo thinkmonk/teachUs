@@ -65,6 +65,8 @@ class StudentAttedanceViewController: BaseViewController {
         manager.apiPost(apiName: " Get user Attendance for month \(forMonth)", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             self.arrayDataSource = Mapper<StudentAttendance>().map(JSON: response)
+            self.arrayDataSource.subjectAttendance.sort(by: { $0.subjectName! < $1.subjectName! })
+            self.arrayDataSource.eventAttendance.sort(by: { $0.eventName! < $1.eventName! })
             self.setUpView()
             self.makeDataSource()            
         }) { (error, code, message) in
