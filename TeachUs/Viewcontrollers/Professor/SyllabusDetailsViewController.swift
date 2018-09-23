@@ -52,7 +52,7 @@ class SyllabusDetailsViewController: BaseViewController {
         parameters["college_code"] = UserManager.sharedUserManager.appUserCollegeDetails.college_code
 
         switch self.userType! {
-        case .Professor,.Student:
+        case .Professor:
             manager.url = URLConstants.ProfessorURL.getSyllabusSuubjectDetails
             parameters["class_id"] = "\(selectedSubject.classId)"
 
@@ -61,6 +61,9 @@ class SyllabusDetailsViewController: BaseViewController {
             manager.url  = URLConstants.CollegeURL.getCollegeSubjectSyllabusDetails
             parameters["class_id"] = "\(self.selectedClassId)"
 
+            break
+        case .Student:
+            manager.url = URLConstants.StudentURL.getSyllabusSuubjectDetails
             break
         }
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)

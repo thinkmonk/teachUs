@@ -34,12 +34,15 @@ public struct URLConstants{
         static let verifyOtp = BaseUrl.baseURL + "/auth/verifyotp"
         static let userDetails = BaseUrl.baseURL + "/login/user_details"
         static let updateUserProfile = BaseUrl.baseURL + "/login/update_user_profile"
+        
     }
     
     struct StudentURL {
         static let getClassAttendance = BaseUrl.baseURL + "/attendance/student_class_attendance"
         static let updateRatings = BaseUrl.baseURL + "/ratings/submit_rating"
         static let professorRatingList = BaseUrl.baseURL + "/ratings/professor_rating_list"
+        static let syllabusSubjectStatus = BaseUrl.baseURL + "/syllabus/student_syllabus_subject_status"
+        static let getSyllabusSuubjectDetails = BaseUrl.baseURL + "/syllabus/student_detailed_syllabus_status"
     }
     
     struct ProfessorURL {

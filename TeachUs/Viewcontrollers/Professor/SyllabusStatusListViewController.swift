@@ -55,7 +55,7 @@ class SyllabusStatusListViewController: BaseViewController {
         //http://ec2-34-215-84-223.us-west-2.compute.amazonaws.com:8081/teachus/teacher/getSyllabusSummary/Zmlyc3ROYW1lPURldmVuZHJhLG1pZGRsZU5hbWU9QSxsYXN0TmFtZT1GYWRuYXZpcyxyb2xsPVBST0ZFU1NPUixpZD0x?professorId=1&subjectId=1
         switch userType! {
         case .Student:
-            manager.url = URLConstants.ProfessorURL.syllabusSubjectStatus
+            manager.url = URLConstants.StudentURL.syllabusSubjectStatus
             parameters["college_code"] = UserManager.sharedUserManager.appUserCollegeDetails.college_code
             break
         
