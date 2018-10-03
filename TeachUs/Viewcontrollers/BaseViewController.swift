@@ -163,7 +163,7 @@ class BaseViewController: UIViewController {
         let manager = NetworkHandler()
         manager.url = URLConstants.OfflineURL.getOfflineData
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
-        let parameters:[String:Any] = ["offline_count":""]
+        let parameters:[String:Any] = ["offline_count":"-1"]
         manager.apiPost(apiName: "Get User Details for offline mode", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             if(code == 200){

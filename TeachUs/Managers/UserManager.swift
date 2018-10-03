@@ -21,6 +21,7 @@ class UserManager{
     
     var offlineAppUserData:OfflineData!
     var offlineAppuserCollegeDetails:Offline_Colleges!
+    var isUserInOfflineMode:Bool = false //check not to show "work in offline mode" pop-up multiple times
     
     var user:LoginUserType! {
     if let user = UserDefaults.standard.value(forKey: Constants.UserDefaults.loginUserType) as? String {

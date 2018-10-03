@@ -24,6 +24,7 @@ class OfflineYesNo: UIView {
         leftMenuController.delegate = homeVc as LeftMenuDeleagte
         mfslidemenuContainer.leftMenuViewController = leftMenuController
         mfslidemenuContainer.centerViewController  = centerNavigationController
+        UserManager.sharedUserManager.isUserInOfflineMode = true
         self.removeFromSuperview()
     }
     

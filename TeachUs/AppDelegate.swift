@@ -120,6 +120,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         leftMenuController.delegate = homeVc as LeftMenuDeleagte
         mfslidemenuContainer.leftMenuViewController = leftMenuController
         mfslidemenuContainer.centerViewController  = centerNavigationController
+        UserManager.sharedUserManager.isUserInOfflineMode = false
     }
 }
 

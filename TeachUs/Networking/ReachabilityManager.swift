@@ -57,7 +57,7 @@ class ReachabilityManager: NSObject {
             }
             */
 
-            if(UserManager.sharedUserManager.user! == .Professor){
+            if(UserManager.sharedUserManager.user! == .Professor && UserManager.sharedUserManager.isUserInOfflineMode == false){
                 UserManager.sharedUserManager.initOfflineUser()
                 viewOffline = OfflineYesNo.instanceFromNib() as? OfflineYesNo
                 if(UIApplication.shared.keyWindow != nil){
@@ -72,11 +72,22 @@ class ReachabilityManager: NSObject {
             if(self.isOfflineDataAvailable){
                 self.networkReachbleActions()
             }
+            else{
+                if(UserManager.sharedUserManager.isUserInOfflineMode){
+                    NotificationCenter.default.post(name: .notificationLoginSuccess, object: nil)
+
+                }
+            }
 
         case .cellular:
             debugPrint("Network reachable through Cellular Data")
             if(self.isOfflineDataAvailable){
                 self.networkReachbleActions()
+            }else{
+                if(UserManager.sharedUserManager.isUserInOfflineMode){
+                    NotificationCenter.default.post(name: .notificationLoginSuccess, object: nil)
+                    
+                }
             }
         }
     }
@@ -107,7 +118,7 @@ class ReachabilityManager: NSObject {
             UIApplication.shared.keyWindow?.rootViewController?.present(controller, animated: true, completion: nil)
         }
         else{
-            
+            NotificationCenter.default.post(name: .notificationOfflineUploadSuccess, object: nil)
         }
         
         /*
@@ -126,6 +137,5 @@ class ReachabilityManager: NSObject {
                                                   name: Notification.Name.reachabilityChanged,
                                                   object: reachability)
     }
-
 }
 
