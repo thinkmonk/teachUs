@@ -36,7 +36,6 @@
 		810FAC5A1FB7549400945DD6 /* AttendanceCountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810FAC581FB7549400945DD6 /* AttendanceCountTableViewCell.swift */; };
 		810FAC5B1FB7549400945DD6 /* AttendanceCountTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 810FAC591FB7549400945DD6 /* AttendanceCountTableViewCell.xib */; };
 		811F28FF2104D7AC002B810F /* OfflineAttendanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811F28FE2104D7AC002B810F /* OfflineAttendanceManager.swift */; };
-		8120372120F9DA790012EE3B /* OfflineLeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8120372020F9DA790012EE3B /* OfflineLeftMenuViewController.swift */; };
 		812298CD2108F61C003C2EE3 /* OfflineApiRequest+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812298CB2108F61C003C2EE3 /* OfflineApiRequest+CoreDataClass.swift */; };
 		812298CE2108F61C003C2EE3 /* OfflineApiRequest+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812298CC2108F61C003C2EE3 /* OfflineApiRequest+CoreDataProperties.swift */; };
 		8123F3C52155681300A15182 /* LectureReportSubjectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8123F3C32155681300A15182 /* LectureReportSubjectTableViewCell.swift */; };
@@ -56,6 +55,13 @@
 		812C34F01FB794DB0048DD3C /* ViewDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812C34EF1FB794DB0048DD3C /* ViewDatePicker.swift */; };
 		812C34F21FB794E30048DD3C /* ViewDatePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 812C34F11FB794E30048DD3C /* ViewDatePicker.xib */; };
 		812CB758206FA01200D31C05 /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812CB757206FA01200D31C05 /* CALayer.swift */; };
+		81316DE12165575200820481 /* OfflineHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81316DDA2165574900820481 /* OfflineHomeViewController.swift */; };
+		81316DE22165575200820481 /* UploadOfflineDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81316DDB2165574900820481 /* UploadOfflineDataViewController.swift */; };
+		81316DE32165575200820481 /* OfflineLeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81316DDC2165574900820481 /* OfflineLeftMenuViewController.swift */; };
+		81316DE42165575200820481 /* OfflineStudentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81316DDD2165574900820481 /* OfflineStudentListViewController.swift */; };
+		81316DE52165575200820481 /* OfflineClassAttendanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81316DDE2165574900820481 /* OfflineClassAttendanceViewController.swift */; };
+		81316DE62165575200820481 /* OfflineMarkCompletedPortionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81316DDF2165574900820481 /* OfflineMarkCompletedPortionViewController.swift */; };
+		81316DE72165575200820481 /* OfflineTabsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81316DE02165574900820481 /* OfflineTabsViewController.swift */; };
 		8135B8952078F26A008E3E4B /* EventAttendanceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8135B8942078F26A008E3E4B /* EventAttendanceListViewController.swift */; };
 		8135B897207900D4008E3E4B /* AddNewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8135B896207900D4008E3E4B /* AddNewEventViewController.swift */; };
 		8135B89A20790D2F008E3E4B /* EventListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8135B89820790D2F008E3E4B /* EventListTableViewCell.swift */; };
@@ -79,16 +85,12 @@
 		8163EB0420541D38003E4B1D /* TeachUs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8163EB0220541D38003E4B1D /* TeachUs.xcdatamodeld */; };
 		8163EB0720557AD9003E4B1D /* CollegeDetails+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8163EB0520557AD9003E4B1D /* CollegeDetails+CoreDataClass.swift */; };
 		8163EB0820557AD9003E4B1D /* CollegeDetails+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8163EB0620557AD9003E4B1D /* CollegeDetails+CoreDataProperties.swift */; };
-		8169D48020FB569F0020A2D0 /* OfflineClassAttendanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8169D47F20FB569F0020A2D0 /* OfflineClassAttendanceViewController.swift */; };
-		8169D48220FB5DF30020A2D0 /* OfflineHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8169D48120FB5DF30020A2D0 /* OfflineHomeViewController.swift */; };
-		8169D48420FB5DFD0020A2D0 /* OfflineTabsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8169D48320FB5DFD0020A2D0 /* OfflineTabsViewController.swift */; };
 		81727B8B1F9E6CB8006433E8 /* MFSideMenuShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 81727B841F9E6CB7006433E8 /* MFSideMenuShadow.m */; };
 		81727B8C1F9E6CB8006433E8 /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 81727B851F9E6CB7006433E8 /* UIViewController+MFSideMenuAdditions.m */; };
 		81727B8D1F9E6CB8006433E8 /* MFSideMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81727B891F9E6CB8006433E8 /* MFSideMenuContainerViewController.m */; };
 		81727B901F9E6EB1006433E8 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81727B8F1F9E6EB1006433E8 /* Notification.swift */; };
 		81727B921F9E70CC006433E8 /* LeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81727B911F9E70CC006433E8 /* LeftMenuViewController.swift */; };
 		81727B941F9E70EE006433E8 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81727B931F9E70EE006433E8 /* HomeViewController.swift */; };
-		8177AD992115EF8000FD4F6C /* UploadOfflineDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8177AD982115EF8000FD4F6C /* UploadOfflineDataViewController.swift */; };
 		817BDAE51FB898C700492822 /* ButtonWithIndexPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817BDAE41FB898C700492822 /* ButtonWithIndexPath.swift */; };
 		8180D9081FD3D21B00CE803F /* SuperAdminProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8180D9071FD3D21B00CE803F /* SuperAdminProfile.swift */; };
 		8185E34020581D5600752F81 /* EditProfilePictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8185E33F20581D5600752F81 /* EditProfilePictureViewController.swift */; };
@@ -108,7 +110,6 @@
 		819BDA541FC4A66E00DD7D2D /* ProfessorDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819BDA531FC4A66E00DD7D2D /* ProfessorDetails.swift */; };
 		819BDA581FC4AD5D00DD7D2D /* TeacherDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819BDA561FC4AD5D00DD7D2D /* TeacherDetailsTableViewCell.swift */; };
 		819BDA591FC4AD5D00DD7D2D /* TeacherDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 819BDA571FC4AD5D00DD7D2D /* TeacherDetailsTableViewCell.xib */; };
-		819D242B2104795C000EEB71 /* OfflineMarkCompletedPortionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819D242A2104795C000EEB71 /* OfflineMarkCompletedPortionViewController.swift */; };
 		819E0B3E20A0C9C600D16847 /* ViewLogsCalender.xib in Resources */ = {isa = PBXBuildFile; fileRef = 819E0B3D20A0C9C600D16847 /* ViewLogsCalender.xib */; };
 		819E0B4020A0C9D700D16847 /* ViewLogsCalender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819E0B3F20A0C9D700D16847 /* ViewLogsCalender.swift */; };
 		819EEC2220A60BF400487467 /* ViewLectureReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819EEC2120A60BF400487467 /* ViewLectureReport.swift */; };
@@ -177,7 +178,6 @@
 		81CCAE561FC806060070907A /* RatingTopicsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81CCAE541FC806060070907A /* RatingTopicsTableViewCell.xib */; };
 		81CCAE581FC82E310070907A /* RatingDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CCAE571FC82E310070907A /* RatingDataSource.swift */; };
 		81CCAE5A1FC99C170070907A /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CCAE591FC99C170070907A /* UIImageView.swift */; };
-		81CDB1E521036CB8009A4FA7 /* OfflineStudentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CDB1E421036CB8009A4FA7 /* OfflineStudentListViewController.swift */; };
 		81D020252059A131003742FD /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D020242059A131003742FD /* RootViewController.swift */; };
 		81D76B4F1FC1AA4D005E861C /* SyllabusStatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D76B4D1FC1AA4D005E861C /* SyllabusStatusTableViewCell.swift */; };
 		81D76B501FC1AA4D005E861C /* SyllabusStatusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81D76B4E1FC1AA4D005E861C /* SyllabusStatusTableViewCell.xib */; };
@@ -286,7 +286,6 @@
 		810FAC581FB7549400945DD6 /* AttendanceCountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceCountTableViewCell.swift; sourceTree = "<group>"; };
 		810FAC591FB7549400945DD6 /* AttendanceCountTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AttendanceCountTableViewCell.xib; sourceTree = "<group>"; };
 		811F28FE2104D7AC002B810F /* OfflineAttendanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineAttendanceManager.swift; sourceTree = "<group>"; };
-		8120372020F9DA790012EE3B /* OfflineLeftMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineLeftMenuViewController.swift; sourceTree = "<group>"; };
 		812298CB2108F61C003C2EE3 /* OfflineApiRequest+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OfflineApiRequest+CoreDataClass.swift"; sourceTree = "<group>"; };
 		812298CC2108F61C003C2EE3 /* OfflineApiRequest+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OfflineApiRequest+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8123F3C32155681300A15182 /* LectureReportSubjectTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LectureReportSubjectTableViewCell.swift; sourceTree = "<group>"; };
@@ -306,6 +305,13 @@
 		812C34EF1FB794DB0048DD3C /* ViewDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDatePicker.swift; sourceTree = "<group>"; };
 		812C34F11FB794E30048DD3C /* ViewDatePicker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewDatePicker.xib; sourceTree = "<group>"; };
 		812CB757206FA01200D31C05 /* CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
+		81316DDA2165574900820481 /* OfflineHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfflineHomeViewController.swift; sourceTree = "<group>"; };
+		81316DDB2165574900820481 /* UploadOfflineDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadOfflineDataViewController.swift; sourceTree = "<group>"; };
+		81316DDC2165574900820481 /* OfflineLeftMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfflineLeftMenuViewController.swift; sourceTree = "<group>"; };
+		81316DDD2165574900820481 /* OfflineStudentListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfflineStudentListViewController.swift; sourceTree = "<group>"; };
+		81316DDE2165574900820481 /* OfflineClassAttendanceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfflineClassAttendanceViewController.swift; sourceTree = "<group>"; };
+		81316DDF2165574900820481 /* OfflineMarkCompletedPortionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfflineMarkCompletedPortionViewController.swift; sourceTree = "<group>"; };
+		81316DE02165574900820481 /* OfflineTabsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfflineTabsViewController.swift; sourceTree = "<group>"; };
 		8135B8942078F26A008E3E4B /* EventAttendanceListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAttendanceListViewController.swift; sourceTree = "<group>"; };
 		8135B896207900D4008E3E4B /* AddNewEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewEventViewController.swift; sourceTree = "<group>"; };
 		8135B89820790D2F008E3E4B /* EventListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListTableViewCell.swift; sourceTree = "<group>"; };
@@ -329,9 +335,6 @@
 		8163EB0320541D38003E4B1D /* TeachUs.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TeachUs.xcdatamodel; sourceTree = "<group>"; };
 		8163EB0520557AD9003E4B1D /* CollegeDetails+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollegeDetails+CoreDataClass.swift"; sourceTree = "<group>"; };
 		8163EB0620557AD9003E4B1D /* CollegeDetails+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollegeDetails+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		8169D47F20FB569F0020A2D0 /* OfflineClassAttendanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineClassAttendanceViewController.swift; sourceTree = "<group>"; };
-		8169D48120FB5DF30020A2D0 /* OfflineHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineHomeViewController.swift; sourceTree = "<group>"; };
-		8169D48320FB5DFD0020A2D0 /* OfflineTabsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineTabsViewController.swift; sourceTree = "<group>"; };
 		81727B841F9E6CB7006433E8 /* MFSideMenuShadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSideMenuShadow.m; sourceTree = "<group>"; };
 		81727B851F9E6CB7006433E8 /* UIViewController+MFSideMenuAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MFSideMenuAdditions.m"; sourceTree = "<group>"; };
 		81727B861F9E6CB7006433E8 /* MFSideMenuContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenuContainerViewController.h; sourceTree = "<group>"; };
@@ -344,7 +347,6 @@
 		81727B911F9E70CC006433E8 /* LeftMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftMenuViewController.swift; sourceTree = "<group>"; };
 		81727B931F9E70EE006433E8 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		817553511B457FEB4E645FC1 /* Pods-TeachUs.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeachUs.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeachUs/Pods-TeachUs.release.xcconfig"; sourceTree = "<group>"; };
-		8177AD982115EF8000FD4F6C /* UploadOfflineDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadOfflineDataViewController.swift; sourceTree = "<group>"; };
 		817BDAE41FB898C700492822 /* ButtonWithIndexPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWithIndexPath.swift; sourceTree = "<group>"; };
 		8180D9071FD3D21B00CE803F /* SuperAdminProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperAdminProfile.swift; sourceTree = "<group>"; };
 		8185E33F20581D5600752F81 /* EditProfilePictureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfilePictureViewController.swift; sourceTree = "<group>"; };
@@ -364,7 +366,6 @@
 		819BDA531FC4A66E00DD7D2D /* ProfessorDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessorDetails.swift; sourceTree = "<group>"; };
 		819BDA561FC4AD5D00DD7D2D /* TeacherDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		819BDA571FC4AD5D00DD7D2D /* TeacherDetailsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TeacherDetailsTableViewCell.xib; sourceTree = "<group>"; };
-		819D242A2104795C000EEB71 /* OfflineMarkCompletedPortionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineMarkCompletedPortionViewController.swift; sourceTree = "<group>"; };
 		819E0B3D20A0C9C600D16847 /* ViewLogsCalender.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewLogsCalender.xib; sourceTree = "<group>"; };
 		819E0B3F20A0C9D700D16847 /* ViewLogsCalender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLogsCalender.swift; sourceTree = "<group>"; };
 		819EEC2120A60BF400487467 /* ViewLectureReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLectureReport.swift; sourceTree = "<group>"; };
@@ -434,7 +435,6 @@
 		81CCAE541FC806060070907A /* RatingTopicsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RatingTopicsTableViewCell.xib; sourceTree = "<group>"; };
 		81CCAE571FC82E310070907A /* RatingDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingDataSource.swift; sourceTree = "<group>"; };
 		81CCAE591FC99C170070907A /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
-		81CDB1E421036CB8009A4FA7 /* OfflineStudentListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineStudentListViewController.swift; sourceTree = "<group>"; };
 		81D020242059A131003742FD /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		81D76B4D1FC1AA4D005E861C /* SyllabusStatusTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyllabusStatusTableViewCell.swift; sourceTree = "<group>"; };
 		81D76B4E1FC1AA4D005E861C /* SyllabusStatusTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SyllabusStatusTableViewCell.xib; sourceTree = "<group>"; };
@@ -644,19 +644,6 @@
 			path = "Custom DataSource";
 			sourceTree = "<group>";
 		};
-		8120371F20F9DA450012EE3B /* Offline */ = {
-			isa = PBXGroup;
-			children = (
-				8120372020F9DA790012EE3B /* OfflineLeftMenuViewController.swift */,
-				8169D48120FB5DF30020A2D0 /* OfflineHomeViewController.swift */,
-				8169D48320FB5DFD0020A2D0 /* OfflineTabsViewController.swift */,
-				8169D47F20FB569F0020A2D0 /* OfflineClassAttendanceViewController.swift */,
-				81CDB1E421036CB8009A4FA7 /* OfflineStudentListViewController.swift */,
-				819D242A2104795C000EEB71 /* OfflineMarkCompletedPortionViewController.swift */,
-				8177AD982115EF8000FD4F6C /* UploadOfflineDataViewController.swift */,
-			);
-			path = Offline;
-};
 		8123F3C2215567F100A15182 /* LectureReport */ = {
 			isa = PBXGroup;
 			children = (
@@ -687,6 +674,20 @@
 				812B152320BAA65B00693183 /* Init.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		81316DD92165574900820481 /* Offline */ = {
+			isa = PBXGroup;
+			children = (
+				81316DDA2165574900820481 /* OfflineHomeViewController.swift */,
+				81316DDB2165574900820481 /* UploadOfflineDataViewController.swift */,
+				81316DDC2165574900820481 /* OfflineLeftMenuViewController.swift */,
+				81316DDD2165574900820481 /* OfflineStudentListViewController.swift */,
+				81316DDE2165574900820481 /* OfflineClassAttendanceViewController.swift */,
+				81316DDF2165574900820481 /* OfflineMarkCompletedPortionViewController.swift */,
+				81316DE02165574900820481 /* OfflineTabsViewController.swift */,
+			);
+			path = Offline;
 			sourceTree = "<group>";
 		};
 		8135B8932078F247008E3E4B /* EventAttendance */ = {
@@ -756,6 +757,7 @@
 		813EC7681F9BA44100F11A12 /* Viewcontrollers */ = {
 			isa = PBXGroup;
 			children = (
+				81316DD92165574900820481 /* Offline */,
 				81AE8A051F9FC37B00D49749 /* BaseViewController.swift */,
 				18A627DE1F90F9870099C106 /* LoginSelectViewController.swift */,
 				8137EF521FA109B500045D97 /* LoginViewController.swift */,
@@ -768,7 +770,6 @@
 				81D7CE8B1FAB980300C4375E /* Students */,
 				81D7CE8C1FAB980E00C4375E /* Professor */,
 				81E4BCE5205E9E2B00674FD4 /* College */,
-				8120371F20F9DA450012EE3B /* Offline */,
 			);
 			path = Viewcontrollers;
 			sourceTree = "<group>";
@@ -1494,6 +1495,7 @@
 				81A35853208282C800B93239 /* ObservableArray.swift in Sources */,
 				81E6740A20531B4C00321257 /* UserDetails+CoreDataClass.swift in Sources */,
 				8135B89D207911CE008E3E4B /* Event.swift in Sources */,
+				81316DE32165575200820481 /* OfflineLeftMenuViewController.swift in Sources */,
 				810610C21FA660890067273E /* Connectivity.swift in Sources */,
 				81A769D120A88A7200A4A2B7 /* CollegeSyllabusTableViewCell.swift in Sources */,
 				81A7D05E208B78590032A1BC /* RatingProfessorList.swift in Sources */,
@@ -1508,7 +1510,6 @@
 				81B2E2D71FC35B0600E9E852 /* DPDKeyboardListener.swift in Sources */,
 				810BECDE206EDEE900F560C6 /* StudentProfileTableViewCell.swift in Sources */,
 				81FEC7FA20F10436003FBDBE /* ReachabilityManager.swift in Sources */,
-				8120372120F9DA790012EE3B /* OfflineLeftMenuViewController.swift in Sources */,
 				812C34F01FB794DB0048DD3C /* ViewDatePicker.swift in Sources */,
 				819AADF31FB6F88F0061C471 /* AttendanceManager.swift in Sources */,
 				8135B89A20790D2F008E3E4B /* EventListTableViewCell.swift in Sources */,
@@ -1568,8 +1569,8 @@
 				81CCAE4D1FC805CA0070907A /* TeacherProfileTableViewCell.swift in Sources */,
 				8135B897207900D4008E3E4B /* AddNewEventViewController.swift in Sources */,
 				810E0CDE1FD046AA006AE5BE /* ProfessorLogsDetailDataSource.swift in Sources */,
-				8177AD992115EF8000FD4F6C /* UploadOfflineDataViewController.swift in Sources */,
 				81D76B4F1FC1AA4D005E861C /* SyllabusStatusTableViewCell.swift in Sources */,
+				81316DE62165575200820481 /* OfflineMarkCompletedPortionViewController.swift in Sources */,
 				81D7CE961FAB98C300C4375E /* SyllabusStatusListViewController.swift in Sources */,
 				812B152F20BAA65C00693183 /* Ring.swift in Sources */,
 				81D7CE941FAB988500C4375E /* ProfessorAttedanceViewController.swift in Sources */,
@@ -1577,6 +1578,7 @@
 				812298CD2108F61C003C2EE3 /* OfflineApiRequest+CoreDataClass.swift in Sources */,
 				8123F3C52155681300A15182 /* LectureReportSubjectTableViewCell.swift in Sources */,
 				812B152D20BAA65C00693183 /* Spark.swift in Sources */,
+				81316DE22165575200820481 /* UploadOfflineDataViewController.swift in Sources */,
 				819EEC2820A6145E00487467 /* LectureReport.swift in Sources */,
 				8163EB0420541D38003E4B1D /* TeachUs.xcdatamodeld in Sources */,
 				8192F5911FD7115A00982601 /* CollegesListModel.swift in Sources */,
@@ -1591,7 +1593,6 @@
 				812B152A20BAA65C00693183 /* Geometry.swift in Sources */,
 				81B2E2D81FC35B0600E9E852 /* DPDUIView+Extension.swift in Sources */,
 				81E3E3A920776057002CFC1D /* CollegeAttendanceMailReportViewController.swift in Sources */,
-				8169D48220FB5DF30020A2D0 /* OfflineHomeViewController.swift in Sources */,
 				811F28FF2104D7AC002B810F /* OfflineAttendanceManager.swift in Sources */,
 				81930B301FCDD7700002CDBE /* TeacherProfile.swift in Sources */,
 				81727B921F9E70CC006433E8 /* LeftMenuViewController.swift in Sources */,
@@ -1599,6 +1600,7 @@
 				8135B8952078F26A008E3E4B /* EventAttendanceListViewController.swift in Sources */,
 				812CB758206FA01200D31C05 /* CALayer.swift in Sources */,
 				810610C01FA65FB30067273E /* LoadingActivityHUD.swift in Sources */,
+				81316DE72165575200820481 /* OfflineTabsViewController.swift in Sources */,
 				8137EF5C1FA10D6A00045D97 /* UIView.swift in Sources */,
 				81E67400205315B100321257 /* UserCollegeDetails.swift in Sources */,
 				81B203C51FD5422000936F0F /* AppUser.swift in Sources */,
@@ -1609,7 +1611,6 @@
 				81A80EDF1FAF3DAD00DDFFA1 /* CollegeList.swift in Sources */,
 				8136E5A620F7C6880080AECA /* Offline_Unit_syllabus_array.swift in Sources */,
 				8126BC061FD2CB45007B6B3B /* StudentProfile.swift in Sources */,
-				81C24E5C20A6E5A7008DDB9A /* LectureReportSubjectTableViewCell.swift in Sources */,
 				8136E5B020F7CD740080AECA /* OfflineYesNo.swift in Sources */,
 				81A523971FA7956100B3B557 /* CollegeLogin.swift in Sources */,
 				819EEC2620A60FF600487467 /* LectureReportViewController.swift in Sources */,
@@ -1631,21 +1632,17 @@
 				81A7D059208B75710032A1BC /* ProfessorRatingProfileTableViewCell.swift in Sources */,
 				81B203DC1FD551FF00936F0F /* SuperAdmin+CoreDataClass.swift in Sources */,
 				81FFB0C21FC0278E00C32097 /* TopicDetailsTableViewCell.swift in Sources */,
-				81CDB1E521036CB8009A4FA7 /* OfflineStudentListViewController.swift in Sources */,
 				81D76B551FC1D600005E861C /* SyllabusDetailsTableViewCell.swift in Sources */,
 				81E4BCE7205E9E7E00674FD4 /* CollegeAttendanceListViewController.swift in Sources */,
 				819EEC2220A60BF400487467 /* ViewLectureReport.swift in Sources */,
 				819EEC2A20A616F000487467 /* LectureReportDataSource.swift in Sources */,
-				819D242B2104795C000EEB71 /* OfflineMarkCompletedPortionViewController.swift in Sources */,
+				81316DE42165575200820481 /* OfflineStudentListViewController.swift in Sources */,
 				8136E5A720F7C6880080AECA /* Offline_Class_list.swift in Sources */,
-				8169D48020FB569F0020A2D0 /* OfflineClassAttendanceViewController.swift in Sources */,
 				81CCAE551FC806060070907A /* RatingTopicsTableViewCell.swift in Sources */,
 				81A7D062208BA7EE0032A1BC /* RatingDetails.swift in Sources */,
 				819BDA581FC4AD5D00DD7D2D /* TeacherDetailsTableViewCell.swift in Sources */,
 				8136E5A320F7C6880080AECA /* Offline_Profile.swift in Sources */,
-				81C24E5D20A6E5A7008DDB9A /* LectureReportTableViewCell.swift in Sources */,
 				8136E5AA20F7C7F60080AECA /* OfflineUserData+CoreDataClass.swift in Sources */,
-				8169D48420FB5DFD0020A2D0 /* OfflineTabsViewController.swift in Sources */,
 				812B152920BAA65C00693183 /* Easing.swift in Sources */,
 				812298CE2108F61C003C2EE3 /* OfflineApiRequest+CoreDataProperties.swift in Sources */,
 				8180D9081FD3D21B00CE803F /* SuperAdminProfile.swift in Sources */,
@@ -1657,6 +1654,8 @@
 				81D7CE821FAB8E5D00C4375E /* MenuItemView.swift in Sources */,
 				81E02A41207C9E0800EB6BA8 /* ClassListTableViewCell.swift in Sources */,
 				810E0CDB1FD03F0A006AE5BE /* LogsDetailTableViewCell.swift in Sources */,
+				81316DE52165575200820481 /* OfflineClassAttendanceViewController.swift in Sources */,
+				81316DE12165575200820481 /* OfflineHomeViewController.swift in Sources */,
 				81E3E3B220777BE1002CFC1D /* AttendanceReport.swift in Sources */,
 				81B203DB1FD551FF00936F0F /* Student+CoreDataProperties.swift in Sources */,
 			);
