@@ -72,7 +72,7 @@ class TeachersRatingViewController: BaseViewController {
                 let tempteacher = Mapper<ProfessorDetails>().map(JSON: teacher)
                 self.arrayDataSource.append(tempteacher!)
             }
-            
+            self.arrayDataSource.sort(by: { $0.professforFullname < $1.professforFullname })
 //            guard let ratingCriteria = response["rating_list"] as? [String:Any] else{
 //                return
 //            }

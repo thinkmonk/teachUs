@@ -138,6 +138,8 @@ class EventAttendanceStudentListViewController: BaseViewController {
                 let tempStudent = Mapper<EventStudents>().map(JSONObject: student)
                 self.arrayDataSource.append(tempStudent!)
             }
+            self.arrayDataSource.sort(by: { $0.rollNumber.localizedStandardCompare($1.rollNumber) == .orderedAscending})
+
             self.arraySearchDataSource = self.arrayDataSource
             self.arrayAllStudentsDataSource = self.arrayDataSource
             

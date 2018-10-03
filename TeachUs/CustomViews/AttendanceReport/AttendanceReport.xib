@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,7 +17,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MPr-do-qYd">
-                    <rect key="frame" x="15" y="233" width="345" height="200"/>
+                    <rect key="frame" x="15" y="233.5" width="345" height="200"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Mb-J9-w17">
                             <rect key="frame" x="0.0" y="0.0" width="345" height="45"/>
@@ -28,12 +28,12 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vW2-vK-NVU">
-                                    <rect key="frame" x="300" y="7" width="30" height="30"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vW2-vK-NVU">
+                                    <rect key="frame" x="300" y="11.5" width="30" height="22"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="30" id="fxB-Id-rQo"/>
                                     </constraints>
-                                    <state key="normal" title="X">
+                                    <state key="normal" image="cross">
                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
@@ -51,7 +51,7 @@
                             </constraints>
                         </view>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkBox_filled" translatesAutoresizingMaskIntoConstraints="NO" id="WaY-Fc-B7z">
-                            <rect key="frame" x="162" y="70" width="20" height="20"/>
+                            <rect key="frame" x="162.5" y="70" width="20" height="20"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Success" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RYC-ks-DXC">
                             <rect key="frame" x="140" y="105" width="65" height="20"/>
@@ -76,10 +76,12 @@
                         <constraint firstItem="RYC-ks-DXC" firstAttribute="centerX" secondItem="CSt-D4-lKG" secondAttribute="centerX" id="BY4-Nx-B7P"/>
                         <constraint firstItem="CSt-D4-lKG" firstAttribute="bottom" secondItem="K0q-en-0Bx" secondAttribute="bottom" constant="25" id="Mwo-GJ-Rqj"/>
                         <constraint firstAttribute="trailing" secondItem="K0q-en-0Bx" secondAttribute="trailing" constant="15" id="N9B-JQ-kLn"/>
+                        <constraint firstItem="9Mb-J9-w17" firstAttribute="leading" secondItem="CSt-D4-lKG" secondAttribute="leading" id="OmF-bh-4qq"/>
                         <constraint firstItem="9Mb-J9-w17" firstAttribute="top" secondItem="MPr-do-qYd" secondAttribute="top" id="Vjh-z6-Rg9"/>
                         <constraint firstItem="WaY-Fc-B7z" firstAttribute="top" secondItem="9Mb-J9-w17" secondAttribute="bottom" constant="25" id="Xdb-wh-Hq5"/>
                         <constraint firstItem="K0q-en-0Bx" firstAttribute="centerX" secondItem="CSt-D4-lKG" secondAttribute="centerX" id="oyB-l8-r7s"/>
                         <constraint firstAttribute="trailing" secondItem="9Mb-J9-w17" secondAttribute="trailing" id="plF-Fn-9w9"/>
+                        <constraint firstItem="9Mb-J9-w17" firstAttribute="trailing" secondItem="CSt-D4-lKG" secondAttribute="trailing" id="rMg-Ek-Ixq"/>
                         <constraint firstItem="RYC-ks-DXC" firstAttribute="top" secondItem="WaY-Fc-B7z" secondAttribute="bottom" constant="15" id="ugY-5P-dNz"/>
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="CSt-D4-lKG"/>
@@ -107,5 +109,6 @@
     </objects>
     <resources>
         <image name="checkBox_filled" width="20" height="20"/>
+        <image name="cross" width="9" height="9"/>
     </resources>
 </document>

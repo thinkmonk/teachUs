@@ -65,9 +65,11 @@ class EventAttendanceClassListViewController: BaseViewController {
             for className in classArray{
                 let tempEvent = Mapper<ClassList>().map(JSONObject: className)
                 self.arrayDataSource.append(tempEvent!)
-                self.tableViewClassList.reloadData()
-                self.showTableView()
             }
+            
+            self.arrayDataSource.sort(by: { ($0.year, $0.courseName, $0.classDivision) < ($1.year, $1.courseName, $1.classDivision) })
+            self.tableViewClassList.reloadData()
+            self.showTableView()
             
         }) { (error, code, message) in
             self.showAlterWithTitle(nil, alertMessage: message)

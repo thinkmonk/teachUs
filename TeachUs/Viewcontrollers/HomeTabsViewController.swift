@@ -102,6 +102,7 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
             controllersArray.append(eventAttendanceListVc)
             
             //SUPER ADMIN
+//            if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! == "1"){
             if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "0"){//0-super-admin, 1-admin
             let collegeSyllabusStatusVC:CollegeSyllabusStatusViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.CollegeSyllabusStatusViewControllerId) as! CollegeSyllabusStatusViewController
             collegeSyllabusStatusVC.title = "Syllabus"

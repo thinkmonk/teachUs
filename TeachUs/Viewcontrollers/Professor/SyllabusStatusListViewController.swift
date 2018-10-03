@@ -55,7 +55,7 @@ class SyllabusStatusListViewController: BaseViewController {
         //http://ec2-34-215-84-223.us-west-2.compute.amazonaws.com:8081/teachus/teacher/getSyllabusSummary/Zmlyc3ROYW1lPURldmVuZHJhLG1pZGRsZU5hbWU9QSxsYXN0TmFtZT1GYWRuYXZpcyxyb2xsPVBST0ZFU1NPUixpZD0x?professorId=1&subjectId=1
         switch userType! {
         case .Student:
-            manager.url = URLConstants.ProfessorURL.syllabusSubjectStatus
+            manager.url = URLConstants.StudentURL.syllabusSubjectStatus
             parameters["college_code"] = UserManager.sharedUserManager.appUserCollegeDetails.college_code
             break
         
@@ -84,6 +84,8 @@ class SyllabusStatusListViewController: BaseViewController {
                 let tempSubject = Mapper<Subject>().map(JSON: subject)
                 self.arrayDataSource.append(tempSubject!)
             }
+            self.arrayDataSource.sort(by: { ($0.courseName,$0.classDivision ,$0.subjectName) < ($1.courseName,$0.classDivision,$1.subjectName) })
+
             self.makeTableView()
             self.tableViewSyllabus.reloadData()
             self.showTableView()

@@ -55,6 +55,7 @@ class CollegeAttendanceListViewController: BaseViewController {
                 let tempList = Mapper<CollegeAttendanceList>().map(JSONObject: attendancelist)
                 self.arrayDataSource?.append(tempList!)
             }
+            self.arrayDataSource?.sort(by: { ($0.year, $0.courseCode, $0.classDivision) < ($1.year, $1.courseCode, $1.classDivision) })
             self.tableViewCollegeAttendanceList.reloadData()
             self.showTableView()
             

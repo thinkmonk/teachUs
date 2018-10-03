@@ -28,6 +28,7 @@ class CollegeAttendanceMailReportViewController: BaseViewController {
     @IBOutlet weak var viewTitleBackground: UIView!
     @IBOutlet weak var ViewFormBg: UIView!
     
+    @IBOutlet weak var constraintemailViewHeight: NSLayoutConstraint!
     var delegate:MailReportViewControllerDelegate!
     var collegeClass:CollegeAttendanceList!
     var verifyPasswordView:VerifyAuthPasswordView!
@@ -50,6 +51,9 @@ class CollegeAttendanceMailReportViewController: BaseViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.clear
         view.isOpaque = false
+        NotificationCenter.default.addObserver(self, selector: #selector(CollegeAttendanceMailReportViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(CollegeAttendanceMailReportViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+
         setUpRx()
         // Do any additional setup after loading the view.
     }
@@ -73,6 +77,24 @@ class CollegeAttendanceMailReportViewController: BaseViewController {
         super.viewDidAppear(animated)
         self.ViewFormBg.makeTableCellEdgesRounded()
     }
+    //MARK:- Keyboard methods
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0{
+                self.view.frame.origin.y -= keyboardSize.height/2
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue  {
+            if self.view.frame.origin.y != 0 && (self.verifyPasswordView == nil && self.reportView == nil){
+                self.view.frame.origin.y += keyboardSize.height/2
+            }
+        }
+    }
+    
+    
     //MARK:- Outlet methods
     @IBAction func dismissView(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -95,6 +117,7 @@ class CollegeAttendanceMailReportViewController: BaseViewController {
     }
     
     func sendVerificationPasswords(){
+        view.endEditing(true) //remove keyboard when submit is clicked
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()
         manager.url = URLConstants.CollegeURL.sendAuthPassword
@@ -127,10 +150,11 @@ class CollegeAttendanceMailReportViewController: BaseViewController {
     }
     
     func setUpPasswordView(){
-        self.verifyPasswordView = VerifyAuthPasswordView.instanceFromNib() as! VerifyAuthPasswordView
+        self.verifyPasswordView = VerifyAuthPasswordView.instanceFromNib() as? VerifyAuthPasswordView
         verifyPasswordView.labelEmail.text = self.emailText.value
         verifyPasswordView.labelNumber.text = self.contactNumberText.value
         verifyPasswordView.collegeClass = self.collegeClass
+        
         verifyPasswordView.setUpUI()
         verifyPasswordView.showView(inView: self.view)
         verifyPasswordView.delegate = self
@@ -138,7 +162,7 @@ class CollegeAttendanceMailReportViewController: BaseViewController {
     
     
     func setUpReportView(){
-        self.reportView = AttendanceReport.instanceFromNib() as! AttendanceReport
+        self.reportView = AttendanceReport.instanceFromNib() as? AttendanceReport
         reportView.collegeClass = self.collegeClass
         reportView.setUpUI()
         reportView.showView(inView: self.view)
@@ -161,7 +185,7 @@ extension CollegeAttendanceMailReportViewController:VerifyAuthPasswordProtocol{
             "role_id":"\(UserManager.sharedUserManager.appUserCollegeDetails.role_id!)",
             "email":"\(self.emailText.value)",
             "contact":"\(self.contactNumberText.value)",
-            "email_password":"\(emailOTP)",
+//            "email_password":"\(emailOTP)",
             "contact_password": "\(numberOtp)",
             "class_id":"\(self.collegeClass.classId)",
             "from_date":"\(self.fromDate)",
@@ -176,6 +200,10 @@ extension CollegeAttendanceMailReportViewController:VerifyAuthPasswordProtocol{
                 self.showAlterWithTitle(nil, alertMessage: message)
                 self.verifyPasswordView.hideView()
                 self.setUpReportView()
+            }
+            else{
+                let message:String = response["message"] as! String
+                self.showAlterWithTitle(nil, alertMessage: message)
             }
         }) { (error, code, message) in
             self.showAlterWithTitle(nil, alertMessage: message)

@@ -56,6 +56,7 @@ class CollegeClassRatingListViewController: BaseViewController {
                 let tempList = Mapper<RatingClassList>().map(JSONObject: ratingList)
                 self.arrayDataSource.append(tempList!)
             }
+            self.arrayDataSource.sort(by: { ($0.courseName, $0.classDivision) < ($1.courseName, $1.classDivision) })
             self.tableViewClassList.reloadData()
             self.showTableView()
             

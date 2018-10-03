@@ -73,9 +73,10 @@ class EventAttendanceListViewController: BaseViewController {
             for event in evetArray{
                 let tempEvent = Mapper<Event>().map(JSONObject: event)
                 self.arrayDataSource.append(tempEvent!)
-                self.tableViewEvents.reloadData()
-                self.showTableView()
             }
+            self.arrayDataSource.sort(by: { $0.eventName < $1.eventName })
+            self.tableViewEvents.reloadData()
+            self.showTableView()
            
         }) { (error, code, message) in
             self.showAlterWithTitle(nil, alertMessage: message)

@@ -35,6 +35,7 @@ class CollegeAttendanceList:Mappable{
     var courseName:String = ""
     var totalStudents:String = ""
     var avgStudents:String = ""
+    var year:String = ""
     
     
     required public init?(map: Map) {
@@ -49,6 +50,7 @@ class CollegeAttendanceList:Mappable{
         self.courseName <- map["course_name"]
         self.totalStudents <- map["total_students"]
         self.avgStudents <- map["avg_students"]
+        self.year <- map["year"]
     }
 
 }

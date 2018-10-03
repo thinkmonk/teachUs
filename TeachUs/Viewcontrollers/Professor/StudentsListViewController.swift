@@ -68,31 +68,6 @@ class StudentsListViewController: BaseViewController {
     
     
     func getEnrolledStudentsList(){
-        /*
-        let manager = NetworkHandler()
-        //"http://ec2-34-215-84-223.us-west-2.compute.amazonaws.com:8081/teachus/teacher/getEnrolledStudentList/Zmlyc3ROYW1lPURldmVuZHJhLG1pZGRsZU5hbWU9QSxsYXN0TmFtZT1GYWRuYXZpcyxyb2xsPVBST0ZFU1NPUixpZD0x?professorId=1&subjectId=1"
-        
-        manager.url = URLConstants.BaseUrl.baseURL + self.subject.enrolledStudentListUrl!
-        
-        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
-        manager.apiGet(apiName: "Get enrolled Students", completionHandler: { (response, code) in
-            LoadingActivityHUD.hideProgressHUD()
-            if(code == 200){
-                
-                let studentDetailArray = response["studentDetail"] as! [[String:Any]]
-                for student in studentDetailArray{
-                    let studentDetail = Mapper<EnrolledStudentDetail>().map(JSON: student)
-                    self.arrayStudentsDetails.append(studentDetail!)
-                }
-                if(self.arrayStudentsDetails.count > 0){
-                    self.setUpTableView()
-                }
-            }
-        }) { (error, code, errorMessage) in
-            LoadingActivityHUD.hideProgressHUD()
-            print(errorMessage)
-        }
- */
         let manager = NetworkHandler()
         manager.url = URLConstants.ProfessorURL.getStudentList
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
@@ -110,6 +85,7 @@ class StudentsListViewController: BaseViewController {
                     let studentDetail = Mapper<EnrolledStudentDetail>().map(JSON: student)
                     self.arrayStudentsDetails.append(studentDetail!)
                 }
+                self.arrayStudentsDetails.sort(by: {$0.studentRollNo! < $1.studentRollNo!})
                 if(self.arrayStudentsDetails.count > 0){
                     self.setUpTableView()
                 }

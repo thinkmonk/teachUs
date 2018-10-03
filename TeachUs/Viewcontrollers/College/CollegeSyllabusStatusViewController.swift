@@ -57,6 +57,8 @@ class CollegeSyllabusStatusViewController: BaseViewController {
                 let tempList = Mapper<CollegeSyllabusList>().map(JSONObject: ratingList)
                 self.arrayDataSource.append(tempList!)
             }
+            self.arrayDataSource.sort(by: { $0.courseName < $1.courseName })
+
             self.tableviewCollegeSyllabus.reloadData()
             self.showTableView()
             
