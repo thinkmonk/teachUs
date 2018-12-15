@@ -37,6 +37,8 @@ class OfflineClassAttendanceViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        ReachabilityManager.shared.resumeMomitoring()
+
     }
     
     override func refresh(sender: AnyObject) {
@@ -50,6 +52,7 @@ class OfflineClassAttendanceViewController: BaseViewController {
     
     func getCollegeSummaryForProfessor(){
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        self.arrayCollegeList?.removeAll()
         for offlineClass in UserManager.sharedUserManager.offlineAppuserCollegeDetails.class_list!{
             self.arrayCollegeList?.append(offlineClass)
         }

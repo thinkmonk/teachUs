@@ -28,7 +28,8 @@ class OfflineStudentListViewController: BaseViewController {
     private var currentOpenProfileIndexPath: IndexPath = IndexPath(row: -1, section: 0)
     var parameters = [String:Any]()
     let disposeBag = DisposeBag()
-    
+    var isDefaultAttencdanceChanged:Bool = true
+
     
     @IBOutlet weak var tableStudentList: UITableView!
     @IBOutlet weak var buttonSubmit: UIButton!
@@ -37,10 +38,9 @@ class OfflineStudentListViewController: BaseViewController {
     
     //TODO:- COMAPRE textfield value of the cell
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        ReachabilityManager.shared.pauseMonitoring()
         if(selectedCollege != nil)
         {
             self.title = selectedCollege.course_name!
@@ -53,6 +53,11 @@ class OfflineStudentListViewController: BaseViewController {
         self.tableStudentList.register(UINib(nibName: "AttendanceCountTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.AttendanceCountTableViewCellId)
         setUpcalenderView()
         initDatPicker()
+        
+        numberPicker = ViewNumberPicker.instanceFromNib() as? ViewNumberPicker
+        numberPicker.setUpPicker()
+        numberPicker.buttonOk.addTarget(self, action: #selector(StudentsListViewController.dismissNumberPicker), for: .touchUpInside)
+
         
     }
     
@@ -68,32 +73,15 @@ class OfflineStudentListViewController: BaseViewController {
     
     
     func getEnrolledStudentsList(){
-//        let manager = NetworkHandler()
-//        manager.url = URLConstants.ProfessorURL.getStudentList
-//        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
-//        let parameters = [
-//            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
-//            "class_id":"\(self.selectedCollege.classId!)",
-//            "subject_id":"\(self.selectedCollege.subjectId!)"
-//        ]
-//        manager.apiPost(apiName: "Get student list", parameters:parameters, completionHandler: { (result, code, response) in
-//            LoadingActivityHUD.hideProgressHUD()
-//            if(code == 200){
-//
-//                let studentDetailArray = response["student_list"] as! [[String:Any]]
-//                for student in studentDetailArray{
-//                    let studentDetail = Mapper<EnrolledStudentDetail>().map(JSON: student)
-//                    self.arrayStudentsDetails.append(studentDetail!)
-//                }
-//                if(self.arrayStudentsDetails.count > 0){
-//                    self.setUpTableView()
-//                }
-//            }
-//        }) { (error, code, errorMessage) in
-//            LoadingActivityHUD.hideProgressHUD()
-//            print(errorMessage)
-//        }
         self.arrayStudentsDetails = self.selectedCollege.student_list!
+        if (Int((self.arrayStudentsDetails.first?.roll_number)!)) != nil{
+            self.arrayStudentsDetails.sort(by: {Int($0.roll_number!)! < Int($1.roll_number!)!})
+        }
+        else{
+//            self.arrayStudentsDetails.sort(by: {$0.studentFullName < $1.studentFullName})
+            self.arrayStudentsDetails.sort( by: {$0.roll_number!.localizedStandardCompare($1.roll_number!) == .orderedAscending})
+
+        }
         if(self.arrayStudentsDetails.count > 0){
             self.setUpTableView()
         }
@@ -120,15 +108,28 @@ class OfflineStudentListViewController: BaseViewController {
         let presentCountDataSource = AttendanceDatasource(celType: .attendanceCount, attachedObject: nil)
         presentCountDataSource.isSelected = false
         arrayDataSource.append(presentCountDataSource)
-        OfflineAttendanceManager.sharedAttendanceManager.arrayStudents.value.removeAll()
-        for student in arrayStudentsDetails{
-            let studentAttendance:MarkStudentAttendance = MarkStudentAttendance(student, self.defaultAttendanceForAllStudents)
-            let studentDetailDataSource = AttendanceDatasource(celType: .studentProfile, attachedObject: studentAttendance)
-            studentDetailDataSource.isSelected = false
-            OfflineAttendanceManager.sharedAttendanceManager.arrayStudents.value.append(studentAttendance)
-            
-            arrayDataSource.append(studentDetailDataSource)
-            
+        
+        //Add students name
+        if(self.isDefaultAttencdanceChanged){
+            OfflineAttendanceManager.sharedAttendanceManager.arrayStudents.value.removeAll()
+            self.isDefaultAttencdanceChanged = false
+            for student in arrayStudentsDetails{
+                let studentAttendance:MarkStudentAttendance = MarkStudentAttendance(offlineStudentDetail: student, self.defaultAttendanceForAllStudents)
+                let studentDetailDataSource = AttendanceDatasource(celType: .studentProfile, attachedObject: studentAttendance)
+                studentDetailDataSource.isSelected = false
+                OfflineAttendanceManager.sharedAttendanceManager.arrayStudents.value.append(studentAttendance)
+                
+                arrayDataSource.append(studentDetailDataSource)
+                
+            }
+        }else{
+            for student in OfflineAttendanceManager.sharedAttendanceManager.arrayStudents.value{
+                let studentAttendance:MarkStudentAttendance = MarkStudentAttendance(offlineStudentDetail:student.offlineStudent!, student.isPrsent!)
+                let studentDetailDataSource = AttendanceDatasource(celType: .studentProfile, attachedObject: studentAttendance)
+                studentDetailDataSource.isSelected = false
+//                                AttendanceManager.sharedAttendanceManager.arrayStudents.value.append(studentAttendance)
+                arrayDataSource.append(studentDetailDataSource)
+            }
         }
         self.addCalenderValues()
         self.tableStudentList.reloadData()
@@ -253,6 +254,7 @@ extension OfflineStudentListViewController: UITableViewDelegate, UITableViewData
             let cell:AttendanceCountTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.AttendanceCountTableViewCellId, for: indexPath) as! AttendanceCountTableViewCell
             let presentStudents = OfflineAttendanceManager.sharedAttendanceManager.arrayStudents.value.filter{$0.isPrsent == true}
             cell.labelAttendanceCount.text = "\(presentStudents.count)"
+            cell.labelPresent.text = presentStudents.count <= 1 ? "PRESENT":"PRESENTS"
             
             cell.selectionStyle = .none
             
@@ -465,6 +467,7 @@ extension OfflineStudentListViewController: UITableViewDelegate, UITableViewData
 extension OfflineStudentListViewController: DefaultAttendanceSelectionDelegate{
     func selectDefaultAttendance(_ attendance: Bool) {
         self.defaultAttendanceForAllStudents = attendance
+        self.isDefaultAttencdanceChanged = true
         self.makeDataSource()
     }
 }

@@ -138,35 +138,6 @@ class OfflineMarkCompletedPortionViewController:BaseViewController {
                                 }
         }))
         self.present(alert, animated: true, completion: nil)
-        
-        /*
-        manager.apiPost(apiName: "mark syllabus professor", parameters: parameters, completionHandler: { (sucess, code, response) in
-            LoadingActivityHUD.hideProgressHUD()
-            guard let status = response["status"] as? NSNumber else{
-                return
-            }
-            if (status == 200){
-                
-                let alert = UIAlertController(title: nil, message: response["message"] as? String, preferredStyle: UIAlertControllerStyle.alert)
-                self.performSegue(withIdentifier: Constants.segues.toLectureReport, sender: self)
-                // add an action (button)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { _ in
-                    //                    for controller in self.navigationController!.viewControllers as Array {
-                    //                        self.markedAttendanceId = response["att_id"]
-                    //                        self.performSegue(withIdentifier: Constants.segues.markPortionCompleted, sender: self)
-                    //                        if controller.isKind(of: HomeViewController.self) {
-                    //                            self.navigationController!.popToViewController(controller, animated: true)
-                    //                            break
-                    //                        }
-                    //                    }
-                }))
-            }
-        }) { (error, code, message) in
-            LoadingActivityHUD.hideProgressHUD()
-            print(message)
-            
-        }
-        */
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -240,8 +211,8 @@ extension OfflineMarkCompletedPortionViewController:UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableviewTopics.width(), height: 44))
-        headerView.backgroundColor = UIColor.clear
-        
+        headerView.backgroundColor = Constants.colors.themeLightBlue
+
         let labelView:UILabel  = UILabel(frame: CGRect(x: 15, y: 0, width: self.tableviewTopics.width(), height: 44))
         labelView.center.y = headerView.centerY()
         labelView.text = self.arrayDataSource[section].unit_name

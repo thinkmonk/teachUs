@@ -29,19 +29,19 @@ class LeftMenuViewController: UIViewController, UIGestureRecognizerDelegate {
     var arrayCollegeDetailsDataSource:[CollegeDetails] = []
     
     let userProfilesDropdown = DropDown()
-
+    
     var isProfileViewOpen:Bool = false
     
     
-//    var studentDataSource = ["Attendance", "Syllabus Status", "Feedback / Ratings", "Logout"]
+    //    var studentDataSource = ["Attendance", "Syllabus Status", "Feedback / Ratings", "Logout"]
     var studentDataSource = ["Attendance", "Syllabus","Ratings", "Logout"]
-
-//    var professorDataSource = ["Attendance", "Syllabus Status", "Logs", "Logout"]
+    
+    //    var professorDataSource = ["Attendance", "Syllabus Status", "Logs", "Logout"]
     var professorDataSource = ["Attendance", "Syllabus", "My Logs", "Logout"]
-
+    
     var collegeSuperAdminDataSource = ["Attendance(Reports)","Attendance(Events)", "Syllabus Status","Add/Remove Admin","Ratings","Logout"]
     var collegeAdminDataSource = ["Attendance(Reports)", "Attendance(Events)", "Logout"]
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -56,23 +56,23 @@ class LeftMenuViewController: UIViewController, UIGestureRecognizerDelegate {
         let tap = UITapGestureRecognizer(target: self, action: #selector(LeftMenuViewController.showProfileDropDown))
         self.labelProfile.isUserInteractionEnabled = true
         self.labelProfile.addGestureRecognizer(tap)
-
+        
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         self.buttonProfile.makeViewCircular()
         if(UserManager.sharedUserManager.appUserCollegeArray.count > 1){
             buttonDropDown.alpha=1
             setupDropdown()
-
+            
         }
         self.setUpTableView()
     }
-
-
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -86,10 +86,10 @@ class LeftMenuViewController: UIViewController, UIGestureRecognizerDelegate {
         case .Student:
             arrayDataSource = studentDataSource
             break
-        case .College:
-                arrayDataSource = UserManager.sharedUserManager.appUserCollegeDetails.privilege! == "0" ? collegeSuperAdminDataSource : collegeAdminDataSource
-//                arrayDataSource = UserManager.sharedUserManager.appUserCollegeDetails.privilege! == "1" ? collegeSuperAdminDataSource : collegeSuperAdminDataSource
-
+        case .College://1 is for super admin, 2 is for admin
+            arrayDataSource = UserManager.sharedUserManager.appUserCollegeDetails.privilege! == "1" ? collegeSuperAdminDataSource : collegeAdminDataSource
+            //                arrayDataSource = UserManager.sharedUserManager.appUserCollegeDetails.privilege! == "2" ? collegeSuperAdminDataSource : collegeSuperAdminDataSource
+            
             break
         }
         self.tableViewMenu.reloadData()
@@ -134,7 +134,7 @@ class LeftMenuViewController: UIViewController, UIGestureRecognizerDelegate {
             self.labelRole.text = ""
         }
         else{
-//            self.labelProfile.text = "\(UserManager.sharedUserManager.appUserCollegeDetails.college_name!)"
+            //            self.labelProfile.text = "\(UserManager.sharedUserManager.appUserCollegeDetails.college_name!)"
             self.labelProfile.text = "Profile"
             self.labelName.text = "\(UserManager.sharedUserManager.appUserDetails.firstName!) \(UserManager.sharedUserManager.appUserDetails.lastName!)"
             self.labelRole.text = "\(UserManager.sharedUserManager.appUserCollegeDetails.college_name!) (\(UserManager.sharedUserManager.appUserCollegeDetails.role_name!))"
@@ -149,18 +149,18 @@ class LeftMenuViewController: UIViewController, UIGestureRecognizerDelegate {
             self.isProfileViewOpen = true
             self.tableViewMenu.alpha  = 0
             self.tableViewProfile.alpha = 1
-//            self.tableViewProfile.reloadData()
+            //            self.tableViewProfile.reloadData()
             self.buttonDropDown.transform = self.buttonDropDown.transform.rotated(by: CGFloat.pi)
         }
         else{
             self.isProfileViewOpen = false
             self.tableViewMenu.alpha  = 1
             self.tableViewProfile.alpha = 0
-//            self.tableViewMenu.reloadData()
+            //            self.tableViewMenu.reloadData()
             self.buttonDropDown.transform = self.buttonDropDown.transform.rotated(by: -CGFloat.pi)
-
+            
         }
-//        self.userProfilesDropdown.show()
+        //        self.userProfilesDropdown.show()
     }
     
     @IBAction  func showModal() {
@@ -203,7 +203,7 @@ extension LeftMenuViewController:UITableViewDelegate, UITableViewDataSource{
             cell.selectionStyle = .blue
             cell.backgroundColor = UIColor.clear
             return cell
-
+            
         }
     }
     
@@ -213,16 +213,21 @@ extension LeftMenuViewController:UITableViewDelegate, UITableViewDataSource{
                 UserManager.sharedUserManager.setAccessToken("")
                 DatabaseManager.deleteAllEntitiesForEntityName(name: "CollegeDetails")
                 DatabaseManager.deleteAllEntitiesForEntityName(name: "UserDetails")
+                DatabaseManager.deleteAllEntitiesForEntityName(name: "OfflineUserData")
+                DatabaseManager.saveDbContext()
                 let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let viewController = mainStoryboard.instantiateViewController(withIdentifier: Constants.viewControllerId.LoginSelectNavBarControllerId) as! UINavigationController
-                UIApplication.shared.keyWindow?.rootViewController = viewController
                 UserDefaults.standard.set(nil, forKey: Constants.UserDefaults.collegeName)
                 UserDefaults.standard.set(nil, forKey: Constants.UserDefaults.roleName)
+                UserDefaults.standard.set(nil, forKey: Constants.UserDefaults.loginUserType)
+                UserDefaults.standard.set(nil, forKey: Constants.UserDefaults.accesToken)
                 UserDefaults.standard.synchronize()
-            }
-            self.menuContainerViewController.setMenuState(MFSideMenuStateClosed, completion: nil)
-            if(delegate != nil){
-                delegate.menuItemSelected(item: indexPath.row)
+                let viewController = mainStoryboard.instantiateViewController(withIdentifier: Constants.viewControllerId.LoginSelectNavBarControllerId) as! UINavigationController
+                UIApplication.shared.keyWindow?.rootViewController = viewController
+            }else{
+                self.menuContainerViewController.setMenuState(MFSideMenuStateClosed, completion: nil)
+                if(delegate != nil){
+                    delegate.menuItemSelected(item: indexPath.row)
+                }
             }
         }
         else{

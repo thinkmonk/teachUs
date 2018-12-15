@@ -12,6 +12,7 @@ class AttendanceCountTableViewCell: UITableViewCell {
 
     @IBOutlet weak var labelAttendanceCount: UILabel!
     
+    @IBOutlet weak var labelPresent: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

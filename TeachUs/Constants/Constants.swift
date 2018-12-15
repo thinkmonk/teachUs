@@ -46,6 +46,7 @@ public struct Constants {
         static let themeRed = UIColor(red: 198/255, green: 0/255, blue: 0/255, alpha: 1)
         static let themeBlue = UIColor(red: 52/255, green: 175/255, blue: 255/255, alpha: 1)
         static let themePurple = UIColor(red: 108/255, green: 96/255, blue: 200/255, alpha: 1)
+        static let themeLightBlue = UIColor(red: 237/255, green: 243/255, blue: 247/255, alpha: 1)
 
     }
     
@@ -74,7 +75,6 @@ public struct Constants {
         static let OfflineHomeViewController = "OfflineHomeViewController"
         static let OfflineStudentsListViewControllerId = "OfflineStudentsListViewControllerId"
         static let UploadOfflineDataViewControllerId = "UploadOfflineDataViewControllerId"
-        
     }
     
     struct UserDefaults {
@@ -125,8 +125,19 @@ public struct Constants {
         static let College = "COLLEGE"
         static let SuperAdmin = "SUPERADMIN"
     }
+    
+    struct  CustomErrorCodes {
+        static let noInternet = 01
+    }
+    
+    struct DatabaseEntities {
+        static let AttendanceRequest = "AttendanceRequest"
+        static let CollegeDetails = "CollegeDetails"
+        static let OfflineApiRequest = "OfflineApiRequest"
+        static let OfflineUserData = "OfflineUserData"
+        static let UserDetails = "UserDetails"
+    }
 }
-
 
 struct AppUserRole {
     static let student = "1"

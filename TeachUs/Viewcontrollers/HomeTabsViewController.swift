@@ -102,8 +102,8 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
             controllersArray.append(eventAttendanceListVc)
             
             //SUPER ADMIN
-//            if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! == "1"){
-            if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "0"){//0-super-admin, 1-admin
+//            if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! == "2"){
+            if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "1"){//1-super-admin, 2-admin
             let collegeSyllabusStatusVC:CollegeSyllabusStatusViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.CollegeSyllabusStatusViewControllerId) as! CollegeSyllabusStatusViewController
             collegeSyllabusStatusVC.title = "Syllabus"
             collegeSyllabusStatusVC.parentNavigationController = self.parentNavigationController
@@ -113,8 +113,8 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
             
             
             //SUPER ADMIN
-//            if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! == "1"){
-                if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "0"){//0-super-admin, 1-admin
+//            if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! == "2"){
+                if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "1"){//1-super-admin, 2-admin
 
                 let addRemoveAdminVC:AddRemoveAdminViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.AddRemoveAdminViewControllerId) as! AddRemoveAdminViewController
                 addRemoveAdminVC.title = "Add/Remove Admin"
@@ -123,8 +123,8 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
             }
 
             //SUPER ADMIN
-//            if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! == "1"){//0-super-admin, 1-admin
-            if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "0"){
+//            if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! == "2"){//1-super-admin, 2-admin
+            if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "1"){
             let collegeRatingListVC:CollegeClassRatingListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.CollegeClassRatingListViewControllerId) as! CollegeClassRatingListViewController
                 collegeRatingListVC.title = "Ratings"
                 collegeRatingListVC.parentNavigationController = self.parentNavigationController

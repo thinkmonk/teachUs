@@ -682,8 +682,8 @@
 				81316DDA2165574900820481 /* OfflineHomeViewController.swift */,
 				81316DDB2165574900820481 /* UploadOfflineDataViewController.swift */,
 				81316DDC2165574900820481 /* OfflineLeftMenuViewController.swift */,
-				81316DDD2165574900820481 /* OfflineStudentListViewController.swift */,
 				81316DDE2165574900820481 /* OfflineClassAttendanceViewController.swift */,
+				81316DDD2165574900820481 /* OfflineStudentListViewController.swift */,
 				81316DDF2165574900820481 /* OfflineMarkCompletedPortionViewController.swift */,
 				81316DE02165574900820481 /* OfflineTabsViewController.swift */,
 			);
@@ -1824,7 +1824,7 @@
 			baseConfigurationReference = ADA58029E3089D434D630F56 /* Pods-TeachUs.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BASE_URL_V1 = "http://teachusedumation.com/api_production/teachus";
+				BASE_URL_V1 = "http://teachusedumation.com/api_uat/teachus";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

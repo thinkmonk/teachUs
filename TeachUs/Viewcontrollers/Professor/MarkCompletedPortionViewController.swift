@@ -23,6 +23,7 @@ class MarkCompletedPortionViewController: BaseViewController {
     @IBOutlet weak var buttonSubmit: UIButton!
     @IBOutlet weak var labelSyllabusCompletion: UILabel!
     var selectedCollege:College!
+    var attendanceParameters:[String:Any] = [:]
     var attendanceId:NSNumber!
     var arrayDataSource:[Unit] = []
     var updatedTopicList:[[String:Any]] = []
@@ -33,6 +34,8 @@ class MarkCompletedPortionViewController: BaseViewController {
         self.tableviewTopics.register(UINib(nibName: "TopicDetailsTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.TopicDetailsTableViewCellId)
         self.title = "Syllabus Update"
         navigationItem.hidesBackButton = true
+        self.tableviewTopics.estimatedRowHeight = 110
+        self.tableviewTopics.rowHeight = UITableViewAutomaticDimension
         self.getTopics()
         // Do any additional setup after loading the view.
     }
@@ -101,15 +104,10 @@ class MarkCompletedPortionViewController: BaseViewController {
             self.tableviewTopics.transform = CGAffineTransform.identity
         }
     }
-
-    
     
     @IBAction func submitSyllabusStatus(_ sender: Any) {
         let manager = NetworkHandler()
-        manager.url = URLConstants.ProfessorURL.submitSyllabusCovered
-        var parameters = [String:Any]()
-        parameters["college_code"] = "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)"
-        parameters["att_id"] = self.attendanceId!
+        manager.url = URLConstants.ProfessorURL.mergedAttendanceAndSyllabus
         let topicList = ["topic_list":self.updatedTopicList]
         var requestString  =  ""
         if let theJSONData = try? JSONSerialization.data(withJSONObject: topicList,options: []) {
@@ -117,27 +115,22 @@ class MarkCompletedPortionViewController: BaseViewController {
             requestString = theJSONText!
             print("requestString = \(theJSONText!)")
         }
-        parameters["topic_list"] = requestString
-        manager.apiPost(apiName: "mark syllabus professor", parameters: parameters, completionHandler: { (sucess, code, response) in
+        self.attendanceParameters["topic_list"] = requestString
+        
+        manager.apiPost(apiName: "mark syllabus professor", parameters: self.attendanceParameters, completionHandler: { (sucess, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             guard let status = response["status"] as? NSNumber else{
                 return
             }
             if (status == 200){
-                
+                self.attendanceId = response["att_id"] as? NSNumber
                 let alert = UIAlertController(title: nil, message: response["message"] as? String, preferredStyle: UIAlertControllerStyle.alert)
-                self.performSegue(withIdentifier: Constants.segues.toLectureReport, sender: self)
                 // add an action (button)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { _ in
-                    //                    for controller in self.navigationController!.viewControllers as Array {
-                    //                        self.markedAttendanceId = response["att_id"]
-                    //                        self.performSegue(withIdentifier: Constants.segues.markPortionCompleted, sender: self)
-                    //                        if controller.isKind(of: HomeViewController.self) {
-                    //                            self.navigationController!.popToViewController(controller, animated: true)
-                    //                            break
-                    //                        }
-                    //                    }
+                    self.performSegue(withIdentifier: Constants.segues.toLectureReport, sender: self)
                 }))
+                self.present(alert, animated: true, completion:nil)
+                
             }
         }) { (error, code, message) in
             LoadingActivityHUD.hideProgressHUD()
@@ -216,8 +209,7 @@ extension MarkCompletedPortionViewController:UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableviewTopics.width(), height: 44))
-        headerView.backgroundColor = UIColor.clear
-        
+        headerView.backgroundColor = Constants.colors.themeLightBlue
         let labelView:UILabel  = UILabel(frame: CGRect(x: 15, y: 0, width: self.tableviewTopics.width(), height: 44))
         labelView.center.y = headerView.centerY()
         labelView.text = self.arrayDataSource[section].unitName
@@ -225,10 +217,11 @@ extension MarkCompletedPortionViewController:UITableViewDelegate, UITableViewDat
         headerView.addSubview(labelView)
         return headerView
     }
-    
+    /*
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 110
     }
+ */
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 44
     }

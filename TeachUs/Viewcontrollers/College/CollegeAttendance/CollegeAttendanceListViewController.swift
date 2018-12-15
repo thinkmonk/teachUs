@@ -117,7 +117,7 @@ extension  CollegeAttendanceListViewController: UITableViewDelegate, UITableView
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.segues.toCollegeAttendanceDetail {
             let destinationVC:CollegeAttendanceDetailsViewController = segue.destination as! CollegeAttendanceDetailsViewController
-            destinationVC.collegeClass = self.arrayDataSource![(self.tableViewCollegeAttendanceList.indexPathForSelectedRow?.row)!]
+            destinationVC.collegeClass = self.arrayDataSource![(self.tableViewCollegeAttendanceList.indexPathForSelectedRow?.section)!]
         }
     }
 }

@@ -31,4 +31,13 @@ extension String{
         
         return  returnValue
     }
+    
+    func convertToDate() -> Date? {
+        let strDate = self
+        print(strDate)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let date = dateFormatter.date(from: strDate)
+        return date ?? Date()
+    }
 }

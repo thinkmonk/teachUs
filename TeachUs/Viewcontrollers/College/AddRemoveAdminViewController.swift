@@ -49,8 +49,11 @@ class AddRemoveAdminViewController: BaseViewController {
     }
     
     //MARK:- Outlet methods
-    @IBAction func adminTypeChanged(_ sender: Any) {
+    @IBAction func adminTypeChanged(_ sender: UISwitch) {
         self.getAdminList()
+        self.viewRemoveAdminPhoneNumber.alpha = sender.isOn ? 0 : 1
+        self.buttonRemoveAdmin.alpha = sender.isOn ? 0 : 1
+
     }
     
     @IBAction func addNewAdmin(_ sender: Any) {
@@ -84,7 +87,7 @@ class AddRemoveAdminViewController: BaseViewController {
         let parameters = [
             "college_id":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_id!)",
             "role_id":"\(UserManager.sharedUserManager.appUserCollegeDetails.role_id!)",
-            "contact":"\(self.textFieldPhoneNumber.text!)"
+            "contact":"\(self.textfieldRemoveAdminPhoneNumber.text!)"
         ]
         manager.apiPost(apiName: " Remove admin", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()

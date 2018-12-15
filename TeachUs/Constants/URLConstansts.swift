@@ -56,6 +56,7 @@ public struct URLConstants{
         static let topicList = BaseUrl.baseURL + "/syllabus/topic_list"
         static let submitSyllabusCovered = BaseUrl.baseURL + "/syllabus/submit_topic_covered"
         static let getLectureReport = BaseUrl.baseURL + "/syllabus/lecture_report"
+        static let mergedAttendanceAndSyllabus = BaseUrl.baseURL + "/attendance/merged_submit_attendance"
     }
     
     

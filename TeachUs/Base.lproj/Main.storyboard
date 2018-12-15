@@ -1020,7 +1020,7 @@ Form Library</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nz7-er-7A4" userLabel="Top View">
-                                <rect key="frame" x="0.0" y="20" width="320" height="50"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overall:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bSf-av-4U4">
                                         <rect key="frame" x="10" y="16" width="52.5" height="18"/>
@@ -1078,7 +1078,7 @@ Form Library</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hqZ-cd-eTx">
-                                <rect key="frame" x="0.0" y="70" width="320" height="50"/>
+                                <rect key="frame" x="0.0" y="114" width="320" height="50"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mgr-SH-i6M">
                                         <rect key="frame" x="15" y="15" width="290" height="31.5"/>
@@ -1118,7 +1118,7 @@ Form Library</string>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="Fr5-gF-bhg">
-                                <rect key="frame" x="10" y="120" width="300" height="448"/>
+                                <rect key="frame" x="10" y="164" width="300" height="404"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
@@ -1149,7 +1149,7 @@ Form Library</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rf2-me-st2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2784" y="2275"/>
+            <point key="canvasLocation" x="3758" y="2274"/>
         </scene>
         <!--Teachers Rating View Controller-->
         <scene sceneID="jJ0-JA-rQv">
@@ -1203,7 +1203,7 @@ Form Library</string>
                                                 <color key="textColor" red="0.4941176471" green="0.51764705879999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Studetns" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6in-2X-It0">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Students" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6in-2X-It0">
                                                 <rect key="frame" x="122" y="0.0" width="76.5" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <color key="textColor" red="0.4941176471" green="0.51764705879999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -1677,7 +1677,7 @@ Form Library</string>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="BtK-GQ-9mL">
                                         <rect key="frame" x="60" y="0.0" width="51" height="31"/>
                                         <connections>
-                                            <action selector="adminTypeChanged:" destination="T1X-uW-JJ8" eventType="valueChanged" id="gom-nH-u3G"/>
+                                            <action selector="adminTypeChanged:" destination="T1X-uW-JJ8" eventType="valueChanged" id="9ZX-xr-s4P"/>
                                         </connections>
                                     </switch>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Super" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mqj-q3-vH4">
@@ -2584,7 +2584,7 @@ Form Library</string>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sio-yf-Hl9">
                                                 <rect key="frame" x="15" y="90" width="270" height="30"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="JTa-B6-cku">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Event Name" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="JTa-B6-cku">
                                                         <rect key="frame" x="20" y="5.5" width="230" height="19"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="textColor"/>
@@ -2864,7 +2864,7 @@ Form Library</string>
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="199"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="xef-aj-0c4">
-                                        <rect key="frame" x="123" y="35.5" width="75" height="75"/>
+                                        <rect key="frame" x="122.5" y="36" width="75" height="75"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gYp-hK-H0r">
                                                 <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
@@ -2880,13 +2880,13 @@ Form Library</string>
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FGN-M9-oVh">
-                                        <rect key="frame" x="20" y="115.5" width="280" height="20.5"/>
+                                        <rect key="frame" x="20" y="116" width="280" height="20.5"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zud-G6-wvB">
-                                        <rect key="frame" x="20" y="141" width="280" height="14.5"/>
+                                        <rect key="frame" x="20" y="141.5" width="280" height="14.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -2898,7 +2898,7 @@ Form Library</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RqC-88-quk">
-                                        <rect key="frame" x="295" y="164.5" width="15" height="22"/>
+                                        <rect key="frame" x="295" y="164" width="15" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="15" id="x5J-Hi-3zQ"/>
                                         </constraints>
@@ -3232,6 +3232,24 @@ Form Library</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Obn-zA-ggF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2338" y="7673"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Gut-SP-gwr">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lVq-Nk-S2o" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="yKG-pH-XRY">
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="zWX-EL-v7R" kind="relationship" relationship="rootViewController" id="Zx1-qw-G6N"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ng5-f1-j9r" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2782.5" y="2274.2957746478874"/>
         </scene>
     </scenes>
     <resources>

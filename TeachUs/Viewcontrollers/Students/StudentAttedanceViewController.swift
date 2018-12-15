@@ -63,6 +63,9 @@ class StudentAttedanceViewController: BaseViewController {
         ]
         
         manager.apiPost(apiName: " Get user Attendance for month \(forMonth)", parameters:parameters, completionHandler: { (result, code, response) in
+            if(forMonth == 0){
+                self.labelMonthType.text = "Overall"
+            }
             LoadingActivityHUD.hideProgressHUD()
             self.arrayDataSource = Mapper<StudentAttendance>().map(JSON: response)
             self.arrayDataSource.subjectAttendance.sort(by: { $0.subjectName! < $1.subjectName! })
@@ -77,6 +80,11 @@ class StudentAttedanceViewController: BaseViewController {
     }
     
     func makeDataSource(){
+        UIView.animate(withDuration: 0.2) {
+            self.tableViewStudentAttendance.contentOffset = .zero
+            self.tableViewStudentAttendance.layoutIfNeeded()
+        }
+        self.tableDataSource.removeAll()
         for subject in self.arrayDataSource.subjectAttendance{
             let tempDataSource = StudentAttendanceCellDatasource(cellType: .ClassAttendance, object: subject)
             self.tableDataSource.append(tempDataSource)

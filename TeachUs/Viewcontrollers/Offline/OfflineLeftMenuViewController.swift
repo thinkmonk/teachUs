@@ -158,20 +158,22 @@ extension OfflineLeftMenuViewController:UITableViewDelegate, UITableViewDataSour
                 DatabaseManager.deleteAllEntitiesForEntityName(name: "CollegeDetails")
                 DatabaseManager.deleteAllEntitiesForEntityName(name: "UserDetails")
                 DatabaseManager.deleteAllEntitiesForEntityName(name: "OfflineUserData")
-                let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                
-                let viewController = mainStoryboard.instantiateViewController(withIdentifier: Constants.viewControllerId.LoginSelectNavBarControllerId) as! UINavigationController
-                UIApplication.shared.keyWindow?.rootViewController = viewController
-                
+                DatabaseManager.saveDbContext()
                 UserDefaults.standard.set(nil, forKey: Constants.UserDefaults.collegeName)
                 UserDefaults.standard.set(nil, forKey: Constants.UserDefaults.roleName)
                 UserDefaults.standard.set(nil, forKey: Constants.UserDefaults.offlineCollegeName)
+                UserDefaults.standard.set(nil, forKey: Constants.UserDefaults.accesToken)
+                UserDefaults.standard.set(nil, forKey: Constants.UserDefaults.loginUserType)
+
                 UserDefaults.standard.synchronize()
-            }
-            
-            self.menuContainerViewController.setMenuState(MFSideMenuStateClosed, completion: nil)
-            if(delegate != nil){
-                delegate.menuItemSelected(item: indexPath.row)
+                let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let viewController = mainStoryboard.instantiateViewController(withIdentifier: Constants.viewControllerId.LoginSelectNavBarControllerId) as! UINavigationController
+                UIApplication.shared.keyWindow?.rootViewController = viewController
+            }else{
+                self.menuContainerViewController.setMenuState(MFSideMenuStateClosed, completion: nil)
+                if(delegate != nil){
+                    delegate.menuItemSelected(item: indexPath.row)
+                }
             }
         }
         else{

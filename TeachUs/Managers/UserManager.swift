@@ -321,6 +321,7 @@ class UserManager{
     
     func initOfflineUser(){
         let dataResponse = DatabaseManager.getEntitesForEntityName(name: "OfflineUserData")
+        if(dataResponse.count > 0){
         let dataTransformable:OfflineUserData = (dataResponse.last as? OfflineUserData)!
         let data = dataTransformable.data!
         self.offlineAppUserData = Mapper<OfflineData>().map(JSONObject: data)
@@ -347,6 +348,7 @@ class UserManager{
                 self.offlineAppuserCollegeDetails = college
             }
         }
+    }
         
         // ****NO code will be executed after this (return is present in defaultcollegename initialiser) ********
     }

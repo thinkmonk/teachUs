@@ -10,9 +10,12 @@ import UIKit
 
 class ReachabilityManager: NSObject {
     
+    var isMonitoringPaused:Bool = false
+    
+    
     var isOfflineDataAvailable:Bool{
-//        DatabaseManager.deleteAllEntitiesForEntityName(name: "OfflineApiRequest")
-//        DatabaseManager.saveDbContext()
+        //        DatabaseManager.deleteAllEntitiesForEntityName(name: "OfflineApiRequest")
+        //        DatabaseManager.saveDbContext()
         let dataResponse = DatabaseManager.getEntitesForEntityName(name: "OfflineApiRequest")
         if dataResponse.count > 0{
             return true
@@ -40,10 +43,10 @@ class ReachabilityManager: NSObject {
         switch reachability.connection {
         case .none:
             debugPrint("Network became unreachable")
-            /*
-            if(UserManager.sharedUserManager.appUserCollegeDetails != nil){
-                if (UserManager.sharedUserManager.appUserCollegeDetails.role_id! == AppUserRole.professor){
-                    print("reachability changed in professor module")
+            let userData = DatabaseManager.getEntitesForEntityName(name: Constants.DatabaseEntities.OfflineUserData)
+            if(UserManager.sharedUserManager.user != nil && userData.count > 0){
+                if(UserManager.sharedUserManager.user! == .Professor && UserManager.sharedUserManager.isUserInOfflineMode == false){
+                    UserManager.sharedUserManager.initOfflineUser()
                     viewOffline = OfflineYesNo.instanceFromNib() as? OfflineYesNo
                     if(UIApplication.shared.keyWindow != nil){
                         let window = UIApplication.shared.keyWindow!
@@ -52,20 +55,7 @@ class ReachabilityManager: NSObject {
                         window.addSubview(viewOffline!)
                     }
                 }
-            }
-            else{
-            }
-            */
-
-            if(UserManager.sharedUserManager.user! == .Professor && UserManager.sharedUserManager.isUserInOfflineMode == false){
-                UserManager.sharedUserManager.initOfflineUser()
-                viewOffline = OfflineYesNo.instanceFromNib() as? OfflineYesNo
-                if(UIApplication.shared.keyWindow != nil){
-                    let window = UIApplication.shared.keyWindow!
-                    viewOffline?.frame = window.frame
-                    viewOffline?.buttonYes.roundedRedButton()
-                    window.addSubview(viewOffline!)
-                }
+                
             }
         case .wifi:
             debugPrint("Network reachable through WiFi")
@@ -73,12 +63,11 @@ class ReachabilityManager: NSObject {
                 self.networkReachbleActions()
             }
             else{
-                if(UserManager.sharedUserManager.isUserInOfflineMode){
+                if(UserManager.sharedUserManager.isUserInOfflineMode && UserManager.sharedUserManager.user != nil){
                     NotificationCenter.default.post(name: .notificationLoginSuccess, object: nil)
-
                 }
             }
-
+            
         case .cellular:
             debugPrint("Network reachable through Cellular Data")
             if(self.isOfflineDataAvailable){
@@ -92,12 +81,22 @@ class ReachabilityManager: NSObject {
         }
     }
     
+    func resumeMomitoring(){
+        print("Monitoring resumed")
+        do{
+            try reachability.startNotifier()
+        } catch {
+            debugPrint("Could not start reachability notifier")
+        }
+    }
+    
     /// Starts monitoring the network availability status
     func startMonitoring() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.reachabilityChanged),
-                                               name: Notification.Name.reachabilityChanged,
-                                               object: reachability)
+        print("Monitoring started")
+            NotificationCenter.default.addObserver(self,
+                                                   selector: #selector(self.reachabilityChanged),
+                                                   name: Notification.Name.reachabilityChanged,
+                                                   object: reachability)
         do{
             try reachability.startNotifier()
         } catch {
@@ -110,24 +109,24 @@ class ReachabilityManager: NSObject {
             viewOffline?.removeFromSuperview()
             viewOffline = nil
         }
-        
-        let dataResponse = DatabaseManager.getEntitesForEntityName(name: "OfflineApiRequest")
-        if dataResponse.count > 0{
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let controller:UploadOfflineDataViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.UploadOfflineDataViewControllerId) as! UploadOfflineDataViewController
-            UIApplication.shared.keyWindow?.rootViewController?.present(controller, animated: true, completion: nil)
+        if(UserManager.sharedUserManager.user != nil){
+            let dataResponse = DatabaseManager.getEntitesForEntityName(name: "OfflineApiRequest")
+            if dataResponse.count > 0{
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let controller:UploadOfflineDataViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.UploadOfflineDataViewControllerId) as! UploadOfflineDataViewController
+                UIApplication.shared.keyWindow?.rootViewController?.present(controller, animated: true, completion: nil)
+            }
+            else{
+                NotificationCenter.default.post(name: .notificationOfflineUploadSuccess, object: nil)
+            }
         }
-        else{
-            NotificationCenter.default.post(name: .notificationOfflineUploadSuccess, object: nil)
-        }
-        
         /*
-        for data in dataResponse{
-            let dataTransformable:OfflineApiRequest = (data as? OfflineApiRequest)!
-            print(dataTransformable.attendanceParams!)
-            print(dataTransformable.syllabusParams!)
-        }
- */
+         for data in dataResponse{
+         let dataTransformable:OfflineApiRequest = (data as? OfflineApiRequest)!
+         print(dataTransformable.attendanceParams!)
+         print(dataTransformable.syllabusParams!)
+         }
+         */
     }
     
     /// Stops monitoring the network availability status
@@ -137,5 +136,9 @@ class ReachabilityManager: NSObject {
                                                   name: Notification.Name.reachabilityChanged,
                                                   object: reachability)
     }
+    func pauseMonitoring(){
+        print("Monitoring paused")
+        reachability.stopNotifier()
+        self.isMonitoringPaused = true
+    }
 }
-

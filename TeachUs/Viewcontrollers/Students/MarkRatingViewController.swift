@@ -10,7 +10,7 @@ import UIKit
 
 class MarkRatingViewController: BaseViewController {
     var parentNavigationController : UINavigationController?
-
+    
     var arrayDataSource:[ProfessorRatingDetials] = []
     var professsorDetails:ProfessorDetails!
     var subjectId:String = ""
@@ -40,13 +40,13 @@ class MarkRatingViewController: BaseViewController {
         self.butonSubmit.alpha = 0
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.butonSubmit.themeRedButton()
@@ -78,7 +78,7 @@ class MarkRatingViewController: BaseViewController {
     @IBAction func submitFeedback(_ sender: Any) {
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()
-
+        
         var ratings:[[String:Any]]! = []
         for value in self.arrayDataSource{
             var ratingTemp:[String:Any] = [:]
@@ -125,13 +125,13 @@ extension MarkRatingViewController: UITableViewDelegate, UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
         return self.arrayTableDataSource.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellDataSource = arrayTableDataSource[indexPath.section]
         switch cellDataSource.ratingCellType!{
         case .TeacherProfile:
             let profileCell:TeacherProfileTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.TeacherProfileTableViewCellId, for: indexPath) as! TeacherProfileTableViewCell
-            profileCell.labelteacherName.text = self.professsorDetails.professorName
+            profileCell.labelteacherName.text = self.professsorDetails.professforFullname
             profileCell.labelTeacherSubject.text = self.professsorDetails.subjectName
             profileCell.imageViewProfile.imageFromServerURL(urlString: self.professsorDetails.imageURL, defaultImage: Constants.Images.defaultProfessor)
             profileCell.selectionStyle = .none
@@ -141,9 +141,9 @@ extension MarkRatingViewController: UITableViewDelegate, UITableViewDataSource{
             if(self.isTeacherPopular){
                 profileCell.buttonHeart.isSelected = true
             }
-//            profileCell.buttonHeart.addTarget(self, action: #selector(MarkRatingViewController.markTeacherPopular(_:)), for: .touchUpInside)
+            //            profileCell.buttonHeart.addTarget(self, action: #selector(MarkRatingViewController.markTeacherPopular(_:)), for: .touchUpInside)
             return profileCell
-        
+            
         case .RatingTitle:
             let ratingTitleCell :RatingTitleTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.RatingTitleTableViewCellId, for: indexPath) as! RatingTitleTableViewCell
             ratingTitleCell.selectionStyle = .none
@@ -153,7 +153,7 @@ extension MarkRatingViewController: UITableViewDelegate, UITableViewDataSource{
             let cell : RatingTopicsTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.RatingTopicsTableViewCellId, for: indexPath) as! RatingTopicsTableViewCell
             
             let details:ProfessorRatingDetials = self.arrayDataSource[indexPath.section - 2] //-2 is fot the top to sections cells i.e. profile & title
- 
+            
             cell.labelRatingTopic.text = "\(details.criteria)"
             cell.buttonRating.setTitle("\(details.ratings)", for: .normal)
             cell.buttonRating.indexPath = indexPath
@@ -162,7 +162,7 @@ extension MarkRatingViewController: UITableViewDelegate, UITableViewDataSource{
             
             cell.buttonRating.addTarget(self, action: #selector(MarkRatingViewController.showRating(_:)), for: .touchUpInside)
             cell.makeWhiteBackground(false)
-
+            
             cell.selectionStyle = .none
             return cell
             
@@ -201,14 +201,14 @@ extension MarkRatingViewController: UITableViewDelegate, UITableViewDataSource{
         switch cellDataSource.ratingCellType! {
         case .TeacherProfile:
             return 100
-
+            
         case .RatingTitle:
             return 44
             
         case .RatingTopics:
             return 50
         }
-
+        
     }
     
     @objc func markTeacherPopular(_ sender: FaveButton){
@@ -253,12 +253,12 @@ extension MarkRatingViewController: UITableViewDelegate, UITableViewDataSource{
     
     @objc func showInfo(_ sender: ButtonWithIndexPath){
         let viewRating = ViewRatingInfo.instanceFromNib() as! ViewRatingInfo
-        if(self.arrayDataSource.count  < sender.indexPath.section){
-        viewRating.labelRatingDetails.text = self.arrayDataSource[sender.indexPath.section].description
+        if(!arrayDataSource[sender.indexPath.row].description.isEmpty){
+            viewRating.labelRatingDetails.text = self.arrayDataSource[sender.indexPath.row].description
         }
         else{
             viewRating.labelRatingDetails.text = "NA"
-
+            
         }
         viewRating.showView(inView: self.view)
     }
@@ -267,14 +267,14 @@ extension MarkRatingViewController: UITableViewDelegate, UITableViewDataSource{
 extension MarkRatingViewController:FaveButtonDelegate{
     
     func faveButtonDotColors(_ faveButton: FaveButton) -> [DotColors]?{
-            return colors
+        return colors
     }
     
     func faveButton(_ faveButton: FaveButton, didSelected selected: Bool){
         print("selected vc \(selected)")
         self.isTeacherPopular = !self.isTeacherPopular
-//        self.tableViewTeacherRating.reloadRows(at: [faveButton.indexPath], with: .automatic)
-
+        //        self.tableViewTeacherRating.reloadRows(at: [faveButton.indexPath], with: .automatic)
+        
     }
     
     

@@ -39,7 +39,7 @@ class UploadOfflineDataViewController: BaseViewController {
     
 
     func markAttendance(){
-        self.labelStatus.text = "Uploading data \(currentIndex+1) of \(self.arrayApiReqestParameters.count) ..."
+        self.labelStatus.text = "Uploading data \(currentIndex+1) of \(self.arrayApiReqestParameters.count)"
         self.viewProgressbar.progress = Float(currentIndex/self.arrayApiReqestParameters.count)
         let dataTransformable:OfflineApiRequest = arrayApiReqestParameters[currentIndex]
         let manager = NetworkHandler()
@@ -90,7 +90,7 @@ class UploadOfflineDataViewController: BaseViewController {
                             self.dismiss(animated: true, completion: {
                                 DatabaseManager.deleteAllEntitiesForEntityName(name: "OfflineApiRequest")
                                 DatabaseManager.saveDbContext()
-                                NotificationCenter.default.post(name: .notificationOfflineUploadSuccess, object: nil)
+                                NotificationCenter.default.post(name: .notificationLoginSuccess, object: nil)
                             })
                         }))
                         self.present(alert, animated: true, completion:nil)

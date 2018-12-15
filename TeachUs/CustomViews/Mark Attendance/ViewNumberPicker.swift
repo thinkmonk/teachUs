@@ -33,13 +33,12 @@ class ViewNumberPicker: UIView {
         for i in 1...10{
             pickerData.append("\(i)")
         }
-        picker.selectRow(0, inComponent: 1, animated: true)
         picker.delegate = self
         picker.dataSource = self
+        picker.selectRow(0, inComponent: 0, animated: true)
         picker.backgroundColor = UIColor.white
         self.buttonOk.roundedRedButton()
     }
-    
     
     func showView(inView:UIView){
         self.alpha = 0.0

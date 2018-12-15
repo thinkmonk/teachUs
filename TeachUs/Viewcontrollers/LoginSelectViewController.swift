@@ -75,6 +75,13 @@ class LoginSelectViewController: BaseViewController {
             
         }) { (error, code, errorMessage) in
             LoadingActivityHUD.hideProgressHUD()
+            if(code == Constants.CustomErrorCodes.noInternet){
+                self.showNoInternetAlert(retry: { (retry) in
+                    if(retry){
+                        self.getRoleList()
+                    }
+                })
+            }
             print(errorMessage)
         }
     }

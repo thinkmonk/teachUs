@@ -116,6 +116,26 @@ class BaseViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
         }
     }
+    typealias TryAgainCompletionBlock = () -> Void
+    var tryAgainCallBack: TryAgainCompletionBlock = { }
+
+    func showNoInternetAlert(retry: @escaping (_ retry:Bool) -> Void){
+       
+        let alertController = UIAlertController(title: "No Internet", message: "Please check your internet connection", preferredStyle: .alert)
+        
+        // Create the actions
+        let okAction = UIAlertAction(title: "Retry", style: UIAlertActionStyle.default) {
+            UIAlertAction in
+            retry(true)
+            
+        }
+        
+        // Add the actions
+        alertController.addAction(okAction)
+        
+        // Present the controller
+        self.present(alertController, animated: true, completion: nil)
+    }
     
     func getAndSaveUserToDb(){
         let manager = NetworkHandler()

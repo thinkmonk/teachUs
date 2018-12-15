@@ -18,7 +18,7 @@ class MarkStudentAttendance {
 
 
     var offlineStudent:Offline_Student_list?
-    init(_ offlineStudentDetail:Offline_Student_list, _ isStudentPresent:Bool) {
+    init(offlineStudentDetail:Offline_Student_list, _ isStudentPresent:Bool) {
         self.offlineStudent = offlineStudentDetail
         self.isPrsent = isStudentPresent
     }

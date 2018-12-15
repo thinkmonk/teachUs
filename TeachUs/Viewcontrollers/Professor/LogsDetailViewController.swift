@@ -17,7 +17,7 @@ class LogDetailSyllabus {
 
 
 class LogsDetailViewController: BaseViewController {
-
+    
     var logClass:LogsClassList!
     var arrayDataSource:[ProfessorLogsDataSource]! = []
     var arrayLogsDetails:[LogDetails] = []
@@ -25,7 +25,7 @@ class LogsDetailViewController: BaseViewController {
     var selectedIndex:Int = 0
     var allCollegeArray:[College] = []
     var calenderView: ViewLogsCalender? // declare variable inside your controller
-
+    
     @IBOutlet weak var tableLogsDetail: UITableView!
     @IBOutlet weak var buttonPreviousSubject: UIButton!
     @IBOutlet weak var buttonNextSubject: UIButton!
@@ -40,13 +40,11 @@ class LogsDetailViewController: BaseViewController {
         self.getLogs(fromDate: "", toDate: "")
         self.tableLogsDetail.register(UINib(nibName: "LogsDetailTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.LogsDetailTableViewCellId)
         self.tableLogsDetail.register(UINib(nibName: "SyllabusDetailsTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.SyllabusDetailsTableViewCellId)
-
+        
         var image = UIImage(named:Constants.Images.calendarWhite)
         image = image?.withRenderingMode(.alwaysOriginal)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style:.plain, target: self, action: #selector(LogsDetailViewController.showCalenderView))
-        
         self.setUpButtons()
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,7 +74,7 @@ class LogsDetailViewController: BaseViewController {
             LoadingActivityHUD.hideProgressHUD()
             self.arrayLogsDetails.removeAll()
             self.title = self.allCollegeArray[self.selectedIndex].subjectName
-
+            
             guard let logs = response["subject_logs"] as? [[String:Any]] else{
                 self.arrayDataSource.removeAll()
                 self.tableLogsDetail.reloadData()
@@ -89,8 +87,13 @@ class LogsDetailViewController: BaseViewController {
             }
             for log in logs{
                 let tempLog = Mapper<LogDetails>().map(JSON: log)
-                self.arrayLogsDetails.append(tempLog!)
+                //remove all the empty values coming in the logs.
+                if(tempLog?.dateOfSubmission != " " && (tempLog?.unitArray.count)! >= 1){
+                    self.arrayLogsDetails.append(tempLog!)
+                }
             }
+            
+            self.arrayLogsDetails.sort(by: { ($0.lectureDate.convertToDate()!) > ($1.lectureDate.convertToDate()!) })
             self.makeDataSource()
             self.showTableView()
         }) { (success, code, message) in
@@ -99,7 +102,7 @@ class LogsDetailViewController: BaseViewController {
             print(message)
         }
     }
-
+    
     @objc func showCalenderView(){
         if calenderView == nil{
             calenderView = Bundle.main.loadNibNamed("ViewLogsCalender", owner: self, options: nil)?.first as? ViewLogsCalender
@@ -121,7 +124,7 @@ class LogsDetailViewController: BaseViewController {
         for log in self.arrayLogsDetails{
             let detailsDataSource = ProfessorLogsDataSource(celType: .LogDetails, attachedObject: log)
             self.arrayDataSource.append(detailsDataSource)
-
+            
             for unit in log.unitArray{
                 for chapter in unit.topicArray!{
                     let attachedSyllabus = LogDetailSyllabus()
@@ -133,7 +136,7 @@ class LogsDetailViewController: BaseViewController {
                 }
             }
         }
-//        self.showTableView()
+        //        self.showTableView()
         self.tableLogsDetail.reloadData()
     }
     
@@ -146,13 +149,13 @@ class LogsDetailViewController: BaseViewController {
     }
     
     func setUpButtons(){
-       if  self.selectedIndex == 0 {
+        if  self.selectedIndex == 0 {
             buttonPreviousSubject.isEnabled = false
             self.buttonNextSubject.isEnabled = true
         }else if self.selectedIndex == self.allCollegeArray.count-1 {
             buttonPreviousSubject.isEnabled = true
             self.buttonNextSubject.isEnabled = false
-       }else{
+        }else{
             self.buttonNextSubject.isEnabled = true
             self.buttonPreviousSubject.isEnabled = true
         }
@@ -195,7 +198,7 @@ extension LogsDetailViewController:UITableViewDelegate, UITableViewDataSource{
             cell.labelAttendanceCount.text = logs.totalStudentAttendance
             cell.labelLectureTime.text = "\(logs.fromTime) to \(logs.toTime)"
             cell.viewTimeOfSubject.alpha = 1
-//            let datstring = logs.dateOfSubmission.getDateFromString()
+            //            let datstring = logs.dateOfSubmission.getDateFromString()
             cell.labelDate.text = "\(logs.lectureDate)"
             cell.labelTimeOfSubmission.text = "\(logs.dateOfSubmission)"
             cell.selectionStyle = .none
