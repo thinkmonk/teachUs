@@ -27,7 +27,8 @@
 import Foundation
 import ObjectMapper
 
-class RatingClassList:Mappable{
+class RatingClassList:Mappable, Equatable{
+    
     
     var courseName:String = ""
     var totalRate:String = ""
@@ -47,6 +48,9 @@ class RatingClassList:Mappable{
     }
     
     
+    static func == (lhs: RatingClassList, rhs: RatingClassList) -> Bool {
+        return lhs.classId == rhs.classId
+    }
     
     
 }

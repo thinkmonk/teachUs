@@ -15,6 +15,9 @@ class LoginViewController: BaseViewController {
     var StudentOtpView:OtpView!
     var collegeLogin:CollegeLogin!
     var username:String = ""
+    var otpTime:Int = 180
+    var otpTimeUpdated:Int!
+    var otpTimer:Timer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,14 +45,14 @@ class LoginViewController: BaseViewController {
         
         switch UserManager.sharedUserManager.user! {
         case .Student, .Professor:
-            studentLoginView = LoginView.instanceFromNib() as! LoginView
+            studentLoginView = (LoginView.instanceFromNib() as! LoginView)
             studentLoginView.userType = UserManager.sharedUserManager.user!
             studentLoginView.setUpView()
             studentLoginView.showView(inView: self.view)
             studentLoginView.delegate = self
             break
         case .College:
-            collegeLogin = CollegeLogin.instanceFromNib() as! CollegeLogin
+            collegeLogin = (CollegeLogin.instanceFromNib() as! CollegeLogin)
             collegeLogin.delegate = self
             collegeLogin.setUpView()
             self.collegeLogin.showView(inView: self.view, yPosition: (self.statusBarHeight+self.navBarHeight+20))
@@ -181,12 +184,41 @@ extension LoginViewController:OtpDelegate{
             print(message)
         }
     }
-    
     func showOtpView(){
+        
         if(self.StudentOtpView != nil){
-            self.StudentOtpView.buttonSendOtp.setTitle("Resend OTP", for: UIControlState.normal)
+            otpTimeUpdated = otpTime
+            GlobalFunction.minutesAndSecsFrom(seconds: otpTimeUpdated) { (mins, secs) in
+                let minutes = GlobalFunction.getStringFrom(seconds: mins)
+                let seconds = GlobalFunction.getStringFrom(seconds: secs)
+                self.StudentOtpView.labelOtpTimeLeft.text = "Resend OTP \(minutes):\(seconds)  "
+            }
+            self.StudentOtpView.buttonSendOtp.isHidden = true
+            self.StudentOtpView.buttonSendOtp.isEnabled = false
+            self.StudentOtpView.labelOtpTimeLeft.isHidden = false
+            self.StudentOtpView.labelOtpTimeLeft.backgroundColor = UIColor.lightGray
+            otpTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(LoginViewController.enableButton), userInfo: nil, repeats: true)
+
             self.StudentOtpView.setUpOtpView()
             self.StudentOtpView.showOtpView()
+        }
+    }
+    
+    @objc func enableButton(){
+        otpTimeUpdated -= 1
+        print(otpTimeUpdated)
+        GlobalFunction.minutesAndSecsFrom(seconds: otpTimeUpdated) { (mins, secs) in
+            let minutes = GlobalFunction.getStringFrom(seconds: mins)
+            let seconds = GlobalFunction.getStringFrom(seconds: secs)
+            self.StudentOtpView.labelOtpTimeLeft.text = "Resend OTP \(minutes):\(seconds)  "
+        }
+        if(Int(otpTimeUpdated) == 0){
+            self.StudentOtpView.labelOtpTimeLeft.isHidden = true
+            self.StudentOtpView.buttonSendOtp.isHidden = false
+            self.StudentOtpView.buttonSendOtp.backgroundColor = Constants.colors.themeBlue
+            self.StudentOtpView.buttonSendOtp.isEnabled = true
+            self.StudentOtpView.buttonSendOtp.setTitle("Resend OTP", for: UIControlState.normal)
+            otpTimer.invalidate()
         }
     }
     
@@ -250,6 +282,36 @@ extension LoginViewController:CollegeLoginDelegate{
         if(self.collegeLogin != nil){
             collegeLogin.setUpVerifyOtpView()
             collegeLogin.textFieldOtp.becomeFirstResponder()
+            otpTimeUpdated = otpTime
+            GlobalFunction.minutesAndSecsFrom(seconds: otpTimeUpdated) { (mins, secs) in
+                let minutes = GlobalFunction.getStringFrom(seconds: mins)
+                let seconds = GlobalFunction.getStringFrom(seconds: secs)
+                self.collegeLogin.labelOtpTimeLeft.text = "Resend OTP \(minutes):\(seconds)  "
+            }
+            self.collegeLogin.buttonSendOtp.isHidden = true
+            self.collegeLogin.buttonSendOtp.isEnabled = false
+            self.collegeLogin.labelOtpTimeLeft.isHidden = false
+            self.collegeLogin.labelOtpTimeLeft.backgroundColor = UIColor.lightGray
+            otpTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(LoginViewController.enableCollegeResendOtpButton), userInfo: nil, repeats: true)
+
+        }
+    }
+    
+    @objc func enableCollegeResendOtpButton(){
+        otpTimeUpdated -= 1
+        print(otpTimeUpdated)
+        GlobalFunction.minutesAndSecsFrom(seconds: otpTimeUpdated) { (mins, secs) in
+            let minutes = GlobalFunction.getStringFrom(seconds: mins)
+            let seconds = GlobalFunction.getStringFrom(seconds: secs)
+            self.collegeLogin.labelOtpTimeLeft.text = "Resend OTP \(minutes):\(seconds)  "
+        }
+        if(Int(otpTimeUpdated) == 0){
+            self.collegeLogin.labelOtpTimeLeft.isHidden = true
+            self.collegeLogin.buttonSendOtp.isHidden = false
+            self.collegeLogin.buttonSendOtp.backgroundColor = Constants.colors.themeBlue
+            self.collegeLogin.buttonSendOtp.isEnabled = true
+            self.collegeLogin.buttonSendOtp.setTitle("Resend OTP", for: UIControlState.normal)
+            otpTimer.invalidate()
         }
     }
     

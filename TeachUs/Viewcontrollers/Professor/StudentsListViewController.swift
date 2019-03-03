@@ -12,7 +12,7 @@ import RxCocoa
 import RxSwift
 
 class StudentsListViewController: BaseViewController {
-
+    
     var selectedCollege:College!
     var arrayStudentsDetails:[EnrolledStudentDetail] = []
     var arrayDataSource:[AttendanceDatasource] = []
@@ -28,11 +28,12 @@ class StudentsListViewController: BaseViewController {
     private var currentOpenProfileIndexPath: IndexPath = IndexPath(row: -1, section: 0)
     var isDefaultAttencdanceChanged:Bool = true
     var parameters:[String:Any] = [:]
-
+    var syllabusData:[String:Any] = [:]
+    
     
     let disposeBag = DisposeBag()
     
-
+    
     @IBOutlet weak var tableStudentList: UITableView!
     @IBOutlet weak var buttonSubmit: UIButton!
     @IBOutlet weak var topConstraintButtonSubmit: NSLayoutConstraint!
@@ -47,7 +48,15 @@ class StudentsListViewController: BaseViewController {
         if(selectedCollege != nil)
         {
             self.title = selectedCollege.subjectName!
-            self.getEnrolledStudentsList()
+            let dataQueue = OperationQueue()
+            dataQueue.addOperation {
+                self.getEnrolledStudentsList()
+            }
+            dataQueue.addOperation {
+                self.getTopics()
+            }
+            dataQueue.waitUntilAllOperationsAreFinished()
+            
         }
         
         self.tableStudentList.register(UINib(nibName: "AttendanceCalenderTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.AttendanceCalenderTableViewCellId)
@@ -60,8 +69,8 @@ class StudentsListViewController: BaseViewController {
         numberPicker = ViewNumberPicker.instanceFromNib() as? ViewNumberPicker
         numberPicker.setUpPicker()
         numberPicker.buttonOk.addTarget(self, action: #selector(StudentsListViewController.dismissNumberPicker), for: .touchUpInside)
-
-
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,6 +79,12 @@ class StudentsListViewController: BaseViewController {
         self.addColorToNavBarText(color: UIColor.white)
         self.buttonSubmit.themeRedButton()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        ReachabilityManager.shared.pauseMonitoring()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -87,7 +102,6 @@ class StudentsListViewController: BaseViewController {
         manager.apiPost(apiName: "Get student list", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             if(code == 200){
-                
                 let studentDetailArray = response["student_list"] as! [[String:Any]]
                 for student in studentDetailArray{
                     let studentDetail = Mapper<EnrolledStudentDetail>().map(JSON: student)
@@ -99,25 +113,59 @@ class StudentsListViewController: BaseViewController {
                 else{
                     self.arrayStudentsDetails.sort( by: {$0.studentRollNo!.localizedStandardCompare($1.studentRollNo!) == .orderedAscending})
                     
-
-//                    self.arrayStudentsDetails.sort(by: {$0.studentRollNo! < $1.studentRollNo!})
+                    
+                    //                    self.arrayStudentsDetails.sort(by: {$0.studentRollNo! < $1.studentRollNo!})
                 }
                 
                 
-//                self.arrayStudentsDetails.sort(by: {Int($0.studentRollNo!)! < Int($1.studentRollNo!)!})
+                //                self.arrayStudentsDetails.sort(by: {Int($0.studentRollNo!)! < Int($1.studentRollNo!)!})
                 if(self.arrayStudentsDetails.count > 0){
                     self.setUpTableView()
                 }
+            }
+            else{
+                self.showErrorAlert(ErrorType.ServerCallFailed, retry: { (retry) in
+                    if(retry){
+                        self.getEnrolledStudentsList()
+                    }
+                })
             }
         }) { (error, code, errorMessage) in
             LoadingActivityHUD.hideProgressHUD()
             print(errorMessage)
         }
     }
- 
+    
+    func getTopics(){
+        let manager = NetworkHandler()
+        manager.url = URLConstants.ProfessorURL.getSyllabusSuubjectDetails
+        var parameters = [String:Any]()
+        parameters["subject_id"] = "\(selectedCollege.subjectId!)"
+        parameters["class_id"] = "\(selectedCollege.classId!)"
+        parameters["college_code"] = UserManager.sharedUserManager.appUserCollegeDetails.college_code
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        
+        
+        manager.apiPost(apiName: "Get topics for professor", parameters: parameters, completionHandler: { (sucess, code, response) in
+            LoadingActivityHUD.hideProgressHUD()
+            if(code == 200){
+                self.syllabusData = response
+            }else{
+                self.showErrorAlert(ErrorType.ServerCallFailed, retry: { (retry) in
+                    if(retry){
+                        self.getTopics()
+                    }
+                })
+            }
+        }) { (error, code, message) in
+            LoadingActivityHUD.hideProgressHUD()
+            self.showAlterWithTitle("Error", alertMessage: message)
+            
+        }
+    }
+    
     
     func setUpTableView(){
-        print("Yoo")
         self.tableStudentList.delegate = self
         self.tableStudentList.dataSource = self
         self.makeDataSource()
@@ -154,7 +202,7 @@ class StudentsListViewController: BaseViewController {
                 let studentAttendance:MarkStudentAttendance = MarkStudentAttendance(student.student!, student.isPrsent!)
                 let studentDetailDataSource = AttendanceDatasource(celType: .studentProfile, attachedObject: studentAttendance)
                 studentDetailDataSource.isSelected = false
-//                AttendanceManager.sharedAttendanceManager.arrayStudents.value.append(studentAttendance)
+                //                AttendanceManager.sharedAttendanceManager.arrayStudents.value.append(studentAttendance)
                 arrayDataSource.append(studentDetailDataSource)
             }
         }
@@ -179,12 +227,16 @@ class StudentsListViewController: BaseViewController {
                 calenderFloatingView.labelTime.text = "From \(self.fromTimePicker.timeString) to \(self.toTimePicker.timeString) "
                 calenderFloatingView.labelNumberOfLectures.text = "Number of lectures: \(self.numberPicker.selectedValue.value)"
             }
-
+            
         }
     }
     
     func checkLectureTiming() -> Bool{
-        if(self.fromTimePicker.picker.date < self.toTimePicker.picker.date){
+        let difference = Calendar.current.dateComponents([.hour, .minute], from: self.fromTimePicker.picker.date, to: self.toTimePicker.picker.date)
+        #if DEBUG
+        print(difference)
+        #endif
+        if(difference.hour! > 0 || difference.minute! > 0){
             return true
         }else{
             self.showAlterWithTitle("Wrong Date Range", alertMessage: "From time should be lesser than to time!")
@@ -232,7 +284,7 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
             if(self.datePicker != nil){
                 cell.labelDate.text = "\(self.datePicker.dateString)"
             }
-
+            
             //To time
             cell.buttonToTime.addTarget(self, action: #selector(StudentsListViewController.showToTimePicker), for: .touchUpInside)
             let toTimeTap = UITapGestureRecognizer(target: self, action: #selector(StudentsListViewController.showToTimePicker))
@@ -243,7 +295,7 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
             if(self.toTimePicker != nil){
                 cell.textFieldToTime.text =  "\(self.toTimePicker.timeString)"
             }
-
+            
             //from time
             cell.buttonFromTime.addTarget(self, action: #selector(StudentsListViewController.showFromTimePicker), for: .touchUpInside)
             let fromTimeTap = UITapGestureRecognizer(target: self, action: #selector(StudentsListViewController.showFromTimePicker))
@@ -272,7 +324,7 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
             
         case .defaultSelection:
             let cell:DefaultSelectionTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.DefaultSelectionTableViewCellId, for: indexPath) as! DefaultSelectionTableViewCell
-
+            
             cell.delegate = self
             cell.selectionStyle = .none
             return cell
@@ -282,9 +334,9 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
             let presentStudents = AttendanceManager.sharedAttendanceManager.arrayStudents.value.filter{$0.isPrsent == true}
             cell.labelAttendanceCount.text = "\(presentStudents.count)"
             cell.labelPresent.text = presentStudents.count <= 1 ? "PRESENT":"PRESENTS"
-
+            
             cell.selectionStyle = .none
-
+            
             return cell
             
         case .studentProfile:
@@ -297,7 +349,11 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
             cell.labelAttendancePercent.text = "\(object.student?.percentage! ?? "NA") %"
             cell.labelLastLectureAttendance.text = object.student?.lastLectureAttendance != nil ? object.student?.lastLectureAttendance! : "NIL"
             cell.clipsToBounds = true
-            cell.imageViewProfile.imageFromServerURL(urlString: (object.student?.imageUrl!)!, defaultImage: Constants.Images.defaultMale)
+            if(!(object.student!.imageUrl?.isEmpty)!){
+                cell.imageViewProfile.imageFromServerURL(urlString: (object.student?.imageUrl!)!, defaultImage: Constants.Images.defaultMale)
+            }else{
+                cell.imageViewProfile.image = UIImage(named: Constants.Images.defaultMale)
+            }
             
             //TODO:  -3 is for previous sections (calender, default selection, attendance count ) <- IMPORTANT
             
@@ -305,20 +361,20 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
             cell.buttonAttendance.addTarget(self, action: #selector(StudentsListViewController.markAttendance), for: .touchUpInside)
             cell.buttonAttendance.indexPath = indexPath
             cell.setUpCell()
-//            cell.setUpRx()
-//            if(currentOpenProfileIndexPath != nil)
-//            {
-//                if(currentOpenProfileIndexPath.section == indexPath.section){
-//                    cell.isExpanded = true
-//                    cell.viewAttendanceDetails.alpha = 1
-//                }else{
-//                    cell.isExpanded = false
-//                    cell.viewAttendanceDetails.alpha = 0
-//                }
-//            }else{
-//                cell.isExpanded = false
-//                cell.viewAttendanceDetails.alpha = 0
-//            }
+            //            cell.setUpRx()
+            //            if(currentOpenProfileIndexPath != nil)
+            //            {
+            //                if(currentOpenProfileIndexPath.section == indexPath.section){
+            //                    cell.isExpanded = true
+            //                    cell.viewAttendanceDetails.alpha = 1
+            //                }else{
+            //                    cell.isExpanded = false
+            //                    cell.viewAttendanceDetails.alpha = 0
+            //                }
+            //            }else{
+            //                cell.isExpanded = false
+            //                cell.viewAttendanceDetails.alpha = 0
+            //            }
             cell.selectionStyle = .none
             return cell
         }
@@ -335,7 +391,7 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
             
         case .attendanceCount:
             return 40
-
+            
         case .studentProfile:
             if(indexPath.section == currentOpenProfileIndexPath.section)
             {
@@ -345,11 +401,11 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
                 return 100
             }
         }
-}
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cellDataSource = arrayDataSource[indexPath.section]
-
+        
         if(cellDataSource.AttendanceCellType! == .studentProfile){
             if(currentOpenProfileIndexPath == indexPath){
                 currentOpenProfileIndexPath = IndexPath(row: -1, section: 0)
@@ -359,11 +415,11 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
                 tableView.endUpdates()
             }
             else{
-            self.currentOpenProfileIndexPath = indexPath
-            let cell:AttendanceStudentListTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.AttendanceStudentListTableViewCellId, for: indexPath) as! AttendanceStudentListTableViewCell
-            tableView.beginUpdates()
-            cell.isExpanded = true
-            tableView.endUpdates()
+                self.currentOpenProfileIndexPath = indexPath
+                let cell:AttendanceStudentListTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.AttendanceStudentListTableViewCellId, for: indexPath) as! AttendanceStudentListTableViewCell
+                tableView.beginUpdates()
+                cell.isExpanded = true
+                tableView.endUpdates()
             }
         }
     }
@@ -373,7 +429,7 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
         switch cellDataSource.AttendanceCellType! {
             
         case .defaultSelection,
-         .attendanceCount:
+             .attendanceCount:
             return 0
             
         default:
@@ -386,7 +442,7 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
         headerView.backgroundColor = UIColor.clear
         
         return headerView
-
+        
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -411,7 +467,7 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     @objc func showDatePicker(){
-            datePicker.showView(inView: self.view)
+        datePicker.showView(inView: self.view)
     }
     
     @objc func showFromTimePicker(){
@@ -431,7 +487,7 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
             toTimePicker.setUpPicker(type: .time)
             toTimePicker.showView(inView: self.view)
             toTimePicker.buttonOk.addTarget(self, action: #selector(StudentsListViewController.dismissToTimePicker), for: .touchUpInside)
-
+            
         }else{
             toTimePicker.showView(inView: self.view)
         }
@@ -447,7 +503,7 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
         }else{
             numberPicker.showView(inView: self.view)
         }
-
+        
     }
     
     @objc func dismissFromTimePicker(){
@@ -535,7 +591,7 @@ extension StudentsListViewController:UIScrollViewDelegate{
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y > 210 {
             self.calenderFloatingView.alpha = (scrollView.contentOffset.y/260)
-//        } else if scrollView.contentOffset.y < 320  {
+            //        } else if scrollView.contentOffset.y < 320  {
         }else{
             self.calenderFloatingView.alpha = ((scrollView.contentOffset.y - 210)/260)
         }
@@ -563,13 +619,14 @@ extension StudentsListViewController:ViewConfirmAttendanceDelegate{
         // add an action (button)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { _ in
             self.performSegue(withIdentifier: Constants.segues.markPortionCompleted, sender: self)
-            }))
+        }))
         self.present(alert, animated: true, completion:nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == Constants.segues.markPortionCompleted){
             let destinationVC:MarkCompletedPortionViewController = segue.destination as! MarkCompletedPortionViewController
+            destinationVC.syllabusData = self.syllabusData
             destinationVC.selectedCollege = self.selectedCollege
             destinationVC.attendanceId = self.markedAttendanceId
             destinationVC.attendanceParameters = self.parameters

@@ -27,7 +27,7 @@ class CollegeLogin: UIView {
     @IBOutlet weak var stackViewEnterOTp: UIStackView!
     @IBOutlet weak var textFieldOtp: UITextField!
     @IBOutlet weak var buttonVerifyOtp: UIButton!
-    
+    @IBOutlet weak var labelOtpTimeLeft: UILabel!
     
     var disposeBag: DisposeBag! = DisposeBag()
     var delegate:CollegeLoginDelegate!
@@ -70,6 +70,8 @@ class CollegeLogin: UIView {
         self.buttonVerifyOtp.roundedRedButton()
         self.viewsendOtp.alpha = 1
         self.viewVerifyOtp.alpha = 0
+        self.labelOtpTimeLeft.makeViewCircular()
+        self.labelOtpTimeLeft.isHidden = true
 
     }
     

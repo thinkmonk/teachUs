@@ -56,9 +56,8 @@ class OfflineStudentListViewController: BaseViewController {
         
         numberPicker = ViewNumberPicker.instanceFromNib() as? ViewNumberPicker
         numberPicker.setUpPicker()
+        NotificationCenter.default.addObserver(self, selector: #selector(viewDidBecomeActive), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         numberPicker.buttonOk.addTarget(self, action: #selector(StudentsListViewController.dismissNumberPicker), for: .touchUpInside)
-
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,10 +66,22 @@ class OfflineStudentListViewController: BaseViewController {
         self.addColorToNavBarText(color: UIColor.white)
         self.buttonSubmit.themeRedButton()
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
+    @objc func viewDidBecomeActive(){
+        #if DEBUG
+            print("viewDidBecomeActive")
+        #endif
+
+        ReachabilityManager.shared.pauseMonitoring()
+    }
     
     func getEnrolledStudentsList(){
         self.arrayStudentsDetails = self.selectedCollege.student_list!
@@ -157,7 +168,11 @@ class OfflineStudentListViewController: BaseViewController {
     }
     
     func checkLectureTiming() -> Bool{
-        if(self.fromTimePicker.picker.date < self.toTimePicker.picker.date){
+        let difference = Calendar.current.dateComponents([.hour, .minute], from: self.fromTimePicker.picker.date, to: self.toTimePicker.picker.date)
+        #if DEBUG
+            print(difference)
+        #endif
+        if(difference.hour! > 0 || difference.minute! > 0){
             return true
         }else{
             self.showAlterWithTitle("Wrong Date Range", alertMessage: "From time should be lesser than to time!")

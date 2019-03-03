@@ -19,10 +19,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="109.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9m5-K4-p9n">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="109.5"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="0.5" colorSpace="calibratedWhite"/>
-                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chapter number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NFO-he-lg1">
                         <rect key="frame" x="10" y="15" width="96" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
@@ -90,6 +86,10 @@
                         <constraints>
                             <constraint firstAttribute="width" constant="1" id="Aef-kJ-Sg0"/>
                         </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9m5-K4-p9n">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="109.5"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="0.5" colorSpace="calibratedWhite"/>
                     </view>
                 </subviews>
                 <constraints>

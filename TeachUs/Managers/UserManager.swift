@@ -361,4 +361,21 @@ class UserManager{
         self.saveDbContext()
         self.initOfflineUser()
     }
+    
+    //log out un authorised user
+    func logOutUser(){
+        UserManager.sharedUserManager.setAccessToken("")
+        DatabaseManager.deleteAllEntitiesForEntityName(name: "CollegeDetails")
+        DatabaseManager.deleteAllEntitiesForEntityName(name: "UserDetails")
+        DatabaseManager.deleteAllEntitiesForEntityName(name: "OfflineUserData")
+        DatabaseManager.saveDbContext()
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        UserDefaults.standard.set(nil, forKey: Constants.UserDefaults.collegeName)
+        UserDefaults.standard.set(nil, forKey: Constants.UserDefaults.roleName)
+        UserDefaults.standard.set(nil, forKey: Constants.UserDefaults.loginUserType)
+        UserDefaults.standard.set(nil, forKey: Constants.UserDefaults.accesToken)
+        UserDefaults.standard.synchronize()
+        let viewController = mainStoryboard.instantiateViewController(withIdentifier: Constants.viewControllerId.LoginSelectNavBarControllerId) as! UINavigationController
+        UIApplication.shared.keyWindow?.rootViewController = viewController
+    }
 }

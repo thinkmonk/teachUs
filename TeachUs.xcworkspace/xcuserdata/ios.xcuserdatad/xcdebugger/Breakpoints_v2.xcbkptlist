@@ -10,141 +10,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TeachUs/Viewcontrollers/Professor/StudentsListViewController.swift"
-            timestampString = "566563744.471168"
+            timestampString = "573309177.350415"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "445"
-            endingLineNumber = "445"
-            landmarkName = "showNumberPicker()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TeachUs/Viewcontrollers/College/CollegeAttendance/CollegeAttendanceListViewController.swift"
-            timestampString = "565961711.07549"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
-            landmarkName = "prepare(for:sender:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TeachUs.CollegeAttendanceListViewController.prepare(for: __C.UIStoryboardSegue, sender: Swift.Optional&lt;Any&gt;) -&gt; ()"
-                  moduleName = "TeachUs"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ios/Documents/teachUs/TeachUs/Viewcontrollers/College/CollegeAttendance/CollegeAttendanceListViewController.swift"
-                  timestampString = "565958021.734867"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "120"
-                  endingLineNumber = "120"
-                  offsetFromSymbolStart = "453">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TeachUs.CollegeAttendanceListViewController.prepare(for: __C.UIStoryboardSegue, sender: Swift.Optional&lt;Any&gt;) -&gt; ()"
-                  moduleName = "TeachUs"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ios/Documents/teachUs/TeachUs/Viewcontrollers/College/CollegeAttendance/CollegeAttendanceListViewController.swift"
-                  timestampString = "565958021.738183"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "120"
-                  endingLineNumber = "120"
-                  offsetFromSymbolStart = "1499">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TeachUs/Networking/ReachabilityManager.swift"
-            timestampString = "566563744.471307"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "reachabilityChanged(notification:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TeachUs/Networking/ReachabilityManager.swift"
-            timestampString = "566563744.471386"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
-            landmarkName = "networkReachbleActions()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TeachUs/Viewcontrollers/Offline/UploadOfflineDataViewController.swift"
-            timestampString = "566563744.471467"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
-            landmarkName = "submitSyllabus()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.UIAlertAction) -&gt; () in closure #1 (Swift.Bool, Swift.Int, Swift.Dictionary&lt;Swift.String, Any&gt;) -&gt; () in TeachUs.UploadOfflineDataViewController.submitSyllabus() -&gt; ()"
-                  moduleName = "TeachUs"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ios/Documents/teachUs/TeachUs/Viewcontrollers/Offline/UploadOfflineDataViewController.swift"
-                  timestampString = "566560320.308183"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "90"
-                  endingLineNumber = "90"
-                  offsetFromSymbolStart = "20">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in closure #1 (__C.UIAlertAction) -&gt; () in closure #1 (Swift.Bool, Swift.Int, Swift.Dictionary&lt;Swift.String, Any&gt;) -&gt; () in TeachUs.UploadOfflineDataViewController.submitSyllabus() -&gt; ()"
-                  moduleName = "TeachUs"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ios/Documents/teachUs/TeachUs/Viewcontrollers/Offline/UploadOfflineDataViewController.swift"
-                  timestampString = "566560320.311361"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "91"
-                  endingLineNumber = "91"
-                  offsetFromSymbolStart = "17">
-               </Location>
-            </Locations>
+            startingLineNumber = "495"
+            endingLineNumber = "495"
+            landmarkName = "StudentsListViewController"
+            landmarkType = "21">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -169,61 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TeachUs/Viewcontrollers/RootViewController.swift"
-            timestampString = "566560452.587116"
+            filePath = "TeachUs/Viewcontrollers/Offline/UploadOfflineDataViewController.swift"
+            timestampString = "566656652.152545"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "17"
-            endingLineNumber = "17"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TeachUs/Networking/ReachabilityManager.swift"
-            timestampString = "566563744.4715739"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
-            landmarkName = "networkReachbleActions()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TeachUs/Networking/ReachabilityManager.swift"
-            timestampString = "566563744.471637"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
-            landmarkName = "networkReachbleActions()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TeachUs/Networking/ReachabilityManager.swift"
-            timestampString = "566563744.471698"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
-            landmarkName = "networkReachbleActions()"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
+            landmarkName = "markSyllabusAndAttendance()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -234,12 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TeachUs/Viewcontrollers/Offline/UploadOfflineDataViewController.swift"
-            timestampString = "566563744.4717619"
+            timestampString = "566656652.153993"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
-            landmarkName = "submitSyllabus()"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
+            landmarkName = "markSyllabusAndAttendance()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -249,13 +73,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TeachUs/Viewcontrollers/RootViewController.swift"
-            timestampString = "566560452.5873851"
+            filePath = "TeachUs/Viewcontrollers/Offline/OfflineMarkCompletedPortionViewController.swift"
+            timestampString = "566770756.862177"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
-            landmarkName = "checkLogin()"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "viewDidBecomeActive()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -265,13 +89,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TeachUs/Networking/ReachabilityManager.swift"
-            timestampString = "566563744.471838"
+            filePath = "TeachUs/Viewcontrollers/Professor/MarkCompletedPortionViewController.swift"
+            timestampString = "569651516.454093"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "reachabilityChanged(notification:)"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "getTopics()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -281,13 +105,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TeachUs/Networking/ReachabilityManager.swift"
-            timestampString = "566563744.471892"
+            filePath = "TeachUs/Viewcontrollers/Professor/MarkCompletedPortionViewController.swift"
+            timestampString = "569651516.454782"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
-            landmarkName = "reachabilityChanged(notification:)"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "mapTopicsToDataSource()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -297,13 +121,157 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TeachUs/AppDelegate.swift"
-            timestampString = "566563744.471947"
+            filePath = "TeachUs/Viewcontrollers/Professor/MarkCompletedPortionViewController.swift"
+            timestampString = "569651516.455237"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "mapTopicsToDataSource()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TeachUs/Viewcontrollers/Professor/MarkCompletedPortionViewController.swift"
+            timestampString = "569651516.45564"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "mapTopicsToDataSource()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TeachUs/Viewcontrollers/Professor/MarkCompletedPortionViewController.swift"
+            timestampString = "569651516.456015"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "showTableView()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TeachUs.MarkCompletedPortionViewController.showTableView() -&gt; ()"
+                  moduleName = "TeachUs"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ios/Documents/teachUs/TeachUs/Viewcontrollers/Professor/MarkCompletedPortionViewController.swift"
+                  timestampString = "573335060.806667"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "126"
+                  endingLineNumber = "126"
+                  offsetFromSymbolStart = "373">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in TeachUs.MarkCompletedPortionViewController.showTableView() -&gt; ()"
+                  moduleName = "TeachUs"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ios/Documents/teachUs/TeachUs/Viewcontrollers/Professor/MarkCompletedPortionViewController.swift"
+                  timestampString = "573335060.809728"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "127"
+                  endingLineNumber = "127"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TeachUs/Viewcontrollers/Professor/MarkCompletedPortionViewController.swift"
+            timestampString = "569651516.456411"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
+            landmarkName = "saveAttendanceAndSyllabusToDb()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TeachUs/Viewcontrollers/Offline/OfflineStudentListViewController.swift"
+            timestampString = "569653869.3048249"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TeachUs/Viewcontrollers/Offline/OfflineClassAttendanceViewController.swift"
+            timestampString = "569651754.774385"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "viewDidAppear(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TeachUs/Viewcontrollers/Professor/ProfessorAttedanceViewController.swift"
+            timestampString = "569669770.419777"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "viewDidAppear(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TeachUs/CustomViews/ViewClassSelection/ViewClassSelection.swift"
+            timestampString = "573335229.985148"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "44"
             endingLineNumber = "44"
-            landmarkName = "applicationDidEnterBackground(_:)"
+            landmarkName = "selectAllClasses(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -313,29 +281,45 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TeachUs/AppDelegate.swift"
-            timestampString = "566563744.4719959"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "applicationWillEnterForeground(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TeachUs/AppDelegate.swift"
-            timestampString = "566563744.4720449"
+            filePath = "TeachUs/CustomViews/ViewClassSelection/ViewClassSelection.swift"
+            timestampString = "573335229.985221"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "55"
             endingLineNumber = "55"
-            landmarkName = "applicationDidBecomeActive(_:)"
+            landmarkName = "deselectAllClasses(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TeachUs/CustomViews/ViewClassSelection/ViewClassSelection.swift"
+            timestampString = "573335229.985278"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "tableView(_:didDeselectRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TeachUs/CustomViews/ViewClassSelection/ViewClassSelection.swift"
+            timestampString = "573335229.985328"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

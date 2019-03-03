@@ -9,7 +9,6 @@
 import Foundation
 extension UIImageView {
     public func imageFromServerURL(urlString: String, defaultImage : String?) {
-        print("URL String \(urlString)")
         if let di = defaultImage {
             self.image = UIImage(named: di)
         }
@@ -17,7 +16,10 @@ extension UIImageView {
         URLSession.shared.dataTask(with: NSURL(string: urlString)! as URL, completionHandler: { (data, response, error) -> Void in
             
             if error != nil {
+                #if DEBUG
+                print("Image cannot be downloaded")
                 print(error ?? "error")
+                #endif
                 return
             }
             DispatchQueue.main.async(execute: { () -> Void in

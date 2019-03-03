@@ -43,7 +43,7 @@ class OfflineLeftMenuViewController: BaseViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(LeftMenuViewController.showProfileDropDown))
         self.labelOfflineProfile.isUserInteractionEnabled = true
         self.labelOfflineProfile.addGestureRecognizer(tap)
-        
+
         // Do any additional setup after loading the view.
     }
     
@@ -63,6 +63,7 @@ class OfflineLeftMenuViewController: BaseViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
     func setUpTableView(){
         arrayDataSource = professorDataSource

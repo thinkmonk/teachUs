@@ -9,6 +9,12 @@
 import UIKit
 
 class ReachabilityManager: NSObject {
+    var viewControllersToBeIgnored:[UIViewController] = [
+        StudentsListViewController(),
+        MarkCompletedPortionViewController(),
+        OfflineStudentListViewController(),
+        OfflineMarkCompletedPortionViewController()
+    ]
     
     var isMonitoringPaused:Bool = false
     
@@ -58,7 +64,9 @@ class ReachabilityManager: NSObject {
                 
             }
         case .wifi:
-            debugPrint("Network reachable through WiFi")
+            #if DEBUG
+                debugPrint("Network reachable through WiFi")
+            #endif
             if(self.isOfflineDataAvailable){
                 self.networkReachbleActions()
             }
@@ -69,7 +77,9 @@ class ReachabilityManager: NSObject {
             }
             
         case .cellular:
+            #if DEBUG
             debugPrint("Network reachable through Cellular Data")
+            #endif
             if(self.isOfflineDataAvailable){
                 self.networkReachbleActions()
             }else{
@@ -92,16 +102,37 @@ class ReachabilityManager: NSObject {
     
     /// Starts monitoring the network availability status
     func startMonitoring() {
-        print("Monitoring started")
+        let topVC = GlobalFunction.topViewController()
+        if(!GlobalFunction.checkIfViewcontrollerExitsInArray(topVC!, viewControllersToBeIgnored)){
+            print("Monitoring started")
+            NotificationCenter.default.removeObserver(self, name: Notification.Name.reachabilityChanged, object: reachability)
             NotificationCenter.default.addObserver(self,
                                                    selector: #selector(self.reachabilityChanged),
                                                    name: Notification.Name.reachabilityChanged,
                                                    object: reachability)
-        do{
-            try reachability.startNotifier()
-        } catch {
-            debugPrint("Could not start reachability notifier")
+            do{
+                try reachability.startNotifier()
+            } catch {
+                debugPrint("Could not start reachability notifier")
+            }
         }
+        /*
+        for vc in viewControllersToBeIgnored{
+            if !(vc.isKind(of: (topVC?.classForCoder)!)){
+                print("Monitoring started")
+                NotificationCenter.default.removeObserver(self, name: Notification.Name.reachabilityChanged, object: reachability)
+                NotificationCenter.default.addObserver(self,
+                                                       selector: #selector(self.reachabilityChanged),
+                                                       name: Notification.Name.reachabilityChanged,
+                                                       object: reachability)
+                do{
+                    try reachability.startNotifier()
+                } catch {
+                    debugPrint("Could not start reachability notifier")
+                }
+            }
+        }
+        */
     }
     
     func networkReachbleActions(){

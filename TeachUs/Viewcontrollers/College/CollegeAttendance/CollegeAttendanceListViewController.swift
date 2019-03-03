@@ -14,6 +14,46 @@ class CollegeAttendanceListViewController: BaseViewController {
     var parentNavigationController : UINavigationController?
     var arrayDataSource:[CollegeAttendanceList]? = []
     @IBOutlet weak var tableViewCollegeAttendanceList: UITableView!
+    @IBOutlet weak var layoutReportViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var labelFromDate: UILabel!
+    @IBOutlet weak var buttonFromDate: UIButton!
+    @IBOutlet weak var labelToDate: UILabel!
+    @IBOutlet weak var buttonToDate: UIButton!
+    @IBOutlet weak var labelClass: UILabel!    
+    @IBOutlet weak var buttonSelectClass: UIButton!
+    @IBOutlet weak var buttonClassDropDown: UIButton!
+    @IBOutlet weak var labelCriteria: UILabel!
+    @IBOutlet weak var buttonSelectCriteria: UIButton!
+    @IBOutlet weak var buttonCriteriaDropDown: UIButton!
+    @IBOutlet weak var buttonMailReport: UIButton!
+    @IBOutlet weak var viewMailReportBg: UIView!
+    @IBOutlet weak var viewCriteriaBg: UIView!
+    
+    var viewClassList : ViewClassSelection!
+    var toDate:Date!
+    var fromDate:Date!
+    var fromDatePicker: ViewDatePicker!
+    let criteriaDropDown = DropDown()
+    var activeLabel:UILabel!
+    var selectedCriteria:String = ""
+    var isMailReportVisible:Bool = false
+    var arrayCriteriaList:[String] = ["All",
+                                      "Below 25",
+                                      "Below 30",
+                                      "Below 40",
+                                      "Below 50",
+                                      "Below 60",
+                                      "Below 70",
+                                      "Below 75",]
+    var dateFormatter: DateFormatter {
+        let df = DateFormatter()
+        df.dateFormat = "YYYY-MMM-dd"
+        return df
+    }
+    
+    var bottomViewHeight:CGFloat {
+        return self.buttonMailReport.height() + self.viewMailReportBg.height()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +63,12 @@ class CollegeAttendanceListViewController: BaseViewController {
         self.tableViewCollegeAttendanceList.dataSource = self
         self.tableViewCollegeAttendanceList.alpha = 0.0
         self.tableViewCollegeAttendanceList.addSubview(refreshControl)
-        getClassAttendance()
+        self.showMailView(value: false)
+        self.buttonMailReport.isHidden = true
+        self.getClassAttendance()
+        self.initDatePicker()
+        self.addTapGestures()
+        self.setUpCriteriaDropDown()
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,6 +81,15 @@ class CollegeAttendanceListViewController: BaseViewController {
         super.refresh(sender: sender)
     }
     
+    func showMailView(value:Bool? = false){
+        self.viewMailReportBg.isHidden = !value!
+        self.isMailReportVisible = value!
+        if(value!){
+            self.tableViewCollegeAttendanceList.contentInset = UIEdgeInsetsMake(0, 0, self.bottomViewHeight, 0);
+        }else{
+            self.tableViewCollegeAttendanceList.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        }
+    }
     
     func getClassAttendance(){
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
@@ -56,16 +110,28 @@ class CollegeAttendanceListViewController: BaseViewController {
                 self.arrayDataSource?.append(tempList!)
             }
             self.arrayDataSource?.sort(by: { ($0.year, $0.courseCode, $0.classDivision) < ($1.year, $1.courseCode, $1.classDivision) })
+            self.initClassSelectionView()
+            
             self.tableViewCollegeAttendanceList.reloadData()
             self.showTableView()
-            
-            
+            self.buttonMailReport.isHidden = false
         }) { (error, code, message) in
             print(message)
             LoadingActivityHUD.hideProgressHUD()
         }
     }
     
+    func initClassSelectionView(){
+        self.viewClassList = ViewClassSelection.instanceFromNib() as? ViewClassSelection
+        self.viewClassList.delegate = self
+        
+        //init class selection list after sorting
+        for college in self.arrayDataSource!{
+            let selectedCollegeList = SelectCollegeClass(college, true)
+            self.viewClassList.classListArray.append(selectedCollegeList)
+        }
+
+    }
     
     func showTableView(){
         self.tableViewCollegeAttendanceList.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
@@ -74,7 +140,104 @@ class CollegeAttendanceListViewController: BaseViewController {
             self.tableViewCollegeAttendanceList.transform = CGAffineTransform.identity
         }
     }
+    
+    func initDatePicker(){
+        if(fromDatePicker == nil){
+            fromDatePicker = ViewDatePicker.instanceFromNib() as? ViewDatePicker
+            fromDatePicker.setUpPicker(type: .date)
+            fromDatePicker.buttonOk.addTarget(self, action: #selector(CollegeAttendanceListViewController.dismissDatePicker), for: .touchUpInside)
+            fromDatePicker.picker.minimumDate = NSCalendar.current.date(byAdding: .month, value: -6, to: Date())
+            fromDatePicker.picker.maximumDate = NSCalendar.current.date(byAdding: .month, value: 0, to: Date())
+            self.toDate = Date()
+            self.labelToDate.text  = self.dateFormatter.string(from: self.toDate!)
+            self.fromDate = NSCalendar.current.date(byAdding: .month, value: -1, to: Date())
+            self.labelFromDate.text = self.dateFormatter.string(from: self.fromDate!)
+        }
+    }
+    
+    @objc func dismissDatePicker(){
+        if(fromDatePicker != nil){
+            fromDatePicker.alpha = 0
+            fromDatePicker.removeFromSuperview()
+        }
+        self.activeLabel.text = self.dateFormatter.string(from: self.fromDatePicker.picker.date)
+        switch activeLabel.tag {
+        case 100:
+            fromDate = fromDatePicker.picker.date
+            
+        case 101:
+            toDate = fromDatePicker.picker.date
+            
+        default:
+            return
+        }
+    }
+    
+    func addTapGestures(){
+        let dateTap = UITapGestureRecognizer(target: self, action: #selector(CollegeAttendanceListViewController.showDatePicker(_:)))
+        self.labelFromDate.isUserInteractionEnabled = true
+        self.labelFromDate.addGestureRecognizer(dateTap)
+        
+        let dateToTap = UITapGestureRecognizer(target: self, action: #selector(CollegeAttendanceListViewController.showDatePicker(_:)))
+        self.labelToDate.isUserInteractionEnabled = true
+        self.labelToDate.addGestureRecognizer(dateToTap)
+        
+        let criteriaTap = UITapGestureRecognizer(target: self, action: #selector(CollegeAttendanceListViewController.showCriteriaDropdown(_:)))
+        self.labelCriteria.isUserInteractionEnabled = true
+        self.labelCriteria.addGestureRecognizer(criteriaTap)
+    }
+    
+    func setUpCriteriaDropDown(){
+        self.criteriaDropDown.anchorView = self.buttonSelectCriteria
+        self.criteriaDropDown.bottomOffset = CGPoint(x: 0, y: buttonSelectCriteria.height())
+        self.criteriaDropDown.width = self.viewCriteriaBg.width()
+        
+        for criteria in arrayCriteriaList{
+            self.criteriaDropDown.dataSource.append(criteria)
+        }
+        self.criteriaDropDown.selectionAction = { [unowned self] (index, item) in
+            self.selectedCriteria = self.arrayCriteriaList[index]
+            let criteriaText = "\(self.arrayCriteriaList[index])"
+            self.buttonSelectCriteria.setTitle(criteriaText, for: .normal)
+        }
+    }
+    
+    //MARK:-Outlet Methods
+    @IBAction func showDatePicker(_ sender: Any){
+        if let senderTap:UITapGestureRecognizer = sender as? UITapGestureRecognizer{
+            self.activeLabel = senderTap.view as? UILabel
+        }
+        
+        if let senderButton:UIButton = sender as? UIButton{
+            switch senderButton.tag{
+            case 100:
+                self.activeLabel = self.labelFromDate!
+                
+            case 101:
+                self.activeLabel = self.labelToDate!
+            default:
+                break
+            }
+        }
+        self.fromDatePicker.showView(inView: self.view)
+    }
 
+    @IBAction func showCriteriaDropdown(_ sender: Any) {
+        self.criteriaDropDown.show()
+    }
+    
+    @IBAction func showClassList(_ sender: Any) {
+        self.viewClassList.frame = self.view.frame
+        self.view.addSubview(self.viewClassList)
+    }
+    
+    @IBAction func mailReport(_ sender: Any) {
+        if(!self.isMailReportVisible){
+            self.showMailView(value: true)
+        }else{
+            
+        }
+    }
 }
 
 extension  CollegeAttendanceListViewController: UITableViewDelegate, UITableViewDataSource{
@@ -119,6 +282,13 @@ extension  CollegeAttendanceListViewController: UITableViewDelegate, UITableView
             let destinationVC:CollegeAttendanceDetailsViewController = segue.destination as! CollegeAttendanceDetailsViewController
             destinationVC.collegeClass = self.arrayDataSource![(self.tableViewCollegeAttendanceList.indexPathForSelectedRow?.section)!]
         }
+    }
+}
+
+extension CollegeAttendanceListViewController:ViewClassSelectionDelegate{
+    func classViewDismissed() {
+        self.viewClassList.removeFromSuperview()
+        print("class dismissed")
     }
 }
 

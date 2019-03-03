@@ -82,6 +82,11 @@
 		8137EF531FA109B500045D97 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8137EF521FA109B500045D97 /* LoginViewController.swift */; };
 		8137EF551FA10AD400045D97 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8137EF541FA10AD400045D97 /* Constants.swift */; };
 		8137EF5C1FA10D6A00045D97 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8137EF5B1FA10D6A00045D97 /* UIView.swift */; };
+		813C0DA021EB7C7100B04E61 /* GlobalFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813C0D9F21EB7C7100B04E61 /* GlobalFunction.swift */; };
+		8161AF63222C4650001F73B5 /* ViewClassSelection.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8161AF62222C4650001F73B5 /* ViewClassSelection.xib */; };
+		8161AF65222C467C001F73B5 /* ViewClassSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8161AF64222C467C001F73B5 /* ViewClassSelection.swift */; };
+		8161AF67222C5922001F73B5 /* CollegeClassManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8161AF66222C5922001F73B5 /* CollegeClassManager.swift */; };
+		8161AF69222C5B63001F73B5 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8161AF68222C5B63001F73B5 /* Array.swift */; };
 		8163EB0420541D38003E4B1D /* TeachUs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8163EB0220541D38003E4B1D /* TeachUs.xcdatamodeld */; };
 		8163EB0720557AD9003E4B1D /* CollegeDetails+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8163EB0520557AD9003E4B1D /* CollegeDetails+CoreDataClass.swift */; };
 		8163EB0820557AD9003E4B1D /* CollegeDetails+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8163EB0620557AD9003E4B1D /* CollegeDetails+CoreDataProperties.swift */; };
@@ -332,6 +337,11 @@
 		8137EF521FA109B500045D97 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = TeachUs/Viewcontrollers/LoginViewController.swift; sourceTree = SOURCE_ROOT; };
 		8137EF541FA10AD400045D97 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8137EF5B1FA10D6A00045D97 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		813C0D9F21EB7C7100B04E61 /* GlobalFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunction.swift; sourceTree = "<group>"; };
+		8161AF62222C4650001F73B5 /* ViewClassSelection.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewClassSelection.xib; sourceTree = "<group>"; };
+		8161AF64222C467C001F73B5 /* ViewClassSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewClassSelection.swift; sourceTree = "<group>"; };
+		8161AF66222C5922001F73B5 /* CollegeClassManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeClassManager.swift; sourceTree = "<group>"; };
+		8161AF68222C5B63001F73B5 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		8163EB0320541D38003E4B1D /* TeachUs.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TeachUs.xcdatamodel; sourceTree = "<group>"; };
 		8163EB0520557AD9003E4B1D /* CollegeDetails+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollegeDetails+CoreDataClass.swift"; sourceTree = "<group>"; };
 		8163EB0620557AD9003E4B1D /* CollegeDetails+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollegeDetails+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -750,6 +760,8 @@
 			children = (
 				81D7CE6B1FAB8D5700C4375E /* Page Menu */,
 				817BDAE41FB898C700492822 /* ButtonWithIndexPath.swift */,
+				813C0D9F21EB7C7100B04E61 /* GlobalFunction.swift */,
+				8161AF66222C5922001F73B5 /* CollegeClassManager.swift */,
 			);
 			path = CustomClass;
 			sourceTree = "<group>";
@@ -777,6 +789,7 @@
 		813EC7691F9BA46200F11A12 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				8161AF61222C4633001F73B5 /* ViewClassSelection */,
 				8136E5AC20F7CD480080AECA /* OfflineViews */,
 				819EEC2020A60B8000487467 /* LectureReport */,
 				819E0B3C20A0C9A400D16847 /* LogDetails */,
@@ -814,6 +827,7 @@
 				8185E3412058456500752F81 /* UIImage.swift */,
 				812CB757206FA01200D31C05 /* CALayer.swift */,
 				81E3E3B32077A24A002CFC1D /* String.swift */,
+				8161AF68222C5B63001F73B5 /* Array.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -877,6 +891,15 @@
 				81FEC7F820F10436003FBDBE /* ReachabilityManager.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		8161AF61222C4633001F73B5 /* ViewClassSelection */ = {
+			isa = PBXGroup;
+			children = (
+				8161AF62222C4650001F73B5 /* ViewClassSelection.xib */,
+				8161AF64222C467C001F73B5 /* ViewClassSelection.swift */,
+			);
+			path = ViewClassSelection;
 			sourceTree = "<group>";
 		};
 		8163EB092055BE3A003E4B1D /* ImagePicker */ = {
@@ -1343,6 +1366,7 @@
 				81E3E3B0207778E7002CFC1D /* AttendanceReport.xib in Resources */,
 				81FFB0C31FC0278E00C32097 /* TopicDetailsTableViewCell.xib in Resources */,
 				81E02A42207C9E0800EB6BA8 /* ClassListTableViewCell.xib in Resources */,
+				8161AF63222C4650001F73B5 /* ViewClassSelection.xib in Resources */,
 				81D76B501FC1AA4D005E861C /* SyllabusStatusTableViewCell.xib in Resources */,
 				8135B89B20790D2F008E3E4B /* EventListTableViewCell.xib in Resources */,
 				81C208521FAF4182003D366D /* ProfessorCollegeListTableViewCell.xib in Resources */,
@@ -1602,10 +1626,12 @@
 				810610C01FA65FB30067273E /* LoadingActivityHUD.swift in Sources */,
 				81316DE72165575200820481 /* OfflineTabsViewController.swift in Sources */,
 				8137EF5C1FA10D6A00045D97 /* UIView.swift in Sources */,
+				8161AF65222C467C001F73B5 /* ViewClassSelection.swift in Sources */,
 				81E67400205315B100321257 /* UserCollegeDetails.swift in Sources */,
 				81B203C51FD5422000936F0F /* AppUser.swift in Sources */,
 				812B152C20BAA65C00693183 /* FaveButton.swift in Sources */,
 				81FFB0BE1FBF468000C32097 /* SyllabusChapter.swift in Sources */,
+				813C0DA021EB7C7100B04E61 /* GlobalFunction.swift in Sources */,
 				81A7D060208BA5D80032A1BC /* CollegeProfessorRatingDetailViewController.swift in Sources */,
 				81FFB0B31FBEE0CD00C32097 /* ViewCalenderTop.swift in Sources */,
 				81A80EDF1FAF3DAD00DDFFA1 /* CollegeList.swift in Sources */,
@@ -1635,6 +1661,8 @@
 				81D76B551FC1D600005E861C /* SyllabusDetailsTableViewCell.swift in Sources */,
 				81E4BCE7205E9E7E00674FD4 /* CollegeAttendanceListViewController.swift in Sources */,
 				819EEC2220A60BF400487467 /* ViewLectureReport.swift in Sources */,
+				8161AF67222C5922001F73B5 /* CollegeClassManager.swift in Sources */,
+				8161AF69222C5B63001F73B5 /* Array.swift in Sources */,
 				819EEC2A20A616F000487467 /* LectureReportDataSource.swift in Sources */,
 				81316DE42165575200820481 /* OfflineStudentListViewController.swift in Sources */,
 				8136E5A720F7C6880080AECA /* Offline_Class_list.swift in Sources */,

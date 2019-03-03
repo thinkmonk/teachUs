@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -57,14 +56,23 @@
                                 <action selector="sendOtp:" destination="iN0-l3-epB" eventType="touchUpInside" id="rji-Pf-y77"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Minutes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hpU-IL-i5t">
+                            <rect key="frame" x="142" y="40" width="61" height="30"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="VR9-6U-ajU" firstAttribute="leading" secondItem="Msb-dC-bFg" secondAttribute="leading" id="BXB-gx-yi6"/>
+                        <constraint firstItem="hpU-IL-i5t" firstAttribute="centerX" secondItem="VR9-6U-ajU" secondAttribute="centerX" id="E7i-e2-8Fk"/>
                         <constraint firstAttribute="trailing" secondItem="Msb-dC-bFg" secondAttribute="trailing" id="Pad-Dj-Dtj"/>
                         <constraint firstItem="VR9-6U-ajU" firstAttribute="trailing" secondItem="Msb-dC-bFg" secondAttribute="trailing" id="Xf4-zj-hme"/>
                         <constraint firstAttribute="bottom" secondItem="VR9-6U-ajU" secondAttribute="bottom" id="XwT-99-Yyq"/>
                         <constraint firstItem="Msb-dC-bFg" firstAttribute="top" secondItem="Oo3-jm-3j8" secondAttribute="top" id="ZBF-cF-ux1"/>
+                        <constraint firstItem="hpU-IL-i5t" firstAttribute="height" secondItem="VR9-6U-ajU" secondAttribute="height" id="eEX-EP-8oj"/>
+                        <constraint firstItem="hpU-IL-i5t" firstAttribute="centerY" secondItem="VR9-6U-ajU" secondAttribute="centerY" id="fuK-k8-QrC"/>
                         <constraint firstItem="VR9-6U-ajU" firstAttribute="top" secondItem="Msb-dC-bFg" secondAttribute="bottom" constant="10" id="g6e-8X-YJg"/>
                         <constraint firstItem="VR9-6U-ajU" firstAttribute="height" secondItem="Msb-dC-bFg" secondAttribute="height" id="pwt-Go-nKh"/>
                         <constraint firstItem="Msb-dC-bFg" firstAttribute="leading" secondItem="Oo3-jm-3j8" secondAttribute="leading" id="zpR-bR-kgA"/>
@@ -86,17 +94,17 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7Hx-Jh-wGI">
-                            <rect key="frame" x="75" y="71" width="195" height="30"/>
+                            <rect key="frame" x="72.5" y="71" width="200" height="30"/>
                             <subviews>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="OTP" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zw7-uq-Msu">
-                                    <rect key="frame" x="0.0" y="0.0" width="87.5" height="30"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="90" height="30"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9D3-rh-1LY">
-                                    <rect key="frame" x="107.5" y="0.0" width="87.5" height="30"/>
+                                    <rect key="frame" x="110" y="0.0" width="90" height="30"/>
                                     <state key="normal" title="Submit"/>
                                     <connections>
                                         <action selector="verifyOtp:" destination="iN0-l3-epB" eventType="touchUpInside" id="lan-kn-8Qg"/>
@@ -138,6 +146,7 @@
                 <outlet property="buttonSendOtp" destination="VR9-6U-ajU" id="kwI-7c-UI7"/>
                 <outlet property="buttonVerifyOtp" destination="9D3-rh-1LY" id="Kae-YN-abt"/>
                 <outlet property="labelMobileNumber" destination="agf-v7-lu0" id="05e-FP-Wfg"/>
+                <outlet property="labelOtpTimeLeft" destination="hpU-IL-i5t" id="FkU-9j-oVh"/>
                 <outlet property="stackViewEnterOTp" destination="7Hx-Jh-wGI" id="ClM-Vt-IgM"/>
                 <outlet property="textFieldMobileNumber" destination="FzZ-yn-JJ7" id="Aa0-LD-tXQ"/>
                 <outlet property="textFieldOtp" destination="Zw7-uq-Msu" id="kkO-PA-XaK"/>

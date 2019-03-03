@@ -27,6 +27,7 @@ class OfflineMarkCompletedPortionViewController:BaseViewController {
         self.tableviewTopics.register(UINib(nibName: "TopicDetailsTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.TopicDetailsTableViewCellId)
         self.title = "Syllabus Update"
         navigationItem.hidesBackButton = true
+        NotificationCenter.default.addObserver(self, selector: #selector(viewDidBecomeActive), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         self.getTopics()
         // Do any additional setup after loading the view.
     }
@@ -42,6 +43,13 @@ class OfflineMarkCompletedPortionViewController:BaseViewController {
         self.addColorToNavBarText(color: .white)
         self.buttonSubmit.themeRedButton()
         self.tableviewTopics.alpha = 1.0
+    }
+    
+    @objc func viewDidBecomeActive(){
+        #if DEBUG
+            print("viewDidBecomeActive")
+        #endif
+        ReachabilityManager.shared.pauseMonitoring()
     }
     
     func getTopics(){
@@ -110,7 +118,8 @@ class OfflineMarkCompletedPortionViewController:BaseViewController {
         let manager = NetworkHandler()
         manager.url = URLConstants.ProfessorURL.submitSyllabusCovered
         var parameters = [String:Any]()
-        parameters["college_code"] = "\(UserManager.sharedUserManager.offlineAppuserCollegeDetails.college_code!)"
+        
+//        parameters["college_code"] = "\(UserManager.sharedUserManager.offlineAppuserCollegeDetails.college_code!)"
 //        parameters["att_id"] = self.attendanceId!
         let topicList = ["topic_list":self.updatedTopicList]
         var requestString  =  ""

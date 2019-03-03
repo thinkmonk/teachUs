@@ -9,9 +9,9 @@
 import UIKit
 
 class BaseViewController: UIViewController {
-
+    
     var refreshControl:UIRefreshControl = UIRefreshControl()
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +19,7 @@ class BaseViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(BaseViewController.refresh(sender:)), for: UIControlEvents.valueChanged)
         // Do any additional setup after loading the view.
     }
-
+    
     @objc func refresh(sender:AnyObject) {
         refreshControl.endRefreshing()
     }
@@ -37,19 +37,19 @@ class BaseViewController: UIViewController {
     }
     
     func addGradientToNavBar(){
-         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-         self.navigationController?.navigationBar.shadowImage = UIImage()
-         self.navigationController?.navigationBar.isTranslucent = true
-         self.navigationController?.navigationBar.backgroundColor = UIColor.clear
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.backgroundColor = UIColor.clear
         let gradient = CAGradientLayer()
         gradient.frame = CGRect(x: 0, y: 0, width: UIApplication.shared.statusBarFrame.width, height: statusBarHeight + navBarHeight)
         gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradient.endPoint = CGPoint(x: 1, y: 1)
-//        let color1 = UIColor(red: 116/255, green: 104/255, blue: 218/255, alpha: 1.0)
-  //      let color2 = UIColor(red: 126/255, green: 74/255, blue: 187/255, alpha: 1.0)
+        //        let color1 = UIColor(red: 116/255, green: 104/255, blue: 218/255, alpha: 1.0)
+        //      let color2 = UIColor(red: 126/255, green: 74/255, blue: 187/255, alpha: 1.0)
         let color1 = UIColor(red: 18/255, green: 63/255, blue: 148/255, alpha: 1.0)
         let color2 = UIColor(red: 8/255, green: 47/255, blue: 136/255, alpha: 1.0)
-
+        
         gradient.colors = [color1.cgColor, color2.cgColor]
         UIApplication.shared.windows.last?.layer.addSublayer(gradient)
         self.view.layer.addSublayer(gradient)
@@ -68,17 +68,17 @@ class BaseViewController: UIViewController {
                                 height: statusBarHeight + navBarHeight + CGFloat(Constants.NumberConstants.homeTabBarHeight))
         gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradient.endPoint = CGPoint(x: 1, y: 1)
-      //  let color1 = UIColor(red: 116/255, green: 104/255, blue: 218/255, alpha: 1.0)
+        //  let color1 = UIColor(red: 116/255, green: 104/255, blue: 218/255, alpha: 1.0)
         //let color2 = UIColor(red: 126/255, green: 74/255, blue: 187/255, alpha: 1.0)
         
         let color1 = UIColor(red: 18/255, green: 63/255, blue: 148/255, alpha: 1.0)
         let color2 = UIColor(red: 8/255, green: 47/255, blue: 136/255, alpha: 1.0)
-
+        
         gradient.colors = [color1.cgColor, color2.cgColor]
-//        UIApplication.shared.windows.last?.layer.addSublayer(gradient)
-//        self.view.layer.addSublayer(gradient)
+        //        UIApplication.shared.windows.last?.layer.addSublayer(gradient)
+        //        self.view.layer.addSublayer(gradient)
         self.view.layer.insertSublayer(gradient, at: 0)
-
+        
     }
     
     func addColorToNavBarText(color: UIColor){
@@ -93,7 +93,7 @@ class BaseViewController: UIViewController {
         backgroundImageView.contentMode = .scaleAspectFill
         view.addSubview(backgroundImageView)
         view.sendSubview(toBack: backgroundImageView)
-
+        
     }
     
     func showAlterWithTitle(_ title:String?, alertMessage:String){
@@ -118,16 +118,30 @@ class BaseViewController: UIViewController {
     }
     typealias TryAgainCompletionBlock = () -> Void
     var tryAgainCallBack: TryAgainCompletionBlock = { }
-
-    func showNoInternetAlert(retry: @escaping (_ retry:Bool) -> Void){
-       
-        let alertController = UIAlertController(title: "No Internet", message: "Please check your internet connection", preferredStyle: .alert)
+    
+    enum ErrorType{
+        case NoInternet
+        case ServerCallFailed
+    }
+    
+    func showErrorAlert(_ errorType:ErrorType, retry: @escaping (_ retry:Bool) -> Void){
+        var title:String = ""
+        var description:String = ""
         
+        switch errorType {
+        case .NoInternet:
+            title = "No Internet"
+            description = "Please check your internet connection"
+            
+        case .ServerCallFailed:
+            title = "Error"
+            description = "Failed to conect to server, Please Retry"
+        }
+        let alertController = UIAlertController(title: title, message: description, preferredStyle: .alert)
         // Create the actions
         let okAction = UIAlertAction(title: "Retry", style: UIAlertActionStyle.default) {
             UIAlertAction in
             retry(true)
-            
         }
         
         // Add the actions
@@ -162,9 +176,9 @@ class BaseViewController: UIViewController {
         let manager = NetworkHandler()
         manager.url = URLConstants.Login.userDetails
         let parameters:[String:Any] =
-        [
-            "role_id":"\(UserManager.sharedUserManager.userRole.roleId)",
-            "contact":"\(UserManager.sharedUserManager.getUserMobileNumber())",
+            [
+                "role_id":"\(UserManager.sharedUserManager.userRole.roleId)",
+                "contact":"\(UserManager.sharedUserManager.getUserMobileNumber())",
         ]
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         manager.apiPost(apiName: "Get User Details", parameters:parameters, completionHandler: { (result, code, response) in
@@ -201,5 +215,5 @@ class BaseViewController: UIViewController {
             print(message)
         }
     }
-
+    
 }

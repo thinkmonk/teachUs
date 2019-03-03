@@ -36,23 +36,23 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jtV-v7-NYa">
-                                <rect key="frame" x="75" y="49.5" width="207" height="1"/>
+                                <rect key="frame" x="75" y="49.5" width="205" height="1"/>
                                 <color key="backgroundColor" red="0.8901960784313725" green="0.9137254901960784" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="rTA-Ph-DsE"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Student Name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="tcE-Ff-41z">
-                                <rect key="frame" x="75" y="55.5" width="207" height="39"/>
+                                <rect key="frame" x="75" y="55.5" width="205" height="39"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <color key="textColor" red="0.019607843137254902" green="0.019607843137254902" blue="0.019607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hAw-YR-c8E" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
-                                <rect key="frame" x="307" y="35" width="73" height="30"/>
+                                <rect key="frame" x="300" y="27.5" width="80" height="45"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="73" id="JxP-UU-ZfB"/>
-                                    <constraint firstAttribute="height" constant="30" id="OOH-pt-44c"/>
+                                    <constraint firstAttribute="width" constant="80" id="JxP-UU-ZfB"/>
+                                    <constraint firstAttribute="height" constant="45" id="OOH-pt-44c"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
@@ -78,7 +78,7 @@
                             <constraint firstItem="GEu-v1-GNz" firstAttribute="leading" secondItem="Y8t-kU-7j5" secondAttribute="leading" constant="15" id="Pjv-6P-CrZ"/>
                             <constraint firstItem="jtV-v7-NYa" firstAttribute="centerY" secondItem="GEu-v1-GNz" secondAttribute="centerY" id="TBX-NU-Y0R"/>
                             <constraint firstAttribute="height" constant="99.5" id="UbS-gU-BnQ"/>
-                            <constraint firstItem="hAw-YR-c8E" firstAttribute="leading" secondItem="jtV-v7-NYa" secondAttribute="trailing" constant="25" id="Ufv-gG-ye7"/>
+                            <constraint firstItem="hAw-YR-c8E" firstAttribute="leading" secondItem="jtV-v7-NYa" secondAttribute="trailing" constant="20" id="Ufv-gG-ye7"/>
                             <constraint firstItem="tcE-Ff-41z" firstAttribute="top" secondItem="jtV-v7-NYa" secondAttribute="bottom" constant="5" id="UhK-mg-3bJ"/>
                             <constraint firstItem="jtV-v7-NYa" firstAttribute="leading" secondItem="GEu-v1-GNz" secondAttribute="trailing" constant="10" id="dlV-VT-it5"/>
                             <constraint firstItem="jtV-v7-NYa" firstAttribute="top" secondItem="JRr-Z5-xIb" secondAttribute="bottom" constant="5" id="u3A-Py-lSS"/>

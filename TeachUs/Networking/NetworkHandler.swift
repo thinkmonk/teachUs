@@ -100,12 +100,18 @@ class NetworkHandler:SessionManager{
                     let responseError:NSError = error as NSError
                     let errorString:String = responseError.localizedDescription
                     let errorCode:Int = responseError.code
-                    let error = NSError(domain: "", code: 0, userInfo: nil)
-                    #if DEBUG
-                        print("***** NETWORK CALL FAILURE RESPONSE *****")
-                        print("error code: \(errorCode), error String \(errorString)")
-                    #endif
-                    failure(error, errorCode, errorString)
+                    if(errorCode == 401){
+                        //unauthorised user, log him out
+                        UserManager.sharedUserManager.logOutUser()
+                    }
+                    else{
+                        let error = NSError(domain: "", code: 0, userInfo: nil)
+                        #if DEBUG
+                            print("***** NETWORK CALL FAILURE RESPONSE *****")
+                            print("error code: \(errorCode), error String \(errorString)")
+                        #endif
+                        failure(error, errorCode, errorString)
+                    }
                 }
             }
         }else{
@@ -153,6 +159,9 @@ class NetworkHandler:SessionManager{
                     let responseError:NSError = error as NSError
                     let errorString:String = responseError.localizedDescription
                     let errorCode:Int = responseError.code
+                    if(errorCode == 401){
+                        UserManager.sharedUserManager.logOutUser()
+                    }else{
                     let error = NSError(domain: "", code: 0, userInfo: nil)
                     #if DEBUG
                         print("***** NETWORK CALL FAILURE RESPONSE *****")
@@ -160,6 +169,7 @@ class NetworkHandler:SessionManager{
                     #endif
                     failure(error, errorCode, errorString)
 
+                    }
                 }
             })
         }else{
@@ -220,12 +230,16 @@ class NetworkHandler:SessionManager{
                     let responseError:NSError = error as NSError
                     let errorString:String = responseError.localizedDescription
                     let errorCode:Int = responseError.code
-                    _ = NSError(domain: "", code: 0, userInfo: nil)
-                    #if DEBUG
+                    if(errorCode == 401){
+                        UserManager.sharedUserManager.logOutUser()
+                    }else{
+                        _ = NSError(domain: "", code: 0, userInfo: nil)
+                        #if DEBUG
                         print("***** NETWORK CALL FAILURE RESPONSE *****")
                         print("error code: \(errorCode), error String \(errorString)")
-                    #endif
-                    failure(false, errorCode, errorString)
+                        #endif
+                        failure(false, errorCode, errorString)
+                    }
                 }
             }
  
@@ -237,11 +251,11 @@ class NetworkHandler:SessionManager{
 
 
         }else{
+            failure(false, 401, "No internet")
+
             //            failure(false, 0, Constants.errorMessages.noInternetMessage);
         }
     }
-    
-    
     
     func apiPostResponseString(apiName: String,
                  parameters: [String: Any],

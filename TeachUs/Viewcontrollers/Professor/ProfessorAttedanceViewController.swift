@@ -39,6 +39,7 @@ class ProfessorAttedanceViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        ReachabilityManager.shared.resumeMomitoring()
 //        getCollegeSummaryForProfessor()
     }
     

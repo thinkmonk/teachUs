@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,7 +23,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oFV-g7-TSf">
-                    <rect key="frame" x="118.5" y="60.5" width="137.5" height="20"/>
+                    <rect key="frame" x="119" y="60.5" width="137.5" height="20"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Record available" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0IT-a0-6Dx">
                             <rect key="frame" x="0.0" y="0.0" width="112.5" height="20"/>
@@ -48,9 +48,8 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dkf-pJ-rWP">
-                    <rect key="frame" x="113" y="100.5" width="150" height="30"/>
+                    <rect key="frame" x="133" y="100.5" width="109" height="30"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="150" id="oXQ-9D-pE8"/>
                         <constraint firstAttribute="height" constant="30" id="ylR-w9-arC"/>
                     </constraints>
                     <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
@@ -59,8 +58,14 @@
                         <action selector="sendotp:" destination="iN0-l3-epB" eventType="touchUpInside" id="Dyf-tT-Lhx"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Resend OTP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jmq-K9-Nep">
+                    <rect key="frame" x="140" y="100.5" width="95" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="On" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aly-5v-LK8">
-                    <rect key="frame" x="177" y="150.5" width="22.5" height="20.5"/>
+                    <rect key="frame" x="176.5" y="150.5" width="22.5" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -96,10 +101,13 @@
                 <constraint firstItem="xxy-Zu-NAW" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="2yg-oe-kxQ"/>
                 <constraint firstItem="HRe-A5-xGc" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="4WD-kT-UNZ"/>
                 <constraint firstItem="xxy-Zu-NAW" firstAttribute="top" secondItem="Aly-5v-LK8" secondAttribute="bottom" constant="20" id="5uN-jd-l1Y"/>
+                <constraint firstItem="jmq-K9-Nep" firstAttribute="height" secondItem="dkf-pJ-rWP" secondAttribute="height" id="9o0-sS-i5H"/>
                 <constraint firstItem="Aly-5v-LK8" firstAttribute="top" secondItem="dkf-pJ-rWP" secondAttribute="bottom" constant="20" id="9t6-ui-O8t"/>
                 <constraint firstItem="Aly-5v-LK8" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="LeZ-a8-c5A"/>
                 <constraint firstItem="oFV-g7-TSf" firstAttribute="top" secondItem="HRe-A5-xGc" secondAttribute="bottom" constant="20" id="Mqu-ug-KhY"/>
                 <constraint firstItem="dkf-pJ-rWP" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="Ojk-xq-K04"/>
+                <constraint firstItem="jmq-K9-Nep" firstAttribute="centerY" secondItem="dkf-pJ-rWP" secondAttribute="centerY" id="PgA-pF-CkR"/>
+                <constraint firstItem="jmq-K9-Nep" firstAttribute="centerX" secondItem="dkf-pJ-rWP" secondAttribute="centerX" id="WhQ-ac-dda"/>
                 <constraint firstItem="dkf-pJ-rWP" firstAttribute="top" secondItem="oFV-g7-TSf" secondAttribute="bottom" constant="20" id="cmA-OD-Lca"/>
                 <constraint firstItem="oFV-g7-TSf" firstAttribute="centerX" secondItem="HRe-A5-xGc" secondAttribute="centerX" id="ldH-vH-ZWf"/>
                 <constraint firstItem="HRe-A5-xGc" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="vEE-ZV-L85"/>
@@ -110,6 +118,7 @@
                 <outlet property="buttonSendOtp" destination="dkf-pJ-rWP" id="GkO-DZ-lMR"/>
                 <outlet property="buttonVerifyOtp" destination="ds1-Zc-jHu" id="h29-Kd-Bed"/>
                 <outlet property="labelOtpMobileNUmber" destination="Aly-5v-LK8" id="6rc-h4-N1B"/>
+                <outlet property="labelOtpTimeLeft" destination="jmq-K9-Nep" id="vZD-0R-8tv"/>
                 <outlet property="labelRecordAvailable" destination="0IT-a0-6Dx" id="0vA-Gm-aLt"/>
                 <outlet property="labelTitle" destination="HRe-A5-xGc" id="E4A-wc-5Ln"/>
                 <outlet property="textFieldOtp" destination="xzu-fF-dNn" id="bVn-8N-BWe"/>

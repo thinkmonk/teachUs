@@ -9,6 +9,7 @@
 import UIKit
 import Foundation
 import ObjectMapper
+import CoreData
 
 enum SyllabusCompletetionType {
     case NotStarted
@@ -27,6 +28,7 @@ class MarkCompletedPortionViewController: BaseViewController {
     var attendanceId:NSNumber!
     var arrayDataSource:[Unit] = []
     var updatedTopicList:[[String:Any]] = []
+    var syllabusData:[String:Any] = [:]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +38,8 @@ class MarkCompletedPortionViewController: BaseViewController {
         navigationItem.hidesBackButton = true
         self.tableviewTopics.estimatedRowHeight = 110
         self.tableviewTopics.rowHeight = UITableViewAutomaticDimension
-        self.getTopics()
+        self.tableviewTopics.alpha = 0.0
+        self.mapTopicsToDataSource()
         // Do any additional setup after loading the view.
     }
 
@@ -50,7 +53,28 @@ class MarkCompletedPortionViewController: BaseViewController {
         self.addGradientToNavBar()
         self.addColorToNavBarText(color: .white)
         self.buttonSubmit.themeRedButton()
-        self.tableviewTopics.alpha = 0.0
+    }
+    
+    func mapTopicsToDataSource(){
+        guard let subjects = self.syllabusData["unit_syllabus_array"] as? [[String:Any]] else{
+            return
+        }
+        
+        if let completionPercent = self.syllabusData["syllabus_percentage"]
+        {
+            self.labelSyllabusCompletion.text = "Completion: \(completionPercent)%"
+        }
+        else{
+            return
+        }
+        
+        for subject in subjects{
+            let tempSubject = Mapper<Unit>().map(JSON: subject)
+            self.arrayDataSource.append(tempSubject!)
+        }
+        self.makeTableView()
+        self.tableviewTopics.reloadData()
+        self.showTableView()
     }
     
     func getTopics(){
@@ -106,6 +130,16 @@ class MarkCompletedPortionViewController: BaseViewController {
     }
     
     @IBAction func submitSyllabusStatus(_ sender: Any) {
+        if(ReachabilityManager.shared.isNetworkAvailable){
+            submitAttendanceAndSyllabus()
+        }
+        else{
+            saveAttendanceAndSyllabusToDb()
+        }
+        
+    }
+    
+    func submitAttendanceAndSyllabus(){
         let manager = NetworkHandler()
         manager.url = URLConstants.ProfessorURL.mergedAttendanceAndSyllabus
         let topicList = ["topic_list":self.updatedTopicList]
@@ -138,6 +172,40 @@ class MarkCompletedPortionViewController: BaseViewController {
             
         }
     }
+
+    func saveAttendanceAndSyllabusToDb(){
+        let manager = NetworkHandler()
+        manager.url = URLConstants.ProfessorURL.submitSyllabusCovered
+        var parameters = [String:Any]()
+        
+        //        parameters["college_code"] = "\(UserManager.sharedUserManager.offlineAppuserCollegeDetails.college_code!)"
+        //        parameters["att_id"] = self.attendanceId!
+        let topicList = ["topic_list":self.updatedTopicList]
+        var requestString  =  ""
+        if let theJSONData = try? JSONSerialization.data(withJSONObject: topicList,options: []) {
+            let theJSONText = String(data: theJSONData,encoding: .ascii)
+            requestString = theJSONText!
+            print("requestString = \(theJSONText!)")
+        }
+        parameters["topic_list"] = requestString
+        
+        let api:OfflineApiRequest = NSEntityDescription.insertNewObject(forEntityName: "OfflineApiRequest", into: DatabaseManager.managedContext) as! OfflineApiRequest
+        api.attendanceParams = self.attendanceParameters as NSObject
+        api.syllabusParams = parameters as NSObject
+        DatabaseManager.saveDbContext()
+        UserManager.sharedUserManager.updateOfflineUserData()
+        let alert = UIAlertController(title: nil, message: "Syllabus Recorded", preferredStyle: UIAlertControllerStyle.alert)
+        // add an action (button)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { _ in
+            for controller in self.navigationController!.viewControllers as Array {
+                if controller.isKind(of: OfflineHomeViewController.self) {
+                    self.navigationController!.popToViewController(controller, animated: true)
+                    break
+                }
+            }
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.segues.toLectureReport{
@@ -145,8 +213,6 @@ class MarkCompletedPortionViewController: BaseViewController {
             destinationVc.selectedAttendanceId = self.attendanceId
         }
     }
-
-
 }
 
 extension MarkCompletedPortionViewController:UITableViewDelegate, UITableViewDataSource{

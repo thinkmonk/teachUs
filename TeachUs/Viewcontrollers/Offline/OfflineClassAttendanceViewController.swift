@@ -19,7 +19,6 @@ class OfflineClassAttendanceViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("ProfessorAttedanceViewController")
         tableviewCollegeList.delegate = self
         tableviewCollegeList.dataSource = self
         self.tableviewCollegeList.alpha = 0
@@ -56,6 +55,8 @@ class OfflineClassAttendanceViewController: BaseViewController {
         for offlineClass in UserManager.sharedUserManager.offlineAppuserCollegeDetails.class_list!{
             self.arrayCollegeList?.append(offlineClass)
         }
+        self.arrayCollegeList?.sort(by: { ($0.year!,$0.class_division! ,$0.subject_name!) < ($1.year!,$0.class_division!,$1.subject_name!) })
+
         UIView.animate(withDuration: 1.0, animations: {
             self.tableviewCollegeList.alpha = 1
         })

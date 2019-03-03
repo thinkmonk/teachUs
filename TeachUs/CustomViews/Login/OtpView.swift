@@ -23,6 +23,7 @@ class OtpView: UIView {
     @IBOutlet weak var viewOtp: UIStackView!
     @IBOutlet weak var textFieldOtp: UITextField!
     @IBOutlet weak var buttonVerifyOtp: UIButton!
+    @IBOutlet weak var labelOtpTimeLeft: UILabel!
     
     
     var disposeBag: DisposeBag! = DisposeBag()
@@ -64,11 +65,14 @@ class OtpView: UIView {
         case .College:
             break
         }
+        self.buttonSendOtp.isHidden = true
+        self.labelOtpTimeLeft.backgroundColor = UIColor.lightGray
         self.labelRecordAvailable.text = "Record of \(UserManager.sharedUserManager.userName) is available"
         self.buttonSendOtp.roundedBlueButton()
         self.buttonVerifyOtp.roundedRedButton()
         self.textFieldOtp.makeEdgesRoundedWith(radius: self.textFieldOtp.height()/2)
         self.labelOtpMobileNUmber.alpha = 0
+        self.labelOtpTimeLeft.makeViewCircular()
         self.viewOtp.alpha = 0
     }
     
