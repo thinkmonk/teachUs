@@ -41,7 +41,7 @@ class RatingClassList:Mappable, Equatable{
     
      func mapping(map: Map) {
         self.courseName <- map["course_name"]
-        self.totalRate <- map["total_rate"]
+        self.totalRate <- map["total_participants"]
         self.averageRating <- map["avg_rate"]
         self.classDivision <- map["class_division"]
         self.classId <- map["class_id"]

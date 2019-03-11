@@ -117,6 +117,7 @@ public struct Constants {
         static let LectureReportCellId = "lectureReportCellId"
         static let LectureReportTopicsCoveredCellId = "lectureReportTopicsCoveredCellId"
         static let CollegeSyllabusTableViewCellId = "CollegeSyllabusTableViewCellId"
+        static let addRemoveAdminCell = "AddRemoveAdminTableViewCellId"
     }
     
     struct UserTypeString {

@@ -83,6 +83,12 @@ public struct URLConstants{
         static let getCollegeSyllabusList = BaseUrl.baseURL + "/syllabus/college_class_syllabus_status"
         static let getCollegeSubjectSyllabusList = BaseUrl.baseURL + "/syllabus/college_syllabus_subject_status"
         static let getCollegeSubjectSyllabusDetails = BaseUrl.baseURL  + "/syllabus/college_detailed_syllabus_status"
+        static let sendAttendanceReportToEmail = BaseUrl.baseURL + "/auth/professor_student_attendance_verify_auth_password"
+        static let verifyFeedbackAuthPassword = BaseUrl.baseURL + "/auth/feedback_verify_auth_password"
+    }
+    
+    struct SyllabusURL {
+        static let getCourseList = BaseUrl.baseURL + "/syllabus/course_list"
     }
     
     struct OfflineURL {

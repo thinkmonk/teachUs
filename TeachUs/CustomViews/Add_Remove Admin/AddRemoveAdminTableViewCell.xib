@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddRemoveAdminTableViewCellId" rowHeight="96" id="KGk-i7-Jjw" customClass="AddRemoveAdminTableViewCell" customModule="TeachUs" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="83"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="82.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OBZ-Sk-gry">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="82.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Courses" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ERi-mP-H6s">
+                                <rect key="frame" x="15" y="15" width="63.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mobile Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BVk-LV-tZ7">
+                                <rect key="frame" x="15" y="51" width="117.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z8r-dC-xrB" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
+                                <rect key="frame" x="221" y="47.5" width="89" height="28"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <inset key="contentEdgeInsets" minX="15" minY="5" maxX="15" maxY="5"/>
+                                <state key="normal" title="Remove">
+                                    <color key="titleColor" red="0.77647058820000003" green="0.0" blue="0.23137254900000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ERi-mP-H6s" firstAttribute="top" secondItem="OBZ-Sk-gry" secondAttribute="top" constant="15" id="5ev-nA-H8D"/>
+                            <constraint firstItem="Z8r-dC-xrB" firstAttribute="centerY" secondItem="BVk-LV-tZ7" secondAttribute="centerY" id="Ed4-mI-OVh"/>
+                            <constraint firstAttribute="trailing" secondItem="Z8r-dC-xrB" secondAttribute="trailing" constant="10" id="IX3-9C-zA1"/>
+                            <constraint firstItem="ERi-mP-H6s" firstAttribute="leading" secondItem="OBZ-Sk-gry" secondAttribute="leading" constant="15" id="QuX-1s-sS0"/>
+                            <constraint firstAttribute="bottom" secondItem="BVk-LV-tZ7" secondAttribute="bottom" constant="10.5" id="R3j-ob-NSd"/>
+                            <constraint firstItem="BVk-LV-tZ7" firstAttribute="top" secondItem="ERi-mP-H6s" secondAttribute="bottom" constant="15" id="YGa-Zb-eTj"/>
+                            <constraint firstItem="BVk-LV-tZ7" firstAttribute="leading" secondItem="ERi-mP-H6s" secondAttribute="leading" id="z2R-ug-Z4M"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="OBZ-Sk-gry" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="PpB-BE-Vyx"/>
+                    <constraint firstItem="OBZ-Sk-gry" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="QjC-mb-aZD"/>
+                    <constraint firstAttribute="trailing" secondItem="OBZ-Sk-gry" secondAttribute="trailing" id="cgw-98-shQ"/>
+                    <constraint firstAttribute="bottom" secondItem="OBZ-Sk-gry" secondAttribute="bottom" id="zC8-Tp-DJL"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="buttonRemoveAdmin" destination="Z8r-dC-xrB" id="7aj-Qn-JVw"/>
+                <outlet property="labelCourseName" destination="ERi-mP-H6s" id="NYI-MF-50L"/>
+                <outlet property="labelMobileNumber" destination="BVk-LV-tZ7" id="CIc-wH-Owu"/>
+            </connections>
+            <point key="canvasLocation" x="-94.400000000000006" y="93.553223388305852"/>
+        </tableViewCell>
+    </objects>
+</document>

@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import RxSwift
+
 class SelectCollegeClass{
     var collegeClass : CollegeAttendanceList?
     var isSelected:Bool!
@@ -17,14 +19,35 @@ class SelectCollegeClass{
     }
 }
 
+
+class SelectCollegeCourse{
+    var collegeCourse : CourseDetail?
+    var isSelected:Bool!
+    
+    init(_ courseDetails:CourseDetail, _ isCourseSelected:Bool) {
+        self.collegeCourse = courseDetails
+        self.isSelected = isCourseSelected
+    }
+}
+
+
+
 class CollegeClassManager{
     
     static var sharedManager = CollegeClassManager()
     var selectedClassArray : [SelectCollegeClass] = []
-    
+    var selectedAttendanceCriteria:Int!
+    var email = Variable<String>("")
     var getSelectedClassList:String {
         let selectedClassArray:[SelectCollegeClass] = self.selectedClassArray.filter({$0.isSelected == true})
         let selectedClassIdArray: [String] = selectedClassArray.map({$0.collegeClass?.classId ?? ""})
         return selectedClassIdArray.joined(separator: ",")
+    }
+    
+    var selectedCourseArray : [SelectCollegeCourse] = []
+    var getSelectedCourseList:String {
+        let selectedCourseArray:[SelectCollegeCourse] = self.selectedCourseArray.filter({$0.isSelected == true})
+        let selectedCourseIdArray: [String] = selectedCourseArray.map({$0.collegeCourse?.courseID ?? ""})
+        return selectedCourseIdArray.joined(separator: ",")
     }
 }

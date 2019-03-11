@@ -15,6 +15,11 @@ class CollegeClassRatingListViewController: BaseViewController {
     var parentNavigationController : UINavigationController?
     var arrayDataSource:[RatingClassList] = []
     @IBOutlet weak var tableViewClassList: UITableView!
+    @IBOutlet weak var buttonMailReport: UIButton!
+    var viewEmailId : VerifyEmail!
+
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableViewClassList.register(UINib(nibName: "SyllabusStatusTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.SyllabusStatusTableViewCellId)
@@ -22,7 +27,11 @@ class CollegeClassRatingListViewController: BaseViewController {
         self.tableViewClassList.dataSource = self
         self.tableViewClassList.alpha = 0.0
         self.tableViewClassList.addSubview(refreshControl)
-        getClassRating()
+        self.initEmailIdView()
+        NotificationCenter.default.addObserver(self, selector: #selector(CollegeAttendanceListViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(CollegeAttendanceListViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        self.initEmailIdView()
+        self.getClassRating()
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,8 +43,46 @@ class CollegeClassRatingListViewController: BaseViewController {
         self.getClassRating()
         super.refresh(sender: sender)
     }
+    //MARK:- Outlet methods
+    
+    @IBAction func actionMailFeedback(_ sender: Any) {
+        self.showEmailView()
+    }
+    
+    //MARK:- Keyboard show/hide notification.
+    @objc func keyboardWillShow(notification: NSNotification) {
+        
+        if let keyboardSize = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size{
+            if((self.viewEmailId.viewBg.origin().y+self.viewEmailId.viewBg.height()) >= (self.viewEmailId.height()-keyboardSize.height) )
+            {
+                self.viewEmailId.viewBg.frame.origin.y -= keyboardSize.height/2
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size{
+            self.viewEmailId.viewBg.center = self.view.center
+        }
+    }
     
     //MARK:- Class methods
+    
+    func initEmailIdView(){
+        self.viewEmailId = VerifyEmail.instanceFromNib() as? VerifyEmail
+        self.viewEmailId.delegate = self
+    }
+    
+    func showEmailView(){
+        self.viewEmailId.frame = CGRect(x: 0.0, y: 0.0, width: self.view.width(), height: self.view.height())
+        self.view.addSubview(self.viewEmailId)
+    }
+    
+    func showOtpView(){
+        self.viewEmailId.buttonOtp.setTitle("Export Feedback", for: .normal)
+        self.viewEmailId.viewVerifyOtpbg.alpha = 1
+        self.viewEmailId.layoutVerifyOtpHeight.constant = 100
+    }
     
     func getClassRating(){
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
@@ -61,6 +108,55 @@ class CollegeClassRatingListViewController: BaseViewController {
             self.showTableView()
             
             
+        }) { (error, code, message) in
+            print(message)
+            LoadingActivityHUD.hideProgressHUD()
+        }
+    }
+    
+    func sendOtpToVerifyEmail(){
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        let manager = NetworkHandler()
+        manager.url = URLConstants.CollegeURL.sendAuthPassword
+        let parameters = [
+            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+            "role_id":"\(UserManager.sharedUserManager.appUserCollegeDetails.role_id!)",
+            "email":"\(self.viewEmailId.textfieldEmail.text!)",
+            "contact":"\(UserManager.sharedUserManager.getUserMobileNumber)"
+        ]
+        
+        manager.apiPost(apiName: "Send Email OTP for feedback", parameters:parameters, completionHandler: { (result, code, response) in
+            LoadingActivityHUD.hideProgressHUD()
+            if(code == 200){
+                let message:String = response["message"] as! String
+                self.showAlterWithTitle(nil, alertMessage: message)
+                self.showOtpView()
+            }
+        }) { (error, code, message) in
+            print(message)
+            LoadingActivityHUD.hideProgressHUD()
+        }
+    }
+    
+    func verifyOtpAndExportReport(){
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        let manager = NetworkHandler()
+        manager.url = URLConstants.CollegeURL.verifyFeedbackAuthPassword
+        let parameters = [
+            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+            "role_id":"\(UserManager.sharedUserManager.appUserCollegeDetails.role_id!)",
+            "email":"\(self.viewEmailId.textfieldEmail.text ?? "")",
+            "contact":"\(UserManager.sharedUserManager.getUserMobileNumber())",
+            "contact_password":"\(self.viewEmailId.textFieldOtp.text ?? "")"
+        ]
+        
+        manager.apiPost(apiName: "Verify OTP and export report", parameters:parameters, completionHandler: { (result, code, response) in
+            LoadingActivityHUD.hideProgressHUD()
+            if(code == 200){
+                let message:String = response["message"] as! String
+                self.showAlterWithTitle(nil, alertMessage: message)
+                self.viewEmailId.removeFromSuperview()
+            }
         }) { (error, code, message) in
             print(message)
             LoadingActivityHUD.hideProgressHUD()
@@ -126,5 +222,18 @@ extension CollegeClassRatingListViewController:IndicatorInfoProvider{
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "Ratings")
     }
+}
+
+extension CollegeClassRatingListViewController:verifyEmailDelegae
+{
+    func emailSubmitted() {
+        self.sendOtpToVerifyEmail()
+    }
+    
+    func otpSubmitted() {
+        self.verifyOtpAndExportReport()
+    }
+    
+    
 }
 

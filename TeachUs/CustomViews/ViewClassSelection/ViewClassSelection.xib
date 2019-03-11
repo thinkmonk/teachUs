@@ -29,9 +29,10 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GoF-FP-SOJ">
-                                    <rect key="frame" x="285" y="4.5" width="30" height="42"/>
+                                    <rect key="frame" x="286" y="10.5" width="29" height="30"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
-                                    <state key="normal" title="x"/>
+                                    <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                    <state key="normal" image="cross"/>
                                     <connections>
                                         <action selector="dismissView:" destination="iN0-l3-epB" eventType="touchUpInside" id="0yH-5h-iRC"/>
                                     </connections>
@@ -104,4 +105,7 @@
             <point key="canvasLocation" x="55.200000000000003" y="48.125937031484263"/>
         </view>
     </objects>
+    <resources>
+        <image name="cross" width="9" height="9"/>
+    </resources>
 </document>

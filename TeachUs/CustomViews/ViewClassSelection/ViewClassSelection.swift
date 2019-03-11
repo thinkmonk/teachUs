@@ -18,7 +18,6 @@ class ViewClassSelection: UIView {
     @IBOutlet weak var buttonDeselectAll: UIButton!
     @IBOutlet weak var buttonClose: UIButton!
     @IBOutlet weak var tableviewClassList: UITableView!
-    var classListArray:[SelectCollegeClass] = []
     var delegate : ViewClassSelectionDelegate!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,7 +36,7 @@ class ViewClassSelection: UIView {
         self.buttonDeselectAll.makeButtonwith(background: .white, fontColor: .black, cornerRadius: nil, borderColor: nil, borderWidth: nil)
 
 
-        self.classListArray = self.classListArray.map({classSelected in
+        CollegeClassManager.sharedManager.selectedClassArray = CollegeClassManager.sharedManager.selectedClassArray.map({classSelected in
             classSelected.isSelected = true
             return classSelected
         })
@@ -48,7 +47,7 @@ class ViewClassSelection: UIView {
         self.buttonDeselectAll.makeButtonwith(background: .white, fontColor: .red, cornerRadius: nil, borderColor: nil, borderWidth: nil)
         self.buttonSelectAll.makeButtonwith(background: .white, fontColor: .black, cornerRadius: nil, borderColor: nil, borderWidth: nil)
 
-        self.classListArray = self.classListArray.map({classSelected in
+        CollegeClassManager.sharedManager.selectedClassArray = CollegeClassManager.sharedManager.selectedClassArray.map({classSelected in
             classSelected.isSelected = false
             return classSelected
         })
@@ -59,7 +58,7 @@ class ViewClassSelection: UIView {
 
 extension ViewClassSelection:UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.classListArray.count
+        return CollegeClassManager.sharedManager.selectedClassArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -70,20 +69,20 @@ extension ViewClassSelection:UITableViewDelegate, UITableViewDataSource{
             return cell
         }()
         
-        cell.textLabel?.text = "\(classListArray[indexPath.row].collegeClass?.courseName ?? "") - \(classListArray[indexPath.row].collegeClass?.classDivision ?? "")"
+        cell.textLabel?.text = "\(CollegeClassManager.sharedManager.selectedClassArray[indexPath.row].collegeClass?.courseName ?? "") - \(CollegeClassManager.sharedManager.selectedClassArray[indexPath.row].collegeClass?.classDivision ?? "")"
         
-        cell.accessoryType = classListArray[indexPath.row].isSelected ? .checkmark : .none
+        cell.accessoryType = CollegeClassManager.sharedManager.selectedClassArray[indexPath.row].isSelected ? .checkmark : .none
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        classListArray[indexPath.row].isSelected = !classListArray[indexPath.row].isSelected
+        CollegeClassManager.sharedManager.selectedClassArray[indexPath.row].isSelected = !CollegeClassManager.sharedManager.selectedClassArray[indexPath.row].isSelected
         self.tableviewClassList.reloadData()
         
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        classListArray[indexPath.row].isSelected = !classListArray[indexPath.row].isSelected
+        CollegeClassManager.sharedManager.selectedClassArray[indexPath.row].isSelected = !CollegeClassManager.sharedManager.selectedClassArray[indexPath.row].isSelected
         self.tableviewClassList.reloadData()
     }
     

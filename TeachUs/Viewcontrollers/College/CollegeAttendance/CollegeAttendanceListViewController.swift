@@ -30,6 +30,8 @@ class CollegeAttendanceListViewController: BaseViewController {
     @IBOutlet weak var viewCriteriaBg: UIView!
     
     var viewClassList : ViewClassSelection!
+    var viewEmailId : VerifyEmail!
+
     var toDate:Date!
     var fromDate:Date!
     var fromDatePicker: ViewDatePicker!
@@ -44,7 +46,8 @@ class CollegeAttendanceListViewController: BaseViewController {
                                       "Below 50",
                                       "Below 60",
                                       "Below 70",
-                                      "Below 75",]
+                                      "Below 75"]
+    var arrayCriteriaNumber:[Int] = [0, 25, 30, 40, 50, 60, 70, 75]
     var dateFormatter: DateFormatter {
         let df = DateFormatter()
         df.dateFormat = "YYYY-MMM-dd"
@@ -69,13 +72,17 @@ class CollegeAttendanceListViewController: BaseViewController {
         self.initDatePicker()
         self.addTapGestures()
         self.setUpCriteriaDropDown()
+        self.initEmailIdView()
+        NotificationCenter.default.addObserver(self, selector: #selector(CollegeAttendanceListViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(CollegeAttendanceListViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    //MARK:- Custom Methods
     override func refresh(sender: AnyObject) {
         self.getClassAttendance()
         super.refresh(sender: sender)
@@ -128,9 +135,13 @@ class CollegeAttendanceListViewController: BaseViewController {
         //init class selection list after sorting
         for college in self.arrayDataSource!{
             let selectedCollegeList = SelectCollegeClass(college, true)
-            self.viewClassList.classListArray.append(selectedCollegeList)
+            CollegeClassManager.sharedManager.selectedClassArray.append(selectedCollegeList)
         }
-
+    }
+    
+    func initEmailIdView(){
+        self.viewEmailId = VerifyEmail.instanceFromNib() as? VerifyEmail
+        self.viewEmailId.delegate = self
     }
     
     func showTableView(){
@@ -197,12 +208,30 @@ class CollegeAttendanceListViewController: BaseViewController {
         }
         self.criteriaDropDown.selectionAction = { [unowned self] (index, item) in
             self.selectedCriteria = self.arrayCriteriaList[index]
+            CollegeClassManager.sharedManager.selectedAttendanceCriteria = self.arrayCriteriaNumber[index]
             let criteriaText = "\(self.arrayCriteriaList[index])"
             self.buttonSelectCriteria.setTitle(criteriaText, for: .normal)
         }
     }
     
-    //MARK:-Outlet Methods
+    //MARK:- Keyboard show/hide notification.
+    @objc func keyboardWillShow(notification: NSNotification) {
+        
+        if let keyboardSize = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size{
+            if((self.viewEmailId.viewBg.origin().y+self.viewEmailId.viewBg.height()) >= (self.viewEmailId.height()-keyboardSize.height) )
+            {
+                self.viewEmailId.viewBg.frame.origin.y -= keyboardSize.height/2
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size{
+            self.viewEmailId.viewBg.frame.origin.y += keyboardSize.height/2
+        }
+    }
+    
+    //MARK:- Outlet Methods
     @IBAction func showDatePicker(_ sender: Any){
         if let senderTap:UITapGestureRecognizer = sender as? UITapGestureRecognizer{
             self.activeLabel = senderTap.view as? UILabel
@@ -235,8 +264,13 @@ class CollegeAttendanceListViewController: BaseViewController {
         if(!self.isMailReportVisible){
             self.showMailView(value: true)
         }else{
-            
+            self.showEmailView()
         }
+    }
+    func showEmailView(){
+        self.viewEmailId.frame = self.view.frame
+//        self.viewEmailId.center = UIApplication.shared.keyWindow?.center ?? self.view.center
+        self.view.addSubview(self.viewEmailId)
     }
 }
 
@@ -295,5 +329,51 @@ extension CollegeAttendanceListViewController:ViewClassSelectionDelegate{
 extension CollegeAttendanceListViewController:IndicatorInfoProvider{
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "Attendance (Reports)")
+    }
+}
+
+extension CollegeAttendanceListViewController:verifyEmailDelegae{
+    func otpSubmitted() {
+        //this methos is not required as we are only taking email to export attendance report
+        
+    }
+    
+    func emailSubmitted() {
+        self.viewEmailId.removeFromSuperview()
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        let manager = NetworkHandler()
+        manager.url = URLConstants.CollegeURL.verifyauthPassword
+        let urlDateFormatter = DateFormatter()
+        urlDateFormatter.dateFormat = "YYYY-MM-dd"
+        var parameters = [
+            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+            "role_id":"\(UserManager.sharedUserManager.appUserCollegeDetails.role_id!)",
+            "email":"\(CollegeClassManager.sharedManager.email.value)",
+            "class_id":"\(CollegeClassManager.sharedManager.getSelectedClassList)",
+            "criteria":"\(CollegeClassManager.sharedManager.selectedAttendanceCriteria ?? 0)"
+        ]
+        
+        if(self.fromDate != nil)
+        {
+            parameters["from_date"] = urlDateFormatter.string(from: self.fromDate)
+        }
+        
+        if(self.toDate != nil)
+        {
+            parameters["to_date"] = urlDateFormatter.string(from: self.toDate)
+        }
+        
+        manager.apiPost(apiName: " Send Class report to email", parameters:parameters, completionHandler: { (result, code, response) in
+            LoadingActivityHUD.hideProgressHUD()
+            let status = response["status"] as! Int
+            if (status == 200){
+                let message:String = response["message"] as! String
+                self.showAlterWithTitle(nil, alertMessage: message)
+                self.showMailView(value: false)
+            }
+        }) { (error, code, message) in
+            self.showAlterWithTitle(nil, alertMessage: message)
+            LoadingActivityHUD.hideProgressHUD()
+        }
     }
 }

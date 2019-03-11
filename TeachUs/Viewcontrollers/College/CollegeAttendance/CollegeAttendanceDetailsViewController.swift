@@ -50,7 +50,7 @@ class CollegeAttendanceDetailsViewController: BaseViewController {
 
         self.labelNoRecordFound.alpha = 0
         self.buttonSubmit.makeViewCircular()
-        self.buttonMaiReport.makeViewCircular()
+//        self.buttonMaiReport.makeViewCircular()
         self.addGradientToNavBar()
         getSubjectList()
         self.initDatePicker()

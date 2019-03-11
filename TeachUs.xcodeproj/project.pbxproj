@@ -35,6 +35,8 @@
 		810FAC571FB7518A00945DD6 /* AttendanceDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810FAC561FB7518A00945DD6 /* AttendanceDataSource.swift */; };
 		810FAC5A1FB7549400945DD6 /* AttendanceCountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810FAC581FB7549400945DD6 /* AttendanceCountTableViewCell.swift */; };
 		810FAC5B1FB7549400945DD6 /* AttendanceCountTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 810FAC591FB7549400945DD6 /* AttendanceCountTableViewCell.xib */; };
+		81165BE72233006E003EE106 /* VerifyEmail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81165BE62233006E003EE106 /* VerifyEmail.xib */; };
+		81165BE922330078003EE106 /* VerifyEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81165BE822330078003EE106 /* VerifyEmail.swift */; };
 		811F28FF2104D7AC002B810F /* OfflineAttendanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811F28FE2104D7AC002B810F /* OfflineAttendanceManager.swift */; };
 		812298CD2108F61C003C2EE3 /* OfflineApiRequest+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812298CB2108F61C003C2EE3 /* OfflineApiRequest+CoreDataClass.swift */; };
 		812298CE2108F61C003C2EE3 /* OfflineApiRequest+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812298CC2108F61C003C2EE3 /* OfflineApiRequest+CoreDataProperties.swift */; };
@@ -90,6 +92,11 @@
 		8163EB0420541D38003E4B1D /* TeachUs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8163EB0220541D38003E4B1D /* TeachUs.xcdatamodeld */; };
 		8163EB0720557AD9003E4B1D /* CollegeDetails+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8163EB0520557AD9003E4B1D /* CollegeDetails+CoreDataClass.swift */; };
 		8163EB0820557AD9003E4B1D /* CollegeDetails+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8163EB0620557AD9003E4B1D /* CollegeDetails+CoreDataProperties.swift */; };
+		816522BA22340F9B00C1BA29 /* CouseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816522B922340F9B00C1BA29 /* CouseList.swift */; };
+		816522BD2234174A00C1BA29 /* ViewCourseSelection.xib in Resources */ = {isa = PBXBuildFile; fileRef = 816522BC2234174A00C1BA29 /* ViewCourseSelection.xib */; };
+		816522BF2234177A00C1BA29 /* ViewCourseSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816522BE2234177A00C1BA29 /* ViewCourseSelection.swift */; };
+		816C5AD822351B2E00B6A7B3 /* AddRemoveAdminTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816C5AD622351B2E00B6A7B3 /* AddRemoveAdminTableViewCell.swift */; };
+		816C5AD922351B2E00B6A7B3 /* AddRemoveAdminTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 816C5AD722351B2E00B6A7B3 /* AddRemoveAdminTableViewCell.xib */; };
 		81727B8B1F9E6CB8006433E8 /* MFSideMenuShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 81727B841F9E6CB7006433E8 /* MFSideMenuShadow.m */; };
 		81727B8C1F9E6CB8006433E8 /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 81727B851F9E6CB7006433E8 /* UIViewController+MFSideMenuAdditions.m */; };
 		81727B8D1F9E6CB8006433E8 /* MFSideMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81727B891F9E6CB8006433E8 /* MFSideMenuContainerViewController.m */; };
@@ -290,6 +297,8 @@
 		810FAC561FB7518A00945DD6 /* AttendanceDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceDataSource.swift; sourceTree = "<group>"; };
 		810FAC581FB7549400945DD6 /* AttendanceCountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceCountTableViewCell.swift; sourceTree = "<group>"; };
 		810FAC591FB7549400945DD6 /* AttendanceCountTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AttendanceCountTableViewCell.xib; sourceTree = "<group>"; };
+		81165BE62233006E003EE106 /* VerifyEmail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VerifyEmail.xib; sourceTree = "<group>"; };
+		81165BE822330078003EE106 /* VerifyEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyEmail.swift; sourceTree = "<group>"; };
 		811F28FE2104D7AC002B810F /* OfflineAttendanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineAttendanceManager.swift; sourceTree = "<group>"; };
 		812298CB2108F61C003C2EE3 /* OfflineApiRequest+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OfflineApiRequest+CoreDataClass.swift"; sourceTree = "<group>"; };
 		812298CC2108F61C003C2EE3 /* OfflineApiRequest+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OfflineApiRequest+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -345,6 +354,11 @@
 		8163EB0320541D38003E4B1D /* TeachUs.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TeachUs.xcdatamodel; sourceTree = "<group>"; };
 		8163EB0520557AD9003E4B1D /* CollegeDetails+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollegeDetails+CoreDataClass.swift"; sourceTree = "<group>"; };
 		8163EB0620557AD9003E4B1D /* CollegeDetails+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollegeDetails+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		816522B922340F9B00C1BA29 /* CouseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouseList.swift; sourceTree = "<group>"; };
+		816522BC2234174A00C1BA29 /* ViewCourseSelection.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewCourseSelection.xib; sourceTree = "<group>"; };
+		816522BE2234177A00C1BA29 /* ViewCourseSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCourseSelection.swift; sourceTree = "<group>"; };
+		816C5AD622351B2E00B6A7B3 /* AddRemoveAdminTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRemoveAdminTableViewCell.swift; sourceTree = "<group>"; };
+		816C5AD722351B2E00B6A7B3 /* AddRemoveAdminTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddRemoveAdminTableViewCell.xib; sourceTree = "<group>"; };
 		81727B841F9E6CB7006433E8 /* MFSideMenuShadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSideMenuShadow.m; sourceTree = "<group>"; };
 		81727B851F9E6CB7006433E8 /* UIViewController+MFSideMenuAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MFSideMenuAdditions.m"; sourceTree = "<group>"; };
 		81727B861F9E6CB7006433E8 /* MFSideMenuContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenuContainerViewController.h; sourceTree = "<group>"; };
@@ -789,6 +803,8 @@
 		813EC7691F9BA46200F11A12 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				816C5AD522351AB400B6A7B3 /* Add_Remove Admin */,
+				816522BB2234173300C1BA29 /* ViewCourseSelection */,
 				8161AF61222C4633001F73B5 /* ViewClassSelection */,
 				8136E5AC20F7CD480080AECA /* OfflineViews */,
 				819EEC2020A60B8000487467 /* LectureReport */,
@@ -848,6 +864,7 @@
 		813EC76D1F9BA4FD00F11A12 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				816522B822340F8C00C1BA29 /* CourseList */,
 				8136E59420F7C34A0080AECA /* OfflineData */,
 				81E67401205318E200321257 /* UserRoles */,
 				81C1D8AC1FCF35790091DA6E /* Users */,
@@ -907,6 +924,32 @@
 			children = (
 			);
 			path = ImagePicker;
+			sourceTree = "<group>";
+		};
+		816522B822340F8C00C1BA29 /* CourseList */ = {
+			isa = PBXGroup;
+			children = (
+				816522B922340F9B00C1BA29 /* CouseList.swift */,
+			);
+			path = CourseList;
+			sourceTree = "<group>";
+		};
+		816522BB2234173300C1BA29 /* ViewCourseSelection */ = {
+			isa = PBXGroup;
+			children = (
+				816522BC2234174A00C1BA29 /* ViewCourseSelection.xib */,
+				816522BE2234177A00C1BA29 /* ViewCourseSelection.swift */,
+			);
+			path = ViewCourseSelection;
+			sourceTree = "<group>";
+		};
+		816C5AD522351AB400B6A7B3 /* Add_Remove Admin */ = {
+			isa = PBXGroup;
+			children = (
+				816C5AD622351B2E00B6A7B3 /* AddRemoveAdminTableViewCell.swift */,
+				816C5AD722351B2E00B6A7B3 /* AddRemoveAdminTableViewCell.xib */,
+			);
+			path = "Add_Remove Admin";
 			sourceTree = "<group>";
 		};
 		81727B771F9E6A0B006433E8 /* Third Party */ = {
@@ -1167,6 +1210,8 @@
 				81E3E3AF207778E7002CFC1D /* AttendanceReport.xib */,
 				81E3E3B72077AF55002CFC1D /* VerifyAuthPasswordView.swift */,
 				81E3E3B52077AF46002CFC1D /* VerifyAuthPasswordView.xib */,
+				81165BE822330078003EE106 /* VerifyEmail.swift */,
+				81165BE62233006E003EE106 /* VerifyEmail.xib */,
 			);
 			path = AttendanceReport;
 			sourceTree = "<group>";
@@ -1355,10 +1400,12 @@
 				81A7D05A208B75710032A1BC /* ProfessorRatingProfileTableViewCell.xib in Resources */,
 				819BDA591FC4AD5D00DD7D2D /* TeacherDetailsTableViewCell.xib in Resources */,
 				81FFB0B51FBEE0EB00C32097 /* ViewCalenderTop.xib in Resources */,
+				81165BE72233006E003EE106 /* VerifyEmail.xib in Resources */,
 				819AADF01FB6DBBD0061C471 /* DefaultSelectionTableViewCell.xib in Resources */,
 				81E3E3B62077AF46002CFC1D /* VerifyAuthPasswordView.xib in Resources */,
 				8126312B1FB2289200CD80D6 /* AttendanceStudentListTableViewCell.xib in Resources */,
 				81F78EAD1FB0DFE600A016B0 /* AttendanceCalenderTableViewCell.xib in Resources */,
+				816C5AD922351B2E00B6A7B3 /* AddRemoveAdminTableViewCell.xib in Resources */,
 				810BECDF206EDEE900F560C6 /* StudentProfileTableViewCell.xib in Resources */,
 				18A627EA1F90F9870099C106 /* LaunchScreen.storyboard in Resources */,
 				8136E5AE20F7CD610080AECA /* OfflineYesNo.xib in Resources */,
@@ -1377,6 +1424,7 @@
 				81CAD6EA1FC9AEF300B55845 /* ViewRatingInfo.xib in Resources */,
 				810610BC1FA65ED20067273E /* Loader.xib in Resources */,
 				810FAC5B1FB7549400945DD6 /* AttendanceCountTableViewCell.xib in Resources */,
+				816522BD2234174A00C1BA29 /* ViewCourseSelection.xib in Resources */,
 				81A523951FA7955600B3B557 /* CollegeLogin.xib in Resources */,
 				81CCAE561FC806060070907A /* RatingTopicsTableViewCell.xib in Resources */,
 				81FFB0B71FBF2D4900C32097 /* ViewConfirmAttendance.xib in Resources */,
@@ -1544,6 +1592,7 @@
 				81D7CE9A1FAB9A1D00C4375E /* UserManager.swift in Sources */,
 				81727B8C1F9E6CB8006433E8 /* UIViewController+MFSideMenuAdditions.m in Sources */,
 				810FAC5A1FB7549400945DD6 /* AttendanceCountTableViewCell.swift in Sources */,
+				81165BE922330078003EE106 /* VerifyEmail.swift in Sources */,
 				81B2E2DC1FC35B0600E9E852 /* DropDown.swift in Sources */,
 				81D020252059A131003742FD /* RootViewController.swift in Sources */,
 				8126312A1FB2289200CD80D6 /* AttendanceStudentListTableViewCell.swift in Sources */,
@@ -1558,6 +1607,7 @@
 				81D7CE841FAB8E5D00C4375E /* CAPSPageMenu+UIConfiguration.swift in Sources */,
 				81A3585120820F2C00B93239 /* EventAttendanceManager.swift in Sources */,
 				8163EB0820557AD9003E4B1D /* CollegeDetails+CoreDataProperties.swift in Sources */,
+				816C5AD822351B2E00B6A7B3 /* AddRemoveAdminTableViewCell.swift in Sources */,
 				81C208561FAF627F003D366D /* StudentsListViewController.swift in Sources */,
 				81B190C41FA24F87004A8A72 /* UIButton.swift in Sources */,
 				81C1D8AB1FCF34F10091DA6E /* DatabaseManager.swift in Sources */,
@@ -1579,6 +1629,7 @@
 				812C34EC1FB78E770048DD3C /* AttendanceCalenderManager.swift in Sources */,
 				81A7D054208B64AA0032A1BC /* CollegeClassRatingListViewController.swift in Sources */,
 				810FAC571FB7518A00945DD6 /* AttendanceDataSource.swift in Sources */,
+				816522BA22340F9B00C1BA29 /* CouseList.swift in Sources */,
 				810610BE1FA65EE00067273E /* Loader.swift in Sources */,
 				81C208541FAF4EF9003D366D /* UIColor.swift in Sources */,
 				81727B941F9E70EE006433E8 /* HomeViewController.swift in Sources */,
@@ -1633,6 +1684,7 @@
 				81FFB0BE1FBF468000C32097 /* SyllabusChapter.swift in Sources */,
 				813C0DA021EB7C7100B04E61 /* GlobalFunction.swift in Sources */,
 				81A7D060208BA5D80032A1BC /* CollegeProfessorRatingDetailViewController.swift in Sources */,
+				816522BF2234177A00C1BA29 /* ViewCourseSelection.swift in Sources */,
 				81FFB0B31FBEE0CD00C32097 /* ViewCalenderTop.swift in Sources */,
 				81A80EDF1FAF3DAD00DDFFA1 /* CollegeList.swift in Sources */,
 				8136E5A620F7C6880080AECA /* Offline_Unit_syllabus_array.swift in Sources */,
