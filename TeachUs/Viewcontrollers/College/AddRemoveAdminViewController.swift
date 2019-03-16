@@ -205,7 +205,7 @@ class AddRemoveAdminViewController: BaseViewController {
         self.viewCourseList.delegate = self
         
         //init class selection list after sorting
-        for course in self.courseListData{
+        for course in self.courseListData.courseList{
             let selectedCourse = SelectCollegeCourse(course, true)
             CollegeClassManager.sharedManager.selectedCourseArray.append(selectedCourse)
         }

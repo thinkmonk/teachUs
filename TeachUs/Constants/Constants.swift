@@ -75,6 +75,7 @@ public struct Constants {
         static let OfflineHomeViewController = "OfflineHomeViewController"
         static let OfflineStudentsListViewControllerId = "OfflineStudentsListViewControllerId"
         static let UploadOfflineDataViewControllerId = "UploadOfflineDataViewControllerId"
+        static let CollegeLogsProfessorListViewControllerId = "CollegeLogsProfessorListViewControllerId"
     }
     
     struct UserDefaults {

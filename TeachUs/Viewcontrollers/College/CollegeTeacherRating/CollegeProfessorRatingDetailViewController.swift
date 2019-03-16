@@ -162,7 +162,7 @@ extension CollegeProfessorRatingDetailViewController : UITableViewDelegate, UITa
             profileCell.buttonHeart.indexPath = indexPath
             profileCell.buttonHeart.isSelected = true
             profileCell.labelHeartDescription.text = "Popularity"
-            if(Int(self.ratingProfessor.popularity)! > 0){
+            if(Int(self.ratingProfessor.popularity) ?? 0 > 0){
                 profileCell.labelPopularityValue.alpha = 1
                 profileCell.labelPopularityValue.text = "\(self.ratingProfessor.popularity)"
             }

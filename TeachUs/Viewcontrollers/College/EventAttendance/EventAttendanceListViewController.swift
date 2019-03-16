@@ -110,11 +110,10 @@ class EventAttendanceListViewController: BaseViewController {
         self.viewCourseList.delegate = self
         
         //init class selection list after sorting
-        for course in self.courseListData{
+        for course in self.courseListData.courseList{
             let selectedCourse = SelectCollegeCourse(course, true)
             CollegeClassManager.sharedManager.selectedCourseArray.append(selectedCourse)
         }
-        
     }
 
     func getEvents(){
@@ -158,11 +157,11 @@ class EventAttendanceListViewController: BaseViewController {
             do{
                 let decoder = JSONDecoder()
                 self.courseListData = try decoder.decode(CourseDetails.self, from: response)
+                self.dispatchGroup.leave()
             }
             catch let error{
                 print("err", error)
             }
-            self.dispatchGroup.leave()
         }) { (error, code, message) in
             self.showAlterWithTitle(nil, alertMessage: message)
             LoadingActivityHUD.hideProgressHUD()
@@ -177,6 +176,7 @@ class EventAttendanceListViewController: BaseViewController {
             }
             .share(replay: 1)
         isEventNameValid.subscribe(onNext: { (isValid) in
+            self.buttonAddEvent.themeRedButton()
             self.buttonAddEvent.alpha = isValid ? 1 : 0
         }).disposed(by: disposeBag)
     }

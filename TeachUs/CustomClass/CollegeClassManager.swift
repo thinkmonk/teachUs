@@ -21,10 +21,10 @@ class SelectCollegeClass{
 
 
 class SelectCollegeCourse{
-    var collegeCourse : CourseDetail?
+    var collegeCourse : CourseList?
     var isSelected:Bool!
     
-    init(_ courseDetails:CourseDetail, _ isCourseSelected:Bool) {
+    init(_ courseDetails:CourseList, _ isCourseSelected:Bool) {
         self.collegeCourse = courseDetails
         self.isSelected = isCourseSelected
     }

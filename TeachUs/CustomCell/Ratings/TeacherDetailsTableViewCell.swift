@@ -51,4 +51,12 @@ class TeacherDetailsTableViewCell: UITableViewCell {
         }
     }
     
+    func setUpProfessorLogCellDetails(tempDetails:ProfessorSubject){
+        self.labelSubject.text = tempDetails.subjects
+        self.labelName.text = "\(tempDetails.professorName ?? "")"
+        self.imageProfessor.imageFromServerURL(urlString: tempDetails.profile ?? "", defaultImage: Constants.Images.defaultProfessor)
+        self.accessoryType = .disclosureIndicator
+        self.selectionStyle = .none
+    }
+    
 }

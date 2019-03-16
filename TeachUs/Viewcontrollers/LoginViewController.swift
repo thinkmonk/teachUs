@@ -206,7 +206,6 @@ extension LoginViewController:OtpDelegate{
     
     @objc func enableButton(){
         otpTimeUpdated -= 1
-        print(otpTimeUpdated)
         GlobalFunction.minutesAndSecsFrom(seconds: otpTimeUpdated) { (mins, secs) in
             let minutes = GlobalFunction.getStringFrom(seconds: mins)
             let seconds = GlobalFunction.getStringFrom(seconds: secs)
@@ -299,7 +298,6 @@ extension LoginViewController:CollegeLoginDelegate{
     
     @objc func enableCollegeResendOtpButton(){
         otpTimeUpdated -= 1
-        print(otpTimeUpdated)
         GlobalFunction.minutesAndSecsFrom(seconds: otpTimeUpdated) { (mins, secs) in
             let minutes = GlobalFunction.getStringFrom(seconds: mins)
             let seconds = GlobalFunction.getStringFrom(seconds: secs)

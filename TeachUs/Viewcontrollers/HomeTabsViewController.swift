@@ -130,6 +130,13 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
                 collegeRatingListVC.parentNavigationController = self.parentNavigationController
                 controllersArray.append(collegeRatingListVC)
             }
+            
+            if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "1"){
+                let collegeLogsListVC:CollegeLogsProfessorListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.CollegeLogsProfessorListViewControllerId) as! CollegeLogsProfessorListViewController
+                collegeLogsListVC.title = "Logs"
+                collegeLogsListVC.parentNavigationController = self.parentNavigationController
+                controllersArray.append(collegeLogsListVC)
+            }
             break
         }
         return controllersArray

@@ -93,7 +93,9 @@ class StudentsListViewController: BaseViewController {
     func getEnrolledStudentsList(){
         let manager = NetworkHandler()
         manager.url = URLConstants.ProfessorURL.getStudentList
-        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        DispatchQueue.main.async {
+            LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        }
         let parameters = [
             "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
             "class_id":"\(self.selectedCollege.classId!)",

@@ -218,11 +218,6 @@ extension CollegeClassRatingListViewController:UITableViewDelegate, UITableViewD
 }
 
 
-extension CollegeClassRatingListViewController:IndicatorInfoProvider{
-    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "Ratings")
-    }
-}
 
 extension CollegeClassRatingListViewController:verifyEmailDelegae
 {
@@ -237,3 +232,8 @@ extension CollegeClassRatingListViewController:verifyEmailDelegae
     
 }
 
+extension CollegeClassRatingListViewController:IndicatorInfoProvider{
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "Ratings")
+    }
+}

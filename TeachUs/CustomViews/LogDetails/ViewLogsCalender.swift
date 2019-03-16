@@ -23,11 +23,18 @@ class ViewLogsCalender: UIView, UITextFieldDelegate {
     @IBOutlet weak var labelFromDate: UILabel!
     @IBOutlet weak var labelToDate: UILabel!
     var fromDatePicker: ViewDatePicker!
-    var fromDate:String = ""
+    var fromDate:Date!
+    var fromDateString:String = ""
     var toDatePicker: ViewDatePicker!
-    var toDate:String = ""
+    var toDate:Date!
+    var toDateStirng:String = ""
     var delegate :ViewLogsCalenderDelegate!
     
+    var dateFormatter: DateFormatter {
+        let df = DateFormatter()
+        df.dateFormat = "YYYY-MM-dd"
+        return df
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         self.buttonSubmit.roundedRedButton()
@@ -35,6 +42,12 @@ class ViewLogsCalender: UIView, UITextFieldDelegate {
         self.initFromDatePicker()
         self.initToDatePicker()
         
+        self.toDate = Date()
+        self.labelToDate.text  = self.dateFormatter.string(from: self.toDate!)
+        self.toDateStirng  = self.dateFormatter.string(from: self.toDate)
+        self.fromDate = NSCalendar.current.date(byAdding: .month, value: -6, to: Date())
+        self.labelFromDate.text = self.dateFormatter.string(from: self.fromDate!)
+        self.fromDateString = self.dateFormatter.string(from: self.fromDate!)
         let tapFromDate = UITapGestureRecognizer(target: self, action: #selector(ViewLogsCalender.tapFromDateFunction))
         self.labelFromDate.isUserInteractionEnabled = true
         self.labelFromDate.addGestureRecognizer(tapFromDate)
@@ -79,7 +92,7 @@ class ViewLogsCalender: UIView, UITextFieldDelegate {
     
     @objc func dismissFromDatePicker(){
         if(fromDatePicker != nil){
-            self.fromDate = self.fromDatePicker.postJsonDateString
+            self.fromDateString = self.fromDatePicker.postJsonDateString
             self.labelFromDate.text = fromDatePicker.dateString
             fromDatePicker.alpha = 0
             fromDatePicker.removeFromSuperview()
@@ -88,7 +101,7 @@ class ViewLogsCalender: UIView, UITextFieldDelegate {
     
     @objc func dismissToDatePicker(){
         if(toDatePicker != nil){
-            self.toDate = self.toDatePicker.postJsonDateString
+            self.toDateStirng = self.toDatePicker.postJsonDateString
             self.labelToDate.text = toDatePicker.dateString
             toDatePicker.alpha = 0
             toDatePicker.removeFromSuperview()
@@ -102,7 +115,7 @@ class ViewLogsCalender: UIView, UITextFieldDelegate {
     }
     
     func verifyDate() -> Bool{
-        if(self.fromDate == ""  || self.toDate == ""){
+        if(self.fromDateString == ""  || self.toDateStirng == ""){
             showAlterWithTitle(nil, alertMessage: "Date Range not selected!")
         }else if(self.fromDate < self.toDate){
             return true
@@ -118,7 +131,7 @@ class ViewLogsCalender: UIView, UITextFieldDelegate {
     @IBAction func submitDates(_ sender: Any) {
         
         if delegate != nil && self.verifyDate(){
-            self.delegate.getLogs(fromDate: self.fromDate, toDate: self.toDate)
+            self.delegate.getLogs(fromDate: self.fromDateString, toDate: self.toDateStirng)
         }
     }
     

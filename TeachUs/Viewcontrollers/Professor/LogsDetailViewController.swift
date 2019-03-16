@@ -26,18 +26,22 @@ class LogsDetailViewController: BaseViewController {
     var allCollegeArray:[College] = []
     var calenderView: ViewLogsCalender? // declare variable inside your controller
     
+    //for collegeLogs Details
+    var isCollegeLogsSubjectData:Bool = false //for college logs
+    var selectedSubjectID:Int?
+    
     @IBOutlet weak var tableLogsDetail: UITableView!
     @IBOutlet weak var buttonPreviousSubject: UIButton!
     @IBOutlet weak var buttonNextSubject: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.initCalenderView()
         self.tableLogsDetail.backgroundColor = UIColor.clear
         self.tableLogsDetail.delegate = self
         self.tableLogsDetail.dataSource = self
         self.tableLogsDetail.separatorStyle = .none
         self.tableLogsDetail.alpha = 0
-        
-        self.getLogs(fromDate: "", toDate: "")
+        self.getLogs(fromDate: self.calenderView?.fromDateString ?? "", toDate: self.calenderView?.toDateStirng ?? "")
         self.tableLogsDetail.register(UINib(nibName: "LogsDetailTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.LogsDetailTableViewCellId)
         self.tableLogsDetail.register(UINib(nibName: "SyllabusDetailsTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.SyllabusDetailsTableViewCellId)
         
@@ -103,16 +107,60 @@ class LogsDetailViewController: BaseViewController {
         }
     }
     
+    
+    func getCollgeProfessorLogDetails(fromDate:String, toDate:String){
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        let manager = NetworkHandler()
+        manager.url = URLConstants.CollegeURL.getcollegeSubjectLogsDetals
+        var parameters = [String:Any]()
+        parameters["college_code"] = UserManager.sharedUserManager.appUserCollegeDetails.college_code
+        parameters["subject_id"] =  self.selectedSubjectID
+        if(fromDate != "" && toDate != ""){
+            parameters["from_date"] = fromDate
+            parameters["to_date"] =  toDate
+        }
+        
+        manager.apiPost(apiName: "Get college professor logs details", parameters: parameters, completionHandler: { (result, code, response) in
+            LoadingActivityHUD.hideProgressHUD()
+            self.arrayLogsDetails.removeAll()
+            self.title = self.allCollegeArray[self.selectedIndex].subjectName
+            
+            guard let logs = response["subject_logs"] as? [[String:Any]] else{
+                self.arrayDataSource.removeAll()
+                self.tableLogsDetail.reloadData()
+                return
+            }
+            if logs.count == 0{
+                self.arrayDataSource.removeAll()
+                self.tableLogsDetail.reloadData()
+                return
+            }
+            for log in logs{
+                let tempLog = Mapper<LogDetails>().map(JSON: log)
+                //remove all the empty values coming in the logs.
+                if(tempLog?.dateOfSubmission != " " && (tempLog?.unitArray.count)! >= 1){
+                    self.arrayLogsDetails.append(tempLog!)
+                }
+            }
+            
+            self.arrayLogsDetails.sort(by: { ($0.lectureDate.convertToDate()!) > ($1.lectureDate.convertToDate()!) })
+            self.makeDataSource()
+            self.showTableView()
+        }) { (success, code, message) in
+            LoadingActivityHUD.hideProgressHUD()
+            self.showAlterWithTitle(nil, alertMessage: message)
+            print(message)
+        }
+    }
+    
+    func initCalenderView(){
+        calenderView = Bundle.main.loadNibNamed("ViewLogsCalender", owner: self, options: nil)?.first as? ViewLogsCalender
+        calenderView?.frame = CGRect(x: 0.0, y: 0.0, width: self.view.width(), height: self.view.height())
+        calenderView?.delegate = self
+    }
+    
     @objc func showCalenderView(){
-        if calenderView == nil{
-            calenderView = Bundle.main.loadNibNamed("ViewLogsCalender", owner: self, options: nil)?.first as? ViewLogsCalender
-            calenderView?.frame = CGRect(x: 0.0, y: 0.0, width: self.view.width(), height: self.view.height())
-            calenderView?.delegate = self
-            self.view.addSubview(calenderView!)
-        }
-        else{
-            self.view.addSubview(calenderView!)
-        }
+        self.view.addSubview(calenderView!)
     }
     
     func makeDataSource(){

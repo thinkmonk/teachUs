@@ -15,8 +15,13 @@ class ProfessorLogsListViewController: BaseViewController {
     var arrayDataSource:[College]! = []
     @IBOutlet weak var tableviewLogs: UITableView!
     let nibCollegeListCell = "ProfessorCollegeListTableViewCell"
-
-
+    
+    
+    var isCollegeLogsSubjectData:Bool = false //for college logs
+    var selectedProffessorId:String? //for college logs
+    var arraySubjectList:ProfessorSubjectList! //for college logs
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableviewLogs.backgroundColor = UIColor.clear
@@ -25,7 +30,15 @@ class ProfessorLogsListViewController: BaseViewController {
         self.tableviewLogs.estimatedRowHeight = 44.0
         self.tableviewLogs.alpha = 0
         self.tableviewLogs.rowHeight = UITableViewAutomaticDimension
-        self.getLogs()
+        self.tableviewLogs.delegate = self
+        self.tableviewLogs.dataSource = self
+
+        if(isCollegeLogsSubjectData){
+            self.addGradientToNavBar()
+            self.getCollegeLogsSubjectData()
+        }else{
+            self.getLogs()
+        }
         tableviewLogs.addSubview(refreshControl) // not required when using UITableViewController
         // Do any additional setup after loading the view.
     }
@@ -36,15 +49,56 @@ class ProfessorLogsListViewController: BaseViewController {
     }
     
     override func refresh(sender: AnyObject) {
-        self.getLogs()
+        if(self.isCollegeLogsSubjectData){
+            self.getCollegeLogsSubjectData()
+        }else{
+            self.getLogs()
+        }
         super.refresh(sender:sender) //this wil end the refreshing
     }
 
-    func getLogs(){
+    func getCollegeLogsSubjectData(){ //for college logs
         
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()
-        manager.url = URLConstants.ProfessorURL.getClassList
+        manager.url = URLConstants.CollegeURL.getLogsSubjectData
+        if let profId = self.selectedProffessorId{
+            let parameters = [
+                "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+                "professor_id":"\(profId)"
+            ]
+            
+            
+            manager.apiPostWithDataResponse(apiName: "Get professor logs for college", parameters: parameters, completionHandler: { (result, code, response) in
+                LoadingActivityHUD.hideProgressHUD()
+                if(code == 200){
+                    do{
+                        let decoder = JSONDecoder()
+                        self.arraySubjectList = try decoder.decode(ProfessorSubjectList.self, from: response)
+                        self.arraySubjectList.subjectsDetails.sort(by: { $0.subjectName < $1.subjectName })
+                    }
+                    catch let error{
+                        print("err", error)
+                    }
+                }
+                else{
+                    print("Error in fetching data")
+                }
+                self.makeTableView()
+                self.showTableView()
+            }) { (success, code, mesage) in
+                LoadingActivityHUD.hideProgressHUD()
+                print(mesage)
+            }
+        }
+        
+    }
+    
+    
+    func getLogs(){
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        let manager = NetworkHandler()
+        manager.url =  URLConstants.ProfessorURL.getClassList
         let parameters = [
             "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)"
         ]
@@ -60,20 +114,17 @@ class ProfessorLogsListViewController: BaseViewController {
                 self.arrayDataSource.append(tempLog!)
             }
             self.arrayDataSource.sort(by: { ($0.year!,$0.classDivision! ,$0.subjectName!) < ($1.year!,$0.classDivision!,$1.subjectName!) })
-
+            
             self.makeTableView()
             self.showTableView()
         }) { (success, code, mesage) in
             LoadingActivityHUD.hideProgressHUD()
             print(mesage)
         }
-
     }
     
     func makeTableView(){
         print(self.arrayDataSource)
-        self.tableviewLogs.delegate = self
-        self.tableviewLogs.dataSource = self
         self.tableviewLogs.reloadData()
     }
     
@@ -88,7 +139,12 @@ class ProfessorLogsListViewController: BaseViewController {
 
 extension ProfessorLogsListViewController:UITableViewDelegate, UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
-        return self.arrayDataSource.count
+        if(self.isCollegeLogsSubjectData && self.arraySubjectList != nil){
+            return self.arraySubjectList.subjectsDetails.count
+        }else if(self.arrayDataSource!.count != 0){
+            return self.arrayDataSource.count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -99,37 +155,24 @@ extension ProfessorLogsListViewController:UITableViewDelegate, UITableViewDataSo
         var cell:UITableViewCell!
         if(cell == nil){
             let collegeCell:ProfessorCollegeListTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.ProfessorCollegeList, for: indexPath) as! ProfessorCollegeListTableViewCell
-            
-            collegeCell.labelSubjectName.text = "\(self.arrayDataSource![indexPath.section].yearName!)\(self.arrayDataSource![indexPath.section].courseCode!) - \(self.arrayDataSource![indexPath.section].subjectName!) - \(self.arrayDataSource![indexPath.section].classDivision!)"
+            if(self.isCollegeLogsSubjectData){
+                collegeCell.labelSubjectName.text = "\(self.arraySubjectList.subjectsDetails[indexPath.section].subjectName)"
+                collegeCell.isUserInteractionEnabled =  false
+
+            }
+            else{
+                collegeCell.labelSubjectName.text = "\(self.arrayDataSource![indexPath.section].yearName!)\(self.arrayDataSource![indexPath.section].courseCode!) - \(self.arrayDataSource![indexPath.section].subjectName!) - \(self.arrayDataSource![indexPath.section].classDivision!)"
+                collegeCell.isUserInteractionEnabled =  true
+
+            }
             collegeCell.selectionStyle = UITableViewCellSelectionStyle.none
             collegeCell.accessoryType = .disclosureIndicator
             cell = collegeCell
         }
         return cell
     }
-    /*
-     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-     return self.arrayDataSource[section].name
-     }
-     */
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        /*
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: tableView.sectionHeaderHeight))
-        
-        let labelTitle = UILabel(frame: CGRect(x: 15.0, y: headerView.height()/2, width: headerView.width()-15, height: 15))
-        labelTitle.center.y = headerView.centerY()
-        labelTitle.textAlignment = .left
-        labelTitle.textColor = UIColor.white
-        labelTitle.text = ""
-        labelTitle.font = UIFont.systemFont(ofSize: 14.0)
-        labelTitle.numberOfLines = 0
-        headerView.addSubview(labelTitle)
-        
-        headerView.backgroundColor = UIColor.rgbColor(52, 40, 70)
-        
-        return headerView
-        */
         
         let headerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableviewLogs.width(), height: 15))
         headerView.backgroundColor = UIColor.clear

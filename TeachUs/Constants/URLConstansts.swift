@@ -85,6 +85,9 @@ public struct URLConstants{
         static let getCollegeSubjectSyllabusDetails = BaseUrl.baseURL  + "/syllabus/college_detailed_syllabus_status"
         static let sendAttendanceReportToEmail = BaseUrl.baseURL + "/auth/professor_student_attendance_verify_auth_password"
         static let verifyFeedbackAuthPassword = BaseUrl.baseURL + "/auth/feedback_verify_auth_password"
+        static let getProfessorListForACollege = BaseUrl.baseURL + "/college/professor_subjects"
+        static let getLogsSubjectData = BaseUrl.baseURL + "/college/professor_subjects_data"
+        static let getcollegeSubjectLogsDetals = BaseUrl.baseURL + "/college/professor_subjects_logs"
     }
     
     struct SyllabusURL {
