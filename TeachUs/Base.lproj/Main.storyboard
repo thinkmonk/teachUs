@@ -1009,7 +1009,7 @@ Form Library</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="151-vh-3gq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4346" y="1543"/>
+            <point key="canvasLocation" x="4583" y="1542"/>
         </scene>
         <!--Student Attedance View Controller-->
         <scene sceneID="y1q-wi-AKY">
@@ -1145,11 +1145,42 @@ Form Library</string>
                         <outlet property="tableViewStudentAttendance" destination="Fr5-gF-bhg" id="qLI-XG-ToH"/>
                         <outlet property="viewAttendanceMonth" destination="f14-ab-QX1" id="f9M-7K-7EP"/>
                         <outlet property="viewHeaderBackground" destination="hqZ-cd-eTx" id="0n1-rW-oWU"/>
+                        <segue destination="V8N-fE-yx4" kind="show" identifier="toStudentAttendanceDetails" id="ZAj-uM-4Jc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rf2-me-st2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3758" y="2274"/>
+            <point key="canvasLocation" x="3630" y="2274"/>
+        </scene>
+        <!--Student Attendance Details View Controller-->
+        <scene sceneID="dQO-0p-oEA">
+            <objects>
+                <viewController id="V8N-fE-yx4" customClass="StudentAttendanceDetailsViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cwc-4V-oXY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lza-Y4-18m">
+                                <rect key="frame" x="10" y="64" width="300" height="504"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Lwb-bP-MjV" firstAttribute="bottom" secondItem="lza-Y4-18m" secondAttribute="bottom" id="Egt-gf-cZX"/>
+                            <constraint firstItem="Lwb-bP-MjV" firstAttribute="trailing" secondItem="lza-Y4-18m" secondAttribute="trailing" constant="10" id="T2m-qp-tx8"/>
+                            <constraint firstItem="lza-Y4-18m" firstAttribute="leading" secondItem="Lwb-bP-MjV" secondAttribute="leading" constant="10" id="oBN-NX-13q"/>
+                            <constraint firstItem="lza-Y4-18m" firstAttribute="top" secondItem="Lwb-bP-MjV" secondAttribute="top" id="q5S-2y-h89"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Lwb-bP-MjV"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableviewAttendanceDetails" destination="lza-Y4-18m" id="oZ6-be-JA5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SCz-Vw-nyK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4583" y="2273"/>
         </scene>
         <!--Teachers Rating View Controller-->
         <scene sceneID="jJ0-JA-rQv">

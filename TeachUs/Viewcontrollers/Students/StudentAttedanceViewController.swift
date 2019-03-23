@@ -21,6 +21,7 @@ class StudentAttedanceViewController: BaseViewController {
     
     var tableDataSource:[StudentAttendanceCellDatasource]! = []
     var arrayDataSource:StudentAttendance!
+    var selectedSubjectAttendance:SubjectAttendance!
     let monthDropdown = DropDown()
     
     override func viewDidLoad() {
@@ -45,13 +46,14 @@ class StudentAttedanceViewController: BaseViewController {
     override func refresh(sender: AnyObject) {
         self.getAttendance(0)
         super.refresh(sender: sender)
-    }
+        }
     
     func getAttendance(_ forMonth:Int){
         let date = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY"
         let strYear = dateFormatter.string(from: date)
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
 
         
         let manager = NetworkHandler()
@@ -145,6 +147,15 @@ class StudentAttedanceViewController: BaseViewController {
     @objc func showMonthPicker(){
         monthDropdown.show()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Constants.segues.toStudentAttendanceDetails{
+            if let destinationVc:StudentAttendanceDetailsViewController = (segue.destination as? StudentAttendanceDetailsViewController){
+                destinationVc.selectedStudentAttendance = self.selectedSubjectAttendance
+                
+            }
+        }
+    }
 }
 
 extension StudentAttedanceViewController:UITableViewDelegate, UITableViewDataSource{
@@ -196,6 +207,17 @@ extension StudentAttedanceViewController:UITableViewDelegate, UITableViewDataSou
         }
         return cell
         
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let dataSource:StudentAttendanceCellDatasource = self.tableDataSource[indexPath.section]
+        switch dataSource.attendanceCellType! {
+        case .ClassAttendance:
+            self.selectedSubjectAttendance = dataSource.attachedObject as? SubjectAttendance
+            
+        case .EventAttendance:break
+        }
+        self.performSegue(withIdentifier: Constants.segues.toStudentAttendanceDetails, sender: self)
     }
 }
 

@@ -27,6 +27,7 @@ public struct Constants {
         
         static let toOfflineHomeTabsVC = "toOfflineHomeTabsVC"
         static let toOfflineMarkPortion = "offlineMarkPortion"
+        static let toStudentAttendanceDetails = "toStudentAttendanceDetails"
     }
     
     struct Images {
@@ -119,6 +120,9 @@ public struct Constants {
         static let LectureReportTopicsCoveredCellId = "lectureReportTopicsCoveredCellId"
         static let CollegeSyllabusTableViewCellId = "CollegeSyllabusTableViewCellId"
         static let addRemoveAdminCell = "AddRemoveAdminTableViewCellId"
+        static let studentAttendanceDetailsHeader = "AttendanceDetailsHeaderTableViewCellId"
+        static let studentAttendanceDetails = "AttendanceDetailsValuesTableViewCellId"
+    
     }
     
     struct UserTypeString {

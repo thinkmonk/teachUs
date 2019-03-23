@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AttendanceDetailsValuesTableViewCellId" rowHeight="55" id="KGk-i7-Jjw" customClass="AttendanceDetailsValuesTableViewCell" customModule="TeachUs" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="54.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GXk-yF-Mg2">
+                        <rect key="frame" x="15" y="0.0" width="290" height="54.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="KMD-Sr-lsA">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="53.5"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mDP-98-Ouk">
+                                <rect key="frame" x="0.0" y="0.0" width="106.5" height="53.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="dSB-nk-2je">
+                                        <rect key="frame" x="15" y="10" width="86.5" height="33.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="dSB-nk-2je" firstAttribute="top" secondItem="mDP-98-Ouk" secondAttribute="top" constant="10" id="A2Z-yc-Kx9"/>
+                                    <constraint firstAttribute="trailing" secondItem="dSB-nk-2je" secondAttribute="trailing" constant="5" id="QDJ-oV-iNn"/>
+                                    <constraint firstAttribute="bottom" secondItem="dSB-nk-2je" secondAttribute="bottom" constant="10" id="d0k-Nr-W0I"/>
+                                    <constraint firstItem="dSB-nk-2je" firstAttribute="leading" secondItem="mDP-98-Ouk" secondAttribute="leading" constant="15" id="rpd-m9-iCB"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lectures Attended" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IQ2-i2-HEk">
+                                <rect key="frame" x="106.5" y="0.0" width="107" height="53.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lectures Taken" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A0R-1H-VkX">
+                                <rect key="frame" x="213.5" y="0.0" width="106.5" height="53.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="mDP-98-Ouk" firstAttribute="top" secondItem="KMD-Sr-lsA" secondAttribute="top" id="FPl-Pe-UOg"/>
+                            <constraint firstItem="mDP-98-Ouk" firstAttribute="leading" secondItem="KMD-Sr-lsA" secondAttribute="leading" id="ZCC-et-Uy4"/>
+                            <constraint firstAttribute="bottom" secondItem="mDP-98-Ouk" secondAttribute="bottom" id="xn8-O5-0BB"/>
+                        </constraints>
+                    </stackView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TZG-Ax-BAd">
+                        <rect key="frame" x="0.0" y="53.5" width="320" height="1"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="Z8A-Rv-xpW"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="KMD-Sr-lsA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="CgP-cI-YUj"/>
+                    <constraint firstAttribute="bottom" secondItem="TZG-Ax-BAd" secondAttribute="bottom" id="If4-Vc-AP6"/>
+                    <constraint firstAttribute="bottom" secondItem="GXk-yF-Mg2" secondAttribute="bottom" id="M5a-OR-2Nb"/>
+                    <constraint firstItem="GXk-yF-Mg2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="MSI-Pg-fp7"/>
+                    <constraint firstAttribute="trailing" secondItem="TZG-Ax-BAd" secondAttribute="trailing" id="Pwe-zv-YPY"/>
+                    <constraint firstItem="KMD-Sr-lsA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Qf5-f6-fYU"/>
+                    <constraint firstAttribute="trailing" secondItem="GXk-yF-Mg2" secondAttribute="trailing" constant="15" id="Y8p-jR-ksh"/>
+                    <constraint firstItem="GXk-yF-Mg2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="ahr-Rm-oSM"/>
+                    <constraint firstAttribute="trailing" secondItem="KMD-Sr-lsA" secondAttribute="trailing" id="enf-1p-f6f"/>
+                    <constraint firstItem="TZG-Ax-BAd" firstAttribute="top" secondItem="KMD-Sr-lsA" secondAttribute="bottom" id="tTZ-aw-nde"/>
+                    <constraint firstItem="TZG-Ax-BAd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="w5g-zE-PZL"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="labelDate" destination="dSB-nk-2je" id="2TS-5p-VPD"/>
+                <outlet property="labelLecturesAtteended" destination="IQ2-i2-HEk" id="VMl-bp-iVU"/>
+                <outlet property="labelLecturesTaken" destination="A0R-1H-VkX" id="PYx-ra-mZl"/>
+                <outlet property="stackViewCellBg" destination="KMD-Sr-lsA" id="ZTd-4r-KfV"/>
+                <outlet property="viewSeperatorBottom" destination="TZG-Ax-BAd" id="3HI-eA-cqC"/>
+                <outlet property="viewcellBg" destination="GXk-yF-Mg2" id="5LN-dj-lPT"/>
+            </connections>
+            <point key="canvasLocation" x="52.799999999999997" y="53.523238380809602"/>
+        </tableViewCell>
+    </objects>
+</document>
