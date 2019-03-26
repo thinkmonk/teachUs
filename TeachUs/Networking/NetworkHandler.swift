@@ -193,11 +193,10 @@ class NetworkHandler:SessionManager{
                  completionHandler: @escaping (_ success:Bool,_ code:Int, _ response: [String:Any]) -> Void,
                  failure: @escaping (_ success:Bool,_ code:Int, _ error: String) -> Void){
         
-        headers = [
-            "Content-Type":"application/x-www-form-urlencoded"
-        ]
         if(!UserManager.sharedUserManager.getAccessToken().isEmpty){
-            headers!["Authorization"] = "\(UserManager.sharedUserManager.getAccessToken())"
+            headers = [
+                "Authorization":"\(UserManager.sharedUserManager.getAccessToken())"
+            ]
         }
 
         #if DEBUG
@@ -206,8 +205,10 @@ class NetworkHandler:SessionManager{
             print("Api name: \(apiName)")
             if let theJSONData = try? JSONSerialization.data(withJSONObject: parameters,options: []) {
                 let theJSONText = String(data: theJSONData,encoding: .ascii)
+//                let params = theJSONText?.split(separator: ",")
+//                let paramPretty = params?.joined(separator: ", \n")
                 print("parameters = \(theJSONText!)")
-            }
+        }
             
             print("Headers = \(headers!)")
             //print("parameters:\(theJSONText)")
@@ -251,11 +252,10 @@ class NetworkHandler:SessionManager{
                  completionHandler: @escaping (_ success:Bool,_ code:Int, _ response: Data) -> Void,
                  failure: @escaping (_ success:Bool,_ code:Int, _ error: String) -> Void){
         
-        headers = [
-            "Content-Type":"application/x-www-form-urlencoded"
-        ]
         if(!UserManager.sharedUserManager.getAccessToken().isEmpty){
-            headers!["Authorization"] = "\(UserManager.sharedUserManager.getAccessToken())"
+            headers = [
+                "Authorization":"\(UserManager.sharedUserManager.getAccessToken())"
+            ]
         }
         
         #if DEBUG
@@ -319,7 +319,10 @@ class NetworkHandler:SessionManager{
             "Content-Type":"application/x-www-form-urlencoded"
         ]
         if(!UserManager.sharedUserManager.getAccessToken().isEmpty){
-            headers!["Authorization"] = "\(UserManager.sharedUserManager.getAccessToken())"
+            headers = [
+                "Authorization":"\(UserManager.sharedUserManager.getAccessToken())"
+            ]
+
         }
         
         #if DEBUG
@@ -337,8 +340,32 @@ class NetworkHandler:SessionManager{
         
         if(Connectivity.isConnectedToInternet){
             
-            Alamofire.request(self.url!, method: .post, parameters: parameters, encoding: URLEncoding.httpBody, headers: self.headers).responseString(completionHandler: { (response) in
-                print(response)
+            Alamofire.request(self.url!, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: self.headers).responseString(completionHandler: { (response) in
+                
+                switch response.result {
+                case .success:
+                    #if DEBUG
+                    print(response)
+                    #endif
+                    completionHandler(true, (response.response?.statusCode)!, response.result.value as! [String : Any])
+                    break
+                    
+                case .failure(let error):
+                    let responseError:NSError = error as NSError
+                    let errorString:String = responseError.localizedDescription
+                    let errorCode:Int = responseError.code
+                    if(errorCode == 401){
+                        UserManager.sharedUserManager.logOutUser()
+                    }else{
+                        _ = NSError(domain: "", code: 0, userInfo: nil)
+                        #if DEBUG
+                        print("***** NETWORK CALL FAILURE RESPONSE *****")
+                        print("error code: \(errorCode), error String \(errorString)")
+                        #endif
+                        failure(false, errorCode, errorString)
+                    }
+                }
+                
             })
             
             /*

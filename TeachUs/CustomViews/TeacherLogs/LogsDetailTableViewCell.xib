@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -36,27 +35,38 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6F6-CT-5Tp" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
+                                <rect key="frame" x="222" y="2.5" width="30" height="30"/>
+                                <state key="normal" title="Edit">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="actionEditAttendance:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="6Ls-fl-U2Z"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.047058823529411764" green="0.10980392156862745" blue="0.37254901960784315" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="CQl-Lp-4oj" firstAttribute="leading" secondItem="Frm-on-I6D" secondAttribute="leading" constant="10" id="CT8-Ya-bG1"/>
                             <constraint firstItem="CQl-Lp-4oj" firstAttribute="top" secondItem="Frm-on-I6D" secondAttribute="top" constant="5" id="eWJ-pB-kGK"/>
+                            <constraint firstItem="6F6-CT-5Tp" firstAttribute="centerY" secondItem="Frm-on-I6D" secondAttribute="centerY" id="kqK-08-iLP"/>
                             <constraint firstAttribute="bottom" secondItem="CQl-Lp-4oj" secondAttribute="bottom" constant="5" id="nHb-8a-VPv"/>
                             <constraint firstAttribute="height" constant="35" id="oay-Ih-8Pj"/>
                             <constraint firstAttribute="trailing" secondItem="CQl-Lp-4oj" secondAttribute="trailing" constant="10" id="r7a-Fo-BNr"/>
+                            <constraint firstAttribute="trailing" secondItem="6F6-CT-5Tp" secondAttribute="trailing" constant="15" id="sec-Ct-0er"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bdb-yk-azs">
-                        <rect key="frame" x="0.0" y="65" width="133.5" height="50"/>
+                        <rect key="frame" x="0.0" y="65" width="133.5" height="49.5"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ADk-NZ-ky7">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="X" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ADk-NZ-ky7">
                                 <rect key="frame" x="10" y="10" width="10.5" height="18"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <color key="textColor" red="0.019607843137254902" green="0.019607843137254902" blue="0.019607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lectures taken" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AMr-3a-Gpp">
-                                <rect key="frame" x="10" y="28" width="71.5" height="12"/>
+                                <rect key="frame" x="10" y="28" width="71.5" height="11.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -98,7 +108,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t8i-LJ-lew">
-                        <rect key="frame" x="0.0" y="115" width="133.5" height="50"/>
+                        <rect key="frame" x="0.0" y="114.5" width="133.5" height="50"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L68-Ji-DIl">
                                 <rect key="frame" x="10" y="10" width="10.5" height="18"/>
@@ -123,7 +133,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rHY-p3-xf1">
-                        <rect key="frame" x="133.5" y="115" width="133.5" height="50"/>
+                        <rect key="frame" x="133.5" y="114.5" width="133.5" height="50"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qsp-rt-BJM">
                                 <rect key="frame" x="0.0" y="10" width="10.5" height="18"/>
@@ -173,6 +183,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="buttonEditAttendance" destination="6F6-CT-5Tp" id="CT9-QC-cG8"/>
                 <outlet property="labelAttendanceCount" destination="L68-Ji-DIl" id="g3C-5p-bPg"/>
                 <outlet property="labelDate" destination="CQl-Lp-4oj" id="auR-dt-4gA"/>
                 <outlet property="labelLectureTime" destination="8uT-LX-pxb" id="0Gk-2I-VM8"/>

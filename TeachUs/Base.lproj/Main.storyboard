@@ -541,21 +541,35 @@ Form Library</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XWp-cD-bd7">
-                                <rect key="frame" x="15" y="64" width="290" height="504"/>
+                                <rect key="frame" x="15" y="64" width="290" height="464"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mlR-yJ-0wp">
+                                <rect key="frame" x="0.0" y="528" width="320" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="HZd-6M-REt"/>
+                                </constraints>
+                                <state key="normal" title="Mail Report"/>
+                                <connections>
+                                    <action selector="mailReport:" destination="arr-zs-JZT" eventType="touchUpInside" id="Zhb-PV-59q"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.92549019610000005" green="0.95294117649999999" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="kcg-bw-I0p" firstAttribute="bottom" secondItem="mlR-yJ-0wp" secondAttribute="bottom" id="MjZ-av-1Cd"/>
                             <constraint firstItem="XWp-cD-bd7" firstAttribute="leading" secondItem="kcg-bw-I0p" secondAttribute="leading" constant="15" id="OC7-PP-nbC"/>
                             <constraint firstAttribute="trailing" secondItem="XWp-cD-bd7" secondAttribute="trailing" constant="15" id="hEn-eN-Wla"/>
+                            <constraint firstItem="mlR-yJ-0wp" firstAttribute="leading" secondItem="kcg-bw-I0p" secondAttribute="leading" id="hlR-vq-kiH"/>
+                            <constraint firstItem="mlR-yJ-0wp" firstAttribute="top" secondItem="XWp-cD-bd7" secondAttribute="bottom" id="hro-i2-cv4"/>
                             <constraint firstItem="XWp-cD-bd7" firstAttribute="top" secondItem="kcg-bw-I0p" secondAttribute="top" id="vs5-ub-Ock"/>
-                            <constraint firstItem="kcg-bw-I0p" firstAttribute="bottom" secondItem="XWp-cD-bd7" secondAttribute="bottom" id="yQx-od-wTx"/>
+                            <constraint firstItem="kcg-bw-I0p" firstAttribute="trailing" secondItem="mlR-yJ-0wp" secondAttribute="trailing" id="w1L-bQ-Hfd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kcg-bw-I0p"/>
                     </view>
                     <navigationItem key="navigationItem" id="2ya-P9-nWy"/>
                     <connections>
+                        <outlet property="buttonMailReport" destination="mlR-yJ-0wp" id="jIW-eO-amm"/>
                         <outlet property="tableviewCollegeList" destination="XWp-cD-bd7" id="i2G-S0-6gj"/>
                         <segue destination="J2l-lX-T3q" kind="show" identifier="markAttendance" id="8yM-mU-V7a"/>
                     </connections>
@@ -925,14 +939,27 @@ Form Library</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="W32-jw-wdP">
-                                <rect key="frame" x="10" y="64" width="300" height="504"/>
+                                <rect key="frame" x="10" y="64" width="300" height="464"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8cJ-Bj-xdk">
+                                <rect key="frame" x="0.0" y="528" width="320" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="SvO-WC-A7f"/>
+                                </constraints>
+                                <state key="normal" title="Mail Report"/>
+                                <connections>
+                                    <action selector="mailReport:" destination="REO-40-ti2" eventType="touchUpInside" id="H5L-8I-zSq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.92549019610000005" green="0.95294117649999999" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="dSd-C3-O4p" firstAttribute="bottom" secondItem="W32-jw-wdP" secondAttribute="bottom" id="etV-FZ-cxw"/>
+                            <constraint firstItem="dSd-C3-O4p" firstAttribute="bottom" secondItem="8cJ-Bj-xdk" secondAttribute="bottom" id="ZCn-b7-9xR"/>
+                            <constraint firstItem="dSd-C3-O4p" firstAttribute="trailing" secondItem="8cJ-Bj-xdk" secondAttribute="trailing" id="g8N-AI-3tu"/>
+                            <constraint firstItem="8cJ-Bj-xdk" firstAttribute="top" secondItem="W32-jw-wdP" secondAttribute="bottom" id="jae-aN-MAO"/>
                             <constraint firstItem="dSd-C3-O4p" firstAttribute="trailing" secondItem="W32-jw-wdP" secondAttribute="trailing" constant="10" id="lXN-rs-ai8"/>
+                            <constraint firstItem="8cJ-Bj-xdk" firstAttribute="leading" secondItem="dSd-C3-O4p" secondAttribute="leading" id="oq1-Ip-xlQ"/>
                             <constraint firstItem="W32-jw-wdP" firstAttribute="top" secondItem="dSd-C3-O4p" secondAttribute="top" id="ujt-Q0-Uip"/>
                             <constraint firstItem="W32-jw-wdP" firstAttribute="leading" secondItem="dSd-C3-O4p" secondAttribute="leading" constant="10" id="xQ5-Js-w92"/>
                         </constraints>
@@ -940,6 +967,7 @@ Form Library</string>
                     </view>
                     <navigationItem key="navigationItem" id="VyG-9R-6XT"/>
                     <connections>
+                        <outlet property="buttonMailReport" destination="8cJ-Bj-xdk" id="Wck-KZ-46Q"/>
                         <outlet property="tableviewLogs" destination="W32-jw-wdP" id="Tqd-el-PVA"/>
                         <segue destination="1iW-gl-mHV" kind="show" id="p1Q-kC-Sbu"/>
                     </connections>

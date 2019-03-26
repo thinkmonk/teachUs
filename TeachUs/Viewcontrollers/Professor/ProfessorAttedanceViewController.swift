@@ -16,6 +16,9 @@ class ProfessorAttedanceViewController: BaseViewController {
     var arrayCollegeList:[College]? = []
     
     @IBOutlet weak var tableviewCollegeList: UITableView!
+    @IBOutlet weak var buttonMailReport: UIButton!
+    var viewMailReport:ViewProfessorMailReport!
+    
     let nibCollegeListCell = "ProfessorCollegeListTableViewCell"
 
     
@@ -31,6 +34,8 @@ class ProfessorAttedanceViewController: BaseViewController {
         self.tableviewCollegeList.estimatedRowHeight = 44
         self.tableviewCollegeList.rowHeight = UITableViewAutomaticDimension
         self.tableviewCollegeList.register(cellNib, forCellReuseIdentifier: Constants.CustomCellId.ProfessorCollegeList)
+        self.buttonMailReport.isHidden = true
+        self.buttonMailReport.themeRedButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,6 +80,7 @@ class ProfessorAttedanceViewController: BaseViewController {
             UIView.animate(withDuration: 1.0, animations: {
                 self.tableviewCollegeList.alpha = 1
             })
+            self.buttonMailReport.isHidden = false
             self.tableviewCollegeList.reloadData()
 
         }) { (error, code, message) in
@@ -88,6 +94,15 @@ class ProfessorAttedanceViewController: BaseViewController {
         let destinationVC:StudentsListViewController =  storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.studentList) as! StudentsListViewController
          destinationVC.selectedCollege = subject        
         self.parentNavigationController?.pushViewController(destinationVC, animated: true)
+    }
+    
+    @IBAction func mailReport(_ sender:Any){
+        self.viewMailReport =  ViewProfessorMailReport.instanceFromNib() as? ViewProfessorMailReport
+        viewMailReport.frame = self.view.frame
+        viewMailReport.makeTableCellEdgesRounded()
+        viewMailReport.delegate = self
+        viewMailReport.labelEmail.text = UserManager.sharedUserManager.appUserDetails.email ?? "NA"
+        self.view.addSubview(viewMailReport)
     }
 }
 
@@ -144,8 +159,41 @@ extension ProfessorAttedanceViewController:UITableViewDataSource, UITableViewDel
     }
 }
 
+extension ProfessorAttedanceViewController:ViewProfessorMailReportDelegate{
+    func dismissMailReportView() {
+        self.viewMailReport.removeFromSuperview()
+    }
+    
+    func mailReport(fromDate: String, toDate: String) {
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        let manager = NetworkHandler()
+        manager.url = URLConstants.ProfessorURL.mailAttendanceReport
+        let parameters = [
+            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+            "role_id":"\(UserManager.sharedUserManager.appUserCollegeDetails.role_id!)",
+            "email":"\(UserManager.sharedUserManager.appUserDetails.email!)",
+            "from_date":fromDate,
+            "to_date":toDate,
+            "criteria":""
+        ]
+        
+        manager.apiPost(apiName: "Send AttendanceReport to email", parameters:parameters, completionHandler: { (result, code, response) in
+            LoadingActivityHUD.hideProgressHUD()
+            if(code == 200){
+                self.viewMailReport.removeFromSuperview()
+                let message:String = response["message"] as! String
+                self.showAlterWithTitle(nil, alertMessage: message)
+            }
+        }) { (error, code, message) in
+            self.showAlterWithTitle(nil, alertMessage: message)
+            LoadingActivityHUD.hideProgressHUD()
+        }
+    }
+}
+
 extension ProfessorAttedanceViewController:IndicatorInfoProvider{
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "Attendance")
     }
 }
+

@@ -14,8 +14,11 @@ class ProfessorLogsListViewController: BaseViewController {
     var parentNavigationController : UINavigationController?
     var arrayDataSource:[College]! = []
     @IBOutlet weak var tableviewLogs: UITableView!
+    @IBOutlet weak var buttonMailReport: UIButton!
+
     let nibCollegeListCell = "ProfessorCollegeListTableViewCell"
-    
+    var viewMailReport:ViewProfessorMailReport!
+
     
     var isCollegeLogsSubjectData:Bool = false //for college logs
     var selectedProffessorId:String? //for college logs
@@ -32,6 +35,10 @@ class ProfessorLogsListViewController: BaseViewController {
         self.tableviewLogs.rowHeight = UITableViewAutomaticDimension
         self.tableviewLogs.delegate = self
         self.tableviewLogs.dataSource = self
+        
+        self.buttonMailReport.isHidden = true
+        self.buttonMailReport.themeRedButton()
+
 
         if(isCollegeLogsSubjectData){
             self.addGradientToNavBar()
@@ -134,6 +141,16 @@ class ProfessorLogsListViewController: BaseViewController {
             self.tableviewLogs.alpha = 1.0
             self.tableviewLogs.transform = CGAffineTransform.identity
         }
+        self.buttonMailReport.isHidden = false
+    }
+    
+    @IBAction func mailReport(_ sender:Any){
+        self.viewMailReport =  ViewProfessorMailReport.instanceFromNib() as? ViewProfessorMailReport
+        viewMailReport.frame = CGRect(x: 0.0, y: 0.0, width: self.view.width(), height: self.view.height())
+        viewMailReport.makeTableCellEdgesRounded()
+        viewMailReport.delegate = self
+        viewMailReport.labelEmail.text = UserManager.sharedUserManager.appUserDetails.email
+        self.view.addSubview(viewMailReport)
     }
 }
 
@@ -204,6 +221,44 @@ extension ProfessorLogsListViewController:UITableViewDelegate, UITableViewDataSo
         destinationVC.allCollegeArray = self.arrayDataSource
         destinationVC.selectedIndex = indexPath.section
         self.parentNavigationController?.pushViewController(destinationVC, animated: true)
+    }
+}
+
+extension ProfessorLogsListViewController:ViewProfessorMailReportDelegate{
+    func dismissMailReportView() {
+        self.viewMailReport.removeFromSuperview()
+    }
+    
+    func mailReport(fromDate: String, toDate: String) {
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        let manager = NetworkHandler()
+        manager.url = URLConstants.ProfessorURL.mailLogsReport
+        let classIdList = self.arrayDataSource.map({$0.classId!})
+        var classIdListStirng = ""
+        for (index,element) in classIdList.enumerated(){
+            classIdListStirng += index == (classIdList.count - 1) ? "\(element)" : "\(element),"
+        }
+        
+        //get all the class id and join them using ","
+        let parameters = [
+            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+            "role_id":"\(UserManager.sharedUserManager.appUserCollegeDetails.role_id!)",
+            "email":"\(UserManager.sharedUserManager.appUserDetails.email!)",
+            "from_date":fromDate,
+            "to_date":toDate,
+            "class_id": classIdListStirng
+            ] as [String : Any]
+        
+        manager.apiPost(apiName: "Send AttendanceReport to email", parameters:parameters, completionHandler: { (result, code, response) in
+            LoadingActivityHUD.hideProgressHUD()
+            if(code == 200){
+                let message:String = response["message"] as! String
+                self.showAlterWithTitle(nil, alertMessage: message)
+            }
+        }) { (error, code, message) in
+            print(message)
+            LoadingActivityHUD.hideProgressHUD()
+        }
     }
 }
 

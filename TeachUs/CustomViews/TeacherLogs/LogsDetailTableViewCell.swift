@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol LogsDetailCellDelegate{
+    func actionDidEditAttendance(_ indexpath:IndexPath)
+}
+
 class LogsDetailTableViewCell: UITableViewCell {
     @IBOutlet weak var viewHeader: UIView!
     @IBOutlet weak var labelDate: UILabel!
@@ -24,8 +28,8 @@ class LogsDetailTableViewCell: UITableViewCell {
     
     @IBOutlet weak var viewTimeOfSubject: UIView!
     @IBOutlet weak var labelTimeOfSubmission: UILabel!
-    
-    
+    @IBOutlet weak var buttonEditAttendance:ButtonWithIndexPath!
+    var delegate:LogsDetailCellDelegate!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -41,5 +45,12 @@ class LogsDetailTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    @IBAction func actionEditAttendance(_ sender: Any) {
+        if let senderButton = sender as? ButtonWithIndexPath{
+            self.delegate.actionDidEditAttendance(senderButton.indexPath)
+        }
+    }
+    
     
 }

@@ -13,6 +13,7 @@ import ObjectMapper
  
  "subject_logs": [
  {
+ "att_id" = 378; <- Added in v2
  "course_name": "FYBMS - A",
  "lecture_date": "2018-02-25",
  "no_of_lecture": "2",
@@ -51,7 +52,7 @@ class LogDetails:Mappable{
     var dateOfSubmission:String = " "
     var totalStudentAttendance:String = " "
     var unitArray:[Unit] = []
-    
+    var attendanceId:String = ""
     required init?(map: Map) {
     }
     
@@ -64,6 +65,7 @@ class LogDetails:Mappable{
         self.dateOfSubmission <- map["date_of_submission"]
         self.totalStudentAttendance <- map["total_student_attendance"]
         self.unitArray  <- map["unit_list"]
+        self.attendanceId <- map["att_id"]
     }
     
 }

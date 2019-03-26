@@ -250,6 +250,8 @@ extension LogsDetailViewController:UITableViewDelegate, UITableViewDataSource{
             cell.labelDate.text = "\(logs.lectureDate)"
             cell.labelTimeOfSubmission.text = "\(logs.dateOfSubmission)"
             cell.selectionStyle = .none
+            cell.buttonEditAttendance.indexPath = indexPath
+            cell.delegate = self
             return cell
             
         case .SyllabusDetail:
@@ -274,6 +276,18 @@ extension LogsDetailViewController:UITableViewDelegate, UITableViewDataSource{
             return 80
         }
     }
+}
+
+extension LogsDetailViewController:LogsDetailCellDelegate{
+    func actionDidEditAttendance(_ indexpath: IndexPath) {
+
+        print("selected attendance id = \((self.arrayDataSource[indexpath.row].attachedObject as! LogDetails).attendanceId )")
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let destinationVC:StudentsListViewController =  storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.studentList) as! StudentsListViewController
+        self.navigationController?.pushViewController(destinationVC, animated: true)
+    }
+    
 }
 
 extension LogsDetailViewController:ViewLogsCalenderDelegate{
