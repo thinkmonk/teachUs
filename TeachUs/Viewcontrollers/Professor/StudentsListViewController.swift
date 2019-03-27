@@ -41,22 +41,30 @@ class StudentsListViewController: BaseViewController {
     
     //TODO:- COMAPRE textfield value of the cell
     
-    
+    //For Edit Attendance flow
+    var isEditAttendanceFlow:Bool = false
+    var selectedAttendanceId:Int?
+    var lectureDetails:EditAttendanceLectureInfo!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if(selectedCollege != nil)
-        {
-            self.title = selectedCollege.subjectName!
-            let dataQueue = OperationQueue()
-            dataQueue.addOperation {
-                self.getEnrolledStudentsList()
+        
+        
+        if self.isEditAttendanceFlow{
+            self.getListForAttendanceEdit()
+        }else{
+            if(selectedCollege != nil)
+            {
+                self.title = selectedCollege.subjectName!
+                let dataQueue = OperationQueue()
+                dataQueue.addOperation {
+                    self.getEnrolledStudentsList()
+                }
+                dataQueue.addOperation {
+                    self.getTopics()
+                }
+                dataQueue.waitUntilAllOperationsAreFinished()
             }
-            dataQueue.addOperation {
-                self.getTopics()
-            }
-            dataQueue.waitUntilAllOperationsAreFinished()
-            
         }
         
         self.tableStudentList.register(UINib(nibName: "AttendanceCalenderTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.AttendanceCalenderTableViewCellId)
@@ -89,6 +97,56 @@ class StudentsListViewController: BaseViewController {
         super.didReceiveMemoryWarning()
     }
     
+    func getListForAttendanceEdit(){
+        let manager = NetworkHandler()
+        manager.url = URLConstants.ProfessorURL.getEditAttendanceData
+        DispatchQueue.main.async {
+            LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        }
+        
+        let parameters = [
+            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+            "attendance_id":"\(self.selectedAttendanceId ?? 0)"
+        ]
+        manager.apiPost(apiName: "Get Edit Attendance data", parameters:parameters, completionHandler: { (result, code, response) in
+            LoadingActivityHUD.hideProgressHUD()
+            if(code == 200){
+                if let lectureInfo = response["lecture_info"] as? [String:Any]{
+                    self.lectureDetails = Mapper<EditAttendanceLectureInfo>().map(JSON:lectureInfo)
+                }
+                
+                if let studentDetailArray = response["attendance_data"] as? [[String:Any]]{
+                    for student in studentDetailArray{
+                        let studentDetail = Mapper<EnrolledStudentDetail>().map(JSON: student)
+                        self.arrayStudentsDetails.append(studentDetail!)
+                    }
+                }
+                
+                if (Int((self.arrayStudentsDetails.first?.studentRollNo)!)) != nil{
+                    self.arrayStudentsDetails.sort(by: {Int($0.studentRollNo!)! < Int($1.studentRollNo!)!})
+                }
+                else{
+                    self.arrayStudentsDetails.sort( by: {$0.studentRollNo!.localizedStandardCompare($1.studentRollNo!) == .orderedAscending})
+                    
+                }
+                if(self.arrayStudentsDetails.count > 0){
+                    self.setUpTableView()
+                }
+            }
+            else{
+                self.showErrorAlert(ErrorType.ServerCallFailed, retry: { (retry) in
+                    if(retry){
+                        self.getListForAttendanceEdit()
+                    }
+                })
+            }
+            
+        }) { (error, code, errorMessage) in
+            LoadingActivityHUD.hideProgressHUD()
+            print(errorMessage)
+        }
+        
+    }
     
     func getEnrolledStudentsList(){
         let manager = NetworkHandler()
@@ -193,7 +251,14 @@ class StudentsListViewController: BaseViewController {
             self.isDefaultAttencdanceChanged = false
             AttendanceManager.sharedAttendanceManager.arrayStudents.value.removeAll()
             for student in arrayStudentsDetails{
-                let studentAttendance:MarkStudentAttendance = MarkStudentAttendance(student, self.defaultAttendanceForAllStudents)
+                var studentAttendance:MarkStudentAttendance!
+                if(self.isEditAttendanceFlow){
+                    let status = Int(student.attendanceStatus ?? "0") ?? 0
+                    studentAttendance = MarkStudentAttendance(student, status.boolValue)
+
+                }else{
+                    studentAttendance = MarkStudentAttendance(student, self.defaultAttendanceForAllStudents)
+                }
                 let studentDetailDataSource = AttendanceDatasource(celType: .studentProfile, attachedObject: studentAttendance)
                 studentDetailDataSource.isSelected = false
                 AttendanceManager.sharedAttendanceManager.arrayStudents.value.append(studentAttendance)

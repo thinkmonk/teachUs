@@ -23,7 +23,7 @@ class StudentAttedanceViewController: BaseViewController {
     var arrayDataSource:StudentAttendance!
     var selectedSubjectAttendance:SubjectAttendance!
     let monthDropdown = DropDown()
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         self.getAttendance(0)

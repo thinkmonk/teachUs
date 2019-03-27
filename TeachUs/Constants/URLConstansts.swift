@@ -60,6 +60,7 @@ public struct URLConstants{
         static let mergedAttendanceAndSyllabus = BaseUrl.baseURL + "/attendance/merged_submit_attendance"
         static let mailAttendanceReport = BaseUrl.baseURL + "/auth/professor_student_attendance_verify_auth_password"
         static let mailLogsReport = BaseUrl.baseURL + "/auth/professor_logs_verify_auth_password"
+        static let getEditAttendanceData =  BaseUrl.baseURL + "/professor/attendance_list_edit"
     }
     
     

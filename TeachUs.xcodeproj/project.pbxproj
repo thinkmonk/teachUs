@@ -15,6 +15,8 @@
 		18A627F51F90F9880099C106 /* TeachUsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A627F41F90F9880099C106 /* TeachUsTests.swift */; };
 		18A628001F90F9880099C106 /* TeachUsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A627FF1F90F9880099C106 /* TeachUsUITests.swift */; };
 		620B195E52A0E8351C79F40C /* Pods_TeachUs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9BB4C9AF04CE7C6C6179D7 /* Pods_TeachUs.framework */; };
+		810200CB224BF1B400C87EA3 /* EditAttendanceLectureInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810200CA224BF1B400C87EA3 /* EditAttendanceLectureInfo.swift */; };
+		810200CD224BFBD600C87EA3 /* MiscallenousExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810200CC224BFBD600C87EA3 /* MiscallenousExtensions.swift */; };
 		8102FDF52243577100A7067B /* StudentAttendanceDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8102FDF42243577100A7067B /* StudentAttendanceDetailsViewController.swift */; };
 		8102FDF922435F6200A7067B /* AttendanceDetailsHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8102FDF722435F6200A7067B /* AttendanceDetailsHeaderTableViewCell.swift */; };
 		8102FDFA22435F6200A7067B /* AttendanceDetailsHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8102FDF822435F6200A7067B /* AttendanceDetailsHeaderTableViewCell.xib */; };
@@ -290,6 +292,8 @@
 		18A627FB1F90F9880099C106 /* TeachUsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TeachUsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18A627FF1F90F9880099C106 /* TeachUsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachUsUITests.swift; sourceTree = "<group>"; };
 		18A628011F90F9880099C106 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		810200CA224BF1B400C87EA3 /* EditAttendanceLectureInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAttendanceLectureInfo.swift; sourceTree = "<group>"; };
+		810200CC224BFBD600C87EA3 /* MiscallenousExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscallenousExtensions.swift; sourceTree = "<group>"; };
 		8102FDF42243577100A7067B /* StudentAttendanceDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentAttendanceDetailsViewController.swift; sourceTree = "<group>"; };
 		8102FDF722435F6200A7067B /* AttendanceDetailsHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceDetailsHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		8102FDF822435F6200A7067B /* AttendanceDetailsHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AttendanceDetailsHeaderTableViewCell.xib; sourceTree = "<group>"; };
@@ -647,6 +651,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		810200C9224BF19B00C87EA3 /* Attendance */ = {
+			isa = PBXGroup;
+			children = (
+				810200CA224BF1B400C87EA3 /* EditAttendanceLectureInfo.swift */,
+			);
+			path = Attendance;
+			sourceTree = "<group>";
+		};
 		8102FDF622435F3800A7067B /* StudentAttendanceDetails */ = {
 			isa = PBXGroup;
 			children = (
@@ -718,6 +730,7 @@
 		811EA45C223D17C900D55899 /* CollegeProfessor */ = {
 			isa = PBXGroup;
 			children = (
+				810200C9224BF19B00C87EA3 /* Attendance */,
 				811EA45D223D17DD00D55899 /* CollegeProfessorList.swift */,
 				817C28A8223D50D8000E0544 /* CollegeProfSubjectDetials.swift */,
 			);
@@ -901,6 +914,7 @@
 				812CB757206FA01200D31C05 /* CALayer.swift */,
 				81E3E3B32077A24A002CFC1D /* String.swift */,
 				8161AF68222C5B63001F73B5 /* Array.swift */,
+				810200CC224BFBD600C87EA3 /* MiscallenousExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1636,6 +1650,7 @@
 				81727B8B1F9E6CB8006433E8 /* MFSideMenuShadow.m in Sources */,
 				81C2085A1FAF6CEB003D366D /* EnrolledStudentDetail.swift in Sources */,
 				81A80ED91FADFC6200DDFFA1 /* URLConstansts.swift in Sources */,
+				810200CB224BF1B400C87EA3 /* EditAttendanceLectureInfo.swift in Sources */,
 				81B203D91FD551FF00936F0F /* Teacher+CoreDataProperties.swift in Sources */,
 				81B203DD1FD551FF00936F0F /* SuperAdmin+CoreDataProperties.swift in Sources */,
 				81FEC7FB20F10436003FBDBE /* Reachability.swift in Sources */,
@@ -1675,6 +1690,7 @@
 				81D7CE9A1FAB9A1D00C4375E /* UserManager.swift in Sources */,
 				81727B8C1F9E6CB8006433E8 /* UIViewController+MFSideMenuAdditions.m in Sources */,
 				810FAC5A1FB7549400945DD6 /* AttendanceCountTableViewCell.swift in Sources */,
+				810200CD224BFBD600C87EA3 /* MiscallenousExtensions.swift in Sources */,
 				8102FDF52243577100A7067B /* StudentAttendanceDetailsViewController.swift in Sources */,
 				81165BE922330078003EE106 /* VerifyEmail.swift in Sources */,
 				81B2E2DC1FC35B0600E9E852 /* DropDown.swift in Sources */,

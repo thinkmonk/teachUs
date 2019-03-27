@@ -285,6 +285,8 @@ extension LogsDetailViewController:LogsDetailCellDelegate{
         
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let destinationVC:StudentsListViewController =  storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.studentList) as! StudentsListViewController
+        destinationVC.selectedAttendanceId = Int((self.arrayDataSource[indexpath.row].attachedObject as! LogDetails).attendanceId)
+        destinationVC.isEditAttendanceFlow = true
         self.navigationController?.pushViewController(destinationVC, animated: true)
     }
     

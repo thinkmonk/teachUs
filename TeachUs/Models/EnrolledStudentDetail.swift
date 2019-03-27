@@ -67,10 +67,15 @@ public class EnrolledStudentDetail :Mappable{
     var lectureAttended:String? = ""
     var totalLecture:String? = ""
     var percentage:String? = ""
-    
     var lastLectureAttendance:String? = ""
     var studentName:String? = ""
 
+    ///For Edit attendance flow
+    var attendanceStatus:String?
+    var editAttendanceStudentName:String?
+    
+    
+    
 //    var subjectId:Int?
 //    var subject:String?
     
@@ -95,6 +100,9 @@ public class EnrolledStudentDetail :Mappable{
         self.percentage <- map["perecentage_att"]
         self.lastLectureAttendance = (self.lastPresent == "0") ? "Absent":"Present"
         self.studentName = "\(self.studentFirstName!) \(self.studentMiddleName!) \(self.studentLastName!)"
+        self.editAttendanceStudentName <- map["student_name"]
+        self.studentName = self.studentName == "  " ? editAttendanceStudentName : self.studentName
+        self.attendanceStatus <- map["att_status"]
     }
 }
 
