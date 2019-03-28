@@ -22,6 +22,7 @@
 		810610BE1FA65EE00067273E /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810610BD1FA65EE00067273E /* Loader.swift */; };
 		810610C01FA65FB30067273E /* LoadingActivityHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810610BF1FA65FB30067273E /* LoadingActivityHUD.swift */; };
 		810610C21FA660890067273E /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810610C11FA660890067273E /* Connectivity.swift */; };
+		8108D933224D5AB20010A605 /* AppUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8108D932224D5AB20010A605 /* AppUpdate.swift */; };
 		810BECD8206E65D600F560C6 /* CollegeAttendanceDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810BECD7206E65D600F560C6 /* CollegeAttendanceDetailsViewController.swift */; };
 		810BECDA206ED5B000F560C6 /* CollegeSubjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810BECD9206ED5B000F560C6 /* CollegeSubjects.swift */; };
 		810BECDE206EDEE900F560C6 /* StudentProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810BECDC206EDEE900F560C6 /* StudentProfileTableViewCell.swift */; };
@@ -277,6 +278,7 @@
 		810610BD1FA65EE00067273E /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		810610BF1FA65FB30067273E /* LoadingActivityHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingActivityHUD.swift; sourceTree = "<group>"; };
 		810610C11FA660890067273E /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
+		8108D932224D5AB20010A605 /* AppUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUpdate.swift; sourceTree = "<group>"; };
 		810BECD7206E65D600F560C6 /* CollegeAttendanceDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeAttendanceDetailsViewController.swift; sourceTree = "<group>"; };
 		810BECD9206ED5B000F560C6 /* CollegeSubjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeSubjects.swift; sourceTree = "<group>"; };
 		810BECDC206EDEE900F560C6 /* StudentProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentProfileTableViewCell.swift; sourceTree = "<group>"; };
@@ -878,6 +880,7 @@
 				81A7D061208BA7EE0032A1BC /* RatingDetails.swift */,
 				819EEC2720A6145E00487467 /* LectureReport.swift */,
 				81AC9F9220AA051900DEECB1 /* CollegeSyllabusList.swift */,
+				8108D932224D5AB20010A605 /* AppUpdate.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1589,6 +1592,7 @@
 				81A560D3205D07DC00DAE086 /* HomeViewController2.swift in Sources */,
 				81D76B521FC1D3EC005E861C /* SyllabusDetailsViewController.swift in Sources */,
 				81ACF7F320851E1700167203 /* AddRemoveAdminViewController.swift in Sources */,
+				8108D933224D5AB20010A605 /* AppUpdate.swift in Sources */,
 				81D7CE921FAB987300C4375E /* StudentAttedanceViewController.swift in Sources */,
 				81CCAE4D1FC805CA0070907A /* TeacherProfileTableViewCell.swift in Sources */,
 				8135B897207900D4008E3E4B /* AddNewEventViewController.swift in Sources */,

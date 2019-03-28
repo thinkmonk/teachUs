@@ -235,6 +235,7 @@ extension LoginViewController:OtpDelegate{
         ]
         manager.apiPost(apiName: "Verify OTP", parameters: parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
+            self.otpTimer.invalidate()
             if(code == 200){
                 let accessToken:String = response["token"] as! String
                 UserManager.sharedUserManager.setAccessToken(accessToken)
@@ -245,6 +246,7 @@ extension LoginViewController:OtpDelegate{
                 self.showAlterWithTitle(nil, alertMessage: message)
             }
         }) { (error, code, message) in
+            self.otpTimer.invalidate()
             LoadingActivityHUD.hideProgressHUD()
             print(message)
         }
@@ -299,7 +301,6 @@ extension LoginViewController:CollegeLoginDelegate{
     
     @objc func enableCollegeResendOtpButton(){
         otpTimeUpdated -= 1
-        print(otpTimeUpdated)
         GlobalFunction.minutesAndSecsFrom(seconds: otpTimeUpdated) { (mins, secs) in
             let minutes = GlobalFunction.getStringFrom(seconds: mins)
             let seconds = GlobalFunction.getStringFrom(seconds: secs)
@@ -327,6 +328,7 @@ extension LoginViewController:CollegeLoginDelegate{
         ]
         manager.apiPost(apiName: "Verify OTP", parameters: parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
+            self.otpTimer.invalidate()
             if(code == 200){
                 let accessToken:String = response["token"] as! String
                 UserManager.sharedUserManager.setAccessToken(accessToken)
@@ -336,6 +338,7 @@ extension LoginViewController:CollegeLoginDelegate{
                 self.showAlterWithTitle(nil, alertMessage: message)
             }
         }) { (error, code, message) in
+            self.otpTimer.invalidate()
             LoadingActivityHUD.hideProgressHUD()
             print(message)
         }

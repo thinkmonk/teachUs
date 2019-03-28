@@ -88,5 +88,9 @@ public struct URLConstants{
     struct OfflineURL {
         static let getOfflineData = BaseUrl.baseURL + "/offline/get_offline"
     }
+    
+    struct TeachUsAppStoreLink {
+        static let storeLink = "https://itunes.apple.com/in/app/teach-us/id1392613722?mt=8"
+    }
 
 }
