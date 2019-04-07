@@ -168,6 +168,7 @@
 		81B2E2DC1FC35B0600E9E852 /* DropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B2E2D41FC35B0600E9E852 /* DropDown.swift */; };
 		81B2E2DD1FC35B0600E9E852 /* DropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B2E2D51FC35B0600E9E852 /* DropDownCell.swift */; };
 		81B69E7C1FA902BD0098F16D /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B69E7B1FA902BD0098F16D /* UITextField.swift */; };
+		81BC7B60224FD6C70091B037 /* ForceUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BC7B5F224FD6C70091B037 /* ForceUpdate.swift */; };
 		81C1D8AB1FCF34F10091DA6E /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C1D8AA1FCF34F10091DA6E /* DatabaseManager.swift */; };
 		81C208511FAF4182003D366D /* ProfessorCollegeListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C2084F1FAF4182003D366D /* ProfessorCollegeListTableViewCell.swift */; };
 		81C208521FAF4182003D366D /* ProfessorCollegeListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81C208501FAF4182003D366D /* ProfessorCollegeListTableViewCell.xib */; };
@@ -431,6 +432,7 @@
 		81B2E2D41FC35B0600E9E852 /* DropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDown.swift; sourceTree = "<group>"; };
 		81B2E2D51FC35B0600E9E852 /* DropDownCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownCell.swift; sourceTree = "<group>"; };
 		81B69E7B1FA902BD0098F16D /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
+		81BC7B5F224FD6C70091B037 /* ForceUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForceUpdate.swift; sourceTree = "<group>"; };
 		81C1D8AA1FCF34F10091DA6E /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		81C2084F1FAF4182003D366D /* ProfessorCollegeListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessorCollegeListTableViewCell.swift; sourceTree = "<group>"; };
 		81C208501FAF4182003D366D /* ProfessorCollegeListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfessorCollegeListTableViewCell.xib; sourceTree = "<group>"; };
@@ -881,6 +883,7 @@
 				819EEC2720A6145E00487467 /* LectureReport.swift */,
 				81AC9F9220AA051900DEECB1 /* CollegeSyllabusList.swift */,
 				8108D932224D5AB20010A605 /* AppUpdate.swift */,
+				81BC7B5F224FD6C70091B037 /* ForceUpdate.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1632,6 +1635,7 @@
 				8137EF5C1FA10D6A00045D97 /* UIView.swift in Sources */,
 				8161AF65222C467C001F73B5 /* ViewClassSelection.swift in Sources */,
 				81E67400205315B100321257 /* UserCollegeDetails.swift in Sources */,
+				81BC7B60224FD6C70091B037 /* ForceUpdate.swift in Sources */,
 				81B203C51FD5422000936F0F /* AppUser.swift in Sources */,
 				812B152C20BAA65C00693183 /* FaveButton.swift in Sources */,
 				81FFB0BE1FBF468000C32097 /* SyllabusChapter.swift in Sources */,

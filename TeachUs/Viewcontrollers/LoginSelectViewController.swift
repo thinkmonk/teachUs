@@ -51,7 +51,7 @@ class LoginSelectViewController: BaseViewController {
         manager.apiGet(apiName: "Get Role for all user", completionHandler: { (response, code) in
             LoadingActivityHUD.hideProgressHUD()
             
-            
+            /*
             let appUpdateData:[Any] = response["device_update"] as! [Any]
             for update in appUpdateData{
                 let tempUpdate :AppUpdateData = Mapper<AppUpdateData>().map(JSONObject: update)!
@@ -61,6 +61,7 @@ class LoginSelectViewController: BaseViewController {
                 }
                 self.checkAndShowAppUpdateDialogue()
             }
+            */
             let userRoleDict:[Any] = response["roles"] as! [Any]
             for user in userRoleDict{
                 let userRoleDict:[String:Any] = user as! [String:Any]

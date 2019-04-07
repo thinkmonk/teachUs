@@ -28,6 +28,7 @@ public struct URLConstants{
     }
     
     struct Login {
+        static let forceUpdateCheck = BaseUrl.baseURL + "/role/device_update"
         static let role = BaseUrl.baseURL + "/role"
         static let checkDetails = BaseUrl.baseURL + "/login/check_details"
         static let sendOtp = BaseUrl.baseURL + "/login/sendotp"
