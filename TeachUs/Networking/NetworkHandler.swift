@@ -197,6 +197,7 @@ class NetworkHandler:SessionManager{
             headers = [
                 "Authorization":"\(UserManager.sharedUserManager.getAccessToken())"
             ]
+            print("Headers = \(headers!)")
         }
 
         #if DEBUG
@@ -210,7 +211,6 @@ class NetworkHandler:SessionManager{
                 print("parameters = \(theJSONText!)")
         }
             
-            print("Headers = \(headers!)")
             //print("parameters:\(theJSONText)")
         #endif
         

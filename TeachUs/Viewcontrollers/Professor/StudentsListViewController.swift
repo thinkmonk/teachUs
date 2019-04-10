@@ -72,7 +72,6 @@ class StudentsListViewController: BaseViewController {
         self.tableStudentList.register(UINib(nibName: "DefaultSelectionTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.DefaultSelectionTableViewCellId)
         self.tableStudentList.register(UINib(nibName: "AttendanceCountTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.AttendanceCountTableViewCellId)
         setUpcalenderView()
-        initDatPicker()
         
         numberPicker = ViewNumberPicker.instanceFromNib() as? ViewNumberPicker
         numberPicker.setUpPicker()
@@ -113,6 +112,7 @@ class StudentsListViewController: BaseViewController {
             if(code == 200){
                 if let lectureInfo = response["lecture_info"] as? [String:Any]{
                     self.lectureDetails = Mapper<EditAttendanceLectureInfo>().map(JSON:lectureInfo)
+                    
                 }
                 
                 if let studentDetailArray = response["attendance_data"] as? [[String:Any]]{
@@ -130,6 +130,7 @@ class StudentsListViewController: BaseViewController {
                     
                 }
                 if(self.arrayStudentsDetails.count > 0){
+                    self.initDatPicker()
                     self.setUpTableView()
                 }
             }
@@ -173,13 +174,9 @@ class StudentsListViewController: BaseViewController {
                 else{
                     self.arrayStudentsDetails.sort( by: {$0.studentRollNo!.localizedStandardCompare($1.studentRollNo!) == .orderedAscending})
                     
-                    
-                    //                    self.arrayStudentsDetails.sort(by: {$0.studentRollNo! < $1.studentRollNo!})
                 }
-                
-                
-                //                self.arrayStudentsDetails.sort(by: {Int($0.studentRollNo!)! < Int($1.studentRollNo!)!})
                 if(self.arrayStudentsDetails.count > 0){
+                    self.initDatPicker()
                     self.setUpTableView()
                 }
             }
@@ -524,12 +521,20 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
     
     func initDatPicker(){
         if(datePicker == nil){
-            datePicker = ViewDatePicker.instanceFromNib() as! ViewDatePicker
+            datePicker = ViewDatePicker.instanceFromNib() as? ViewDatePicker
             datePicker.setUpPicker(type: .date)
             datePicker.buttonOk.addTarget(self, action: #selector(StudentsListViewController.dismissDatePicker), for: .touchUpInside)
-            
-            datePicker.picker.minimumDate = NSCalendar.current.date(byAdding: .month, value: -6, to: Date())
-            datePicker.picker.maximumDate = NSCalendar.current.date(byAdding: .month, value: 0, to: Date())
+            if self.isEditAttendanceFlow{
+                let formatter = DateFormatter()
+                formatter.dateFormat = "YYYY-MM-dd" //2018-12-01
+                let lectureDate = formatter.date(from: self.lectureDetails.lectureDate)
+                datePicker.picker.date = lectureDate ?? Date()
+                datePicker.picker.minimumDate = NSCalendar.current.date(byAdding: .month, value: -6, to: lectureDate ?? Date())
+                datePicker.picker.maximumDate = NSCalendar.current.date(byAdding: .month, value: 0, to: lectureDate ?? Date())
+            }else{
+                datePicker.picker.minimumDate = NSCalendar.current.date(byAdding: .month, value: -6, to: Date())
+                datePicker.picker.maximumDate = NSCalendar.current.date(byAdding: .month, value: 0, to: Date())
+            }
         }
     }
     
