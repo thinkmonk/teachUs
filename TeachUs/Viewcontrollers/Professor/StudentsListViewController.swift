@@ -130,7 +130,9 @@ class StudentsListViewController: BaseViewController {
                     
                 }
                 if(self.arrayStudentsDetails.count > 0){
+                    self.numberPicker.selectedValue.value = self.lectureDetails.numberOfLectures
                     self.initDatPicker()
+                    self.initTimePickers()
                     self.setUpTableView()
                 }
             }
@@ -542,12 +544,51 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
         datePicker.showView(inView: self.view)
     }
     
+    //MARK:- Time picker methods
+    
+    func initTimePickers(){
+        if self.isEditAttendanceFlow{
+            let formatter = DateFormatter()
+            formatter.dateFormat = "HH:mm" //7:22 Am
+            let lectureFromTime = formatter.date(from: self.lectureDetails.fromTime)
+            let lectureToTime = formatter.date(from: self.lectureDetails.toTime)
+            
+            //Set Up from time
+            if(fromTimePicker == nil){
+                self.initFromTimePicker()
+                self.fromTimePicker.picker.date = lectureFromTime ?? Date()
+            }else{
+                self.fromTimePicker.picker.date = lectureFromTime ?? Date()
+            }
+            
+            //Set Up to time
+            if (toTimePicker == nil)
+            {
+                self.initToTimePicker()
+                self.toTimePicker.picker.date = lectureToTime ?? Date()
+            }else{
+                self.toTimePicker.picker.date = lectureToTime ?? Date()
+            }
+        }
+    }
+    
+    func initFromTimePicker(){
+        fromTimePicker = ViewDatePicker.instanceFromNib() as? ViewDatePicker
+        fromTimePicker.setUpPicker(type: .time)
+        fromTimePicker.buttonOk.addTarget(self, action: #selector(StudentsListViewController.dismissFromTimePicker), for: .touchUpInside)
+
+    }
+    
+    func initToTimePicker(){
+        toTimePicker = ViewDatePicker.instanceFromNib() as? ViewDatePicker
+        toTimePicker.setUpPicker(type: .time)
+        toTimePicker.buttonOk.addTarget(self, action: #selector(StudentsListViewController.dismissToTimePicker), for: .touchUpInside)
+    }
+    
     @objc func showFromTimePicker(){
         if(fromTimePicker == nil){
-            fromTimePicker = ViewDatePicker.instanceFromNib() as! ViewDatePicker
-            fromTimePicker.setUpPicker(type: .time)
+            self.initFromTimePicker()
             fromTimePicker.showView(inView: self.view)
-            fromTimePicker.buttonOk.addTarget(self, action: #selector(StudentsListViewController.dismissFromTimePicker), for: .touchUpInside)
         }else{
             fromTimePicker.showView(inView: self.view)
         }
@@ -555,10 +596,8 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
     
     @objc func showToTimePicker(){
         if(toTimePicker == nil){
-            toTimePicker = ViewDatePicker.instanceFromNib() as? ViewDatePicker
-            toTimePicker.setUpPicker(type: .time)
+            self.initToTimePicker()
             toTimePicker.showView(inView: self.view)
-            toTimePicker.buttonOk.addTarget(self, action: #selector(StudentsListViewController.dismissToTimePicker), for: .touchUpInside)
             
         }else{
             toTimePicker.showView(inView: self.view)
