@@ -89,8 +89,8 @@ class NetworkHandler:SessionManager{
             Alamofire.request(self.url!).validate().responseJSON { response in
                 switch response.result {
                 case .success:
-                    print("Validation Successful")
                     #if DEBUG
+                    print("Validation Successful")
                         print("***** NETWORK CALL RESPONSE *****")
                         print("status code: \((response.response?.statusCode)!), responseData: \(response.result.value ?? Dictionary<String, Any>())")
                     #endif
@@ -147,8 +147,8 @@ class NetworkHandler:SessionManager{
                 switch response.result{
                     
                 case .success(_):
-                    print("Validation Successful")
                     #if DEBUG
+                    print("Validation Successful")
                         print("***** NETWORK CALL RESPONSE *****")
                         print("status code: \((response.response?.statusCode)!), responseData: \(response.result.value!)")
                     #endif

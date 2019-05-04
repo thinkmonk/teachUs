@@ -63,7 +63,7 @@ class RootViewController: BaseViewController {
     func checkAndShowAppUpdateDialogue() {
         //TEMPORARY CHECK <-------
 //        if (!(self.forceUpdateObject.isForceUpdate?.caseInsensitiveCompare("yes") == .orderedSame))
-        if (self.forceUpdateObject.isForceUpdate?.caseInsensitiveCompare("yes") == .orderedSame)
+        if (self.forceUpdateObject.isForceUpdate?.caseInsensitiveCompare("yes") == .orderedSame && self.checkforNewVersoin())
         {
             // create the alert
             let alert = UIAlertController(title: "\(self.forceUpdateObject.forceUpdateTextTitle)", message: "\(self.forceUpdateObject.forceUpdateText)", preferredStyle: UIAlertController.Style.alert)
