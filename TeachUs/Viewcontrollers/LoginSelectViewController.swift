@@ -22,6 +22,7 @@ class LoginSelectViewController: BaseViewController {
     var roleStudent:UserRole!
     var roleProfessor:UserRole!
     var roleCollege:UserRole!
+    var appUpdateData:AppUpdateData!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +50,18 @@ class LoginSelectViewController: BaseViewController {
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         manager.apiGet(apiName: "Get Role for all user", completionHandler: { (response, code) in
             LoadingActivityHUD.hideProgressHUD()
+            
+            /*
+            let appUpdateData:[Any] = response["device_update"] as! [Any]
+            for update in appUpdateData{
+                let tempUpdate :AppUpdateData = Mapper<AppUpdateData>().map(JSONObject: update)!
+                if tempUpdate.osType == "IOS"
+                {
+                    self.appUpdateData = tempUpdate
+                }
+                self.checkAndShowAppUpdateDialogue()
+            }
+            */
             let userRoleDict:[Any] = response["roles"] as! [Any]
             for user in userRoleDict{
                 let userRoleDict:[String:Any] = user as! [String:Any]
@@ -68,6 +81,7 @@ class LoginSelectViewController: BaseViewController {
                     break
                 }
             }
+            
             
             UIView.animate(withDuration: 0.5, animations: {
                 self.viewButtonStack.alpha = 1
@@ -105,6 +119,42 @@ class LoginSelectViewController: BaseViewController {
         self.performSegue(withIdentifier: Constants.segues.toLoginView, sender: self)
     }
 
+    func checkAndShowAppUpdateDialogue() {
+        if !(self.appUpdateData.isforceUpdate)
+        {
+            // create the alert
+            let alert = UIAlertController(title: "\(self.appUpdateData.forceUpdateTextTitle)", message: "\(self.appUpdateData.forceUpdateText)", preferredStyle: UIAlertController.Style.alert)
+            
+            // add the actions (buttons)
+            alert.addAction((UIAlertAction(title: "Go to AppStore", style: .default, handler: { (action) in
+                if let url = URL(string: URLConstants.TeachUsAppStoreLink.storeLink) {
+                    if UIApplication.shared.canOpenURL(url) {
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    }
+                }
+            })))
+//            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+            
+            // show the alert
+            self.present(alert, animated: true, completion: nil)
+        }else{
+            let alert = UIAlertController(title: "New Version Available!", message: "\(self.appUpdateData.appUpdateText)", preferredStyle: UIAlertController.Style.alert)
+            
+            // add the actions (buttons)
+            alert.addAction((UIAlertAction(title: "Go to AppStore", style: .default, handler: { (action) in
+                if let url = URL(string: URLConstants.TeachUsAppStoreLink.storeLink) {
+                    if UIApplication.shared.canOpenURL(url) {
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    }
+                }
+            })))
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+            
+            // show the alert
+            self.present(alert, animated: true, completion: nil)
+
+        }
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.segues.toLoginView{

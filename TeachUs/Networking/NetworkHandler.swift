@@ -75,8 +75,8 @@ class NetworkHandler:SessionManager{
     }
     
     
-    func apiGetWithAnyResponse(apiName: String,
-                completionHandler: @escaping (_ result: Any, _ code: Int) -> Void,
+    func apiGetWithDataResponse(apiName: String,
+                completionHandler: @escaping (_ result: Data, _ code: Int) -> Void,
                 failure: @escaping (_ error: NSError, _ errorCode: Int,_ message: String) -> Void){
         
         #if DEBUG
@@ -89,12 +89,12 @@ class NetworkHandler:SessionManager{
             Alamofire.request(self.url!).validate().responseJSON { response in
                 switch response.result {
                 case .success:
-                    print("Validation Successful")
                     #if DEBUG
+                    print("Validation Successful")
                         print("***** NETWORK CALL RESPONSE *****")
                         print("status code: \((response.response?.statusCode)!), responseData: \(response.result.value ?? Dictionary<String, Any>())")
                     #endif
-                        completionHandler(response.result.value!, (response.response?.statusCode)!)
+                    completionHandler(response.data!, (response.response?.statusCode)!)
                 case .failure(let error):
                     print(error)
                     let responseError:NSError = error as NSError
@@ -147,8 +147,8 @@ class NetworkHandler:SessionManager{
                 switch response.result{
                     
                 case .success(_):
-                    print("Validation Successful")
                     #if DEBUG
+                    print("Validation Successful")
                         print("***** NETWORK CALL RESPONSE *****")
                         print("status code: \((response.response?.statusCode)!), responseData: \(response.result.value!)")
                     #endif
@@ -304,11 +304,62 @@ class NetworkHandler:SessionManager{
     }
     
     
-    
-    
-    
-    
-    
+    //MARK:- Post Api with  DATA response type
+    func apiPostWithDataResponse(apiName: String,
+                                 parameters: [String: Any],
+                                 completionHandler: @escaping (_ success:Bool,_ code:Int, _ response: Data) -> Void,
+                                 failure: @escaping (_ success:Bool,_ code:Int, _ error: String) -> Void){
+        
+        if(!UserManager.sharedUserManager.getAccessToken().isEmpty){
+            headers = [
+                "Authorization":"\(UserManager.sharedUserManager.getAccessToken())"
+            ]
+        }
+        
+        #if DEBUG
+        print("URL : \(self.url!)")
+        print("***** POST NETWORK CALL DETAILS *****")
+        print("Api name: \(apiName)")
+        if let theJSONData = try? JSONSerialization.data(withJSONObject: parameters,options: []) {
+            let theJSONText = String(data: theJSONData,encoding: .ascii)
+            print("parameters = \(theJSONText!)")
+        }
+        
+        print("Headers = \(headers!)")
+        //print("parameters:\(theJSONText)")
+        #endif
+        
+        if(Connectivity.isConnectedToInternet){
+            
+            Alamofire.request(self.url!, method: .post, parameters:parameters,encoding: URLEncoding.httpBody, headers: self.headers).responseJSON {
+                response in
+                switch response.result {
+                case .success:
+                    #if DEBUG
+                    print(response)
+                    #endif
+                    completionHandler(true, (response.response?.statusCode)!, response.data!)
+                    break
+                case .failure(let error):
+                    let responseError:NSError = error as NSError
+                    let errorString:String = responseError.localizedDescription
+                    let errorCode:Int = responseError.code
+                    if(errorCode == 401){
+                        UserManager.sharedUserManager.logOutUser()
+                    }else{
+                        _ = NSError(domain: "", code: 0, userInfo: nil)
+                        #if DEBUG
+                        print("***** NETWORK CALL FAILURE RESPONSE *****")
+                        print("error code: \(errorCode), error String \(errorString)")
+                        #endif
+                        failure(false, errorCode, errorString)
+                    }
+                }
+            }
+        }else{
+            failure(false, 401, "No internet")
+        }
+    }
     
     func apiPostResponseString(apiName: String,
                  parameters: [String: Any],

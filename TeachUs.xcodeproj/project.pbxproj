@@ -29,6 +29,7 @@
 		810610BE1FA65EE00067273E /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810610BD1FA65EE00067273E /* Loader.swift */; };
 		810610C01FA65FB30067273E /* LoadingActivityHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810610BF1FA65FB30067273E /* LoadingActivityHUD.swift */; };
 		810610C21FA660890067273E /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810610C11FA660890067273E /* Connectivity.swift */; };
+		8108D933224D5AB20010A605 /* AppUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8108D932224D5AB20010A605 /* AppUpdate.swift */; };
 		810BECD8206E65D600F560C6 /* CollegeAttendanceDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810BECD7206E65D600F560C6 /* CollegeAttendanceDetailsViewController.swift */; };
 		810BECDA206ED5B000F560C6 /* CollegeSubjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810BECD9206ED5B000F560C6 /* CollegeSubjects.swift */; };
 		810BECDE206EDEE900F560C6 /* StudentProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810BECDC206EDEE900F560C6 /* StudentProfileTableViewCell.swift */; };
@@ -187,6 +188,7 @@
 		81B69E7C1FA902BD0098F16D /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B69E7B1FA902BD0098F16D /* UITextField.swift */; };
 		81BEA4B9224671EB009C4D79 /* ViewProfessorMailReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BEA4B8224671EB009C4D79 /* ViewProfessorMailReport.swift */; };
 		81BEA4BB224671FE009C4D79 /* ViewProfessorMailReport.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81BEA4BA224671FE009C4D79 /* ViewProfessorMailReport.xib */; };
+		81BC7B60224FD6C70091B037 /* ForceUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BC7B5F224FD6C70091B037 /* ForceUpdate.swift */; };
 		81C1D8AB1FCF34F10091DA6E /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C1D8AA1FCF34F10091DA6E /* DatabaseManager.swift */; };
 		81C208511FAF4182003D366D /* ProfessorCollegeListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C2084F1FAF4182003D366D /* ProfessorCollegeListTableViewCell.swift */; };
 		81C208521FAF4182003D366D /* ProfessorCollegeListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81C208501FAF4182003D366D /* ProfessorCollegeListTableViewCell.xib */; };
@@ -306,6 +308,7 @@
 		810610BD1FA65EE00067273E /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		810610BF1FA65FB30067273E /* LoadingActivityHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingActivityHUD.swift; sourceTree = "<group>"; };
 		810610C11FA660890067273E /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
+		8108D932224D5AB20010A605 /* AppUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUpdate.swift; sourceTree = "<group>"; };
 		810BECD7206E65D600F560C6 /* CollegeAttendanceDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeAttendanceDetailsViewController.swift; sourceTree = "<group>"; };
 		810BECD9206ED5B000F560C6 /* CollegeSubjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeSubjects.swift; sourceTree = "<group>"; };
 		810BECDC206EDEE900F560C6 /* StudentProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentProfileTableViewCell.swift; sourceTree = "<group>"; };
@@ -471,6 +474,7 @@
 		81B69E7B1FA902BD0098F16D /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		81BEA4B8224671EB009C4D79 /* ViewProfessorMailReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewProfessorMailReport.swift; sourceTree = "<group>"; };
 		81BEA4BA224671FE009C4D79 /* ViewProfessorMailReport.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewProfessorMailReport.xib; sourceTree = "<group>"; };
+		81BC7B5F224FD6C70091B037 /* ForceUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForceUpdate.swift; sourceTree = "<group>"; };
 		81C1D8AA1FCF34F10091DA6E /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		81C2084F1FAF4182003D366D /* ProfessorCollegeListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessorCollegeListTableViewCell.swift; sourceTree = "<group>"; };
 		81C208501FAF4182003D366D /* ProfessorCollegeListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfessorCollegeListTableViewCell.xib; sourceTree = "<group>"; };
@@ -969,6 +973,8 @@
 				81A7D061208BA7EE0032A1BC /* RatingDetails.swift */,
 				819EEC2720A6145E00487467 /* LectureReport.swift */,
 				81AC9F9220AA051900DEECB1 /* CollegeSyllabusList.swift */,
+				8108D932224D5AB20010A605 /* AppUpdate.swift */,
+				81BC7B5F224FD6C70091B037 /* ForceUpdate.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1743,6 +1749,7 @@
 				81A560D3205D07DC00DAE086 /* HomeViewController2.swift in Sources */,
 				81D76B521FC1D3EC005E861C /* SyllabusDetailsViewController.swift in Sources */,
 				81ACF7F320851E1700167203 /* AddRemoveAdminViewController.swift in Sources */,
+				8108D933224D5AB20010A605 /* AppUpdate.swift in Sources */,
 				81D7CE921FAB987300C4375E /* StudentAttedanceViewController.swift in Sources */,
 				81CCAE4D1FC805CA0070907A /* TeacherProfileTableViewCell.swift in Sources */,
 				811EA45B223D175400D55899 /* ProfessorLogsManager.swift in Sources */,
@@ -1785,6 +1792,7 @@
 				8137EF5C1FA10D6A00045D97 /* UIView.swift in Sources */,
 				8161AF65222C467C001F73B5 /* ViewClassSelection.swift in Sources */,
 				81E67400205315B100321257 /* UserCollegeDetails.swift in Sources */,
+				81BC7B60224FD6C70091B037 /* ForceUpdate.swift in Sources */,
 				81B203C51FD5422000936F0F /* AppUser.swift in Sources */,
 				812B152C20BAA65C00693183 /* FaveButton.swift in Sources */,
 				81DC5C73224614BB00D9F3B7 /* StudentAttendanceDetails.swift in Sources */,

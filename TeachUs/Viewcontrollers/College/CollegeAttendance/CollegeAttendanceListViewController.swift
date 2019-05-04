@@ -121,7 +121,8 @@ class CollegeAttendanceListViewController: BaseViewController {
             
             self.tableViewCollegeAttendanceList.reloadData()
             self.showTableView()
-            self.buttonMailReport.isHidden = false
+            #warning ("This is a temp change, until reports are live")
+            self.buttonMailReport.isHidden = true
         }) { (error, code, message) in
             print(message)
             LoadingActivityHUD.hideProgressHUD()
