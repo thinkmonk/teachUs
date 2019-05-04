@@ -116,23 +116,6 @@ class ReachabilityManager: NSObject {
                 debugPrint("Could not start reachability notifier")
             }
         }
-        /*
-        for vc in viewControllersToBeIgnored{
-            if !(vc.isKind(of: (topVC?.classForCoder)!)){
-                print("Monitoring started")
-                NotificationCenter.default.removeObserver(self, name: Notification.Name.reachabilityChanged, object: reachability)
-                NotificationCenter.default.addObserver(self,
-                                                       selector: #selector(self.reachabilityChanged),
-                                                       name: Notification.Name.reachabilityChanged,
-                                                       object: reachability)
-                do{
-                    try reachability.startNotifier()
-                } catch {
-                    debugPrint("Could not start reachability notifier")
-                }
-            }
-        }
-        */
     }
     
     func networkReachbleActions(){

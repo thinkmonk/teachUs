@@ -29,12 +29,13 @@ class AttendanceManager {
     }
     
     var attendanceList:String {
-        var attendance = ""
+        var attendance:[String] = []
         let presentStudents = self.arrayStudents.value.filter{$0.isPrsent == true}
+        
         for student in presentStudents{
-            attendance.append("\((student.student?.studentId!)!),")
+            attendance.append("\((student.student?.studentId!)!)")
         }
-        return attendance
+        return attendance.joined(separator: ",")
     }
 }
 

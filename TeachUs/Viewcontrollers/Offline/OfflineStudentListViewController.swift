@@ -20,7 +20,6 @@ class OfflineStudentListViewController: BaseViewController {
     var datePicker: ViewDatePicker!
     var toTimePicker: ViewDatePicker!
     var fromTimePicker: ViewDatePicker!
-    var numberPicker:ViewNumberPicker!
     var calenderFloatingView:ViewCalenderTop!
     var viewConfirmAttendance:ViewConfirmAttendance!
     var markedAttendanceId:NSNumber!
@@ -29,6 +28,7 @@ class OfflineStudentListViewController: BaseViewController {
     var parameters = [String:Any]()
     let disposeBag = DisposeBag()
     var isDefaultAttencdanceChanged:Bool = true
+    var numberOfLectures = Variable<Int>(1)
 
     
     @IBOutlet weak var tableStudentList: UITableView!
@@ -54,10 +54,6 @@ class OfflineStudentListViewController: BaseViewController {
         setUpcalenderView()
         initDatPicker()
         
-        numberPicker = ViewNumberPicker.instanceFromNib() as? ViewNumberPicker
-        numberPicker.setUpPicker()
-        NotificationCenter.default.addObserver(self, selector: #selector(viewDidBecomeActive), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
-        numberPicker.buttonOk.addTarget(self, action: #selector(StudentsListViewController.dismissNumberPicker), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -147,7 +143,7 @@ class OfflineStudentListViewController: BaseViewController {
     }
     
     func setUpcalenderView(){
-        calenderFloatingView = ViewCalenderTop.instanceFromNib() as! ViewCalenderTop
+        calenderFloatingView = ViewCalenderTop.instanceFromNib() as? ViewCalenderTop
         
         let y = (navBarHeight) + statusBarHeight
         calenderFloatingView.frame = CGRect(x: 0.0, y: (y), width: self.view.width(), height: 60.0)
@@ -158,10 +154,10 @@ class OfflineStudentListViewController: BaseViewController {
     }
     func addCalenderValues(){
         if(calenderFloatingView != nil){
-            if(self.toTimePicker != nil && self.fromTimePicker != nil && self.numberPicker != nil && self.datePicker != nil){
+            if(self.toTimePicker != nil && self.fromTimePicker != nil && self.datePicker != nil){
                 calenderFloatingView.labelDate.text = "\(self.datePicker.dateString)"
                 calenderFloatingView.labelTime.text = "From \(self.fromTimePicker.timeString) to \(self.toTimePicker.timeString) "
-                calenderFloatingView.labelNumberOfLectures.text = "Number of lectures: \(self.numberPicker.selectedValue.value)"
+                calenderFloatingView.labelNumberOfLectures.text = "Number of lectures: \(self.numberOfLectures.value)"
             }
             
         }
@@ -244,15 +240,7 @@ extension OfflineStudentListViewController: UITableViewDelegate, UITableViewData
             }
             
             // number of lectures
-            cell.buttonNumberOfLectures.addTarget(self, action: #selector(StudentsListViewController.showNumberPicker), for: .touchUpInside)
-            let numberPickerTap = UITapGestureRecognizer(target: self, action: #selector(StudentsListViewController.showNumberPicker))
-            tap.numberOfTapsRequired = 1
-            cell.textFieldNumberOfLectures.tag = indexPath.row
-            cell.textFieldNumberOfLectures.isUserInteractionEnabled = true
-            cell.textFieldNumberOfLectures.addGestureRecognizer(numberPickerTap)
-            if(self.numberPicker != nil){
-                cell.textFieldNumberOfLectures.text =  "\(self.numberPicker.selectedValue.value)"
-            }
+            cell.numberOflecturesTaken = self.numberOfLectures.value
             cell.delegate = self
             cell.setUpRx()
             cell.selectionStyle = .none
@@ -411,18 +399,7 @@ extension OfflineStudentListViewController: UITableViewDelegate, UITableViewData
         }
     }
     
-    @objc func showNumberPicker(){
-        if(numberPicker == nil){
-            numberPicker = ViewNumberPicker.instanceFromNib() as! ViewNumberPicker
-            numberPicker.setUpPicker()
-            numberPicker.showView(inView: self.view)
-            numberPicker.buttonOk.addTarget(self, action: #selector(StudentsListViewController.dismissNumberPicker), for: .touchUpInside)
-            
-        }else{
-            numberPicker.showView(inView: self.view)
-        }
-        
-    }
+   
     
     @objc func dismissFromTimePicker(){
         if(fromTimePicker != nil)
@@ -447,13 +424,7 @@ extension OfflineStudentListViewController: UITableViewDelegate, UITableViewData
         }
     }
     
-    @objc func dismissNumberPicker(){
-        if(numberPicker != nil){
-            numberPicker.alpha = 0
-            numberPicker.removeFromSuperview()
-            self.makeDataSource()
-        }
-    }
+   
     
     //MARK:- Mark attendance for a student
     @objc func markAttendance(_ sender:ButtonWithIndexPath){
@@ -490,6 +461,11 @@ extension OfflineStudentListViewController: DefaultAttendanceSelectionDelegate{
 //MARK:- Calender delegate methods
 
 extension OfflineStudentListViewController:AttendanceCalenderTableViewCellDelegate{
+    func numberOfLecturesSelected(lectures: Int) {
+        self.numberOfLectures.value = lectures
+        self.makeDataSource()
+    }
+    
     func showSubmit() {
         self.topConstraintButtonSubmit.constant = 0
         UIView.animate(withDuration: 0.3) {
@@ -526,7 +502,7 @@ extension OfflineStudentListViewController:ViewConfirmAttendanceDelegate{
             "course_id":"\(self.selectedCollege.course_id!)",
             "subject_id":"\(self.selectedCollege.subject_id!)",
             "topics_covered":"1",
-            "no_of_lecture":"\(self.numberPicker.selectedValue.value)",
+            "no_of_lecture":"\(self.numberOfLectures.value)",
             "lecture_date":"\(datePicker.postJsonDateString)",
             "from_time":"\(fromTimePicker.postJsonTimeString)",
             "to_time":"\(toTimePicker.postJsonTimeString)",

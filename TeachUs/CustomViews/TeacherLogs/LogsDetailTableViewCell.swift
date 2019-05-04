@@ -29,6 +29,8 @@ class LogsDetailTableViewCell: UITableViewCell {
     @IBOutlet weak var viewTimeOfSubject: UIView!
     @IBOutlet weak var labelTimeOfSubmission: UILabel!
     @IBOutlet weak var buttonEditAttendance:ButtonWithIndexPath!
+    
+    
     var delegate:LogsDetailCellDelegate!
     override func awakeFromNib() {
         super.awakeFromNib()

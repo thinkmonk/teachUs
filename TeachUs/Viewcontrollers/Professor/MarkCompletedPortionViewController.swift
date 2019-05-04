@@ -130,7 +130,8 @@ class MarkCompletedPortionViewController: BaseViewController {
     }
     
     @IBAction func submitSyllabusStatus(_ sender: Any) {
-        if(ReachabilityManager.shared.isNetworkAvailable){
+        print(ReachabilityManager.shared.reachabilityStatus.description)
+        if(ReachabilityManager.shared.reachability.connection != .none){
             submitAttendanceAndSyllabus()
         }
         else{

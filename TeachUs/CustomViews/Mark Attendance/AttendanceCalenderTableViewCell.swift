@@ -13,6 +13,7 @@ import RxCocoa
 protocol AttendanceCalenderTableViewCellDelegate {
     func showSubmit()
     func hideSubmit()
+    func numberOfLecturesSelected(lectures:Int)
 }
 
 class AttendanceCalenderTableViewCell: UITableViewCell {
@@ -23,19 +24,34 @@ class AttendanceCalenderTableViewCell: UITableViewCell {
     @IBOutlet weak var viewToTimeBg: UIView!
     @IBOutlet weak var textFieldToTime: UITextField!
     @IBOutlet weak var buttonToTime: UIButton!
-    @IBOutlet weak var textFieldNumberOfLectures: UITextField!
     @IBOutlet weak var buttonEdit: UIButton!
     @IBOutlet weak var labelDate: UILabel!
-    @IBOutlet weak var viewNumberOfLecturesBg: UIView!
-    @IBOutlet weak var buttonNumberOfLectures: UIButton!
+    @IBOutlet var buttonArrayNumberOfLectures: [UIButton]!
+    
+    
     let disposeBag = DisposeBag()
     var delegate:AttendanceCalenderTableViewCellDelegate!
+    
+    var numberOflecturesTaken:Int!{
+        didSet{
+            for (index,button) in self.buttonArrayNumberOfLectures.enumerated(){
+                if index == numberOflecturesTaken-1{//FF94BA
+                    button.backgroundColor = UIColor.rgbColor(255, 255, 255)
+                    button.setTitleColor(UIColor.black, for: .normal)
+
+                }else{
+                    button.setTitleColor(UIColor.white, for: .normal)
+                    button.backgroundColor = UIColor.rgbColor(255, 148, 186)
+                }
+            }
+        }
+    }
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.viewToTimeBg.addWhiteBottomBorder()
         self.viewFromTImeBg.addWhiteBottomBorder()
-        self.viewNumberOfLecturesBg.addWhiteBottomBorder()
         self.makeTableCellEdgesRounded()
         self.buttonEdit.dropShadow()
         // Initialization code
@@ -48,7 +64,6 @@ class AttendanceCalenderTableViewCell: UITableViewCell {
     var attendanceDate = Variable<String>("")
     var attendanceFromTime = Variable<String>("")
     var attendanceToTime = Variable<String>("")
-    var numberOfLectures = Variable<String>("")
     
     /*
     var isCalenderDataValid:Observable<Bool>{
@@ -58,16 +73,20 @@ class AttendanceCalenderTableViewCell: UITableViewCell {
     }*/
     
     var isCalenderDataValid:Observable<Bool>{
-        return Observable.combineLatest(attendanceToTime.asObservable(), attendanceFromTime.asObservable(), numberOfLectures.asObservable()){toTime, fromTime, numberOfLecs in
-            toTime.characters.count > 0 && fromTime.characters.count > 0 && numberOfLecs.characters.count > 0
+        return Observable.combineLatest(attendanceToTime.asObservable(), attendanceFromTime.asObservable()){toTime, fromTime in
+            toTime.count > 0 && fromTime.count > 0 && self.numberOflecturesTaken > 0
         }
     }
 
-
+    @IBAction func didSelectNumberOfLectures(_ sender: Any) {
+        if let senderButton = sender as? UIButton, let count = Int(senderButton.titleLabel?.text ?? "1") {
+            self.delegate.numberOfLecturesSelected(lectures: count)
+        }
+    }
+    
     func setUpRx(){
         self.textFieldToTime.rx.text.map{ $0 ?? ""}.bind(to: attendanceToTime).disposed(by: disposeBag)
         self.textFieldFromTime.rx.text.map{$0 ?? ""}.bind(to: attendanceFromTime).disposed(by: disposeBag)
-        self.textFieldNumberOfLectures.rx.text.map{$0 ?? ""}.bind(to: numberOfLectures).disposed(by: disposeBag)
         
         isCalenderDataValid.asObservable().subscribe(onNext: { (isVaild) in
             if(isVaild){

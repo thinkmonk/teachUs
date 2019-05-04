@@ -13,8 +13,10 @@ public class LoadingActivityHUD {
     static let loaderView:Loader = Loader.instanceFromNib() as! Loader
     
     class func showProgressHUD(view:UIView){
-        loaderView.center = view.center
-        view.addSubview(loaderView)
+        DispatchQueue.main.async {
+            loaderView.center = view.center
+            view.addSubview(loaderView)
+        }
         loaderView.start()
     }
     

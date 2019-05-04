@@ -20,7 +20,6 @@ class StudentsListViewController: BaseViewController {
     var datePicker: ViewDatePicker!
     var toTimePicker: ViewDatePicker!
     var fromTimePicker: ViewDatePicker!
-    var numberPicker:ViewNumberPicker!
     var calenderFloatingView:ViewCalenderTop!
     var viewConfirmAttendance:ViewConfirmAttendance!
     var markedAttendanceId:NSNumber!
@@ -29,6 +28,8 @@ class StudentsListViewController: BaseViewController {
     var isDefaultAttencdanceChanged:Bool = true
     var parameters:[String:Any] = [:]
     var syllabusData:[String:Any] = [:]
+    var numberOfLectures = Variable<Int>(1)
+
     
     
     let disposeBag = DisposeBag()
@@ -73,9 +74,6 @@ class StudentsListViewController: BaseViewController {
         self.tableStudentList.register(UINib(nibName: "AttendanceCountTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.AttendanceCountTableViewCellId)
         setUpcalenderView()
         
-        numberPicker = ViewNumberPicker.instanceFromNib() as? ViewNumberPicker
-        numberPicker.setUpPicker()
-        numberPicker.buttonOk.addTarget(self, action: #selector(StudentsListViewController.dismissNumberPicker), for: .touchUpInside)
         
         
     }
@@ -130,7 +128,7 @@ class StudentsListViewController: BaseViewController {
                     
                 }
                 if(self.arrayStudentsDetails.count > 0){
-                    self.numberPicker.selectedValue.value = self.lectureDetails.numberOfLectures
+                    self.numberOfLectures.value = Int(self.lectureDetails.numberOfLectures) ?? 1
                     self.initDatPicker()
                     self.initTimePickers()
                     self.setUpTableView()
@@ -202,7 +200,10 @@ class StudentsListViewController: BaseViewController {
         parameters["subject_id"] = "\(selectedCollege.subjectId!)"
         parameters["class_id"] = "\(selectedCollege.classId!)"
         parameters["college_code"] = UserManager.sharedUserManager.appUserCollegeDetails.college_code
-        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        DispatchQueue.main.async {
+            LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        }
+    
         
         
         manager.apiPost(apiName: "Get topics for professor", parameters: parameters, completionHandler: { (sucess, code, response) in
@@ -273,7 +274,10 @@ class StudentsListViewController: BaseViewController {
             }
         }
         self.addCalenderValues()
-        self.tableStudentList.reloadData()
+        
+        DispatchQueue.main.async {
+            self.tableStudentList.reloadData()
+        }
     }
     
     func setUpcalenderView(){
@@ -288,10 +292,10 @@ class StudentsListViewController: BaseViewController {
     }
     func addCalenderValues(){
         if(calenderFloatingView != nil){
-            if(self.toTimePicker != nil && self.fromTimePicker != nil && self.numberPicker != nil && self.datePicker != nil){
+            if(self.toTimePicker != nil && self.fromTimePicker != nil && self.numberOfLectures.value != nil && self.datePicker != nil){
                 calenderFloatingView.labelDate.text = "\(self.datePicker.dateString)"
                 calenderFloatingView.labelTime.text = "From \(self.fromTimePicker.timeString) to \(self.toTimePicker.timeString) "
-                calenderFloatingView.labelNumberOfLectures.text = "Number of lectures: \(self.numberPicker.selectedValue.value)"
+                calenderFloatingView.labelNumberOfLectures.text = "Number of lectures: \(self.numberOfLectures.value)"
             }
             
         }
@@ -319,6 +323,40 @@ class StudentsListViewController: BaseViewController {
             let presentStudents = AttendanceManager.sharedAttendanceManager.arrayStudents.value.filter{$0.isPrsent == true}
             viewConfirmAttendance.labelStudentCount.text = "\(presentStudents.count)/\(AttendanceManager.sharedAttendanceManager.arrayStudents.value.count)"
             viewConfirmAttendance.showView(inView: UIApplication.shared.keyWindow!)
+        }
+    }
+    
+    func submitEditedAttendance(){
+        let manager = NetworkHandler()
+        manager.url = URLConstants.ProfessorURL.submitEditedAttendace
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        parameters = [
+            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+            "attendance_id":"\(self.selectedAttendanceId ?? 0)",
+            "students":"\(AttendanceManager.sharedAttendanceManager.attendanceList)",
+            "from_time":"\(fromTimePicker.postJsonTimeString)",
+            "to_time":"\(toTimePicker.postJsonTimeString)",
+            "lecture_date":"\(datePicker.postJsonDateString)",
+            "no_of_lecture":"\(self.numberOfLectures.value)"
+        ]
+        
+        manager.apiPost(apiName: "Edit attendance for id \(self.selectedAttendanceId ?? 0)", parameters:parameters, completionHandler: { (result, code, response) in
+            LoadingActivityHUD.hideProgressHUD()
+            if(code == 200){
+                
+                let alert = UIAlertController(title: nil, message: response["message"] as? String, preferredStyle: UIAlertControllerStyle.alert)
+                
+                // add an action (button)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { _ in
+                    self.navigationController?.popViewController(animated: true)
+                    
+                }))
+                // show the alert
+                self.present(alert, animated: true, completion:nil)
+            }
+        }) { (error, code, errorMessage) in
+            LoadingActivityHUD.hideProgressHUD()
+            self.showAlterWithTitle(nil, alertMessage: errorMessage)
         }
     }
 }
@@ -374,15 +412,10 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
             }
             
             // number of lectures
-            cell.buttonNumberOfLectures.addTarget(self, action: #selector(StudentsListViewController.showNumberPicker), for: .touchUpInside)
-            let numberPickerTap = UITapGestureRecognizer(target: self, action: #selector(StudentsListViewController.showNumberPicker))
+            
+            cell.numberOflecturesTaken = self.numberOfLectures.value
             tap.numberOfTapsRequired = 1
-            cell.textFieldNumberOfLectures.tag = indexPath.row
-            cell.textFieldNumberOfLectures.isUserInteractionEnabled = true
-            cell.textFieldNumberOfLectures.addGestureRecognizer(numberPickerTap)
-            if(self.numberPicker != nil){
-                cell.textFieldNumberOfLectures.text =  "\(self.numberPicker.selectedValue.value)"
-            }
+            
             cell.delegate = self
             cell.setUpRx()
             cell.selectionStyle = .none
@@ -427,20 +460,6 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
             cell.buttonAttendance.addTarget(self, action: #selector(StudentsListViewController.markAttendance), for: .touchUpInside)
             cell.buttonAttendance.indexPath = indexPath
             cell.setUpCell()
-            //            cell.setUpRx()
-            //            if(currentOpenProfileIndexPath != nil)
-            //            {
-            //                if(currentOpenProfileIndexPath.section == indexPath.section){
-            //                    cell.isExpanded = true
-            //                    cell.viewAttendanceDetails.alpha = 1
-            //                }else{
-            //                    cell.isExpanded = false
-            //                    cell.viewAttendanceDetails.alpha = 0
-            //                }
-            //            }else{
-            //                cell.isExpanded = false
-            //                cell.viewAttendanceDetails.alpha = 0
-            //            }
             cell.selectionStyle = .none
             return cell
         }
@@ -604,19 +623,6 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
         }
     }
     
-    @objc func showNumberPicker(){
-        if(numberPicker == nil){
-            numberPicker = ViewNumberPicker.instanceFromNib() as? ViewNumberPicker
-            numberPicker.setUpPicker()
-            numberPicker.showView(inView: self.view)
-            numberPicker.buttonOk.addTarget(self, action: #selector(StudentsListViewController.dismissNumberPicker), for: .touchUpInside)
-            
-        }else{
-            numberPicker.showView(inView: self.view)
-        }
-        
-    }
-    
     @objc func dismissFromTimePicker(){
         if(fromTimePicker != nil)
         {
@@ -639,14 +645,7 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
             self.makeDataSource()
         }
     }
-    
-    @objc func dismissNumberPicker(){
-        if(numberPicker != nil){
-            numberPicker.alpha = 0
-            numberPicker.removeFromSuperview()
-            self.makeDataSource()
-        }
-    }
+
     
     //MARK:- Mark attendance for a student
     @objc func markAttendance(_ sender:ButtonWithIndexPath){
@@ -683,6 +682,11 @@ extension StudentsListViewController:DefaultAttendanceSelectionDelegate{
 //MARK:- Calender delegate methods
 
 extension StudentsListViewController:AttendanceCalenderTableViewCellDelegate{
+    func numberOfLecturesSelected(lectures: Int) {
+        self.numberOfLectures.value = lectures
+        self.makeDataSource()
+    }
+    
     func showSubmit() {
         self.topConstraintButtonSubmit.constant = 0
         UIView.animate(withDuration: 0.3) {
@@ -698,6 +702,7 @@ extension StudentsListViewController:AttendanceCalenderTableViewCellDelegate{
     }
 }
 
+//MARK:- UIScrollViewDelegate
 extension StudentsListViewController:UIScrollViewDelegate{
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y > 210 {
@@ -709,29 +714,36 @@ extension StudentsListViewController:UIScrollViewDelegate{
     }
 }
 
+
+//MARK:- ViewConfirmAttendanceDelegate
 extension StudentsListViewController:ViewConfirmAttendanceDelegate{
     
     func confirmAttendance(){
-        parameters = [
-            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
-            "class_id":"\(self.selectedCollege.classId!)",
-            "course_id":"\(self.selectedCollege.courseId!)",
-            "subject_id":"\(self.selectedCollege.subjectId!)",
-            "topics_covered":"1",
-            "no_of_lecture":"\(self.numberPicker.selectedValue.value)",
-            "lecture_date":"\(datePicker.postJsonDateString)",
-            "from_time":"\(fromTimePicker.postJsonTimeString)",
-            "to_time":"\(toTimePicker.postJsonTimeString)",
-            "attendance_list":"\(AttendanceManager.sharedAttendanceManager.attendanceList)"
-        ]
-        
-        let alert = UIAlertController(title: nil, message: "Attendance Recorded", preferredStyle: UIAlertControllerStyle.alert)
-        
-        // add an action (button)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { _ in
-            self.performSegue(withIdentifier: Constants.segues.markPortionCompleted, sender: self)
-        }))
-        self.present(alert, animated: true, completion:nil)
+        if self.isEditAttendanceFlow{
+            self.submitEditedAttendance()
+            
+        }else{
+            parameters = [
+                "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+                "class_id":"\(self.selectedCollege.classId!)",
+                "course_id":"\(self.selectedCollege.courseId!)",
+                "subject_id":"\(self.selectedCollege.subjectId!)",
+                "topics_covered":"1",
+                "no_of_lecture":"\(self.numberOfLectures.value)",
+                "lecture_date":"\(datePicker.postJsonDateString)",
+                "from_time":"\(fromTimePicker.postJsonTimeString)",
+                "to_time":"\(toTimePicker.postJsonTimeString)",
+                "attendance_list":"\(AttendanceManager.sharedAttendanceManager.attendanceList)"
+            ]
+            
+            let alert = UIAlertController(title: nil, message: "Attendance Recorded", preferredStyle: UIAlertControllerStyle.alert)
+            
+            // add an action (button)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { _ in
+                self.performSegue(withIdentifier: Constants.segues.markPortionCompleted, sender: self)
+            }))
+            self.present(alert, animated: true, completion:nil)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
