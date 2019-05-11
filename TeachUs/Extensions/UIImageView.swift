@@ -18,7 +18,6 @@ extension UIImageView {
             if error != nil {
                 #if DEBUG
                 print("Image cannot be downloaded")
-                print(error ?? "error")
                 #endif
                 return
             }

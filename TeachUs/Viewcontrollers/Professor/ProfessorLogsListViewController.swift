@@ -50,10 +50,6 @@ class ProfessorLogsListViewController: BaseViewController {
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     override func refresh(sender: AnyObject) {
         if(self.isCollegeLogsSubjectData){
@@ -174,7 +170,7 @@ extension ProfessorLogsListViewController:UITableViewDelegate, UITableViewDataSo
             let collegeCell:ProfessorCollegeListTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.ProfessorCollegeList, for: indexPath) as! ProfessorCollegeListTableViewCell
             if(self.isCollegeLogsSubjectData){
                 collegeCell.labelSubjectName.text = "\(self.arraySubjectList.subjectsDetails[indexPath.section].subjectName)"
-                collegeCell.isUserInteractionEnabled =  false
+                collegeCell.isUserInteractionEnabled =  true
 
             }
             else{
@@ -217,10 +213,20 @@ extension ProfessorLogsListViewController:UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let destinationVC:LogsDetailViewController =  storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.LogsDetail) as! LogsDetailViewController
-        destinationVC.selectedCollege = self.arrayDataSource[indexPath.section]
-        destinationVC.allCollegeArray = self.arrayDataSource
-        destinationVC.selectedIndex = indexPath.section
-        self.parentNavigationController?.pushViewController(destinationVC, animated: true)
+        if(self.isCollegeLogsSubjectData){
+            destinationVC.isCollegeLogsSubjectData = self.isCollegeLogsSubjectData
+            destinationVC.allCollegeSubjects = self.arraySubjectList.subjectsDetails
+            destinationVC.selectedIndex = indexPath.section
+            self.navigationController?.pushViewController(destinationVC, animated: true)
+
+        }else{
+            destinationVC.selectedCollege = self.arrayDataSource[indexPath.section]
+            destinationVC.allCollegeArray = self.arrayDataSource
+            destinationVC.selectedIndex = indexPath.section
+            self.parentNavigationController?.pushViewController(destinationVC, animated: true)
+        }
+        
+        
     }
 }
 

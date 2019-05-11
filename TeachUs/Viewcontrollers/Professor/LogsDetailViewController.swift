@@ -28,7 +28,7 @@ class LogsDetailViewController: BaseViewController {
     
     //for collegeLogs Details
     var isCollegeLogsSubjectData:Bool = false //for college logs
-    var selectedSubjectID:Int?
+    var allCollegeSubjects = [SubjectsDetail]()
     
     @IBOutlet weak var tableLogsDetail: UITableView!
     @IBOutlet weak var buttonPreviousSubject: UIButton!
@@ -41,7 +41,11 @@ class LogsDetailViewController: BaseViewController {
         self.tableLogsDetail.dataSource = self
         self.tableLogsDetail.separatorStyle = .none
         self.tableLogsDetail.alpha = 0
-        self.getLogs(fromDate: self.calenderView?.fromDateString ?? "", toDate: self.calenderView?.toDateStirng ?? "")
+        if self.isCollegeLogsSubjectData{
+            self.getCollgeProfessorLogDetails(fromDate: self.calenderView?.fromDateString ?? "", toDate: self.calenderView?.toDateStirng ?? "")
+        }else{
+            self.getLogs(fromDate: self.calenderView?.fromDateString ?? "", toDate: self.calenderView?.toDateStirng ?? "")
+        }
         self.tableLogsDetail.register(UINib(nibName: "LogsDetailTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.LogsDetailTableViewCellId)
         self.tableLogsDetail.register(UINib(nibName: "SyllabusDetailsTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.SyllabusDetailsTableViewCellId)
         
@@ -114,7 +118,9 @@ class LogsDetailViewController: BaseViewController {
         manager.url = URLConstants.CollegeURL.getcollegeSubjectLogsDetals
         var parameters = [String:Any]()
         parameters["college_code"] = UserManager.sharedUserManager.appUserCollegeDetails.college_code
-        parameters["subject_id"] =  self.selectedSubjectID
+        parameters["subject_id"] =  self.allCollegeSubjects[self.selectedIndex].subjectID
+        parameters["class_id"] =  self.allCollegeSubjects[self.selectedIndex].classID
+
         if(fromDate != "" && toDate != ""){
             parameters["from_date"] = fromDate
             parameters["to_date"] =  toDate
@@ -123,7 +129,7 @@ class LogsDetailViewController: BaseViewController {
         manager.apiPost(apiName: "Get college professor logs details", parameters: parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             self.arrayLogsDetails.removeAll()
-            self.title = self.allCollegeArray[self.selectedIndex].subjectName
+            self.title = self.allCollegeSubjects[self.selectedIndex].subjectName
             
             guard let logs = response["subject_logs"] as? [[String:Any]] else{
                 self.arrayDataSource.removeAll()
@@ -200,7 +206,7 @@ class LogsDetailViewController: BaseViewController {
         if  self.selectedIndex == 0 {
             buttonPreviousSubject.isEnabled = false
             self.buttonNextSubject.isEnabled = true
-        }else if self.selectedIndex == self.allCollegeArray.count-1 {
+        }else if (self.selectedIndex == self.allCollegeArray.count-1)  || (self.selectedIndex == self.allCollegeSubjects.count-1) {
             buttonPreviousSubject.isEnabled = true
             self.buttonNextSubject.isEnabled = false
         }else{
@@ -210,18 +216,34 @@ class LogsDetailViewController: BaseViewController {
     }
     
     @IBAction func showLogsForNextSubject(_ sender: Any) {
-        if (self.selectedIndex < self.allCollegeArray.count-1){
-            self.selectedIndex += 1
-            self.getLogs(fromDate: "", toDate: "")
-            self.setUpButtons()
+        if self.isCollegeLogsSubjectData{
+            if (self.selectedIndex < self.allCollegeSubjects.count-1){
+                self.selectedIndex += 1
+                self.getCollgeProfessorLogDetails(fromDate: self.calenderView?.fromDateString ?? "", toDate: self.calenderView?.toDateStirng ?? "")
+                self.setUpButtons()
+            }
+        }else{
+            if (self.selectedIndex < self.allCollegeArray.count-1){
+                self.selectedIndex += 1
+                self.getLogs(fromDate: "", toDate: "")
+                self.setUpButtons()
+            }
         }
     }
     
     @IBAction func showLogsForPreviousSubject(_ sender: Any) {
-        if (self.selectedIndex > 0){
-            self.selectedIndex -= 1
-            self.getLogs(fromDate: "", toDate: "")
-            self.setUpButtons()
+        if self.isCollegeLogsSubjectData{
+            if (self.selectedIndex > 0){
+                self.selectedIndex -= 1
+                self.getCollgeProfessorLogDetails(fromDate: self.calenderView?.fromDateString ?? "", toDate: self.calenderView?.toDateStirng ?? "")
+                self.setUpButtons()
+            }
+        }else{
+            if (self.selectedIndex > 0){
+                self.selectedIndex -= 1
+                self.getLogs(fromDate: "", toDate: "")
+                self.setUpButtons()
+            }
         }
     }
     
@@ -295,7 +317,11 @@ extension LogsDetailViewController:LogsDetailCellDelegate{
 extension LogsDetailViewController:ViewLogsCalenderDelegate{
     func getLogs(fromDate: String, toDate: String) {
         self.dismissCalenderView()
-        self.getLogDetails(fromDate: fromDate, toDate: toDate)
+        if self.isCollegeLogsSubjectData{
+            self.getCollgeProfessorLogDetails(fromDate: fromDate, toDate: toDate)
+        }else{
+            self.getLogDetails(fromDate: fromDate, toDate: toDate)
+        }
     }
     
     func dismissCalenderView(){
