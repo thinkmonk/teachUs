@@ -13,6 +13,7 @@ class ProfileStudentIdTableViewCell: UITableViewCell {
     @IBOutlet weak var labelKey: UILabel!
     @IBOutlet weak var labelValue: UILabel!
     @IBOutlet weak var viewBottomSeperator: UIView!
+    @IBOutlet weak var labelColon: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

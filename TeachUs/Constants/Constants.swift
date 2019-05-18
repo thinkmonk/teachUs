@@ -123,7 +123,8 @@ public struct Constants {
         static let addRemoveAdminCell = "AddRemoveAdminTableViewCellId"
         static let studentAttendanceDetailsHeader = "AttendanceDetailsHeaderTableViewCellId"
         static let studentAttendanceDetails = "AttendanceDetailsValuesTableViewCellId"
-    
+        static let profileDetailsEditTableViewCell = "ProfileDetailsEditTableViewCellId"
+        static let profileStudentIdTableViewCell = "ProfileStudentIdTableViewCellId"
     }
     
     struct UserTypeString {
