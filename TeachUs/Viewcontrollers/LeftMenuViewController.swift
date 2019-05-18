@@ -12,6 +12,7 @@ import AlamofireImage
 
 protocol LeftMenuDeleagte {
     func menuItemSelected(item:Int)
+    func editProfileClicked()
 }
 
 class LeftMenuViewController: UIViewController, UIGestureRecognizerDelegate {
@@ -44,7 +45,7 @@ class LeftMenuViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.isNavigationBarHidden = true
         self.updateUserDetails()
         self.tableViewProfile.alpha  = isProfileViewOpen ? 1 : 0
         self.tableViewProfile.delegate = self
@@ -142,6 +143,14 @@ class LeftMenuViewController: UIViewController, UIGestureRecognizerDelegate {
         }
         
         UserManager.sharedUserManager.setUserBasedOnRole()
+    }
+    
+    @IBAction func editProfle(_ sender:Any){
+        self.menuContainerViewController.setMenuState(MFSideMenuStateClosed, completion: {
+            if self.delegate != nil{
+                self.delegate.editProfileClicked()
+            }
+        })
     }
     
     @IBAction func showProfileDropDown(_ sender: Any) {

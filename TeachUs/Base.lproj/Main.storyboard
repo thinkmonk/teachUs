@@ -164,7 +164,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="leftMenuBackground" translatesAutoresizingMaskIntoConstraints="NO" id="gCW-AG-obA">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="leftMenuBackground" translatesAutoresizingMaskIntoConstraints="NO" id="gCW-AG-obA">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aAR-hT-63q">
@@ -214,6 +214,15 @@
                                             <action selector="showProfileDropDown:" destination="722-hi-RXJ" eventType="touchUpInside" id="PbZ-5i-EVB"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="12j-5s-uFj">
+                                        <rect key="frame" x="275" y="15" width="30" height="30"/>
+                                        <state key="normal" title="Edit">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="editProfle:" destination="722-hi-RXJ" eventType="touchUpInside" id="TTd-9L-l3S"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -223,6 +232,7 @@
                                     <constraint firstAttribute="trailing" secondItem="AAW-Ai-b3y" secondAttribute="trailing" constant="10" id="JFz-Nf-YX0"/>
                                     <constraint firstItem="AAW-Ai-b3y" firstAttribute="leading" secondItem="eHv-Ej-Fxt" secondAttribute="trailing" constant="5" id="QG5-Bm-0Jl"/>
                                     <constraint firstItem="MPE-d0-Bjy" firstAttribute="leading" secondItem="aAR-hT-63q" secondAttribute="leading" constant="20" symbolic="YES" id="Zu7-nz-dHl"/>
+                                    <constraint firstItem="12j-5s-uFj" firstAttribute="top" secondItem="aAR-hT-63q" secondAttribute="top" constant="15" id="Zye-JI-fNp"/>
                                     <constraint firstItem="IL7-sd-yj5" firstAttribute="leading" secondItem="aAR-hT-63q" secondAttribute="leading" constant="20" symbolic="YES" id="e1n-vz-G4X"/>
                                     <constraint firstItem="MPE-d0-Bjy" firstAttribute="top" secondItem="IL7-sd-yj5" secondAttribute="bottom" constant="5" id="esy-WZ-ysB"/>
                                     <constraint firstItem="IL7-sd-yj5" firstAttribute="top" secondItem="Vf5-km-JTb" secondAttribute="bottom" constant="5" id="gdC-d6-1Rw"/>
@@ -230,6 +240,7 @@
                                     <constraint firstAttribute="trailing" secondItem="IL7-sd-yj5" secondAttribute="trailing" constant="20" symbolic="YES" id="kcy-lp-Tcf"/>
                                     <constraint firstAttribute="bottom" secondItem="eHv-Ej-Fxt" secondAttribute="bottom" constant="15" id="oX9-nx-gLG"/>
                                     <constraint firstItem="eHv-Ej-Fxt" firstAttribute="top" secondItem="MPE-d0-Bjy" secondAttribute="bottom" constant="10" id="tJ7-i2-IJc"/>
+                                    <constraint firstAttribute="trailing" secondItem="12j-5s-uFj" secondAttribute="trailing" constant="15" id="wgv-CE-1P2"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GBp-3F-DJV" userLabel="Seperator">
@@ -294,6 +305,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="uiI-1d-Hwd"/>
                     </view>
+                    <navigationItem key="navigationItem" id="WPu-dc-VR2"/>
                     <connections>
                         <outlet property="buttonDropDown" destination="AAW-Ai-b3y" id="wDY-dO-3cO"/>
                         <outlet property="buttonProfile" destination="v3b-Mh-uOM" id="rHy-x5-s5v"/>
@@ -306,7 +318,37 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aIe-zO-Qza" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="244" y="558"/>
+            <point key="canvasLocation" x="1071" y="560"/>
+        </scene>
+        <!--Students Profile Deatils View Controller-->
+        <scene sceneID="ClJ-7b-5Lw">
+            <objects>
+                <viewController id="3Ky-B3-8mm" customClass="StudentsProfileDeatilsViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dZl-kf-WvT">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8jm-su-nAB">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="gcG-nJ-7mi" firstAttribute="trailing" secondItem="8jm-su-nAB" secondAttribute="trailing" id="7t9-xV-fQ6"/>
+                            <constraint firstItem="gcG-nJ-7mi" firstAttribute="bottom" secondItem="8jm-su-nAB" secondAttribute="bottom" id="8NO-vA-fLT"/>
+                            <constraint firstItem="8jm-su-nAB" firstAttribute="top" secondItem="gcG-nJ-7mi" secondAttribute="top" id="fQR-bK-jaD"/>
+                            <constraint firstItem="8jm-su-nAB" firstAttribute="leading" secondItem="gcG-nJ-7mi" secondAttribute="leading" id="xXR-sn-hQF"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="gcG-nJ-7mi"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableStudentProfileDetails" destination="8jm-su-nAB" id="Jwc-5Q-2ef"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cc8-eJ-dK8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1909" y="558"/>
         </scene>
         <!--Edit Profile Picture View Controller-->
         <scene sceneID="Xg7-TF-Pbj">
@@ -405,7 +447,7 @@ Form Library</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oHN-Yc-U2D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1020" y="559"/>
+            <point key="canvasLocation" x="2906.25" y="559.85915492957747"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="Vd5-YR-gUR">
@@ -432,6 +474,9 @@ Form Library</string>
                         <viewLayoutGuide key="safeArea" id="CGw-1k-7hg"/>
                     </view>
                     <navigationItem key="navigationItem" id="OUp-tZ-i5g"/>
+                    <connections>
+                        <segue destination="3Ky-B3-8mm" kind="show" identifier="toEditProfile" id="tgg-fJ-z21"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WbJ-Y2-iKd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -576,7 +621,7 @@ Form Library</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uCl-hU-uNv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3549.375" y="43.309859154929576"/>
+            <point key="canvasLocation" x="4546.875" y="43.309859154929576"/>
         </scene>
         <!--Students List View Controller-->
         <scene sceneID="08M-2Z-7A0">
@@ -623,7 +668,7 @@ Form Library</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bwb-EL-Y4c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4346" y="45"/>
+            <point key="canvasLocation" x="5341.875" y="44.366197183098592"/>
         </scene>
         <!--Mark Completed Portion View Controller-->
         <scene sceneID="DtI-dZ-PgW">
@@ -689,7 +734,7 @@ Form Library</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EI4-Yj-cia" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5131.875" y="44.366197183098592"/>
+            <point key="canvasLocation" x="6129.375" y="44.366197183098592"/>
         </scene>
         <!--Lecture Report View Controller-->
         <scene sceneID="Kd7-kt-ZW5">
@@ -851,7 +896,7 @@ Form Library</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q9N-u7-jeb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5996.25" y="43.309859154929576"/>
+            <point key="canvasLocation" x="6993.75" y="43.309859154929576"/>
         </scene>
         <!--Syllabus Status List View Controller-->
         <scene sceneID="ZrB-nX-ZAd">
@@ -928,7 +973,7 @@ Form Library</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zJV-Ud-Jir" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3608" y="798"/>
+            <point key="canvasLocation" x="4605" y="797.53521126760563"/>
         </scene>
         <!--Professor Logs List View Controller-->
         <scene sceneID="cHg-x8-Spl">
@@ -1842,7 +1887,7 @@ Form Library</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8BO-e8-Llz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2788" y="45"/>
+            <point key="canvasLocation" x="3783.75" y="44.366197183098592"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="k2t-EA-8Ha">
@@ -1860,7 +1905,7 @@ Form Library</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NgW-S0-edY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2786" y="798"/>
+            <point key="canvasLocation" x="3781.875" y="797.53521126760563"/>
         </scene>
         <!--Syllabus Details View Controller-->
         <scene sceneID="6Pu-FW-571">
@@ -1912,7 +1957,7 @@ Form Library</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bbe-Kt-btd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4344" y="798"/>
+            <point key="canvasLocation" x="5340" y="797.53521126760563"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="adN-y3-fh9">

@@ -28,6 +28,7 @@ public struct Constants {
         static let toOfflineHomeTabsVC = "toOfflineHomeTabsVC"
         static let toOfflineMarkPortion = "offlineMarkPortion"
         static let toStudentAttendanceDetails = "toStudentAttendanceDetails"
+        static let toEditProfile = "toEditProfile"
     }
     
     struct Images {

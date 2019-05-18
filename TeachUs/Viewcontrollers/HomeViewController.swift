@@ -86,6 +86,10 @@ class HomeViewController: BaseViewController{
 
 }
 extension HomeViewController:LeftMenuDeleagte{
+    func editProfileClicked() {
+        self.performSegue(withIdentifier: Constants.segues.toEditProfile, sender: self)
+    }
+    
     func menuItemSelected(item:Int){
 //        pageMenu?.moveToPage(item)
         for childViewController in childViewControllers {
@@ -98,5 +102,7 @@ extension HomeViewController:LeftMenuDeleagte{
         }
 //        makeDataSource()
     }
+    
+    
 
 }

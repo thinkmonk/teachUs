@@ -45,6 +45,7 @@ public struct URLConstants{
         static let professorRatingList = BaseUrl.baseURL + "/ratings/professor_rating_list"
         static let syllabusSubjectStatus = BaseUrl.baseURL + "/syllabus/student_syllabus_subject_status"
         static let getSyllabusSuubjectDetails = BaseUrl.baseURL + "/syllabus/student_detailed_syllabus_status"
+        static let getStudentProfileDetails = BaseUrl.baseURL + "/student/student_details"
     }
     
     struct ProfessorURL {

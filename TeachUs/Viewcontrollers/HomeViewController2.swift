@@ -143,6 +143,10 @@ class HomeViewController2: BaseViewController {
     
 }
 extension HomeViewController2:LeftMenuDeleagte{
+    func editProfileClicked() {
+        
+    }
+    
     func menuItemSelected(item:Int){
         pageMenu?.moveToPage(item)
         makeDataSource()

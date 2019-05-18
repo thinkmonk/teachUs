@@ -41,6 +41,10 @@ class OfflineHomeViewController: BaseViewController {
     }
 }
 extension OfflineHomeViewController:LeftMenuDeleagte{
+    func editProfileClicked() {
+        
+    }
+    
     func menuItemSelected(item:Int){
         //        pageMenu?.moveToPage(item)
         for childViewController in childViewControllers {
