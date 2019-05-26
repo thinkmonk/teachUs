@@ -151,7 +151,7 @@ class BaseViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    func getAndSaveUserToDb(){
+    func getAndSaveUserToDb(_ isLoginFlow:Bool){
         let manager = NetworkHandler()
         manager.url = URLConstants.Login.userDetails
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
@@ -162,7 +162,7 @@ class BaseViewController: UIViewController {
             if(UserManager.sharedUserManager.appUserCollegeDetails.role_id == AppUserRole.professor){//check if logged-in user is a professor and fetch offline data
                 self.getOfflineData()
             }
-            else{
+            else if isLoginFlow {
                 NotificationCenter.default.post(name: .notificationLoginSuccess, object: nil)
             }
         }) { (error, code, message) in

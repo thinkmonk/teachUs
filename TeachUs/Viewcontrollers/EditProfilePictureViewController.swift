@@ -12,7 +12,7 @@ import AVFoundation
 import MobileCoreServices
 
 
-protocol editProfileDelegate {
+protocol editProfilePictureDelegate {
    func  profileEdited()
 }
 
@@ -23,7 +23,7 @@ class EditProfilePictureViewController: BaseViewController{
     @IBOutlet weak var buttonSelectPhotoFromGallery: UIButton!
     @IBOutlet weak var buttonSelectPhotoFromCamera: UIButton!
     let picker = UIImagePickerController()
-    var delegate:editProfileDelegate?
+    var delegate:editProfilePictureDelegate?
     var profileImageUrl:String = UserManager.sharedUserManager.appUserDetails.profilePicUrl!
     
     override func viewDidLoad() {

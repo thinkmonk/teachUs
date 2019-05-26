@@ -116,7 +116,7 @@ class RootViewController: BaseViewController {
                 ReachabilityManager.shared.networkReachbleActions()
             }
             else{
-                self.getAndSaveUserToDb()
+                self.getAndSaveUserToDb(true)
             }
         }
         else{
@@ -126,7 +126,7 @@ class RootViewController: BaseViewController {
     
     
     @objc func offlineSyncComplete(){
-        self.getAndSaveUserToDb()
+        self.getAndSaveUserToDb(true)
     }
     
     

@@ -238,7 +238,7 @@ extension LoginViewController:OtpDelegate{
             if(code == 200){
                 let accessToken:String = response["token"] as! String
                 UserManager.sharedUserManager.setAccessToken(accessToken)
-                self.getAndSaveUserToDb()
+                self.getAndSaveUserToDb(true)
             }
             else{
                 let message:String = response["message"] as! String

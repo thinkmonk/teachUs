@@ -66,6 +66,9 @@ struct StudentDetails: Codable {
     let studentID, rollNumber, fName, lName: String?
     let mName, dob, email, gender: String?
     let contact, classID, createdOn, excelSheetUploadID: String?
+    var fullName :String{
+        return "\(fName ?? "") \(mName ?? "") \(lName ?? "")"
+    }
     
     enum CodingKeys: String, CodingKey {
         case studentID = "student_id"

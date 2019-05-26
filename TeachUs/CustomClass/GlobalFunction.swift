@@ -45,4 +45,52 @@ class GlobalFunction{
         
         return seconds < 10 ? "\(seconds)" : "\(seconds)"
     }
+    
+    class func isValidEmail(testStr:String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailTest.evaluate(with: testStr)
+    }
+    
+    static let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+    
+    
+    class func checkIfFileExisits(fileUrl:String) -> String?{
+        if let url = URL(string: fileUrl) {
+            let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+            let filePathURL = NSURL(fileURLWithPath: path)
+            if let pathComponent = filePathURL.appendingPathComponent(url.lastPathComponent) {
+                let filePath = pathComponent.path
+                let fileManager = FileManager.default
+                if fileManager.fileExists(atPath: filePath) {
+                    return filePath
+                } else {
+                    return nil
+                }
+            } else {
+                return nil
+            }
+        }
+        return nil
+    }
+    
+    class func downloadFileAndSaveToDisk(fileUrl:String){
+        if let url = URL(string: fileUrl) {
+            URLSession.shared.downloadTask(with: url) { location, response, error in
+                guard let location = location else {
+                    print("download error:", error ?? "")
+                    return
+                }
+                // move the downloaded file from the temporary location url to your app documents directory
+                do {
+                    try FileManager.default.moveItem(at: location, to: self.documents.appendingPathComponent(response?.suggestedFilename ?? url.lastPathComponent))
+                } catch {
+                    print(error.localizedDescription)
+                }
+                }.resume()
+        }
+    }
+
 }
+

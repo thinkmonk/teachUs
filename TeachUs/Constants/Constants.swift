@@ -29,6 +29,8 @@ public struct Constants {
         static let toOfflineMarkPortion = "offlineMarkPortion"
         static let toStudentAttendanceDetails = "toStudentAttendanceDetails"
         static let toEditProfile = "toEditProfile"
+        static let toEditProfileDetails = "toEditProfileDetails"
+        static let toProfileChangeRequestDetials = "toProfileChangeRequestDetials"
     }
     
     struct Images {
@@ -78,6 +80,7 @@ public struct Constants {
         static let OfflineStudentsListViewControllerId = "OfflineStudentsListViewControllerId"
         static let UploadOfflineDataViewControllerId = "UploadOfflineDataViewControllerId"
         static let CollegeLogsProfessorListViewControllerId = "CollegeLogsProfessorListViewControllerId"
+        static let ProfileChangeRequestsViewControllerId = "ProfileChangeRequestsViewControllerid"
     }
     
     struct UserDefaults {
@@ -125,6 +128,7 @@ public struct Constants {
         static let studentAttendanceDetails = "AttendanceDetailsValuesTableViewCellId"
         static let profileDetailsEditTableViewCell = "ProfileDetailsEditTableViewCellId"
         static let profileStudentIdTableViewCell = "ProfileStudentIdTableViewCellId"
+        static let profileChangeRequestTableViewCellId = "ProfileChangeRequestTableViewCellId"
     }
     
     struct UserTypeString {

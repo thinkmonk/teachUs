@@ -12,6 +12,7 @@ class StudentsProfileDeatilsViewController: BaseViewController {
 
     @IBOutlet weak var tableStudentProfileDetails: UITableView!
     var studentProfileDetails:StudentProfileDetails?
+    var typeEditView:EditViewType!
     var arrayDataSource = [EditProfileDataSource]()
     
     override func viewDidLoad() {
@@ -64,12 +65,12 @@ class StudentsProfileDeatilsViewController: BaseViewController {
             self.arrayDataSource.append(nameDs)
         }
         
-        if let contactNumber = UserManager.sharedUserManager.appUserDetails.contact {
+        if let contactNumber = self.studentProfileDetails?.studentDetails?.contact {
             let contactDs = EditProfileDataSource(profileCell: .cellTypeMobileNumber, profileObject: contactNumber)
             self.arrayDataSource.append(contactDs)
         }
         
-        if let emailId = UserManager.sharedUserManager.appUserDetails.email{
+        if let emailId = self.studentProfileDetails?.studentDetails?.email{
             let emailDs = EditProfileDataSource(profileCell: .cellTypeEmail, profileObject: emailId)
             self.arrayDataSource.append(emailDs)
         }
@@ -112,9 +113,40 @@ class StudentsProfileDeatilsViewController: BaseViewController {
             self.tableStudentProfileDetails.reloadData()
         }
     }
+    
+    @objc func didEditUserInfo(_ sender:ButtonWithIndexPath){
+        
+        let selectedRow = sender.indexPath.row
+        let editDs = self.arrayDataSource[selectedRow]
+        switch editDs.cellType!{
+        case .cellTypeName :
+            self.typeEditView = .EditName
+            self.performSegue(withIdentifier: Constants.segues.toEditProfileDetails, sender: self)
+        case .cellTypeEmail:
+            self.typeEditView = .EditEmail
+            self.performSegue(withIdentifier: Constants.segues.toEditProfileDetails, sender: self)
+        case .cellTypeMobileNumber:
+            self.typeEditView = .EditMobileNumber
+            self.performSegue(withIdentifier: Constants.segues.toEditProfileDetails, sender: self)
+        default:
+            break
+        }
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Constants.segues.toEditProfileDetails{
+            if let destinationVC = segue.destination as? EditProfileDetailsViewController{
+                destinationVC.viewType = self.typeEditView
+                destinationVC.studentDetails = self.studentProfileDetails
+                destinationVC.delegate = self
+            }
+        }
+    }
+    
 }
 
-
+//MARK:- TABLEVIEW DELEGATES
 extension StudentsProfileDeatilsViewController:UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.arrayDataSource.count
@@ -142,6 +174,8 @@ extension StudentsProfileDeatilsViewController:UITableViewDelegate, UITableViewD
                 cell.labelKey.text = "Full Name"
                 cell.labelValue.text = name
             }
+            cell.buttonEditDetails.indexPath = indexPath
+            cell.buttonEditDetails.addTarget(self, action: #selector(StudentsProfileDeatilsViewController.didEditUserInfo(_:)), for: .touchUpInside)
             cell.viewCellWrapper.backgroundColor = .clear
             cell.viewBottomSeperator.isHidden = false
             return cell
@@ -153,6 +187,8 @@ extension StudentsProfileDeatilsViewController:UITableViewDelegate, UITableViewD
                 cell.labelKey.text = "Email"
                 cell.labelValue.text = email
             }
+            cell.buttonEditDetails.indexPath = indexPath
+            cell.buttonEditDetails.addTarget(self, action: #selector(StudentsProfileDeatilsViewController.didEditUserInfo(_:)), for: .touchUpInside)
             cell.viewCellWrapper.backgroundColor = .clear
             cell.viewBottomSeperator.isHidden = false
             return cell
@@ -163,6 +199,8 @@ extension StudentsProfileDeatilsViewController:UITableViewDelegate, UITableViewD
                 cell.labelKey.text = "Contact Number"
                 cell.labelValue.text = mobileNumber
             }
+            cell.buttonEditDetails.indexPath = indexPath
+            cell.buttonEditDetails.addTarget(self, action: #selector(StudentsProfileDeatilsViewController.didEditUserInfo(_:)), for: .touchUpInside)
             cell.viewCellWrapper.backgroundColor = .clear
             cell.viewBottomSeperator.isHidden = false
             return cell
@@ -235,6 +273,14 @@ extension StudentsProfileDeatilsViewController:UITableViewDelegate, UITableViewD
             return cell
 
         }
+    }
+    
+    
+}
+
+extension StudentsProfileDeatilsViewController:EditProfileDetailsDelegate{
+    func profileDetailsEdited() {
+        self.getStudentDetails()
     }
     
     

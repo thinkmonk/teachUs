@@ -137,6 +137,15 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
                 collegeLogsListVC.parentNavigationController = self.parentNavigationController
                 controllersArray.append(collegeLogsListVC)
             }
+            
+            if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "1"){
+                let requestListVC:ProfileChangeRequestsViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.ProfileChangeRequestsViewControllerId) as! ProfileChangeRequestsViewController
+                requestListVC.title = "Request"
+                requestListVC.parentNavigationController = self.parentNavigationController
+                controllersArray.append(requestListVC)
+
+            }
+            
             break
         }
         return controllersArray
