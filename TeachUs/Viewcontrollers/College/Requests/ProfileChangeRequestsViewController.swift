@@ -83,15 +83,13 @@ class ProfileChangeRequestsViewController: BaseViewController {
         manager.apiPost(apiName: "Update profile change request", parameters: parameters, completionHandler: { (result, code, reponse) in
             LoadingActivityHUD.hideProgressHUD()
             if code == 200{
-                self.dismiss(animated: true, completion: {
-                    self.viewRequestDetails.removeFromSuperview()
-                })
+                self.viewRequestDetails.removeFromSuperview()
+                self.getRequestChangeData()
             }
         }) { (result, code, errorString) in
             LoadingActivityHUD.hideProgressHUD()
-            self.dismiss(animated: true, completion: {
-               self.viewRequestDetails.removeFromSuperview()
-            })
+            self.viewRequestDetails.removeFromSuperview()
+            self.getRequestChangeData()
         }
     }
     
