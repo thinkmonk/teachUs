@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import MobileCoreServices
 
 enum EditViewType {
     case EditName
@@ -44,6 +45,7 @@ class EditProfileDetailsViewController: BaseViewController {
     var viewType:EditViewType?
     var imagePicker:UIImagePickerController?=UIImagePickerController()
     var chosenImage:UIImage?
+    var chosenFile:URL?
     var updatedUserValue = Variable<String>("")
     var stringOtp = Variable<String>("")
     var delegate:EditProfileDetailsDelegate!
@@ -52,6 +54,7 @@ class EditProfileDetailsViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         view.isOpaque = false
         if let editViewType = viewType{
             self.setUpView(type: editViewType)
@@ -174,28 +177,41 @@ class EditProfileDetailsViewController: BaseViewController {
     
     func updateName(){
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
-        var profileImage = self.chosenImage
-        let imageSizeKB = profileImage?.getSizeInKb()
-        print("size of image in KB: %f ", Double(imageSizeKB!))
-        if(imageSizeKB! >= 500.0){
-            do {
-                try profileImage?.compressImage(400, completion: { (image, compressRatio) in
-                    print(image.size)
-                    profileImage = image
-                })
-            } catch {
-                print("Error")
-            }
-            print("compressed image size = \(profileImage?.getSizeInKb() ?? 0)")
-        }
-        let imageData:NSData = UIImageJPEGRepresentation(profileImage!, 1)! as NSData
-        let strBase64 = imageData.base64EncodedString(options: .lineLength64Characters)
         var parameters = [String:Any]()
-        parameters["updated_doc"] = "\(strBase64)"
+
+        if var profileImage = self.chosenImage {
+            let imageSizeKB = profileImage.getSizeInKb()
+            print("size of image in KB: %f ", Double(imageSizeKB))
+            if(imageSizeKB >= 500.0){
+                do {
+                    try profileImage.compressImage(400, completion: { (image, compressRatio) in
+                        print(image.size)
+                        profileImage = image
+                    })
+                } catch {
+                    print("Error")
+                }
+                print("compressed image size = \(profileImage.getSizeInKb())")
+            }
+            let imageData:NSData = UIImageJPEGRepresentation(profileImage, 1)! as NSData
+            let strBase64 = imageData.base64EncodedString(options: .lineLength64Characters)
+            parameters["updated_doc"] = "\(strBase64)"
+        }
+        
+        if let docURL = self.chosenFile{
+            do {
+                let docData:Data = try Data(contentsOf: docURL)
+                let strBase64 = docData.base64EncodedString(options: .lineLength64Characters)
+                parameters["updated_doc"] = "\(strBase64)"
+            } catch let error{
+                print(error)
+            }
+        }
+        
         parameters["college_code"]  = "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)"
         parameters["existing_data"] = self.studentDetails.studentDetails?.fullName
         parameters["new_data"] = self.updatedUserValue.value
-        parameters["doc_size"] = profileImage?.getSizeInKb()
+        parameters["doc_size"] = 0
         let manager = NetworkHandler()
         manager.url = URLConstants.StudentURL.updateStudentName
         manager.apiPost(apiName: " Update user Name", parameters:parameters, completionHandler: { (result, code, response) in
@@ -322,6 +338,13 @@ extension EditProfileDetailsViewController{
             UIAlertAction in
             self.openGallery()
         }
+        
+        let documentAction = UIAlertAction(title: "Document", style: UIAlertActionStyle.default)
+        {
+            UIAlertAction in
+            self.openDocumentPicker()
+        }
+        
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel)
         {
             UIAlertAction in
@@ -331,6 +354,7 @@ extension EditProfileDetailsViewController{
         alert.addAction(cameraAction)
         alert.addAction(galleryAction)
         alert.addAction(cancelAction)
+        alert.addAction(documentAction)
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -355,6 +379,13 @@ extension EditProfileDetailsViewController{
             self.showAlterWithTitle("Oops!", alertMessage: "Photo LIbrary Access Not Provided")
         }
     }
+    
+    func openDocumentPicker(){
+        let importMenu = UIDocumentMenuViewController(documentTypes: [String(kUTTypePDF)], in: .import)
+        importMenu.delegate = self
+        importMenu.modalPresentationStyle = .formSheet
+        self.present(importMenu, animated: true, completion: nil)
+    }
 }
 
 extension EditProfileDetailsViewController:UIImagePickerControllerDelegate,UINavigationControllerDelegate {
@@ -371,3 +402,25 @@ extension EditProfileDetailsViewController:UIImagePickerControllerDelegate,UINav
     }
 }
 
+extension EditProfileDetailsViewController:UIDocumentMenuDelegate,UIDocumentPickerDelegate{
+    public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        guard let myURL = urls.first else {
+            return
+        }
+        self.chosenFile = myURL
+        self.buttonSubmitProof.isHidden = false
+        print("import result : \(myURL)")
+    }
+    
+    
+    public func documentMenu(_ documentMenu:UIDocumentMenuViewController, didPickDocumentPicker documentPicker: UIDocumentPickerViewController) {
+        documentPicker.delegate = self
+        present(documentPicker, animated: true, completion: nil)
+    }
+    
+    
+    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+        print("view was cancelled")
+        dismiss(animated: true, completion: nil)
+    }
+}

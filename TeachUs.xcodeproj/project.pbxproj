@@ -559,6 +559,7 @@
 		81E673FF205315B100321257 /* UserCollegeDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollegeDetails.swift; sourceTree = "<group>"; };
 		81E6740620531B4C00321257 /* UserDetails+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDetails+CoreDataClass.swift"; sourceTree = "<group>"; };
 		81E6740720531B4C00321257 /* UserDetails+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDetails+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		81E91918229B1FC500CE41D1 /* TeachUs.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TeachUs.entitlements; sourceTree = "<group>"; };
 		81F78EAA1FB0DFE600A016B0 /* AttendanceCalenderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceCalenderTableViewCell.swift; sourceTree = "<group>"; };
 		81F78EAB1FB0DFE600A016B0 /* AttendanceCalenderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AttendanceCalenderTableViewCell.xib; sourceTree = "<group>"; };
 		81FEC7F820F10436003FBDBE /* ReachabilityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
@@ -633,6 +634,7 @@
 		18A627DB1F90F9870099C106 /* TeachUs */ = {
 			isa = PBXGroup;
 			children = (
+				81E91918229B1FC500CE41D1 /* TeachUs.entitlements */,
 				8137EF511FA1099D00045D97 /* Constants */,
 				813EC7681F9BA44100F11A12 /* Viewcontrollers */,
 				813EC7691F9BA46200F11A12 /* CustomViews */,
@@ -1532,6 +1534,17 @@
 						CreatedOnToolsVersion = 9.0;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					18A627EF1F90F9880099C106 = {
 						CreatedOnToolsVersion = 9.0;
@@ -2111,6 +2124,7 @@
 				BASE_URL = "http://teachusedumation.com/api_uat";
 				BASE_URL_V1 = "$(BASE_URL)/teachus";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = TeachUs/TeachUs.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -2137,6 +2151,7 @@
 				BASE_URL = "http://teachusedumation.com/api";
 				BASE_URL_V1 = "$(BASE_URL)/teachus";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = TeachUs/TeachUs.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
