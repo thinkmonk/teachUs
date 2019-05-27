@@ -38,7 +38,7 @@ class LeftMenuViewController: UIViewController, UIGestureRecognizerDelegate {
     var studentDataSource = ["Attendance", "Syllabus","Ratings", "Logout"]
     
     //    var professorDataSource = ["Attendance", "Syllabus Status", "Logs", "Logout"]
-    var professorDataSource = ["Attendance", "Syllabus", "My Logs", "Logout"]
+    var professorDataSource = ["Attendance", "Syllabus", "My Logs", "Notes", "Logout"]
     
     var collegeSuperAdminDataSource = ["Attendance(Reports)","Attendance(Events)", "Syllabus Status","Add/Remove Admin","Ratings", "Logs", "Request","Logout" ]
     var collegeAdminDataSource = ["Attendance(Reports)", "Attendance(Events)", "Logout"]
