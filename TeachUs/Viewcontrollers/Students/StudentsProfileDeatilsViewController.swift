@@ -12,19 +12,28 @@ class StudentsProfileDeatilsViewController: BaseViewController {
 
     @IBOutlet weak var tableStudentProfileDetails: UITableView!
     var studentProfileDetails:StudentProfileDetails?
+    var professorProfileDetails:ProfessorProfileDetails?
     var typeEditView:EditViewType!
     var arrayDataSource = [EditProfileDataSource]()
+    
+    var isProfessorProfileView:Bool{
+        return UserManager.sharedUserManager.user! == .Professor
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
         self.addGradientToNavBar()
-        self.getStudentDetails()
+        if isProfessorProfileView{
+            self.getProfessorDetails()
+        }else{
+            self.getStudentDetails()
+        }
         self.tableStudentProfileDetails.register(UINib(nibName: "ProfileDetailsEditTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.profileDetailsEditTableViewCell)
         self.tableStudentProfileDetails.register(UINib(nibName: "ProfileStudentIdTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.profileStudentIdTableViewCell)
         self.tableStudentProfileDetails.delegate = self
         self.tableStudentProfileDetails.dataSource = self
-        self.tableStudentProfileDetails.estimatedRowHeight = 30
+        self.tableStudentProfileDetails.estimatedRowHeight = 15
         self.tableStudentProfileDetails.rowHeight = UITableViewAutomaticDimension
         self.tableStudentProfileDetails.contentInset =  UIEdgeInsetsMake(15.0, 0, 15.0, 0)
     }
@@ -49,8 +58,10 @@ class StudentsProfileDeatilsViewController: BaseViewController {
             print(message)
             LoadingActivityHUD.hideProgressHUD()
         }
-
     }
+    
+    
+    
     
     func makeDataSource(){
         self.arrayDataSource.removeAll()
@@ -138,9 +149,108 @@ class StudentsProfileDeatilsViewController: BaseViewController {
         if segue.identifier == Constants.segues.toEditProfileDetails{
             if let destinationVC = segue.destination as? EditProfileDetailsViewController{
                 destinationVC.viewType = self.typeEditView
-                destinationVC.studentDetails = self.studentProfileDetails
+                if(self.isProfessorProfileView){
+                    destinationVC.professorProfileDetails = self.professorProfileDetails
+                }else{
+                    destinationVC.studentDetails = self.studentProfileDetails
+                }
                 destinationVC.delegate = self
             }
+        }
+    }
+    
+}
+
+//MARK:- For professor's profile
+extension StudentsProfileDeatilsViewController{
+    func getProfessorDetails(){
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        let manager = NetworkHandler()
+        manager.url = URLConstants.ProfessorURL.getProfessorProfileDetails
+        let parameters = [
+            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)"
+        ]
+        manager.apiPostWithDataResponse(apiName: "Get professor profile", parameters:parameters, completionHandler: { (result, code, response) in
+            LoadingActivityHUD.hideProgressHUD()
+            do{
+                let decoder = JSONDecoder()
+                self.professorProfileDetails = try decoder.decode(ProfessorProfileDetails.self, from: response)
+                self.makeProfessorDataSource()
+            } catch let error{
+                print("err", error)
+            }
+        }) { (error, code, message) in
+            print(message)
+            LoadingActivityHUD.hideProgressHUD()
+        }
+    }
+    
+    func makeProfessorDataSource(){
+        self.arrayDataSource.removeAll()
+        
+        
+        if let id = self.professorProfileDetails?.professorDetails?.uniqueLoginID{
+            let idDs = EditProfileDataSource(profileCell: .cellTypeId, profileObject: id)
+            self.arrayDataSource.append(idDs)
+        }
+        
+        if let firstName = self.professorProfileDetails?.professorDetails?.fName {
+            let nameDs = EditProfileDataSource(profileCell: .cellTypeName, profileObject: "\(firstName)")
+            self.arrayDataSource.append(nameDs)
+        }
+        
+        if let contactNumber = self.professorProfileDetails?.professorDetails?.contact {
+            let contactDs = EditProfileDataSource(profileCell: .cellTypeMobileNumber, profileObject: contactNumber)
+            self.arrayDataSource.append(contactDs)
+        }
+        
+        if let emailId = self.professorProfileDetails?.professorDetails?.email{
+            let emailDs = EditProfileDataSource(profileCell: .cellTypeEmail, profileObject: emailId)
+            self.arrayDataSource.append(emailDs)
+        }
+        
+        for college in self.professorProfileDetails?.data ?? []{
+            if let collegeName = college.collegeName{
+                let collegeNameDs = EditProfileDataSource(profileCell: .cellTypeProfessorCollegeName, profileObject: collegeName)
+                self.arrayDataSource.append(collegeNameDs)
+            }
+            if let role = college.role{
+                let collegeNameDs = EditProfileDataSource(profileCell: .cellTypeProfessorRole, profileObject: role)
+                self.arrayDataSource.append(collegeNameDs)
+            }
+            
+            
+            for course in college.courseDetails ?? []{
+                if let courseName = course.courseName{
+                    let courseNameDs = EditProfileDataSource(profileCell: .cellTypeCourseName, profileObject: courseName)
+                    self.arrayDataSource.append(courseNameDs)
+                }
+                
+                if let yearName = course.yearName{
+                    let yearNameDs = EditProfileDataSource(profileCell: .cellTypeYear, profileObject: yearName)
+                    self.arrayDataSource.append(yearNameDs)
+                }
+                
+                if let semesterDetails = course.semester{
+                    let semesterDs = EditProfileDataSource(profileCell: .cellTypeSemester, profileObject: semesterDetails)
+                    self.arrayDataSource.append(semesterDs)
+                }
+                
+                if let divisionName = course.classDivision {
+                    let divisionDs = EditProfileDataSource(profileCell: .cellTypeDivision, profileObject: divisionName)
+                    self.arrayDataSource.append(divisionDs)
+                }
+                
+                if let subjectName = course.subjects?.joined(separator: ","){
+                    let subjectTitleDs = EditProfileDataSource(profileCell: .cellTypeSubjectName, profileObject: subjectName)
+                    self.arrayDataSource.append(subjectTitleDs)
+                    
+                }
+            }
+        }
+        
+        DispatchQueue.main.async {
+            self.tableStudentProfileDetails.reloadData()
         }
     }
     
@@ -272,6 +382,51 @@ extension StudentsProfileDeatilsViewController:UITableViewDelegate, UITableViewD
             cell.viewBottomSeperator.isHidden = true
             return cell
 
+        case .cellTypeDivision:
+            let cell:ProfileStudentIdTableViewCell  = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.profileStudentIdTableViewCell, for: indexPath) as! ProfileStudentIdTableViewCell
+            if let division = datasource.attachedObject as? String{
+                cell.labelKey.text = "Division"
+                cell.labelValue.text = division
+            }
+            cell.viewCellWrapper.backgroundColor = .white
+            cell.labelColon.isHidden = true
+            cell.viewBottomSeperator.isHidden = true
+            return cell
+
+        case .cellTypeSubjectName:
+            let cell:ProfileStudentIdTableViewCell  = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.profileStudentIdTableViewCell, for: indexPath) as! ProfileStudentIdTableViewCell
+            if let subjectName = datasource.attachedObject as? String{
+                cell.labelKey.text = "Subject"
+                cell.labelValue.text = subjectName
+            }
+            cell.viewCellWrapper.backgroundColor = .white
+            cell.labelColon.isHidden = false
+            cell.viewBottomSeperator.isHidden = false
+            return cell
+
+        case .cellTypeProfessorCollegeName:
+            let cell:ProfileStudentIdTableViewCell  = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.profileStudentIdTableViewCell, for: indexPath) as! ProfileStudentIdTableViewCell
+            if let collegeName = datasource.attachedObject as? String{
+                cell.labelKey.text = "College Name"
+                cell.labelValue.text = collegeName
+            }
+            cell.viewCellWrapper.backgroundColor = .lightGray
+            cell.viewBottomSeperator.isHidden = true
+            cell.labelColon.isHidden = false
+            cell.backgroundColor = .lightGray
+            return cell
+            
+        case .cellTypeProfessorRole:
+            let cell:ProfileStudentIdTableViewCell  = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.profileStudentIdTableViewCell, for: indexPath) as! ProfileStudentIdTableViewCell
+            if let role = datasource.attachedObject as? String{
+                cell.labelKey.text = "Role"
+                cell.labelValue.text = role
+            }
+            cell.viewCellWrapper.backgroundColor = .lightGray
+            cell.viewBottomSeperator.isHidden = true
+            cell.labelColon.isHidden = false
+            cell.backgroundColor = .lightGray
+            return cell
         }
     }
     

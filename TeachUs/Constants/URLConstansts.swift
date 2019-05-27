@@ -36,7 +36,6 @@ public struct URLConstants{
         static let verifyOtp = BaseUrl.baseURLV1 + "/auth/verifyotp"
         static let userDetails = BaseUrl.baseURLV1 + "/login/user_details"
         static let updateUserProfile = BaseUrl.baseURLV1 + "/login/update_user_profile"
-        
     }
     
     struct StudentURL {
@@ -52,7 +51,6 @@ public struct URLConstants{
         static let updateStudentMobileNumber = BaseUrl.baseURLV1  + "/student/verify_auth_password_newcontact"
         static let sendOtpForEmailUpdate = BaseUrl.baseURLV1  + "/student/send_auth_password_newemail"
         static let updateStudentEmail = BaseUrl.baseURLV1 + "/student/verify_auth_password_newemail"
-
     }
     
     struct ProfessorURL {
@@ -71,6 +69,12 @@ public struct URLConstants{
         static let mailLogsReport = BaseUrl.baseURLV1 + "/auth/professor_logs_verify_auth_password"
         static let getEditAttendanceData =  BaseUrl.baseURLV1 + "/professor/attendance_list_edit"
         static let submitEditedAttendace = BaseUrl.baseURLV1 + "/professor/attendance_list_update"
+        static let getProfessorProfileDetails = BaseUrl.baseURLV1 + "/professor/professor_data"
+        static let updateProfessorName = BaseUrl.baseURLV1 + "/professor/professor_name_update_request"
+        static let sendOTPForNewContact = BaseUrl.baseURLV1 + "/professor/send_auth_password_newcontact"
+        static let verifyOTPForNewContact = BaseUrl.baseURLV1 + "/professor/verify_auth_password_newcontact"
+        static let sendOtpForEmailUpdate = BaseUrl.baseURLV1  + "/professor/send_auth_password_newemail"
+        static let updateProfessorEmail = BaseUrl.baseURLV1 + "/professor/verify_auth_password_newemail"
     }
     
     

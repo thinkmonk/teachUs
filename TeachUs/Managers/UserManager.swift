@@ -23,6 +23,7 @@ class UserManager{
     var offlineAppuserCollegeDetails:Offline_Colleges!
     var isUserInOfflineMode:Bool = false //check not to show "work in offline mode" pop-up multiple times
     
+    /// Return the type of the role type of the user logged in
     var user:LoginUserType! {
     if let user = UserDefaults.standard.value(forKey: Constants.UserDefaults.loginUserType) as? String {
             switch user {

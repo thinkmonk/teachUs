@@ -154,6 +154,7 @@
 		81A523951FA7955600B3B557 /* CollegeLogin.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81A523941FA7955600B3B557 /* CollegeLogin.xib */; };
 		81A523971FA7956100B3B557 /* CollegeLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A523961FA7956100B3B557 /* CollegeLogin.swift */; };
 		81A560D3205D07DC00DAE086 /* HomeViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A560D2205D07DC00DAE086 /* HomeViewController2.swift */; };
+		81A6BBFA229C546A00615EDD /* ProfessorProfileDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A6BBF9229C546A00615EDD /* ProfessorProfileDetails.swift */; };
 		81A769D120A88A7200A4A2B7 /* CollegeSyllabusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A769CF20A88A7200A4A2B7 /* CollegeSyllabusTableViewCell.swift */; };
 		81A769D220A88A7200A4A2B7 /* CollegeSyllabusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81A769D020A88A7200A4A2B7 /* CollegeSyllabusTableViewCell.xib */; };
 		81A7D054208B64AA0032A1BC /* CollegeClassRatingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A7D053208B64AA0032A1BC /* CollegeClassRatingListViewController.swift */; };
@@ -453,6 +454,7 @@
 		81A523941FA7955600B3B557 /* CollegeLogin.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollegeLogin.xib; sourceTree = "<group>"; };
 		81A523961FA7956100B3B557 /* CollegeLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeLogin.swift; sourceTree = "<group>"; };
 		81A560D2205D07DC00DAE086 /* HomeViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController2.swift; sourceTree = "<group>"; };
+		81A6BBF9229C546A00615EDD /* ProfessorProfileDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessorProfileDetails.swift; sourceTree = "<group>"; };
 		81A769CF20A88A7200A4A2B7 /* CollegeSyllabusTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CollegeSyllabusTableViewCell.swift; path = Syllabus/CollegeSyllabusTableViewCell.swift; sourceTree = "<group>"; };
 		81A769D020A88A7200A4A2B7 /* CollegeSyllabusTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CollegeSyllabusTableViewCell.xib; path = Syllabus/CollegeSyllabusTableViewCell.xib; sourceTree = "<group>"; };
 		81A7D053208B64AA0032A1BC /* CollegeClassRatingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeClassRatingListViewController.swift; sourceTree = "<group>"; };
@@ -984,6 +986,7 @@
 		813EC76D1F9BA4FD00F11A12 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				81A6BBF8229C544700615EDD /* Profiles */,
 				81BC49AB2299D2B600549867 /* ProfileChangeRequest */,
 				81DC5C71224614A000D9F3B7 /* Students */,
 				811EA45C223D17C900D55899 /* CollegeProfessor */,
@@ -1156,6 +1159,14 @@
 				819EEC2320A60C2100487467 /* ViewLectureReport.xib */,
 			);
 			path = LectureReport;
+			sourceTree = "<group>";
+		};
+		81A6BBF8229C544700615EDD /* Profiles */ = {
+			isa = PBXGroup;
+			children = (
+				81A6BBF9229C546A00615EDD /* ProfessorProfileDetails.swift */,
+			);
+			path = Profiles;
 			sourceTree = "<group>";
 		};
 		81A769CA20A889D000A4A2B7 /* profile */ = {
@@ -1934,6 +1945,7 @@
 				8161AF69222C5B63001F73B5 /* Array.swift in Sources */,
 				819EEC2A20A616F000487467 /* LectureReportDataSource.swift in Sources */,
 				81316DE42165575200820481 /* OfflineStudentListViewController.swift in Sources */,
+				81A6BBFA229C546A00615EDD /* ProfessorProfileDetails.swift in Sources */,
 				8136E5A720F7C6880080AECA /* Offline_Class_list.swift in Sources */,
 				81CCAE551FC806060070907A /* RatingTopicsTableViewCell.swift in Sources */,
 				81A7D062208BA7EE0032A1BC /* RatingDetails.swift in Sources */,

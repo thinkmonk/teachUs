@@ -49,6 +49,11 @@ class EditProfileDetailsViewController: BaseViewController {
     var updatedUserValue = Variable<String>("")
     var stringOtp = Variable<String>("")
     var delegate:EditProfileDetailsDelegate!
+    
+    var professorProfileDetails:ProfessorProfileDetails!
+    var isProfessorProfileView:Bool{
+        return UserManager.sharedUserManager.user! == .Professor
+    }
 
     var myDisposeBag = DisposeBag()
     
@@ -74,7 +79,6 @@ class EditProfileDetailsViewController: BaseViewController {
         self.viewWrapper.makeEdgesRounded()
         NotificationCenter.default.addObserver(self, selector: #selector(EditProfileDetailsViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(EditProfileDetailsViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-
     }
     
     func setUpRx(){
@@ -110,7 +114,7 @@ class EditProfileDetailsViewController: BaseViewController {
             self.viewProofBg.isHidden = false
             self.viewOtpBg.isHidden = true
             self.viewImageProofBg.isHidden = false
-            self.labelEditValue.text = self.studentDetails.studentDetails?.fullName ?? ""
+            self.labelEditValue.text = isProfessorProfileView ? (self.professorProfileDetails.professorDetails?.fName ?? "") : (self.studentDetails.studentDetails?.fullName ?? "")
             self.textFieldNewValue.placeholder = "Enter Name"
             self.textFieldNewValue.keyboardType = .default
             
@@ -121,7 +125,7 @@ class EditProfileDetailsViewController: BaseViewController {
             self.viewProofBg.isHidden = false
             self.viewOtpBg.isHidden = false
             self.viewImageProofBg.isHidden = true
-            self.labelEditValue.text = self.studentDetails.studentDetails?.contact ?? ""
+            self.labelEditValue.text = isProfessorProfileView ? (self.professorProfileDetails.professorDetails?.contact ?? "") : (self.studentDetails.studentDetails?.contact ?? "")
             self.textFieldNewValue.placeholder = "Enter Mobile Number"
             self.textFieldNewValue.keyboardType = .numberPad
 
@@ -132,7 +136,7 @@ class EditProfileDetailsViewController: BaseViewController {
             self.viewProofBg.isHidden = false
             self.viewOtpBg.isHidden = false
             self.viewImageProofBg.isHidden = true
-            self.labelEditValue.text = self.studentDetails.studentDetails?.email ?? ""
+            self.labelEditValue.text = isProfessorProfileView ? (self.professorProfileDetails.professorDetails?.email): (self.studentDetails.studentDetails?.email ?? "")
             self.textFieldNewValue.placeholder = "Enter Email"
             self.textFieldNewValue.keyboardType = .emailAddress
         }
@@ -209,11 +213,11 @@ class EditProfileDetailsViewController: BaseViewController {
         }
         
         parameters["college_code"]  = "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)"
-        parameters["existing_data"] = self.studentDetails.studentDetails?.fullName
+        parameters["existing_data"] = isProfessorProfileView ? self.professorProfileDetails.professorDetails?.fName : self.studentDetails.studentDetails?.fullName
         parameters["new_data"] = self.updatedUserValue.value
         parameters["doc_size"] = 0
         let manager = NetworkHandler()
-        manager.url = URLConstants.StudentURL.updateStudentName
+        manager.url = isProfessorProfileView ? URLConstants.ProfessorURL.updateProfessorName : URLConstants.StudentURL.updateStudentName
         manager.apiPost(apiName: " Update user Name", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             if (code == 200){
@@ -245,7 +249,11 @@ class EditProfileDetailsViewController: BaseViewController {
         }
         parameters["contact_password"] = self.textfieldEnterOTP.text
         let manager = NetworkHandler()
-        manager.url = isEMailVerification ?  URLConstants.StudentURL.updateStudentEmail : URLConstants.StudentURL.updateStudentMobileNumber
+        if(isProfessorProfileView){
+            manager.url = isEMailVerification ?  URLConstants.ProfessorURL.updateProfessorEmail : URLConstants.ProfessorURL.verifyOTPForNewContact
+        }else{
+            manager.url = isEMailVerification ?  URLConstants.StudentURL.updateStudentEmail : URLConstants.StudentURL.updateStudentMobileNumber
+        }
         manager.apiPost(apiName: " verify otp ", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             if (code == 200){
@@ -279,13 +287,18 @@ class EditProfileDetailsViewController: BaseViewController {
         parameters["college_code"]  = "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)"
         if isEMailVerification{
             parameters["email"] = "\(self.updatedUserValue.value)"
-            parameters["contact"] = "\(self.studentDetails.studentDetails?.contact ?? "")"
-
+            parameters["contact"] = isEMailVerification ? "\(self.professorProfileDetails.professorDetails?.contact ?? "")" :  "\(self.studentDetails.studentDetails?.contact ?? "")"
+            
         }else{
             parameters["contact"] = "\(self.updatedUserValue.value)"
         }
         let manager = NetworkHandler()
-        manager.url = isEMailVerification ?  URLConstants.StudentURL.sendOtpForEmailUpdate : URLConstants.StudentURL.sendOtpForMobileNumberUpdate
+        if isProfessorProfileView{
+            manager.url = isEMailVerification ?  URLConstants.ProfessorURL.sendOtpForEmailUpdate : URLConstants.ProfessorURL.sendOTPForNewContact
+        }
+        else{
+            manager.url = isEMailVerification ?  URLConstants.StudentURL.sendOtpForEmailUpdate : URLConstants.StudentURL.sendOtpForMobileNumberUpdate
+        }
         manager.apiPost(apiName: " send otp ", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             if let responseCode = response["status"] as? Int,let errorMessage = response["message"] as? String{

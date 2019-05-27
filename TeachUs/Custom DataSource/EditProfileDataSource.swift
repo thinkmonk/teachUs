@@ -18,6 +18,10 @@ enum EditProfileCellType{
     case cellTypeSemester
     case cellTypeSubjectTitle
     case cellTypeSubjectList
+    case cellTypeDivision
+    case cellTypeSubjectName
+    case cellTypeProfessorCollegeName
+    case cellTypeProfessorRole
 }
 
 class EditProfileDataSource{
