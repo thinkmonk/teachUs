@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>403825214225-hv7543eeihr62lui33s426qi8ohupbtm.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.403825214225-hv7543eeihr62lui33s426qi8ohupbtm</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCYoIct36Kjn_FKFQcUuLQHsBSgztA7-l4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>403825214225</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.thinkmonk.teachus</string>
+	<key>PROJECT_ID</key>
+	<string>teachus-454cc</string>
+	<key>STORAGE_BUCKET</key>
+	<string>teachus-454cc.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:403825214225:ios:9a545fcaff4235b3</string>
+	<key>DATABASE_URL</key>
+	<string>https://teachus-454cc.firebaseio.com</string>
+</dict>
+</plist>

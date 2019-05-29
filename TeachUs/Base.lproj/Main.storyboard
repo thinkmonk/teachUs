@@ -4083,27 +4083,104 @@ Form Library</string>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="B92-pc-KZl">
-                                <rect key="frame" x="15" y="64" width="290" height="504"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h1M-sm-ySS">
+                                <rect key="frame" x="15" y="64" width="290" height="112"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vsq-PG-R6m">
+                                        <rect key="frame" x="10" y="10" width="270" height="27"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Notes Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EI4-b6-UCs">
+                                                <rect key="frame" x="5" y="5" width="260" height="17"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.73725490196078436" green="0.73725490196078436" blue="0.73725490196078436" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="EI4-b6-UCs" secondAttribute="trailing" constant="5" id="5gV-1l-5NR"/>
+                                            <constraint firstItem="EI4-b6-UCs" firstAttribute="leading" secondItem="Vsq-PG-R6m" secondAttribute="leading" constant="5" id="ffy-Qz-Qag"/>
+                                            <constraint firstAttribute="bottom" secondItem="EI4-b6-UCs" secondAttribute="bottom" constant="5" id="oeT-bS-aZE"/>
+                                            <constraint firstItem="EI4-b6-UCs" firstAttribute="top" secondItem="Vsq-PG-R6m" secondAttribute="top" constant="5" id="oog-gW-hsD"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="File:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M5I-F7-7tZ">
+                                        <rect key="frame" x="10" y="42" width="28" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ycb-2w-kEn">
+                                        <rect key="frame" x="235" y="42" width="45" height="30"/>
+                                        <state key="normal" title="Attach"/>
+                                        <connections>
+                                            <action selector="actionUploadNotes:" destination="M0q-tu-FAD" eventType="touchUpInside" id="prt-2x-lJF"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="File Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sqm-dB-Yme">
+                                        <rect key="frame" x="41" y="48" width="189" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eaG-NA-HFz">
+                                        <rect key="frame" x="10" y="77" width="270" height="30"/>
+                                        <state key="normal" title="Upload"/>
+                                        <connections>
+                                            <action selector="uploadFileToFireBase:" destination="M0q-tu-FAD" eventType="touchUpInside" id="CVj-9o-gYb"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Ycb-2w-kEn" firstAttribute="leading" secondItem="sqm-dB-Yme" secondAttribute="trailing" constant="5" id="0KF-bS-KdF"/>
+                                    <constraint firstItem="M5I-F7-7tZ" firstAttribute="leading" secondItem="Vsq-PG-R6m" secondAttribute="leading" id="5b1-ZN-NRL"/>
+                                    <constraint firstItem="sqm-dB-Yme" firstAttribute="leading" secondItem="M5I-F7-7tZ" secondAttribute="trailing" constant="3" id="8Kk-3k-aVE"/>
+                                    <constraint firstItem="eaG-NA-HFz" firstAttribute="leading" secondItem="M5I-F7-7tZ" secondAttribute="leading" id="9ds-cl-PeO"/>
+                                    <constraint firstItem="eaG-NA-HFz" firstAttribute="top" secondItem="Ycb-2w-kEn" secondAttribute="bottom" constant="5" id="IY2-Sx-3YR"/>
+                                    <constraint firstAttribute="bottom" secondItem="eaG-NA-HFz" secondAttribute="bottom" constant="5" id="TCz-W1-a7W"/>
+                                    <constraint firstItem="M5I-F7-7tZ" firstAttribute="top" secondItem="Vsq-PG-R6m" secondAttribute="bottom" constant="5" id="TKN-wp-KVW"/>
+                                    <constraint firstItem="sqm-dB-Yme" firstAttribute="centerY" secondItem="M5I-F7-7tZ" secondAttribute="centerY" id="TWh-Rd-qCO"/>
+                                    <constraint firstItem="sqm-dB-Yme" firstAttribute="centerY" secondItem="Ycb-2w-kEn" secondAttribute="centerY" id="hOR-9c-UHL"/>
+                                    <constraint firstItem="eaG-NA-HFz" firstAttribute="trailing" secondItem="Ycb-2w-kEn" secondAttribute="trailing" id="j57-D0-WTU"/>
+                                    <constraint firstItem="Ycb-2w-kEn" firstAttribute="trailing" secondItem="Vsq-PG-R6m" secondAttribute="trailing" id="lfL-5z-ycG"/>
+                                    <constraint firstItem="Vsq-PG-R6m" firstAttribute="top" secondItem="h1M-sm-ySS" secondAttribute="top" constant="10" id="mnb-zh-mJU"/>
+                                    <constraint firstAttribute="trailing" secondItem="Vsq-PG-R6m" secondAttribute="trailing" constant="10" id="py8-40-gJS"/>
+                                    <constraint firstItem="Vsq-PG-R6m" firstAttribute="leading" secondItem="h1M-sm-ySS" secondAttribute="leading" constant="10" id="uZR-2C-HLY"/>
+                                    <constraint firstItem="Ycb-2w-kEn" firstAttribute="top" secondItem="Vsq-PG-R6m" secondAttribute="bottom" constant="5" id="vRn-eQ-mYs"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="B92-pc-KZl">
+                                <rect key="frame" x="15" y="176" width="290" height="392"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="gWi-63-F6z" firstAttribute="trailing" secondItem="B92-pc-KZl" secondAttribute="trailing" constant="15" id="Fyn-Wc-Tjl"/>
+                            <constraint firstItem="B92-pc-KZl" firstAttribute="leading" secondItem="h1M-sm-ySS" secondAttribute="leading" id="15K-De-Pb5"/>
+                            <constraint firstItem="B92-pc-KZl" firstAttribute="trailing" secondItem="h1M-sm-ySS" secondAttribute="trailing" id="23S-VY-QLO"/>
                             <constraint firstItem="gWi-63-F6z" firstAttribute="bottom" secondItem="B92-pc-KZl" secondAttribute="bottom" id="Ixp-7s-L3Z"/>
-                            <constraint firstItem="B92-pc-KZl" firstAttribute="top" secondItem="gWi-63-F6z" secondAttribute="top" id="Zwz-Re-A83"/>
-                            <constraint firstItem="B92-pc-KZl" firstAttribute="leading" secondItem="gWi-63-F6z" secondAttribute="leading" constant="15" id="bg8-vO-gxg"/>
+                            <constraint firstItem="h1M-sm-ySS" firstAttribute="top" secondItem="gWi-63-F6z" secondAttribute="top" id="JSJ-7B-1yW"/>
+                            <constraint firstItem="B92-pc-KZl" firstAttribute="top" secondItem="h1M-sm-ySS" secondAttribute="bottom" id="NxA-vf-MoT"/>
+                            <constraint firstItem="gWi-63-F6z" firstAttribute="trailing" secondItem="h1M-sm-ySS" secondAttribute="trailing" constant="15" id="WUz-qn-jWk"/>
+                            <constraint firstItem="h1M-sm-ySS" firstAttribute="leading" secondItem="gWi-63-F6z" secondAttribute="leading" constant="15" id="nE2-Ra-oJR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gWi-63-F6z"/>
                     </view>
                     <connections>
+                        <outlet property="buttonAttachFile" destination="Ycb-2w-kEn" id="4Ly-vB-5Pz"/>
+                        <outlet property="buttonUploadNotes" destination="eaG-NA-HFz" id="1Vw-fp-JAZ"/>
+                        <outlet property="labelFileName" destination="sqm-dB-Yme" id="12d-jc-agV"/>
                         <outlet property="tableViewNotesDetails" destination="B92-pc-KZl" id="df3-r8-Aac"/>
+                        <outlet property="textfiledName" destination="EI4-b6-UCs" id="tSp-Xq-Nh8"/>
+                        <outlet property="viewHeaderWrapper" destination="h1M-sm-ySS" id="Mcz-Db-X94"/>
+                        <outlet property="viewTextfieldBg" destination="Vsq-PG-R6m" id="VF8-g2-9FB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ip9-gK-x9d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4776" y="11035"/>
+            <point key="canvasLocation" x="4775.625" y="11034.507042253521"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="aec-3A-wug">

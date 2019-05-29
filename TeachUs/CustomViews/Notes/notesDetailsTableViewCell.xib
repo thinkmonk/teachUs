@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="notesDetailsTableViewCellId" rowHeight="56" id="KGk-i7-Jjw" customClass="notesDetailsTableViewCell" customModule="TeachUs" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="55.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8kg-gC-aEB">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="55.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Note Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gu0-Bq-HTP">
+                                <rect key="frame" x="10" y="17.5" width="171" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mcc-1f-O4D" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
+                                <rect key="frame" x="265" y="10" width="45" height="35.5"/>
+                                <state key="normal" title="Delete"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RKe-14-xHt" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
+                                <rect key="frame" x="186" y="13" width="69" height="30"/>
+                                <state key="normal" title="Download"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="mcc-1f-O4D" firstAttribute="leading" secondItem="RKe-14-xHt" secondAttribute="trailing" constant="10" id="BtT-9R-Dqn"/>
+                            <constraint firstItem="RKe-14-xHt" firstAttribute="leading" secondItem="gu0-Bq-HTP" secondAttribute="trailing" constant="5" id="GV1-9J-fn6"/>
+                            <constraint firstItem="gu0-Bq-HTP" firstAttribute="leading" secondItem="8kg-gC-aEB" secondAttribute="leading" constant="10" id="QQm-a5-x87"/>
+                            <constraint firstItem="mcc-1f-O4D" firstAttribute="top" secondItem="8kg-gC-aEB" secondAttribute="top" constant="10" id="QvU-4Z-f75"/>
+                            <constraint firstItem="RKe-14-xHt" firstAttribute="centerY" secondItem="mcc-1f-O4D" secondAttribute="centerY" id="Yga-pJ-ubg"/>
+                            <constraint firstAttribute="trailing" secondItem="mcc-1f-O4D" secondAttribute="trailing" constant="10" id="Zit-Y2-H8i"/>
+                            <constraint firstAttribute="bottom" secondItem="mcc-1f-O4D" secondAttribute="bottom" constant="10" id="jyz-8Q-V1G"/>
+                            <constraint firstItem="gu0-Bq-HTP" firstAttribute="centerY" secondItem="RKe-14-xHt" secondAttribute="centerY" id="xai-C2-4E4"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="8kg-gC-aEB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Jhy-Au-spT"/>
+                    <constraint firstItem="8kg-gC-aEB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Z9C-6r-wYD"/>
+                    <constraint firstAttribute="bottom" secondItem="8kg-gC-aEB" secondAttribute="bottom" id="oz4-8K-MOQ"/>
+                    <constraint firstAttribute="trailing" secondItem="8kg-gC-aEB" secondAttribute="trailing" id="vDu-bA-tgA"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="buttonDeleteNotes" destination="mcc-1f-O4D" id="2AZ-Xm-4c1"/>
+                <outlet property="buttonDownloadNotes" destination="RKe-14-xHt" id="MWC-8z-BF2"/>
+                <outlet property="labelNotesTitle" destination="gu0-Bq-HTP" id="Rwe-gT-gRL"/>
+                <outlet property="viewCellWrapper" destination="8kg-gC-aEB" id="6Aq-iV-PAJ"/>
+            </connections>
+            <point key="canvasLocation" x="-91.200000000000003" y="115.14242878560721"/>
+        </tableViewCell>
+    </objects>
+</document>

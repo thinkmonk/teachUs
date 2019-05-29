@@ -77,6 +77,7 @@ public struct URLConstants{
         static let updateProfessorEmail = BaseUrl.baseURLV1 + "/professor/verify_auth_password_newemail"
         static let getNotesList = BaseUrl.baseURLV1 + "/professor/notes_list"
         static let getNotesDetails = BaseUrl.baseURLV1 + "/professor/notes_list_view"
+        static let deleteNotes = BaseUrl.baseURLV1 + "/professor/notes_delete"
     }
     
     

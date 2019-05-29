@@ -52,6 +52,8 @@
 		810FAC5B1FB7549400945DD6 /* AttendanceCountTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 810FAC591FB7549400945DD6 /* AttendanceCountTableViewCell.xib */; };
 		81165BE72233006E003EE106 /* VerifyEmail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81165BE62233006E003EE106 /* VerifyEmail.xib */; };
 		81165BE922330078003EE106 /* VerifyEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81165BE822330078003EE106 /* VerifyEmail.swift */; };
+		811BD5FF229DC03800FDFEB6 /* notesDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811BD5FD229DC03800FDFEB6 /* notesDetailsTableViewCell.swift */; };
+		811BD600229DC03800FDFEB6 /* notesDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 811BD5FE229DC03800FDFEB6 /* notesDetailsTableViewCell.xib */; };
 		811EA459223D173A00D55899 /* CollegeLogsProfessorListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811EA458223D173A00D55899 /* CollegeLogsProfessorListViewController.swift */; };
 		811EA45B223D175400D55899 /* ProfessorLogsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811EA45A223D175400D55899 /* ProfessorLogsManager.swift */; };
 		811EA45E223D17DD00D55899 /* CollegeProfessorList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811EA45D223D17DD00D55899 /* CollegeProfessorList.swift */; };
@@ -107,6 +109,7 @@
 		8161AF65222C467C001F73B5 /* ViewClassSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8161AF64222C467C001F73B5 /* ViewClassSelection.swift */; };
 		8161AF67222C5922001F73B5 /* CollegeClassManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8161AF66222C5922001F73B5 /* CollegeClassManager.swift */; };
 		8161AF69222C5B63001F73B5 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8161AF68222C5B63001F73B5 /* Array.swift */; };
+		8163DC5B229F1A8800DA95AA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8163DC5A229F1A8700DA95AA /* GoogleService-Info.plist */; };
 		8163EB0420541D38003E4B1D /* TeachUs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8163EB0220541D38003E4B1D /* TeachUs.xcdatamodeld */; };
 		8163EB0720557AD9003E4B1D /* CollegeDetails+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8163EB0520557AD9003E4B1D /* CollegeDetails+CoreDataClass.swift */; };
 		8163EB0820557AD9003E4B1D /* CollegeDetails+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8163EB0620557AD9003E4B1D /* CollegeDetails+CoreDataProperties.swift */; };
@@ -352,6 +355,8 @@
 		810FAC591FB7549400945DD6 /* AttendanceCountTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AttendanceCountTableViewCell.xib; sourceTree = "<group>"; };
 		81165BE62233006E003EE106 /* VerifyEmail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VerifyEmail.xib; sourceTree = "<group>"; };
 		81165BE822330078003EE106 /* VerifyEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyEmail.swift; sourceTree = "<group>"; };
+		811BD5FD229DC03800FDFEB6 /* notesDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = notesDetailsTableViewCell.swift; sourceTree = "<group>"; };
+		811BD5FE229DC03800FDFEB6 /* notesDetailsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = notesDetailsTableViewCell.xib; sourceTree = "<group>"; };
 		811EA458223D173A00D55899 /* CollegeLogsProfessorListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeLogsProfessorListViewController.swift; sourceTree = "<group>"; };
 		811EA45A223D175400D55899 /* ProfessorLogsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessorLogsManager.swift; sourceTree = "<group>"; };
 		811EA45D223D17DD00D55899 /* CollegeProfessorList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeProfessorList.swift; sourceTree = "<group>"; };
@@ -407,6 +412,7 @@
 		8161AF64222C467C001F73B5 /* ViewClassSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewClassSelection.swift; sourceTree = "<group>"; };
 		8161AF66222C5922001F73B5 /* CollegeClassManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeClassManager.swift; sourceTree = "<group>"; };
 		8161AF68222C5B63001F73B5 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		8163DC5A229F1A8700DA95AA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8163EB0320541D38003E4B1D /* TeachUs.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TeachUs.xcdatamodel; sourceTree = "<group>"; };
 		8163EB0520557AD9003E4B1D /* CollegeDetails+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollegeDetails+CoreDataClass.swift"; sourceTree = "<group>"; };
 		8163EB0620557AD9003E4B1D /* CollegeDetails+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollegeDetails+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -667,6 +673,7 @@
 				18A627E81F90F9870099C106 /* LaunchScreen.storyboard */,
 				8163EB0220541D38003E4B1D /* TeachUs.xcdatamodeld */,
 				18A627EB1F90F9870099C106 /* Info.plist */,
+				8163DC5A229F1A8700DA95AA /* GoogleService-Info.plist */,
 			);
 			path = TeachUs;
 			sourceTree = "<group>";
@@ -1197,6 +1204,8 @@
 			children = (
 				81A6BC01229C65B600615EDD /* SubjectNotesTableViewCell.swift */,
 				81A6BC02229C65B600615EDD /* SubjectNotesTableViewCell.xib */,
+				811BD5FD229DC03800FDFEB6 /* notesDetailsTableViewCell.swift */,
+				811BD5FE229DC03800FDFEB6 /* notesDetailsTableViewCell.xib */,
 			);
 			path = Notes;
 			sourceTree = "<group>";
@@ -1628,6 +1637,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				811BD600229DC03800FDFEB6 /* notesDetailsTableViewCell.xib in Resources */,
 				81A7D05A208B75710032A1BC /* ProfessorRatingProfileTableViewCell.xib in Resources */,
 				819BDA591FC4AD5D00DD7D2D /* TeacherDetailsTableViewCell.xib in Resources */,
 				81FFB0B51FBEE0EB00C32097 /* ViewCalenderTop.xib in Resources */,
@@ -1638,6 +1648,7 @@
 				81F78EAD1FB0DFE600A016B0 /* AttendanceCalenderTableViewCell.xib in Resources */,
 				816C5AD922351B2E00B6A7B3 /* AddRemoveAdminTableViewCell.xib in Resources */,
 				810BECDF206EDEE900F560C6 /* StudentProfileTableViewCell.xib in Resources */,
+				8163DC5B229F1A8800DA95AA /* GoogleService-Info.plist in Resources */,
 				8102FDFA22435F6200A7067B /* AttendanceDetailsHeaderTableViewCell.xib in Resources */,
 				18A627EA1F90F9870099C106 /* LaunchScreen.storyboard in Resources */,
 				8136E5AE20F7CD610080AECA /* OfflineYesNo.xib in Resources */,
@@ -1745,20 +1756,26 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1810,6 +1827,7 @@
 				81316DE32165575200820481 /* OfflineLeftMenuViewController.swift in Sources */,
 				810610C21FA660890067273E /* Connectivity.swift in Sources */,
 				81A769D120A88A7200A4A2B7 /* CollegeSyllabusTableViewCell.swift in Sources */,
+				811BD5FF229DC03800FDFEB6 /* notesDetailsTableViewCell.swift in Sources */,
 				81A7D05E208B78590032A1BC /* RatingProfessorList.swift in Sources */,
 				81E02A44207CDCB900EB6BA8 /* EventAttendanceStudentListViewController.swift in Sources */,
 				817C28A9223D50D8000E0544 /* CollegeProfSubjectDetials.swift in Sources */,

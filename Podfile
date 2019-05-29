@@ -10,7 +10,8 @@ target 'TeachUs' do
     pod 'AlamofireObjectMapper', '~> 5.0'
     pod 'AlamofireImage', '~> 3.3'
     pod 'XLPagerTabStrip', '~> 8.0'
-
+    pod 'Firebase/Core'
+    pod 'Firebase/Storage'
 
   # Pods for TeachUs
 

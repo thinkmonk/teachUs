@@ -91,6 +91,50 @@ class GlobalFunction{
                 }.resume()
         }
     }
+    
+    class func checkIfFileExisits(fileUrl:String, name:String) -> String?{
+        if let url = URL(string: fileUrl) {
+            let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+            let filePathURL = NSURL(fileURLWithPath: path)
+            if let pathComponent = filePathURL.appendingPathComponent(name) {
+                let filePath = pathComponent.path
+                let fileManager = FileManager.default
+                if fileManager.fileExists(atPath: filePath) {
+                    return filePath
+                } else {
+                    return nil
+                }
+            } else {
+                return nil
+            }
+        }
+        return nil
+    }
+    
+    
+    
+    class func downloadFileAndSaveToDisk(fileUrl:String,
+                                         customName:String,
+                                         completion:@escaping (_ success:Bool) -> Void){
+        if let url = URL(string: fileUrl) {
+            URLSession.shared.downloadTask(with: url) { location, response, error in
+                guard let location = location else {
+                    print("download error:", error ?? "")
+                    completion(false)
+                    return
+                }
+                // move the downloaded file from the temporary location url to your app documents directory
+                do {
+                    try FileManager.default.moveItem(at: location, to: self.documents.appendingPathComponent(customName))
+                    completion(true)
+                } catch {
+                    print(error.localizedDescription)
+                    completion(true)
+                }
+                }.resume()
+        }
+    }
+
 
 }
 
