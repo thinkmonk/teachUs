@@ -12,6 +12,7 @@ class CollegeSyllabusTableViewCell: UITableViewCell {
 
     @IBOutlet weak var labelSyllabusSubject: UILabel!
     @IBOutlet weak var labelSyllabusPercent: UILabel!
+    @IBOutlet weak var imageViewRightArrow: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

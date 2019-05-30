@@ -135,11 +135,6 @@ extension ProfileChangeRequestsViewController:UITableViewDelegate, UITableViewDa
     }
 }
 
-extension ProfileChangeRequestsViewController:IndicatorInfoProvider{
-    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "Request")
-    }
-}
 
 extension ProfileChangeRequestsViewController:ViewProfileRequestDetailsDelegate{
     func downloadProof() {
@@ -173,4 +168,10 @@ extension ProfileChangeRequestsViewController:ViewProfileRequestDetailsDelegate{
     }
     
     
+}
+
+extension ProfileChangeRequestsViewController:IndicatorInfoProvider{
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "Request")
+    }
 }

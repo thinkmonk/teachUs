@@ -95,7 +95,10 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
             professorRating.parentNavigationController = self.parentNavigationController            
             controllersArray.append(professorRating)
             
-
+            let studentNotesVC:StudentNotesListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.studentNotesList) as! StudentNotesListViewController
+            studentNotesVC.title = "Notes"
+            studentNotesVC.parentNavigationController = self.parentNavigationController
+            controllersArray.append(studentNotesVC)
             
             break
             

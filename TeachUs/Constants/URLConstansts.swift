@@ -51,6 +51,8 @@ public struct URLConstants{
         static let updateStudentMobileNumber = BaseUrl.baseURLV1  + "/student/verify_auth_password_newcontact"
         static let sendOtpForEmailUpdate = BaseUrl.baseURLV1  + "/student/send_auth_password_newemail"
         static let updateStudentEmail = BaseUrl.baseURLV1 + "/student/verify_auth_password_newemail"
+        static let getStudentNotesList = BaseUrl.baseURLV1 + "/student/notes_list"
+        static let getStudentNotesDetails = BaseUrl.baseURLV1 + "/student/notes_list_view"
     }
     
     struct ProfessorURL {
@@ -78,6 +80,7 @@ public struct URLConstants{
         static let getNotesList = BaseUrl.baseURLV1 + "/professor/notes_list"
         static let getNotesDetails = BaseUrl.baseURLV1 + "/professor/notes_list_view"
         static let deleteNotes = BaseUrl.baseURLV1 + "/professor/notes_delete"
+        static let uploadNotes = BaseUrl.baseURLV1 + "/professor/notes_upload"
     }
     
     
@@ -111,6 +114,9 @@ public struct URLConstants{
         static let getcollegeSubjectLogsDetals = BaseUrl.baseURLV1 + "/college/professor_subjects_logs"
         static let getProfileChangeRequests = BaseUrl.baseURLV1 + "/college/requests_data"
         static let updateRequestDetails = BaseUrl.baseURLV1 + "/college/update_data"
+        static let collegeGetNotesClassList = BaseUrl.baseURLV1 + "/college/class_subjects"
+        static let collegeNotesProfessorList = BaseUrl.baseURLV1 + "/college/subjects_notes"
+        static let collegeNotesDetail = BaseUrl.baseURLV1 + "/college/notes"
     }
     
     struct SyllabusURL {

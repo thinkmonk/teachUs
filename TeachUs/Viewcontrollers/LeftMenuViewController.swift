@@ -35,12 +35,12 @@ class LeftMenuViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
     //    var studentDataSource = ["Attendance", "Syllabus Status", "Feedback / Ratings", "Logout"]
-    var studentDataSource = ["Attendance", "Syllabus","Ratings", "Logout"]
+    var studentDataSource = ["Attendance", "Syllabus","Ratings","Notes" ,"Logout"]
     
     //    var professorDataSource = ["Attendance", "Syllabus Status", "Logs", "Logout"]
     var professorDataSource = ["Attendance", "Syllabus", "My Logs", "Notes", "Logout"]
     
-    var collegeSuperAdminDataSource = ["Attendance(Reports)","Attendance(Events)", "Syllabus Status","Add/Remove Admin","Ratings", "Logs", "Request","Logout" ]
+    var collegeSuperAdminDataSource = ["Attendance(Reports)","Attendance(Events)", "Syllabus Status","Add/Remove Admin","Ratings", "Logs","Notes" ,"Request","Logout" ]
     var collegeAdminDataSource = ["Attendance(Reports)", "Attendance(Events)", "Logout"]
     
     override func viewDidLoad() {

@@ -32,6 +32,10 @@ public struct Constants {
         static let toEditProfileDetails = "toEditProfileDetails"
         static let toProfileChangeRequestDetials = "toProfileChangeRequestDetials"
         static let toNotesDetails = "toNotesDetails"
+        static let toStudentNotesDetails = "toStudentNotesDetails"
+        static let toCollegeSubjectNotesList = "toCollegeSubjectNotesList"
+        static let toCollegeNotesDetals = "toSubjectNotesDetails"
+        
     }
     
     struct Images {
@@ -83,6 +87,7 @@ public struct Constants {
         static let CollegeLogsProfessorListViewControllerId = "CollegeLogsProfessorListViewControllerId"
         static let ProfileChangeRequestsViewControllerId = "ProfileChangeRequestsViewControllerid"
         static let ProfessorNotesSubjectListViewControllerId = "ProfessorNotesSubjectListViewControllerId"
+        static let studentNotesList = "StudentNotesListViewControllerId"
     }
     
     struct UserDefaults {

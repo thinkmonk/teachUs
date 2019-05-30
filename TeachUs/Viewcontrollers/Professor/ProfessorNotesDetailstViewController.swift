@@ -39,15 +39,19 @@ class ProfessorNotesDetailstViewController: BaseViewController {
         self.tableViewNotesDetails.dataSource = self
         self.tableViewNotesDetails.estimatedRowHeight = 20
         self.tableViewNotesDetails.rowHeight = UITableViewAutomaticDimension
+        imagePicker?.delegate = self
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.viewTextfieldBg.makeEdgesRounded()
+        self.buttonUploadNotes.roundedRedButton()
+        self.viewHeaderWrapper.makeEdgesRounded()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.viewTextfieldBg.makeEdgesRounded()
-        self.buttonUploadNotes.themeRedButton()
-        self.viewHeaderWrapper.makeEdgesRounded()
-        imagePicker?.delegate = self
     }
     
     @IBAction func actionUploadNotes(_ sender: Any) {
@@ -156,8 +160,41 @@ class ProfessorNotesDetailstViewController: BaseViewController {
         }
     }
     
-    @IBAction func uploadFileToFireBase(_ sender: UIButton){
-        // Create a root reference
+    @IBAction func actionUploadNotesToServer(_ sender:UIButton){
+        self.uploadFileToFirebase(completion: { (fileURL, fileSize, fileName)  in
+            LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+            let manager = NetworkHandler()
+            manager.url = URLConstants.ProfessorURL.uploadNotes
+            let parameters = [
+                "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+                "subject_id" :self.selectedNotesSubject.subjectID ?? "",
+                "class_id":self.selectedNotesSubject.classID ?? "",
+                "title":self.textfiledName.text ?? "",
+                "doc":fileURL.absoluteString,
+                "file_name":fileName,
+                "doc_size":fileSize
+            ]
+            manager.apiPost(apiName: "Upload nOtes", parameters:parameters, completionHandler: { (result, code, response) in
+                if let status = response["status"] as? Int, status == 200, let message = response["message"] as? String{
+                    self.showAlterWithTitle("Success", alertMessage: message)
+                    self.textfiledName.text  = ""
+                    self.labelFileName.text = "File Name"
+                    self.chosenImage = nil
+                    self.chosenFile = nil
+                    self.getNotes()
+                }
+                LoadingActivityHUD.hideProgressHUD()
+            }) { (error, code, message) in
+                print(message)
+                LoadingActivityHUD.hideProgressHUD()
+            }
+        }) { (errorMessage) in
+            self.showAlterWithTitle("Error", alertMessage: errorMessage)
+        }
+    }
+    
+    func uploadFileToFirebase(completion:@escaping(_ fileUrl:URL, _ filesize:String,_ fileName:String) -> Void,
+                              failure:@escaping(_ message:String) -> Void){
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         
         if let mobilenumber = UserManager.sharedUserManager.appUserDetails.contact{
@@ -169,11 +206,15 @@ class ProfessorNotesDetailstViewController: BaseViewController {
                 let uploadTask = fileNameRef.putData(jpedData, metadata: nil) { (metadata, error) in
                     LoadingActivityHUD.hideProgressHUD()
                     fileNameRef.downloadURL { (url, error) in
-                        guard let downloadURL = url else {
-                            // Uh-oh, an error occurred!
+                        guard let metadata = metadata else {
+                            failure("Unable to upload")
                             return
                         }
-                        print("Image Uploaded, url is \(downloadURL)")
+                        guard let downloadURL = url else {
+                            failure("Unable to upload")
+                            return
+                        }
+                        completion(downloadURL,"\(metadata.size)",fileNameRef.name)
                     }
                 }
                 uploadTask.observe(.progress) { snapshot in
@@ -189,14 +230,20 @@ class ProfessorNotesDetailstViewController: BaseViewController {
                 let uploadTask = fileNameRef.putFile(from: selectedFile, metadata: nil) { metadata, error in
                     LoadingActivityHUD.hideProgressHUD()
                     fileNameRef.downloadURL { (url, error) in
-                        if let downloadURL = url {
-                            print("download url = \(downloadURL)")
+                        guard let metadata = metadata else {
+                            failure("Unable to upload")
+                            return
                         }
+                        guard let downloadURL = url else {
+                            failure("Unable to upload")
+                            return
+                        }
+                        
                         if let errorObject = error {
-                                print("errorObject \(errorObject.localizedDescription)")
+                            print("errorObject \(errorObject.localizedDescription)")
+                            failure("Unable to upload")
                         }
-                        
-                        
+                        completion(downloadURL, "\(metadata.size)", fileNameRef.name)
                     }
                 }
                 uploadTask.observe(.progress) { snapshot in
@@ -208,7 +255,6 @@ class ProfessorNotesDetailstViewController: BaseViewController {
             }
         }
         LoadingActivityHUD.hideProgressHUD()
-        
     }
     
 }
@@ -267,6 +313,7 @@ extension ProfessorNotesDetailstViewController{
     {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
             imagePicker!.sourceType = UIImagePickerControllerSourceType.photoLibrary
+            imagePicker?.mediaTypes = ["public.image", "public.movie"]
             self.present(imagePicker!, animated: true, completion: nil)
         }else{
             self.showAlterWithTitle("Oops!", alertMessage: "Photo LIbrary Access Not Provided")
@@ -308,9 +355,32 @@ extension ProfessorNotesDetailstViewController:UIDocumentMenuDelegate,UIDocument
 extension ProfessorNotesDetailstViewController:UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     
     @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        self.chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage
-        self.chosenFile = nil
-        self.labelFileName.text = "Image selected"
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage{
+            self.chosenImage = image
+            self.chosenFile = nil
+            self.labelFileName.text = "Image selected"
+        }
+        
+        if let videoURL = info["UIImagePickerControllerMediaURL"] as? URL{
+            print("videoURL \(videoURL)")
+            
+            var fileAttributes: [FileAttributeKey : Any]? = nil
+            do {
+                fileAttributes = try FileManager.default.attributesOfItem(atPath: videoURL.path)
+            } catch let attributesError {
+                print(attributesError.localizedDescription)
+            }
+            let fileSizeNumber = fileAttributes?[.size] as? NSNumber
+            let fileSize: Int64 = fileSizeNumber?.int64Value ?? 0
+            if fileSize > 26214400{
+                self.showAlterWithTitle("ERROR", alertMessage: "File size should be less than 25mb")
+            }else{
+                self.chosenFile = videoURL
+                self.labelFileName.text = "Video selected"
+            }
+            print(String(format: "SIZE OF VIDEO: %0.2f Mb", Float(fileSize) / 1024 / 1024))
+        }
+        
         imagePicker?.dismiss(animated:true, completion: nil)
     }
     
