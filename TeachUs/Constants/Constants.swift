@@ -88,6 +88,7 @@ public struct Constants {
         static let ProfileChangeRequestsViewControllerId = "ProfileChangeRequestsViewControllerid"
         static let ProfessorNotesSubjectListViewControllerId = "ProfessorNotesSubjectListViewControllerId"
         static let studentNotesList = "StudentNotesListViewControllerId"
+        static let collegeNotesClassList = "CollegeNotesClassListViewControllerId"
     }
     
     struct UserDefaults {

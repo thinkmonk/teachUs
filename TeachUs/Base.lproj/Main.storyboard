@@ -4153,10 +4153,10 @@ Form Library</string>
             </objects>
             <point key="canvasLocation" x="3758" y="11840"/>
         </scene>
-        <!--View Controller-->
+        <!--College Notes Class List View Controller-->
         <scene sceneID="5rJ-lL-Nyt">
             <objects>
-                <viewController id="wyp-eO-IhX" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CollegeNotesClassListViewControllerId" id="wyp-eO-IhX" customClass="CollegeNotesClassListViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="unA-Bq-0ie">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4184,7 +4184,7 @@ Form Library</string>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qZ4-NQ-cO6">
                                         <rect key="frame" x="176" y="0.0" width="144" height="35"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Notes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9fO-ph-HC3">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Subjects" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9fO-ph-HC3">
                                                 <rect key="frame" x="0.0" y="9.5" width="129" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <color key="textColor" red="0.4941176471" green="0.51764705879999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -4204,12 +4204,12 @@ Form Library</string>
                                     <constraint firstAttribute="height" constant="35" id="F0M-40-DvU"/>
                                 </constraints>
                             </stackView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6Qb-Ij-Ra4">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6Qb-Ij-Ra4">
                                 <rect key="frame" x="15" y="99" width="290" height="469"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="6Qb-Ij-Ra4" firstAttribute="bottom" secondItem="ABV-Dj-8fP" secondAttribute="bottom" id="JZD-8Q-sNI"/>
                             <constraint firstItem="AzL-bR-o55" firstAttribute="top" secondItem="ABV-Dj-8fP" secondAttribute="top" id="Kmh-d7-yNS"/>
@@ -4223,6 +4223,7 @@ Form Library</string>
                     </view>
                     <navigationItem key="navigationItem" id="QKf-9k-Om9"/>
                     <connections>
+                        <outlet property="tableviewClassNotesList" destination="6Qb-Ij-Ra4" id="z9T-n1-Ba6"/>
                         <segue destination="BRo-he-fQS" kind="show" identifier="toCollegeSubjectNotesList" id="qwu-6o-s2I"/>
                     </connections>
                 </viewController>
@@ -4230,10 +4231,10 @@ Form Library</string>
             </objects>
             <point key="canvasLocation" x="3761" y="12713"/>
         </scene>
-        <!--View Controller-->
+        <!--College Notes Subject List View Controller-->
         <scene sceneID="Ybc-Tz-ZJM">
             <objects>
-                <viewController id="BRo-he-fQS" sceneMemberID="viewController">
+                <viewController id="BRo-he-fQS" customClass="CollegeNotesSubjectListViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JYQ-xD-Fdg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4244,7 +4245,7 @@ Form Library</string>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sio-a6-P45">
                                         <rect key="frame" x="0.0" y="0.0" width="176" height="35"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Class" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nxo-9O-nla">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject &amp; Lecturer Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nxo-9O-nla">
                                                 <rect key="frame" x="15" y="9.5" width="161" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <color key="textColor" red="0.4941176471" green="0.51764705879999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -4286,7 +4287,7 @@ Form Library</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="iWE-R2-SkF" firstAttribute="leading" secondItem="JZa-6R-Lan" secondAttribute="leading" constant="15" id="JO6-cR-mYQ"/>
                             <constraint firstItem="0zP-1W-a0U" firstAttribute="trailing" secondItem="JZa-6R-Lan" secondAttribute="trailing" id="JQo-V0-ure"/>
@@ -4336,7 +4337,7 @@ Form Library</string>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="QdQ-jv-g11" firstAttribute="leading" secondItem="Tqy-5E-5BG" secondAttribute="leading" constant="15" id="Auh-4g-cmk"/>
                             <constraint firstItem="Tqy-5E-5BG" firstAttribute="trailing" secondItem="QdQ-jv-g11" secondAttribute="trailing" constant="15" id="JHq-PJ-RIO"/>

@@ -152,6 +152,13 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
             }
             
             if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "1"){
+                let collegeNotesClassListVC:CollegeNotesClassListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.collegeNotesClassList) as! CollegeNotesClassListViewController
+                collegeNotesClassListVC.title = "Notes"
+                collegeNotesClassListVC.parentNavigationController = self.parentNavigationController
+                controllersArray.append(collegeNotesClassListVC)
+            }
+            
+            if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "1"){
                 let requestListVC:ProfileChangeRequestsViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.ProfileChangeRequestsViewControllerId) as! ProfileChangeRequestsViewController
                 requestListVC.title = "Request"
                 requestListVC.parentNavigationController = self.parentNavigationController

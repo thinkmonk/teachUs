@@ -12,6 +12,8 @@ import XLPagerTabStrip
 
 class CollegeNotesClassListViewController: BaseViewController {
     @IBOutlet weak var tableviewClassNotesList:UITableView!
+    var parentNavigationController : UINavigationController?
+
     let nibCell = "CollegeSyllabusTableViewCell"
     var notesClassList:NotesClass!
     var selectedClass:ClassSubject!
@@ -77,9 +79,30 @@ extension CollegeNotesClassListViewController:UITableViewDelegate, UITableViewDa
         if let notesObject = self.notesClassList?.classSubjects?[indexPath.section]{
             cell.labelSyllabusSubject.text = notesObject.classSubjectClass ?? ""
             cell.labelSyllabusPercent.text =  notesObject.totalSubject ?? ""
+            
+            if Int(notesObject.totalSubject ?? "0") == 0{
+                cell.imageViewRightArrow.isHidden = true
+                cell.isUserInteractionEnabled = false
+            }else{
+                cell.imageViewRightArrow.isHidden = false
+                cell.isUserInteractionEnabled = true
+            }
         }
         cell.selectionStyle = .none
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableviewClassNotesList.width(), height: 15))
+        headerView.backgroundColor = UIColor.clear
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if(section == 0){
+            return 0
+        }
+        return 15
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -94,6 +117,6 @@ extension CollegeNotesClassListViewController:UITableViewDelegate, UITableViewDa
 
 extension CollegeNotesClassListViewController:IndicatorInfoProvider{
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "Request")
+        return IndicatorInfo(title: "Notes")
     }
 }
