@@ -9,7 +9,7 @@
 import Foundation
 // MARK: - NotesClass
 struct NotesClass: Codable {
-    let classSubjects: [ClassSubject]?
+    var classSubjects: [ClassSubject]?
     
     enum CodingKeys: String, CodingKey {
         case classSubjects = "class_subjects"

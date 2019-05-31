@@ -22,8 +22,13 @@ extension UIImageView {
                 return
             }
             DispatchQueue.main.async(execute: { () -> Void in
-                let image = UIImage(data: data!)
-                self.image = image
+                if let image = UIImage(data: data!){
+                    self.image = image
+                }else{
+                    if let di = defaultImage {
+                        self.image = UIImage(named: di)
+                    }
+                }
             })
             
         }).resume()

@@ -65,6 +65,8 @@
 		8126312A1FB2289200CD80D6 /* AttendanceStudentListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812631281FB2289200CD80D6 /* AttendanceStudentListTableViewCell.swift */; };
 		8126312B1FB2289200CD80D6 /* AttendanceStudentListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 812631291FB2289200CD80D6 /* AttendanceStudentListTableViewCell.xib */; };
 		8126BC061FD2CB45007B6B3B /* StudentProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8126BC051FD2CB45007B6B3B /* StudentProfile.swift */; };
+		8128163222A1BDEA005DD071 /* CollegeNotesClassSuject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8128163122A1BDEA005DD071 /* CollegeNotesClassSuject.swift */; };
+		8128163422A1CD2A005DD071 /* CollegeNotesDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8128163322A1CD2A005DD071 /* CollegeNotesDetails.swift */; };
 		812B152820BAA65C00693183 /* Constraints+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812B152020BAA65B00693183 /* Constraints+.swift */; };
 		812B152920BAA65C00693183 /* Easing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812B152120BAA65B00693183 /* Easing.swift */; };
 		812B152A20BAA65C00693183 /* Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812B152220BAA65B00693183 /* Geometry.swift */; };
@@ -377,6 +379,8 @@
 		812631281FB2289200CD80D6 /* AttendanceStudentListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceStudentListTableViewCell.swift; sourceTree = "<group>"; };
 		812631291FB2289200CD80D6 /* AttendanceStudentListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AttendanceStudentListTableViewCell.xib; sourceTree = "<group>"; };
 		8126BC051FD2CB45007B6B3B /* StudentProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentProfile.swift; sourceTree = "<group>"; };
+		8128163122A1BDEA005DD071 /* CollegeNotesClassSuject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeNotesClassSuject.swift; sourceTree = "<group>"; };
+		8128163322A1CD2A005DD071 /* CollegeNotesDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeNotesDetails.swift; sourceTree = "<group>"; };
 		812B152020BAA65B00693183 /* Constraints+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Constraints+.swift"; sourceTree = "<group>"; };
 		812B152120BAA65B00693183 /* Easing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Easing.swift; sourceTree = "<group>"; };
 		812B152220BAA65B00693183 /* Geometry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geometry.swift; sourceTree = "<group>"; };
@@ -1215,6 +1219,8 @@
 				81A6BC07229C6F5100615EDD /* NotesSubjectDetails.swift */,
 				81D2774222A064DA003CFC51 /* StudentNotesSubjectList.swift */,
 				81D2774D22A077A2003CFC51 /* CollegeNotesClass.swift */,
+				8128163122A1BDEA005DD071 /* CollegeNotesClassSuject.swift */,
+				8128163322A1CD2A005DD071 /* CollegeNotesDetails.swift */,
 			);
 			path = Notes;
 			sourceTree = "<group>";
@@ -2001,6 +2007,7 @@
 				81D7CE801FAB8E5D00C4375E /* CAPSPageMenu.swift in Sources */,
 				811EA459223D173A00D55899 /* CollegeLogsProfessorListViewController.swift in Sources */,
 				8135B8952078F26A008E3E4B /* EventAttendanceListViewController.swift in Sources */,
+				8128163422A1CD2A005DD071 /* CollegeNotesDetails.swift in Sources */,
 				812CB758206FA01200D31C05 /* CALayer.swift in Sources */,
 				811EA45E223D17DD00D55899 /* CollegeProfessorList.swift in Sources */,
 				810610C01FA65FB30067273E /* LoadingActivityHUD.swift in Sources */,
@@ -2060,6 +2067,7 @@
 				81CCAE551FC806060070907A /* RatingTopicsTableViewCell.swift in Sources */,
 				81A7D062208BA7EE0032A1BC /* RatingDetails.swift in Sources */,
 				819BDA581FC4AD5D00DD7D2D /* TeacherDetailsTableViewCell.swift in Sources */,
+				8128163222A1BDEA005DD071 /* CollegeNotesClassSuject.swift in Sources */,
 				8136E5A320F7C6880080AECA /* Offline_Profile.swift in Sources */,
 				8136E5AA20F7C7F60080AECA /* OfflineUserData+CoreDataClass.swift in Sources */,
 				812B152920BAA65C00693183 /* Easing.swift in Sources */,

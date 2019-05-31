@@ -10,6 +10,11 @@ import UIKit
 
 class CollegeSubjectAndProfessorNotesTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var imageVIewProfessor: UIImageView!
+    @IBOutlet weak var labelSubjectName: UILabel!
+    @IBOutlet weak var labelNotesCount: UILabel!
+    @IBOutlet weak var labelLecturerName: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
