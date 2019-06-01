@@ -4587,8 +4587,71 @@ Form Library</string>
             </objects>
             <point key="canvasLocation" x="2783" y="12713"/>
         </scene>
+        <!--College Notice List View Controller-->
+        <scene sceneID="9Yi-Uc-zqN">
+            <objects>
+                <viewController storyboardIdentifier="CollegeNoticeListViewControllerId" id="fxZ-lN-Jfe" customClass="CollegeNoticeListViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MrT-sD-HDo">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Y1-d2-UXT">
+                                <rect key="frame" x="92.5" y="74" width="135" height="42"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                <state key="normal" title=" Add Notice" image="addEvent">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="actionAddNotice:" destination="fxZ-lN-Jfe" eventType="touchUpInside" id="gO2-Rc-XWp"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KzQ-vK-DlH">
+                                <rect key="frame" x="15" y="121" width="290" height="447"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="5Y1-d2-UXT" firstAttribute="top" secondItem="rMG-hl-xMJ" secondAttribute="top" constant="10" id="1Rr-aw-OXt"/>
+                            <constraint firstItem="5Y1-d2-UXT" firstAttribute="centerX" secondItem="MrT-sD-HDo" secondAttribute="centerX" id="BhB-Ea-vkd"/>
+                            <constraint firstItem="rMG-hl-xMJ" firstAttribute="trailing" secondItem="KzQ-vK-DlH" secondAttribute="trailing" constant="15" id="Jwe-dV-SL6"/>
+                            <constraint firstItem="KzQ-vK-DlH" firstAttribute="leading" secondItem="rMG-hl-xMJ" secondAttribute="leading" constant="15" id="OiO-cP-nU7"/>
+                            <constraint firstItem="KzQ-vK-DlH" firstAttribute="top" secondItem="5Y1-d2-UXT" secondAttribute="bottom" constant="5" id="TKF-AH-shK"/>
+                            <constraint firstItem="rMG-hl-xMJ" firstAttribute="bottom" secondItem="KzQ-vK-DlH" secondAttribute="bottom" id="us0-Ng-DH3"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="rMG-hl-xMJ"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Z2f-GL-dNd"/>
+                    <connections>
+                        <outlet property="buttonAddNotice" destination="5Y1-d2-UXT" id="3S0-wm-2Sd"/>
+                        <outlet property="tableviewNoticeList" destination="KzQ-vK-DlH" id="xu3-xB-KNu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Ow-qM-RRD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3759" y="13532"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="cG5-c2-3u2">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aaC-gp-Jig" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zUn-y7-axG">
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="fxZ-lN-Jfe" kind="relationship" relationship="rootViewController" id="urx-KO-B6v"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Uxg-9y-FxU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2784" y="13532"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="addEvent" width="20" height="20"/>
         <image name="calenderRed" width="15" height="15"/>
         <image name="clockIcon" width="64" height="70"/>
         <image name="college_default" width="114" height="114"/>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CollegeNoticeListTableViewCellId" rowHeight="159" id="KGk-i7-Jjw" customClass="CollegeNoticeListTableViewCell" customModule="TeachUs" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="162"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="161.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bjj-rS-c58">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="161.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M58-tN-iWV">
+                                <rect key="frame" x="20" y="15" width="32.5" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.16862745098039217" green="0.30588235294117649" blue="0.61176470588235299" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notice Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="711-bf-oi1">
+                                <rect key="frame" x="20" y="38" width="280" height="18"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JGU-2B-WD6">
+                                <rect key="frame" x="20" y="61" width="270" height="1"/>
+                                <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="vKH-Xw-azG"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notice Details" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xlR-0T-Rxl">
+                                <rect key="frame" x="20" y="68" width="270" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.3411764705882353" green="0.3411764705882353" blue="0.3411764705882353" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JJU-xC-0Rg" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
+                                <rect key="frame" x="20" y="91" width="61" height="28"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <state key="normal" title="Download">
+                                    <color key="titleColor" red="0.89411764705882346" green="0.26666666666666666" blue="0.18823529411764706" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Ei-zS-p0p">
+                                <rect key="frame" x="20" y="124" width="270" height="1"/>
+                                <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="Xl2-qh-fae"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notice Details" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZAB-Yj-fT0">
+                                <rect key="frame" x="20" y="133" width="285" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.52156862745098043" green="0.52156862745098043" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ZAB-Yj-fT0" secondAttribute="trailing" constant="15" id="4XW-kA-mQa"/>
+                            <constraint firstItem="M58-tN-iWV" firstAttribute="leading" secondItem="Bjj-rS-c58" secondAttribute="leading" constant="20" id="94s-eO-xfX"/>
+                            <constraint firstItem="JJU-xC-0Rg" firstAttribute="leading" secondItem="xlR-0T-Rxl" secondAttribute="leading" id="EHx-v8-KMw"/>
+                            <constraint firstAttribute="bottom" secondItem="ZAB-Yj-fT0" secondAttribute="bottom" constant="10.5" id="FTc-wS-QDW"/>
+                            <constraint firstItem="JJU-xC-0Rg" firstAttribute="top" secondItem="xlR-0T-Rxl" secondAttribute="bottom" constant="5" id="Hia-96-gI1"/>
+                            <constraint firstItem="711-bf-oi1" firstAttribute="leading" secondItem="M58-tN-iWV" secondAttribute="leading" id="Ifg-ot-hhY"/>
+                            <constraint firstAttribute="trailing" secondItem="2Ei-zS-p0p" secondAttribute="trailing" constant="30" id="LVZ-X6-0Dp"/>
+                            <constraint firstItem="2Ei-zS-p0p" firstAttribute="leading" secondItem="JJU-xC-0Rg" secondAttribute="leading" id="Omf-me-eME"/>
+                            <constraint firstAttribute="trailing" secondItem="711-bf-oi1" secondAttribute="trailing" constant="20" id="PvF-tU-jpu"/>
+                            <constraint firstItem="2Ei-zS-p0p" firstAttribute="top" secondItem="JJU-xC-0Rg" secondAttribute="bottom" constant="5" id="Vqt-pb-7s5"/>
+                            <constraint firstItem="xlR-0T-Rxl" firstAttribute="leading" secondItem="JGU-2B-WD6" secondAttribute="leading" id="bNr-ZI-Lla"/>
+                            <constraint firstItem="JGU-2B-WD6" firstAttribute="top" secondItem="711-bf-oi1" secondAttribute="bottom" constant="5" id="eTD-HL-fK0"/>
+                            <constraint firstItem="ZAB-Yj-fT0" firstAttribute="leading" secondItem="2Ei-zS-p0p" secondAttribute="leading" id="ep6-by-vDd"/>
+                            <constraint firstAttribute="trailing" secondItem="JGU-2B-WD6" secondAttribute="trailing" constant="30" id="jpt-RI-UZh"/>
+                            <constraint firstItem="M58-tN-iWV" firstAttribute="top" secondItem="Bjj-rS-c58" secondAttribute="top" constant="15" id="nsJ-Y1-v2z"/>
+                            <constraint firstItem="ZAB-Yj-fT0" firstAttribute="top" secondItem="2Ei-zS-p0p" secondAttribute="bottom" constant="8" id="pJJ-Cf-Zu1"/>
+                            <constraint firstItem="711-bf-oi1" firstAttribute="top" secondItem="M58-tN-iWV" secondAttribute="bottom" constant="5" id="txZ-67-xHz"/>
+                            <constraint firstItem="xlR-0T-Rxl" firstAttribute="top" secondItem="JGU-2B-WD6" secondAttribute="bottom" constant="6" id="uZn-1t-YUa"/>
+                            <constraint firstItem="JGU-2B-WD6" firstAttribute="leading" secondItem="711-bf-oi1" secondAttribute="leading" id="wTZ-hn-i8b"/>
+                            <constraint firstAttribute="trailing" secondItem="xlR-0T-Rxl" secondAttribute="trailing" constant="30" id="zdl-g7-wBs"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="Bjj-rS-c58" secondAttribute="trailing" id="Ss6-EE-LND"/>
+                    <constraint firstAttribute="bottom" secondItem="Bjj-rS-c58" secondAttribute="bottom" id="erl-mq-5mF"/>
+                    <constraint firstItem="Bjj-rS-c58" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="nmA-a3-b8p"/>
+                    <constraint firstItem="Bjj-rS-c58" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="zoW-XF-ynA"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="buttonDownload" destination="JJU-xC-0Rg" id="jF9-6m-zBw"/>
+                <outlet property="labelNoticeClassDetails" destination="ZAB-Yj-fT0" id="qJo-5u-eWN"/>
+                <outlet property="labelNoticeDate" destination="M58-tN-iWV" id="XTf-Fc-Hk1"/>
+                <outlet property="labelNoticeDescription" destination="xlR-0T-Rxl" id="Ayr-Vs-5QL"/>
+                <outlet property="labelNoticeTitle" destination="711-bf-oi1" id="4XV-t9-SPA"/>
+                <outlet property="viewWrapper" destination="Bjj-rS-c58" id="Ytv-95-Ced"/>
+            </connections>
+            <point key="canvasLocation" x="137.59999999999999" y="141.22938530734635"/>
+        </tableViewCell>
+    </objects>
+</document>

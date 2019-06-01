@@ -89,6 +89,7 @@ public struct Constants {
         static let ProfessorNotesSubjectListViewControllerId = "ProfessorNotesSubjectListViewControllerId"
         static let studentNotesList = "StudentNotesListViewControllerId"
         static let collegeNotesClassList = "CollegeNotesClassListViewControllerId"
+        static let collegeNoticeList = "CollegeNoticeListViewControllerId"
     }
     
     struct UserDefaults {
@@ -140,6 +141,7 @@ public struct Constants {
         static let notesListCellId = "notesListCellId"
         static let notesDetailsCellId = "notesDetailsTableViewCellId"
         static let notesProfesorListCellId = "CollegeSubjectAndProfessorNotesTableViewCellId"
+        static let collegeNoticeListCell = "CollegeNoticeListTableViewCellId"
     }
     
     struct UserTypeString {

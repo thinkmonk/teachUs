@@ -26,7 +26,9 @@ class Loader: UIView {
     }
 
     func stop(){
-        loader.stopAnimating()
+        DispatchQueue.main.async {
+            self.loader.stopAnimating()
+        }
     }
     
     class func instanceFromNib() -> UIView {

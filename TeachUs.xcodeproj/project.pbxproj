@@ -205,6 +205,11 @@
 		81B2E2DB1FC35B0600E9E852 /* DropDown+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B2E2D31FC35B0600E9E852 /* DropDown+Appearance.swift */; };
 		81B2E2DC1FC35B0600E9E852 /* DropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B2E2D41FC35B0600E9E852 /* DropDown.swift */; };
 		81B2E2DD1FC35B0600E9E852 /* DropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B2E2D51FC35B0600E9E852 /* DropDownCell.swift */; };
+		81B4E90622A2B610005AA5F7 /* CollegeNoticeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B4E90522A2B610005AA5F7 /* CollegeNoticeListViewController.swift */; };
+		81B4E90A22A2B818005AA5F7 /* CollegeNoticeListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B4E90822A2B818005AA5F7 /* CollegeNoticeListTableViewCell.swift */; };
+		81B4E90B22A2B818005AA5F7 /* CollegeNoticeListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81B4E90922A2B818005AA5F7 /* CollegeNoticeListTableViewCell.xib */; };
+		81B4E90E22A2C14E005AA5F7 /* CollegeNoticeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B4E90D22A2C14E005AA5F7 /* CollegeNoticeList.swift */; };
+		81B4E91022A2D182005AA5F7 /* CollegeNoticeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B4E90F22A2D182005AA5F7 /* CollegeNoticeDetailsViewController.swift */; };
 		81B69E7C1FA902BD0098F16D /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B69E7B1FA902BD0098F16D /* UITextField.swift */; };
 		81BC49A52299CDD800549867 /* ProfileChangeRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BC49A42299CDD800549867 /* ProfileChangeRequestsViewController.swift */; };
 		81BC49A82299D0F100549867 /* ProfileChangeRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BC49A62299D0F100549867 /* ProfileChangeRequestTableViewCell.swift */; };
@@ -526,6 +531,11 @@
 		81B2E2D31FC35B0600E9E852 /* DropDown+Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DropDown+Appearance.swift"; sourceTree = "<group>"; };
 		81B2E2D41FC35B0600E9E852 /* DropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDown.swift; sourceTree = "<group>"; };
 		81B2E2D51FC35B0600E9E852 /* DropDownCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownCell.swift; sourceTree = "<group>"; };
+		81B4E90522A2B610005AA5F7 /* CollegeNoticeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeNoticeListViewController.swift; sourceTree = "<group>"; };
+		81B4E90822A2B818005AA5F7 /* CollegeNoticeListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeNoticeListTableViewCell.swift; sourceTree = "<group>"; };
+		81B4E90922A2B818005AA5F7 /* CollegeNoticeListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollegeNoticeListTableViewCell.xib; sourceTree = "<group>"; };
+		81B4E90D22A2C14E005AA5F7 /* CollegeNoticeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeNoticeList.swift; sourceTree = "<group>"; };
+		81B4E90F22A2D182005AA5F7 /* CollegeNoticeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeNoticeDetailsViewController.swift; sourceTree = "<group>"; };
 		81B69E7B1FA902BD0098F16D /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		81BC49A42299CDD800549867 /* ProfileChangeRequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileChangeRequestsViewController.swift; sourceTree = "<group>"; };
 		81BC49A62299D0F100549867 /* ProfileChangeRequestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileChangeRequestTableViewCell.swift; sourceTree = "<group>"; };
@@ -961,6 +971,7 @@
 		813EC7691F9BA46200F11A12 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				81B4E90722A2B803005AA5F7 /* Notice */,
 				81A6BC00229C659800615EDD /* Notes */,
 				81BC49AA2299D0FB00549867 /* ProfileRequets */,
 				8102F29F228713EB007920EF /* StudentProfileDetails */,
@@ -1028,6 +1039,7 @@
 		813EC76D1F9BA4FD00F11A12 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				81B4E90C22A2C142005AA5F7 /* Notice */,
 				81A6BBFD229C632500615EDD /* Notes */,
 				81A6BBF8229C544700615EDD /* Profiles */,
 				81BC49AB2299D2B600549867 /* ProfileChangeRequest */,
@@ -1338,6 +1350,32 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		81B4E90422A2B5E0005AA5F7 /* Notice */ = {
+			isa = PBXGroup;
+			children = (
+				81B4E90522A2B610005AA5F7 /* CollegeNoticeListViewController.swift */,
+				81B4E90F22A2D182005AA5F7 /* CollegeNoticeDetailsViewController.swift */,
+			);
+			path = Notice;
+			sourceTree = "<group>";
+		};
+		81B4E90722A2B803005AA5F7 /* Notice */ = {
+			isa = PBXGroup;
+			children = (
+				81B4E90822A2B818005AA5F7 /* CollegeNoticeListTableViewCell.swift */,
+				81B4E90922A2B818005AA5F7 /* CollegeNoticeListTableViewCell.xib */,
+			);
+			path = Notice;
+			sourceTree = "<group>";
+		};
+		81B4E90C22A2C142005AA5F7 /* Notice */ = {
+			isa = PBXGroup;
+			children = (
+				81B4E90D22A2C14E005AA5F7 /* CollegeNoticeList.swift */,
+			);
+			path = Notice;
+			sourceTree = "<group>";
+		};
 		81BC49A32299C9A400549867 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1494,6 +1532,7 @@
 		81E4BCE5205E9E2B00674FD4 /* College */ = {
 			isa = PBXGroup;
 			children = (
+				81B4E90422A2B5E0005AA5F7 /* Notice */,
 				81D2774622A074C6003CFC51 /* Notes */,
 				81BC49A32299C9A400549867 /* Requests */,
 				811EA457223D171100D55899 /* CollegeLogs */,
@@ -1714,6 +1753,7 @@
 				8135B89B20790D2F008E3E4B /* EventListTableViewCell.xib in Resources */,
 				81C208521FAF4182003D366D /* ProfessorCollegeListTableViewCell.xib in Resources */,
 				18A627E71F90F9870099C106 /* Assets.xcassets in Resources */,
+				81B4E90B22A2B818005AA5F7 /* CollegeNoticeListTableViewCell.xib in Resources */,
 				81CCAE521FC805F70070907A /* RatingTitleTableViewCell.xib in Resources */,
 				81A769D220A88A7200A4A2B7 /* CollegeSyllabusTableViewCell.xib in Resources */,
 				81D76B561FC1D600005E861C /* SyllabusDetailsTableViewCell.xib in Resources */,
@@ -1926,6 +1966,7 @@
 				81D7CE841FAB8E5D00C4375E /* CAPSPageMenu+UIConfiguration.swift in Sources */,
 				81D2774A22A074F2003CFC51 /* CollegeNotesSubjectListViewController.swift in Sources */,
 				81A3585120820F2C00B93239 /* EventAttendanceManager.swift in Sources */,
+				81B4E91022A2D182005AA5F7 /* CollegeNoticeDetailsViewController.swift in Sources */,
 				8163EB0820557AD9003E4B1D /* CollegeDetails+CoreDataProperties.swift in Sources */,
 				816C5AD822351B2E00B6A7B3 /* AddRemoveAdminTableViewCell.swift in Sources */,
 				81BEA4B9224671EB009C4D79 /* ViewProfessorMailReport.swift in Sources */,
@@ -1939,6 +1980,7 @@
 				818C26081FB6FAFF002638E5 /* MarkStudentAttendance.swift in Sources */,
 				810610B71FA5F4ED0067273E /* OtpView.swift in Sources */,
 				81D7CE861FAB8E9E00C4375E /* CAPSPageMenu+Options.swift in Sources */,
+				81B4E90622A2B610005AA5F7 /* CollegeNoticeListViewController.swift in Sources */,
 				81AC9F9320AA051900DEECB1 /* CollegeSyllabusList.swift in Sources */,
 				810BECDA206ED5B000F560C6 /* CollegeSubjects.swift in Sources */,
 				819BDA521FC4A0C500DD7D2D /* TeachersRatingViewController.swift in Sources */,
@@ -2021,7 +2063,9 @@
 				812B152C20BAA65C00693183 /* FaveButton.swift in Sources */,
 				81DC5C73224614BB00D9F3B7 /* StudentAttendanceDetails.swift in Sources */,
 				81FFB0BE1FBF468000C32097 /* SyllabusChapter.swift in Sources */,
+				81B4E90A22A2B818005AA5F7 /* CollegeNoticeListTableViewCell.swift in Sources */,
 				813C0DA021EB7C7100B04E61 /* GlobalFunction.swift in Sources */,
+				81B4E90E22A2C14E005AA5F7 /* CollegeNoticeList.swift in Sources */,
 				81BC49B32299DEEC00549867 /* ViewProfileRequestDetails.swift in Sources */,
 				81A7D060208BA5D80032A1BC /* CollegeProfessorRatingDetailViewController.swift in Sources */,
 				816522BF2234177A00C1BA29 /* ViewCourseSelection.swift in Sources */,
