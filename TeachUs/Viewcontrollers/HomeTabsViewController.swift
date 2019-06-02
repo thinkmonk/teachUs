@@ -152,18 +152,20 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
             }
             
             if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "1"){
+                let collegeNoticeClassListVC:CollegeNoticeListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.collegeNoticeList) as! CollegeNoticeListViewController
+                collegeNoticeClassListVC.title = "Notice"
+                collegeNoticeClassListVC.parentNavigationController = self.parentNavigationController
+                controllersArray.append(collegeNoticeClassListVC)
+            }
+            
+            if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "1"){
                 let collegeNotesClassListVC:CollegeNotesClassListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.collegeNotesClassList) as! CollegeNotesClassListViewController
                 collegeNotesClassListVC.title = "Notes"
                 collegeNotesClassListVC.parentNavigationController = self.parentNavigationController
                 controllersArray.append(collegeNotesClassListVC)
             }
             
-            if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "1"){
-                let collegeNoticeClassListVC:CollegeNoticeListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.collegeNoticeList) as! CollegeNoticeListViewController
-                collegeNoticeClassListVC.title = "Notice"
-                collegeNoticeClassListVC.parentNavigationController = self.parentNavigationController
-                controllersArray.append(collegeNoticeClassListVC)
-            }
+           
             
             if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "1"){
                 let requestListVC:ProfileChangeRequestsViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.ProfileChangeRequestsViewControllerId) as! ProfileChangeRequestsViewController

@@ -30,7 +30,6 @@ class CollegeNoticeDetailsViewController: BaseViewController {
     
 
     @objc func downloadNotices(_ sender:ButtonWithIndexPath){
-        let cellView = tableviewNoticeDetails.cellForRow(at: sender.indexPath) as! CollegeNoticeListTableViewCell
         
         if let noticeObejct = self.selectedNotice, let fileUrl = noticeObejct.filePath{
             let imageURL = "\(fileUrl)"
@@ -44,7 +43,9 @@ class CollegeNoticeDetailsViewController: BaseViewController {
                 self.navigationController?.pushViewController(pdfVC, animated: true)
                 pdfVC.addGradientToNavBar()
             }else{// save file
-                LoadingActivityHUD.showProgressHUD(view: cellView.viewWrapper)
+                if let window = UIApplication.shared.keyWindow{
+                    LoadingActivityHUD.showProgressHUD(view: window)
+                }
                 GlobalFunction.downloadFileAndSaveToDisk(fileUrl: imageURL, customName: noticeObejct.generatedFileName ?? "TeachUs\(Date())") { (success) in
                     LoadingActivityHUD.hideProgressHUD()
                     DispatchQueue.main.async {
@@ -53,7 +54,6 @@ class CollegeNoticeDetailsViewController: BaseViewController {
                 }
             }
         }
-        #error ("You have to create view in xib and assign class to it, also passs notice object from listviewcontroller to details viewcontroller")
     }
     
     
@@ -80,7 +80,6 @@ extension CollegeNoticeDetailsViewController:UITableViewDelegate, UITableViewDat
             cell.buttonDownload.addTarget(self, action: #selector(CollegeNoticeListViewController.downloadNotices(_:)), for: .touchUpInside)
         }
         cell.selectionStyle = .none
-        cell.accessoryType = .disclosureIndicator
         return cell
     }
     

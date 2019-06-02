@@ -33,7 +33,9 @@ public class LoadingActivityHUD {
     
     class func hideProgressHUD(){
         loaderView.stop()
-        loaderView.removeFromSuperview()
+        DispatchQueue.main.async {
+            loaderView.removeFromSuperview()
+        }
     }
 }
 

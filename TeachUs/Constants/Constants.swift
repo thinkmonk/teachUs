@@ -35,6 +35,8 @@ public struct Constants {
         static let toStudentNotesDetails = "toStudentNotesDetails"
         static let toCollegeSubjectNotesList = "toCollegeSubjectNotesList"
         static let toCollegeNotesDetals = "toSubjectNotesDetails"
+        static let toNoticeDetails = "toNoticeDetails"
+
         
     }
     

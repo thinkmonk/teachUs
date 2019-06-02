@@ -16,6 +16,7 @@ class CollegeNoticeListViewController: BaseViewController {
     @IBOutlet weak var buttonAddNotice: UIButton!
     @IBOutlet weak var tableviewNoticeList: UITableView!
     var notesList:CollegeNoticeList?
+    var selectedNotice:Notice?
     var nibCell = "CollegeNoticeListTableViewCell"
     
     override func viewDidLoad() {
@@ -60,7 +61,6 @@ class CollegeNoticeListViewController: BaseViewController {
     }
     
     @objc func downloadNotices(_ sender:ButtonWithIndexPath){
-        let cellView = tableviewNoticeList.cellForRow(at: sender.indexPath) as! CollegeNoticeListTableViewCell
 
         if let noticeObejct = self.notesList?.notices?[sender.indexPath.section], let fileUrl = noticeObejct.filePath{
             let imageURL = "\(fileUrl)"
@@ -74,7 +74,9 @@ class CollegeNoticeListViewController: BaseViewController {
                 self.navigationController?.pushViewController(pdfVC, animated: true)
                 pdfVC.addGradientToNavBar()
             }else{// save file
-                LoadingActivityHUD.showProgressHUD(view: cellView.viewWrapper)
+                if let window = UIApplication.shared.keyWindow{
+                    LoadingActivityHUD.showProgressHUD(view: window)
+                }
                 GlobalFunction.downloadFileAndSaveToDisk(fileUrl: imageURL, customName: noticeObejct.generatedFileName ?? "TeachUs\(Date())") { (success) in
                     LoadingActivityHUD.hideProgressHUD()
                     DispatchQueue.main.async {
@@ -85,7 +87,13 @@ class CollegeNoticeListViewController: BaseViewController {
         }
     }
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Constants.segues.toNoticeDetails{
+            if let destinationVC = segue.destination as? CollegeNoticeDetailsViewController{
+                destinationVC.selectedNotice = self.selectedNotice
+            }
+        }
+    }
     
     @IBAction func actionAddNotice(_ sender: Any) {
         
@@ -121,6 +129,13 @@ extension CollegeNoticeListViewController:UITableViewDelegate, UITableViewDataSo
         let headerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableviewNoticeList.width(), height: 15))
         headerView.backgroundColor = UIColor.clear
         return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let noticeObject = self.notesList?.notices?[indexPath.section]{
+            self.selectedNotice = noticeObject
+            self.performSegue(withIdentifier: Constants.segues.toNoticeDetails, sender: self)
+        }
     }
     
 }

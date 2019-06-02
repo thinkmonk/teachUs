@@ -389,7 +389,7 @@ extension EditProfileDetailsViewController{
             imagePicker!.sourceType = UIImagePickerControllerSourceType.photoLibrary
             self.present(imagePicker!, animated: true, completion: nil)
         }else{
-            self.showAlterWithTitle("Oops!", alertMessage: "Photo LIbrary Access Not Provided")
+            self.showAlterWithTitle("Oops!", alertMessage: "Photo Library Access Not Provided")
         }
     }
     
