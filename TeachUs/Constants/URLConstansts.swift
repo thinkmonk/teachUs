@@ -53,6 +53,7 @@ public struct URLConstants{
         static let updateStudentEmail = BaseUrl.baseURLV1 + "/student/verify_auth_password_newemail"
         static let getStudentNotesList = BaseUrl.baseURLV1 + "/student/notes_list"
         static let getStudentNotesDetails = BaseUrl.baseURLV1 + "/student/notes_list_view"
+        static let getStudentNotice = BaseUrl.baseURLV1 + "/student/notices"
     }
     
     struct ProfessorURL {
@@ -81,6 +82,7 @@ public struct URLConstants{
         static let getNotesDetails = BaseUrl.baseURLV1 + "/professor/notes_list_view"
         static let deleteNotes = BaseUrl.baseURLV1 + "/professor/notes_delete"
         static let uploadNotes = BaseUrl.baseURLV1 + "/professor/notes_upload"
+        static let getNotice = BaseUrl.baseURLV1 + "/professor/notices"
     }
     
     

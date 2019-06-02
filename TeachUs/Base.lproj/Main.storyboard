@@ -4597,6 +4597,9 @@ Form Library</string>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Y1-d2-UXT">
                                 <rect key="frame" x="92.5" y="74" width="135" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="Fha-qk-hqp"/>
+                                </constraints>
                                 <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                 <state key="normal" title=" Add Notice" image="addEvent">
                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -4625,6 +4628,7 @@ Form Library</string>
                     <navigationItem key="navigationItem" id="Z2f-GL-dNd"/>
                     <connections>
                         <outlet property="buttonAddNotice" destination="5Y1-d2-UXT" id="3S0-wm-2Sd"/>
+                        <outlet property="layoutAddbuttonHeight" destination="Fha-qk-hqp" id="9Fg-MB-eDx"/>
                         <outlet property="tableviewNoticeList" destination="KzQ-vK-DlH" id="xu3-xB-KNu"/>
                         <segue destination="Cbz-fX-W1o" kind="show" identifier="toNoticeDetails" id="RPr-eR-LM5"/>
                     </connections>

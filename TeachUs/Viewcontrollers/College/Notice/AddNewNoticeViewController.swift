@@ -172,7 +172,7 @@ class AddNewNoticeViewController: BaseViewController {
         if let mobilenumber = UserManager.sharedUserManager.appUserDetails.contact{
             
             let storageRef = storage.reference()
-            let filePathReference = storageRef.child("\(mobilenumber)/Notes/")
+            let filePathReference = storageRef.child("\(mobilenumber)/Notice/")
             if let selectedImage = self.chosenImage,let jpedData = UIImageJPEGRepresentation(selectedImage, 1){
                 let fileNameRef = filePathReference.child("\(Date().timeIntervalSince1970).jpg")
                 let uploadTask = fileNameRef.putData(jpedData, metadata: nil) { (metadata, error) in

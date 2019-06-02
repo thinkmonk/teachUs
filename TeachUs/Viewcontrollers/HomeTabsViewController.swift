@@ -67,6 +67,12 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
             professorLogsListVC.parentNavigationController = self.parentNavigationController
             controllersArray.append(professorLogsListVC)
             
+            let collegeNoticeClassListVC:CollegeNoticeListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.collegeNoticeList) as! CollegeNoticeListViewController
+            collegeNoticeClassListVC.title = "Notice"
+            collegeNoticeClassListVC.parentNavigationController = self.parentNavigationController
+            controllersArray.append(collegeNoticeClassListVC)
+
+            
             let professorNotes:ProfessorNotesSubjectListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.ProfessorNotesSubjectListViewControllerId) as! ProfessorNotesSubjectListViewController
             professorNotes.title = "Notes"
             professorNotes.parentNavigationController = self.parentNavigationController
@@ -94,6 +100,12 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
             professorRating.title = "Rating"
             professorRating.parentNavigationController = self.parentNavigationController            
             controllersArray.append(professorRating)
+            
+            let collegeNoticeClassListVC:CollegeNoticeListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.collegeNoticeList) as! CollegeNoticeListViewController
+            collegeNoticeClassListVC.title = "Notice"
+            collegeNoticeClassListVC.parentNavigationController = self.parentNavigationController
+            controllersArray.append(collegeNoticeClassListVC)
+
             
             let studentNotesVC:StudentNotesListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.studentNotesList) as! StudentNotesListViewController
             studentNotesVC.title = "Notes"

@@ -15,6 +15,7 @@ class CollegeNoticeListViewController: BaseViewController {
     
     @IBOutlet weak var buttonAddNotice: UIButton!
     @IBOutlet weak var tableviewNoticeList: UITableView!
+    @IBOutlet weak var layoutAddbuttonHeight: NSLayoutConstraint!
     var notesList:CollegeNoticeList?
     var selectedNotice:Notice?
     var nibCell = "CollegeNoticeListTableViewCell"
@@ -28,6 +29,14 @@ class CollegeNoticeListViewController: BaseViewController {
         self.tableviewNoticeList.dataSource = self
         self.tableviewNoticeList.estimatedRowHeight  = 40
         self.tableviewNoticeList.rowHeight = UITableViewAutomaticDimension
+        switch  UserManager.sharedUserManager.user!{
+        case .College:
+            self.buttonAddNotice.isHidden = false
+            self.layoutAddbuttonHeight.constant = 40
+        case .Professor,.Student:
+            self.buttonAddNotice.isHidden = true
+            self.layoutAddbuttonHeight.constant = 0
+        }
         self.getNoticeList()
     }
     
@@ -39,11 +48,19 @@ class CollegeNoticeListViewController: BaseViewController {
     func getNoticeList(){
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()
-        manager.url = URLConstants.CollegeURL.collegeNoticeList
+        switch  UserManager.sharedUserManager.user!{
+        case .College:
+            manager.url = URLConstants.CollegeURL.collegeNoticeList
+        case .Professor:
+            manager.url = URLConstants.ProfessorURL.getNotice
+        case .Student:
+            manager.url = URLConstants.StudentURL.getStudentNotice
+        }
+
         let parameters = [
             "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
         ]
-        manager.apiPostWithDataResponse(apiName: "Get Student Notes List", parameters:parameters, completionHandler: { (result, code, response) in
+        manager.apiPostWithDataResponse(apiName: "Get Notice List", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             do{
                 let decoder = JSONDecoder()
