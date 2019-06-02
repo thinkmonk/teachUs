@@ -11,6 +11,7 @@ public struct URLConstants{
 
     struct AppUrl {
         static let baseURL = "BASE_URL"
+        static let baseURLHome = "BASE_URL_HOME"
         static let baseUrlV1 = "BASE_URL_V1"
     }
     
@@ -23,6 +24,7 @@ public struct URLConstants{
 //        static let baseURL = "http://zilliotech.com/api/teachus" //v2
 //        static let baseURL = "http://ec2-34-215-84-223.us-west-2.compute.amazonaws.com:8081/teachus"  //v1`
         //http://teachusedumation.com
+        static let baseURLHome = Bundle.main.object(forInfoDictionaryKey: AppUrl.baseURLHome) as! String
         static let baseURL = Bundle.main.object(forInfoDictionaryKey: AppUrl.baseURL) as! String
         static var baseURLV1 = (Bundle.main.object(forInfoDictionaryKey: AppUrl.baseUrlV1) as? String)!
 
@@ -36,6 +38,7 @@ public struct URLConstants{
         static let verifyOtp = BaseUrl.baseURLV1 + "/auth/verifyotp"
         static let userDetails = BaseUrl.baseURLV1 + "/login/user_details"
         static let updateUserProfile = BaseUrl.baseURLV1 + "/login/update_user_profile"
+        static let saveDeviceToken = BaseUrl.baseURLV1 + "/auth/notification_save_token"
     }
     
     struct StudentURL {
@@ -54,6 +57,7 @@ public struct URLConstants{
         static let getStudentNotesList = BaseUrl.baseURLV1 + "/student/notes_list"
         static let getStudentNotesDetails = BaseUrl.baseURLV1 + "/student/notes_list_view"
         static let getStudentNotice = BaseUrl.baseURLV1 + "/student/notices"
+        static let getNotificationList = BaseUrl.baseURLV1 + "/student/notifications"
     }
     
     struct ProfessorURL {
@@ -83,6 +87,7 @@ public struct URLConstants{
         static let deleteNotes = BaseUrl.baseURLV1 + "/professor/notes_delete"
         static let uploadNotes = BaseUrl.baseURLV1 + "/professor/notes_upload"
         static let getNotice = BaseUrl.baseURLV1 + "/professor/notices"
+        static let getNotificationList = BaseUrl.baseURLV1 + "/professor/notifications"
     }
     
     
@@ -121,6 +126,7 @@ public struct URLConstants{
         static let collegeNotesDetail = BaseUrl.baseURLV1 + "/college/notes"
         static let collegeNoticeList = BaseUrl.baseURLV1 + "/college/notices"
         static let collegeUploadNotice = BaseUrl.baseURLV1 + "/college/notice_upload"
+        static let getcollegeNotificationList = BaseUrl.baseURLV1 + "/college/notifications"
     }
     
     struct SyllabusURL {
@@ -134,5 +140,6 @@ public struct URLConstants{
     struct TeachUsAppStoreLink {
         static let storeLink = "https://itunes.apple.com/in/app/teach-us/id1392613722?mt=8"
     }
+
 
 }

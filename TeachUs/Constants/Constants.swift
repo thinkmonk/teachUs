@@ -36,6 +36,8 @@ public struct Constants {
         static let toCollegeSubjectNotesList = "toCollegeSubjectNotesList"
         static let toCollegeNotesDetals = "toSubjectNotesDetails"
         static let toNoticeDetails = "toNoticeDetails"
+        
+        static let toNotificationDetails = "toNotificationDetails"
 
         
     }
@@ -92,6 +94,7 @@ public struct Constants {
         static let studentNotesList = "StudentNotesListViewControllerId"
         static let collegeNotesClassList = "CollegeNotesClassListViewControllerId"
         static let collegeNoticeList = "CollegeNoticeListViewControllerId"
+        static let collegeNotificationList = "CollegeNotificationListViewControllerId"
     }
     
     struct UserDefaults {
@@ -103,6 +106,7 @@ public struct Constants {
         static let collegeName = "collegeName"
         static let roleName = "roleName"
         static let offlineCollegeName = "offlineCollegeName"
+        static let deviceToken = "deviceToken"
     }
     
     struct NumberConstants {
@@ -144,6 +148,7 @@ public struct Constants {
         static let notesDetailsCellId = "notesDetailsTableViewCellId"
         static let notesProfesorListCellId = "CollegeSubjectAndProfessorNotesTableViewCellId"
         static let collegeNoticeListCell = "CollegeNoticeListTableViewCellId"
+        static let notificationCellId = "NotificationListTableViewCellId"
     }
     
     struct UserTypeString {

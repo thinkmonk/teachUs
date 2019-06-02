@@ -71,6 +71,12 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
             collegeNoticeClassListVC.title = "Notice"
             collegeNoticeClassListVC.parentNavigationController = self.parentNavigationController
             controllersArray.append(collegeNoticeClassListVC)
+            
+            let collegeNotificationListVC:CollegeNotificationListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.collegeNotificationList) as! CollegeNotificationListViewController
+            collegeNotificationListVC.title = "Notification"
+            collegeNotificationListVC.parentNavigationController = self.parentNavigationController
+            controllersArray.append(collegeNotificationListVC)
+
 
             
             let professorNotes:ProfessorNotesSubjectListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.ProfessorNotesSubjectListViewControllerId) as! ProfessorNotesSubjectListViewController
@@ -105,6 +111,13 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
             collegeNoticeClassListVC.title = "Notice"
             collegeNoticeClassListVC.parentNavigationController = self.parentNavigationController
             controllersArray.append(collegeNoticeClassListVC)
+            
+            
+            let collegeNotificationListVC:CollegeNotificationListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.collegeNotificationList) as! CollegeNotificationListViewController
+            collegeNotificationListVC.title = "Notification"
+            collegeNotificationListVC.parentNavigationController = self.parentNavigationController
+            controllersArray.append(collegeNotificationListVC)
+
 
             
             let studentNotesVC:StudentNotesListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.studentNotesList) as! StudentNotesListViewController
@@ -169,6 +182,15 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
                 collegeNoticeClassListVC.parentNavigationController = self.parentNavigationController
                 controllersArray.append(collegeNoticeClassListVC)
             }
+            
+            
+            if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "1"){
+                let collegeNotificationListVC:CollegeNotificationListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.collegeNotificationList) as! CollegeNotificationListViewController
+                collegeNotificationListVC.title = "Notification"
+                collegeNotificationListVC.parentNavigationController = self.parentNavigationController
+                controllersArray.append(collegeNotificationListVC)
+            }
+            
             
             if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "1"){
                 let collegeNotesClassListVC:CollegeNotesClassListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.collegeNotesClassList) as! CollegeNotesClassListViewController

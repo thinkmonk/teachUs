@@ -139,6 +139,12 @@
 		81930B301FCDD7700002CDBE /* TeacherProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81930B2F1FCDD7700002CDBE /* TeacherProfile.swift */; };
 		81930B321FCDE2590002CDBE /* ProfessorLogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81930B311FCDE2590002CDBE /* ProfessorLogs.swift */; };
 		8194881E22A421CC0006CB86 /* AddNewNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8194881D22A421CC0006CB86 /* AddNewNoticeViewController.swift */; };
+		8194882122A462E40006CB86 /* CollegeNotificationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8194882022A462E40006CB86 /* CollegeNotificationListViewController.swift */; };
+		8194882322A462F40006CB86 /* CollegeNotificationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8194882222A462F40006CB86 /* CollegeNotificationDetailsViewController.swift */; };
+		8194882622A465210006CB86 /* CollegeNotificationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8194882522A465210006CB86 /* CollegeNotificationList.swift */; };
+		8194882A22A467830006CB86 /* NotificationListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8194882822A467830006CB86 /* NotificationListTableViewCell.swift */; };
+		8194882B22A467830006CB86 /* NotificationListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8194882922A467830006CB86 /* NotificationListTableViewCell.xib */; };
+		8194882D22A478440006CB86 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8194882C22A478440006CB86 /* UserNotifications.framework */; };
 		8194C30F1FC60DCA0077DB7B /* MarkRatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8194C30E1FC60DCA0077DB7B /* MarkRatingViewController.swift */; };
 		819AADEF1FB6DBBD0061C471 /* DefaultSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819AADED1FB6DBBD0061C471 /* DefaultSelectionTableViewCell.swift */; };
 		819AADF01FB6DBBD0061C471 /* DefaultSelectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 819AADEE1FB6DBBD0061C471 /* DefaultSelectionTableViewCell.xib */; };
@@ -465,6 +471,12 @@
 		81930B2F1FCDD7700002CDBE /* TeacherProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherProfile.swift; sourceTree = "<group>"; };
 		81930B311FCDE2590002CDBE /* ProfessorLogs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessorLogs.swift; sourceTree = "<group>"; };
 		8194881D22A421CC0006CB86 /* AddNewNoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewNoticeViewController.swift; sourceTree = "<group>"; };
+		8194882022A462E40006CB86 /* CollegeNotificationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeNotificationListViewController.swift; sourceTree = "<group>"; };
+		8194882222A462F40006CB86 /* CollegeNotificationDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeNotificationDetailsViewController.swift; sourceTree = "<group>"; };
+		8194882522A465210006CB86 /* CollegeNotificationList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeNotificationList.swift; sourceTree = "<group>"; };
+		8194882822A467830006CB86 /* NotificationListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationListTableViewCell.swift; sourceTree = "<group>"; };
+		8194882922A467830006CB86 /* NotificationListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationListTableViewCell.xib; sourceTree = "<group>"; };
+		8194882C22A478440006CB86 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		8194C30E1FC60DCA0077DB7B /* MarkRatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkRatingViewController.swift; sourceTree = "<group>"; };
 		819AADED1FB6DBBD0061C471 /* DefaultSelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSelectionTableViewCell.swift; sourceTree = "<group>"; };
 		819AADEE1FB6DBBD0061C471 /* DefaultSelectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DefaultSelectionTableViewCell.xib; sourceTree = "<group>"; };
@@ -640,6 +652,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8194882D22A478440006CB86 /* UserNotifications.framework in Frameworks */,
 				620B195E52A0E8351C79F40C /* Pods_TeachUs.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -733,6 +746,7 @@
 		6D4DE5D1E6982730F8093DAE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8194882C22A478440006CB86 /* UserNotifications.framework */,
 				0F9BB4C9AF04CE7C6C6179D7 /* Pods_TeachUs.framework */,
 				0C6207727D93C64473349FD7 /* Pods_TeachUsTests.framework */,
 				EC92E78285678FBDD7A6B3D6 /* Pods_TeachUsUITests.framework */,
@@ -973,6 +987,7 @@
 		813EC7691F9BA46200F11A12 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				8194882722A467690006CB86 /* Notificaiton */,
 				81B4E90722A2B803005AA5F7 /* Notice */,
 				81A6BC00229C659800615EDD /* Notes */,
 				81BC49AA2299D0FB00549867 /* ProfileRequets */,
@@ -1041,6 +1056,7 @@
 		813EC76D1F9BA4FD00F11A12 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				8194882422A465130006CB86 /* Notificaion */,
 				81B4E90C22A2C142005AA5F7 /* Notice */,
 				81A6BBFD229C632500615EDD /* Notes */,
 				81A6BBF8229C544700615EDD /* Profiles */,
@@ -1178,6 +1194,32 @@
 				81CCAE541FC806060070907A /* RatingTopicsTableViewCell.xib */,
 			);
 			path = Ratings;
+			sourceTree = "<group>";
+		};
+		8194881F22A462CA0006CB86 /* Notifictions */ = {
+			isa = PBXGroup;
+			children = (
+				8194882022A462E40006CB86 /* CollegeNotificationListViewController.swift */,
+				8194882222A462F40006CB86 /* CollegeNotificationDetailsViewController.swift */,
+			);
+			path = Notifictions;
+			sourceTree = "<group>";
+		};
+		8194882422A465130006CB86 /* Notificaion */ = {
+			isa = PBXGroup;
+			children = (
+				8194882522A465210006CB86 /* CollegeNotificationList.swift */,
+			);
+			path = Notificaion;
+			sourceTree = "<group>";
+		};
+		8194882722A467690006CB86 /* Notificaiton */ = {
+			isa = PBXGroup;
+			children = (
+				8194882822A467830006CB86 /* NotificationListTableViewCell.swift */,
+				8194882922A467830006CB86 /* NotificationListTableViewCell.xib */,
+			);
+			path = Notificaiton;
 			sourceTree = "<group>";
 		};
 		819AADF11FB6F83D0061C471 /* CollegeSubjectList */ = {
@@ -1535,6 +1577,7 @@
 		81E4BCE5205E9E2B00674FD4 /* College */ = {
 			isa = PBXGroup;
 			children = (
+				8194881F22A462CA0006CB86 /* Notifictions */,
 				81B4E90422A2B5E0005AA5F7 /* Notice */,
 				81D2774622A074C6003CFC51 /* Notes */,
 				81BC49A32299C9A400549867 /* Requests */,
@@ -1744,6 +1787,7 @@
 				18A627EA1F90F9870099C106 /* LaunchScreen.storyboard in Resources */,
 				8136E5AE20F7CD610080AECA /* OfflineYesNo.xib in Resources */,
 				819216EB1FB81BA6009B56C0 /* ViewNumberPicker.xib in Resources */,
+				8194882B22A467830006CB86 /* NotificationListTableViewCell.xib in Resources */,
 				81BC49B12299DBCB00549867 /* RequestDetails.xib in Resources */,
 				81E3E3B0207778E7002CFC1D /* AttendanceReport.xib in Resources */,
 				81D2775222A07AD5003CFC51 /* CollegeSubjectAndProfessorNotesTableViewCell.xib in Resources */,
@@ -1919,6 +1963,8 @@
 				81E6740A20531B4C00321257 /* UserDetails+CoreDataClass.swift in Sources */,
 				8135B89D207911CE008E3E4B /* Event.swift in Sources */,
 				81316DE32165575200820481 /* OfflineLeftMenuViewController.swift in Sources */,
+				8194882122A462E40006CB86 /* CollegeNotificationListViewController.swift in Sources */,
+				8194882322A462F40006CB86 /* CollegeNotificationDetailsViewController.swift in Sources */,
 				810610C21FA660890067273E /* Connectivity.swift in Sources */,
 				81A769D120A88A7200A4A2B7 /* CollegeSyllabusTableViewCell.swift in Sources */,
 				811BD5FF229DC03800FDFEB6 /* notesDetailsTableViewCell.swift in Sources */,
@@ -1928,6 +1974,7 @@
 				8185E3422058456500752F81 /* UIImage.swift in Sources */,
 				81727B901F9E6EB1006433E8 /* Notification.swift in Sources */,
 				81D7CE7F1FAB8E5D00C4375E /* CAPSPageMenuConfiguration.swift in Sources */,
+				8194882A22A467830006CB86 /* NotificationListTableViewCell.swift in Sources */,
 				81A6BC06229C6D8300615EDD /* ProfessorNotesDetailstViewController.swift in Sources */,
 				81D7CE981FAB98DB00C4375E /* ProfessorLogsListViewController.swift in Sources */,
 				81CCAE5A1FC99C170070907A /* UIImageView.swift in Sources */,
@@ -1988,6 +2035,7 @@
 				810BECDA206ED5B000F560C6 /* CollegeSubjects.swift in Sources */,
 				819BDA521FC4A0C500DD7D2D /* TeachersRatingViewController.swift in Sources */,
 				81E4BCEB205EA47900674FD4 /* CollegeAttendanceList.swift in Sources */,
+				8194882622A465210006CB86 /* CollegeNotificationList.swift in Sources */,
 				81F78EAC1FB0DFE600A016B0 /* AttendanceCalenderTableViewCell.swift in Sources */,
 				81ACF7F520851EAC00167203 /* Admin.swift in Sources */,
 				81AE8A061F9FC37B00D49749 /* BaseViewController.swift in Sources */,
@@ -2299,7 +2347,8 @@
 			baseConfigurationReference = ADA58029E3089D434D630F56 /* Pods-TeachUs.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BASE_URL = "http://teachusedumation.com/api_uat";
+				BASE_URL = "$(BASE_URL_HOME)/api_uat";
+				BASE_URL_HOME = "http://teachusedumation.com";
 				BASE_URL_V1 = "$(BASE_URL)/teachus";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = TeachUs/TeachUs.entitlements;
@@ -2326,7 +2375,8 @@
 			baseConfigurationReference = 817553511B457FEB4E645FC1 /* Pods-TeachUs.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BASE_URL = "http://teachusedumation.com/api";
+				BASE_URL = "$(BASE_URL_HOME)/api";
+				BASE_URL_HOME = "http://teachusedumation.com";
 				BASE_URL_V1 = "$(BASE_URL)/teachus";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = TeachUs/TeachUs.entitlements;

@@ -216,4 +216,23 @@ class BaseViewController: UIViewController {
         }
     }
     
+    func setUserAccessToken(){
+        let manager = NetworkHandler()
+        manager.url = URLConstants.Login.saveDeviceToken
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        let parameters:[String:Any] = ["device_token":"\(GlobalFunction.getDeviceToken())"]
+        manager.apiPost(apiName: "Set user's device token", parameters:parameters, completionHandler: { (result, code, response) in
+            LoadingActivityHUD.hideProgressHUD()
+            if(code == 200){
+                
+            }
+            else{
+
+            }
+        }) { (error, code, message) in
+            LoadingActivityHUD.hideProgressHUD()
+            print(message)
+        }
+    }
+    
 }

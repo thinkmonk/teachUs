@@ -134,7 +134,19 @@ class GlobalFunction{
                 }.resume()
         }
     }
-
+    
+    class func setDeviceToken(_ token:String){
+        UserDefaults.standard.set(token, forKey: Constants.UserDefaults.deviceToken)
+        UserDefaults.standard.synchronize()
+    }
+    
+    class func getDeviceToken() -> String {
+        guard let token = UserDefaults.standard.value(forKey: Constants.UserDefaults.deviceToken) as? String else {
+            //            return "Zmlyc3ROYW1lPURldmVuZHJhLG1pZGRsZU5hbWU9QSxsYXN0TmFtZT1GYWRuYXZpcyxyb2xsPVBST0ZFU1NPUixpZD0x"
+            return ""
+        }
+        return token
+    }
 
 }
 
