@@ -53,6 +53,7 @@ public struct Constants {
         static let collegeDefault = "college_default"
         static let calendarWhite = "calender"
         static let defaultMale = "defaule_male"
+        static let leftMenuTopView = "left_menu_topView"
     }
     
     struct  colors {

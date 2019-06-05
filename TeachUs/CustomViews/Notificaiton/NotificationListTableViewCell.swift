@@ -28,7 +28,10 @@ class NotificationListTableViewCell: UITableViewCell {
     func setUpCell(notificationObj:NotificationList){
         if let subUrl = notificationObj.filePath, let fileName = notificationObj.generatedFileName{
             let imageURl = URLConstants.BaseUrl.baseURLHome + subUrl + "\(fileName)"
-            self.imageViewNotificationImage.imageFromServerURL(urlString: imageURl, defaultImage: nil)
+            print("Notification image URL = \(imageURl)")
+            DispatchQueue.main.async {
+                self.imageViewNotificationImage.imageFromServerURL(urlString: imageURl, defaultImage: Constants.Images.leftMenuTopView)
+            }
         }
         self.labelDate.text = notificationObj.updatedBy?.getDateFromString()
         self.labelNotificationTitle.text = notificationObj.title ?? ""

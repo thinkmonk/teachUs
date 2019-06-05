@@ -101,7 +101,7 @@ class LogsDetailViewController: BaseViewController {
                 }
             }
             
-            self.arrayLogsDetails.sort(by: { ($0.lectureDate.convertToDate()!) > ($1.lectureDate.convertToDate()!) })
+            self.arrayLogsDetails.sort(by: { ($0.lectureDate.convertToDate()!) < ($1.lectureDate.convertToDate()!) })
             self.makeDataSource()
             self.showTableView()
         }) { (success, code, message) in
@@ -293,7 +293,7 @@ extension LogsDetailViewController:UITableViewDelegate, UITableViewDataSource{
         let cellDataSource = arrayDataSource[indexPath.row]
         switch cellDataSource.logsCellType! {
         case .LogDetails:
-            return 180
+            return 200
         case .SyllabusDetail:
             return 80
         }

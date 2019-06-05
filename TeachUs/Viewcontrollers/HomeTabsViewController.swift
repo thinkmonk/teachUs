@@ -26,6 +26,7 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
         settings.style.buttonBarItemsShouldFillAvailiableWidth = true
         settings.style.buttonBarLeftContentInset = 0
         settings.style.buttonBarRightContentInset = 0
+        settings.style.buttonBarMinimumInteritemSpacing = 0
         super.viewDidLoad()
         
          changeCurrentIndexProgressive = { [weak self] (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in

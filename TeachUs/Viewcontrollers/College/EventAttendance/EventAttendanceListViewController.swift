@@ -242,6 +242,10 @@ extension EventAttendanceListViewController:IndicatorInfoProvider{
 
 extension EventAttendanceListViewController:ViewCourseSelectionDelegate{
     func courseViewDismissed() {
+        let totalClass = CollegeClassManager.sharedManager.selectedCourseArray.count
+        let selectedClass = CollegeClassManager.sharedManager.selectedCourseArray.filter({ $0.isSelected == true}).count
+        let titleString = selectedClass == totalClass ? "All" : "\(selectedClass) Courses"
+        self.buttonAllClass.setTitle(titleString, for: .normal)
         self.viewCourseList.removeFromSuperview()
     }
     

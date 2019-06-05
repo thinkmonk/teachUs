@@ -25,7 +25,12 @@ class CollegeNotificationListViewController: BaseViewController {
         self.tableviewNotificationList.estimatedRowHeight = 40
         self.tableviewNotificationList.rowHeight = UITableViewAutomaticDimension
         self.getNotificationList()
+
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     

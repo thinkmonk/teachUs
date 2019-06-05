@@ -68,6 +68,7 @@ class CollegeNotesSubjectDetialsViewController: BaseViewController {
                 webView.loadRequest(URLRequest(url: URL(fileURLWithPath: filePath)))
                 let pdfVC = BaseViewController() //create a view controller for view only purpose
                 pdfVC.view.addSubview(webView)
+                webView.scalesPageToFit = true
                 pdfVC.title = "\(URL(string: fileUrl)?.lastPathComponent ?? "")"
                 self.navigationController?.pushViewController(pdfVC, animated: true)
                 pdfVC.addGradientToNavBar()

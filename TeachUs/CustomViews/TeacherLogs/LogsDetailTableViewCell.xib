@@ -135,8 +135,8 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rHY-p3-xf1">
                         <rect key="frame" x="133.5" y="114.5" width="133.5" height="50"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qsp-rt-BJM">
-                                <rect key="frame" x="0.0" y="10" width="10.5" height="18"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Qsp-rt-BJM">
+                                <rect key="frame" x="0.0" y="10" width="128.5" height="18"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <color key="textColor" red="0.019607843137254902" green="0.019607843137254902" blue="0.019607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -155,6 +155,7 @@
                             <constraint firstItem="XKg-1L-7uh" firstAttribute="leading" secondItem="Qsp-rt-BJM" secondAttribute="leading" id="91q-ly-K6u"/>
                             <constraint firstAttribute="bottom" secondItem="XKg-1L-7uh" secondAttribute="bottom" constant="10" id="ZnQ-ey-aEs"/>
                             <constraint firstItem="Qsp-rt-BJM" firstAttribute="top" secondItem="rHY-p3-xf1" secondAttribute="top" constant="10" id="keA-xc-fRP"/>
+                            <constraint firstAttribute="trailing" secondItem="Qsp-rt-BJM" secondAttribute="trailing" constant="5" id="tvx-Uy-6aK"/>
                         </constraints>
                     </view>
                 </subviews>

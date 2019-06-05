@@ -165,7 +165,7 @@ extension OfflineMarkCompletedPortionViewController:UITableViewDelegate, UITable
         let cell:TopicDetailsTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.TopicDetailsTableViewCellId, for: indexPath) as! TopicDetailsTableViewCell
         
         let chapterCell:Offline_Topic_list = self.arrayDataSource[indexPath.section].topic_list![indexPath.row]
-        cell.labelChapterNumber.text = chapterCell.topic_id!
+        cell.labelChapterNumber.text = ""
         cell.labelChapterName.text = chapterCell.topic_name!
         cell.labelStatus.text = chapterCell.setChapterStatus
         //        cell.buttonSetStatus.roundedBlueButton()

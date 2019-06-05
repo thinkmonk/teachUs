@@ -44,7 +44,7 @@ class CollegeNotesClassListViewController: BaseViewController {
             do{
                 let decoder = JSONDecoder()
                 self.notesClassList = try decoder.decode(NotesClass.self, from: response)
-                self.notesClassList.classSubjects!.sort(by: { ($0.classSubjectClass!) < ($1.classSubjectClass!) })
+                self.notesClassList.classSubjects?.sort(by: { ($0.classSubjectClass!) < ($1.classSubjectClass!) })
                 DispatchQueue.main.async {
                     self.tableviewClassNotesList.reloadData()
                 }
