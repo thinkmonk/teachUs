@@ -15,7 +15,7 @@ protocol LeftMenuDeleagte {
     func editProfileClicked()
 }
 
-class LeftMenuViewController: UIViewController, UIGestureRecognizerDelegate {
+class LeftMenuViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var buttonProfile: UIButton!
     @IBOutlet weak var labelName: UILabel!
@@ -23,6 +23,7 @@ class LeftMenuViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var labelProfile: UILabel!
     @IBOutlet weak var tableViewMenu: UITableView!
     @IBOutlet weak var tableViewProfile: UITableView!
+    @IBOutlet weak var buttonEditProfile: UIButton!
     
     @IBOutlet weak var buttonDropDown: UIButton!
     var delegate:LeftMenuDeleagte!
@@ -84,14 +85,16 @@ class LeftMenuViewController: UIViewController, UIGestureRecognizerDelegate {
         switch UserManager.sharedUserManager.user! {
         case .Professor:
             arrayDataSource = professorDataSource
+            self.buttonEditProfile.isHidden = false
             break
         case .Student:
             arrayDataSource = studentDataSource
+            self.buttonEditProfile.isHidden = false
             break
         case .College://1 is for super admin, 2 is for admin
             arrayDataSource = UserManager.sharedUserManager.appUserCollegeDetails.privilege! == "1" ? collegeSuperAdminDataSource : collegeAdminDataSource
             //                arrayDataSource = UserManager.sharedUserManager.appUserCollegeDetails.privilege! == "2" ? collegeSuperAdminDataSource : collegeSuperAdminDataSource
-            
+            self.buttonEditProfile.isHidden = true
             break
         }
         self.tableViewMenu.reloadData()
@@ -220,6 +223,7 @@ extension LeftMenuViewController:UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == self.tableViewMenu{
             if arrayDataSource.count-1 == indexPath.row{
+                self.deregisterUserAccessToken()
                 UserManager.sharedUserManager.setAccessToken("")
                 DatabaseManager.deleteAllEntitiesForEntityName(name: "CollegeDetails")
                 DatabaseManager.deleteAllEntitiesForEntityName(name: "UserDetails")

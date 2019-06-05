@@ -39,6 +39,7 @@ public struct URLConstants{
         static let userDetails = BaseUrl.baseURLV1 + "/login/user_details"
         static let updateUserProfile = BaseUrl.baseURLV1 + "/login/update_user_profile"
         static let saveDeviceToken = BaseUrl.baseURLV1 + "/auth/notification_save_token"
+        static let deleteDeviceToken = BaseUrl.baseURLV1 + "/auth/notification_token_delete"
     }
     
     struct StudentURL {

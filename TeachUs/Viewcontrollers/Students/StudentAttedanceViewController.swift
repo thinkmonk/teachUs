@@ -73,9 +73,12 @@ class StudentAttedanceViewController: BaseViewController {
             self.arrayDataSource.subjectAttendance.sort(by: { $0.subjectName! < $1.subjectName! })
             self.arrayDataSource.eventAttendance.sort(by: { $0.eventName! < $1.eventName! })
             self.setUpView()
-            self.makeDataSource()            
+            self.makeDataSource()
+            self.setUserAccessToken()
+
         }) { (error, code, message) in
             print(message)
+            self.setUserAccessToken()
             LoadingActivityHUD.hideProgressHUD()
         }
         

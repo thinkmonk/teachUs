@@ -82,10 +82,12 @@ class ProfessorAttedanceViewController: BaseViewController {
             })
             self.buttonMailReport.isHidden = false
             self.tableviewCollegeList.reloadData()
-
+            self.setUserAccessToken()
         }) { (error, code, message) in
             print(message)
             LoadingActivityHUD.hideProgressHUD()
+            self.setUserAccessToken()
+
         }
     }
     func selectedSubject(_ subject: College) {

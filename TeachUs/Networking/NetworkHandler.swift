@@ -189,7 +189,7 @@ class NetworkHandler:SessionManager{
     
     
     func apiPost(apiName: String,
-                 parameters: [String: Any],
+                 parameters: [String: Any]?,
                  completionHandler: @escaping (_ success:Bool,_ code:Int, _ response: [String:Any]) -> Void,
                  failure: @escaping (_ success:Bool,_ code:Int, _ error: String) -> Void){
         
@@ -204,7 +204,7 @@ class NetworkHandler:SessionManager{
             print("URL : \(self.url!)")
             print("***** POST NETWORK CALL DETAILS *****")
             print("Api name: \(apiName)")
-            if let theJSONData = try? JSONSerialization.data(withJSONObject: parameters,options: []) {
+        if let theJSONData = try? JSONSerialization.data(withJSONObject: parameters ?? [:],options: []) {
                 let theJSONText = String(data: theJSONData,encoding: .ascii)
 //                let params = theJSONText?.split(separator: ",")
 //                let paramPretty = params?.joined(separator: ", \n")

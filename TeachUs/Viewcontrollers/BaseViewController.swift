@@ -217,22 +217,46 @@ class BaseViewController: UIViewController {
     }
     
     func setUserAccessToken(){
+        if (UserDefaults.standard.object(forKey: "INSTALLED") as? NSNumber)?.intValue ?? 0 == 0 {
+            UserDefaults.standard.set(NSNumber(value: 1), forKey: "INSTALLED")
+            UserDefaults.standard.synchronize()
+            let manager = NetworkHandler()
+            manager.url = URLConstants.Login.saveDeviceToken
+            LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+            let parameters:[String:Any] = ["device_token":"\(GlobalFunction.getDeviceToken())"]
+            manager.apiPost(apiName: "Set user's device token", parameters:parameters, completionHandler: { (result, code, response) in
+                LoadingActivityHUD.hideProgressHUD()
+                if(code == 200){
+                    
+                }
+                else{
+                    
+                }
+            }) { (error, code, message) in
+                LoadingActivityHUD.hideProgressHUD()
+                print(message)
+            }
+        }
+    }
+    
+    func deregisterUserAccessToken(){
         let manager = NetworkHandler()
-        manager.url = URLConstants.Login.saveDeviceToken
+        manager.url = URLConstants.Login.deleteDeviceToken
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
-        let parameters:[String:Any] = ["device_token":"\(GlobalFunction.getDeviceToken())"]
-        manager.apiPost(apiName: "Set user's device token", parameters:parameters, completionHandler: { (result, code, response) in
+        manager.apiPost(apiName: "Delete user's device token", parameters:nil, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             if(code == 200){
-                
+                UserDefaults.standard.set(NSNumber(value: 0), forKey: "INSTALLED")
+                UserDefaults.standard.synchronize()
             }
             else{
-
+                
             }
         }) { (error, code, message) in
             LoadingActivityHUD.hideProgressHUD()
             print(message)
         }
+
     }
     
 }

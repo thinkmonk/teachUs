@@ -308,6 +308,7 @@
                     <navigationItem key="navigationItem" id="WPu-dc-VR2"/>
                     <connections>
                         <outlet property="buttonDropDown" destination="AAW-Ai-b3y" id="wDY-dO-3cO"/>
+                        <outlet property="buttonEditProfile" destination="12j-5s-uFj" id="Do3-EJ-fQl"/>
                         <outlet property="buttonProfile" destination="v3b-Mh-uOM" id="rHy-x5-s5v"/>
                         <outlet property="labelName" destination="IL7-sd-yj5" id="omX-Z1-Zhg"/>
                         <outlet property="labelProfile" destination="eHv-Ej-Fxt" id="E5d-4k-qei"/>

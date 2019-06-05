@@ -122,8 +122,10 @@ class CollegeAttendanceListViewController: BaseViewController {
             self.tableViewCollegeAttendanceList.reloadData()
             self.showTableView()
             self.buttonMailReport.isHidden = false
+            self.setUserAccessToken()
         }) { (error, code, message) in
             print(message)
+            self.setUserAccessToken()
             LoadingActivityHUD.hideProgressHUD()
         }
     }
