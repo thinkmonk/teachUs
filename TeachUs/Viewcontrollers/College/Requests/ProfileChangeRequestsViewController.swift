@@ -141,6 +141,15 @@ extension ProfileChangeRequestsViewController:ViewProfileRequestDetailsDelegate{
         if let fileUrl = self.selectedDetailsObject.filePath{
             let imageURL = URLConstants.BaseUrl.baseURL + "/\(fileUrl)"
             if let filePath = GlobalFunction.checkIfFileExisits(fileUrl: imageURL){
+                
+                let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let viewController = mainStoryboard.instantiateViewController(withIdentifier: Constants.viewControllerId.documentsVC) as! DocumentsViewController
+                viewController.filepath = filePath
+                viewController.fileURL = imageURL
+                self.navigationController?.pushViewController(viewController, animated: true)
+
+                
+                /*
                 let webView = UIWebView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.size.width, height:UIScreen.main.bounds.size.height))
                 webView.loadRequest(URLRequest(url: URL(fileURLWithPath: filePath)))
                 let pdfVC = BaseViewController() //create a view controller for view only purpose
@@ -149,6 +158,7 @@ extension ProfileChangeRequestsViewController:ViewProfileRequestDetailsDelegate{
                 pdfVC.title = "\(URL(string: fileUrl)?.lastPathComponent ?? "")"
                 self.navigationController?.pushViewController(pdfVC, animated: true)
                 pdfVC.addGradientToNavBar()
+ */
             }else{// save file
                 GlobalFunction.downloadFileAndSaveToDisk(fileUrl: imageURL)
             }

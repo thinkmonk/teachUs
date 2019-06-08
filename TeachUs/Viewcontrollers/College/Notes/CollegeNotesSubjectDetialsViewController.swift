@@ -64,6 +64,14 @@ class CollegeNotesSubjectDetialsViewController: BaseViewController {
         if let notesObejct = self.noteListData?.classSubjects?[sender.indexPath.section], let fileUrl = notesObejct.filePath{
             let imageURL = "\(fileUrl)"
             if let filePath = GlobalFunction.checkIfFileExisits(fileUrl: imageURL, name:notesObejct.generatedFileName ?? ""){
+                let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let viewController = mainStoryboard.instantiateViewController(withIdentifier: Constants.viewControllerId.documentsVC) as! DocumentsViewController
+                viewController.filepath = filePath
+                viewController.fileURL = imageURL
+                self.navigationController?.pushViewController(viewController, animated: true)
+
+                
+                /*
                 let webView = UIWebView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.size.width, height:UIScreen.main.bounds.size.height))
                 webView.loadRequest(URLRequest(url: URL(fileURLWithPath: filePath)))
                 let pdfVC = BaseViewController() //create a view controller for view only purpose
@@ -72,6 +80,7 @@ class CollegeNotesSubjectDetialsViewController: BaseViewController {
                 pdfVC.title = "\(URL(string: fileUrl)?.lastPathComponent ?? "")"
                 self.navigationController?.pushViewController(pdfVC, animated: true)
                 pdfVC.addGradientToNavBar()
+                */
             }else{// save file
                 GlobalFunction.downloadFileAndSaveToDisk(fileUrl: imageURL, customName: notesObejct.generatedFileName ?? "TeachUs\(Date())") { (success) in
                     DispatchQueue.main.async {

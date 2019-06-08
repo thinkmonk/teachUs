@@ -96,6 +96,7 @@ public struct Constants {
         static let collegeNotesClassList = "CollegeNotesClassListViewControllerId"
         static let collegeNoticeList = "CollegeNoticeListViewControllerId"
         static let collegeNotificationList = "CollegeNotificationListViewControllerId"
+        static let documentsVC = "DocumentsViewControllerId"
     }
     
     struct UserDefaults {

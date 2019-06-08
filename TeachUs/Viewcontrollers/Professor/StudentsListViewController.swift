@@ -317,12 +317,58 @@ class StudentsListViewController: BaseViewController {
     @IBAction func submitAttendance(_ sender: UIButton) {
         if(self.checkLectureTiming()){
             if(viewConfirmAttendance == nil){
-                viewConfirmAttendance = ViewConfirmAttendance.instanceFromNib() as! ViewConfirmAttendance
+                viewConfirmAttendance = ViewConfirmAttendance.instanceFromNib() as? ViewConfirmAttendance
                 viewConfirmAttendance.delegate = self
             }
             let presentStudents = AttendanceManager.sharedAttendanceManager.arrayStudents.value.filter{$0.isPrsent == true}
             viewConfirmAttendance.labelStudentCount.text = "\(presentStudents.count)/\(AttendanceManager.sharedAttendanceManager.arrayStudents.value.count)"
             viewConfirmAttendance.showView(inView: UIApplication.shared.keyWindow!)
+        }
+    }
+    
+    func checkForDuplicateAttendance(_ completion:@escaping(_ success:Bool) -> Void){
+        
+        
+        let manager = NetworkHandler()
+        manager.url = URLConstants.ProfessorURL.duplicateAttendanceCheck
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        parameters = [
+            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+            "class_id":"\(self.selectedCollege.classId!)",
+            "subject_id":"\(self.selectedCollege.subjectId!)",
+            "from_time":"\(fromTimePicker.postJsonTimeString)",
+            "to_time":"\(toTimePicker.postJsonTimeString)",
+            "lecture_date":"\(datePicker.postJsonDateString)",
+            "course_id":"\(self.selectedCollege.courseId!)",
+        ]
+        
+        manager.apiPost(apiName: "Check for duplicate Attendance entry" , parameters:parameters, completionHandler: { (result, code, response) in
+            LoadingActivityHUD.hideProgressHUD()
+            if(code == 406){
+                if let responseMessage = response["message"] as? String{
+                    if responseMessage.caseInsensitiveCompare("Duplicate data entry") == ComparisonResult.orderedSame{
+                        let alert = UIAlertController(title: nil, message: responseMessage, preferredStyle: UIAlertControllerStyle.alert)
+                        
+                        // add an action (button)
+                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { _ in
+                            completion(true)
+
+                            
+                        }))
+                        // show the alert
+                        self.present(alert, animated: true, completion:nil)
+                        
+                    }else{
+                        completion(false)
+                    }
+                }
+            }else{
+                completion(false)
+            }
+        }) { (error, code, errorMessage) in
+            LoadingActivityHUD.hideProgressHUD()
+            self.showAlterWithTitle(nil, alertMessage: errorMessage)
+            completion(false)
         }
     }
     
@@ -723,26 +769,30 @@ extension StudentsListViewController:ViewConfirmAttendanceDelegate{
             self.submitEditedAttendance()
             
         }else{
-            parameters = [
-                "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
-                "class_id":"\(self.selectedCollege.classId!)",
-                "course_id":"\(self.selectedCollege.courseId!)",
-                "subject_id":"\(self.selectedCollege.subjectId!)",
-                "topics_covered":"1",
-                "no_of_lecture":"\(self.numberOfLectures.value)",
-                "lecture_date":"\(datePicker.postJsonDateString)",
-                "from_time":"\(fromTimePicker.postJsonTimeString)",
-                "to_time":"\(toTimePicker.postJsonTimeString)",
-                "attendance_list":"\(AttendanceManager.sharedAttendanceManager.attendanceList)"
-            ]
-            
-            let alert = UIAlertController(title: nil, message: "Attendance Recorded", preferredStyle: UIAlertControllerStyle.alert)
-            
-            // add an action (button)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { _ in
-                self.performSegue(withIdentifier: Constants.segues.markPortionCompleted, sender: self)
-            }))
-            self.present(alert, animated: true, completion:nil)
+            self.checkForDuplicateAttendance { (isAttendancePresent) in
+                if !isAttendancePresent{
+                    self.parameters = [
+                        "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+                        "class_id":"\(self.selectedCollege.classId!)",
+                        "course_id":"\(self.selectedCollege.courseId!)",
+                        "subject_id":"\(self.selectedCollege.subjectId!)",
+                        "topics_covered":"1",
+                        "no_of_lecture":"\(self.numberOfLectures.value)",
+                        "lecture_date":"\(self.datePicker.postJsonDateString)",
+                        "from_time":"\(self.fromTimePicker.postJsonTimeString)",
+                        "to_time":"\(self.toTimePicker.postJsonTimeString)",
+                        "attendance_list":"\(AttendanceManager.sharedAttendanceManager.attendanceList)"
+                    ]
+                    
+                    let alert = UIAlertController(title: nil, message: "Attendance Recorded", preferredStyle: UIAlertControllerStyle.alert)
+                    
+                    // add an action (button)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { _ in
+                        self.performSegue(withIdentifier: Constants.segues.markPortionCompleted, sender: self)
+                    }))
+                    self.present(alert, animated: true, completion:nil)
+                }
+            }
         }
     }
     

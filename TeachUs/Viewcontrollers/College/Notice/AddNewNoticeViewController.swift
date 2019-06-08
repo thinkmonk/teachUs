@@ -28,6 +28,7 @@ class AddNewNoticeViewController: BaseViewController {
     @IBOutlet weak var buttonPreviewNotice: UIButton!
     
     var imagePicker:UIImagePickerController?=UIImagePickerController()
+    var documentPicker:UIDocumentMenuViewController!
     var chosenFile:URL?
     var chosenImage:UIImage?
     var viewClassList : ViewClassSelection!
@@ -159,10 +160,11 @@ class AddNewNoticeViewController: BaseViewController {
     }
     
     func openDocumentPicker(){
-        let importMenu = UIDocumentMenuViewController(documentTypes: [String(kUTTypePDF)], in: .import)
-        importMenu.delegate = self
-        importMenu.modalPresentationStyle = .formSheet
-        self.present(importMenu, animated: true, completion: nil)
+        let types = [kUTTypePDF, kUTTypeText, kUTTypeRTF, kUTTypeItem]
+        self.documentPicker = UIDocumentMenuViewController(documentTypes: types as [String], in: .import)
+        documentPicker.delegate = self
+        documentPicker.modalPresentationStyle = .formSheet
+        self.present(self.documentPicker, animated: true, completion: nil)
     }
     
     func uploadFileToFirebase(completion:@escaping(_ fileUrl:URL, _ filesize:String,_ fileName:String) -> Void,
@@ -174,7 +176,7 @@ class AddNewNoticeViewController: BaseViewController {
             let storageRef = storage.reference()
             let filePathReference = storageRef.child("\(mobilenumber)/Notice/")
             if let selectedImage = self.chosenImage,let jpedData = UIImageJPEGRepresentation(selectedImage, 1){
-                let fileNameRef = filePathReference.child("\(Date().timeIntervalSince1970).jpg")
+                let fileNameRef = filePathReference.child("\(Int64(Date().timeIntervalSince1970 * 1000)).jpg")
                 let uploadTask = fileNameRef.putData(jpedData, metadata: nil) { (metadata, error) in
                     LoadingActivityHUD.hideProgressHUD()
                     fileNameRef.downloadURL { (url, error) in
@@ -270,7 +272,7 @@ extension AddNewNoticeViewController:UIDocumentMenuDelegate,UIDocumentPickerDele
     
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
         print("view was cancelled")
-        dismiss(animated: true, completion: nil)
+        self.documentPicker.dismiss(animated: true, completion: nil)
     }
 }
 

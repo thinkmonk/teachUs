@@ -50,10 +50,10 @@ class ViewDatePicker: UIView {
         let date = picker.date
         let dateFormatter: DateFormatter = DateFormatter()
         // Set date format
-        dateFormatter.dateFormat = "HH:mm:ss"
+        dateFormatter.dateFormat = "HH:mm"
         // Apply date format
         let selectedDate: String = dateFormatter.string(from: date)
-        return selectedDate
+        return "\(selectedDate):00"
 
     }
     /*

@@ -55,9 +55,13 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="253" verticalHuggingPriority="251" image="arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="9nI-5V-cdj">
                                 <rect key="frame" x="277" y="163.5" width="8" height="14"/>
                             </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="q9v-gQ-3Cw">
+                                <rect key="frame" x="135" y="70" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="q9v-gQ-3Cw" firstAttribute="centerX" secondItem="OSu-Ep-r9i" secondAttribute="centerX" id="CWZ-Ia-QVN"/>
                             <constraint firstItem="C8Y-pD-R01" firstAttribute="top" secondItem="OSu-Ep-r9i" secondAttribute="bottom" constant="10" id="CXm-ik-S2z"/>
                             <constraint firstItem="AWh-Pj-NYo" firstAttribute="top" secondItem="hBe-jT-Nvv" secondAttribute="bottom" constant="15" id="J2R-R0-HF4"/>
                             <constraint firstItem="AWh-Pj-NYo" firstAttribute="trailing" secondItem="hBe-jT-Nvv" secondAttribute="trailing" id="M2L-IJ-7G5"/>
@@ -71,6 +75,7 @@
                             <constraint firstItem="gRO-Qj-FPv" firstAttribute="top" secondItem="C8Y-pD-R01" secondAttribute="bottom" constant="8" id="g8w-p9-zzM"/>
                             <constraint firstAttribute="bottom" secondItem="AWh-Pj-NYo" secondAttribute="bottom" constant="10" id="gIK-tk-jTl"/>
                             <constraint firstItem="gRO-Qj-FPv" firstAttribute="leading" secondItem="C8Y-pD-R01" secondAttribute="leading" id="iau-5t-dFd"/>
+                            <constraint firstItem="q9v-gQ-3Cw" firstAttribute="centerY" secondItem="OSu-Ep-r9i" secondAttribute="centerY" id="jba-cm-W5R"/>
                             <constraint firstAttribute="trailing" secondItem="OSu-Ep-r9i" secondAttribute="trailing" id="kIW-4F-kXz"/>
                             <constraint firstItem="hBe-jT-Nvv" firstAttribute="top" secondItem="gRO-Qj-FPv" secondAttribute="bottom" constant="15" id="nj7-91-vwG"/>
                             <constraint firstItem="C8Y-pD-R01" firstAttribute="leading" secondItem="OSu-Ep-r9i" secondAttribute="leading" constant="10" id="q2H-JY-pzp"/>
@@ -90,6 +95,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="activityIndicator" destination="q9v-gQ-3Cw" id="vBE-d9-wbA"/>
                 <outlet property="imageViewNotificationImage" destination="OSu-Ep-r9i" id="heO-3b-6af"/>
                 <outlet property="imageViewrightArrow" destination="9nI-5V-cdj" id="kPh-af-KU4"/>
                 <outlet property="labelDate" destination="C8Y-pD-R01" id="pTi-2p-ct9"/>

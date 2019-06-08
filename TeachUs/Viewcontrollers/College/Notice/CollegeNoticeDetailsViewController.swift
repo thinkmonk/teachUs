@@ -34,14 +34,13 @@ class CollegeNoticeDetailsViewController: BaseViewController {
         if let noticeObejct = self.selectedNotice, let fileUrl = noticeObejct.filePath{
             let imageURL = "\(fileUrl)"
             if let filePath = GlobalFunction.checkIfFileExisits(fileUrl: imageURL, name:noticeObejct.generatedFileName ?? ""){
-                let webView = UIWebView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.size.width, height:UIScreen.main.bounds.size.height))
-                webView.loadRequest(URLRequest(url: URL(fileURLWithPath: filePath)))
-                let pdfVC = BaseViewController() //create a view controller for view only purpose
-                pdfVC.view.addSubview(webView)
-                webView.scalesPageToFit = true
-                pdfVC.title = "\(URL(string: fileUrl)?.lastPathComponent ?? "")"
-                self.navigationController?.pushViewController(pdfVC, animated: true)
-                pdfVC.addGradientToNavBar()
+                
+                let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let viewController = mainStoryboard.instantiateViewController(withIdentifier: Constants.viewControllerId.documentsVC) as! DocumentsViewController
+                viewController.filepath = filePath
+                viewController.fileURL = imageURL
+                self.navigationController?.pushViewController(viewController, animated: true)
+
             }else{// save file
                 if let window = UIApplication.shared.keyWindow{
                     LoadingActivityHUD.showProgressHUD(view: window)

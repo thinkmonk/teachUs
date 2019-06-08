@@ -15,6 +15,7 @@ class NotificationListTableViewCell: UITableViewCell {
     @IBOutlet weak var imageViewrightArrow: UIImageView!
     @IBOutlet weak var labelNotificationTitle: UILabel!
     @IBOutlet weak var labelNotificationDescription: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -26,11 +27,17 @@ class NotificationListTableViewCell: UITableViewCell {
     }
     
     func setUpCell(notificationObj:NotificationList){
+        activityIndicator.startAnimating()
+        self.activityIndicator.isHidden = false
         if let subUrl = notificationObj.filePath, let fileName = notificationObj.generatedFileName{
             let imageURl = URLConstants.BaseUrl.baseURLHome + subUrl + "\(fileName)"
             print("Notification image URL = \(imageURl)")
             DispatchQueue.main.async {
-                self.imageViewNotificationImage.imageFromServerURL(urlString: imageURl, defaultImage: Constants.Images.leftMenuTopView)
+//                self.imageViewNotificationImage.imageFromServerURL(urlString: imageURl, defaultImage: Constants.Images.leftMenuTopView)
+                self.imageViewNotificationImage.imageFromServerURL(urlString: imageURl, defaultImage: Constants.Images.leftMenuTopView, { (success) in
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.isHidden = true
+                })
             }
         }
         self.labelDate.text = notificationObj.updatedBy?.getDateFromString()

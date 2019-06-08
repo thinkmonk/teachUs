@@ -107,6 +107,7 @@
 		8137EF551FA10AD400045D97 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8137EF541FA10AD400045D97 /* Constants.swift */; };
 		8137EF5C1FA10D6A00045D97 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8137EF5B1FA10D6A00045D97 /* UIView.swift */; };
 		813C0DA021EB7C7100B04E61 /* GlobalFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813C0D9F21EB7C7100B04E61 /* GlobalFunction.swift */; };
+		81511A3722AC4D0400B50F44 /* DocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81511A3622AC4D0400B50F44 /* DocumentsViewController.swift */; };
 		8161AF63222C4650001F73B5 /* ViewClassSelection.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8161AF62222C4650001F73B5 /* ViewClassSelection.xib */; };
 		8161AF65222C467C001F73B5 /* ViewClassSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8161AF64222C467C001F73B5 /* ViewClassSelection.swift */; };
 		8161AF67222C5922001F73B5 /* CollegeClassManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8161AF66222C5922001F73B5 /* CollegeClassManager.swift */; };
@@ -433,6 +434,7 @@
 		8137EF541FA10AD400045D97 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8137EF5B1FA10D6A00045D97 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		813C0D9F21EB7C7100B04E61 /* GlobalFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunction.swift; sourceTree = "<group>"; };
+		81511A3622AC4D0400B50F44 /* DocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsViewController.swift; sourceTree = "<group>"; };
 		8161AF62222C4650001F73B5 /* ViewClassSelection.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewClassSelection.xib; sourceTree = "<group>"; };
 		8161AF64222C467C001F73B5 /* ViewClassSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewClassSelection.swift; sourceTree = "<group>"; };
 		8161AF66222C5922001F73B5 /* CollegeClassManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeClassManager.swift; sourceTree = "<group>"; };
@@ -977,6 +979,7 @@
 				81A560D2205D07DC00DAE086 /* HomeViewController2.swift */,
 				8185E33F20581D5600752F81 /* EditProfilePictureViewController.swift */,
 				81D020242059A131003742FD /* RootViewController.swift */,
+				81511A3622AC4D0400B50F44 /* DocumentsViewController.swift */,
 				81D7CE8B1FAB980300C4375E /* Students */,
 				81D7CE8C1FAB980E00C4375E /* Professor */,
 				81E4BCE5205E9E2B00674FD4 /* College */,
@@ -2083,6 +2086,7 @@
 				8136E5A120F7C6880080AECA /* Offline_Topic_list.swift in Sources */,
 				81B190C01FA24E19004A8A72 /* LoginView.swift in Sources */,
 				81D2774C22A07512003CFC51 /* CollegeNotesSubjectDetialsViewController.swift in Sources */,
+				81511A3722AC4D0400B50F44 /* DocumentsViewController.swift in Sources */,
 				81E02A46207CFC6800EB6BA8 /* EventStudents.swift in Sources */,
 				812B152820BAA65C00693183 /* Constraints+.swift in Sources */,
 				18A627DD1F90F9870099C106 /* AppDelegate.swift in Sources */,

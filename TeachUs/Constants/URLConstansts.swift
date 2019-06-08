@@ -89,6 +89,7 @@ public struct URLConstants{
         static let uploadNotes = BaseUrl.baseURLV1 + "/professor/notes_upload"
         static let getNotice = BaseUrl.baseURLV1 + "/professor/notices"
         static let getNotificationList = BaseUrl.baseURLV1 + "/professor/notifications"
+        static let duplicateAttendanceCheck =  BaseUrl.baseURLV1 + "/attendance/check_attendance_details"
     }
     
     

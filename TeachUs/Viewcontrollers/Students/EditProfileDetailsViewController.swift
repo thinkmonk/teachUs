@@ -394,7 +394,8 @@ extension EditProfileDetailsViewController{
     }
     
     func openDocumentPicker(){
-        let importMenu = UIDocumentMenuViewController(documentTypes: [String(kUTTypePDF)], in: .import)
+        let types = [kUTTypePDF, kUTTypeText, kUTTypeRTF, kUTTypeItem]
+        let importMenu = UIDocumentMenuViewController(documentTypes:types as [String], in: .import)
         importMenu.delegate = self
         importMenu.modalPresentationStyle = .formSheet
         self.present(importMenu, animated: true, completion: nil)
