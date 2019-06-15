@@ -2,16 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>BASE_URL_HOME</key>
-	<string>$(BASE_URL_HOME)</string>
-	<key>UIFileSharingEnabled</key>
-	<true/>
-	<key>LSSupportsOpeningDocumentsInPlace</key>
-	<true/>
 	<key>BASE_URL</key>
 	<string>$(BASE_URL)</string>
-	<key>NSContactsUsageDescription</key>
-	<string>$(EXECUTABLE_NAME) needs to access contacts to add new admin from Contact list</string>
+	<key>BASE_URL_HOME</key>
+	<string>$(BASE_URL_HOME)</string>
 	<key>BASE_URL_V1</key>
 	<string>$(BASE_URL_V1)</string>
 	<key>CFBundleDevelopmentRegion</key>
@@ -32,6 +26,8 @@
 	<string>1.0.0.3</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -39,8 +35,12 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>TeachUS would need the access to change profile picture</string>
+	<key>NSContactsUsageDescription</key>
+	<string>$(EXECUTABLE_NAME) needs to access contacts to add new admin from Contact list</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>TeachUS would need the access to change profile picture</string>
+	<key>UIFileSharingEnabled</key>
+	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
