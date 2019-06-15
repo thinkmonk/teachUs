@@ -335,6 +335,14 @@ extension CollegeAttendanceDetailsViewController:UITableViewDelegate, UITableVie
         return 15
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let attendanceVC: StudentAttedanceViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.studentAttendace) as! StudentAttedanceViewController
+        attendanceVC.isCollegeFlow = true
+        attendanceVC.enrolledStudentObj = arrayStudentList [indexPath.section]
+        self.navigationController?.pushViewController(attendanceVC, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableViewStudentList.width(), height: 15))
         footerView.backgroundColor = UIColor.clear

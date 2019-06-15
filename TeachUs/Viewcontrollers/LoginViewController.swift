@@ -41,6 +41,14 @@ class LoginViewController: BaseViewController {
         self.addColorToNavBarText(color: UIColor.white)
     }
     
+    func showunavailableUSerView(){
+        let viewUnauthoriseduser:ViewUnavailableProfile = ViewUnavailableProfile.instanceFromNib() as! ViewUnavailableProfile
+        viewUnauthoriseduser.frame = self.view.frame
+        self.view.addSubview(viewUnauthoriseduser)
+        self.view.bringSubview(toFront: viewUnauthoriseduser)
+        self.view.bringSubview(toFront: viewUnauthoriseduser)
+    }
+    
     func setUpLoginView(){
         
         switch UserManager.sharedUserManager.user! {
@@ -137,8 +145,7 @@ extension LoginViewController:LoginDelegate{
                 self.setUpOtpView()
             }
             else{
-                let message:String = response["message"] as! String
-                self.showAlterWithTitle(nil, alertMessage: message)
+                self.showunavailableUSerView()
             }
         }) { (error, code, message) in
             print(message)
@@ -270,8 +277,7 @@ extension LoginViewController:CollegeLoginDelegate{
             if (code == 200){
                 self.showEnterOtpView()
             }else{
-                let message:String = response["message"] as! String
-                self.showAlterWithTitle(nil, alertMessage: message)
+                self.showunavailableUSerView()
             }
         }) { (error, code, message) in
             LoadingActivityHUD.hideProgressHUD()

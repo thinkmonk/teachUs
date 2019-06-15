@@ -16,13 +16,17 @@ class AttendanceDetailsHeaderTableViewCell: UITableViewCell {
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        self.labelSubjectName.textColor = UIColor.white
-        self.labelAttendanceCount.textColor = UIColor.white
-        self.labelAttendancePercentage.textColor = UIColor.white
+        self.makeTopEdgesRounded()
+
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.labelSubjectName.textColor = UIColor.white
+        self.labelAttendanceCount.textColor = UIColor.white
+        self.labelAttendancePercentage.textColor = UIColor.white
+        self.backgroundColor = UIColor.rgbColor(5, 41, 107)
+
         // Initialization code
     }
 

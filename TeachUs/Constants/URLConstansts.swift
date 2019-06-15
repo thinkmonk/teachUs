@@ -129,6 +129,8 @@ public struct URLConstants{
         static let collegeNoticeList = BaseUrl.baseURLV1 + "/college/notices"
         static let collegeUploadNotice = BaseUrl.baseURLV1 + "/college/notice_upload"
         static let getcollegeNotificationList = BaseUrl.baseURLV1 + "/college/notifications"
+        static let colleegStudentattendanceFlow = BaseUrl.baseURLV1 + "/college/student_class_attendance"
+        static let collegeStudentAttendanceDetails = BaseUrl.baseURLV1 + "/college/student_attendance"
     }
     
     struct SyllabusURL {

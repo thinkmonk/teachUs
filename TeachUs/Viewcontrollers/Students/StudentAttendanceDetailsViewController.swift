@@ -12,12 +12,19 @@ class StudentAttendanceDetailsViewController: BaseViewController {
     var selectedStudentAttendance:SubjectAttendance!
     var studentAttendanceDetails:AttendanceDetails!
     var arrayDataSource = [StudentAttendanceDetailsDataSource]()
+    
+    
+    //----------------------->For college Flow <------------------------//
+    var enrolledStudentObj:EnrolledStudentDetail?
+    var isCollegeFlow:Bool = false
+    
+
 
     @IBOutlet weak var tableviewAttendanceDetails: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addGradientToNavBar()
-        self.getAttendanceDetails()
+        isCollegeFlow ? self.getAttendanceDetailsForCollegeFlow() : self.getAttendanceDetails()
         self.tableviewAttendanceDetails.register(UINib(nibName: "AttendanceDetailsHeaderTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.studentAttendanceDetailsHeader)
         self.tableviewAttendanceDetails.register(UINib(nibName: "AttendanceDetailsValuesTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.studentAttendanceDetails)
         self.tableviewAttendanceDetails.estimatedRowHeight = 40
@@ -56,8 +63,40 @@ class StudentAttendanceDetailsViewController: BaseViewController {
             print(message)
             LoadingActivityHUD.hideProgressHUD()
         }
-
     }
+    
+    func getAttendanceDetailsForCollegeFlow(){
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        let manager = NetworkHandler()
+        manager.url = URLConstants.CollegeURL.collegeStudentAttendanceDetails
+        let parameters = [
+            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+            "subject_id":"\(selectedStudentAttendance.subjectId ?? "")",
+            "email":self.enrolledStudentObj?.studentEmail ?? ""
+        ]
+        
+        manager.apiPostWithDataResponse(apiName: " Get user college Attendance details", parameters:parameters, completionHandler: { (result, code, response) in
+            LoadingActivityHUD.hideProgressHUD()
+            if(code == 200){
+                do{
+                    let decoder = JSONDecoder()
+                    self.studentAttendanceDetails = try decoder.decode(AttendanceDetails.self, from: response)
+                    self.makeDataSource()
+                }
+                catch let error{
+                    print("err", error)
+                }
+            }
+            else{
+                print("Error in fetching data")
+            }
+        }) { (error, code, message) in
+            print(message)
+            LoadingActivityHUD.hideProgressHUD()
+        }
+        
+    }
+    
     
     func makeDataSource()
     {
@@ -111,8 +150,6 @@ extension StudentAttendanceDetailsViewController:UITableViewDelegate, UITableVie
             cell.labelSubjectName.text = self.selectedStudentAttendance.subjectName
             cell.labelAttendanceCount.text = "\(self.selectedStudentAttendance.presentCount ?? "NA")/ \(self.selectedStudentAttendance.totalCount ?? "NA")"
             cell.labelAttendancePercentage.text = "\(self.selectedStudentAttendance.percentage ?? "NA")%"
-            cell.backgroundColor = UIColor.rgbColor(5, 41, 107)
-            cell.makeTopEdgesRounded()
             return cell
             
         case .AttendanceTitle:

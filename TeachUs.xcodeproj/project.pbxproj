@@ -295,6 +295,8 @@
 		81E6740B20531B4C00321257 /* UserDetails+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E6740720531B4C00321257 /* UserDetails+CoreDataProperties.swift */; };
 		81F78EAC1FB0DFE600A016B0 /* AttendanceCalenderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F78EAA1FB0DFE600A016B0 /* AttendanceCalenderTableViewCell.swift */; };
 		81F78EAD1FB0DFE600A016B0 /* AttendanceCalenderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81F78EAB1FB0DFE600A016B0 /* AttendanceCalenderTableViewCell.xib */; };
+		81F92A4322B4E8B600395413 /* ViewUnavailableProfile.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81F92A4222B4E8B600395413 /* ViewUnavailableProfile.xib */; };
+		81F92A4522B4E8BD00395413 /* ViewUnavailableProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F92A4422B4E8BD00395413 /* ViewUnavailableProfile.swift */; };
 		81FEC7FA20F10436003FBDBE /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FEC7F820F10436003FBDBE /* ReachabilityManager.swift */; };
 		81FEC7FB20F10436003FBDBE /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FEC7F920F10436003FBDBE /* Reachability.swift */; };
 		81FFB0B31FBEE0CD00C32097 /* ViewCalenderTop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FFB0B21FBEE0CD00C32097 /* ViewCalenderTop.swift */; };
@@ -630,6 +632,8 @@
 		81E91918229B1FC500CE41D1 /* TeachUs.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TeachUs.entitlements; sourceTree = "<group>"; };
 		81F78EAA1FB0DFE600A016B0 /* AttendanceCalenderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceCalenderTableViewCell.swift; sourceTree = "<group>"; };
 		81F78EAB1FB0DFE600A016B0 /* AttendanceCalenderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AttendanceCalenderTableViewCell.xib; sourceTree = "<group>"; };
+		81F92A4222B4E8B600395413 /* ViewUnavailableProfile.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewUnavailableProfile.xib; sourceTree = "<group>"; };
+		81F92A4422B4E8BD00395413 /* ViewUnavailableProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUnavailableProfile.swift; sourceTree = "<group>"; };
 		81FEC7F820F10436003FBDBE /* ReachabilityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
 		81FEC7F920F10436003FBDBE /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		81FEC7FC20F113D7003FBDBE /* TeachUs 2(Offline).xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeachUs 2(Offline).xcdatamodel"; sourceTree = "<group>"; };
@@ -990,6 +994,7 @@
 		813EC7691F9BA46200F11A12 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				81F92A4122B4E89800395413 /* UnavailableProfile */,
 				8194882722A467690006CB86 /* Notificaiton */,
 				81B4E90722A2B803005AA5F7 /* Notice */,
 				81A6BC00229C659800615EDD /* Notes */,
@@ -1629,6 +1634,15 @@
 			path = "Mark Attendance";
 			sourceTree = "<group>";
 		};
+		81F92A4122B4E89800395413 /* UnavailableProfile */ = {
+			isa = PBXGroup;
+			children = (
+				81F92A4222B4E8B600395413 /* ViewUnavailableProfile.xib */,
+				81F92A4422B4E8BD00395413 /* ViewUnavailableProfile.swift */,
+			);
+			path = UnavailableProfile;
+			sourceTree = "<group>";
+		};
 		81FFB0BF1FC0274500C32097 /* Mark portion */ = {
 			isa = PBXGroup;
 			children = (
@@ -1815,6 +1829,7 @@
 				81CCAE561FC806060070907A /* RatingTopicsTableViewCell.xib in Resources */,
 				81FFB0B71FBF2D4900C32097 /* ViewConfirmAttendance.xib in Resources */,
 				810E0CDC1FD03F0A006AE5BE /* LogsDetailTableViewCell.xib in Resources */,
+				81F92A4322B4E8B600395413 /* ViewUnavailableProfile.xib in Resources */,
 				81CCAE4E1FC805CA0070907A /* TeacherProfileTableViewCell.xib in Resources */,
 				81BEA4BB224671FE009C4D79 /* ViewProfessorMailReport.xib in Resources */,
 				8102F2A722871698007920EF /* ProfileDetailsEditTableViewCell.xib in Resources */,
@@ -2008,6 +2023,7 @@
 				81D7CE831FAB8E5D00C4375E /* CAPSPageMenu+UIGestureRecognizerDelegate.swift in Sources */,
 				81A0CDD5209F5B5C0023564B /* LogDetails.swift in Sources */,
 				819BDA541FC4A66E00DD7D2D /* ProfessorDetails.swift in Sources */,
+				81F92A4522B4E8BD00395413 /* ViewUnavailableProfile.swift in Sources */,
 				81FFB0BB1FBF3E6B00C32097 /* MarkCompletedPortionViewController.swift in Sources */,
 				81BC49A52299CDD800549867 /* ProfileChangeRequestsViewController.swift in Sources */,
 				8136E5A520F7C6880080AECA /* Offline_Student_list.swift in Sources */,
