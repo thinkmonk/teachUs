@@ -26,7 +26,8 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X3a-Lq-PiG">
-                            <rect key="frame" x="306" y="10" width="9" height="22"/>
+                            <rect key="frame" x="276" y="0.0" width="39" height="52"/>
+                            <inset key="contentEdgeInsets" minX="15" minY="15" maxX="15" maxY="15"/>
                             <state key="normal" image="cross"/>
                             <connections>
                                 <action selector="closeView:" destination="iN0-l3-epB" eventType="touchUpInside" id="HdQ-H5-Lof"/>
@@ -70,7 +71,7 @@
                         <constraint firstItem="KDz-md-dfB" firstAttribute="top" secondItem="1bv-BJ-3p7" secondAttribute="top" constant="15" id="Gye-ik-x5W"/>
                         <constraint firstItem="X3a-Lq-PiG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="KDz-md-dfB" secondAttribute="trailing" constant="10" id="K0i-kS-JD7"/>
                         <constraint firstItem="tGC-pT-BDR" firstAttribute="top" secondItem="9AJ-wA-gwu" secondAttribute="bottom" constant="8" id="Nbg-5m-TEd"/>
-                        <constraint firstItem="X3a-Lq-PiG" firstAttribute="top" secondItem="1bv-BJ-3p7" secondAttribute="top" constant="10" id="Reh-En-A8k"/>
+                        <constraint firstItem="X3a-Lq-PiG" firstAttribute="top" secondItem="1bv-BJ-3p7" secondAttribute="top" id="Reh-En-A8k"/>
                         <constraint firstItem="dPD-bo-gFP" firstAttribute="top" secondItem="KDz-md-dfB" secondAttribute="bottom" constant="10" id="XpE-4M-5gV"/>
                         <constraint firstAttribute="trailing" secondItem="a92-qB-ZI1" secondAttribute="trailing" constant="15" id="a1b-3N-dSa"/>
                         <constraint firstItem="KDz-md-dfB" firstAttribute="leading" secondItem="1bv-BJ-3p7" secondAttribute="leading" constant="15" id="bWi-ME-b7x"/>

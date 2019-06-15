@@ -19,7 +19,7 @@ class ProfessorLogsListViewController: BaseViewController {
     let nibCollegeListCell = "ProfessorCollegeListTableViewCell"
     var viewMailReport:ViewProfessorMailReport!
 
-    
+    // ------------------------->FOR COLLEGE FLOW <-------------------------
     var isCollegeLogsSubjectData:Bool = false //for college logs
     var selectedProffessorId:String? //for college logs
     var arraySubjectList:ProfessorSubjectList! //for college logs
@@ -43,7 +43,9 @@ class ProfessorLogsListViewController: BaseViewController {
         if(isCollegeLogsSubjectData){
             self.addGradientToNavBar()
             self.getCollegeLogsSubjectData()
+            self.buttonMailReport.isHidden = true
         }else{
+            self.buttonMailReport.isHidden = false
             self.getLogs()
         }
         tableviewLogs.addSubview(refreshControl) // not required when using UITableViewController
@@ -137,7 +139,7 @@ class ProfessorLogsListViewController: BaseViewController {
             self.tableviewLogs.alpha = 1.0
             self.tableviewLogs.transform = CGAffineTransform.identity
         }
-        self.buttonMailReport.isHidden = false
+        buttonMailReport.isHidden = isCollegeLogsSubjectData
     }
     
     @IBAction func mailReport(_ sender:Any){
@@ -171,10 +173,12 @@ extension ProfessorLogsListViewController:UITableViewDelegate, UITableViewDataSo
             if(self.isCollegeLogsSubjectData){
                 collegeCell.labelSubjectName.text = "\(self.arraySubjectList.subjectsDetails[indexPath.section].subjectName)"
                 collegeCell.isUserInteractionEnabled =  true
+                collegeCell.labelLogCount.text = "\(self.arraySubjectList.subjectsDetails[indexPath.section].logCount)"
 
             }
             else{
                 collegeCell.labelSubjectName.text = "\(self.arrayDataSource![indexPath.section].yearName!)\(self.arrayDataSource![indexPath.section].courseCode!) - \(self.arrayDataSource![indexPath.section].subjectName!) - \(self.arrayDataSource![indexPath.section].classDivision!)"
+                collegeCell.labelLogCount.isHidden = true
                 collegeCell.isUserInteractionEnabled =  true
 
             }

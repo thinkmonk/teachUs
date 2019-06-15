@@ -27,7 +27,13 @@ class ProfessorNotesSubjectListViewController: BaseViewController {
         self.tableViewNotesList.delegate = self
         self.tableViewNotesList.dataSource = self
         self.tableViewNotesList.backgroundColor = .clear
+        self.tableViewNotesList.addSubview(refreshControl)
         self.getSujectList()
+    }
+    
+    override func refresh(sender: AnyObject) {
+        self.getSujectList()
+        super.refresh(sender: self)
     }
     
     func getSujectList(){

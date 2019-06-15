@@ -699,7 +699,13 @@ Form Library</string>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="CGw-1k-7hg"/>
                     </view>
-                    <navigationItem key="navigationItem" id="OUp-tZ-i5g"/>
+                    <navigationItem key="navigationItem" id="OUp-tZ-i5g">
+                        <barButtonItem key="rightBarButtonItem" image="bellNotification" style="plain" id="wPT-IU-xdp">
+                            <connections>
+                                <segue destination="fbb-JT-spQ" kind="show" id="2R3-T6-7Rt"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="3Ky-B3-8mm" kind="show" identifier="toEditProfile" id="tgg-fJ-z21"/>
                     </connections>
@@ -3872,6 +3878,47 @@ Form Library</string>
             </objects>
             <point key="canvasLocation" x="4665" y="8501"/>
         </scene>
+        <!--Bell Notification List View Controller-->
+        <scene sceneID="Rgi-ON-01H">
+            <objects>
+                <viewController id="fbb-JT-spQ" customClass="BellNotificationListViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fHK-Pk-mpe">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ap7-m9-9rC">
+                                <rect key="frame" x="15" y="64" width="290" height="504"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NO NOTIFICATIONS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u0c-jW-z3c">
+                                <rect key="frame" x="83.5" y="273.5" width="153" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="j0f-DR-hFR" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="u0c-jW-z3c" secondAttribute="trailing" constant="15" id="8gp-pI-Uaa"/>
+                            <constraint firstItem="u0c-jW-z3c" firstAttribute="centerX" secondItem="fHK-Pk-mpe" secondAttribute="centerX" id="Bj6-ts-zo4"/>
+                            <constraint firstItem="u0c-jW-z3c" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="j0f-DR-hFR" secondAttribute="leading" constant="15" id="K3A-VG-NNj"/>
+                            <constraint firstItem="u0c-jW-z3c" firstAttribute="centerY" secondItem="fHK-Pk-mpe" secondAttribute="centerY" id="K6l-bH-3Eo"/>
+                            <constraint firstItem="j0f-DR-hFR" firstAttribute="trailing" secondItem="Ap7-m9-9rC" secondAttribute="trailing" constant="15" id="OU0-0E-VET"/>
+                            <constraint firstItem="j0f-DR-hFR" firstAttribute="bottom" secondItem="Ap7-m9-9rC" secondAttribute="bottom" id="TNz-Hk-rRc"/>
+                            <constraint firstItem="Ap7-m9-9rC" firstAttribute="top" secondItem="j0f-DR-hFR" secondAttribute="top" id="icF-vb-jBP"/>
+                            <constraint firstItem="Ap7-m9-9rC" firstAttribute="leading" secondItem="j0f-DR-hFR" secondAttribute="leading" constant="15" id="pnT-Hi-uk7"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="j0f-DR-hFR"/>
+                    </view>
+                    <connections>
+                        <outlet property="labelNoNotification" destination="u0c-jW-z3c" id="8aJ-MQ-EUQ"/>
+                        <outlet property="tableviewBellNotificationList" destination="Ap7-m9-9rC" id="5xg-0Y-Qsr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="THH-FZ-zLd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1909" y="2274"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Gut-SP-gwr">
             <objects>
@@ -4841,9 +4888,9 @@ Form Library</string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rUE-Ub-BeR">
-                                        <rect key="frame" x="103" y="260" width="74" height="28"/>
+                                        <rect key="frame" x="105.5" y="260" width="69" height="28"/>
                                         <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
-                                        <state key="normal" title="Preview"/>
+                                        <state key="normal" title="Submit"/>
                                         <connections>
                                             <action selector="actionUploadNotice:" destination="um7-4p-3vh" eventType="touchUpInside" id="Ggt-b1-YVf"/>
                                         </connections>
@@ -4954,6 +5001,7 @@ Form Library</string>
     </scenes>
     <resources>
         <image name="addEvent" width="20" height="20"/>
+        <image name="bellNotification" width="16" height="16"/>
         <image name="calenderRed" width="15" height="15"/>
         <image name="clockIcon" width="64" height="70"/>
         <image name="college_default" width="114" height="114"/>

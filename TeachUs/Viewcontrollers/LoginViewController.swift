@@ -42,6 +42,7 @@ class LoginViewController: BaseViewController {
     }
     
     func showunavailableUSerView(){
+        self.view.endEditing(true)
         let viewUnauthoriseduser:ViewUnavailableProfile = ViewUnavailableProfile.instanceFromNib() as! ViewUnavailableProfile
         viewUnauthoriseduser.frame = self.view.frame
         self.view.addSubview(viewUnauthoriseduser)

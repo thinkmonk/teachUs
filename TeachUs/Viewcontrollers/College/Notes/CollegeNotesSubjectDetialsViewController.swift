@@ -69,18 +69,6 @@ class CollegeNotesSubjectDetialsViewController: BaseViewController {
                 viewController.filepath = filePath
                 viewController.fileURL = imageURL
                 self.navigationController?.pushViewController(viewController, animated: true)
-
-                
-                /*
-                let webView = UIWebView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.size.width, height:UIScreen.main.bounds.size.height))
-                webView.loadRequest(URLRequest(url: URL(fileURLWithPath: filePath)))
-                let pdfVC = BaseViewController() //create a view controller for view only purpose
-                pdfVC.view.addSubview(webView)
-                webView.scalesPageToFit = true
-                pdfVC.title = "\(URL(string: fileUrl)?.lastPathComponent ?? "")"
-                self.navigationController?.pushViewController(pdfVC, animated: true)
-                pdfVC.addGradientToNavBar()
-                */
             }else{// save file
                 GlobalFunction.downloadFileAndSaveToDisk(fileUrl: imageURL, customName: notesObejct.generatedFileName ?? "TeachUs\(Date())") { (success) in
                     DispatchQueue.main.async {

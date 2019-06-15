@@ -1,20 +1,19 @@
 //
-//  ProfessorCollegeListTableViewCell.swift
+//  BellNotificationListTableViewCell.swift
 //  TeachUs
 //
-//  Created by ios on 11/5/17.
-//  Copyright © 2017 TeachUs. All rights reserved.
+//  Created by ios on 6/15/19.
+//  Copyright © 2019 TeachUs. All rights reserved.
 //
 
 import UIKit
 
-class ProfessorCollegeListTableViewCell: UITableViewCell {
+class BellNotificationListTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var labelSubjectName: UILabel!
-    @IBOutlet weak var labelLogCount:UILabel!
+    @IBOutlet weak var labelNotificaitondate: UILabel!
+    @IBOutlet weak var labelNotificationDescription: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.makeTableCellEdgesRounded()
         // Initialization code
     }
 

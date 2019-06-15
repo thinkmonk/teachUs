@@ -395,7 +395,7 @@ extension EditProfileDetailsViewController{
     
     func openDocumentPicker(){
         let types = [kUTTypePDF, kUTTypeText, kUTTypeRTF, kUTTypeItem]
-        let importMenu = UIDocumentMenuViewController(documentTypes:types as [String], in: .import)
+        let importMenu = UIDocumentPickerViewController(documentTypes:types as [String], in: .import)
         importMenu.delegate = self
         importMenu.modalPresentationStyle = .formSheet
         self.present(importMenu, animated: true, completion: nil)
@@ -424,6 +424,13 @@ extension EditProfileDetailsViewController:UIDocumentMenuDelegate,UIDocumentPick
         self.chosenFile = myURL
         self.buttonSubmitProof.isHidden = false
         print("import result : \(myURL)")
+    }
+    
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
+        self.chosenFile = url
+        self.chosenImage = nil
+        print("import result : \(url)")
+        
     }
     
     

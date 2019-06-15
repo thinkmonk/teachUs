@@ -115,8 +115,6 @@ class ProfessorNotesDetailstViewController: BaseViewController {
         }
     }
     @objc func downloadNotes(_ sender:ButtonWithIndexPath){
-        
-        
         if let notesObejct = self.noteListData?.notesList?[sender.indexPath.section], let fileUrl = notesObejct.filePath{
             let imageURL = "\(fileUrl)"
             if let filePath = GlobalFunction.checkIfFileExisits(fileUrl: imageURL, name:notesObejct.generatedFileName ?? ""){
@@ -126,24 +124,13 @@ class ProfessorNotesDetailstViewController: BaseViewController {
                 viewController.filepath = filePath
                 viewController.fileURL = imageURL
                 self.navigationController?.pushViewController(viewController, animated: true)
-
-                /*
-                let view2 = WKWebView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.size.width, height:UIScreen.main.bounds.size.height))
-                let filepathURL = URL(fileURLWithPath: filePath)
-                view2.loadFileURL(filepathURL, allowingReadAccessTo: filepathURL)
-                
-//                let webView = UIWebView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.size.width, height:UIScreen.main.bounds.size.height))
-//                webView.loadRequest(URLRequest(url: URL(fileURLWithPath: filePath)))
-                let pdfVC = BaseViewController() //create a view controller for view only purpose
-                pdfVC.view.addSubview(view2)
-                pdfVC.title = "\(URL(string: fileUrl)?.lastPathComponent ?? "")"
-                self.navigationController?.pushViewController(pdfVC, animated: true)
-                pdfVC.addGradientToNavBar()
-                */
             }else{// save file
+                LoadingActivityHUD.showProgressHUD(view: self.view)
                 GlobalFunction.downloadFileAndSaveToDisk(fileUrl: imageURL, customName: notesObejct.generatedFileName ?? "TeachUs\(Date())") { (success) in
                     DispatchQueue.main.async {
                         self.tableViewNotesDetails.reloadRows(at: [sender.indexPath], with: .fade)
+                        LoadingActivityHUD.hideProgressHUD()
+
                     }
                 }
             }
@@ -229,7 +216,7 @@ class ProfessorNotesDetailstViewController: BaseViewController {
             let storageRef = storage.reference()
             let filePathReference = storageRef.child("\(mobilenumber)/Notes/")
             if let selectedImage = self.chosenImage,let jpedData = UIImageJPEGRepresentation(selectedImage, 1){
-                let fileNameRef = filePathReference.child("\(Date().timeIntervalSince1970).jpg")
+                let fileNameRef = filePathReference.child("\(Int64(Date().timeIntervalSince1970 * 1000)).jpg")
                 let uploadTask = fileNameRef.putData(jpedData, metadata: nil) { (metadata, error) in
                     LoadingActivityHUD.hideProgressHUD()
                     fileNameRef.downloadURL { (url, error) in
@@ -281,7 +268,6 @@ class ProfessorNotesDetailstViewController: BaseViewController {
                 }
             }
         }
-        LoadingActivityHUD.hideProgressHUD()
     }
     
 }
@@ -349,7 +335,7 @@ extension ProfessorNotesDetailstViewController{
     
     func openDocumentPicker(){
         let types = [kUTTypePDF, kUTTypeText, kUTTypeRTF, kUTTypeItem]
-        let importMenu = UIDocumentMenuViewController(documentTypes: types as [String], in: .import)
+        let importMenu = UIDocumentPickerViewController(documentTypes: types as [String], in: .import)
         importMenu.delegate = self
         importMenu.modalPresentationStyle = .formSheet
         self.present(importMenu, animated: true, completion: nil)
@@ -365,6 +351,13 @@ extension ProfessorNotesDetailstViewController:UIDocumentMenuDelegate,UIDocument
         self.chosenImage = nil
         self.labelFileName.text = self.chosenFile?.lastPathComponent ?? ""
         print("import result : \(myURL)")
+    }
+    
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
+        self.chosenFile = url
+        self.chosenImage = nil
+        print("import result : \(url)")
+        
     }
     
     

@@ -151,6 +151,7 @@ public struct Constants {
         static let notesProfesorListCellId = "CollegeSubjectAndProfessorNotesTableViewCellId"
         static let collegeNoticeListCell = "CollegeNoticeListTableViewCellId"
         static let notificationCellId = "NotificationListTableViewCellId"
+        static let bellNotificationCellId = "BellNotificationListTableViewCellId"
     }
     
     struct UserTypeString {

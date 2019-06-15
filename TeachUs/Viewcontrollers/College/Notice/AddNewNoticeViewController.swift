@@ -28,7 +28,7 @@ class AddNewNoticeViewController: BaseViewController {
     @IBOutlet weak var buttonPreviewNotice: UIButton!
     
     var imagePicker:UIImagePickerController?=UIImagePickerController()
-    var documentPicker:UIDocumentMenuViewController!
+    var documentPicker:UIDocumentPickerViewController!
     var chosenFile:URL?
     var chosenImage:UIImage?
     var viewClassList : ViewClassSelection!
@@ -161,7 +161,7 @@ class AddNewNoticeViewController: BaseViewController {
     
     func openDocumentPicker(){
         let types = [kUTTypePDF, kUTTypeText, kUTTypeRTF, kUTTypeItem]
-        self.documentPicker = UIDocumentMenuViewController(documentTypes: types as [String], in: .import)
+        self.documentPicker = UIDocumentPickerViewController(documentTypes: types as [String], in: .import)
         documentPicker.delegate = self
         documentPicker.modalPresentationStyle = .formSheet
         self.present(self.documentPicker, animated: true, completion: nil)
@@ -263,6 +263,12 @@ extension AddNewNoticeViewController:UIDocumentMenuDelegate,UIDocumentPickerDele
         print("import result : \(myURL)")
     }
     
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
+        self.chosenFile = url
+        self.chosenImage = nil
+        print("import result : \(url)")
+
+    }
     
     public func documentMenu(_ documentMenu:UIDocumentMenuViewController, didPickDocumentPicker documentPicker: UIDocumentPickerViewController) {
         documentPicker.delegate = self

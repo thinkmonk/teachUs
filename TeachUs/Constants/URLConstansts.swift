@@ -59,6 +59,8 @@ public struct URLConstants{
         static let getStudentNotesDetails = BaseUrl.baseURLV1 + "/student/notes_list_view"
         static let getStudentNotice = BaseUrl.baseURLV1 + "/student/notices"
         static let getNotificationList = BaseUrl.baseURLV1 + "/student/notifications"
+        static let getBellNotifications = BaseUrl.baseURLV1 + "/student/firebasenotification"
+
     }
     
     struct ProfessorURL {
@@ -90,6 +92,8 @@ public struct URLConstants{
         static let getNotice = BaseUrl.baseURLV1 + "/professor/notices"
         static let getNotificationList = BaseUrl.baseURLV1 + "/professor/notifications"
         static let duplicateAttendanceCheck =  BaseUrl.baseURLV1 + "/attendance/check_attendance_details"
+        static let getBellNotifications = BaseUrl.baseURLV1 + "/professor/firebasenotification"
+
     }
     
     
@@ -131,6 +135,7 @@ public struct URLConstants{
         static let getcollegeNotificationList = BaseUrl.baseURLV1 + "/college/notifications"
         static let colleegStudentattendanceFlow = BaseUrl.baseURLV1 + "/college/student_class_attendance"
         static let collegeStudentAttendanceDetails = BaseUrl.baseURLV1 + "/college/student_attendance"
+        static let getBellNotifications = BaseUrl.baseURLV1 + "/college/firebasenotification"
     }
     
     struct SyllabusURL {

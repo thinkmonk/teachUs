@@ -17,11 +17,12 @@ struct ProfessorSubjectList: Codable {
 }
 
 struct SubjectsDetail: Codable {
-    let subjectID, subjectName, classID: String
+    let subjectID, subjectName, classID, logCount: String
     
     enum CodingKeys: String, CodingKey {
         case subjectID = "subject_id"
         case subjectName = "subject_name"
         case classID = "class_id"
+        case logCount = "log_count"
     }
 }

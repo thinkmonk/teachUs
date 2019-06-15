@@ -52,6 +52,30 @@ class StudentNotesDetailsViewController: BaseViewController {
             LoadingActivityHUD.hideProgressHUD()
         }
     }
+    
+    @objc func downloadNotes(_ sender:ButtonWithIndexPath){
+        if let notesObejct = self.noteListData?.notesList?[sender.indexPath.section], let fileUrl = notesObejct.filePath{
+            let imageURL = "\(fileUrl)"
+            if let filePath = GlobalFunction.checkIfFileExisits(fileUrl: imageURL, name:notesObejct.generatedFileName ?? ""){
+                
+                let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let viewController = mainStoryboard.instantiateViewController(withIdentifier: Constants.viewControllerId.documentsVC) as! DocumentsViewController
+                viewController.filepath = filePath
+                viewController.fileURL = imageURL
+                self.navigationController?.pushViewController(viewController, animated: true)
+            }else{// save file
+                LoadingActivityHUD.showProgressHUD(view: self.view)
+                GlobalFunction.downloadFileAndSaveToDisk(fileUrl: imageURL, customName: notesObejct.generatedFileName ?? "TeachUs\(Date())") { (success) in
+                    DispatchQueue.main.async {
+                        self.tableViewStudentNotes.reloadRows(at: [sender.indexPath], with: .fade)
+                        LoadingActivityHUD.hideProgressHUD()
+                        
+                    }
+                }
+            }
+            
+        }
+    }
 
 }
 extension StudentNotesDetailsViewController:UITableViewDelegate, UITableViewDataSource{
@@ -67,8 +91,7 @@ extension StudentNotesDetailsViewController:UITableViewDelegate, UITableViewData
         let cell:notesDetailsTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.notesDetailsCellId) as! notesDetailsTableViewCell
         if let notes = self.noteListData?.notesList?[indexPath.section]{
             cell.setUpNotes(notesData: notes)
-            cell.buttonDownloadNotes.addTarget(self, action: #selector(ProfessorNotesDetailstViewController.downloadNotes(_:)), for: .touchUpInside)
-            cell.buttonDeleteNotes.addTarget(self, action: #selector(ProfessorNotesDetailstViewController.deleteNote(_:)), for: .touchUpInside)
+            cell.buttonDownloadNotes.addTarget(self, action: #selector(StudentNotesDetailsViewController.downloadNotes(_:)), for: .touchUpInside)
             cell.selectionStyle = .none
             cell.buttonDeleteNotes.isHidden = true
             cell.buttonDeleteNotes.setWidth(0)
