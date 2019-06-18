@@ -111,6 +111,7 @@ extension CollegeLogsProfessorListViewController:UITableViewDataSource, UITableV
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let professorLogsListVC = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorLogs) as! ProfessorLogsListViewController
         professorLogsListVC.isCollegeLogsSubjectData = true
+        professorLogsListVC.selectedProfessorName = details.professorName
         professorLogsListVC.selectedProffessorId = details.professorID
         professorLogsListVC.navigationController?.navigationBar.alpha = 1
         self.navigationController?.pushViewController(professorLogsListVC, animated: true)

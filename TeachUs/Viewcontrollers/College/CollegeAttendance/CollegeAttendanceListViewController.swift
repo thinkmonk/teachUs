@@ -28,7 +28,7 @@ class CollegeAttendanceListViewController: BaseViewController {
     @IBOutlet weak var buttonMailReport: UIButton!
     @IBOutlet weak var viewMailReportBg: UIView!
     @IBOutlet weak var viewCriteriaBg: UIView!
-    
+    @IBOutlet weak var buttonCloseMalReportView: UIButton!
     var viewClassList : ViewClassSelection!
     var viewEmailId : VerifyEmail!
 
@@ -82,6 +82,14 @@ class CollegeAttendanceListViewController: BaseViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    //MARK:- Outlet methods
+    
+    @IBAction func closeReportView(_ sender: Any) {
+        self.showMailView(value: false)
+    }
+    
     //MARK:- Custom Methods
     override func refresh(sender: AnyObject) {
         self.getClassAttendance()
@@ -324,6 +332,8 @@ extension  CollegeAttendanceListViewController: UITableViewDelegate, UITableView
 extension CollegeAttendanceListViewController:ViewClassSelectionDelegate{
     func classViewDismissed() {
         self.viewClassList.removeFromSuperview()
+        let selectedClassCount = CollegeClassManager.sharedManager.selectedClassArray.filter({$0.isSelected == true}).count
+        self.buttonSelectClass.setTitle("\(selectedClassCount) class", for: .normal)
         print("class dismissed")
     }
 }

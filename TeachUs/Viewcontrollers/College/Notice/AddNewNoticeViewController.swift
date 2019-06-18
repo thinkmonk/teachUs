@@ -9,6 +9,8 @@
 import UIKit
 import FirebaseStorage
 import MobileCoreServices
+import RxSwift
+import RxCocoa
 
 protocol AddNewNoticeDelegate {
     func viewDismissed()
@@ -29,19 +31,26 @@ class AddNewNoticeViewController: BaseViewController {
     
     var imagePicker:UIImagePickerController?=UIImagePickerController()
     var documentPicker:UIDocumentPickerViewController!
-    var chosenFile:URL?
-    var chosenImage:UIImage?
+//    var chosenFile:URL?
+//    var chosenImage:UIImage?
     var viewClassList : ViewClassSelection!
     let storage = Storage.storage()
     var delegate:AddNewNoticeDelegate!
+    
+    var noticeTitle = Variable<String>("")
+    var noticeDescription = Variable<String>("")
+    var chosenImage = Variable<UIImage?>(UIImage())
+    var chosenFile =  Variable<URL?>(URL(string: ""))
+    var myDisposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(AddNewNoticeViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(AddNewNoticeViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         self.initClassSelectionView()
+        self.buttonPreviewNotice.isHidden = true
         imagePicker?.delegate = self
-        // Do any additional setup after loading the view.
+        self.setUpRx()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,6 +64,23 @@ class AddNewNoticeViewController: BaseViewController {
     func initClassSelectionView(){
         self.viewClassList = ViewClassSelection.instanceFromNib() as? ViewClassSelection
         self.viewClassList.delegate = self
+    }
+    
+    func setUpRx(){
+        self.textfieldNoticeTitle.rx.text.map{$0 ?? ""}.bind(to: self.noticeTitle).disposed(by: myDisposeBag)
+        self.textViewDescription.rx.text.map{$0 ?? ""}.bind(to: self.noticeDescription).disposed(by: myDisposeBag)
+        
+        var isValid : Observable<Bool> {
+            return Observable.combineLatest(self.noticeTitle.asObservable(), self.noticeDescription.asObservable(), self.chosenFile.asObservable(), self.chosenImage.asObservable()){ title, description, file, image in
+                
+                return title.count > 2 && description.count > 2 && (self.chosenImage.value != nil || self.chosenFile.value != nil)
+            }
+        }
+        
+        isValid.asObservable().subscribe(onNext: {[weak self] (isValid) in
+            self?.buttonPreviewNotice.isHidden = !isValid
+        }).disposed(by: myDisposeBag)
+        
     }
     
     @IBAction func acctionDissmissView(_ sender: Any) {
@@ -83,8 +109,8 @@ class AddNewNoticeViewController: BaseViewController {
             manager.apiPost(apiName: "Upload nOtes", parameters:parameters, completionHandler: { (result, code, response) in
                 if let status = response["status"] as? Int, status == 200, let message = response["message"] as? String{
                     self.showAlterWithTitle("Success", alertMessage: message)
-                    self.chosenImage = nil
-                    self.chosenFile = nil
+                    self.chosenImage.value = nil
+                    self.chosenFile.value = nil
                 }
                 self.acctionDissmissView(self)
                 LoadingActivityHUD.hideProgressHUD()
@@ -175,7 +201,7 @@ class AddNewNoticeViewController: BaseViewController {
             
             let storageRef = storage.reference()
             let filePathReference = storageRef.child("\(mobilenumber)/Notice/")
-            if let selectedImage = self.chosenImage,let jpedData = UIImageJPEGRepresentation(selectedImage, 1){
+            if let selectedImage = self.chosenImage.value,let jpedData = UIImageJPEGRepresentation(selectedImage, 1){
                 let fileNameRef = filePathReference.child("\(Int64(Date().timeIntervalSince1970 * 1000)).jpg")
                 let uploadTask = fileNameRef.putData(jpedData, metadata: nil) { (metadata, error) in
                     LoadingActivityHUD.hideProgressHUD()
@@ -199,7 +225,7 @@ class AddNewNoticeViewController: BaseViewController {
                 }
             }
             
-            if let selectedFile = self.chosenFile{
+            if let selectedFile = self.chosenFile.value{
                 let fileNameRef = filePathReference.child("\(selectedFile.lastPathComponent)")
                 let uploadTask = fileNameRef.putFile(from: selectedFile, metadata: nil) { metadata, error in
                     LoadingActivityHUD.hideProgressHUD()
@@ -258,14 +284,14 @@ extension AddNewNoticeViewController:UIDocumentMenuDelegate,UIDocumentPickerDele
         guard let myURL = urls.first else {
             return
         }
-        self.chosenFile = myURL
-        self.chosenImage = nil
+        self.chosenFile.value = myURL
+        self.chosenImage.value = nil
         print("import result : \(myURL)")
     }
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
-        self.chosenFile = url
-        self.chosenImage = nil
+        self.chosenFile.value = url
+        self.chosenImage.value = nil
         print("import result : \(url)")
 
     }
@@ -294,8 +320,8 @@ extension AddNewNoticeViewController:UIImagePickerControllerDelegate,UINavigatio
     
     @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage{
-            self.chosenImage = image
-            self.chosenFile = nil
+            self.chosenImage.value = image
+            self.chosenFile.value = nil
         }
         
         if let videoURL = info["UIImagePickerControllerMediaURL"] as? URL{
@@ -312,7 +338,7 @@ extension AddNewNoticeViewController:UIImagePickerControllerDelegate,UINavigatio
             if fileSize > 26214400{
                 self.showAlterWithTitle("ERROR", alertMessage: "File size should be less than 25mb")
             }else{
-                self.chosenFile = videoURL
+                self.chosenFile.value  = videoURL
             }
             print(String(format: "SIZE OF VIDEO: %0.2f Mb", Float(fileSize) / 1024 / 1024))
         }

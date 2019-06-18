@@ -11,6 +11,8 @@ import MobileCoreServices
 import Firebase
 import FirebaseStorage
 import  WebKit
+import RxCocoa
+import RxSwift
 
 class ProfessorNotesDetailstViewController: BaseViewController {
 
@@ -23,9 +25,15 @@ class ProfessorNotesDetailstViewController: BaseViewController {
     @IBOutlet weak var buttonUploadNotes: UIButton!
     let nibCollegeListCell = "notesDetailsTableViewCell"
     var imagePicker:UIImagePickerController?=UIImagePickerController()
-    var chosenFile:URL?
-    var chosenImage:UIImage?
+//    var chosenFile:URL?
+//    var chosenImage:UIImage?
     let storage = Storage.storage()
+    
+    var noticeTitle = Variable<String>("")
+    var chosenImage = Variable<UIImage?>(UIImage())
+    var chosenFile =  Variable<URL?>(URL(string: ""))
+    var myDisposeBag = DisposeBag()
+
 
     var selectedNotesSubject:SubjectList!
     var noteListData : NotesSubjectDetails?
@@ -41,8 +49,12 @@ class ProfessorNotesDetailstViewController: BaseViewController {
         self.tableViewNotesDetails.estimatedRowHeight = 20
         self.tableViewNotesDetails.rowHeight = UITableViewAutomaticDimension
         imagePicker?.delegate = self
+        self.buttonUploadNotes.isHidden = true
+        self.setUpRx()
         // Do any additional setup after loading the view.
     }
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -53,6 +65,23 @@ class ProfessorNotesDetailstViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+    }
+    
+    
+    func setUpRx(){
+        self.textfiledName.rx.text.map{$0 ?? ""}.bind(to: self.noticeTitle).disposed(by: myDisposeBag)
+        
+        var isValid : Observable<Bool> {
+            return Observable.combineLatest(self.noticeTitle.asObservable(), self.chosenFile.asObservable(), self.chosenImage.asObservable()){ title, file, image in
+                
+                return title.count > 2 && (self.chosenImage.value != nil || self.chosenFile.value != nil)
+            }
+        }
+        
+        isValid.asObservable().subscribe(onNext: {[weak self] (isValid) in
+            self?.buttonUploadNotes.isHidden = !isValid
+        }).disposed(by: myDisposeBag)
+        
     }
     
     @IBAction func actionUploadNotes(_ sender: Any) {
@@ -193,8 +222,8 @@ class ProfessorNotesDetailstViewController: BaseViewController {
                     self.showAlterWithTitle("Success", alertMessage: message)
                     self.textfiledName.text  = ""
                     self.labelFileName.text = "File Name"
-                    self.chosenImage = nil
-                    self.chosenFile = nil
+                    self.chosenImage.value = nil
+                    self.chosenFile.value = nil
                     self.getNotes()
                 }
                 LoadingActivityHUD.hideProgressHUD()
@@ -215,7 +244,7 @@ class ProfessorNotesDetailstViewController: BaseViewController {
             
             let storageRef = storage.reference()
             let filePathReference = storageRef.child("\(mobilenumber)/Notes/")
-            if let selectedImage = self.chosenImage,let jpedData = UIImageJPEGRepresentation(selectedImage, 1){
+            if let selectedImage = self.chosenImage.value,let jpedData = UIImageJPEGRepresentation(selectedImage, 1){
                 let fileNameRef = filePathReference.child("\(Int64(Date().timeIntervalSince1970 * 1000)).jpg")
                 let uploadTask = fileNameRef.putData(jpedData, metadata: nil) { (metadata, error) in
                     LoadingActivityHUD.hideProgressHUD()
@@ -239,7 +268,7 @@ class ProfessorNotesDetailstViewController: BaseViewController {
                 }
             }
             
-            if let selectedFile = self.chosenFile{
+            if let selectedFile = self.chosenFile.value{
                 let fileNameRef = filePathReference.child("\(selectedFile.lastPathComponent)")
                 let uploadTask = fileNameRef.putFile(from: selectedFile, metadata: nil) { metadata, error in
                     LoadingActivityHUD.hideProgressHUD()
@@ -347,15 +376,15 @@ extension ProfessorNotesDetailstViewController:UIDocumentMenuDelegate,UIDocument
         guard let myURL = urls.first else {
             return
         }
-        self.chosenFile = myURL
-        self.chosenImage = nil
-        self.labelFileName.text = self.chosenFile?.lastPathComponent ?? ""
+        self.chosenFile.value = myURL
+        self.chosenImage.value = nil
+        self.labelFileName.text = self.chosenFile.value?.lastPathComponent ?? ""
         print("import result : \(myURL)")
     }
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
-        self.chosenFile = url
-        self.chosenImage = nil
+        self.chosenFile.value = url
+        self.chosenImage.value = nil
         print("import result : \(url)")
         
     }
@@ -377,8 +406,8 @@ extension ProfessorNotesDetailstViewController:UIImagePickerControllerDelegate,U
     
     @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage{
-            self.chosenImage = image
-            self.chosenFile = nil
+            self.chosenImage.value = image
+            self.chosenFile.value = nil
             self.labelFileName.text = "Image selected"
         }
         
@@ -396,7 +425,7 @@ extension ProfessorNotesDetailstViewController:UIImagePickerControllerDelegate,U
             if fileSize > 26214400{
                 self.showAlterWithTitle("ERROR", alertMessage: "File size should be less than 25mb")
             }else{
-                self.chosenFile = videoURL
+                self.chosenFile.value = videoURL
                 self.labelFileName.text = "Video selected"
             }
             print(String(format: "SIZE OF VIDEO: %0.2f Mb", Float(fileSize) / 1024 / 1024))

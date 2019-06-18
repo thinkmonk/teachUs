@@ -23,6 +23,7 @@ class ProfessorLogsListViewController: BaseViewController {
     var isCollegeLogsSubjectData:Bool = false //for college logs
     var selectedProffessorId:String? //for college logs
     var arraySubjectList:ProfessorSubjectList! //for college logs
+    var selectedProfessorName:String?
     
     
     override func viewDidLoad() {
@@ -43,8 +44,10 @@ class ProfessorLogsListViewController: BaseViewController {
         if(isCollegeLogsSubjectData){
             self.addGradientToNavBar()
             self.getCollegeLogsSubjectData()
+            self.title = self.selectedProfessorName
             self.buttonMailReport.isHidden = true
         }else{
+            self.title = ""
             self.buttonMailReport.isHidden = false
             self.getLogs()
         }

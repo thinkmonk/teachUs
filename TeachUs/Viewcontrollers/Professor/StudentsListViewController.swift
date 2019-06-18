@@ -49,7 +49,7 @@ class StudentsListViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.automaticallyAdjustsScrollViewInsets = true
         
         if self.isEditAttendanceFlow{
             self.getListForAttendanceEdit()
@@ -168,13 +168,18 @@ class StudentsListViewController: BaseViewController {
                     let studentDetail = Mapper<EnrolledStudentDetail>().map(JSON: student)
                     self.arrayStudentsDetails.append(studentDetail!)
                 }
-                if (Int((self.arrayStudentsDetails.first?.studentRollNo)!)) != nil{
-                    self.arrayStudentsDetails.sort(by: {Int($0.studentRollNo!)! < Int($1.studentRollNo!)!})
+                
+                
+                if let student = self.arrayStudentsDetails.first{
+                    if (Int(student.studentRollNo!) != nil){
+                        self.arrayStudentsDetails.sort(by: {Int($0.studentRollNo!)! < Int($1.studentRollNo!)!})
+
+                    }else{
+                        self.arrayStudentsDetails.sort( by: {$0.studentRollNo!.localizedStandardCompare($1.studentRollNo!) == .orderedAscending})
+
+                    }
                 }
-                else{
-                    self.arrayStudentsDetails.sort( by: {$0.studentRollNo!.localizedStandardCompare($1.studentRollNo!) == .orderedAscending})
-                    
-                }
+                
                 if(self.arrayStudentsDetails.count > 0){
                     self.initDatPicker()
                     self.setUpTableView()
@@ -662,9 +667,11 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
     @objc func showToTimePicker(){
         if(toTimePicker == nil){
             self.initToTimePicker()
+            self.toTimePicker.picker.date = NSCalendar.current.date(byAdding: .hour, value: 1, to: self.fromTimePicker.picker.date ) ?? Date()
             toTimePicker.showView(inView: self.view)
             
         }else{
+            self.toTimePicker.picker.date = NSCalendar.current.date(byAdding: .hour, value: 1, to: self.fromTimePicker.picker.date ) ?? Date()
             toTimePicker.showView(inView: self.view)
         }
     }
@@ -675,6 +682,7 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
             fromTimePicker.alpha = 0
             fromTimePicker.removeFromSuperview()
             self.makeDataSource()
+
         }
     }
     @objc func dismissToTimePicker(){
@@ -682,6 +690,7 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
             toTimePicker.alpha = 0
             toTimePicker.removeFromSuperview()
             self.makeDataSource()
+
         }
     }
     @objc func dismissDatePicker(){

@@ -48,6 +48,8 @@ class AddRemoveAdminViewController: BaseViewController {
         self.tableViewAdminList.alpha = 1.0
         self.getAdminList()
         self.getCourseList()
+        self.setUpRx()
+        self.buttonAdd.isHidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -58,7 +60,6 @@ class AddRemoveAdminViewController: BaseViewController {
         super.viewWillAppear(animated)
         self.viewAddAdminPhoneNumber.makeViewCircular()
         self.buttonAdd.roundedRedButton()
-        //self.setUpRx()
 
     }
     
@@ -261,21 +262,15 @@ class AddRemoveAdminViewController: BaseViewController {
         }
     }
     
-    /*
+    
     func setUpRx(){
-        self.textfieldRemoveAdminPhoneNumber.rx.controlEvent([UIControlEvents.editingDidBegin, UIControlEvents.editingChanged])
-        .asObservable()
-            .subscribe(onNext: { () in
-                self.adminDropdown.show()
+        self.textFieldPhoneNumber.rx.controlEvent([.editingChanged])
+            .asObservable().subscribe({ [unowned self] _ in
+                self.buttonAdd.isHidden = !((self.textFieldPhoneNumber.text?.count ?? 0) >= 10)
             }).disposed(by: disposeBag)
         
-        self.textfieldRemoveAdminPhoneNumber.rx.controlEvent([UIControlEvents.editingDidEnd])
-            .asObservable()
-            .subscribe(onNext: { () in
-                self.adminDropdown.hide()
-            }).disposed(by: disposeBag)
     }
- */
+
     /*
     func setupDropdown(){
         self.adminDropdown.anchorView = self.viewRemoveAdminPhoneNumber

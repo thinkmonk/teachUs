@@ -1576,10 +1576,30 @@ Form Library</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="omV-Ow-JfW">
-                                <rect key="frame" x="0.0" y="443" width="320" height="85"/>
+                                <rect key="frame" x="0.0" y="423" width="320" height="105"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HbS-h5-juF">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="20"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tpX-58-DVG">
+                                                <rect key="frame" x="266" y="0.0" width="39" height="20"/>
+                                                <inset key="contentEdgeInsets" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+                                                <state key="normal" image="cross"/>
+                                                <connections>
+                                                    <action selector="closeReportView:" destination="9bo-q2-C8x" eventType="touchUpInside" id="tre-zx-0lU"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="tpX-58-DVG" firstAttribute="centerY" secondItem="HbS-h5-juF" secondAttribute="centerY" id="0JW-zc-Qwg"/>
+                                            <constraint firstAttribute="height" constant="20" id="OW2-F5-e0V"/>
+                                            <constraint firstAttribute="trailing" secondItem="tpX-58-DVG" secondAttribute="trailing" constant="15" id="Xip-D2-Ksa"/>
+                                            <constraint firstItem="tpX-58-DVG" firstAttribute="top" secondItem="HbS-h5-juF" secondAttribute="top" id="YYc-Fv-jw2"/>
+                                        </constraints>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oen-nc-4nE">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="35"/>
+                                        <rect key="frame" x="0.0" y="20" width="320" height="35"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CPj-T6-Ns7">
                                                 <rect key="frame" x="10" y="8.5" width="128" height="18"/>
@@ -1627,7 +1647,7 @@ Form Library</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ROU-UZ-85N">
-                                        <rect key="frame" x="0.0" y="35" width="320" height="50"/>
+                                        <rect key="frame" x="0.0" y="55" width="320" height="50"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="oJ0-iL-Buh">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
@@ -1759,12 +1779,15 @@ Form Library</string>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="oen-nc-4nE" secondAttribute="trailing" id="0fh-07-iuh"/>
                                     <constraint firstAttribute="bottom" secondItem="ROU-UZ-85N" secondAttribute="bottom" id="2za-6I-4oW"/>
-                                    <constraint firstAttribute="height" constant="85" id="6Z7-Pp-OEm"/>
+                                    <constraint firstAttribute="height" constant="105" id="6Z7-Pp-OEm"/>
+                                    <constraint firstItem="oen-nc-4nE" firstAttribute="top" secondItem="HbS-h5-juF" secondAttribute="bottom" id="AJD-w8-Oec"/>
+                                    <constraint firstItem="HbS-h5-juF" firstAttribute="trailing" secondItem="oen-nc-4nE" secondAttribute="trailing" id="IPa-dC-55g"/>
+                                    <constraint firstItem="HbS-h5-juF" firstAttribute="top" secondItem="omV-Ow-JfW" secondAttribute="top" id="PU5-7K-lyw"/>
                                     <constraint firstItem="oen-nc-4nE" firstAttribute="leading" secondItem="omV-Ow-JfW" secondAttribute="leading" id="Tgq-F1-7Pw"/>
-                                    <constraint firstItem="oen-nc-4nE" firstAttribute="top" secondItem="omV-Ow-JfW" secondAttribute="top" id="dXt-Cq-Sj6"/>
                                     <constraint firstItem="ROU-UZ-85N" firstAttribute="leading" secondItem="oen-nc-4nE" secondAttribute="leading" id="fDj-sr-Xf5"/>
                                     <constraint firstItem="ROU-UZ-85N" firstAttribute="top" secondItem="oen-nc-4nE" secondAttribute="bottom" id="hl3-dL-ipi"/>
                                     <constraint firstItem="ROU-UZ-85N" firstAttribute="trailing" secondItem="oen-nc-4nE" secondAttribute="trailing" id="n9m-cd-cxk"/>
+                                    <constraint firstItem="HbS-h5-juF" firstAttribute="leading" secondItem="oen-nc-4nE" secondAttribute="leading" id="uf9-1l-BBP"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hLf-iA-lJh">
@@ -1804,6 +1827,7 @@ Form Library</string>
                     </navigationItem>
                     <connections>
                         <outlet property="buttonClassDropDown" destination="3go-X3-pc0" id="nFz-Ng-fFj"/>
+                        <outlet property="buttonCloseMalReportView" destination="tpX-58-DVG" id="YLF-9Q-JSF"/>
                         <outlet property="buttonCriteriaDropDown" destination="vxT-jX-tTe" id="gef-M6-lFO"/>
                         <outlet property="buttonFromDate" destination="qkC-vQ-9ZO" id="4tE-lO-ZsR"/>
                         <outlet property="buttonMailReport" destination="hLf-iA-lJh" id="aCY-Ak-gEi"/>

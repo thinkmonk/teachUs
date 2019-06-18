@@ -125,6 +125,7 @@ extension ProfessorAttedanceViewController:UITableViewDataSource, UITableViewDel
             
             collegeCell.labelSubjectName.text = "\(self.arrayCollegeList![indexPath.section].yearName!)\(self.arrayCollegeList![indexPath.section].courseCode!) - \(self.arrayCollegeList![indexPath.section].subjectName!) - \(self.arrayCollegeList![indexPath.section].classDivision!)"
             collegeCell.selectionStyle = UITableViewCellSelectionStyle.none
+            collegeCell.labelLogCount.isHidden = true
             collegeCell.accessoryType = .disclosureIndicator
             cell = collegeCell
         }

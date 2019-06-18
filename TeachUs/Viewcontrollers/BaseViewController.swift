@@ -15,6 +15,7 @@ class BaseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.automaticallyAdjustsScrollViewInsets = false
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: #selector(BaseViewController.refresh(sender:)), for: UIControlEvents.valueChanged)
         // Do any additional setup after loading the view.

@@ -46,6 +46,7 @@ class LoginViewController: BaseViewController {
         let viewUnauthoriseduser:ViewUnavailableProfile = ViewUnavailableProfile.instanceFromNib() as! ViewUnavailableProfile
         viewUnauthoriseduser.frame = self.view.frame
         self.view.addSubview(viewUnauthoriseduser)
+        viewUnauthoriseduser.parentViewController = self
         self.view.bringSubview(toFront: viewUnauthoriseduser)
         self.view.bringSubview(toFront: viewUnauthoriseduser)
     }
