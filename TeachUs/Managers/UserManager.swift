@@ -238,7 +238,7 @@ class UserManager{
         guard let appUser = userResponse["user_details"] as? [String:Any]  else {
             return
         }
-        self.appUserDetails = NSEntityDescription.insertNewObject(forEntityName: "UserDetails", into: DatabaseManager.managedContext) as! UserDetails
+        self.appUserDetails = NSEntityDescription.insertNewObject(forEntityName: "UserDetails", into: DatabaseManager.managedContext) as? UserDetails
         self.appUserDetails.login_id = (appUser["login_id"] as! String)
         self.appUserDetails.firstName = appUser["f_name"] as? String
         self.appUserDetails.lastName = appUser["l_name"] as? String
@@ -276,6 +276,9 @@ class UserManager{
         collegeDetails.college_name = college["college_name"] as? String
         collegeDetails.college_code = college["college_code"] as? String
         collegeDetails.role_name = college["role_name"] as? String
+        if let notificationsCount = college["total_notification"] as? String{
+            collegeDetails.notificationCount = notificationsCount
+        }
         self.appUserCollegeArray.append(collegeDetails)
         self.saveDbContext()
     }

@@ -13,7 +13,7 @@ class HomeViewController: BaseViewController{
     
     var pageMenu : CAPSPageMenu?
     var controllersArray : [UIViewController] = []
-
+    var notificaitonLabel:UILabel!
     let purpleInspireColor = UIColor(red:0.13, green:0.03, blue:0.25, alpha:1.0)
 
     override func viewDidLoad() {
@@ -39,10 +39,40 @@ class HomeViewController: BaseViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.title = "\(UserManager.sharedUserManager.userFullName)"
+        
         self.addColorToNavBarText(color: UIColor.white)
 //        self.addChildViewController(pageMenu!)
 //        self.view.addSubview(pageMenu!.view)
 //        pageMenu?.didMove(toParentViewController: self)
+        
+        self.addNotificaitonLabel()
+    }
+    
+    
+    func addNotificaitonLabel(){
+        // badge label
+        if notificaitonLabel == nil{
+            notificaitonLabel = UILabel(frame: CGRect(x: 10, y: -10, width: 18, height: 18))
+            notificaitonLabel.layer.borderColor = UIColor.clear.cgColor
+            notificaitonLabel.layer.borderWidth = 2
+            notificaitonLabel.layer.cornerRadius = notificaitonLabel.bounds.size.height / 2
+            notificaitonLabel.textAlignment = .center
+            notificaitonLabel.layer.masksToBounds = true
+            notificaitonLabel.font = UIFont.systemFont(ofSize: 12)
+            notificaitonLabel.textColor = .white
+            notificaitonLabel.backgroundColor = .red
+            notificaitonLabel.text = UserManager.sharedUserManager.appUserCollegeDetails.notificationCount
+            
+            // button
+            let rightButton = UIButton(frame: CGRect(x: 0, y: 0, width: 18, height: 16))
+            rightButton.setBackgroundImage(UIImage(named: "bellNotification"), for: .normal)
+            rightButton.addTarget(self, action: #selector(bellNotificationAction), for: .touchUpInside)
+            rightButton.addSubview(notificaitonLabel)
+            
+            // Bar button item
+            let rightBarButtomItem = UIBarButtonItem(customView: rightButton)
+            navigationItem.rightBarButtonItem = rightBarButtomItem
+        }
 
     }
     
@@ -70,6 +100,10 @@ class HomeViewController: BaseViewController{
         
         
         
+    }
+    
+    @objc func bellNotificationAction(){
+        self.performSegue(withIdentifier: Constants.segues.toBellNotificationList, sender: self)
     }
 
     @objc func hamburgerAction() {
@@ -100,9 +134,15 @@ extension HomeViewController:LeftMenuDeleagte{
             child.moveToViewController(at: item)
             break
         }
-//        makeDataSource()
+        
+        if let label = self.notificaitonLabel{
+            label.text = UserManager.sharedUserManager.appUserCollegeDetails.notificationCount
+        }
+
     }
     
+    func updateBellNotificaitonCount(){
+    }
     
 
 }

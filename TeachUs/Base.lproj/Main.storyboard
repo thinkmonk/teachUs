@@ -699,15 +699,10 @@ Form Library</string>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="CGw-1k-7hg"/>
                     </view>
-                    <navigationItem key="navigationItem" id="OUp-tZ-i5g">
-                        <barButtonItem key="rightBarButtonItem" image="bellNotification" style="plain" id="wPT-IU-xdp">
-                            <connections>
-                                <segue destination="fbb-JT-spQ" kind="show" id="2R3-T6-7Rt"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="OUp-tZ-i5g"/>
                     <connections>
                         <segue destination="3Ky-B3-8mm" kind="show" identifier="toEditProfile" id="tgg-fJ-z21"/>
+                        <segue destination="fbb-JT-spQ" kind="show" identifier="toBellNotification" id="dag-7N-tkT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WbJ-Y2-iKd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -5025,7 +5020,6 @@ Form Library</string>
     </scenes>
     <resources>
         <image name="addEvent" width="20" height="20"/>
-        <image name="bellNotification" width="16" height="16"/>
         <image name="calenderRed" width="15" height="15"/>
         <image name="clockIcon" width="64" height="70"/>
         <image name="college_default" width="114" height="114"/>

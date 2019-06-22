@@ -2,8 +2,8 @@
 //  CollegeDetails+CoreDataProperties.swift
 //  TeachUs
 //
-//  Created by ios on 3/18/18.
-//  Copyright © 2018 TeachUs. All rights reserved.
+//  Created by ios on 6/22/19.
+//  Copyright © 2019 TeachUs. All rights reserved.
 //
 //
 
@@ -20,9 +20,10 @@ extension CollegeDetails {
     @NSManaged public var college_code: String?
     @NSManaged public var college_id: String?
     @NSManaged public var college_name: String?
+    @NSManaged public var isCurrentProile: Bool
     @NSManaged public var privilege: String?
     @NSManaged public var role_id: String?
     @NSManaged public var role_name: String?
-    @NSManaged public var isCurrentProile: Bool
+    @NSManaged public var notificationCount: String?
 
 }

@@ -28,8 +28,8 @@ class CollegeClassRatingListViewController: BaseViewController {
         self.tableViewClassList.alpha = 0.0
         self.tableViewClassList.addSubview(refreshControl)
         self.initEmailIdView()
-        NotificationCenter.default.addObserver(self, selector: #selector(CollegeAttendanceListViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(CollegeAttendanceListViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(CollegeClassRatingListViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(CollegeClassRatingListViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         self.initEmailIdView()
         self.getClassRating()
     }
@@ -62,7 +62,7 @@ class CollegeClassRatingListViewController: BaseViewController {
     
     @objc func keyboardWillHide(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size{
-            self.viewEmailId.viewBg.center = self.view.center
+            self.viewEmailId.viewBg.center = UIApplication.shared.keyWindow?.center ?? self.tableViewClassList.center
         }
     }
     
@@ -74,8 +74,10 @@ class CollegeClassRatingListViewController: BaseViewController {
     }
     
     func showEmailView(){
-        self.viewEmailId.frame = CGRect(x: 0.0, y: 0.0, width: self.view.width(), height: self.view.height())
-        self.view.addSubview(self.viewEmailId)
+        if let window = UIApplication.shared.keyWindow{
+            self.viewEmailId.frame = CGRect(x: 0.0, y: 0.0, width: window.width(), height: window.height())
+            window.addSubview(viewEmailId)
+        }
     }
     
     func showOtpView(){

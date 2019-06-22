@@ -127,6 +127,7 @@
 		81727B901F9E6EB1006433E8 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81727B8F1F9E6EB1006433E8 /* Notification.swift */; };
 		81727B921F9E70CC006433E8 /* LeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81727B911F9E70CC006433E8 /* LeftMenuViewController.swift */; };
 		81727B941F9E70EE006433E8 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81727B931F9E70EE006433E8 /* HomeViewController.swift */; };
+		8174684822BE7E7E00488B50 /* UIBarButtonItem+Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8174684722BE7E7E00488B50 /* UIBarButtonItem+Badge.swift */; };
 		817BDAE51FB898C700492822 /* ButtonWithIndexPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817BDAE41FB898C700492822 /* ButtonWithIndexPath.swift */; };
 		817C28A9223D50D8000E0544 /* CollegeProfSubjectDetials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817C28A8223D50D8000E0544 /* CollegeProfSubjectDetials.swift */; };
 		8180D9081FD3D21B00CE803F /* SuperAdminProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8180D9071FD3D21B00CE803F /* SuperAdminProfile.swift */; };
@@ -465,6 +466,8 @@
 		81727B8F1F9E6EB1006433E8 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		81727B911F9E70CC006433E8 /* LeftMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftMenuViewController.swift; sourceTree = "<group>"; };
 		81727B931F9E70EE006433E8 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		8174684622BE78A700488B50 /* TeachUs (Offline) 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeachUs (Offline) 2.xcdatamodel"; sourceTree = "<group>"; };
+		8174684722BE7E7E00488B50 /* UIBarButtonItem+Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Badge.swift"; sourceTree = "<group>"; };
 		817553511B457FEB4E645FC1 /* Pods-TeachUs.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeachUs.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeachUs/Pods-TeachUs.release.xcconfig"; sourceTree = "<group>"; };
 		817BDAE41FB898C700492822 /* ButtonWithIndexPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWithIndexPath.swift; sourceTree = "<group>"; };
 		817C28A8223D50D8000E0544 /* CollegeProfSubjectDetials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeProfSubjectDetials.swift; sourceTree = "<group>"; };
@@ -974,6 +977,7 @@
 				817BDAE41FB898C700492822 /* ButtonWithIndexPath.swift */,
 				813C0D9F21EB7C7100B04E61 /* GlobalFunction.swift */,
 				8161AF66222C5922001F73B5 /* CollegeClassManager.swift */,
+				8174684722BE7E7E00488B50 /* UIBarButtonItem+Badge.swift */,
 			);
 			path = CustomClass;
 			sourceTree = "<group>";
@@ -2060,6 +2064,7 @@
 				81A80EDB1FAE14A400DDFFA1 /* NetworkHandler.swift in Sources */,
 				81BC49AD2299D2C700549867 /* ChangeRequest.swift in Sources */,
 				8102FDFD2243605900A7067B /* AttendanceDetailsValuesTableViewCell.swift in Sources */,
+				8174684822BE7E7E00488B50 /* UIBarButtonItem+Badge.swift in Sources */,
 				819216EC1FB81BA6009B56C0 /* ViewNumberPicker.swift in Sources */,
 				81A7D056208B6E550032A1BC /* RatingClassList.swift in Sources */,
 				81D7CE841FAB8E5D00C4375E /* CAPSPageMenu+UIConfiguration.swift in Sources */,
@@ -2570,10 +2575,11 @@
 		8163EB0220541D38003E4B1D /* TeachUs.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				8174684622BE78A700488B50 /* TeachUs (Offline) 2.xcdatamodel */,
 				81FEC7FC20F113D7003FBDBE /* TeachUs 2(Offline).xcdatamodel */,
 				8163EB0320541D38003E4B1D /* TeachUs.xcdatamodel */,
 			);
-			currentVersion = 81FEC7FC20F113D7003FBDBE /* TeachUs 2(Offline).xcdatamodel */;
+			currentVersion = 8174684622BE78A700488B50 /* TeachUs (Offline) 2.xcdatamodel */;
 			path = TeachUs.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

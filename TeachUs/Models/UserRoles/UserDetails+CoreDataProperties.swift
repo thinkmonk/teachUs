@@ -2,8 +2,8 @@
 //  UserDetails+CoreDataProperties.swift
 //  TeachUs
 //
-//  Created by ios on 3/11/18.
-//  Copyright © 2018 TeachUs. All rights reserved.
+//  Created by ios on 6/22/19.
+//  Copyright © 2019 TeachUs. All rights reserved.
 //
 //
 
@@ -23,6 +23,7 @@ extension UserDetails {
     @NSManaged public var lastName: String?
     @NSManaged public var login_id: String?
     @NSManaged public var profilePicUrl: String?
+    @NSManaged public var notificationCount: String?
     @NSManaged public var college: NSSet?
 
 }
