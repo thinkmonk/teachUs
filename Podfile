@@ -12,6 +12,7 @@ target 'TeachUs' do
     pod 'XLPagerTabStrip', '~> 8.0'
     pod 'Firebase/Core'
     pod 'Firebase/Storage'
+    pod 'Firebase/Messaging'
 
   # Pods for TeachUs
 

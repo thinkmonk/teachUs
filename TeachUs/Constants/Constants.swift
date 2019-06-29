@@ -110,6 +110,7 @@ public struct Constants {
         static let roleName = "roleName"
         static let offlineCollegeName = "offlineCollegeName"
         static let deviceToken = "deviceToken"
+        static let fcmToken = "fcmToken"
     }
     
     struct NumberConstants {

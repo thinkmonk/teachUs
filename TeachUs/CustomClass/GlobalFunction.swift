@@ -147,6 +147,20 @@ class GlobalFunction{
         }
         return token
     }
+    
+    class func setFCMToken(_ fcmToken:String){
+        UserDefaults.standard.set(fcmToken, forKey: Constants.UserDefaults.fcmToken)
+        UserDefaults.standard.synchronize()
+
+    }
+    
+    class func getFCMDeviceToken() -> String {
+        guard let token = UserDefaults.standard.value(forKey: Constants.UserDefaults.fcmToken) as? String else {
+            return ""
+        }
+        return token
+    }
+
 
 }
 

@@ -54,38 +54,19 @@ class LoginViewController: BaseViewController {
     func setUpLoginView(){
         
         switch UserManager.sharedUserManager.user! {
-        case .Student, .Professor:
+        case  .Professor:
             studentLoginView = (LoginView.instanceFromNib() as! LoginView)
             studentLoginView.userType = UserManager.sharedUserManager.user!
             studentLoginView.setUpView()
             studentLoginView.showView(inView: self.view)
             studentLoginView.delegate = self
             break
-        case .College:
+        case .Student,.College:
             collegeLogin = (CollegeLogin.instanceFromNib() as! CollegeLogin)
+            collegeLogin.userType = UserManager.sharedUserManager.user!
             collegeLogin.delegate = self
             collegeLogin.setUpView()
             self.collegeLogin.showView(inView: self.view, yPosition: (self.statusBarHeight+self.navBarHeight+20))
-            /*
-            let manager = NetworkHandler()
-            manager.url = URLConstants.CollegeURL.getCollegeList
-            LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
-            manager.apiGet(apiName: "Get College ka list", completionHandler: { (response,code ) in
-                let collegeDetails = response["college_list"] as![[String:Any]]
-                var collegeArray:[CollegesListModel] = []
-                for college in collegeDetails{
-                    let tempCollege:CollegesListModel = Mapper<CollegesListModel>().map(JSON:college)!
-                    collegeArray.append(tempCollege)
-                }
-                self.collegeLogin.arrayCollegeList = collegeArray
-                self.collegeLogin.setUpSelectCollegeView()
-                self.collegeLogin.showView(inView: self.view, yPosition: (self.statusBarHeight+self.navBarHeight+20))
-                LoadingActivityHUD.hideProgressHUD()
-            }, failure: { (error, code , message) in
-                print(message)
-                LoadingActivityHUD.hideProgressHUD()
-
-            })*/
             
             break
         }

@@ -21,6 +21,7 @@ class CollegeLogin: UIView {
     @IBOutlet weak var viewMobileNumberTf: UIView!
     @IBOutlet weak var textFieldMobileNumber: UITextField!
     @IBOutlet weak var buttonSendOtp: UIButton!
+    @IBOutlet weak var labelTitle: UILabel!
     
     @IBOutlet weak var viewVerifyOtp: UIView!
     @IBOutlet weak var labelMobileNumber: UILabel!
@@ -28,10 +29,9 @@ class CollegeLogin: UIView {
     @IBOutlet weak var textFieldOtp: UITextField!
     @IBOutlet weak var buttonVerifyOtp: UIButton!
     @IBOutlet weak var labelOtpTimeLeft: UILabel!
-    
+    var userType:LoginUserType!
     var disposeBag: DisposeBag! = DisposeBag()
     var delegate:CollegeLoginDelegate!
-    var userType:LoginUserType!
     let picker = UIPickerView()
     var mobileNumber = ""
     
@@ -72,6 +72,15 @@ class CollegeLogin: UIView {
         self.viewVerifyOtp.alpha = 0
         self.labelOtpTimeLeft.makeViewCircular()
         self.labelOtpTimeLeft.isHidden = true
+        
+        switch self.userType! {
+        case .College:
+            self.labelTitle.text = "COLLEGE"
+        case .Student:
+            self.labelTitle.text = "STUDENT"
+        default:
+            break
+        }
 
     }
     

@@ -147,6 +147,7 @@
                 <outlet property="buttonVerifyOtp" destination="9D3-rh-1LY" id="Kae-YN-abt"/>
                 <outlet property="labelMobileNumber" destination="agf-v7-lu0" id="05e-FP-Wfg"/>
                 <outlet property="labelOtpTimeLeft" destination="hpU-IL-i5t" id="FkU-9j-oVh"/>
+                <outlet property="labelTitle" destination="eU0-Rw-fOC" id="mvn-J6-cyd"/>
                 <outlet property="stackViewEnterOTp" destination="7Hx-Jh-wGI" id="ClM-Vt-IgM"/>
                 <outlet property="textFieldMobileNumber" destination="FzZ-yn-JJ7" id="Aa0-LD-tXQ"/>
                 <outlet property="textFieldOtp" destination="Zw7-uq-Msu" id="kkO-PA-XaK"/>
