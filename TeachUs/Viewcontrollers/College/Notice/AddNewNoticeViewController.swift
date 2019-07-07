@@ -28,6 +28,7 @@ class AddNewNoticeViewController: BaseViewController {
     @IBOutlet weak var labelClassNames: UILabel!
     @IBOutlet weak var buttonSelectClass: UIButton!
     @IBOutlet weak var buttonPreviewNotice: UIButton!
+    @IBOutlet weak var roleSwitch: UISwitch!
     
     var imagePicker:UIImagePickerController?=UIImagePickerController()
     var documentPicker:UIDocumentPickerViewController!
@@ -103,7 +104,7 @@ class AddNewNoticeViewController: BaseViewController {
                 "description":"\(self.textViewDescription.text ?? "")",
                 "doc":fileURL.absoluteString,
                 "file_name":"\(fileName)",
-                "role_id":"1,2,3",
+                "role_id": self.roleSwitch.isOn ? "2,3" : "1,3",
                 "doc_size":"\(fileSize)"
             ]
             manager.apiPost(apiName: "Upload nOtes", parameters:parameters, completionHandler: { (result, code, response) in
