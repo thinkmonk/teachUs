@@ -96,7 +96,7 @@ class GlobalFunction{
         if let url = URL(string: fileUrl) {
             let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
             let filePathURL = NSURL(fileURLWithPath: path)
-            if let pathComponent = filePathURL.appendingPathComponent(name) {
+            if let pathComponent = filePathURL.appendingPathComponent(name.replacingOccurrences(of: "/", with: "")) {
                 let filePath = pathComponent.path
                 let fileManager = FileManager.default
                 if fileManager.fileExists(atPath: filePath) {
@@ -125,7 +125,8 @@ class GlobalFunction{
                 }
                 // move the downloaded file from the temporary location url to your app documents directory
                 do {
-                    try FileManager.default.moveItem(at: location, to: self.documents.appendingPathComponent(customName))
+                    let newCustomName = customName.replacingOccurrences(of: "/", with: "")
+                    try FileManager.default.moveItem(at: location, to: self.documents.appendingPathComponent(newCustomName))
                     completion(true)
                 } catch {
                     print(error.localizedDescription)

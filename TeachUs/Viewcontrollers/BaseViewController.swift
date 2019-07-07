@@ -244,7 +244,8 @@ class BaseViewController: UIViewController {
         let manager = NetworkHandler()
         manager.url = URLConstants.Login.deleteDeviceToken
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
-        manager.apiPost(apiName: "Delete user's device token", parameters:nil, completionHandler: { (result, code, response) in
+        let parameters:[String:Any] = ["device_token":"\(GlobalFunction.getFCMDeviceToken())"]
+        manager.apiPost(apiName: "Delete user's device token", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             if(code == 200){
                 UserDefaults.standard.set(NSNumber(value: 0), forKey: "INSTALLED")

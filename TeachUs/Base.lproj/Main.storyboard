@@ -215,7 +215,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="12j-5s-uFj">
-                                        <rect key="frame" x="275" y="15" width="30" height="30"/>
+                                        <rect key="frame" x="275" y="20" width="30" height="30"/>
                                         <state key="normal" title="Edit">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -232,7 +232,6 @@
                                     <constraint firstAttribute="trailing" secondItem="AAW-Ai-b3y" secondAttribute="trailing" constant="10" id="JFz-Nf-YX0"/>
                                     <constraint firstItem="AAW-Ai-b3y" firstAttribute="leading" secondItem="eHv-Ej-Fxt" secondAttribute="trailing" constant="5" id="QG5-Bm-0Jl"/>
                                     <constraint firstItem="MPE-d0-Bjy" firstAttribute="leading" secondItem="aAR-hT-63q" secondAttribute="leading" constant="20" symbolic="YES" id="Zu7-nz-dHl"/>
-                                    <constraint firstItem="12j-5s-uFj" firstAttribute="top" secondItem="aAR-hT-63q" secondAttribute="top" constant="15" id="Zye-JI-fNp"/>
                                     <constraint firstItem="IL7-sd-yj5" firstAttribute="leading" secondItem="aAR-hT-63q" secondAttribute="leading" constant="20" symbolic="YES" id="e1n-vz-G4X"/>
                                     <constraint firstItem="MPE-d0-Bjy" firstAttribute="top" secondItem="IL7-sd-yj5" secondAttribute="bottom" constant="5" id="esy-WZ-ysB"/>
                                     <constraint firstItem="IL7-sd-yj5" firstAttribute="top" secondItem="Vf5-km-JTb" secondAttribute="bottom" constant="5" id="gdC-d6-1Rw"/>
@@ -289,6 +288,7 @@
                             <constraint firstItem="eU9-ki-WaB" firstAttribute="bottom" secondItem="she-Ex-G8J" secondAttribute="bottom" id="AlN-vx-uVW"/>
                             <constraint firstItem="aAR-hT-63q" firstAttribute="height" secondItem="gCW-AG-obA" secondAttribute="height" multiplier="0.35" id="CYp-Qf-yxy"/>
                             <constraint firstItem="she-Ex-G8J" firstAttribute="trailing" secondItem="uiI-1d-Hwd" secondAttribute="trailing" id="FWD-md-nzF"/>
+                            <constraint firstItem="uiI-1d-Hwd" firstAttribute="top" secondItem="12j-5s-uFj" secondAttribute="top" id="O3A-cJ-omX"/>
                             <constraint firstItem="aAR-hT-63q" firstAttribute="trailing" secondItem="uiI-1d-Hwd" secondAttribute="trailing" id="OOH-V1-Ceg"/>
                             <constraint firstItem="aAR-hT-63q" firstAttribute="top" secondItem="CRB-vk-sUi" secondAttribute="top" id="PP7-34-r7p"/>
                             <constraint firstItem="uiI-1d-Hwd" firstAttribute="trailing" secondItem="gCW-AG-obA" secondAttribute="trailing" id="RL2-xC-lKJ"/>

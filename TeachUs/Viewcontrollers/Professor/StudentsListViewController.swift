@@ -83,6 +83,7 @@ class StudentsListViewController: BaseViewController {
         self.addGradientToNavBar()
         self.addColorToNavBarText(color: UIColor.white)
         self.buttonSubmit.themeRedButton()
+        self.buttonSubmit.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -743,6 +744,7 @@ extension StudentsListViewController:AttendanceCalenderTableViewCellDelegate{
     }
     
     func showSubmit() {
+        self.buttonSubmit.isHidden = false
         self.topConstraintButtonSubmit.constant = 0
         UIView.animate(withDuration: 0.3) {
             self.topConstraintButtonSubmit.constant -= self.buttonSubmit.height()
@@ -753,6 +755,7 @@ extension StudentsListViewController:AttendanceCalenderTableViewCellDelegate{
         self.topConstraintButtonSubmit.constant = -self.buttonSubmit.height()
         UIView.animate(withDuration: 0.3) {
             self.topConstraintButtonSubmit.constant = 0
+            self.buttonSubmit.isHidden = true
         }
     }
 }

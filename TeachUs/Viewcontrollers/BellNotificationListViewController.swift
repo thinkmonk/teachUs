@@ -81,7 +81,7 @@ extension BellNotificationListViewController:UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:BellNotificationListTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.bellNotificationCellId, for: indexPath) as! BellNotificationListTableViewCell
         
-        if let bellNotificationObj = self.arrayNotifications?.notifications?[indexPath.row]{
+        if let bellNotificationObj = self.arrayNotifications?.notifications?[indexPath.section]{
             cell.labelNotificationDescription.text = "\(bellNotificationObj.data?.message ?? "NA")"
             cell.labelNotificaitondate.text = "\(bellNotificationObj.created ?? "")"
         }
