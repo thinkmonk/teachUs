@@ -188,10 +188,13 @@ extension OfflineMarkCompletedPortionViewController:UITableViewDelegate, UITable
             cell.buttonCompleted.selectedDefaultButton()
             cell.labelStatus.textColor = UIColor.rgbColor(299.0, 0.0, 0.0)   //#E50000
             cell.viewDisableCell.alpha = 0
-            let topicList = ["topic_id":"\(chapterCell.topic_id)",
-                "status":"1" ]
-            self.updateUnitListArray(list: topicList)
-            self.updatedTopicList.append(topicList)
+            if let topicId = chapterCell.topic_id
+            {
+                let topicList = ["topic_id":"\(topicId)",
+                    "status":"1" ]
+                self.updateUnitListArray(list: topicList)
+                self.updatedTopicList.append(topicList)
+            }
 
             //            cell.viewStatusStack.alpha = 1
             //            cell.viewwSeperator.alpha = 1
