@@ -16,9 +16,16 @@ class CollegeNoticeListTableViewCell: UITableViewCell {
     @IBOutlet weak var buttonDownload: ButtonWithIndexPath!
     @IBOutlet weak var labelNoticeClassDetails: UILabel!
     @IBOutlet weak var viewWrapper: UIView!
+    @IBOutlet weak var labelRecipientDetails:UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+    }
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        self.viewWrapper.makeTableCellEdgesRounded()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -32,7 +39,9 @@ class CollegeNoticeListTableViewCell: UITableViewCell {
         self.labelNoticeTitle.text = noticeObject.title ?? ""
         self.labelNoticeDescription.text = noticeObject.noticeDescription ?? ""
         self.labelNoticeClassDetails.text = "Send to \(noticeObject.courses ?? "")"
-        if let fileUrl = noticeObject.filePath{
+        if let fileUrl = noticeObject.filePath, !fileUrl.isEmpty{
+            self.buttonDownload.isHidden = false
+
             let imageURL = "\(fileUrl)"
             if let _ = GlobalFunction.checkIfFileExisits(fileUrl: imageURL, name:noticeObject.generatedFileName ?? ""){
                 self.buttonDownload.setTitle("View", for: .normal)
@@ -40,7 +49,19 @@ class CollegeNoticeListTableViewCell: UITableViewCell {
             else{
                 self.buttonDownload.setTitle("Download", for: .normal)
             }
+        }else{
+            self.buttonDownload.isHidden = true
         }
+        
+        var recipientDetailsString : String = "Notice for "
+        if(noticeObject.roleID?.contains("1") ?? false){
+            recipientDetailsString.append("Student, ")
+        }
+        if (noticeObject.roleID?.contains("2") ?? false){
+            recipientDetailsString.append("Lecturer, " )
+        }
+        recipientDetailsString.append("College")
+        self.labelRecipientDetails.text = recipientDetailsString
     }
     
 }

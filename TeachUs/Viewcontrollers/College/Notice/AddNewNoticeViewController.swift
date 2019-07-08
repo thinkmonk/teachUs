@@ -40,7 +40,7 @@ class AddNewNoticeViewController: BaseViewController {
     
     var noticeTitle = Variable<String>("")
     var noticeDescription = Variable<String>("")
-    var chosenImage = Variable<UIImage?>(UIImage())
+    var chosenImage = Variable<UIImage?>(nil)
     var chosenFile =  Variable<URL?>(URL(string: ""))
     var myDisposeBag = DisposeBag()
 
@@ -74,7 +74,7 @@ class AddNewNoticeViewController: BaseViewController {
         var isValid : Observable<Bool> {
             return Observable.combineLatest(self.noticeTitle.asObservable(), self.noticeDescription.asObservable(), self.chosenFile.asObservable(), self.chosenImage.asObservable()){ title, description, file, image in
                 
-                return title.count > 2 && description.count > 2 && (self.chosenImage.value != nil || self.chosenFile.value != nil)
+                return title.count > 2 && description.count > 2
             }
         }
         
@@ -93,38 +93,58 @@ class AddNewNoticeViewController: BaseViewController {
     }
     
     @IBAction func actionUploadNotice(_ sender: Any) {
-        self.uploadFileToFirebase(completion: { (fileURL, fileSize, fileName)  in
-            LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
-            let manager = NetworkHandler()
-            manager.url = URLConstants.CollegeURL.collegeUploadNotice
+        if self.chosenFile.value == nil && self.chosenImage.value == nil{
             let parameters = [
                 "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
                 "class_id":"\(CollegeClassManager.sharedManager.getSelectedClassList)",
                 "title":self.textfieldNoticeTitle.text ?? "",
                 "description":"\(self.textViewDescription.text ?? "")",
-                "doc":fileURL.absoluteString,
-                "file_name":"\(fileName)",
+                "doc":"",
+                "file_name":"",
                 "role_id": self.roleSwitch.isOn ? "2,3" : "1,3",
-                "doc_size":"\(fileSize)"
+                "doc_size":""
             ]
-            manager.apiPost(apiName: "Upload nOtes", parameters:parameters, completionHandler: { (result, code, response) in
-                if let status = response["status"] as? Int, status == 200, let message = response["message"] as? String{
-                    self.showAlterWithTitle("Success", alertMessage: message)
-                    self.chosenImage.value = nil
-                    self.chosenFile.value = nil
-                }
-                self.acctionDissmissView(self)
-                LoadingActivityHUD.hideProgressHUD()
-            }) { (error, code, message) in
-                print(message)
-                LoadingActivityHUD.hideProgressHUD()
+            self.postProfessorNotes(parameters)
+
+        }else{
+            self.uploadFileToFirebase(completion: { (fileURL, fileSize, fileName)  in
+                let parameters = [
+                    "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+                    "class_id":"\(CollegeClassManager.sharedManager.getSelectedClassList)",
+                    "title":self.textfieldNoticeTitle.text ?? "",
+                    "description":"\(self.textViewDescription.text ?? "")",
+                    "doc":fileURL.absoluteString,
+                    "file_name":"\(fileName)",
+                    "role_id": self.roleSwitch.isOn ? "2,3" : "1,3",
+                    "doc_size":"\(fileSize)"
+                ]
+                self.postProfessorNotes(parameters)
+            }) { (errorMessage) in
+                self.showAlterWithTitle("Error", alertMessage: errorMessage)
             }
-        }) { (errorMessage) in
-            self.showAlterWithTitle("Error", alertMessage: errorMessage)
+        }
+    }
+    
+    private func postProfessorNotes(_ params:[String:Any]){
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        let manager = NetworkHandler()
+        manager.url = URLConstants.CollegeURL.collegeUploadNotice
+        manager.apiPost(apiName: "Upload nOtes", parameters:params, completionHandler: { (result, code, response) in
+            if let status = response["status"] as? Int, status == 200, let message = response["message"] as? String{
+                self.showAlterWithTitle("Success", alertMessage: message)
+                self.chosenImage.value = nil
+                self.chosenFile.value = nil
+            }
+            self.acctionDissmissView(self)
+            LoadingActivityHUD.hideProgressHUD()
+        }) { (error, code, message) in
+            print(message)
+            LoadingActivityHUD.hideProgressHUD()
         }
     }
     
     @IBAction func actionShowClassList(_ sender: Any) {
+        self.view.endEditing(true)
         if (CollegeClassManager.sharedManager.selectedClassArray.count > 0){
             self.viewClassList.frame = CGRect(x: 0.0, y: 0.0, width: self.view.width(), height: self.view.height())
             self.view.addSubview(self.viewClassList)
