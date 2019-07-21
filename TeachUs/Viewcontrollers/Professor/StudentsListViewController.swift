@@ -668,7 +668,12 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
     @objc func showToTimePicker(){
         if(toTimePicker == nil){
             self.initToTimePicker()
-            self.toTimePicker.picker.date = NSCalendar.current.date(byAdding: .hour, value: 1, to: self.fromTimePicker.picker.date ) ?? Date()
+            if self.fromTimePicker != nil{
+                
+                self.toTimePicker.picker.date = NSCalendar.current.date(byAdding: .hour, value: 1, to: self.fromTimePicker.picker.date ) ?? Date()
+            }else{
+                self.toTimePicker.picker.date = Date()
+            }
             toTimePicker.showView(inView: self.view)
             
         }else{

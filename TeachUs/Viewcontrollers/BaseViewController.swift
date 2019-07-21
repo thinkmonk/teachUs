@@ -160,8 +160,10 @@ class BaseViewController: UIViewController {
             LoadingActivityHUD.hideProgressHUD()
             UserManager.sharedUserManager.saveUserDetailsToDb(response)
             UserManager.sharedUserManager.initLoggedInUser()
-            if(UserManager.sharedUserManager.appUserCollegeDetails.role_id == AppUserRole.professor){//check if logged-in user is a professor and fetch offline data
-                self.getOfflineData()
+            if let userRoleId = UserManager.sharedUserManager.appUserCollegeDetails.role_id{
+                if(userRoleId == AppUserRole.professor){//check if logged-in user is a professor and fetch offline data
+                    self.getOfflineData()
+                }
             }
             else if isLoginFlow {
                 NotificationCenter.default.post(name: .notificationLoginSuccess, object: nil)
