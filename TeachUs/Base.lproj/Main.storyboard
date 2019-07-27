@@ -858,7 +858,7 @@ Form Library</string>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CXL-DI-gCU">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="CXL-DI-gCU">
                                 <rect key="frame" x="15" y="4" width="290" height="564"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
@@ -886,6 +886,9 @@ Form Library</string>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ppD-0d-IwX"/>
                     </view>
+                    <navigationItem key="navigationItem" id="m9U-S7-nGK">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="SVe-RH-yTN"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="buttonSubmit" destination="fpk-g3-i0s" id="d9a-VM-sAu"/>
                         <outlet property="tableStudentList" destination="CXL-DI-gCU" id="cX0-fS-LfW"/>
@@ -5081,14 +5084,14 @@ Form Library</string>
         <image name="clockIcon" width="64" height="70"/>
         <image name="college_default" width="114" height="114"/>
         <image name="college_selection" width="114" height="114"/>
-        <image name="contact" width="30" height="30"/>
+        <image name="contact" width="45" height="45"/>
         <image name="cross" width="9" height="9"/>
         <image name="dropdown" width="15" height="9"/>
         <image name="dropdown_white" width="15" height="9"/>
         <image name="leftMenuBackground" width="998" height="2390"/>
         <image name="professor_default" width="114" height="114"/>
         <image name="professor_selection" width="114" height="114"/>
-        <image name="student_default" width="112" height="112"/>
+        <image name="student_default" width="112.5" height="112"/>
         <image name="student_selection" width="114" height="114"/>
     </resources>
 </document>

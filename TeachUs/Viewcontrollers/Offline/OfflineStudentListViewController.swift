@@ -15,6 +15,7 @@ class OfflineStudentListViewController: BaseViewController {
     
     var selectedCollege:Offline_Class_list!
     var arrayStudentsDetails:[Offline_Student_list] = []
+    var arraySearchStudentDetails = [Offline_Student_list]()
     var arrayDataSource:[AttendanceDatasource] = []
     var defaultAttendanceForAllStudents:Bool = true
     var datePicker: ViewDatePicker!
@@ -29,6 +30,10 @@ class OfflineStudentListViewController: BaseViewController {
     let disposeBag = DisposeBag()
     var isDefaultAttencdanceChanged:Bool = true
     var numberOfLectures = Variable<Int>(1)
+    let searchBarStudents = UISearchBar()
+    var searchText:String = ""
+    var defaultbuttonIndexpath:Int?
+    var isSearchBarShown:Bool = false
 
     
     @IBOutlet weak var tableStudentList: UITableView!
@@ -53,7 +58,11 @@ class OfflineStudentListViewController: BaseViewController {
         self.tableStudentList.register(UINib(nibName: "AttendanceCountTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.AttendanceCountTableViewCellId)
         setUpcalenderView()
         initDatPicker()
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(StudentsListViewController.showSearchBar(_:)))
+        searchBarStudents.delegate = self
+        self.setUpKeyboardObservers()
         
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,6 +80,11 @@ class OfflineStudentListViewController: BaseViewController {
         super.didReceiveMemoryWarning()
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    
     @objc func viewDidBecomeActive(){
         #if DEBUG
             print("viewDidBecomeActive")
@@ -79,10 +93,42 @@ class OfflineStudentListViewController: BaseViewController {
         ReachabilityManager.shared.pauseMonitoring()
     }
     
+    @objc func showSearchBar(_ sender: Any) {
+        searchBarStudents.sizeToFit()
+        if !isSearchBarShown{
+            isSearchBarShown.toggle()
+            navigationItem.titleView = searchBarStudents
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(StudentsListViewController.showSearchBar(_:)))
+            if let indexScrolled = self.defaultbuttonIndexpath{
+                let indexpathValue = IndexPath(row: 0, section: indexScrolled)
+                self.tableStudentList.scrollToRow(at: indexpathValue, at: .top, animated: true)
+            }
+            self.searchBarStudents.becomeFirstResponder()
+        }else{
+            isSearchBarShown.toggle()
+            self.searchText = ""
+            self.searchBarStudents.text = ""
+            navigationItem.titleView = nil
+            self.searchBarStudents.resignFirstResponder()
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(StudentsListViewController.showSearchBar(_:)))
+            self.tableStudentList.setContentOffset(.zero, animated: true)
+            self.makeDataSource()
+        }
+        
+    }
+    
+    func setUpKeyboardObservers(){
+        NotificationCenter.default.addObserver(self, selector: #selector(StudentsListViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(StudentsListViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+    }
+    
+    
     func getEnrolledStudentsList(){
         self.arrayStudentsDetails = self.selectedCollege.student_list!
-        if (Int((self.arrayStudentsDetails.first?.roll_number)!)) != nil{
-            self.arrayStudentsDetails.sort(by: {Int($0.roll_number!)! < Int($1.roll_number!)!})
+        if let _ = Int(self.arrayStudentsDetails.first?.roll_number ?? ""){
+            self.arrayStudentsDetails.sort(by: {(Int($0.roll_number ?? "") ?? 0) < (Int($1.roll_number ?? "") ?? 0)})
+            
         }
         else{
 //            self.arrayStudentsDetails.sort(by: {$0.studentFullName < $1.studentFullName})
@@ -115,12 +161,22 @@ class OfflineStudentListViewController: BaseViewController {
         let presentCountDataSource = AttendanceDatasource(celType: .attendanceCount, attachedObject: nil)
         presentCountDataSource.isSelected = false
         arrayDataSource.append(presentCountDataSource)
+        self.defaultbuttonIndexpath = self.arrayDataSource.count-1 //minus 1 as per array notation, count return real numbers starting from 1.
+
+        var arrayEnrolledStudents = [Offline_Student_list]()
+        if !self.searchText.isEmpty{
+            arrayEnrolledStudents = arraySearchStudentDetails
+        }else{
+            arrayEnrolledStudents = self.arrayStudentsDetails
+        }
+        
+
         
         //Add students name
         if(self.isDefaultAttencdanceChanged){
             OfflineAttendanceManager.sharedAttendanceManager.arrayStudents.value.removeAll()
             self.isDefaultAttencdanceChanged = false
-            for student in arrayStudentsDetails{
+            for student in arrayEnrolledStudents{
                 let studentAttendance:MarkStudentAttendance = MarkStudentAttendance(offlineStudentDetail: student, self.defaultAttendanceForAllStudents)
                 let studentDetailDataSource = AttendanceDatasource(celType: .studentProfile, attachedObject: studentAttendance)
                 studentDetailDataSource.isSelected = false
@@ -131,11 +187,24 @@ class OfflineStudentListViewController: BaseViewController {
             }
         }else{
             for student in OfflineAttendanceManager.sharedAttendanceManager.arrayStudents.value{
-                let studentAttendance:MarkStudentAttendance = MarkStudentAttendance(offlineStudentDetail:student.offlineStudent!, student.isPrsent!)
-                let studentDetailDataSource = AttendanceDatasource(celType: .studentProfile, attachedObject: studentAttendance)
-                studentDetailDataSource.isSelected = false
-//                                AttendanceManager.sharedAttendanceManager.arrayStudents.value.append(studentAttendance)
-                arrayDataSource.append(studentDetailDataSource)
+                
+                if let studentObject = student.offlineStudent{
+                    if arrayEnrolledStudents.contains(where: {$0.student_id == studentObject.student_id}) && !self.searchText.isEmpty{
+                        let studentAttendance:MarkStudentAttendance = MarkStudentAttendance(offlineStudentDetail: studentObject, student.isPrsent!)
+
+                        let studentDetailDataSource = AttendanceDatasource(celType: .studentProfile, attachedObject: studentAttendance)
+                        studentDetailDataSource.isSelected = false
+                        //                AttendanceManager.sharedAttendanceManager.arrayStudents.value.append(studentAttendance)
+                        arrayDataSource.append(studentDetailDataSource)
+                        
+                    }else if self.searchText.isEmpty{
+                        let studentAttendance:MarkStudentAttendance = MarkStudentAttendance(offlineStudentDetail: studentObject, student.isPrsent!)
+                        let studentDetailDataSource = AttendanceDatasource(celType: .studentProfile, attachedObject: studentAttendance)
+                        studentDetailDataSource.isSelected = false
+                        //                AttendanceManager.sharedAttendanceManager.arrayStudents.value.append(studentAttendance)
+                        arrayDataSource.append(studentDetailDataSource)
+                    }
+                }
             }
         }
         self.addCalenderValues()
@@ -205,9 +274,9 @@ extension OfflineStudentListViewController: UITableViewDelegate, UITableViewData
         switch cellDataSource.AttendanceCellType! {
         case .calender:
             let cell:AttendanceCalenderTableViewCell  = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.AttendanceCalenderTableViewCellId, for: indexPath) as! AttendanceCalenderTableViewCell
-            cell.buttonEdit.addTarget(self, action: #selector(StudentsListViewController.showDatePicker), for: .touchUpInside)
+            cell.buttonEdit.addTarget(self, action: #selector(OfflineStudentListViewController.showDatePicker), for: .touchUpInside)
             
-            let tap = UITapGestureRecognizer(target: self, action: #selector(StudentsListViewController.showDatePicker))
+            let tap = UITapGestureRecognizer(target: self, action: #selector(OfflineStudentListViewController.showDatePicker))
             tap.numberOfTapsRequired = 1
             cell.labelDate.tag = indexPath.row
             cell.labelDate.isUserInteractionEnabled = true
@@ -218,8 +287,8 @@ extension OfflineStudentListViewController: UITableViewDelegate, UITableViewData
             }
             
             //To time
-            cell.buttonToTime.addTarget(self, action: #selector(StudentsListViewController.showToTimePicker), for: .touchUpInside)
-            let toTimeTap = UITapGestureRecognizer(target: self, action: #selector(StudentsListViewController.showToTimePicker))
+            cell.buttonToTime.addTarget(self, action: #selector(OfflineStudentListViewController.showToTimePicker), for: .touchUpInside)
+            let toTimeTap = UITapGestureRecognizer(target: self, action: #selector(OfflineStudentListViewController.showToTimePicker))
             tap.numberOfTapsRequired = 1
             cell.textFieldToTime.tag = indexPath.row
             cell.textFieldToTime.isUserInteractionEnabled = true
@@ -229,8 +298,8 @@ extension OfflineStudentListViewController: UITableViewDelegate, UITableViewData
             }
             
             //from time
-            cell.buttonFromTime.addTarget(self, action: #selector(StudentsListViewController.showFromTimePicker), for: .touchUpInside)
-            let fromTimeTap = UITapGestureRecognizer(target: self, action: #selector(StudentsListViewController.showFromTimePicker))
+            cell.buttonFromTime.addTarget(self, action: #selector(OfflineStudentListViewController.showFromTimePicker), for: .touchUpInside)
+            let fromTimeTap = UITapGestureRecognizer(target: self, action: #selector(OfflineStudentListViewController.showFromTimePicker))
             tap.numberOfTapsRequired = 1
             cell.textFieldFromTime.tag = indexPath.row
             cell.textFieldFromTime.isUserInteractionEnabled = true
@@ -267,18 +336,17 @@ extension OfflineStudentListViewController: UITableViewDelegate, UITableViewData
             
             let cell : AttendanceStudentListTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.AttendanceStudentListTableViewCellId, for: indexPath) as! AttendanceStudentListTableViewCell
             let object:MarkStudentAttendance = cellDataSource.attachedObject! as! MarkStudentAttendance
+            cell.labelName.attributedText = object.offlineStudent?.studentFullName.addColorForString(self.searchText, stringColor: Constants.colors.themeRed)
+
             cell.labelName.text = object.offlineStudent?.studentFullName
             cell.labelRollNumber.text = "\(object.offlineStudent?.roll_number! ?? "NA")"
             cell.labelAttendanceCount.text = "NA"
             cell.labelAttendancePercent.text = "NA"
             cell.labelLastLectureAttendance.text = "NIL"
             cell.clipsToBounds = true
-//            cell.imageViewProfile.imageFromServerURL(urlString: (object.student?.imageUrl!)!, defaultImage: Constants.Images.defaultMale)
             
-            //TODO:  -3 is for previous sections (calender, default selection, attendance count ) <- IMPORTANT
-            
-            cell.buttonAttendance.isSelected = OfflineAttendanceManager.sharedAttendanceManager.arrayStudents.value[indexPath.section-3].isPrsent
-            cell.buttonAttendance.addTarget(self, action: #selector(StudentsListViewController.markAttendance), for: .touchUpInside)
+            cell.buttonAttendance.isSelected = object.isPrsent
+            cell.buttonAttendance.addTarget(self, action: #selector(OfflineStudentListViewController.markAttendance), for: .touchUpInside)
             cell.buttonAttendance.indexPath = indexPath
             cell.setUpCell()
             cell.selectionStyle = .none
@@ -358,6 +426,13 @@ extension OfflineStudentListViewController: UITableViewDelegate, UITableViewData
         return 0
     }
     
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footer = UIView(frame: CGRect(x: 0, y: 0, width: tableView.width(), height: 0))
+        footer.backgroundColor = UIColor.clear
+        return footer
+    }
+
+    
     //MARK:- Picker view methods for number and date.
     
     
@@ -365,7 +440,7 @@ extension OfflineStudentListViewController: UITableViewDelegate, UITableViewData
         if(datePicker == nil){
             datePicker = ViewDatePicker.instanceFromNib() as! ViewDatePicker
             datePicker.setUpPicker(type: .date)
-            datePicker.buttonOk.addTarget(self, action: #selector(StudentsListViewController.dismissDatePicker), for: .touchUpInside)
+            datePicker.buttonOk.addTarget(self, action: #selector(OfflineStudentListViewController.dismissDatePicker), for: .touchUpInside)
             
             datePicker.picker.minimumDate = NSCalendar.current.date(byAdding: .month, value: -6, to: Date())
             datePicker.picker.maximumDate = NSCalendar.current.date(byAdding: .month, value: 0, to: Date())
@@ -378,10 +453,8 @@ extension OfflineStudentListViewController: UITableViewDelegate, UITableViewData
     
     @objc func showFromTimePicker(){
         if(fromTimePicker == nil){
-            fromTimePicker = ViewDatePicker.instanceFromNib() as! ViewDatePicker
-            fromTimePicker.setUpPicker(type: .time)
+            self.initFromTimePicker()
             fromTimePicker.showView(inView: self.view)
-            fromTimePicker.buttonOk.addTarget(self, action: #selector(StudentsListViewController.dismissFromTimePicker), for: .touchUpInside)
         }else{
             fromTimePicker.showView(inView: self.view)
         }
@@ -389,14 +462,33 @@ extension OfflineStudentListViewController: UITableViewDelegate, UITableViewData
     
     @objc func showToTimePicker(){
         if(toTimePicker == nil){
-            toTimePicker = ViewDatePicker.instanceFromNib() as! ViewDatePicker
-            toTimePicker.setUpPicker(type: .time)
+            self.initToTimePicker()
+            if self.fromTimePicker != nil{
+                
+                self.toTimePicker.picker.date = NSCalendar.current.date(byAdding: .hour, value: 1, to: self.fromTimePicker.picker.date ) ?? Date()
+            }else{
+                self.toTimePicker.picker.date = Date()
+            }
             toTimePicker.showView(inView: self.view)
-            toTimePicker.buttonOk.addTarget(self, action: #selector(StudentsListViewController.dismissToTimePicker), for: .touchUpInside)
             
         }else{
+            self.toTimePicker.picker.date = NSCalendar.current.date(byAdding: .hour, value: 1, to: self.fromTimePicker.picker.date ) ?? Date()
             toTimePicker.showView(inView: self.view)
         }
+    }
+    
+    
+    func initToTimePicker(){
+        toTimePicker = ViewDatePicker.instanceFromNib() as? ViewDatePicker
+        toTimePicker.setUpPicker(type: .time)
+        toTimePicker.buttonOk.addTarget(self, action: #selector(OfflineStudentListViewController.dismissToTimePicker), for: .touchUpInside)
+    }
+
+    func initFromTimePicker(){
+        fromTimePicker = ViewDatePicker.instanceFromNib() as? ViewDatePicker
+        fromTimePicker.setUpPicker(type: .time)
+        fromTimePicker.buttonOk.addTarget(self, action: #selector(OfflineStudentListViewController.dismissFromTimePicker), for: .touchUpInside)
+        
     }
     
    
@@ -427,6 +519,7 @@ extension OfflineStudentListViewController: UITableViewDelegate, UITableViewData
    
     
     //MARK:- Mark attendance for a student
+    /*
     @objc func markAttendance(_ sender:ButtonWithIndexPath){
         if(sender.isSelected){ //-3 is for previous sections (calender, default selection, attendance count )
             OfflineAttendanceManager.sharedAttendanceManager.arrayStudents.value[sender.indexPath.section - 3].isPrsent = false
@@ -442,6 +535,32 @@ extension OfflineStudentListViewController: UITableViewDelegate, UITableViewData
             sender.setTitleColor(UIColor.white, for: .selected)
         }
         sender.isSelected = !sender.isSelected
+        let indexPath = IndexPath(row: 0, section: 2)
+        self.tableStudentList.reloadRows(at: [indexPath], with: .fade)
+    }
+    */
+    
+    @objc func markAttendance(_ sender:ButtonWithIndexPath)
+    {
+        let cellDs = self.arrayDataSource[sender.indexPath.section]
+        if let enrolledStudent = cellDs.attachedObject as? MarkStudentAttendance,
+            let studentObject = OfflineAttendanceManager.sharedAttendanceManager.arrayStudents.value.filter({$0.offlineStudent?.student_id == enrolledStudent.offlineStudent?.student_id}).first
+        {
+            if sender.isSelected{
+                studentObject.isPrsent = false
+                sender.setTitle("Absent", for: .normal)
+                sender.backgroundColor = UIColor.rgbColor(126, 132, 155)
+                sender.setTitleColor(UIColor.white, for: .normal)
+            }
+            else{
+                studentObject.isPrsent = true
+                sender.setTitle("Present", for: .selected)
+                sender.backgroundColor = UIColor.rgbColor(198, 0, 60)
+                sender.setTitleColor(UIColor.white, for: .selected)
+                
+            }
+        }
+        sender.isSelected.toggle()
         let indexPath = IndexPath(row: 0, section: 2)
         self.tableStudentList.reloadRows(at: [indexPath], with: .fade)
     }
@@ -554,5 +673,34 @@ extension OfflineStudentListViewController:ViewConfirmAttendanceDelegate{
             destinationVC.arrayDataSource = self.selectedCollege.unit_syllabus_array!
         }
         //        TODO: pass parameters here
+    }
+}
+
+//MARK:- UISearchBarDelegate
+extension OfflineStudentListViewController:UISearchBarDelegate{
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print("searchText = \(searchText)")
+        if searchText.count > 2{
+            self.searchText = searchText
+            arraySearchStudentDetails = self.arrayStudentsDetails.filter({$0.studentFullName.lowercased().contains(self.searchText.lowercased())})
+            print("arraySearchStudentDetails \(arraySearchStudentDetails.count)")
+            self.makeDataSource()
+        }
+    }
+}
+
+//MARK:- Keyboard delegate methods
+extension OfflineStudentListViewController{
+    @objc func keyboardWillShow(notification: NSNotification) {
+        
+        if let keyboardSize = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size{
+            let newContentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0)
+            self.tableStudentList.contentInset = newContentInsets
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        let newContentInsets = UIEdgeInsets.zero
+        self.tableStudentList.contentInset = newContentInsets
     }
 }

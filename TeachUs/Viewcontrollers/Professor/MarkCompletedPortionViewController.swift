@@ -27,7 +27,11 @@ class MarkCompletedPortionViewController: BaseViewController {
     var attendanceParameters:[String:Any] = [:]
     var attendanceId:NSNumber!
     var arrayDataSource:[Unit] = []
-    var updatedTopicList:[[String:Any]] = []
+    var updatedTopicList:[[String:Any]] = [] {
+        didSet{
+            self.buttonSubmit.isHidden = !(self.updatedTopicList.count > 0)
+        }
+    }
     var syllabusData:[String:Any] = [:]
 
     override func viewDidLoad() {
@@ -53,6 +57,7 @@ class MarkCompletedPortionViewController: BaseViewController {
         self.addGradientToNavBar()
         self.addColorToNavBarText(color: .white)
         self.buttonSubmit.themeRedButton()
+        self.buttonSubmit.isHidden = !(self.updatedTopicList.count > 0)
     }
     
     func mapTopicsToDataSource(){
@@ -340,14 +345,14 @@ extension MarkCompletedPortionViewController:UITableViewDelegate, UITableViewDat
                 self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].chapterStatusTheme = .NotStarted
             self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].status = "0"
             self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].isUpdated = true
-                let topicList = ["topic_id":"\(self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].chapterId)",
+            let topicList = ["topic_id":"\(self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].chapterId)",
                     "status":"1" ]
                 self.updateUnitListArray(list: topicList)
             self.tableviewTopics.reloadRows(at: [indexpath], with: .fade)
         }
     }
     
-    func updateUnitListArray(list:[String:String]){
+    func updateUnitListArray(list:[String:String]){//maintain a single instance of all the updated units.
         for i in 0..<updatedTopicList.count{
             let topic = updatedTopicList[i]
             let tempCurrentTopic = topic["topic_id"] as! String

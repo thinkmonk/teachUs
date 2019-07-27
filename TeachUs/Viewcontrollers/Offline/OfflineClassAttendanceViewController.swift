@@ -90,6 +90,7 @@ extension OfflineClassAttendanceViewController:UITableViewDataSource, UITableVie
             
             collegeCell.labelSubjectName.text = "\(self.arrayCollegeList![indexPath.section].year_name!)\(self.arrayCollegeList![indexPath.section].course_code!) - \(self.arrayCollegeList![indexPath.section].subject_name!) - \(self.arrayCollegeList![indexPath.section].class_division!)"
             collegeCell.selectionStyle = UITableViewCellSelectionStyle.none
+            collegeCell.labelLogCount.isHidden = true
             collegeCell.accessoryType = .disclosureIndicator
             cell = collegeCell
         }

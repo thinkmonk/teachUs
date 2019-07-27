@@ -15,6 +15,7 @@ class StudentsListViewController: BaseViewController {
     
     var selectedCollege:College!
     var arrayStudentsDetails:[EnrolledStudentDetail] = []
+    var arraySearchStudentDetails = [EnrolledStudentDetail]()
     var arrayDataSource:[AttendanceDatasource] = []
     var defaultAttendanceForAllStudents:Bool = true
     var datePicker: ViewDatePicker!
@@ -30,7 +31,8 @@ class StudentsListViewController: BaseViewController {
     var syllabusData:[String:Any] = [:]
     var numberOfLectures = Variable<Int>(1)
 
-    
+    let searchBarStudents = UISearchBar()
+    var searchText:String = ""
     
     let disposeBag = DisposeBag()
     
@@ -38,7 +40,7 @@ class StudentsListViewController: BaseViewController {
     @IBOutlet weak var tableStudentList: UITableView!
     @IBOutlet weak var buttonSubmit: UIButton!
     @IBOutlet weak var topConstraintButtonSubmit: NSLayoutConstraint!
-    
+    var defaultbuttonIndexpath:Int?
     
     //TODO:- COMAPRE textfield value of the cell
     
@@ -49,7 +51,6 @@ class StudentsListViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.automaticallyAdjustsScrollViewInsets = true
         
         if self.isEditAttendanceFlow{
             self.getListForAttendanceEdit()
@@ -73,10 +74,14 @@ class StudentsListViewController: BaseViewController {
         self.tableStudentList.register(UINib(nibName: "DefaultSelectionTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.DefaultSelectionTableViewCellId)
         self.tableStudentList.register(UINib(nibName: "AttendanceCountTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.AttendanceCountTableViewCellId)
         setUpcalenderView()
-        
-        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(StudentsListViewController.showSearchBar(_:)))
+        searchBarStudents.delegate = self
+        self.setUpKeyboardObservers()
         
     }
+    var isSearchBarShown:Bool = false
+    
+  
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -93,6 +98,40 @@ class StudentsListViewController: BaseViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func showSearchBar(_ sender: Any) {
+        searchBarStudents.sizeToFit()
+        if !isSearchBarShown{
+            isSearchBarShown.toggle()
+            navigationItem.titleView = searchBarStudents
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(StudentsListViewController.showSearchBar(_:)))
+            if let indexScrolled = self.defaultbuttonIndexpath{
+                let indexpathValue = IndexPath(row: 0, section: indexScrolled)
+                self.tableStudentList.scrollToRow(at: indexpathValue, at: .top, animated: true)
+            }
+            self.searchBarStudents.becomeFirstResponder()
+        }else{
+            isSearchBarShown.toggle()
+            self.searchText = ""
+            self.searchBarStudents.text = ""
+            navigationItem.titleView = nil
+            self.searchBarStudents.resignFirstResponder()
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(StudentsListViewController.showSearchBar(_:)))
+            self.tableStudentList.setContentOffset(.zero, animated: true)
+            self.makeDataSource()
+        }
+        
+    }
+    
+    func setUpKeyboardObservers(){
+        NotificationCenter.default.addObserver(self, selector: #selector(StudentsListViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(StudentsListViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+
     }
     
     func getListForAttendanceEdit(){
@@ -251,12 +290,20 @@ class StudentsListViewController: BaseViewController {
         let presentCountDataSource = AttendanceDatasource(celType: .attendanceCount, attachedObject: nil)
         presentCountDataSource.isSelected = false
         arrayDataSource.append(presentCountDataSource)
-        
+        self.defaultbuttonIndexpath = self.arrayDataSource.count-1 //minus 1 as per array notation, count return real numbers starting from 1.
         //Add students name
+        var arrayEnrolledStudents = [EnrolledStudentDetail]()
+        if !self.searchText.isEmpty{
+           arrayEnrolledStudents = arraySearchStudentDetails
+        }else{
+            arrayEnrolledStudents = self.arrayStudentsDetails
+        }
+        
         if(self.isDefaultAttencdanceChanged){
             self.isDefaultAttencdanceChanged = false
             AttendanceManager.sharedAttendanceManager.arrayStudents.value.removeAll()
-            for student in arrayStudentsDetails{
+            
+            for student in arrayEnrolledStudents{
                 var studentAttendance:MarkStudentAttendance!
                 if(self.isEditAttendanceFlow){
                     let status = Int(student.attendanceStatus ?? "0") ?? 0
@@ -272,11 +319,22 @@ class StudentsListViewController: BaseViewController {
             }
         }else{
             for student in AttendanceManager.sharedAttendanceManager.arrayStudents.value{
-                let studentAttendance:MarkStudentAttendance = MarkStudentAttendance(student.student!, student.isPrsent!)
-                let studentDetailDataSource = AttendanceDatasource(celType: .studentProfile, attachedObject: studentAttendance)
-                studentDetailDataSource.isSelected = false
-                //                AttendanceManager.sharedAttendanceManager.arrayStudents.value.append(studentAttendance)
-                arrayDataSource.append(studentDetailDataSource)
+                if let studentObject = student.student{
+                    if arrayEnrolledStudents.contains(where: {$0.studentId == studentObject.studentId}) && !self.searchText.isEmpty{
+                        let studentAttendance:MarkStudentAttendance = MarkStudentAttendance(studentObject, student.isPrsent!)
+                        let studentDetailDataSource = AttendanceDatasource(celType: .studentProfile, attachedObject: studentAttendance)
+                        studentDetailDataSource.isSelected = false
+                        //                AttendanceManager.sharedAttendanceManager.arrayStudents.value.append(studentAttendance)
+                        arrayDataSource.append(studentDetailDataSource)
+                        
+                    }else if self.searchText.isEmpty{
+                        let studentAttendance:MarkStudentAttendance = MarkStudentAttendance(studentObject, student.isPrsent!)
+                        let studentDetailDataSource = AttendanceDatasource(celType: .studentProfile, attachedObject: studentAttendance)
+                        studentDetailDataSource.isSelected = false
+                        //                AttendanceManager.sharedAttendanceManager.arrayStudents.value.append(studentAttendance)
+                        arrayDataSource.append(studentDetailDataSource)
+                    }
+                }
             }
         }
         self.addCalenderValues()
@@ -494,7 +552,7 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
             
             let cell : AttendanceStudentListTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.AttendanceStudentListTableViewCellId, for: indexPath) as! AttendanceStudentListTableViewCell
             let object:MarkStudentAttendance = cellDataSource.attachedObject! as! MarkStudentAttendance
-            cell.labelName.text = object.student?.studentName
+            cell.labelName.attributedText = object.student?.studentName?.addColorForString(self.searchText, stringColor: Constants.colors.themeRed)
             cell.labelRollNumber.text = "\(object.student?.studentRollNo! ?? "NA")"
             cell.labelAttendanceCount.text = "\(object.student?.totalLecture! ?? "NA")"
             cell.labelAttendancePercent.text = "\(object.student?.percentage! ?? "NA") %"
@@ -505,10 +563,7 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
             }else{
                 cell.imageViewProfile.image = UIImage(named: Constants.Images.defaultMale)
             }
-            
-            //TODO:  -3 is for previous sections (calender, default selection, attendance count ) <- IMPORTANT
-            
-            cell.buttonAttendance.isSelected = AttendanceManager.sharedAttendanceManager.arrayStudents.value[indexPath.section-3].isPrsent
+            cell.buttonAttendance.isSelected = object.isPrsent
             cell.buttonAttendance.addTarget(self, action: #selector(StudentsListViewController.markAttendance), for: .touchUpInside)
             cell.buttonAttendance.indexPath = indexPath
             cell.setUpCell()
@@ -587,6 +642,12 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
             return 40
         }
         return 0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footer = UIView(frame: CGRect(x: 0, y: 0, width: tableView.width(), height: 0))
+        footer.backgroundColor = UIColor.clear
+        return footer
     }
     
     //MARK:- Picker view methods for number and date.
@@ -709,21 +770,27 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
 
     
     //MARK:- Mark attendance for a student
-    @objc func markAttendance(_ sender:ButtonWithIndexPath){
-        if(sender.isSelected){ //-3 is for previous sections (calender, default selection, attendance count )
-            AttendanceManager.sharedAttendanceManager.arrayStudents.value[sender.indexPath.section - 3].isPrsent = false
-            sender.setTitle("Absent", for: .normal)
-            sender.backgroundColor = UIColor.rgbColor(126, 132, 155)
-            sender.setTitleColor(UIColor.white, for: .normal)
-            
+    @objc func markAttendance(_ sender:ButtonWithIndexPath)
+    {
+        let cellDs = self.arrayDataSource[sender.indexPath.section]
+        if let enrolledStudent = cellDs.attachedObject as? MarkStudentAttendance,
+            let studentObject = AttendanceManager.sharedAttendanceManager.arrayStudents.value.filter({$0.student?.studentId == enrolledStudent.student?.studentId}).first
+        {
+            if sender.isSelected{
+                studentObject.isPrsent = false
+                sender.setTitle("Absent", for: .normal)
+                sender.backgroundColor = UIColor.rgbColor(126, 132, 155)
+                sender.setTitleColor(UIColor.white, for: .normal)
+            }
+            else{
+                studentObject.isPrsent = true
+                sender.setTitle("Present", for: .selected)
+                sender.backgroundColor = UIColor.rgbColor(198, 0, 60)
+                sender.setTitleColor(UIColor.white, for: .selected)
+                
+            }
         }
-        else{
-            AttendanceManager.sharedAttendanceManager.arrayStudents.value[sender.indexPath.section - 3].isPrsent = true
-            sender.setTitle("Present", for: .selected)
-            sender.backgroundColor = UIColor.rgbColor(198, 0, 60)
-            sender.setTitleColor(UIColor.white, for: .selected)
-        }
-        sender.isSelected = !sender.isSelected
+        sender.isSelected.toggle()
         let indexPath = IndexPath(row: 0, section: 2)
         self.tableStudentList.reloadRows(at: [indexPath], with: .fade)
     }
@@ -821,5 +888,34 @@ extension StudentsListViewController:ViewConfirmAttendanceDelegate{
             destinationVC.attendanceId = self.markedAttendanceId
             destinationVC.attendanceParameters = self.parameters
         }
+    }
+}
+
+//MARK:- UISearchBarDelegate
+extension StudentsListViewController:UISearchBarDelegate{
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print("sea  rchText = \(searchText)")
+        if searchText.count > 2{
+            self.searchText = searchText
+            arraySearchStudentDetails = self.arrayStudentsDetails.filter({$0.studentName?.lowercased().contains(self.searchText.lowercased()) ?? false})
+            print("arraySearchStudentDetails \(arraySearchStudentDetails.count)")
+            self.makeDataSource()
+        }
+    }
+}
+
+//MARK:- Keyboard delegate methods
+extension StudentsListViewController{
+    @objc func keyboardWillShow(notification: NSNotification) {
+        
+        if let keyboardSize = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size{
+            let newContentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0)
+            self.tableStudentList.contentInset = newContentInsets
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        let newContentInsets = UIEdgeInsets.zero
+        self.tableStudentList.contentInset = newContentInsets
     }
 }

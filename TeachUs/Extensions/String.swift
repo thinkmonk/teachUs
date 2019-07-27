@@ -40,4 +40,12 @@ extension String{
         let date = dateFormatter.date(from: strDate)
         return date ?? Date()
     }
+    
+    func addColorForString(_ string:String, stringColor:UIColor) -> NSAttributedString{
+        
+        let range = (self.lowercased() as NSString).range(of: string.lowercased())
+        let attribute = NSMutableAttributedString.init(string: self)
+        attribute.addAttribute(NSAttributedStringKey.foregroundColor, value: stringColor , range: range)
+        return attribute
+    }
 }

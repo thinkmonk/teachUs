@@ -19,7 +19,11 @@ class OfflineMarkCompletedPortionViewController:BaseViewController {
     var attendanceParameters = [String:Any]()
     var attendanceId:NSNumber!
     var arrayDataSource:[Offline_Unit_syllabus_array] = []
-    var updatedTopicList:[[String:Any]] = []
+    var updatedTopicList:[[String:Any]] = []{
+        didSet{
+            self.buttonSubmit.isHidden = !(self.updatedTopicList.count > 0)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +32,10 @@ class OfflineMarkCompletedPortionViewController:BaseViewController {
         self.title = "Syllabus Update"
         navigationItem.hidesBackButton = true
         NotificationCenter.default.addObserver(self, selector: #selector(viewDidBecomeActive), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        self.tableviewTopics.estimatedRowHeight = 110
+        self.tableviewTopics.rowHeight = UITableViewAutomaticDimension
         self.getTopics()
+
         // Do any additional setup after loading the view.
     }
     
@@ -43,6 +50,8 @@ class OfflineMarkCompletedPortionViewController:BaseViewController {
         self.addColorToNavBarText(color: .white)
         self.buttonSubmit.themeRedButton()
         self.tableviewTopics.alpha = 1.0
+        self.buttonSubmit.isHidden = !(self.updatedTopicList.count > 0)
+
     }
     
     @objc func viewDidBecomeActive(){
@@ -53,47 +62,6 @@ class OfflineMarkCompletedPortionViewController:BaseViewController {
     }
     
     func getTopics(){
-        /*
-        let manager = NetworkHandler()
-        manager.url = URLConstants.ProfessorURL.getSyllabusSuubjectDetails
-        var parameters = [String:Any]()
-        parameters["subject_id"] = "\(selectedCollege.subject_id!)"
-        parameters["class_id"] = "\(selectedCollege.class_id!)"
-        parameters["college_code"] = UserManager.sharedUserManager.appUserCollegeDetails.college_code
-        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
-        
-        
-        manager.apiPost(apiName: "Get topics for professor", parameters: parameters, completionHandler: { (sucess, code, response) in
-            LoadingActivityHUD.hideProgressHUD()
-            
-            guard let subjects = response["unit_syllabus_array"] as? [[String:Any]] else{
-                return
-            }
-            
-            if let completionPercent = response["syllabus_percentage"]
-            {
-//                self.labelSyllabusCompletion.text = "Completion: \(completionPercent)%"
-            }
-            else{
-                return
-            }
-            
-            for subject in subjects{
-                let tempSubject = Mapper<Unit>().map(JSON: subject)
-                self.arrayDataSource.append(tempSubject!)
-            }
-            self.makeTableView()
-            self.tableviewTopics.reloadData()
-            self.showTableView()
-            
-        }) { (error, code, message) in
-            LoadingActivityHUD.hideProgressHUD()
-            print(message)
-            
-        }
-        
-        */
-        
         self.makeTableView()
         self.tableviewTopics.reloadData()
         self.showTableView()
@@ -238,9 +206,6 @@ extension OfflineMarkCompletedPortionViewController:UITableViewDelegate, UITable
         return headerView
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 110
-    }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 44
     }
