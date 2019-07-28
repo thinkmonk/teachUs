@@ -553,9 +553,9 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
             let cell : AttendanceStudentListTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.AttendanceStudentListTableViewCellId, for: indexPath) as! AttendanceStudentListTableViewCell
             let object:MarkStudentAttendance = cellDataSource.attachedObject! as! MarkStudentAttendance
             cell.labelName.attributedText = object.student?.studentName?.addColorForString(self.searchText, stringColor: Constants.colors.themeRed)
-            cell.labelRollNumber.text = "\(object.student?.studentRollNo! ?? "NA")"
-            cell.labelAttendanceCount.text = "\(object.student?.totalLecture! ?? "NA")"
-            cell.labelAttendancePercent.text = "\(object.student?.percentage! ?? "NA") %"
+            cell.labelRollNumber.attributedText = object.student?.studentRollNo?.addColorForString(self.searchText, stringColor: Constants.colors.themeRed)
+            cell.labelAttendanceCount.text = "\(object.student?.totalLecture ?? "NA")"
+            cell.labelAttendancePercent.text = "\(object.student?.percentage ?? "NA") %"
             cell.labelLastLectureAttendance.text = object.student?.lastLectureAttendance != nil ? object.student?.lastLectureAttendance! : "NIL"
             cell.clipsToBounds = true
             if(!(object.student!.imageUrl?.isEmpty)!){
@@ -894,13 +894,13 @@ extension StudentsListViewController:ViewConfirmAttendanceDelegate{
 //MARK:- UISearchBarDelegate
 extension StudentsListViewController:UISearchBarDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("sea  rchText = \(searchText)")
-        if searchText.count > 2{
-            self.searchText = searchText
-            arraySearchStudentDetails = self.arrayStudentsDetails.filter({$0.studentName?.lowercased().contains(self.searchText.lowercased()) ?? false})
-            print("arraySearchStudentDetails \(arraySearchStudentDetails.count)")
-            self.makeDataSource()
-        }
+        print("searchText = \(searchText)")
+        self.searchText = searchText
+        arraySearchStudentDetails = self.arrayStudentsDetails.filter({ (enrolledStudentObject) -> Bool in
+            return (enrolledStudentObject.studentName?.lowercased().contains(self.searchText.lowercased()) ?? false ) || (enrolledStudentObject.studentRollNo?.contains(self.searchText.lowercased()) ?? false)
+        })
+        print("arraySearchStudentDetails \(arraySearchStudentDetails.count)")
+        self.makeDataSource()
     }
 }
 

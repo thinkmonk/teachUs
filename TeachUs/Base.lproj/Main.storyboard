@@ -858,7 +858,7 @@ Form Library</string>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="CXL-DI-gCU">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="CXL-DI-gCU">
                                 <rect key="frame" x="15" y="4" width="290" height="564"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
@@ -2341,10 +2341,10 @@ Form Library</string>
                                 <rect key="frame" x="15" y="117" width="290" height="78"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zv7-NO-mhc">
-                                        <rect key="frame" x="0.0" y="10" width="235" height="29"/>
+                                        <rect key="frame" x="0.0" y="10" width="220" height="29"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mobile Number" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="J0K-Ml-3hM">
-                                                <rect key="frame" x="10" y="5" width="215" height="19"/>
+                                                <rect key="frame" x="10" y="5" width="200" height="19"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -2366,7 +2366,7 @@ Form Library</string>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SyY-cf-ssn">
-                                        <rect key="frame" x="245" y="10" width="30" height="30"/>
+                                        <rect key="frame" x="230" y="10" width="45" height="45"/>
                                         <state key="normal" image="contact"/>
                                         <connections>
                                             <action selector="click_Contact:" destination="T1X-uW-JJ8" eventType="touchUpInside" id="lvN-Zo-atB"/>

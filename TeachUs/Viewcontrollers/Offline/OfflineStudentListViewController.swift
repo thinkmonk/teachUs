@@ -337,9 +337,7 @@ extension OfflineStudentListViewController: UITableViewDelegate, UITableViewData
             let cell : AttendanceStudentListTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.AttendanceStudentListTableViewCellId, for: indexPath) as! AttendanceStudentListTableViewCell
             let object:MarkStudentAttendance = cellDataSource.attachedObject! as! MarkStudentAttendance
             cell.labelName.attributedText = object.offlineStudent?.studentFullName.addColorForString(self.searchText, stringColor: Constants.colors.themeRed)
-
-            cell.labelName.text = object.offlineStudent?.studentFullName
-            cell.labelRollNumber.text = "\(object.offlineStudent?.roll_number! ?? "NA")"
+            cell.labelRollNumber.attributedText = object.offlineStudent?.roll_number?.addColorForString(self.searchText, stringColor: Constants.colors.themeRed)
             cell.labelAttendanceCount.text = "NA"
             cell.labelAttendancePercent.text = "NA"
             cell.labelLastLectureAttendance.text = "NIL"
@@ -680,12 +678,12 @@ extension OfflineStudentListViewController:ViewConfirmAttendanceDelegate{
 extension OfflineStudentListViewController:UISearchBarDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print("searchText = \(searchText)")
-        if searchText.count > 2{
-            self.searchText = searchText
-            arraySearchStudentDetails = self.arrayStudentsDetails.filter({$0.studentFullName.lowercased().contains(self.searchText.lowercased())})
-            print("arraySearchStudentDetails \(arraySearchStudentDetails.count)")
-            self.makeDataSource()
-        }
+        self.searchText = searchText
+        arraySearchStudentDetails = self.arrayStudentsDetails.filter({ (enrolledStudentObject) -> Bool in
+            return (enrolledStudentObject.studentFullName.lowercased().contains(self.searchText.lowercased()) ) || (enrolledStudentObject.roll_number?.contains(self.searchText.lowercased()) ?? false)
+        })
+        print("arraySearchStudentDetails \(arraySearchStudentDetails.count)")
+        self.makeDataSource()
     }
 }
 
