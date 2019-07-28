@@ -55,6 +55,7 @@ public struct Constants {
         static let calendarWhite = "calender"
         static let defaultMale = "defaule_male"
         static let leftMenuTopView = "left_menu_topView"
+        static let checkMarkReadAll = "checkMark"
     }
     
     struct  colors {

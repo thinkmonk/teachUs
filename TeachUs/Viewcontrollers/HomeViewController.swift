@@ -23,6 +23,7 @@ class HomeViewController: BaseViewController{
 
         let buttonHamburger = UIBarButtonItem(image: UIImage(named: Constants.Images.hamburger), style: .plain, target: self, action: #selector(HomeViewController.hamburgerAction))
         self.navigationItem.leftBarButtonItem  = buttonHamburger
+        NotificationCenter.default.addObserver(self, selector: #selector(updateBellNotificaitonCount), name: .notificationBellCountUpdate, object: nil)
 
 //        self.makeDataSource()
 //        setUpPageMenu()
@@ -135,14 +136,13 @@ extension HomeViewController:LeftMenuDeleagte{
             child.moveToViewController(at: item)
             break
         }
-        
+        self.updateBellNotificaitonCount()
+    }
+    
+    @objc func updateBellNotificaitonCount(){
         if let label = self.notificaitonLabel{
             label.text = UserManager.sharedUserManager.appUserCollegeDetails.notificationCount
         }
-
-    }
-    
-    func updateBellNotificaitonCount(){
     }
     
 

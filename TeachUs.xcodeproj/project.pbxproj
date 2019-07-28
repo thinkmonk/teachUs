@@ -108,6 +108,7 @@
 		8137EF5C1FA10D6A00045D97 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8137EF5B1FA10D6A00045D97 /* UIView.swift */; };
 		813C0DA021EB7C7100B04E61 /* GlobalFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813C0D9F21EB7C7100B04E61 /* GlobalFunction.swift */; };
 		81511A3722AC4D0400B50F44 /* DocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81511A3622AC4D0400B50F44 /* DocumentsViewController.swift */; };
+		8151C3CE22ED7EE300680951 /* BellNotificationReadStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8151C3CD22ED7EE300680951 /* BellNotificationReadStatus.swift */; };
 		8161AF63222C4650001F73B5 /* ViewClassSelection.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8161AF62222C4650001F73B5 /* ViewClassSelection.xib */; };
 		8161AF65222C467C001F73B5 /* ViewClassSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8161AF64222C467C001F73B5 /* ViewClassSelection.swift */; };
 		8161AF67222C5922001F73B5 /* CollegeClassManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8161AF66222C5922001F73B5 /* CollegeClassManager.swift */; };
@@ -441,6 +442,7 @@
 		8137EF5B1FA10D6A00045D97 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		813C0D9F21EB7C7100B04E61 /* GlobalFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunction.swift; sourceTree = "<group>"; };
 		81511A3622AC4D0400B50F44 /* DocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsViewController.swift; sourceTree = "<group>"; };
+		8151C3CD22ED7EE300680951 /* BellNotificationReadStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellNotificationReadStatus.swift; sourceTree = "<group>"; };
 		8161AF62222C4650001F73B5 /* ViewClassSelection.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewClassSelection.xib; sourceTree = "<group>"; };
 		8161AF64222C467C001F73B5 /* ViewClassSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewClassSelection.swift; sourceTree = "<group>"; };
 		8161AF66222C5922001F73B5 /* CollegeClassManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeClassManager.swift; sourceTree = "<group>"; };
@@ -1659,6 +1661,7 @@
 			isa = PBXGroup;
 			children = (
 				81F92A4922B5294700395413 /* BellNotificationList.swift */,
+				8151C3CD22ED7EE300680951 /* BellNotificationReadStatus.swift */,
 			);
 			path = BellNotification;
 			sourceTree = "<group>";
@@ -2018,6 +2021,7 @@
 				8194882322A462F40006CB86 /* CollegeNotificationDetailsViewController.swift in Sources */,
 				810610C21FA660890067273E /* Connectivity.swift in Sources */,
 				81A769D120A88A7200A4A2B7 /* CollegeSyllabusTableViewCell.swift in Sources */,
+				8151C3CE22ED7EE300680951 /* BellNotificationReadStatus.swift in Sources */,
 				811BD5FF229DC03800FDFEB6 /* notesDetailsTableViewCell.swift in Sources */,
 				81A7D05E208B78590032A1BC /* RatingProfessorList.swift in Sources */,
 				81E02A44207CDCB900EB6BA8 /* EventAttendanceStudentListViewController.swift in Sources */,

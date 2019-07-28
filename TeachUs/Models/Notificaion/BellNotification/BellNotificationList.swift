@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: - BellNotificationList
 struct BellNotificationList: Codable {
-    let notifications: [BellNotification]?
+    var notifications: [BellNotification]?
     let totalNotification: String?
     
     enum CodingKeys: String, CodingKey {
@@ -24,6 +24,14 @@ struct BellNotification: Codable {
     let id: String?
     let data: DataClass?
     let created: String?
+    var notificationRead:String?
+    enum CodingKeys: String, CodingKey {
+        case notificationRead = "android_module_read_flag"
+        case id
+        case data
+        case created
+    }
+
 }
 
 // MARK: - DataClass
