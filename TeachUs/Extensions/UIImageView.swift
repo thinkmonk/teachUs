@@ -46,6 +46,10 @@ extension UIImageView {
             }
             
             downloadPicTask.resume()
+        }else{
+            if let di = defaultImage, let image = UIImage(named: di) {
+                self.image = image
+            }
         }
     }
     

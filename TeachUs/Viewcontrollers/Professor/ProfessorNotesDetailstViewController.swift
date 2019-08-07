@@ -167,40 +167,40 @@ class ProfessorNotesDetailstViewController: BaseViewController {
         }
     }
     
-    @objc func deleteNote(_ sender:ButtonWithIndexPath){
-        
-        
-        if let notesObejct = self.noteListData?.notesList?[sender.indexPath.section], let mobilenumber = UserManager.sharedUserManager.appUserDetails.contact{
-            let storageRef = storage.reference()
-            let filePathReference = storageRef.child("\(mobilenumber)/Notes/\(notesObejct.originalFileName ?? "")")
-            LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
-
-            filePathReference.delete { error in
-                if let error = error {
-                    self.showAlterWithTitle("Error", alertMessage: "\(error.localizedDescription)")
-                } else {
-                    let manager = NetworkHandler()
-                    manager.url = URLConstants.ProfessorURL.deleteNotes
-                    let parameters = [
-                        "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
-                        "notes_id" :notesObejct.notesID ?? ""
-                    ]
-                    manager.apiPost(apiName: "delete notes \(notesObejct.title ?? "")", parameters: parameters, completionHandler: { (success, code, response) in
-                        LoadingActivityHUD.hideProgressHUD()
-                        if let status = response["status"] as? Int, status == 200, let message = response["message"] as? String{
-                            self.getNotes()
-                            self.showAlterWithTitle("Success", alertMessage:message)
-                        }
-                    }) { (success, code, errormessage) in
-                        LoadingActivityHUD.hideProgressHUD()
-                        print(errormessage)
-                    }                }
+    @objc func deleteNote(_ sender:ButtonWithIndexPath)
+    {
+        let alert = UIAlertController(title: "Confirm Delete", message: "Are you sure you want to delete the selected notes", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "YES", style: .default, handler: { (_) in
+            if let notesObejct = self.noteListData?.notesList?[sender.indexPath.section], let mobilenumber = UserManager.sharedUserManager.appUserDetails.contact{
+                let storageRef = self.storage.reference()
+                let filePathReference = storageRef.child("\(mobilenumber)/Notes/\(notesObejct.originalFileName ?? "")")
+                LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+                
+                filePathReference.delete { error in
+                    if let error = error {
+                        self.showAlterWithTitle("Error", alertMessage: "\(error.localizedDescription)")
+                    } else {
+                        let manager = NetworkHandler()
+                        manager.url = URLConstants.ProfessorURL.deleteNotes
+                        let parameters = [
+                            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+                            "notes_id" :notesObejct.notesID ?? ""
+                        ]
+                        manager.apiPost(apiName: "delete notes \(notesObejct.title ?? "")", parameters: parameters, completionHandler: { (success, code, response) in
+                            LoadingActivityHUD.hideProgressHUD()
+                            if let status = response["status"] as? Int, status == 200, let message = response["message"] as? String{
+                                self.getNotes()
+                                self.showAlterWithTitle("Success", alertMessage:message)
+                            }
+                        }) { (success, code, errormessage) in
+                            LoadingActivityHUD.hideProgressHUD()
+                            print(errormessage)
+                        }                }
+                }
             }
-            
-            
-
-            
-        }
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func actionUploadNotesToServer(_ sender:UIButton){

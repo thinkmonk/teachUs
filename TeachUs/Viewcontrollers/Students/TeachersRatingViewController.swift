@@ -150,14 +150,31 @@ extension TeachersRatingViewController:UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let destinationVC:MarkRatingViewController =  storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.MarkRating) as! MarkRatingViewController
-        destinationVC.arrayDataSource = self.arrayRatingCriteriaDataSource
-        destinationVC.professsorDetails = self.arrayDataSource[indexPath.section]
-        destinationVC.subjectId = "\(self.arrayDataSource[indexPath.section].subjectId)"
-        destinationVC.parentNavigationController = self.parentNavigationController
-        self.parentNavigationController?.pushViewController(destinationVC, animated: true)
-    }    
+        let profDetails = self.arrayDataSource[indexPath.row]
+        switch profDetails.ratingStatus {
+        case "3":
+            self.showAlterWithTitle("Not Started", alertMessage: "Feedback yet not Started")
+            break
+            
+        case "2":
+            self.showAlterWithTitle("InEligible", alertMessage: "You are not Eligible")
+            break
+            
+        case "1":
+            self.showAlterWithTitle(nil, alertMessage: "Ratings already Submitted")
+            break
+            
+        default:
+            let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+            let destinationVC:MarkRatingViewController =  storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.MarkRating) as! MarkRatingViewController
+            destinationVC.arrayDataSource = self.arrayRatingCriteriaDataSource
+            destinationVC.professsorDetails = self.arrayDataSource[indexPath.section]
+            destinationVC.subjectId = "\(self.arrayDataSource[indexPath.section].subjectId)"
+            destinationVC.parentNavigationController = self.parentNavigationController
+            self.parentNavigationController?.pushViewController(destinationVC, animated: true)
+            break
+        }
+    }
 }
 
 extension TeachersRatingViewController:IndicatorInfoProvider{

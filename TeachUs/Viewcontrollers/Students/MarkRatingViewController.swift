@@ -228,12 +228,7 @@ extension MarkRatingViewController: UITableViewDelegate, UITableViewDataSource{
             "02",
             "03",
             "04",
-            "05",
-            "06",
-            "07",
-            "08",
-            "09",
-            "10"
+            "05"
         ]
         self.ratingDropDown.selectionAction = { [unowned self] (index, item) in
             self.arrayDataSource[sender.indexPath.section-2].ratings = item

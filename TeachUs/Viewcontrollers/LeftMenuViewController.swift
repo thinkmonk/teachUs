@@ -28,6 +28,7 @@ class LeftMenuViewController: BaseViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var buttonDropDown: UIButton!
     var delegate:LeftMenuDeleagte!
     var arrayDataSource:[String]! = []
+    var imageDataSource = [String]()
     var arrayCollegeDetailsDataSource:[CollegeDetails] = []
     
     let userProfilesDropdown = DropDown()
@@ -37,13 +38,17 @@ class LeftMenuViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     //    var studentDataSource = ["Attendance", "Syllabus Status", "Feedback / Ratings", "Logout"]
     var studentDataSource = ["Attendance", "Syllabus","Ratings","Notice", "Notification" ,"Notes" ,"Logout"]
+    var studentImageDataSource = ["attendanceReport", "syllabus", "feedback", "notice", "notification", "notes", "logout"]
     
     //    var professorDataSource = ["Attendance", "Syllabus Status", "Logs", "Logout"]
     var professorDataSource = ["Attendance", "Syllabus", "My Logs", "Notice", "Notification" ,"Notes", "Logout"]
+    var professorImageDataSource = ["attendanceReport", "syllabus", "logs", "notice", "notification", "notes", "logout"]
     
     var collegeSuperAdminDataSource = ["Attendance(Reports)","Attendance(Events)", "Syllabus Status","Add/Remove Admin","Feedback", "Logs", "Notice", "Notification" , "Notes","Request","Logout" ]
+    var collegeSuperAdminImageDataSource = ["attendanceReport", "syllabusStatusEvent", "syllabus", "addRemoveAdmin","feedback", "logs","notice", "notification", "notes", "request", "logout"]
     
     var collegeAdminDataSource = ["Attendance(Reports)", "Attendance(Events)", "Logout"]
+    var collegeAdminImageDataSource = ["attendanceReport","syllabusStatusEvent", "logout"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,14 +90,19 @@ class LeftMenuViewController: BaseViewController, UIGestureRecognizerDelegate {
         switch UserManager.sharedUserManager.user! {
         case .Professor:
             arrayDataSource = professorDataSource
+            imageDataSource = professorImageDataSource
             self.buttonEditProfile.isHidden = false
             break
         case .Student:
             arrayDataSource = studentDataSource
+            imageDataSource = studentImageDataSource
             self.buttonEditProfile.isHidden = false
             break
         case .College://1 is for super admin, 2 is for admin
-            arrayDataSource = UserManager.sharedUserManager.appUserCollegeDetails.privilege! == "1" ? collegeSuperAdminDataSource : collegeAdminDataSource
+            if let privilege = UserManager.sharedUserManager.appUserCollegeDetails.privilege{
+                arrayDataSource = privilege == "1" ? collegeSuperAdminDataSource : collegeAdminDataSource
+                imageDataSource = privilege == "1" ? collegeSuperAdminImageDataSource : collegeAdminImageDataSource
+            }
             //                arrayDataSource = UserManager.sharedUserManager.appUserCollegeDetails.privilege! == "2" ? collegeSuperAdminDataSource : collegeSuperAdminDataSource
             self.buttonEditProfile.isHidden = true
             break
@@ -204,6 +214,7 @@ extension LeftMenuViewController:UITableViewDelegate, UITableViewDataSource{
             cell.textLabel?.textColor = .white
             cell.selectionStyle = .blue
             cell.textLabel?.text = arrayDataSource[indexPath.row]
+            cell.imageView?.image = UIImage(named: "\(self.imageDataSource[indexPath.row])")
             cell.backgroundColor = UIColor.clear
             return cell
         }

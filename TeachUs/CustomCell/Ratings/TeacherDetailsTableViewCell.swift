@@ -36,7 +36,7 @@ class TeacherDetailsTableViewCell: UITableViewCell {
         self.labelName.text = "\(tempDetails.professforFullname)"
         self.imageProfessor.imageFromServerURL(urlString: tempDetails.imageURL, defaultImage: Constants.Images.defaultProfessor)
         self.selectionStyle = .none
-        if(tempDetails.isRatingSubmitted == "1"){
+        if(tempDetails.ratingStatus == "1"){
             self.imageViewBackground.backgroundColor = .lightGray
             self.labelName.textColor = .lightGray
             self.labelSubject.textColor = .lightGray

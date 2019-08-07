@@ -77,8 +77,14 @@ extension CollegeNotesSubjectListViewController:UITableViewDataSource, UITableVi
         let cell:CollegeSubjectAndProfessorNotesTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.notesProfesorListCellId) as! CollegeSubjectAndProfessorNotesTableViewCell
         
         if let subjectObject = self.classNotesCountObject?.classSubjetcs?[indexPath.section]{
-            let imageURL = URLConstants.BaseUrl.baseURL + "/\(subjectObject.profile ?? "")"
-            cell.imageVIewProfessor.imageFromServerURL(urlString: imageURL, defaultImage: Constants.Images.defaultProfessor)
+            if let profileURL = subjectObject.profile, !profileURL.isEmpty{
+                let imageURL = URLConstants.BaseUrl.baseURL + "/\(profileURL)"
+                cell.imageVIewProfessor.imageFromServerURL(urlString: imageURL, defaultImage: Constants.Images.defaultProfessor)
+            }else{
+                if let image = UIImage(named: Constants.Images.defaultProfessor) {
+                    cell.imageVIewProfessor.image = image
+                }
+            }
             cell.labelNotesCount.text = subjectObject.totalNotes ?? ""
             cell.labelLecturerName.text = subjectObject.professorName ?? ""
             if Int(subjectObject.totalNotes ?? "0") == 0{

@@ -270,22 +270,6 @@ class AddRemoveAdminViewController: BaseViewController {
             }).disposed(by: disposeBag)
         
     }
-
-    /*
-    func setupDropdown(){
-        self.adminDropdown.anchorView = self.viewRemoveAdminPhoneNumber
-        self.adminDropdown.bottomOffset = CGPoint(x: 0, y: viewRemoveAdminPhoneNumber.height())
-        self.adminDropdown.width = self.viewRemoveAdminPhoneNumber.width()
-        self.adminDropdown.dataSource.removeAll()
-        for admin in self.arrayAdminList{
-            self.adminDropdown.dataSource.append(admin.contact)
-        }
-        self.adminDropdown.selectionAction = { [unowned self] (index, item) in
-                self.textfieldRemoveAdminPhoneNumber.text = "\(self.arrayAdminList[index].contact)"
-        }
-        DropDown.appearance().backgroundColor = UIColor.white
-    }
- */
 }
 
 extension AddRemoveAdminViewController:IndicatorInfoProvider{
@@ -310,6 +294,8 @@ extension AddRemoveAdminViewController:UITableViewDataSource, UITableViewDelegat
         adminCell.setUpCell(adminDetails: self.arrayAdminList[indexPath.section])
         adminCell.buttonRemoveAdmin.indexPath = indexPath
         adminCell.buttonRemoveAdmin.addTarget(self, action: #selector(AddRemoveAdminViewController.removeAdmin(_:)), for: .touchUpInside)
+        adminCell.buttonRemoveAdmin.isHidden = self.isSuperAdmin.isOn
+        
         return adminCell
     }
     

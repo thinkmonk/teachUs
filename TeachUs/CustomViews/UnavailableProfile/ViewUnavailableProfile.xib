@@ -67,7 +67,7 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e9j-zj-ccO">
                             <rect key="frame" x="10" y="298" width="250" height="30"/>
-                            <state key="normal" title="Call on: +91 9892222453"/>
+                            <state key="normal" title="Call on: +91 9892223453"/>
                             <connections>
                                 <action selector="makePhoneCall:" destination="iN0-l3-epB" eventType="touchUpInside" id="9VQ-Ap-pxO"/>
                             </connections>
@@ -115,6 +115,6 @@
     </objects>
     <resources>
         <image name="cross" width="9" height="9"/>
-        <image name="invalidUser" width="101" height="90"/>
+        <image name="invalidUser" width="101" height="90.5"/>
     </resources>
 </document>

@@ -48,7 +48,7 @@ class ProfessorDetails:Mappable{
     var professorLastName:String = ""
     var subjectId:String = ""
     var subjectName:String = ""
-    var isRatingSubmitted:String = ""
+    var ratingStatus:String = ""
     var imageURL:String = ""
     
     var professorMiddleName:String = ""
@@ -66,7 +66,7 @@ class ProfessorDetails:Mappable{
         self.professorLastName <- map["l_name"]
         self.subjectId <- map["subject_id"]
         self.subjectName <- map["subject_name"]
-        self.isRatingSubmitted <- map["rating_status"]
+        self.ratingStatus <- map["rating_status"]
         self.imageURL <- map["profile"]
         self.professorMiddleName <- map["m_name"]
         self.subjectCode <- map["subject_code"]
