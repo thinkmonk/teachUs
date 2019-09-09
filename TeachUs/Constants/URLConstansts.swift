@@ -141,6 +141,7 @@ public struct URLConstants{
         static let getBellNotifications = BaseUrl.baseURLV1 + "/college/firebasenotification"
         static let markReadNotification = BaseUrl.baseURLV1 + "/college/firebasenotification_readstatus"
         static let deleteNotice = BaseUrl.baseURLV1 + "/college/notice_delete"
+        static let editEventDetails = BaseUrl.baseURLV1 + "/events/update_event"
 
     }
     

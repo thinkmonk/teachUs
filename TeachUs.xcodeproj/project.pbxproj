@@ -50,6 +50,7 @@
 		810FAC571FB7518A00945DD6 /* AttendanceDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810FAC561FB7518A00945DD6 /* AttendanceDataSource.swift */; };
 		810FAC5A1FB7549400945DD6 /* AttendanceCountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810FAC581FB7549400945DD6 /* AttendanceCountTableViewCell.swift */; };
 		810FAC5B1FB7549400945DD6 /* AttendanceCountTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 810FAC591FB7549400945DD6 /* AttendanceCountTableViewCell.xib */; };
+		811353142326870B001D485A /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811353132326870B001D485A /* EventManager.swift */; };
 		81165BE72233006E003EE106 /* VerifyEmail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81165BE62233006E003EE106 /* VerifyEmail.xib */; };
 		81165BE922330078003EE106 /* VerifyEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81165BE822330078003EE106 /* VerifyEmail.swift */; };
 		811BD5FF229DC03800FDFEB6 /* notesDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811BD5FD229DC03800FDFEB6 /* notesDetailsTableViewCell.swift */; };
@@ -384,6 +385,7 @@
 		810FAC561FB7518A00945DD6 /* AttendanceDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceDataSource.swift; sourceTree = "<group>"; };
 		810FAC581FB7549400945DD6 /* AttendanceCountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceCountTableViewCell.swift; sourceTree = "<group>"; };
 		810FAC591FB7549400945DD6 /* AttendanceCountTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AttendanceCountTableViewCell.xib; sourceTree = "<group>"; };
+		811353132326870B001D485A /* EventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
 		81165BE62233006E003EE106 /* VerifyEmail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VerifyEmail.xib; sourceTree = "<group>"; };
 		81165BE822330078003EE106 /* VerifyEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyEmail.swift; sourceTree = "<group>"; };
 		811BD5FD229DC03800FDFEB6 /* notesDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = notesDetailsTableViewCell.swift; sourceTree = "<group>"; };
@@ -1069,6 +1071,7 @@
 				81C1D8AA1FCF34F10091DA6E /* DatabaseManager.swift */,
 				811F28FE2104D7AC002B810F /* OfflineAttendanceManager.swift */,
 				811EA45A223D175400D55899 /* ProfessorLogsManager.swift */,
+				811353132326870B001D485A /* EventManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -2219,6 +2222,7 @@
 				81316DE42165575200820481 /* OfflineStudentListViewController.swift in Sources */,
 				81A6BBFA229C546A00615EDD /* ProfessorProfileDetails.swift in Sources */,
 				8136E5A720F7C6880080AECA /* Offline_Class_list.swift in Sources */,
+				811353142326870B001D485A /* EventManager.swift in Sources */,
 				81CCAE551FC806060070907A /* RatingTopicsTableViewCell.swift in Sources */,
 				81A7D062208BA7EE0032A1BC /* RatingDetails.swift in Sources */,
 				819BDA581FC4AD5D00DD7D2D /* TeacherDetailsTableViewCell.swift in Sources */,

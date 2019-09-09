@@ -12,11 +12,11 @@ import ObjectMapper
 
 class CollegeSyllabusStatusViewController: BaseViewController {
     var parentNavigationController : UINavigationController?
-    var arrayDataSource:[CollegeSyllabusList] = []
+    var arrayDataSource:CollegeSyllabusList?
     @IBOutlet weak var tableviewCollegeSyllabus: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableviewCollegeSyllabus.register(UINib(nibName: "CollegeSyllabusTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.CollegeSyllabusTableViewCellId)
+        self.tableviewCollegeSyllabus.register(UINib(nibName: "SyllabusStatusTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.SyllabusStatusTableViewCellId)
         self.tableviewCollegeSyllabus.delegate = self
         self.tableviewCollegeSyllabus.dataSource = self
         self.tableviewCollegeSyllabus.alpha = 0.0
@@ -47,17 +47,16 @@ class CollegeSyllabusStatusViewController: BaseViewController {
             "role_id":"\(UserManager.sharedUserManager.appUserCollegeDetails.role_id!)"
         ]
         
-        manager.apiPost(apiName: " Get Class Syllabus", parameters:parameters, completionHandler: { (result, code, response) in
+        manager.apiPostWithDataResponse(apiName: " Get Class Syllabus", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
-            guard let ratingListArray = response["class_list"] as? [[String:Any]] else{
-                return
+            do{
+                let decoder = JSONDecoder()
+                self.arrayDataSource = try decoder.decode(CollegeSyllabusList.self, from: response)
+                self.arrayDataSource?.classList.sort(by: { $0.courseName ?? "" < $1.courseName ?? "" })
+            }catch let error{
+                print("parsing error \(error)")
             }
-            self.arrayDataSource.removeAll()
-            for ratingList in ratingListArray{
-                let tempList = Mapper<CollegeSyllabusList>().map(JSONObject: ratingList)
-                self.arrayDataSource.append(tempList!)
-            }
-            self.arrayDataSource.sort(by: { $0.courseName < $1.courseName })
+            
 
             self.tableviewCollegeSyllabus.reloadData()
             self.showTableView()
@@ -81,7 +80,7 @@ class CollegeSyllabusStatusViewController: BaseViewController {
 
 extension CollegeSyllabusStatusViewController:UITableViewDelegate, UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
-        return self.arrayDataSource.count
+        return self.arrayDataSource?.classList.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -89,9 +88,13 @@ extension CollegeSyllabusStatusViewController:UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell:CollegeSyllabusTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.CollegeSyllabusTableViewCellId, for: indexPath) as! CollegeSyllabusTableViewCell
-        cell.labelSyllabusSubject.text = self.arrayDataSource[indexPath.section].courseName
-        cell.labelSyllabusPercent.text = "\(self.arrayDataSource[indexPath.section].status)%"
+        let cell:SyllabusStatusTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.SyllabusStatusTableViewCellId, for: indexPath) as! SyllabusStatusTableViewCell
+        cell.labelSubject.text = self.arrayDataSource?.classList[indexPath.section].courseName
+        //***********************************************************************************
+        //*** Interchanging number of lectures and syllabus % text to suit the required UI***
+        //***********************************************************************************
+        cell.labelNumberOfLectures.text = "\(self.arrayDataSource?.classList[indexPath.section].status.stringValue ?? "0")%"
+        cell.labelAttendancePercent.text = "\(self.arrayDataSource?.classList[indexPath.section].numberOfLectures ?? "NA")"
         cell.selectionStyle = .none
         return cell
     }
@@ -109,11 +112,13 @@ extension CollegeSyllabusStatusViewController:UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let professorSyllabusStatusVC = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorSyllabusStatus) as! SyllabusStatusListViewController
-        professorSyllabusStatusVC.title = "\(self.arrayDataSource[indexPath.section].courseName)"
-        professorSyllabusStatusVC.parentNavigationController = self.parentNavigationController
-        professorSyllabusStatusVC.userType = LoginUserType.College
-        professorSyllabusStatusVC.selectedClassId = self.arrayDataSource[indexPath.section].classId
-        self.navigationController?.pushViewController(professorSyllabusStatusVC, animated: true)
+        if let classObj = self.arrayDataSource?.classList[indexPath.section], let classID = classObj.classId{
+            professorSyllabusStatusVC.title = "\(classObj.courseName)"
+            professorSyllabusStatusVC.parentNavigationController = self.parentNavigationController
+            professorSyllabusStatusVC.userType = LoginUserType.College
+            professorSyllabusStatusVC.selectedClassId = classID
+            self.navigationController?.pushViewController(professorSyllabusStatusVC, animated: true)
+        }
     }
 }
 

@@ -334,6 +334,10 @@ extension AddRemoveAdminViewController:CNContactPickerDelegate{
 }
 
 extension AddRemoveAdminViewController:ViewCourseSelectionDelegate{
+    func submitSelectedCourses() {
+        self.viewCourseList.removeFromSuperview()
+    }
+    
     func courseViewDismissed() {
         self.viewCourseList.removeFromSuperview()
     }

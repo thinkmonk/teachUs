@@ -10,6 +10,7 @@ import UIKit
 
 protocol ViewCourseSelectionDelegate {
     func courseViewDismissed()
+    func submitSelectedCourses()
 }
 
 class ViewCourseSelection: UIView {
@@ -31,6 +32,11 @@ class ViewCourseSelection: UIView {
     @IBAction func dismissView(_ sender: Any) {
         self.delegate.courseViewDismissed()
     }
+    
+    @IBAction func actionSubmitSelectedCourses(_ sender: Any) {
+        self.delegate.submitSelectedCourses()
+    }
+    
     
     
     @IBAction func selectAllCourses(_ sender: Any) {

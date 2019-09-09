@@ -68,11 +68,7 @@ class EventAttendanceListViewController: BaseViewController {
         let inputFormatter = DateFormatter()
         inputFormatter.dateFormat = "yyyy-MM-dd"
         let resultDateString = inputFormatter.string(from: date)
-        
-        
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
-        let manager = NetworkHandler()
-        manager.url = URLConstants.CollegeURL.addNewEvent
         let parameters = [
             "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
             "event_name":"\(self.textFieldEventName.text ?? "")",
@@ -82,23 +78,20 @@ class EventAttendanceListViewController: BaseViewController {
             "course_id":"\(CollegeClassManager.sharedManager.getSelectedCourseList)"
         ]
         
-        manager.apiPost(apiName: " Add new Event", parameters:parameters, completionHandler: { (result, code, response) in
-            LoadingActivityHUD.hideProgressHUD()
-            let status = response["status"] as! Int
-            if (status == 200){
-                let message:String = response["message"] as! String
-                self.showAlterWithTitle(nil, alertMessage: message)
+        EventManager.shared.addEvent(params: parameters) { (successFlag, message) in
+            if successFlag{
+                self.showAlterWithTitle(nil, alertMessage: message ?? "")
                 self.textFieldEventName.text = ""
-                
                 self.getEvents()
                 self.dispatchGroup.notify(queue: DispatchQueue.main, execute: {
                     self.tableViewEvents.reloadData()
                     self.view.endEditing(true)
                 })
+            }else{
+                self.showAlterWithTitle(nil, alertMessage: message ?? "")
+                LoadingActivityHUD.hideProgressHUD()
+                
             }
-        }) { (error, code, message) in
-            self.showAlterWithTitle(nil, alertMessage: message)
-            LoadingActivityHUD.hideProgressHUD()
         }
     }
     
@@ -251,12 +244,23 @@ extension EventAttendanceListViewController:IndicatorInfoProvider{
 }
 
 extension EventAttendanceListViewController:ViewCourseSelectionDelegate{
-    func courseViewDismissed() {
+    func submitSelectedCourses() {
+        self.selectMarkedCourses()
+        self.viewCourseList.removeFromSuperview()
+    }
+    
+    fileprivate func selectMarkedCourses() {
         let totalClass = CollegeClassManager.sharedManager.selectedCourseArray.count
         let selectedClass = CollegeClassManager.sharedManager.selectedCourseArray.filter({ $0.isSelected == true}).count
         let titleString = selectedClass == totalClass ? "All" : "\(selectedClass) Courses"
         self.buttonAllClass.setTitle(titleString, for: .normal)
+    }
+    
+    func courseViewDismissed() {
+        selectMarkedCourses()
         self.viewCourseList.removeFromSuperview()
     }
+    
+    
     
 }

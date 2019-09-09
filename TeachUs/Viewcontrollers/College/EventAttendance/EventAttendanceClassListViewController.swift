@@ -157,6 +157,17 @@ extension EventAttendanceClassListViewController:AddEventAttendanceDelegate{
 
 
 extension EventAttendanceClassListViewController:ViewCourseSelectionDelegate{
+    func submitSelectedCourses() {
+        let parameters = [
+            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+            "course_id":"\(CollegeClassManager.sharedManager.getSelectedCourseList)",
+            "event_id":"\(self.currentEvent.eventId)"
+        ]
+        EventManager.shared.editEvent(params: parameters) { (_) in
+            self.viewCourseList.removeFromSuperview()
+        }
+    }
+    
     func courseViewDismissed() {
         self.viewCourseList.removeFromSuperview()
     }
