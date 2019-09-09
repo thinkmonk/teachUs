@@ -58,7 +58,7 @@ class CollegeNoticeListViewController: BaseViewController {
         }
 
         let parameters = [
-            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)"
         ]
         manager.apiPostWithDataResponse(apiName: "Get Notice List", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
@@ -88,20 +88,6 @@ class CollegeNoticeListViewController: BaseViewController {
                 viewController.filepath = filePath
                 viewController.fileURL = imageURL
                 self.navigationController?.pushViewController(viewController, animated: true)
-
-                
-                /*
-                let webView = UIWebView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.size.width, height:UIScreen.main.bounds.size.height))
-                webView.loadRequest(URLRequest(url: URL(fileURLWithPath: filePath)))
-                webView.scalesPageToFit = true
-                webView.contentMode = .scaleAspectFit
-                let pdfVC = BaseViewController() //create a view controller for view only purpose
-                pdfVC.view.addSubview(webView)
-                webView.scalesPageToFit = true
-                pdfVC.title = "\(URL(string: fileUrl)?.lastPathComponent ?? "")"
-                self.navigationController?.pushViewController(pdfVC, animated: true)
-                pdfVC.addGradientToNavBar()
-                */
             }else{// save file
                 if let window = UIApplication.shared.keyWindow{
                     LoadingActivityHUD.showProgressHUD(view: window)
@@ -116,16 +102,69 @@ class CollegeNoticeListViewController: BaseViewController {
         }
     }
     
+    @objc func deleteNotices(_ sender:ButtonWithIndexPath){
+
+        
+        if let indexpath = sender.indexPath, let notice = self.notesList?.notices?[indexpath.row]
+        {
+            let alert = UIAlertController(title: nil, message: "Are you sure, you want to delete this notice?", preferredStyle: UIAlertControllerStyle.alert)
+            
+            // add an action (button)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { _ in
+                self.deleteNoticeApiCall(noticeObj: notice)
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            // show the alert
+            self.present(alert, animated: true, completion:nil)
+        }
+    }
+    
+    private func deleteNoticeApiCall(noticeObj:Notice){
+        if let noticeId =  noticeObj.noticeID
+        {
+            LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+            let manager = NetworkHandler()
+            manager.url = URLConstants.CollegeURL.deleteNotice
+            let parameters = [
+                "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+                "notice_id":"\(noticeId)"
+            ]
+            manager.apiPostWithDataResponse(apiName: "Delete Notice \(noticeObj.title ?? "")", parameters:parameters, completionHandler: { (result, code, response) in
+                LoadingActivityHUD.hideProgressHUD()
+                self.getNoticeList()
+            }) { (error, code, message) in
+                print(message)
+                LoadingActivityHUD.hideProgressHUD()
+            }
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.segues.toNoticeDetails{
             if let destinationVC = segue.destination as? CollegeNoticeDetailsViewController{
                 destinationVC.selectedNotice = self.selectedNotice
             }
         }
+        
+        if segue.identifier == Constants.segues.toAddNewNotice{
+            if let destinationVC = segue.destination as? AddNewNoticeViewController{
+                destinationVC.delegate = self
+            }
+
+        }
     }
     
     @IBAction func actionAddNotice(_ sender: Any) {
         
+    }
+}
+
+extension CollegeNoticeListViewController:AddNewNoticeDelegate{
+    func viewDismissed(isNoticeAdded: Bool?) {
+        if let noticeAddedFlag = isNoticeAdded, noticeAddedFlag == true{
+            self.getNoticeList()
+        }
     }
 }
 
@@ -143,7 +182,10 @@ extension CollegeNoticeListViewController:UITableViewDelegate, UITableViewDataSo
         if let noticeObject = self.notesList?.notices?[indexPath.section]{
             cell.setUpNotice(noticeObject: noticeObject)
             cell.buttonDownload.indexPath = indexPath
+            cell.buttonDeleteNotice.indexPath = indexPath
             cell.buttonDownload.addTarget(self, action: #selector(CollegeNoticeListViewController.downloadNotices(_:)), for: .touchUpInside)
+            cell.buttonDeleteNotice.addTarget(self, action: #selector(CollegeNoticeListViewController.deleteNotices(_:)), for: .touchUpInside)
+
         }
         cell.selectionStyle = .none
         cell.accessoryType = .disclosureIndicator

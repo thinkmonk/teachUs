@@ -8,7 +8,7 @@
 
 import Foundation
 struct CollegeNoticeList: Codable {
-    let notices: [Notice]?
+    var notices: [Notice]?
 }
 
 // MARK: - Notice

@@ -66,7 +66,8 @@ class LoginViewController: BaseViewController {
             collegeLogin.userType = UserManager.sharedUserManager.user!
             collegeLogin.delegate = self
             collegeLogin.setUpView()
-            self.collegeLogin.showView(inView: self.view, yPosition: (self.statusBarHeight+self.navBarHeight+20))
+//            self.collegeLogin.showView(inView: self.view, yPosition: (self.statusBarHeight+self.navBarHeight+20))
+            self.collegeLogin.showView(inView: self.view, yPosition: (self.view.centerY() - self.collegeLogin.height()/2))
             
             break
         }
@@ -84,6 +85,14 @@ class LoginViewController: BaseViewController {
                 {
                     self.view.frame.origin.y -= keyboardSize.height/2
                 }
+            }
+            if(self.collegeLogin != nil)
+            {
+                if((self.collegeLogin.origin().y + self.collegeLogin.viewVerifyOtp.bottom() ) >= (self.view.height()-keyboardSize.height) && self.view.frame.origin.y == 0)
+                {
+                    self.view.frame.origin.y -= keyboardSize.height/2
+                }
+
             }
         }
     }
@@ -186,7 +195,7 @@ extension LoginViewController:OtpDelegate{
             self.StudentOtpView.buttonSendOtp.isHidden = true
             self.StudentOtpView.buttonSendOtp.isEnabled = false
             self.StudentOtpView.labelOtpTimeLeft.isHidden = false
-            self.StudentOtpView.labelOtpTimeLeft.backgroundColor = UIColor.lightGray
+            self.StudentOtpView.labelOtpTimeLeft.backgroundColor = UIColor.clear
             otpTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(LoginViewController.enableButton), userInfo: nil, repeats: true)
 
             self.StudentOtpView.setUpOtpView()
@@ -281,7 +290,7 @@ extension LoginViewController:CollegeLoginDelegate{
             self.collegeLogin.buttonSendOtp.isHidden = true
             self.collegeLogin.buttonSendOtp.isEnabled = false
             self.collegeLogin.labelOtpTimeLeft.isHidden = false
-            self.collegeLogin.labelOtpTimeLeft.backgroundColor = UIColor.lightGray
+            self.collegeLogin.labelOtpTimeLeft.backgroundColor = UIColor.clear
             otpTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(LoginViewController.enableCollegeResendOtpButton), userInfo: nil, repeats: true)
 
         }

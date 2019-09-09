@@ -33,7 +33,7 @@ class SelectCollegeCourse{
 
 
 class CollegeClassManager{
-    
+    var courseListData : CourseDetails?
     static var sharedManager = CollegeClassManager()
     var selectedClassArray : [SelectCollegeClass] = []
     var selectedAttendanceCriteria:Int!
@@ -49,5 +49,28 @@ class CollegeClassManager{
         let selectedCourseArray:[SelectCollegeCourse] = self.selectedCourseArray.filter({$0.isSelected == true})
         let selectedCourseIdArray: [String] = selectedCourseArray.map({$0.collegeCourse?.courseID ?? ""})
         return selectedCourseIdArray.joined(separator: ",")
+    }
+    
+    final func getCourseList(completion: ((Bool) -> Void)? = nil) {
+        let manager = NetworkHandler()
+        manager.url = URLConstants.SyllabusURL.getCourseList
+        let parameters = [
+            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)"
+        ]
+        
+        manager.apiPostWithDataResponse(apiName: " Get all Course List", parameters:parameters, completionHandler: { (result, code, response) in
+            do{
+                let decoder = JSONDecoder()
+                self.courseListData = try decoder.decode(CourseDetails.self, from: response)
+                completion?(true)
+            }
+            catch let error{
+                print("err", error)
+                completion?(false)
+            }
+        }) { (error, code, message) in
+            completion?(false)
+        }
+        
     }
 }

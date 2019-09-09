@@ -40,13 +40,16 @@ class HomeViewController2: BaseViewController {
         pageMenu?.didMove(toParentViewController: self)
         
     }
+    private var deselectedColor : UIColor{
+        return UIColor(white: 1.0, alpha: 1)
+    }
     
     func setCapsPageMenu(){
         let parameters: [CAPSPageMenuOption] = [
             .scrollMenuBackgroundColor(UIColor.clear),
             .viewBackgroundColor(UIColor.clear),
             .selectionIndicatorColor(UIColor.clear),
-            .unselectedMenuItemLabelColor(UIColor(red: 152.0/255.0, green: 132.0/255.0, blue: 212.0/255.0, alpha: 1.0)),
+            .unselectedMenuItemLabelColor(deselectedColor),
             .menuItemFont(UIFont(name: "HelveticaNeue", size: 15.0)!),
             .menuHeight(44.0),
             .menuMargin(20.0),

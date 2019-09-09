@@ -30,7 +30,8 @@ class Event:Mappable{
     var eventDescription:String =  ""
     var eventDate:String = ""
     var totalParticipants:String = ""
-    
+    private var courseSpecific = ""
+    var courseSpecificArray = [String]()
     required init?(map: Map) {
         
     }
@@ -42,7 +43,9 @@ class Event:Mappable{
         self.eventDescription <- map["event_description"]
         self.eventDate <- map["event_date"]
         self.totalParticipants <- map["total_participants"]
+        self.courseSpecific <- map["course_specific"]
+        if !self.courseSpecific.isEmpty{
+            self.courseSpecificArray = self.courseSpecific.components(separatedBy: ",")
+        }
     }
-    
-    
 }

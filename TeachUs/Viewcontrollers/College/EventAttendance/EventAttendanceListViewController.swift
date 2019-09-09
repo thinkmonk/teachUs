@@ -23,7 +23,6 @@ class EventAttendanceListViewController: BaseViewController {
     var arrayDataSource:[Event] = []
     var disposeBag = DisposeBag()
     var viewCourseList : ViewCourseSelection!
-    var courseListData:CourseDetails!
     var dispatchGroup = DispatchGroup()
     
     override func viewDidLoad() {
@@ -76,9 +75,9 @@ class EventAttendanceListViewController: BaseViewController {
         manager.url = URLConstants.CollegeURL.addNewEvent
         let parameters = [
             "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
-            "event_name":"\(self.textFieldEventName.text!)",
-            "event_code":"\(self.textFieldEventName.text!)",
-            "event_description":"\(self.textFieldEventName.text!)",
+            "event_name":"\(self.textFieldEventName.text ?? "")",
+            "event_code":"\(self.textFieldEventName.text ?? "")",
+            "event_description":"\(self.textFieldEventName.text ?? "")",
             "event_date":"\(resultDateString)",
             "course_id":"\(CollegeClassManager.sharedManager.getSelectedCourseList)"
         ]
@@ -89,6 +88,13 @@ class EventAttendanceListViewController: BaseViewController {
             if (status == 200){
                 let message:String = response["message"] as! String
                 self.showAlterWithTitle(nil, alertMessage: message)
+                self.textFieldEventName.text = ""
+                
+                self.getEvents()
+                self.dispatchGroup.notify(queue: DispatchQueue.main, execute: {
+                    self.tableViewEvents.reloadData()
+                    self.view.endEditing(true)
+                })
             }
         }) { (error, code, message) in
             self.showAlterWithTitle(nil, alertMessage: message)
@@ -97,8 +103,11 @@ class EventAttendanceListViewController: BaseViewController {
     }
     
     @IBAction func showCourseList(_ sender: Any) {
-        self.viewCourseList.frame = CGRect(x: 0.0, y:0.0, width: self.view.width(), height: self.view.height())
-        self.view.addSubview(self.viewCourseList)
+        self.view.endEditing(true)
+        if self.viewCourseList != nil{
+            self.viewCourseList.frame = CGRect(x: 0.0, y:0.0, width: self.view.width(), height: self.view.height())
+            self.view.addSubview(self.viewCourseList)
+        }
     }
     
     
@@ -110,10 +119,23 @@ class EventAttendanceListViewController: BaseViewController {
         self.viewCourseList.delegate = self
         
         //init class selection list after sorting
-        for course in self.courseListData.courseList{
-            let selectedCourse = SelectCollegeCourse(course, true)
-            CollegeClassManager.sharedManager.selectedCourseArray.append(selectedCourse)
-        }
+        if let listData = CollegeClassManager.sharedManager.courseListData{
+            
+            for course in listData.courseList
+            {
+                let selectedCourse = SelectCollegeCourse(course, true)
+                CollegeClassManager.sharedManager.selectedCourseArray.append(selectedCourse)
+            }
+            }else{
+                CollegeClassManager.sharedManager.getCourseList { (_) in
+                    if let listData = CollegeClassManager.sharedManager.courseListData{
+                        for course in listData.courseList{
+                            let selectedCourse = SelectCollegeCourse(course, true)
+                            CollegeClassManager.sharedManager.selectedCourseArray.append(selectedCourse)
+                        }
+                    }
+                }
+            }
     }
 
     func getEvents(){
@@ -144,29 +166,12 @@ class EventAttendanceListViewController: BaseViewController {
     }
     
     func getCourseList(){
-        self.dispatchGroup.enter()
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
-        let manager = NetworkHandler()
-        manager.url = URLConstants.SyllabusURL.getCourseList
-        let parameters = [
-            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)"
-        ]
-        
-        manager.apiPostWithDataResponse(apiName: " Get all Course List", parameters:parameters, completionHandler: { (result, code, response) in
+        self.dispatchGroup.enter()
+        CollegeClassManager.sharedManager.getCourseList { (isCompleted) in
             LoadingActivityHUD.hideProgressHUD()
-            do{
-                let decoder = JSONDecoder()
-                self.courseListData = try decoder.decode(CourseDetails.self, from: response)
-                self.dispatchGroup.leave()
-            }
-            catch let error{
-                print("err", error)
-            }
-        }) { (error, code, message) in
-            self.showAlterWithTitle(nil, alertMessage: message)
-            LoadingActivityHUD.hideProgressHUD()
+            self.dispatchGroup.leave()
         }
-        
     }
     
     func setUpRx(){
@@ -176,8 +181,13 @@ class EventAttendanceListViewController: BaseViewController {
             }
             .share(replay: 1)
         isEventNameValid.subscribe(onNext: { (isValid) in
-            self.buttonAddEvent.themeRedButton()
-            self.buttonAddEvent.alpha = isValid ? 1 : 0
+            if !isValid{
+                self.buttonAddEvent.themeDisabledGreyButton(false)
+                
+            }else{
+                self.buttonAddEvent.isEnabled = true
+                self.buttonAddEvent.themeRedButton()
+            }
         }).disposed(by: disposeBag)
     }
     

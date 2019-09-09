@@ -23,11 +23,18 @@ extension UIButton{
         self.makeButtonwith(background: bgColor, fontColor: fontColor, cornerRadius: self.height()/2, borderColor: nil, borderWidth: 0.0)
     }
     
+    func themeDisabledGreyButton(_ isEnabled:Bool = false){
+        self.isEnabled = isEnabled
+        let bgColor:UIColor = UIColor.lightGray
+        let fontColor:UIColor = UIColor.white
+        self.makeButtonwith(background: bgColor, fontColor: fontColor, cornerRadius: nil, borderColor: nil, borderWidth: 0.0)
+    }
+
+    
     func themeRedButton(){
         let bgColor:UIColor = Constants.colors.themeRed
         let fontColor:UIColor = UIColor.white
         self.makeButtonwith(background: bgColor, fontColor: fontColor, cornerRadius: nil, borderColor: nil, borderWidth: 0.0)
-
     }
     
     func roundedBlueButton(){

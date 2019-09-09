@@ -10,7 +10,7 @@ import UIKit
 import XLPagerTabStrip
 
 class HomeTabsViewController: ButtonBarPagerTabStripViewController {
-    let unselectedColor = UIColor(red: 152.0/255.0, green: 132.0/255.0, blue: 212.0/255.0, alpha: 1.0)
+    let unselectedColor = UIColor(white: 1.0, alpha: 0.4)
     var controllersArray : [UIViewController] = []
     var parentNavigationController : UINavigationController?
 

@@ -265,6 +265,7 @@ extension StudentAttedanceViewController:UITableViewDelegate, UITableViewDataSou
             cell.labelSubject.text = cellData.subjectName
             cell.labelNumberOfLectures.text = "\(cellData.percentage!)%"
             cell.labelAttendancePercent.text = "\(cellData.presentCount!)/\(cellData.totalCount!)"
+            cell.accessoryType = .disclosureIndicator
             cell.selectionStyle = .none
             
         case .EventAttendance:

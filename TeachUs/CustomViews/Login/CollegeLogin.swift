@@ -118,7 +118,6 @@ class CollegeLogin: UIView {
             self.alpha = 1.0
             self.transform = CGAffineTransform.identity
         }, completion: { (result) in
-            print("completion result is \(result)")
         })
     }
 

@@ -18,7 +18,8 @@ class EventAttendanceClassListViewController: BaseViewController {
     
     @IBOutlet weak var tableViewClassList: UITableView!
     @IBOutlet weak var buttonConfirm: UIButton!
-    
+    var viewCourseList : ViewCourseSelection!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +31,8 @@ class EventAttendanceClassListViewController: BaseViewController {
         self.tableViewClassList.alpha = 0
         self.title = "\(self.currentEvent.eventName)"
         self.buttonConfirm.alpha = 0
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(EventAttendanceClassListViewController.editClassForEvents))
+        
         // Do any additional setup after loading the view.
     }
 
@@ -76,6 +79,7 @@ class EventAttendanceClassListViewController: BaseViewController {
             LoadingActivityHUD.hideProgressHUD()
         }
     }
+    
     func showTableView(){
         self.tableViewClassList.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
         UIView.animate(withDuration: 0.3) {
@@ -84,6 +88,19 @@ class EventAttendanceClassListViewController: BaseViewController {
         }
     }
     
+    @objc func editClassForEvents(){
+        if self.viewCourseList == nil{
+            self.viewCourseList = ViewCourseSelection.instanceFromNib() as? ViewCourseSelection
+            self.viewCourseList.delegate = self
+        }
+        
+        if CollegeClassManager.sharedManager.courseListData == nil{
+            CollegeClassManager.sharedManager.getCourseList(completion: nil)
+        }
+        self.viewCourseList.frame = CGRect(x: 0.0, y:self.statusBarHeight+self.navBarHeight, width: self.view.width(), height: self.view.height()-(self.statusBarHeight+self.navBarHeight))
+        self.viewCourseList.selecCourses(courseIdArray: self.currentEvent.courseSpecificArray)
+        self.view.addSubview(self.viewCourseList)
+    }
     //MARK:- Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.segues.toStudentList {
@@ -136,4 +153,11 @@ extension EventAttendanceClassListViewController:AddEventAttendanceDelegate{
     }
     
     
+}
+
+
+extension EventAttendanceClassListViewController:ViewCourseSelectionDelegate{
+    func courseViewDismissed() {
+        self.viewCourseList.removeFromSuperview()
+    }
 }

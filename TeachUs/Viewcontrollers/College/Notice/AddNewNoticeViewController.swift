@@ -13,7 +13,7 @@ import RxSwift
 import RxCocoa
 
 protocol AddNewNoticeDelegate {
-    func viewDismissed()
+    func viewDismissed(isNoticeAdded:Bool?)
 }
 
 class AddNewNoticeViewController: BaseViewController {
@@ -43,6 +43,7 @@ class AddNewNoticeViewController: BaseViewController {
     var chosenImage = Variable<UIImage?>(nil)
     var chosenFile =  Variable<URL?>(URL(string: ""))
     var myDisposeBag = DisposeBag()
+    var noticeAddedFlag:Bool? = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,7 +88,7 @@ class AddNewNoticeViewController: BaseViewController {
     @IBAction func acctionDissmissView(_ sender: Any) {
         self.dismiss(animated: true, completion: {
             if self.delegate != nil{
-                self.delegate.viewDismissed()
+                self.delegate.viewDismissed(isNoticeAdded: self.noticeAddedFlag)
             }
         })
     }
@@ -129,12 +130,12 @@ class AddNewNoticeViewController: BaseViewController {
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()
         manager.url = URLConstants.CollegeURL.collegeUploadNotice
-        manager.apiPost(apiName: "Upload nOtes", parameters:params, completionHandler: { (result, code, response) in
-            if let status = response["status"] as? Int, status == 200, let message = response["message"] as? String{
-                self.showAlterWithTitle("Success", alertMessage: message)
-                self.chosenImage.value = nil
-                self.chosenFile.value = nil
-            }
+        manager.apiPostWithDataResponse(apiName: "Upload Notice", parameters:params, completionHandler: { (result, code, response) in
+            
+            self.showAlterWithTitle("Success", alertMessage: "Notice added!")
+            self.chosenImage.value = nil
+            self.chosenFile.value = nil
+            self.noticeAddedFlag = true
             self.acctionDissmissView(self)
             LoadingActivityHUD.hideProgressHUD()
         }) { (error, code, message) in

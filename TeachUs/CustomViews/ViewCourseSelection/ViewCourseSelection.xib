@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,7 +17,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HBx-h2-2Wx">
-                    <rect key="frame" x="25" y="25" width="325" height="617"/>
+                    <rect key="frame" x="25" y="25" width="325" height="582"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bax-ZM-td9">
                             <rect key="frame" x="0.0" y="0.0" width="325" height="50.5"/>
@@ -68,16 +68,16 @@
                             </subviews>
                         </stackView>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kTL-bz-RSM">
-                            <rect key="frame" x="0.0" y="80.5" width="325" height="536.5"/>
+                            <rect key="frame" x="0.0" y="80.5" width="325" height="501.5"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </tableView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="y8q-fn-ObN" firstAttribute="top" secondItem="Bax-ZM-td9" secondAttribute="bottom" id="2PA-n8-koe"/>
-                        <constraint firstAttribute="bottom" secondItem="kTL-bz-RSM" secondAttribute="bottom" id="8AD-Qa-LLP"/>
                         <constraint firstAttribute="trailing" secondItem="Bax-ZM-td9" secondAttribute="trailing" id="GTJ-qv-kn7"/>
                         <constraint firstItem="kTL-bz-RSM" firstAttribute="leading" secondItem="HBx-h2-2Wx" secondAttribute="leading" id="ILg-kW-jSS"/>
+                        <constraint firstAttribute="bottom" secondItem="kTL-bz-RSM" secondAttribute="bottom" id="L93-7I-Ev0"/>
                         <constraint firstAttribute="trailing" secondItem="y8q-fn-ObN" secondAttribute="trailing" id="Pie-a8-7kt"/>
                         <constraint firstItem="y8q-fn-ObN" firstAttribute="leading" secondItem="HBx-h2-2Wx" secondAttribute="leading" id="Tmq-nF-ULO"/>
                         <constraint firstItem="kTL-bz-RSM" firstAttribute="top" secondItem="y8q-fn-ObN" secondAttribute="bottom" id="ViA-eC-kqu"/>
@@ -86,13 +86,23 @@
                         <constraint firstItem="Bax-ZM-td9" firstAttribute="top" secondItem="HBx-h2-2Wx" secondAttribute="top" id="lV8-yS-zU2"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FsV-u7-xJX">
+                    <rect key="frame" x="25" y="612" width="325" height="30"/>
+                    <state key="normal" title="Submit"/>
+                    <connections>
+                        <action selector="dismissView:" destination="iN0-l3-epB" eventType="touchUpInside" id="cjz-eR-eXB"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.5015939295977011" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="FsV-u7-xJX" secondAttribute="bottom" constant="25" id="CwG-ky-Ssg"/>
+                <constraint firstItem="HBx-h2-2Wx" firstAttribute="leading" secondItem="FsV-u7-xJX" secondAttribute="leading" id="XDY-gD-8pS"/>
                 <constraint firstItem="HBx-h2-2Wx" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="25" id="ZC1-WY-7xh"/>
                 <constraint firstItem="HBx-h2-2Wx" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="25" id="gTg-Vb-5AV"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="HBx-h2-2Wx" secondAttribute="bottom" constant="25" id="juE-2V-DAS"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="HBx-h2-2Wx" secondAttribute="trailing" constant="25" id="nCL-7g-BHf"/>
+                <constraint firstItem="HBx-h2-2Wx" firstAttribute="trailing" secondItem="FsV-u7-xJX" secondAttribute="trailing" id="twX-gg-GpN"/>
+                <constraint firstItem="FsV-u7-xJX" firstAttribute="top" secondItem="HBx-h2-2Wx" secondAttribute="bottom" constant="5" id="yeo-Zr-rSx"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
@@ -100,6 +110,7 @@
                 <outlet property="buttonClose" destination="38B-cG-EGz" id="Jhi-Kl-EUQ"/>
                 <outlet property="buttonDeselectAll" destination="1Jf-XA-mWy" id="AKi-Gu-Hcd"/>
                 <outlet property="buttonSelectAll" destination="vbZ-QB-7Wo" id="veD-3k-Rw4"/>
+                <outlet property="buttonSubmit" destination="FsV-u7-xJX" id="FLX-hn-ONU"/>
                 <outlet property="tableviewCourseList" destination="kTL-bz-RSM" id="szI-bq-bRe"/>
             </connections>
         </view>

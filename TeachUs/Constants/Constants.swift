@@ -39,6 +39,7 @@ public struct Constants {
         
         static let toNotificationDetails = "toNotificationDetails"
         static let toBellNotificationList = "toBellNotification"
+        static let toAddNewNotice = "addNewNotice"
 
         
     }

@@ -150,7 +150,7 @@ extension TeachersRatingViewController:UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let profDetails = self.arrayDataSource[indexPath.row]
+        let profDetails = self.arrayDataSource[indexPath.section]
         switch profDetails.ratingStatus {
         case "3":
             self.showAlterWithTitle("Not Started", alertMessage: "Feedback yet not Started")

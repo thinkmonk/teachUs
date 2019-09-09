@@ -18,18 +18,20 @@ class ViewCourseSelection: UIView {
     @IBOutlet weak var buttonDeselectAll: UIButton!
     @IBOutlet weak var buttonClose: UIButton!
     @IBOutlet weak var tableviewCourseList: UITableView!
+    @IBOutlet weak var buttonSubmit: UIButton!
     var delegate : ViewCourseSelectionDelegate!
     override func awakeFromNib() {
         super.awakeFromNib()
         self.tableviewCourseList.delegate = self
         self.tableviewCourseList.dataSource = self
         self.buttonSelectAll.makeButtonwith(background: .white, fontColor: .red, cornerRadius: nil, borderColor: nil, borderWidth: nil)
-        
+        self.buttonSubmit.roundedRedButton()
     }
     
     @IBAction func dismissView(_ sender: Any) {
         self.delegate.courseViewDismissed()
     }
+    
     
     @IBAction func selectAllCourses(_ sender: Any) {
         self.buttonSelectAll.makeButtonwith(background: .white, fontColor: .red, cornerRadius: nil, borderColor: nil, borderWidth: nil)
@@ -52,6 +54,17 @@ class ViewCourseSelection: UIView {
             return classSelected
         })
         self.tableviewCourseList.reloadData()
+    }
+    
+    func selecCourses(courseIdArray:[String]){
+        CollegeClassManager.sharedManager.selectedCourseArray =
+        CollegeClassManager.sharedManager.selectedCourseArray.map({mapObj in
+            if let courseId = mapObj.collegeCourse?.courseID
+            {
+                mapObj.isSelected = courseIdArray.contains(courseId)
+            }
+            return mapObj
+        })
     }
     
 }

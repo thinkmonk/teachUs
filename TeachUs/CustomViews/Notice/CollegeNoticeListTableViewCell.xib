@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -80,6 +80,10 @@
                                 <color key="textColor" red="0.52156862749999999" green="0.52156862749999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Id-Pu-6mG" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
+                                <rect key="frame" x="265" y="15" width="45" height="30"/>
+                                <state key="normal" title="Delete"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -92,6 +96,8 @@
                             <constraint firstItem="711-bf-oi1" firstAttribute="leading" secondItem="M58-tN-iWV" secondAttribute="leading" id="Ifg-ot-hhY"/>
                             <constraint firstItem="6Kj-qp-HeJ" firstAttribute="trailing" secondItem="CL3-20-6ZN" secondAttribute="trailing" id="Klj-ca-2iy"/>
                             <constraint firstAttribute="trailing" secondItem="2Ei-zS-p0p" secondAttribute="trailing" constant="30" id="LVZ-X6-0Dp"/>
+                            <constraint firstAttribute="trailing" secondItem="5Id-Pu-6mG" secondAttribute="trailing" constant="10" id="Lio-2Z-Tf7"/>
+                            <constraint firstItem="5Id-Pu-6mG" firstAttribute="top" secondItem="M58-tN-iWV" secondAttribute="top" id="NVg-eD-XYB"/>
                             <constraint firstItem="2Ei-zS-p0p" firstAttribute="leading" secondItem="JJU-xC-0Rg" secondAttribute="leading" id="Omf-me-eME"/>
                             <constraint firstAttribute="trailing" secondItem="711-bf-oi1" secondAttribute="trailing" constant="20" id="PvF-tU-jpu"/>
                             <constraint firstItem="2Ei-zS-p0p" firstAttribute="top" secondItem="JJU-xC-0Rg" secondAttribute="bottom" constant="5" id="Vqt-pb-7s5"/>
@@ -121,6 +127,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="buttonDeleteNotice" destination="5Id-Pu-6mG" id="fnD-Pz-FIb"/>
                 <outlet property="buttonDownload" destination="JJU-xC-0Rg" id="jF9-6m-zBw"/>
                 <outlet property="labelNoticeClassDetails" destination="ZAB-Yj-fT0" id="qJo-5u-eWN"/>
                 <outlet property="labelNoticeDate" destination="M58-tN-iWV" id="XTf-Fc-Hk1"/>

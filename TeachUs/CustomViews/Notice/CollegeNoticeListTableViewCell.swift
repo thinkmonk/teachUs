@@ -17,7 +17,7 @@ class CollegeNoticeListTableViewCell: UITableViewCell {
     @IBOutlet weak var labelNoticeClassDetails: UILabel!
     @IBOutlet weak var viewWrapper: UIView!
     @IBOutlet weak var labelRecipientDetails:UILabel!
-    
+    @IBOutlet weak var buttonDeleteNotice: ButtonWithIndexPath!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -62,6 +62,7 @@ class CollegeNoticeListTableViewCell: UITableViewCell {
         }
         recipientDetailsString.append("College")
         self.labelRecipientDetails.text = recipientDetailsString
+        self.buttonDeleteNotice.isHidden = UserManager.sharedUserManager.user! != .College
     }
     
 }
