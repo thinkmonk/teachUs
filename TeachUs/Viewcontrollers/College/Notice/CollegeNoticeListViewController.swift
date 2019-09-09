@@ -143,6 +143,7 @@ class CollegeNoticeListViewController: BaseViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.segues.toNoticeDetails{
             if let destinationVC = segue.destination as? CollegeNoticeDetailsViewController{
+                destinationVC.delegate = self
                 destinationVC.selectedNotice = self.selectedNotice
             }
         }
@@ -160,11 +161,15 @@ class CollegeNoticeListViewController: BaseViewController {
     }
 }
 
-extension CollegeNoticeListViewController:AddNewNoticeDelegate{
+extension CollegeNoticeListViewController:AddNewNoticeDelegate, NoticeDetailsDelegate{
     func viewDismissed(isNoticeAdded: Bool?) {
         if let noticeAddedFlag = isNoticeAdded, noticeAddedFlag == true{
             self.getNoticeList()
         }
+    }
+    
+    func noticeDeleted() {
+        self.getNoticeList()
     }
 }
 

@@ -8,11 +8,16 @@
 
 import UIKit
 
+protocol NoticeDetailsDelegate {
+    func noticeDeleted()
+}
+
 class CollegeNoticeDetailsViewController: BaseViewController {
     var selectedNotice:Notice?
     @IBOutlet weak var tableviewNoticeDetails:UITableView!
     var nibCell = "CollegeNoticeListTableViewCell"
-
+    var delegate: NoticeDetailsDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addGradientToNavBar()
@@ -55,6 +60,43 @@ class CollegeNoticeDetailsViewController: BaseViewController {
         }
     }
     
+    @objc func deleteNotices(_ sender:ButtonWithIndexPath){
+        if let indexpath = sender.indexPath, let notice = selectedNotice
+        {
+            let alert = UIAlertController(title: nil, message: "Are you sure, you want to delete this notice?", preferredStyle: UIAlertControllerStyle.alert)
+            
+            // add an action (button)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { _ in
+                self.deleteNoticeApiCall(noticeObj: notice)
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            // show the alert
+            self.present(alert, animated: true, completion:nil)
+        }
+    }
+    
+    private func deleteNoticeApiCall(noticeObj:Notice){
+        if let noticeId =  noticeObj.noticeID
+        {
+            LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+            let manager = NetworkHandler()
+            manager.url = URLConstants.CollegeURL.deleteNotice
+            let parameters = [
+                "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+                "notice_id":"\(noticeId)"
+            ]
+            manager.apiPostWithDataResponse(apiName: "Delete Notice \(noticeObj.title ?? "")", parameters:parameters, completionHandler: { (result, code, response) in
+                LoadingActivityHUD.hideProgressHUD()
+                self.delegate?.noticeDeleted()
+                self.navigationController?.popViewController(animated: true)
+            }) { (error, code, message) in
+                print(message)
+                LoadingActivityHUD.hideProgressHUD()
+            }
+        }
+    }
+    
     
 
 }
@@ -76,7 +118,10 @@ extension CollegeNoticeDetailsViewController:UITableViewDelegate, UITableViewDat
             cell.labelNoticeClassDetails.numberOfLines = 0
             cell.setUpNotice(noticeObject: noticeObject)
             cell.buttonDownload.indexPath = indexPath
-            cell.buttonDownload.addTarget(self, action: #selector(CollegeNoticeListViewController.downloadNotices(_:)), for: .touchUpInside)
+            cell.buttonDeleteNotice.indexPath = indexPath
+            cell.buttonDownload.addTarget(self, action: #selector(CollegeNoticeDetailsViewController.downloadNotices(_:)), for: .touchUpInside)
+            cell.buttonDeleteNotice.addTarget(self, action: #selector(CollegeNoticeDetailsViewController.deleteNotices(_:)), for: .touchUpInside)
+
         }
         cell.selectionStyle = .none
         return cell
