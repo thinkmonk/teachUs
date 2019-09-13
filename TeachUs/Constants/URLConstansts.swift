@@ -96,6 +96,7 @@ public struct URLConstants{
         static let duplicateAttendanceCheck =  BaseUrl.baseURLV1 + "/attendance/check_attendance_details"
         static let getBellNotifications = BaseUrl.baseURLV1 + "/professor/firebasenotification"
         static let markReadNotification = BaseUrl.baseURLV1 + "/professor/firebasenotification_readstatus"
+        static let getPreviousLecture = BaseUrl.baseURLV1 + "/attendance/last_lectures_detail"
 
     }
     

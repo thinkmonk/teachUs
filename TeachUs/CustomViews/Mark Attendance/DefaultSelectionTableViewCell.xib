@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,81 +19,45 @@
                 <rect key="frame" x="0.0" y="0.0" width="274" height="49.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5G1-uQ-2zA">
-                        <rect key="frame" x="0.0" y="0.0" width="274" height="50.5"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="BoZ-gh-GJN">
+                        <rect key="frame" x="0.0" y="5" width="274" height="39.5"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Default overall button" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqq-JM-m5h">
-                                <rect key="frame" x="0.0" y="0.0" width="109.5" height="50.5"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hdJ-5n-3AD">
-                                <rect key="frame" x="109.5" y="0.0" width="89.5" height="50.5"/>
-                                <subviews>
-                                    <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gWY-MQ-zIm">
-                                        <rect key="frame" x="7.5" y="10" width="75" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="75" id="mSx-j9-YAw"/>
-                                            <constraint firstAttribute="height" constant="30" id="qUo-bR-y69"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
-                                        <state key="normal" title="Absent"/>
-                                        <connections>
-                                            <action selector="markDefaultAttendance:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ejZ-hU-msh"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="gWY-MQ-zIm" firstAttribute="centerX" secondItem="hdJ-5n-3AD" secondAttribute="centerX" id="HaM-cn-o0a"/>
-                                    <constraint firstItem="gWY-MQ-zIm" firstAttribute="centerY" secondItem="hdJ-5n-3AD" secondAttribute="centerY" id="Mwl-ow-Ck4"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bkm-GA-pnc">
-                                <rect key="frame" x="199" y="0.0" width="75" height="50.5"/>
-                                <subviews>
-                                    <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iF2-G2-AfW">
-                                        <rect key="frame" x="1" y="11.5" width="73" height="28"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
-                                        <state key="normal" title="Present"/>
-                                        <connections>
-                                            <action selector="markDefaultAttendance:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="lVn-rS-cji"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="iF2-G2-AfW" firstAttribute="centerY" secondItem="bkm-GA-pnc" secondAttribute="centerY" id="4Os-5s-k9t"/>
-                                    <constraint firstAttribute="width" constant="75" id="S0s-a2-abE"/>
-                                    <constraint firstItem="iF2-G2-AfW" firstAttribute="centerX" secondItem="bkm-GA-pnc" secondAttribute="centerX" id="aDl-OS-sDE"/>
-                                    <constraint firstAttribute="height" constant="30" id="c0c-JG-0Im"/>
-                                </constraints>
-                            </view>
+                            <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Dp2-hB-nfw">
+                                <rect key="frame" x="0.0" y="6.5" width="184" height="27"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
+                                <state key="normal" title="Fetch Previous Attendance"/>
+                                <connections>
+                                    <action selector="bringLatAttendance:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="bb7-3t-XgL"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="iF2-G2-AfW">
+                                <rect key="frame" x="184" y="6" width="90" height="28"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
+                                <state key="normal" title="Absent All"/>
+                                <connections>
+                                    <action selector="markDefaultAttendance:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="gYx-91-KuQ"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <constraints>
-                            <constraint firstItem="zqq-JM-m5h" firstAttribute="width" secondItem="5G1-uQ-2zA" secondAttribute="width" multiplier="0.4" id="T9p-vt-Mxi"/>
-                        </constraints>
                     </stackView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
-                    <constraint firstItem="5G1-uQ-2zA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="IpA-05-Jo0"/>
-                    <constraint firstAttribute="bottom" secondItem="5G1-uQ-2zA" secondAttribute="bottom" id="ljh-yd-43I"/>
-                    <constraint firstAttribute="trailing" secondItem="5G1-uQ-2zA" secondAttribute="trailing" id="pds-fl-wyB"/>
-                    <constraint firstItem="5G1-uQ-2zA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="x3g-r0-kUq"/>
+                    <constraint firstItem="BoZ-gh-GJN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="Gbl-l1-meK"/>
+                    <constraint firstItem="BoZ-gh-GJN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="J8c-dJ-eyL"/>
+                    <constraint firstAttribute="trailing" secondItem="BoZ-gh-GJN" secondAttribute="trailing" id="iq8-m0-HSl"/>
+                    <constraint firstAttribute="bottom" secondItem="BoZ-gh-GJN" secondAttribute="bottom" constant="5" id="wLK-9v-rtH"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="buttonAbsent" destination="gWY-MQ-zIm" id="ybt-Nw-JnY"/>
                 <outlet property="buttonPresent" destination="iF2-G2-AfW" id="Gs8-zv-e4f"/>
             </connections>
-            <point key="canvasLocation" x="-105" y="-161"/>
+            <point key="canvasLocation" x="-105.59999999999999" y="-161.01949025487258"/>
         </tableViewCell>
     </objects>
 </document>

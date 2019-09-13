@@ -568,6 +568,10 @@ extension OfflineStudentListViewController: UITableViewDelegate, UITableViewData
 //MARK:- Default Attendance Selection Delegate
 
 extension OfflineStudentListViewController: DefaultAttendanceSelectionDelegate{
+    func getPreviousLectureAttendance() {
+//        
+    }
+    
     func selectDefaultAttendance(_ attendance: Bool) {
         self.defaultAttendanceForAllStudents = attendance
         self.isDefaultAttencdanceChanged = true

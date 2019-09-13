@@ -135,6 +135,8 @@ class MarkCompletedPortionViewController: BaseViewController {
     }
     
     @IBAction func submitSyllabusStatus(_ sender: Any) {
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        self.buttonSubmit.isEnabled = false
         print(ReachabilityManager.shared.reachabilityStatus.description)
         if(ReachabilityManager.shared.reachability.connection != .none){
             submitAttendanceAndSyllabus()
@@ -170,12 +172,12 @@ class MarkCompletedPortionViewController: BaseViewController {
                     self.performSegue(withIdentifier: Constants.segues.toLectureReport, sender: self)
                 }))
                 self.present(alert, animated: true, completion:nil)
-                
+                self.buttonSubmit.isEnabled = true
             }
         }) { (error, code, message) in
             LoadingActivityHUD.hideProgressHUD()
             print(message)
-            
+            self.buttonSubmit.isEnabled = true
         }
     }
 

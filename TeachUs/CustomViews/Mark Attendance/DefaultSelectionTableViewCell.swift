@@ -10,21 +10,19 @@ import UIKit
 
 protocol DefaultAttendanceSelectionDelegate {
     func selectDefaultAttendance(_ attendance:Bool)
+    func getPreviousLectureAttendance()
 }
 
 class DefaultSelectionTableViewCell: UITableViewCell {
 
     @IBOutlet weak var buttonPresent: UIButton!
-    @IBOutlet weak var buttonAbsent: UIButton!
     var buttons:[UIButton]!
-    var delegate:DefaultAttendanceSelectionDelegate!
-    var selectedButton:UIButton!
+    var delegate:DefaultAttendanceSelectionDelegate?
+    var isPresent:Bool = false //default value of entire edit attendance flow
     override func awakeFromNib() {
         super.awakeFromNib()
-        buttons = [buttonPresent,buttonAbsent]
-        self.markDefaultAttendance(self.buttonPresent)
+        self.markDefaultAttendance(self.isPresent)
         self.buttonPresent.makeTableCellEdgesRounded()
-        self.buttonAbsent.makeTableCellEdgesRounded()
         // Initialization code
     }
 
@@ -40,37 +38,65 @@ class DefaultSelectionTableViewCell: UITableViewCell {
     }
     
     @IBAction func markDefaultAttendance(_ sender: Any) {
-        let button:UIButton = sender as! UIButton
-        
-        for btn in buttons{
-            if btn == button{
-                btn.makeButtonwith(background: .white, fontColor: .red, cornerRadius: nil, borderColor: nil, borderWidth: nil)
-                btn.dropShadow()
-            }
-            else{
-                btn.makeButtonwith(background: .white, fontColor: .black, cornerRadius: nil, borderColor: nil, borderWidth: nil)
-                btn.removeDropShadow()
-            }
+        isPresent.toggle()
+        if isPresent{
+            self.buttonPresent.setTitle("Absent All", for: .normal)
+            self.buttonPresent.makeButtonwith(background: .white, fontColor: .black, cornerRadius: nil, borderColor: nil, borderWidth: nil)
+            self.buttonPresent.dropShadow()
+
+        }else{
+            self.buttonPresent.setTitle("Present All", for: .normal)
+            self.buttonPresent.makeButtonwith(background: .white, fontColor: .red, cornerRadius: nil, borderColor: nil, borderWidth: nil)
+            self.buttonPresent.removeDropShadow()
+    
         }
         
-        if(button != selectedButton){
-            selectedButton = button
-            if(delegate != nil){
-                //100 - present
-                //101 - absent
-                
-                switch button.tag{
-                case 100:
-                    self.delegate.selectDefaultAttendance(true)
-                    break
-                case 101:
-                    self.delegate.selectDefaultAttendance(false)
-                    break
-                default:
-                    break
-                }
-            }
-            
-        }
+//        if let button:UIButton = sender as? UIButton{
+//            if isPresent{
+//                button.makeButtonwith(background: .white, fontColor: .red, cornerRadius: nil, borderColor: nil, borderWidth: nil)
+//                button.dropShadow()
+//
+//            }
+//            else{
+//                button.makeButtonwith(background: .white, fontColor: .black, cornerRadius: nil, borderColor: nil, borderWidth: nil)
+//                button.removeDropShadow()
+//            }
+//        }
+        
+        self.delegate?.selectDefaultAttendance(isPresent)
+//        for btn in buttons{
+//            if btn == button{
+//                btn.makeButtonwith(background: .white, fontColor: .red, cornerRadius: nil, borderColor: nil, borderWidth: nil)
+//                btn.dropShadow()
+//            }
+//            else{
+//                btn.makeButtonwith(background: .white, fontColor: .black, cornerRadius: nil, borderColor: nil, borderWidth: nil)
+//                btn.removeDropShadow()
+//            }
+//        }
+        
+//        if(button != selectedButton){
+//            selectedButton = button
+//            if(delegate != nil){
+//                //100 - present
+//                //101 - absent
+//                
+//                switch button.tag{
+//                case 100:
+//                    self.delegate.selectDefaultAttendance(true)
+//                    break
+//                case 101:
+//                    self.delegate.selectDefaultAttendance(false)
+//                    break
+//                default:
+//                    break
+//                }
+//            }
+//            
+//        }
+    }
+    
+    @IBAction func bringLatAttendance(_ sender:Any){
+        self.delegate?.getPreviousLectureAttendance()
     }
 }

@@ -48,6 +48,7 @@ class StudentsListViewController: BaseViewController {
     var isEditAttendanceFlow:Bool = false
     var selectedAttendanceId:Int?
     var lectureDetails:EditAttendanceLectureInfo!
+    var previousLectureAttendanceList:LastLectureAttendance?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -800,6 +801,65 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
 //MARK:- Default Attendance Selection Delegate
 
 extension StudentsListViewController:DefaultAttendanceSelectionDelegate{
+    fileprivate func addPreviousLectureAttendanceValue() {
+        for student in AttendanceManager.sharedAttendanceManager.arrayStudents.value{
+            if let previousValue = self.previousLectureAttendanceList?.lastAttendanceDetail.filter({
+                $0.studentID == student.student?.studentId
+            }).first{
+                student.isPrsent = previousValue.attStatus == "1" ? true : false
+            }
+        }
+        self.makeDataSource()
+    }
+    
+    func getPreviousLectureAttendance() {
+        if self.previousLectureAttendanceList  == nil{
+            let manager = NetworkHandler()
+            manager.url = URLConstants.ProfessorURL.getPreviousLecture
+            DispatchQueue.main.async {
+                LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+            }
+            
+            let currentDate = Date()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "YYYY-MM-dd"
+            let datestring = dateFormatter.string(from: currentDate)
+            
+            let parameters = [
+                "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+                "class_id":"\(self.selectedCollege.classId ?? "")",
+                "subject_id": "\(self.selectedCollege.subjectId ?? "")",
+                "date":"\(datestring)"
+            ]
+            manager.apiPostWithDataResponse(apiName: "Get Last lecture Attendance data", parameters:parameters, completionHandler: { (result, code, response) in
+                LoadingActivityHUD.hideProgressHUD()
+                if(code == 200){
+                    //                LastLectureAttendance.swift
+                    do{
+                        let myDecoder = JSONDecoder()
+                        self.previousLectureAttendanceList = try myDecoder.decode(LastLectureAttendance.self, from: response)
+                        self.addPreviousLectureAttendanceValue()
+                    } catch let error{
+                        print(error)
+                    }
+                }
+                else{
+                    self.showErrorAlert(ErrorType.ServerCallFailed, retry: { (retry) in
+                        if(retry){
+                            self.getListForAttendanceEdit()
+                        }
+                    })
+                }
+                
+            }) { (error, code, errorMessage) in
+                LoadingActivityHUD.hideProgressHUD()
+                print(errorMessage)
+            }
+        }else{
+            self.addPreviousLectureAttendanceValue()
+        }
+    }
+    
     func selectDefaultAttendance(_ attendance: Bool) {
         self.defaultAttendanceForAllStudents = attendance
         self.isDefaultAttencdanceChanged = true
