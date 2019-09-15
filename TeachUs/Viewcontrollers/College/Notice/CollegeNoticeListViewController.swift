@@ -105,7 +105,7 @@ class CollegeNoticeListViewController: BaseViewController {
     @objc func deleteNotices(_ sender:ButtonWithIndexPath){
 
         
-        if let indexpath = sender.indexPath, let notice = self.notesList?.notices?[indexpath.row]
+        if let indexpath = sender.indexPath, let notice = self.notesList?.notices?[indexpath.section]
         {
             let alert = UIAlertController(title: nil, message: "Are you sure, you want to delete this notice?", preferredStyle: UIAlertControllerStyle.alert)
             

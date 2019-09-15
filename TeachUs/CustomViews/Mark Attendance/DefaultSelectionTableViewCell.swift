@@ -11,12 +11,14 @@ import UIKit
 protocol DefaultAttendanceSelectionDelegate {
     func selectDefaultAttendance(_ attendance:Bool)
     func getPreviousLectureAttendance()
+    func showGridView()
 }
 
 class DefaultSelectionTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var buttonShowGridView: UIButton!
     @IBOutlet weak var buttonPresent: UIButton!
-    var buttons:[UIButton]!
+    @IBOutlet weak var buttonFetchPreviAttendance: UIButton!
     var delegate:DefaultAttendanceSelectionDelegate?
     var isPresent:Bool = false //default value of entire edit attendance flow
     override func awakeFromNib() {
@@ -50,53 +52,15 @@ class DefaultSelectionTableViewCell: UITableViewCell {
             self.buttonPresent.removeDropShadow()
     
         }
-        
-//        if let button:UIButton = sender as? UIButton{
-//            if isPresent{
-//                button.makeButtonwith(background: .white, fontColor: .red, cornerRadius: nil, borderColor: nil, borderWidth: nil)
-//                button.dropShadow()
-//
-//            }
-//            else{
-//                button.makeButtonwith(background: .white, fontColor: .black, cornerRadius: nil, borderColor: nil, borderWidth: nil)
-//                button.removeDropShadow()
-//            }
-//        }
-        
         self.delegate?.selectDefaultAttendance(isPresent)
-//        for btn in buttons{
-//            if btn == button{
-//                btn.makeButtonwith(background: .white, fontColor: .red, cornerRadius: nil, borderColor: nil, borderWidth: nil)
-//                btn.dropShadow()
-//            }
-//            else{
-//                btn.makeButtonwith(background: .white, fontColor: .black, cornerRadius: nil, borderColor: nil, borderWidth: nil)
-//                btn.removeDropShadow()
-//            }
-//        }
-        
-//        if(button != selectedButton){
-//            selectedButton = button
-//            if(delegate != nil){
-//                //100 - present
-//                //101 - absent
-//                
-//                switch button.tag{
-//                case 100:
-//                    self.delegate.selectDefaultAttendance(true)
-//                    break
-//                case 101:
-//                    self.delegate.selectDefaultAttendance(false)
-//                    break
-//                default:
-//                    break
-//                }
-//            }
-//            
-//        }
     }
     
     @IBAction func bringLatAttendance(_ sender:Any){
         self.delegate?.getPreviousLectureAttendance()
     }
+    
+    @IBAction func showGridView(_ sender: Any) {
+        self.delegate?.showGridView()
+    }
+    
 }

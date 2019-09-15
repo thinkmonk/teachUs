@@ -100,6 +100,7 @@ public struct Constants {
         static let collegeNoticeList = "CollegeNoticeListViewControllerId"
         static let collegeNotificationList = "CollegeNotificationListViewControllerId"
         static let documentsVC = "DocumentsViewControllerId"
+        static let rollNumberGridVC = "StudentListGridViewControllerId"
     }
     
     struct UserDefaults {
@@ -156,6 +157,7 @@ public struct Constants {
         static let collegeNoticeListCell = "CollegeNoticeListTableViewCellId"
         static let notificationCellId = "NotificationListTableViewCellId"
         static let bellNotificationCellId = "BellNotificationListTableViewCellId"
+        static let rollNumberGrid = "StudentRollNumberCollectionViewCellId"
     }
     
     struct UserTypeString {

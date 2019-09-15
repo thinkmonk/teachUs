@@ -319,6 +319,7 @@ extension OfflineStudentListViewController: UITableViewDelegate, UITableViewData
             let cell:DefaultSelectionTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.DefaultSelectionTableViewCellId, for: indexPath) as! DefaultSelectionTableViewCell
             
             cell.delegate = self
+            cell.buttonFetchPreviAttendance.isHidden = true
             cell.selectionStyle = .none
             return cell
             
@@ -572,6 +573,9 @@ extension OfflineStudentListViewController: DefaultAttendanceSelectionDelegate{
 //        
     }
     
+    func showGridView() {
+        
+    }
     func selectDefaultAttendance(_ attendance: Bool) {
         self.defaultAttendanceForAllStudents = attendance
         self.isDefaultAttencdanceChanged = true

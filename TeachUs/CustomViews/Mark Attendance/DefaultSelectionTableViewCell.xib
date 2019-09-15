@@ -19,11 +19,20 @@
                 <rect key="frame" x="0.0" y="0.0" width="274" height="49.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="BoZ-gh-GJN">
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="BoZ-gh-GJN">
                         <rect key="frame" x="0.0" y="5" width="274" height="39.5"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7N9-bx-E8v">
+                                <rect key="frame" x="0.0" y="6.5" width="39" height="27"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" image="grid"/>
+                                <connections>
+                                    <action selector="showGridView:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="aOy-vL-IZx"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Dp2-hB-nfw">
-                                <rect key="frame" x="0.0" y="6.5" width="184" height="27"/>
+                                <rect key="frame" x="39" y="6.5" width="145" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
                                 <state key="normal" title="Fetch Previous Attendance"/>
@@ -55,9 +64,14 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="buttonFetchPreviAttendance" destination="Dp2-hB-nfw" id="jtZ-xv-d7t"/>
                 <outlet property="buttonPresent" destination="iF2-G2-AfW" id="Gs8-zv-e4f"/>
+                <outlet property="buttonShowGridView" destination="7N9-bx-E8v" id="hR4-5j-xaw"/>
             </connections>
             <point key="canvasLocation" x="-105.59999999999999" y="-161.01949025487258"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="grid" width="29" height="27"/>
+    </resources>
 </document>

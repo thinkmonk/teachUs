@@ -5103,6 +5103,82 @@ Form Library</string>
             </objects>
             <point key="canvasLocation" x="2786" y="15032"/>
         </scene>
+        <!--Student List Grid View Controller-->
+        <scene sceneID="IuJ-3l-jIF">
+            <objects>
+                <viewController storyboardIdentifier="StudentListGridViewControllerId" id="su3-sc-0re" customClass="StudentListGridViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ioV-4s-Lhb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Qw5-eA-7ae">
+                                <rect key="frame" x="0.0" y="50" width="320" height="518"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="5" id="vsD-hq-tZH">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="BG6-Qv-cn1">
+                                        <rect key="frame" x="10" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uow-P5-ToJ">
+                                <rect key="frame" x="0.0" y="568" width="320" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="kUM-Dt-1XT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <state key="normal" title="Submit"/>
+                                <connections>
+                                    <action selector="actionSubmitAttendance:" destination="su3-sc-0re" eventType="touchUpInside" id="jbj-P5-RSb"/>
+                                    <action selector="submitAttendance:" destination="J2l-lX-T3q" eventType="touchUpInside" id="XDA-me-wUw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vl0-bG-i7R">
+                                <rect key="frame" x="0.0" y="20" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="0HY-t3-3BC"/>
+                                    <constraint firstAttribute="height" constant="30" id="Xqr-oG-RV8"/>
+                                </constraints>
+                                <state key="normal" image="cross"/>
+                                <connections>
+                                    <action selector="closeView:" destination="su3-sc-0re" eventType="touchUpInside" id="BNU-eM-Oay"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="YoO-I0-E6Z" firstAttribute="bottom" secondItem="Qw5-eA-7ae" secondAttribute="bottom" id="11Z-CL-di2"/>
+                            <constraint firstItem="vl0-bG-i7R" firstAttribute="leading" secondItem="YoO-I0-E6Z" secondAttribute="leading" id="Eae-qA-7dT"/>
+                            <constraint firstItem="Qw5-eA-7ae" firstAttribute="top" secondItem="vl0-bG-i7R" secondAttribute="bottom" id="Gwx-Bl-gzM"/>
+                            <constraint firstItem="Uow-P5-ToJ" firstAttribute="leading" secondItem="Qw5-eA-7ae" secondAttribute="leading" id="I6B-Xe-1xu"/>
+                            <constraint firstItem="vl0-bG-i7R" firstAttribute="top" secondItem="YoO-I0-E6Z" secondAttribute="top" id="LgJ-aC-5Dj"/>
+                            <constraint firstItem="YoO-I0-E6Z" firstAttribute="trailing" secondItem="Qw5-eA-7ae" secondAttribute="trailing" id="Pay-jY-A05"/>
+                            <constraint firstItem="Uow-P5-ToJ" firstAttribute="top" secondItem="Qw5-eA-7ae" secondAttribute="bottom" id="TEN-dh-63v"/>
+                            <constraint firstItem="Qw5-eA-7ae" firstAttribute="leading" secondItem="YoO-I0-E6Z" secondAttribute="leading" id="gsX-p7-YGG"/>
+                            <constraint firstItem="Uow-P5-ToJ" firstAttribute="trailing" secondItem="Qw5-eA-7ae" secondAttribute="trailing" id="uJh-LD-F8n"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="YoO-I0-E6Z"/>
+                    </view>
+                    <connections>
+                        <outlet property="buttonSubmit" destination="Uow-P5-ToJ" id="f7L-O1-qE5"/>
+                        <outlet property="collectionViewStudentsGrid" destination="Qw5-eA-7ae" id="cgG-8S-h0g"/>
+                        <outlet property="layoutTopConstraint" destination="TEN-dh-63v" id="ghd-qc-KKr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ygv-yj-wZz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7896" y="44"/>
+        </scene>
     </scenes>
     <resources>
         <image name="addEvent" width="20" height="20"/>
