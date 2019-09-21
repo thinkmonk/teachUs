@@ -165,6 +165,7 @@ public struct Constants {
         static let Professor = "LECTURER"
         static let College = "COLLEGE"
         static let SuperAdmin = "SUPERADMIN"
+        static let Parents = "PARENTS"
     }
     
     struct  CustomErrorCodes {

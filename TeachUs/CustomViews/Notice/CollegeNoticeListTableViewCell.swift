@@ -18,6 +18,7 @@ class CollegeNoticeListTableViewCell: UITableViewCell {
     @IBOutlet weak var viewWrapper: UIView!
     @IBOutlet weak var labelRecipientDetails:UILabel!
     @IBOutlet weak var buttonDeleteNotice: ButtonWithIndexPath!
+    @IBOutlet weak var constraintDownbuttonBotton: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -41,6 +42,8 @@ class CollegeNoticeListTableViewCell: UITableViewCell {
         self.labelNoticeClassDetails.text = "Send to \(noticeObject.courses ?? "")"
         if let fileUrl = noticeObject.filePath, !fileUrl.isEmpty{
             self.buttonDownload.isHidden = false
+            self.buttonDownload.setHeight(30)
+            self.constraintDownbuttonBotton.isActive = false
 
             let imageURL = "\(fileUrl)"
             if let _ = GlobalFunction.checkIfFileExisits(fileUrl: imageURL, name:noticeObject.generatedFileName ?? ""){
@@ -51,6 +54,8 @@ class CollegeNoticeListTableViewCell: UITableViewCell {
             }
         }else{
             self.buttonDownload.isHidden = true
+            self.buttonDownload.setHeight(0)
+            self.constraintDownbuttonBotton.isActive = true
         }
         
         var recipientDetailsString : String = "Notice for "
@@ -62,7 +67,7 @@ class CollegeNoticeListTableViewCell: UITableViewCell {
         }
         recipientDetailsString.append("College")
         self.labelRecipientDetails.text = recipientDetailsString
-        self.buttonDeleteNotice.isHidden = UserManager.sharedUserManager.user! != .College
+        self.buttonDeleteNotice.isHidden = UserManager.sharedUserManager.user! != .college
     }
     
 }

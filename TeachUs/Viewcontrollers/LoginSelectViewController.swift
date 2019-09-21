@@ -10,18 +10,20 @@ import UIKit
 import ObjectMapper
 
 enum LoginUserType {
-    case Student
-    case Professor
-    case College
+    case student
+    case professor
+    case college
+    case parents
 }
 
 class LoginSelectViewController: BaseViewController {
-    @IBOutlet weak var viewButtonStack: UIStackView!
     var arrayUserRoles:[UserRole] = []
     var userType:LoginUserType!
     var roleStudent:UserRole!
     var roleProfessor:UserRole!
     var roleCollege:UserRole!
+    var roleParents:UserRole!
+    
     var appUpdateData:AppUpdateData!
     
     override func viewDidLoad() {
@@ -29,7 +31,6 @@ class LoginSelectViewController: BaseViewController {
         self.addDefaultBackGroundImage()
         self.navigationController?.navigationBar.isHidden = false
 
-        self.viewButtonStack.alpha = 0
         self.getRoleList()
     }
 
@@ -76,17 +77,12 @@ class LoginSelectViewController: BaseViewController {
                 case "College":
                     self.roleCollege = Mapper<UserRole>().map(JSONObject: user)!
                     break
-
+                case "Parents":
+                    self.roleParents = Mapper<UserRole>().map(JSONObject: user)!
                 default:
                     break
                 }
             }
-            
-            
-            UIView.animate(withDuration: 0.5, animations: {
-                self.viewButtonStack.alpha = 1
-            })
-            
         }) { (error, code, errorMessage) in
             LoadingActivityHUD.hideProgressHUD()
             if(code == Constants.CustomErrorCodes.noInternet){
@@ -102,21 +98,29 @@ class LoginSelectViewController: BaseViewController {
     }
 
     @IBAction func loginStudent(_ sender: Any) {
-        UserManager.sharedUserManager.setLoginUserType(.Student)
+        UserManager.sharedUserManager.setLoginUserType(.student)
         UserManager.sharedUserManager.userRole = roleStudent
         self.performSegue(withIdentifier: Constants.segues.toLoginView, sender: self)
     }
     
     @IBAction func loginProfessor(_ sender: Any) {
-        UserManager.sharedUserManager.setLoginUserType(.Professor)
+        UserManager.sharedUserManager.setLoginUserType(.professor)
         UserManager.sharedUserManager.userRole = roleProfessor
         self.performSegue(withIdentifier: Constants.segues.toLoginView, sender: self)
     }
 
     @IBAction func loginCollege(_ sender: Any) {
-        UserManager.sharedUserManager.setLoginUserType(.College)
+        UserManager.sharedUserManager.setLoginUserType(.college)
         UserManager.sharedUserManager.userRole = roleCollege
         self.performSegue(withIdentifier: Constants.segues.toLoginView, sender: self)
+    }
+    
+    
+    @IBAction func loginParents(_ sender:Any){
+        UserManager.sharedUserManager.setLoginUserType(.parents)
+        UserManager.sharedUserManager.userRole = roleParents
+        self.performSegue(withIdentifier: Constants.segues.toLoginView, sender: self)
+
     }
 
     func checkAndShowAppUpdateDialogue() {

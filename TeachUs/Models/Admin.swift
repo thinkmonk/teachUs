@@ -32,6 +32,10 @@ class Admin:Mappable{
     var profile:String = ""
     var roleId:String = ""
     var collegeId:String = ""
+    var courseList:String = ""
+    var fullNamae:String{
+        return "\(self.firstName) \(self.lastName)"
+    }
     
     required init?(map: Map) {
     }
@@ -43,6 +47,7 @@ class Admin:Mappable{
         self.profile <- map["profile"]
         self.roleId <- map["role_id"]
         self.collegeId <- map["college_id"]
+        self.courseList <- map["course_list"]
     }
     
     

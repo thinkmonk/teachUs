@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,20 +22,20 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OBZ-Sk-gry">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="82.5"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Courses" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ERi-mP-H6s">
-                                <rect key="frame" x="15" y="15" width="63.5" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Courses" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ERi-mP-H6s">
+                                <rect key="frame" x="15" y="15" width="290" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mobile Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BVk-LV-tZ7">
-                                <rect key="frame" x="15" y="51" width="117.5" height="21"/>
+                                <rect key="frame" x="15" y="50.5" width="117.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z8r-dC-xrB" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
-                                <rect key="frame" x="221" y="47.5" width="89" height="28"/>
+                                <rect key="frame" x="221" y="47" width="89" height="28"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <inset key="contentEdgeInsets" minX="15" minY="5" maxX="15" maxY="5"/>
                                 <state key="normal" title="Remove">
@@ -48,9 +48,10 @@
                             <constraint firstItem="ERi-mP-H6s" firstAttribute="top" secondItem="OBZ-Sk-gry" secondAttribute="top" constant="15" id="5ev-nA-H8D"/>
                             <constraint firstItem="Z8r-dC-xrB" firstAttribute="centerY" secondItem="BVk-LV-tZ7" secondAttribute="centerY" id="Ed4-mI-OVh"/>
                             <constraint firstAttribute="trailing" secondItem="Z8r-dC-xrB" secondAttribute="trailing" constant="10" id="IX3-9C-zA1"/>
+                            <constraint firstAttribute="trailing" secondItem="ERi-mP-H6s" secondAttribute="trailing" constant="15" id="QHp-oW-1lF"/>
                             <constraint firstItem="ERi-mP-H6s" firstAttribute="leading" secondItem="OBZ-Sk-gry" secondAttribute="leading" constant="15" id="QuX-1s-sS0"/>
-                            <constraint firstAttribute="bottom" secondItem="BVk-LV-tZ7" secondAttribute="bottom" constant="10.5" id="R3j-ob-NSd"/>
                             <constraint firstItem="BVk-LV-tZ7" firstAttribute="top" secondItem="ERi-mP-H6s" secondAttribute="bottom" constant="15" id="YGa-Zb-eTj"/>
+                            <constraint firstAttribute="bottom" secondItem="BVk-LV-tZ7" secondAttribute="bottom" constant="11" id="iB5-rv-1IQ"/>
                             <constraint firstItem="BVk-LV-tZ7" firstAttribute="leading" secondItem="ERi-mP-H6s" secondAttribute="leading" id="z2R-ug-Z4M"/>
                         </constraints>
                     </view>

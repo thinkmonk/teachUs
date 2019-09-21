@@ -270,11 +270,11 @@ class CollegeAttendanceDetailsViewController: BaseViewController {
     
     func verifyDate() -> Bool{
         if(self.fromDate == nil  || self.toDate == nil){
-            self.showAlterWithTitle(nil, alertMessage: "Date Range not selected!")
+            self.showAlertWithTitle(nil, alertMessage: "Date Range not selected!")
         }else if(self.fromDate < self.toDate){
             return true
         }else{
-            self.showAlterWithTitle("Wrong Date Range", alertMessage: "From date should be lesser than to date!")
+            self.showAlertWithTitle("Wrong Date Range", alertMessage: "From date should be lesser than to date!")
         }
         return false
     }

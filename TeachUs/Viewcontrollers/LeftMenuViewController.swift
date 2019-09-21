@@ -50,6 +50,11 @@ class LeftMenuViewController: BaseViewController, UIGestureRecognizerDelegate {
     var collegeAdminDataSource = ["Attendance(Reports)", "Attendance(Events)", "Logout"]
     var collegeAdminImageDataSource = ["attendanceReport","syllabusStatusEvent", "logout"]
     
+    var parentsDataSource = ["Attendance", "Syllabus","Notice", "Notification"]
+    var parentImageDataSource = ["attendanceReport", "syllabus", "notice", "notification"]
+
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
@@ -88,17 +93,24 @@ class LeftMenuViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     func setUpTableView(){
         switch UserManager.sharedUserManager.user! {
-        case .Professor:
+        case .professor:
             arrayDataSource = professorDataSource
             imageDataSource = professorImageDataSource
             self.buttonEditProfile.isHidden = false
             break
-        case .Student:
+            
+        case .parents:
+            arrayDataSource = parentsDataSource
+            imageDataSource = parentImageDataSource
+            self.buttonEditProfile.isHidden = false
+            break
+
+        case .student:
             arrayDataSource = studentDataSource
             imageDataSource = studentImageDataSource
             self.buttonEditProfile.isHidden = false
             break
-        case .College://1 is for super admin, 2 is for admin
+        case .college://1 is for super admin, 2 is for admin
             if let privilege = UserManager.sharedUserManager.appUserCollegeDetails.privilege{
                 arrayDataSource = privilege == "1" ? collegeSuperAdminDataSource : collegeAdminDataSource
                 imageDataSource = privilege == "1" ? collegeSuperAdminImageDataSource : collegeAdminImageDataSource
@@ -221,7 +233,11 @@ extension LeftMenuViewController:UITableViewDelegate, UITableViewDataSource{
         else{
             let cell:UITableViewCell = (tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.leftMenuCell) as UITableViewCell?)!
             let college:CollegeDetails = arrayCollegeDetailsDataSource[indexPath.row]
-            cell.textLabel?.text = "\(college.college_name!) (\(college.role_name!) )"
+            if UserManager.sharedUserManager.user! == .parents{
+                cell.textLabel?.text = "\(college.studentName!) (\(college.college_name!) )"
+            }else{
+                cell.textLabel?.text = "\(college.college_name!) (\(college.role_name!) )"
+            }
             cell.textLabel?.numberOfLines = 0
             cell.textLabel?.textColor = .white
             cell.selectionStyle = .blue

@@ -223,6 +223,7 @@ extension ProfessorLogsListViewController:UITableViewDelegate, UITableViewDataSo
         if(self.isCollegeLogsSubjectData){
             destinationVC.isCollegeLogsSubjectData = self.isCollegeLogsSubjectData
             destinationVC.allCollegeSubjects = self.arraySubjectList.subjectsDetails
+            destinationVC.professorId = self.selectedProffessorId
             destinationVC.selectedIndex = indexPath.section
             self.navigationController?.pushViewController(destinationVC, animated: true)
 
@@ -266,7 +267,7 @@ extension ProfessorLogsListViewController:ViewProfessorMailReportDelegate{
             LoadingActivityHUD.hideProgressHUD()
             if(code == 200){
                 let message:String = response["message"] as! String
-                self.showAlterWithTitle(nil, alertMessage: message)
+                self.showAlertWithTitle(nil, alertMessage: message)
             }
         }) { (error, code, message) in
             print(message)

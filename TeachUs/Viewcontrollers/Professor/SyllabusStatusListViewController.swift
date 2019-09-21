@@ -44,7 +44,7 @@ class SyllabusStatusListViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if(self.userType == LoginUserType.College){
+        if(self.userType == LoginUserType.college){
             self.addGradientToNavBar()
         }
     }
@@ -54,21 +54,25 @@ class SyllabusStatusListViewController: BaseViewController {
         var parameters = [String:Any]()
         //http://ec2-34-215-84-223.us-west-2.compute.amazonaws.com:8081/teachus/teacher/getSyllabusSummary/Zmlyc3ROYW1lPURldmVuZHJhLG1pZGRsZU5hbWU9QSxsYXN0TmFtZT1GYWRuYXZpcyxyb2xsPVBST0ZFU1NPUixpZD0x?professorId=1&subjectId=1
         switch userType! {
-        case .Student:
+        case .student:
             manager.url = URLConstants.StudentURL.syllabusSubjectStatus
             parameters["college_code"] = UserManager.sharedUserManager.appUserCollegeDetails.college_code
             break
-        
-        case .Professor:
+            
+        case .professor:
             manager.url = URLConstants.ProfessorURL.syllabusSubjectStatus
             parameters["college_code"] = UserManager.sharedUserManager.appUserCollegeDetails.college_code
             break
             
-        case .College:
+        case .college:
             manager.url = URLConstants.CollegeURL.getCollegeSubjectSyllabusList
             parameters["college_code"] = UserManager.sharedUserManager.appUserCollegeDetails.college_code
             parameters["class_id"] = self.selectedClassId
             break
+            
+        default:
+            break
+            
         }
         
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
@@ -150,7 +154,7 @@ extension SyllabusStatusListViewController:UITableViewDelegate, UITableViewDataS
         let cellSubject = arrayDataSource[indexPath.section]
         cell.labelNumberOfLectures.text = "\(cellSubject.numberOfLectures)"
         cell.labelSubject.text = "\(cellSubject.courseName) - \(cellSubject.classDivision) \(cellSubject.subjectName)"
-        cell.labelSubject.text = self.userType! == LoginUserType.Professor ? "\(cellSubject.courseName) - \(cellSubject.classDivision) \(cellSubject.subjectName)" : "\(cellSubject.subjectName)"
+        cell.labelSubject.text = self.userType! == LoginUserType.professor ? "\(cellSubject.courseName) - \(cellSubject.classDivision) \(cellSubject.subjectName)" : "\(cellSubject.subjectName)"
         cell.labelAttendancePercent.text = "\(cellSubject.completion)%"
         cell.selectionStyle = .none
         cell.accessoryType = .disclosureIndicator

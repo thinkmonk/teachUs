@@ -30,12 +30,15 @@ class CollegeNoticeListViewController: BaseViewController {
         self.tableviewNoticeList.estimatedRowHeight  = 40
         self.tableviewNoticeList.rowHeight = UITableViewAutomaticDimension
         switch  UserManager.sharedUserManager.user!{
-        case .College:
+        case .college:
             self.buttonAddNotice.isHidden = false
             self.layoutAddbuttonHeight.constant = 40
-        case .Professor,.Student:
+        case .professor,.student:
             self.buttonAddNotice.isHidden = true
             self.layoutAddbuttonHeight.constant = 0
+        default:
+            break
+
         }
         self.getNoticeList()
     }
@@ -49,12 +52,15 @@ class CollegeNoticeListViewController: BaseViewController {
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()
         switch  UserManager.sharedUserManager.user!{
-        case .College:
+        case .college:
             manager.url = URLConstants.CollegeURL.collegeNoticeList
-        case .Professor:
+        case .professor:
             manager.url = URLConstants.ProfessorURL.getNotice
-        case .Student:
+        case .student:
             manager.url = URLConstants.StudentURL.getStudentNotice
+        default:
+            break
+
         }
 
         let parameters = [

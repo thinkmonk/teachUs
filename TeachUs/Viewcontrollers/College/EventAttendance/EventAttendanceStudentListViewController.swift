@@ -108,7 +108,7 @@ class EventAttendanceStudentListViewController: BaseViewController {
                 }
             }
         }) { (error, code, message) in
-            self.showAlterWithTitle(nil, alertMessage: message)
+            self.showAlertWithTitle(nil, alertMessage: message)
             LoadingActivityHUD.hideProgressHUD()
         }
     }
@@ -155,7 +155,7 @@ class EventAttendanceStudentListViewController: BaseViewController {
             self.showTableView()
             
         }) { (error, code, message) in
-            self.showAlterWithTitle(nil, alertMessage: message)
+            self.showAlertWithTitle(nil, alertMessage: message)
             LoadingActivityHUD.hideProgressHUD()
         }
     }

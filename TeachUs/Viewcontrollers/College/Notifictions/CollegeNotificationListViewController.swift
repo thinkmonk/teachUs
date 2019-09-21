@@ -38,17 +38,20 @@ class CollegeNotificationListViewController: BaseViewController {
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()
         switch  UserManager.sharedUserManager.user!{
-        case .College:
+        case .college:
             manager.url = URLConstants.CollegeURL.getcollegeNotificationList
-        case .Professor:
+        case .professor:
             manager.url = URLConstants.ProfessorURL.getNotificationList
-        case .Student:
+        case .student:
             manager.url = URLConstants.StudentURL.getNotificationList
+        case .parents:
+            manager.url = URLConstants.ParentsURL.getNotificationList
         }
         
         let parameters = [
             "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
         ]
+        
         manager.apiPostWithDataResponse(apiName: "Get Notice List", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             do{

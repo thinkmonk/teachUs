@@ -66,7 +66,7 @@ class EditProfilePictureViewController: BaseViewController{
             self.present(picker, animated: true, completion: nil)
         }
         else{
-            self.showAlterWithTitle("Oops!", alertMessage: "Photo Library Access Not Provided")
+            self.showAlertWithTitle("Oops!", alertMessage: "Photo Library Access Not Provided")
 
         }
         
@@ -93,7 +93,7 @@ class EditProfilePictureViewController: BaseViewController{
             self.present(picker, animated: true, completion: nil)
         }
         else{
-            self.showAlterWithTitle("Oops!", alertMessage: "Camera Access Not Provided")
+            self.showAlertWithTitle("Oops!", alertMessage: "Camera Access Not Provided")
 
         }
         

@@ -7,10 +7,14 @@
 //
 
 import UIKit
+import Firebase
 
 class BellNotificationListViewController: BaseViewController {
     @IBOutlet weak var tableviewBellNotificationList: UITableView!
     @IBOutlet weak var labelNoNotification: UILabel!
+    @IBOutlet weak var viewNotificationButtonBg: UIView!
+    @IBOutlet weak var swiftEnableDisableNotification: UISwitch!
+    
     let cellId = "BellNotificationListTableViewCell"
     var arrayNotifications : BellNotificationList?
     
@@ -35,6 +39,9 @@ class BellNotificationListViewController: BaseViewController {
         super.refresh(sender: sender)
     }
     
+    @IBAction func actionSwitchChanged(_ sender: Any) {
+        self.swiftEnableDisableNotification.isOn ? self.enableNotification() : self.disableNotification()
+    }
     @objc func markAllRead(){
         let alert = UIAlertController(title: nil, message: "Are you sure you want to mark all unread notifications as read?", preferredStyle: UIAlertControllerStyle.alert)
         
@@ -64,12 +71,14 @@ class BellNotificationListViewController: BaseViewController {
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()
         switch  UserManager.sharedUserManager.user!{
-        case .College:
+        case .college:
             manager.url = URLConstants.CollegeURL.getBellNotifications
-        case .Professor:
+        case .professor:
             manager.url = URLConstants.ProfessorURL.getBellNotifications
-        case .Student:
+        case .student:
             manager.url = URLConstants.StudentURL.getBellNotifications
+        case .parents:
+            manager.url = URLConstants.ParentsURL.getBellNotifications
         }
         
         let parameters = [
@@ -101,12 +110,15 @@ class BellNotificationListViewController: BaseViewController {
     func markReadNotification(firebaseID:String){
         let manager = NetworkHandler()
         switch  UserManager.sharedUserManager.user!{
-        case .College:
+        case .college:
             manager.url = URLConstants.CollegeURL.markReadNotification
-        case .Professor:
+        case .professor:
             manager.url = URLConstants.ProfessorURL.markReadNotification
-        case .Student:
+        case .student:
             manager.url = URLConstants.StudentURL.markReadNotification
+        
+        case .parents:
+            manager.url = URLConstants.ParentsURL.markReadNotification
         }
         
         let parameters = [
@@ -187,5 +199,26 @@ extension BellNotificationListViewController:UITableViewDelegate, UITableViewDat
                 }
             }
         }
+    }
+}
+
+
+extension BellNotificationListViewController{
+    func disableNotification(){
+        let instance = InstanceID.instanceID()
+        instance.deleteID { (error) in
+            print(error.debugDescription)
+        }
+    }
+    
+    func enableNotification(){
+        InstanceID.instanceID().instanceID { (result, error) in
+            if let error = error {
+                print("Error fetching remote instange ID: \(error)")
+            } else if let result = result {
+                print("Remote instance ID token: \(result.token)")
+            }
+        }
+        Messaging.messaging().shouldEstablishDirectChannel = true
     }
 }

@@ -31,38 +31,61 @@ public struct URLConstants{
     }
     
     struct Login {
-        static let forceUpdateCheck = BaseUrl.baseURLV1 + "/role/device_update"
-        static let role = BaseUrl.baseURLV1 + "/role"
-        static let checkDetails = BaseUrl.baseURLV1 + "/login/check_details"
-        static let sendOtp = BaseUrl.baseURLV1 + "/login/sendotp"
-        static let verifyOtp = BaseUrl.baseURLV1 + "/auth/verifyotp"
-        static let userDetails = BaseUrl.baseURLV1 + "/login/user_details"
-        static let updateUserProfile = BaseUrl.baseURLV1 + "/login/update_user_profile"
-        static let saveDeviceToken = BaseUrl.baseURLV1 + "/auth/notification_save_token"
-        static let deleteDeviceToken = BaseUrl.baseURLV1 + "/auth/notification_token_delete"
+        static let forceUpdateCheck =   BaseUrl.baseURLV1 + "/role/device_update"
+        static let role =               BaseUrl.baseURLV1 + "/role"
+        static let checkDetails =       BaseUrl.baseURLV1 + "/login/check_details"
+        static let sendOtp =            BaseUrl.baseURLV1 + "/login/sendotp"
+        static let verifyOtp =          BaseUrl.baseURLV1 + "/auth/verifyotp"
+        static let userDetails =        BaseUrl.baseURLV1 + "/login/user_details"
+        static let updateUserProfile =  BaseUrl.baseURLV1 + "/login/update_user_profile"
+        static let saveDeviceToken =    BaseUrl.baseURLV1 + "/auth/notification_save_token"
+        static let deleteDeviceToken =  BaseUrl.baseURLV1 + "/auth/notification_token_delete"
     }
     
     struct StudentURL {
-        static let getClassAttendance = BaseUrl.baseURLV1 + "/attendance/student_class_attendance"
-        static let getAttendanceDetails = BaseUrl.baseURLV1 + "/student/student_attendance"
-        static let updateRatings = BaseUrl.baseURLV1 + "/ratings/submit_rating"
-        static let professorRatingList = BaseUrl.baseURLV1 + "/ratings/professor_rating_list"
-        static let syllabusSubjectStatus = BaseUrl.baseURLV1 + "/syllabus/student_syllabus_subject_status"
-        static let getSyllabusSuubjectDetails = BaseUrl.baseURLV1 + "/syllabus/student_detailed_syllabus_status"
-        static let getStudentProfileDetails = BaseUrl.baseURLV1 + "/student/student_details"
-        static let updateStudentName = BaseUrl.baseURLV1 + "/student/student_name_update_request"
-        static let sendOtpForMobileNumberUpdate = BaseUrl.baseURLV1  + "/student/send_auth_password_newcontact"
-        static let updateStudentMobileNumber = BaseUrl.baseURLV1  + "/student/verify_auth_password_newcontact"
-        static let sendOtpForEmailUpdate = BaseUrl.baseURLV1  + "/student/send_auth_password_newemail"
-        static let updateStudentEmail = BaseUrl.baseURLV1 + "/student/verify_auth_password_newemail"
-        static let getStudentNotesList = BaseUrl.baseURLV1 + "/student/notes_list"
-        static let getStudentNotesDetails = BaseUrl.baseURLV1 + "/student/notes_list_view"
-        static let getStudentNotice = BaseUrl.baseURLV1 + "/student/notices"
-        static let getNotificationList = BaseUrl.baseURLV1 + "/student/notifications"
-        static let getBellNotifications = BaseUrl.baseURLV1 + "/student/firebasenotification"
-        static let markReadNotification = BaseUrl.baseURLV1 + "/student/firebasenotification_readstatus"
+        static let getClassAttendance =             BaseUrl.baseURLV1 + "/attendance/student_class_attendance"
+        static let getAttendanceDetails =           BaseUrl.baseURLV1 + "/student/student_attendance"
+        static let updateRatings =                  BaseUrl.baseURLV1 + "/ratings/submit_rating"
+        static let professorRatingList =            BaseUrl.baseURLV1 + "/ratings/professor_rating_list"
+        static let syllabusSubjectStatus =          BaseUrl.baseURLV1 + "/syllabus/student_syllabus_subject_status"
+        static let getSyllabusSuubjectDetails =     BaseUrl.baseURLV1 + "/syllabus/student_detailed_syllabus_status"
+        static let getStudentProfileDetails =       BaseUrl.baseURLV1 + "/student/student_details"
+        static let updateStudentName =              BaseUrl.baseURLV1 + "/student/student_name_update_request"
+        static let sendOtpForMobileNumberUpdate =   BaseUrl.baseURLV1 + "/student/send_auth_password_newcontact"
+        static let updateStudentMobileNumber =      BaseUrl.baseURLV1 + "/student/verify_auth_password_newcontact"
+        static let sendOtpForEmailUpdate =          BaseUrl.baseURLV1 + "/student/send_auth_password_newemail"
+        static let updateStudentEmail =             BaseUrl.baseURLV1 + "/student/verify_auth_password_newemail"
+        static let getStudentNotesList =            BaseUrl.baseURLV1 + "/student/notes_list"
+        static let getStudentNotesDetails =         BaseUrl.baseURLV1 + "/student/notes_list_view"
+        static let getStudentNotice =               BaseUrl.baseURLV1 + "/student/notices"
+        static let getNotificationList =            BaseUrl.baseURLV1 + "/student/notifications"
+        static let getBellNotifications =           BaseUrl.baseURLV1 + "/student/firebasenotification"
+        static let markReadNotification =           BaseUrl.baseURLV1 + "/student/firebasenotification_readstatus"
 
 
+    }
+    
+    struct ParentsURL {
+        static let getClassAttendance =             BaseUrl.baseURLV1 + "/attendance/student_class_attendance"
+        static let getAttendanceDetails =           BaseUrl.baseURLV1 + "/student/student_attendance"
+        static let updateRatings =                  BaseUrl.baseURLV1 + "/ratings/submit_rating"
+        static let professorRatingList =            BaseUrl.baseURLV1 + "/ratings/professor_rating_list"
+        static let syllabusSubjectStatus =          BaseUrl.baseURLV1 + "/syllabus/student_syllabus_subject_status"
+        static let getSyllabusSuubjectDetails =     BaseUrl.baseURLV1 + "/syllabus/student_detailed_syllabus_status"
+        static let getStudentProfileDetails =       BaseUrl.baseURLV1 + "/parents/student_details"
+        static let updateStudentName =              BaseUrl.baseURLV1 + "/parents/student_name_update_request"
+        static let sendOtpForMobileNumberUpdate =   BaseUrl.baseURLV1 + "/parents/send_auth_password_newcontact"
+        static let updateStudentMobileNumber =      BaseUrl.baseURLV1 + "/parents/verify_auth_password_newcontact"
+        static let sendOtpForEmailUpdate =          BaseUrl.baseURLV1 + "/parents/send_auth_password_newemail"
+        static let updateStudentEmail =             BaseUrl.baseURLV1 + "/parents/verify_auth_password_newemail"
+        static let getStudentNotesList =            BaseUrl.baseURLV1 + "/parents/notes_list"
+        static let getStudentNotesDetails =         BaseUrl.baseURLV1 + "/parents/notes_list_view"
+        static let getStudentNotice =               BaseUrl.baseURLV1 + "/parents/notices"
+        static let getNotificationList =            BaseUrl.baseURLV1 + "/parents/notifications"
+        static let getBellNotifications =           BaseUrl.baseURLV1 + "/parents/firebasenotification"
+        static let markReadNotification =           BaseUrl.baseURLV1 + "/parents/firebasenotification_readstatus"
+        
+        
     }
     
     struct ProfessorURL {
@@ -143,7 +166,7 @@ public struct URLConstants{
         static let markReadNotification = BaseUrl.baseURLV1 + "/college/firebasenotification_readstatus"
         static let deleteNotice = BaseUrl.baseURLV1 + "/college/notice_delete"
         static let editEventDetails = BaseUrl.baseURLV1 + "/events/update_event"
-
+        static let collegAdminClassList = BaseUrl.baseURLV1 + "/syllabus/class_list"
     }
     
     struct SyllabusURL {

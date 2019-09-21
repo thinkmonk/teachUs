@@ -131,7 +131,7 @@ class CollegeClassRatingListViewController: BaseViewController {
             LoadingActivityHUD.hideProgressHUD()
             if(code == 200){
                 let message:String = response["message"] as! String
-                self.showAlterWithTitle(nil, alertMessage: message)
+                self.showAlertWithTitle(nil, alertMessage: message)
                 self.showOtpView()
             }
         }) { (error, code, message) in
@@ -156,7 +156,7 @@ class CollegeClassRatingListViewController: BaseViewController {
             LoadingActivityHUD.hideProgressHUD()
             if(code == 200){
                 let message:String = response["message"] as! String
-                self.showAlterWithTitle(nil, alertMessage: message)
+                self.showAlertWithTitle(nil, alertMessage: message)
                 self.viewEmailId.removeFromSuperview()
             }
         }) { (error, code, message) in
@@ -236,6 +236,6 @@ extension CollegeClassRatingListViewController:verifyEmailDelegae
 
 extension CollegeClassRatingListViewController:IndicatorInfoProvider{
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "Ratings")
+        return IndicatorInfo(title: "Feedback")
     }
 }

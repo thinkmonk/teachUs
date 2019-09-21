@@ -121,7 +121,7 @@ class AddNewNoticeViewController: BaseViewController {
                 ]
                 self.postProfessorNotes(parameters)
             }) { (errorMessage) in
-                self.showAlterWithTitle("Error", alertMessage: errorMessage)
+                self.showAlertWithTitle("Error", alertMessage: errorMessage)
             }
         }
     }
@@ -132,7 +132,7 @@ class AddNewNoticeViewController: BaseViewController {
         manager.url = URLConstants.CollegeURL.collegeUploadNotice
         manager.apiPostWithDataResponse(apiName: "Upload Notice", parameters:params, completionHandler: { (result, code, response) in
             
-            self.showAlterWithTitle("Success", alertMessage: "Notice added!")
+            self.showAlertWithTitle("Success", alertMessage: "Notice added!")
             self.chosenImage.value = nil
             self.chosenFile.value = nil
             self.noticeAddedFlag = true
@@ -147,6 +147,7 @@ class AddNewNoticeViewController: BaseViewController {
     @IBAction func actionShowClassList(_ sender: Any) {
         self.view.endEditing(true)
         if (CollegeClassManager.sharedManager.selectedClassArray.count > 0){
+            self.viewClassList.setUpView(array: CollegeClassManager.sharedManager.selectedClassArray, isAdminScreenFlag: false)
             self.viewClassList.frame = CGRect(x: 0.0, y: 0.0, width: self.view.width(), height: self.view.height())
             self.view.addSubview(self.viewClassList)
         }
@@ -192,7 +193,7 @@ class AddNewNoticeViewController: BaseViewController {
             imagePicker!.sourceType = UIImagePickerControllerSourceType.camera
             self .present(imagePicker!, animated: true, completion: nil)
         }else{
-            self.showAlterWithTitle("Oops!", alertMessage: "Camera Access Not Provided")
+            self.showAlertWithTitle("Oops!", alertMessage: "Camera Access Not Provided")
             
         }
     }
@@ -203,7 +204,7 @@ class AddNewNoticeViewController: BaseViewController {
             imagePicker!.sourceType = UIImagePickerControllerSourceType.photoLibrary
             self.present(imagePicker!, animated: true, completion: nil)
         }else{
-            self.showAlterWithTitle("Oops!", alertMessage: "Photo Library Access Not Provided")
+            self.showAlertWithTitle("Oops!", alertMessage: "Photo Library Access Not Provided")
         }
     }
     
@@ -358,7 +359,7 @@ extension AddNewNoticeViewController:UIImagePickerControllerDelegate,UINavigatio
             let fileSizeNumber = fileAttributes?[.size] as? NSNumber
             let fileSize: Int64 = fileSizeNumber?.int64Value ?? 0
             if fileSize > 26214400{
-                self.showAlterWithTitle("ERROR", alertMessage: "File size should be less than 25mb")
+                self.showAlertWithTitle("ERROR", alertMessage: "File size should be less than 25mb")
             }else{
                 self.chosenFile.value  = videoURL
             }

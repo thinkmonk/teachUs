@@ -80,15 +80,20 @@ class LoginView: UIView, UITextFieldDelegate {
     func setUpView(){
         switch UserManager.sharedUserManager.user!
         {
-            case .Student:
-                self.labelTitle.text = "STUDENT"
-                break
+        case .student:
+            self.labelTitle.text = "STUDENT"
+            break
             
-            case .Professor:
-                self.labelTitle.text = "LECTURER"
-                break
-        case .College:
-                break
+        case .professor:
+            self.labelTitle.text = "LECTURER"
+            break
+            
+        case .parents:
+            self.labelTitle.text = "PARENT"
+            break
+            
+        case .college:
+            break
         }
         self.textfieldFirstName.delegate = self
         self.textFieldEmailId.delegate = self

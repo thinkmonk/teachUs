@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -49,6 +49,7 @@
                     <constraint firstItem="QPW-Ga-wI3" firstAttribute="trailing" secondItem="QEW-ZY-j4m" secondAttribute="trailing" id="PgN-HZ-EyT"/>
                     <constraint firstItem="nJ4-9z-UNT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="es5-TE-0mP"/>
                     <constraint firstItem="nJ4-9z-UNT" firstAttribute="top" secondItem="QPW-Ga-wI3" secondAttribute="bottom" constant="15" id="f2h-0J-75z"/>
+                    <constraint firstAttribute="bottom" secondItem="Igl-EC-KSK" secondAttribute="bottom" constant="14.5" id="kq6-kE-mb5"/>
                     <constraint firstAttribute="trailing" secondItem="Igl-EC-KSK" secondAttribute="trailing" constant="15" id="ly3-uk-IgT"/>
                     <constraint firstAttribute="trailing" secondItem="QEW-ZY-j4m" secondAttribute="trailing" constant="10" id="mp6-Ug-erD"/>
                     <constraint firstAttribute="trailing" secondItem="nJ4-9z-UNT" secondAttribute="trailing" constant="35" id="ujy-tH-TMf"/>

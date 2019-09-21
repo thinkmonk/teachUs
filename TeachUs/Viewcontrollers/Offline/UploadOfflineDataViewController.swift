@@ -63,7 +63,7 @@ class UploadOfflineDataViewController: BaseViewController {
             }
         }) { (error, code, errorMessage) in
             LoadingActivityHUD.hideProgressHUD()
-            self.showAlterWithTitle(nil, alertMessage: errorMessage)
+            self.showAlertWithTitle(nil, alertMessage: errorMessage)
         }
     }
     

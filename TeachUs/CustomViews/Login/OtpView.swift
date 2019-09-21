@@ -55,14 +55,17 @@ class OtpView: UIView {
     func setUpSendOtpView(){
         switch UserManager.sharedUserManager.user!
         {
-        case .Student:
+        case .student:
             self.labelTitle.text = "STUDENT"
             break
             
-        case .Professor:
+        case .professor:
             self.labelTitle.text = "LECTURER"
+            
+        case .parents:
+            self.labelTitle.text = "PARENTS"
             break
-        case .College:
+        case .college:
             break
         }
         self.buttonSendOtp.isHidden = true

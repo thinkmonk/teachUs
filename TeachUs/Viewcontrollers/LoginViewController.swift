@@ -54,14 +54,14 @@ class LoginViewController: BaseViewController {
     func setUpLoginView(){
         
         switch UserManager.sharedUserManager.user! {
-        case  .Professor:
+        case  .professor:
             studentLoginView = (LoginView.instanceFromNib() as! LoginView)
             studentLoginView.userType = UserManager.sharedUserManager.user!
             studentLoginView.setUpView()
             studentLoginView.showView(inView: self.view)
             studentLoginView.delegate = self
             break
-        case .Student,.College:
+        case .student,.college,.parents:
             collegeLogin = (CollegeLogin.instanceFromNib() as! CollegeLogin)
             collegeLogin.userType = UserManager.sharedUserManager.user!
             collegeLogin.delegate = self
@@ -141,7 +141,7 @@ extension LoginViewController:LoginDelegate{
             }
         }) { (error, code, message) in
             print(message)
-            self.showAlterWithTitle(nil, alertMessage: message)
+            self.showAlertWithTitle(nil, alertMessage: message)
             LoadingActivityHUD.hideProgressHUD()
         }
 
@@ -241,7 +241,7 @@ extension LoginViewController:OtpDelegate{
             }
             else{
                 let message:String = response["message"] as! String
-                self.showAlterWithTitle(nil, alertMessage: message)
+                self.showAlertWithTitle(nil, alertMessage: message)
             }
         }) { (error, code, message) in
             self.otpTimer.invalidate()
@@ -332,7 +332,7 @@ extension LoginViewController:CollegeLoginDelegate{
                 self.getAndSaveUserCollegeDetails()
             }else{
                 let message:String = response["message"] as! String
-                self.showAlterWithTitle(nil, alertMessage: message)
+                self.showAlertWithTitle(nil, alertMessage: message)
             }
         }) { (error, code, message) in
             self.otpTimer.invalidate()

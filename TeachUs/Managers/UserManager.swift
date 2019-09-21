@@ -28,11 +28,13 @@ class UserManager{
     if let user = UserDefaults.standard.value(forKey: Constants.UserDefaults.loginUserType) as? String {
             switch user {
             case Constants.UserTypeString.College:
-                return LoginUserType.College
+                return LoginUserType.college
             case Constants.UserTypeString.Professor:
-                return LoginUserType.Professor
+                return LoginUserType.professor
             case Constants.UserTypeString.Student:
-                return LoginUserType.Student
+                return LoginUserType.student
+            case Constants.UserTypeString.Parents:
+                return LoginUserType.parents
             default:
                 return nil
             }
@@ -74,14 +76,18 @@ class UserManager{
     
     func setLoginUserType(_ type:LoginUserType){
         switch type {
-        case .Student:
+        case .student:
             UserDefaults.standard.set(Constants.UserTypeString.Student, forKey: Constants.UserDefaults.loginUserType)
             
-        case .Professor:
+        case .professor:
             UserDefaults.standard.set(Constants.UserTypeString.Professor, forKey: Constants.UserDefaults.loginUserType)
 
-        case .College:
+        case .college:
             UserDefaults.standard.set(Constants.UserTypeString.College, forKey: Constants.UserDefaults.loginUserType)
+            
+        case .parents:
+            UserDefaults.standard.set(Constants.UserTypeString.Parents, forKey: Constants.UserDefaults.loginUserType)
+
 
         }
         UserDefaults.standard.synchronize()
@@ -115,13 +121,16 @@ class UserManager{
                         self.appUserCollegeDetails = self.appUserCollegeArray.first!
                         switch self.appUserCollegeArray.first?.role_id!{
                         case "1"?:
-                            UserManager.sharedUserManager.setLoginUserType(.Student)
+                            UserManager.sharedUserManager.setLoginUserType(.student)
                             break
                         case "2"?:
-                            UserManager.sharedUserManager.setLoginUserType(.Professor)
+                            UserManager.sharedUserManager.setLoginUserType(.professor)
                             break
                         case "3"?:
-                            UserManager.sharedUserManager.setLoginUserType(.College)
+                            UserManager.sharedUserManager.setLoginUserType(.college)
+                            
+                        case "4"?:
+                            UserManager.sharedUserManager.setLoginUserType(.parents)
                             break
                         default:
                             break
@@ -129,15 +138,19 @@ class UserManager{
                     }else
                     {//set up user after login type is known
                         for user in self.appUserCollegeArray {
-                            if user.role_id! == "1" && self.user! == LoginUserType.Student{
+                            if user.role_id! == "1" && self.user! == LoginUserType.student{
                                 self.appUserCollegeDetails = user
                                 break
                             }
-                            if user.role_id! == "2" && self.user! == LoginUserType.Professor{
+                            if user.role_id! == "2" && self.user! == LoginUserType.professor{
                                 self.appUserCollegeDetails = user
                                 break
                             }
-                            if user.role_id! == "3" && self.user! == LoginUserType.College{
+                            if user.role_id! == "3" && self.user! == LoginUserType.college{
+                                self.appUserCollegeDetails = user
+                                break
+                            }
+                            if user.role_id! == "4" && self.user! == LoginUserType.parents{
                                 self.appUserCollegeDetails = user
                                 break
                             }
@@ -152,13 +165,16 @@ class UserManager{
                     self.appUserCollegeDetails = appuser
                     switch appuser.role_id!{
                     case "1":
-                        UserManager.sharedUserManager.setLoginUserType(.Student)
+                        UserManager.sharedUserManager.setLoginUserType(.student)
                         break
                     case "2":
-                        UserManager.sharedUserManager.setLoginUserType(.Professor)
+                        UserManager.sharedUserManager.setLoginUserType(.professor)
                         break
                     case "3":
-                        UserManager.sharedUserManager.setLoginUserType(.College)
+                        UserManager.sharedUserManager.setLoginUserType(.college)
+                        break
+                    case "4":
+                        UserManager.sharedUserManager.setLoginUserType(.parents)
                         break
                     default:
                         break
@@ -172,14 +188,18 @@ class UserManager{
     func setUserBasedOnRole(){
                     switch self.appUserCollegeDetails.role_id!{
                     case "1":
-                        UserManager.sharedUserManager.setLoginUserType(.Student)
+                        UserManager.sharedUserManager.setLoginUserType(.student)
                         break
                     case "2":
-                        UserManager.sharedUserManager.setLoginUserType(.Professor)
+                        UserManager.sharedUserManager.setLoginUserType(.professor)
                         break
                     case "3":
-                        UserManager.sharedUserManager.setLoginUserType(.College)
+                        UserManager.sharedUserManager.setLoginUserType(.college)
                         break
+                    case "4":
+                        UserManager.sharedUserManager.setLoginUserType(.parents)
+                        break
+
                     default:
                         break
                     }
@@ -278,6 +298,10 @@ class UserManager{
         collegeDetails.role_name = college["role_name"] as? String
         if let notificationsCount = college["total_notification"] as? String{
             collegeDetails.notificationCount = notificationsCount
+        }
+        if let studentName = college["student_name"] as? String, let studentEmail = college["student_email"] as? String{
+            collegeDetails.studentName = studentName
+            collegeDetails.studentEmail = studentEmail
         }
         self.appUserCollegeArray.append(collegeDetails)
         self.saveDbContext()

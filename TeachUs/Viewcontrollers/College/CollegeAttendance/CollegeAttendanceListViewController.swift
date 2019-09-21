@@ -146,6 +146,7 @@ class CollegeAttendanceListViewController: BaseViewController {
         for college in self.arrayDataSource!{
             let selectedCollegeList = SelectCollegeClass(college, true)
             CollegeClassManager.sharedManager.selectedClassArray.append(selectedCollegeList)
+            self.viewClassList.setUpView(array: CollegeClassManager.sharedManager.selectedClassArray, isAdminScreenFlag: false)
         }
     }
     
@@ -380,11 +381,11 @@ extension CollegeAttendanceListViewController:verifyEmailDelegae{
             let status = response["status"] as! Int
             if (status == 200){
                 let message:String = response["message"] as! String
-                self.showAlterWithTitle(nil, alertMessage: message)
+                self.showAlertWithTitle(nil, alertMessage: message)
                 self.showMailView(value: false)
             }
         }) { (error, code, message) in
-            self.showAlterWithTitle(nil, alertMessage: message)
+            self.showAlertWithTitle(nil, alertMessage: message)
             LoadingActivityHUD.hideProgressHUD()
         }
     }

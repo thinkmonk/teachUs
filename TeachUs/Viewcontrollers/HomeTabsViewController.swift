@@ -49,7 +49,7 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
         
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         switch UserManager.sharedUserManager.user! {
-        case .Professor:
+        case .professor:
             
             controllersArray.removeAll()
             let professorAttendanceVC = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorAttendance) as! ProfessorAttedanceViewController
@@ -60,7 +60,7 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
             let professorSyllabusStatusVC = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorSyllabusStatus) as! SyllabusStatusListViewController
             professorSyllabusStatusVC.title = "Syllabus Status"
             professorSyllabusStatusVC.parentNavigationController = self.parentNavigationController
-            professorSyllabusStatusVC.userType = .Professor
+            professorSyllabusStatusVC.userType = .professor
             controllersArray.append(professorSyllabusStatusVC)
             
             let professorLogsListVC = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorLogs) as! ProfessorLogsListViewController
@@ -89,7 +89,7 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
             break
 
             
-        case .Student:
+        case .student:
             controllersArray.removeAll()
             let attendanceVC: StudentAttedanceViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.studentAttendace) as! StudentAttedanceViewController
             attendanceVC.title = "Attendance"
@@ -100,7 +100,7 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
             syllabusStatusVC.title = "Syllabus Status"
             
             syllabusStatusVC.parentNavigationController = self.parentNavigationController
-            syllabusStatusVC.userType = .Student
+            syllabusStatusVC.userType = .student
             controllersArray.append(syllabusStatusVC)
             
             let professorRating:TeachersRatingViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorRating) as! TeachersRatingViewController
@@ -128,7 +128,35 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
             
             break
             
-        case .College:
+            
+        case .parents:
+            controllersArray.removeAll()
+            let attendanceVC: StudentAttedanceViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.studentAttendace) as! StudentAttedanceViewController
+            attendanceVC.title = "Attendance"
+            attendanceVC.parentNavigationController = self.parentNavigationController
+            controllersArray.append(attendanceVC)
+            
+            let syllabusStatusVC:SyllabusStatusListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorSyllabusStatus) as! SyllabusStatusListViewController
+            syllabusStatusVC.title = "Syllabus Status"
+            
+            syllabusStatusVC.parentNavigationController = self.parentNavigationController
+            syllabusStatusVC.userType = .student
+            controllersArray.append(syllabusStatusVC)
+            
+            let collegeNoticeClassListVC:CollegeNoticeListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.collegeNoticeList) as! CollegeNoticeListViewController
+            collegeNoticeClassListVC.title = "Notice"
+            collegeNoticeClassListVC.parentNavigationController = self.parentNavigationController
+            controllersArray.append(collegeNoticeClassListVC)
+            
+            
+            let collegeNotificationListVC:CollegeNotificationListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.collegeNotificationList) as! CollegeNotificationListViewController
+            collegeNotificationListVC.title = "Notification"
+            collegeNotificationListVC.parentNavigationController = self.parentNavigationController
+            controllersArray.append(collegeNotificationListVC)
+            break
+
+            
+        case .college:
             self.controllersArray.removeAll()
             let collegeAttendanceListVC:CollegeAttendanceListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.CollegeAttendanceListViewControllerId) as! CollegeAttendanceListViewController
             collegeAttendanceListVC.title = "Attendance (Reports)"

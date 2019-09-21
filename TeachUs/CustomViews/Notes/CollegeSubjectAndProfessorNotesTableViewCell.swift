@@ -14,6 +14,7 @@ class CollegeSubjectAndProfessorNotesTableViewCell: UITableViewCell {
     @IBOutlet weak var labelSubjectName: UILabel!
     @IBOutlet weak var labelNotesCount: UILabel!
     @IBOutlet weak var labelLecturerName: UILabel!
+    @IBOutlet weak var imageViewRightArrow: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

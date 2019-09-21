@@ -240,7 +240,7 @@ class OfflineStudentListViewController: BaseViewController {
         if(difference.hour! > 0 || difference.minute! > 0){
             return true
         }else{
-            self.showAlterWithTitle("Wrong Date Range", alertMessage: "From time should be lesser than to time!")
+            self.showAlertWithTitle("Wrong Date Range", alertMessage: "From time should be lesser than to time!")
         }
         return false
     }

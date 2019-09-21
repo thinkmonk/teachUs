@@ -133,12 +133,12 @@ class CollegeAttendanceMailReportViewController: BaseViewController {
             let status = response["status"] as! Int
             if (status == 200){
                 let message:String = response["message"] as! String
-                self.showAlterWithTitle(nil, alertMessage: message)
+                self.showAlertWithTitle(nil, alertMessage: message)
                 self.setUpPasswordView()
                 self.ViewFormBg.removeFromSuperview()
             }
         }) { (error, code, message) in
-            self.showAlterWithTitle(nil, alertMessage: message)
+            self.showAlertWithTitle(nil, alertMessage: message)
             LoadingActivityHUD.hideProgressHUD()
         }
         
@@ -197,16 +197,16 @@ extension CollegeAttendanceMailReportViewController:VerifyAuthPasswordProtocol{
             let status = response["status"] as! Int
             if (status == 200){
                 let message:String = response["message"] as! String
-                self.showAlterWithTitle(nil, alertMessage: message)
+                self.showAlertWithTitle(nil, alertMessage: message)
                 self.verifyPasswordView.hideView()
                 self.setUpReportView()
             }
             else{
                 let message:String = response["message"] as! String
-                self.showAlterWithTitle(nil, alertMessage: message)
+                self.showAlertWithTitle(nil, alertMessage: message)
             }
         }) { (error, code, message) in
-            self.showAlterWithTitle(nil, alertMessage: message)
+            self.showAlertWithTitle(nil, alertMessage: message)
             LoadingActivityHUD.hideProgressHUD()
         }
         /*
@@ -267,7 +267,7 @@ extension CollegeAttendanceMailReportViewController:AttendanceReportProtocol{
                 
             }
         }) { (error, code, message) in
-            self.showAlterWithTitle(nil, alertMessage: message)
+            self.showAlertWithTitle(nil, alertMessage: message)
             LoadingActivityHUD.hideProgressHUD()
         }
         

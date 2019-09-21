@@ -265,7 +265,7 @@ class StudentsListViewController: BaseViewController {
             }
         }) { (error, code, message) in
             LoadingActivityHUD.hideProgressHUD()
-            self.showAlterWithTitle("Error", alertMessage: message)
+            self.showAlertWithTitle("Error", alertMessage: message)
             
         }
     }
@@ -374,7 +374,7 @@ class StudentsListViewController: BaseViewController {
         if(difference.hour! > 0 || difference.minute! > 0){
             return true
         }else{
-            self.showAlterWithTitle("Wrong Date Range", alertMessage: "From time should be lesser than to time!")
+            self.showAlertWithTitle("Wrong Date Range", alertMessage: "From time should be lesser than to time!")
         }
         return false
     }
@@ -432,7 +432,7 @@ class StudentsListViewController: BaseViewController {
             }
         }) { (error, code, errorMessage) in
             LoadingActivityHUD.hideProgressHUD()
-            self.showAlterWithTitle(nil, alertMessage: errorMessage)
+            self.showAlertWithTitle(nil, alertMessage: errorMessage)
             completion(false)
         }
     }
@@ -467,7 +467,7 @@ class StudentsListViewController: BaseViewController {
             }
         }) { (error, code, errorMessage) in
             LoadingActivityHUD.hideProgressHUD()
-            self.showAlterWithTitle(nil, alertMessage: errorMessage)
+            self.showAlertWithTitle(nil, alertMessage: errorMessage)
         }
     }
 }
@@ -534,6 +534,7 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
             
         case .defaultSelection:
             let cell:DefaultSelectionTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.DefaultSelectionTableViewCellId, for: indexPath) as! DefaultSelectionTableViewCell
+            cell.buttonFetchPreviAttendance.isHidden = isEditAttendanceFlow
             
             cell.delegate = self
             cell.selectionStyle = .none
@@ -840,8 +841,8 @@ extension StudentsListViewController:DefaultAttendanceSelectionDelegate{
             
             let parameters = [
                 "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
-                "class_id":"\(self.selectedCollege.classId ?? "")",
-                "subject_id": "\(self.selectedCollege.subjectId ?? "")",
+                "class_id":"\(self.selectedCollege?.classId ?? "")",
+                "subject_id": "\(self.selectedCollege?.subjectId ?? "")",
                 "date":"\(datestring)"
             ]
             manager.apiPostWithDataResponse(apiName: "Get Last lecture Attendance data", parameters:parameters, completionHandler: { (result, code, response) in

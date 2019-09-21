@@ -58,6 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate {
         print("Firebase registration token: \(fcmToken)")
         GlobalFunction.setFCMToken(fcmToken)
         let dataDict:[String: String] = ["token": fcmToken]
+        UserDefaults.standard.set(NSNumber(value: 0), forKey: "INSTALLED")//reset the flag when new token is received so that it can be synced to server.
         NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
         // TODO: If necessary send token to application server.
         // Note: This callback is fired at each app startup and whenever a new token is generated.

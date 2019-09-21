@@ -52,7 +52,7 @@ class EditProfileDetailsViewController: BaseViewController {
     
     var professorProfileDetails:ProfessorProfileDetails!
     var isProfessorProfileView:Bool{
-        return UserManager.sharedUserManager.user! == .Professor
+        return UserManager.sharedUserManager.user! == .professor
     }
 
     var myDisposeBag = DisposeBag()
@@ -257,7 +257,7 @@ class EditProfileDetailsViewController: BaseViewController {
         manager.apiPost(apiName: " verify otp ", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             if (code == 200){
-                self.showAlterWithTitle("Success", alertMessage: "OTP verified")
+                self.showAlertWithTitle("Success", alertMessage: "OTP verified")
                 if let newAccessToken = response["token"] as? String{
                     self.getAndSaveUserToDb(false)
                     UserManager.sharedUserManager.setAccessToken(newAccessToken)
@@ -273,7 +273,7 @@ class EditProfileDetailsViewController: BaseViewController {
                     }
                 })
             }else{
-                self.showAlterWithTitle("Error", alertMessage: "Invalid OTP")
+                self.showAlertWithTitle("Error", alertMessage: "Invalid OTP")
             }
         }) { (error, code, message) in
             print(message)
@@ -305,7 +305,7 @@ class EditProfileDetailsViewController: BaseViewController {
                 if responseCode == 200{
                     self.textfieldEnterOTP.becomeFirstResponder()
                 }else{
-                    self.showAlterWithTitle("ERROR", alertMessage: errorMessage)
+                    self.showAlertWithTitle("ERROR", alertMessage: errorMessage)
                 }
             }
         }) { (error, code, message) in
@@ -378,7 +378,7 @@ extension EditProfileDetailsViewController{
             imagePicker!.sourceType = UIImagePickerControllerSourceType.camera
             self .present(imagePicker!, animated: true, completion: nil)
         }else{
-            self.showAlterWithTitle("Oops!", alertMessage: "Camera Access Not Provided")
+            self.showAlertWithTitle("Oops!", alertMessage: "Camera Access Not Provided")
             
         }
     }
@@ -389,7 +389,7 @@ extension EditProfileDetailsViewController{
             imagePicker!.sourceType = UIImagePickerControllerSourceType.photoLibrary
             self.present(imagePicker!, animated: true, completion: nil)
         }else{
-            self.showAlterWithTitle("Oops!", alertMessage: "Photo Library Access Not Provided")
+            self.showAlertWithTitle("Oops!", alertMessage: "Photo Library Access Not Provided")
         }
     }
     

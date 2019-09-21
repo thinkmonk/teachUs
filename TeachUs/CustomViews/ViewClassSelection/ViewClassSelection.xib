@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,7 +17,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pjP-FY-YFj">
-                    <rect key="frame" x="25" y="45" width="325" height="597"/>
+                    <rect key="frame" x="25" y="45" width="325" height="572"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OC1-Ed-5SF">
                             <rect key="frame" x="0.0" y="0.0" width="325" height="50.5"/>
@@ -68,7 +68,7 @@
                             </subviews>
                         </stackView>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SrZ-dj-C17">
-                            <rect key="frame" x="0.0" y="80.5" width="325" height="516.5"/>
+                            <rect key="frame" x="0.0" y="80.5" width="325" height="491.5"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </tableView>
                     </subviews>
@@ -86,10 +86,21 @@
                         <constraint firstAttribute="trailing" secondItem="2Ty-Ez-XOc" secondAttribute="trailing" id="x3j-Pe-Csm"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gIo-SZ-lbh">
+                    <rect key="frame" x="25" y="617" width="325" height="30"/>
+                    <state key="normal" title="Submit"/>
+                    <connections>
+                        <action selector="dismissView:" destination="iN0-l3-epB" eventType="touchUpInside" id="HeU-v4-AzO"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.51412086925287359" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="pjP-FY-YFj" secondAttribute="bottom" constant="25" id="eYw-zl-JB1"/>
+                <constraint firstItem="gIo-SZ-lbh" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="4kq-JF-0u9"/>
+                <constraint firstItem="gIo-SZ-lbh" firstAttribute="top" secondItem="pjP-FY-YFj" secondAttribute="bottom" id="8Jr-tR-0t7"/>
+                <constraint firstItem="gIo-SZ-lbh" firstAttribute="leading" secondItem="SrZ-dj-C17" secondAttribute="leading" id="WKS-Ca-WpE"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="gIo-SZ-lbh" secondAttribute="bottom" constant="20" id="eky-yI-rwz"/>
+                <constraint firstItem="gIo-SZ-lbh" firstAttribute="trailing" secondItem="SrZ-dj-C17" secondAttribute="trailing" id="hXw-LH-B6C"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="pjP-FY-YFj" secondAttribute="trailing" constant="25" id="nel-lF-2NS"/>
                 <constraint firstItem="pjP-FY-YFj" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="25" id="oPP-FJ-Vho"/>
                 <constraint firstItem="pjP-FY-YFj" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="25" id="pjq-9T-gGy"/>
@@ -100,6 +111,7 @@
                 <outlet property="buttonClose" destination="GoF-FP-SOJ" id="rgi-nm-O3w"/>
                 <outlet property="buttonDeselectAll" destination="bX4-wI-u2c" id="BAr-rb-3LD"/>
                 <outlet property="buttonSelectAll" destination="ElC-Gp-cod" id="dVI-pu-2oM"/>
+                <outlet property="buttonSubmit" destination="gIo-SZ-lbh" id="2LK-Me-C7p"/>
                 <outlet property="tableviewClassList" destination="SrZ-dj-C17" id="3Wq-NB-Tb4"/>
             </connections>
             <point key="canvasLocation" x="55.200000000000003" y="48.125937031484263"/>

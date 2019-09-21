@@ -67,11 +67,11 @@ class AddNewEventViewController: BaseViewController {
             let status = response["status"] as! Int
             if (status == 200){
                 let message:String = response["message"] as! String
-                self.showAlterWithTitle(nil, alertMessage: message)
+                self.showAlertWithTitle(nil, alertMessage: message)
                 self.closeView(self)
             }
         }) { (error, code, message) in
-            self.showAlterWithTitle(nil, alertMessage: message)
+            self.showAlertWithTitle(nil, alertMessage: message)
             LoadingActivityHUD.hideProgressHUD()
         }
     }

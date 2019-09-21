@@ -74,10 +74,13 @@ class CollegeLogin: UIView {
         self.labelOtpTimeLeft.isHidden = true
         
         switch self.userType! {
-        case .College:
+        case .college:
             self.labelTitle.text = "COLLEGE"
-        case .Student:
+        case .student:
             self.labelTitle.text = "STUDENT"
+            
+        case .parents:
+            self.labelTitle.text = "PARENT"
         default:
             break
         }

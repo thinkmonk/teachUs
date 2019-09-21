@@ -75,7 +75,7 @@ class EventAttendanceClassListViewController: BaseViewController {
             self.showTableView()
             
         }) { (error, code, message) in
-            self.showAlterWithTitle(nil, alertMessage: message)
+            self.showAlertWithTitle(nil, alertMessage: message)
             LoadingActivityHUD.hideProgressHUD()
         }
     }
@@ -149,7 +149,7 @@ extension EventAttendanceClassListViewController:UITableViewDelegate, UITableVie
 
 extension EventAttendanceClassListViewController:AddEventAttendanceDelegate{
     func eventAttendanceAdded(_ message: String) {
-        self.showAlterWithTitle(nil, alertMessage: message)
+        self.showAlertWithTitle(nil, alertMessage: message)
     }
     
     

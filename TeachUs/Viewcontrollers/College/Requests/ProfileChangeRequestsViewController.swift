@@ -56,7 +56,7 @@ class ProfileChangeRequestsViewController: BaseViewController {
             }
         }) { (success, code, errorMessage) in
             LoadingActivityHUD.hideProgressHUD()
-            self.showAlterWithTitle("Error", alertMessage: errorMessage)
+            self.showAlertWithTitle("Error", alertMessage: errorMessage)
         }
     }
     
@@ -107,7 +107,7 @@ extension ProfileChangeRequestsViewController:UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let requestObject = self.changeRequestObject?.requestData![indexPath.row]
+        let requestObject = self.changeRequestObject?.requestData![indexPath.section]
         let cell:ProfileChangeRequestTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.profileChangeRequestTableViewCellId) as! ProfileChangeRequestTableViewCell
         cell.setUpCell(data:requestObject!)
         

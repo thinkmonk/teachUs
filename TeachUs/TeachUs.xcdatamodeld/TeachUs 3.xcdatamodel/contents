@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14492.1" systemVersion="18G95" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="AttendanceRequest" representedClassName="AttendanceRequest" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="params" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="CollegeDetails" representedClassName="CollegeDetails" syncable="YES">
+        <attribute name="college_code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="college_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="college_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isCurrentProile" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="notificationCount" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="privilege" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="role_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="role_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="studentEmail" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="studentName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="OfflineApiRequest" representedClassName="OfflineApiRequest" syncable="YES">
+        <attribute name="attendanceParams" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="syllabusParams" optional="YES" attributeType="Transformable" syncable="YES"/>
+    </entity>
+    <entity name="OfflineUserData" representedClassName="OfflineUserData" syncable="YES">
+        <attribute name="data" optional="YES" attributeType="Transformable" syncable="YES"/>
+    </entity>
+    <entity name="UserDetails" representedClassName="UserDetails" syncable="YES">
+        <attribute name="contact" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="login_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="notificationCount" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="profilePicUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="college" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CollegeDetails" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="AttendanceRequest" positionX="61" positionY="-126" width="128" height="90"/>
+        <element name="CollegeDetails" positionX="-128" positionY="-108" width="128" height="195"/>
+        <element name="OfflineApiRequest" positionX="-135" positionY="-54" width="128" height="75"/>
+        <element name="OfflineUserData" positionX="-135" positionY="-54" width="128" height="60"/>
+        <element name="UserDetails" positionX="-324" positionY="-108" width="128" height="165"/>
+    </elements>
+</model>

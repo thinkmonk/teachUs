@@ -51,7 +51,7 @@ class ReachabilityManager: NSObject {
             debugPrint("Network became unreachable")
             let userData = DatabaseManager.getEntitesForEntityName(name: Constants.DatabaseEntities.OfflineUserData)
             if(UserManager.sharedUserManager.user != nil && userData.count > 0){
-                if(UserManager.sharedUserManager.user! == .Professor && UserManager.sharedUserManager.isUserInOfflineMode == false){
+                if(UserManager.sharedUserManager.user! == .professor && UserManager.sharedUserManager.isUserInOfflineMode == false){
                     UserManager.sharedUserManager.initOfflineUser()
                     viewOffline = OfflineYesNo.instanceFromNib() as? OfflineYesNo
                     if(UIApplication.shared.keyWindow != nil){

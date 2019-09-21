@@ -24,14 +24,15 @@ class AddRemoveAdminViewController: BaseViewController {
     @IBOutlet weak var buttonAdd: UIButton!
     @IBOutlet weak var tableViewAdminList: UITableView!
     @IBOutlet weak var buttonContact: UIButton!
-    
+    @IBOutlet weak var viewSelectClass: UIView!
+    @IBOutlet weak var buttonSelectClass: UIButton!
     let adminDropdown = DropDown()
     var parentNavigationController : UINavigationController?
     var arrayAdminList:[Admin] = []
     let disposeBag = DisposeBag()
     var courseListData:CourseDetails!
     var dispatchGroup = DispatchGroup()
-    var viewCourseList : ViewCourseSelection!
+    var viewClassList : ViewClassSelection!
 
     
     
@@ -47,7 +48,8 @@ class AddRemoveAdminViewController: BaseViewController {
         self.initContactList()
         self.tableViewAdminList.alpha = 1.0
         self.getAdminList()
-        self.getCourseList()
+//        self.getCourseList()
+        initClassSelectionView()
         self.setUpRx()
         self.buttonAdd.isHidden = true
     }
@@ -78,18 +80,18 @@ class AddRemoveAdminViewController: BaseViewController {
             "role_id":"\(UserManager.sharedUserManager.appUserCollegeDetails.role_id!)",
             "contact":"\(self.textFieldPhoneNumber.text!)",
             "admin_type":"\(adminType)",
-            "courses":"\(CollegeClassManager.sharedManager.getSelectedCourseList)"
+            "class":"\(CollegeClassManager.sharedManager.getSelectedAminClassList)"
         ]
         manager.apiPost(apiName: " Add new admin", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             let status = response["status"] as! Int
             if (status == 200){
                 let message:String = response["message"] as! String
-                self.showAlterWithTitle(nil, alertMessage: message)
+                self.showAlertWithTitle(nil, alertMessage: message)
                 self.getAdminList()
             }
         }) { (error, code, message) in
-            self.showAlterWithTitle(nil, alertMessage: message)
+            self.showAlertWithTitle(nil, alertMessage: message)
             LoadingActivityHUD.hideProgressHUD()
         }
     }
@@ -103,10 +105,34 @@ class AddRemoveAdminViewController: BaseViewController {
     }
     
     @IBAction func showCourseList(_ sender: Any) {
-        if(self.viewCourseList != nil){
-            self.viewCourseList.frame = CGRect(x: 0.0, y:0.0, width: self.view.width(), height: self.view.height())
-            self.view.addSubview(self.viewCourseList)
+        
+        self.view.endEditing(true)
+        self.viewClassList.frame = self.tableViewAdminList.frame
+        self.view.addSubview(self.viewClassList)
+
+//        if(self.viewCourseList != nil){
+//            self.viewCourseList.frame = CGRect(x: 0.0, y:0.0, width: self.view.width(), height: self.view.height())
+//            self.view.addSubview(self.viewCourseList)
+//        }
+    }
+    
+    func initClassSelectionView(){
+        self.viewClassList = ViewClassSelection.instanceFromNib() as? ViewClassSelection
+        self.viewClassList.delegate = self
+        
+        //init class selection list after sorting
+        if CollegeClassManager.sharedManager.selectedAdminClassArray.isEmpty{
+            CollegeClassManager.sharedManager.getAllClass { (isCompleted) in
+                self.viewClassList.setUpView(array: CollegeClassManager.sharedManager.selectedAdminClassArray, isAdminScreenFlag: true)
+            }
+        }else{
+            self.viewClassList.setUpView(array: CollegeClassManager.sharedManager.selectedAdminClassArray, isAdminScreenFlag: true)
         }
+        
+    }
+    
+    func getClassList(){
+        
     }
     
     
@@ -126,11 +152,11 @@ class AddRemoveAdminViewController: BaseViewController {
                 let status = response["status"] as! Int
                 if (status == 200){
                     let message:String = response["message"] as! String
-                    self.showAlterWithTitle(nil, alertMessage: message)
+                    self.showAlertWithTitle(nil, alertMessage: message)
                     self.getAdminList()
                 }
             }) { (error, code, message) in
-                self.showAlterWithTitle(nil, alertMessage: message)
+                self.showAlertWithTitle(nil, alertMessage: message)
                 LoadingActivityHUD.hideProgressHUD()
             }
         }
@@ -189,26 +215,13 @@ class AddRemoveAdminViewController: BaseViewController {
             do{
                 let decoder = JSONDecoder()
                 self.courseListData = try decoder.decode(CourseDetails.self, from: response)
-                self.initCourseSelectionView()
             }
             catch let error{
                 print("err", error)
             }
         }) { (error, code, message) in
-            self.showAlterWithTitle(nil, alertMessage: message)
+            self.showAlertWithTitle(nil, alertMessage: message)
             LoadingActivityHUD.hideProgressHUD()
-        }
-        
-    }
-    
-    func initCourseSelectionView(){
-        self.viewCourseList = ViewCourseSelection.instanceFromNib() as? ViewCourseSelection
-        self.viewCourseList.delegate = self
-        
-        //init class selection list after sorting
-        for course in self.courseListData.courseList{
-            let selectedCourse = SelectCollegeCourse(course, true)
-            CollegeClassManager.sharedManager.selectedCourseArray.append(selectedCourse)
         }
         
     }
@@ -249,7 +262,7 @@ class AddRemoveAdminViewController: BaseViewController {
             self.showTableView()
 //            self.setupDropdown()
         }) { (error, code, message) in
-            self.showAlterWithTitle(nil, alertMessage: message)
+            self.showAlertWithTitle(nil, alertMessage: message)
             LoadingActivityHUD.hideProgressHUD()
         }
     }
@@ -272,11 +285,6 @@ class AddRemoveAdminViewController: BaseViewController {
     }
 }
 
-extension AddRemoveAdminViewController:IndicatorInfoProvider{
-    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "Add/Remove Admin")
-    }
-}
 
 
 extension AddRemoveAdminViewController:UITableViewDataSource, UITableViewDelegate{
@@ -333,14 +341,17 @@ extension AddRemoveAdminViewController:CNContactPickerDelegate{
     }
 }
 
-extension AddRemoveAdminViewController:ViewCourseSelectionDelegate{
-    func submitSelectedCourses() {
-        self.viewCourseList.removeFromSuperview()
+extension AddRemoveAdminViewController:ViewClassSelectionDelegate{
+    func classViewDismissed() {
+        self.viewClassList.removeFromSuperview()
+        let selectedClassCount = CollegeClassManager.sharedManager.selectedAdminClassArray.filter({$0.isSelected == true}).count
+        self.buttonSelectClass.setTitle("\(selectedClassCount) class", for: .normal)
+        print("class dismissed")
     }
-    
-    func courseViewDismissed() {
-        self.viewCourseList.removeFromSuperview()
+}
+
+extension AddRemoveAdminViewController:IndicatorInfoProvider{
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "Add/Remove Admin")
     }
-    
-    
 }

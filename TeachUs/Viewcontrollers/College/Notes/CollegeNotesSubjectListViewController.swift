@@ -25,6 +25,7 @@ class CollegeNotesSubjectListViewController: BaseViewController {
         self.tableViewLecturerNotesCount.dataSource = self
         self.tableViewLecturerNotesCount.estimatedRowHeight = 20
         self.tableViewLecturerNotesCount.rowHeight = UITableViewAutomaticDimension
+        self.title = self.selectedClass.classSubjectClass
     }
     
     func getCourseNotes()
@@ -85,12 +86,15 @@ extension CollegeNotesSubjectListViewController:UITableViewDataSource, UITableVi
                     cell.imageVIewProfessor.image = image
                 }
             }
+            cell.labelSubjectName.text = subjectObject.subjectName ?? ""
             cell.labelNotesCount.text = subjectObject.totalNotes ?? ""
             cell.labelLecturerName.text = subjectObject.professorName ?? ""
             if Int(subjectObject.totalNotes ?? "0") == 0{
-                cell.accessoryType = .none
+                cell.isUserInteractionEnabled = false
+                cell.imageViewRightArrow.isHidden = true
             }else{
-                cell.accessoryType = .disclosureIndicator
+                cell.isUserInteractionEnabled = true
+                cell.imageViewRightArrow.isHidden = false
             }
             cell.selectionStyle = .none
         }

@@ -26,7 +26,7 @@ class AddRemoveAdminTableViewCell: UITableViewCell {
     }
     
     func setUpCell(adminDetails:Admin){
-        self.labelCourseName.text = ""
+        self.labelCourseName.text = "\(adminDetails.fullNamae) (\(adminDetails.courseList))"
         self.labelMobileNumber.text = "\(adminDetails.contact)"
     }
     

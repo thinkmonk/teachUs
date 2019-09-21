@@ -113,9 +113,9 @@ extension CollegeSyllabusStatusViewController:UITableViewDelegate, UITableViewDa
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let professorSyllabusStatusVC = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorSyllabusStatus) as! SyllabusStatusListViewController
         if let classObj = self.arrayDataSource?.classList[indexPath.section], let classID = classObj.classId{
-            professorSyllabusStatusVC.title = "\(classObj.courseName)"
+            professorSyllabusStatusVC.title = "\(classObj.courseName ?? "")"
             professorSyllabusStatusVC.parentNavigationController = self.parentNavigationController
-            professorSyllabusStatusVC.userType = LoginUserType.College
+            professorSyllabusStatusVC.userType = LoginUserType.college
             professorSyllabusStatusVC.selectedClassId = classID
             self.navigationController?.pushViewController(professorSyllabusStatusVC, animated: true)
         }

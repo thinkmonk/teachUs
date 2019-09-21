@@ -80,7 +80,7 @@ class EventAttendanceListViewController: BaseViewController {
         
         EventManager.shared.addEvent(params: parameters) { (successFlag, message) in
             if successFlag{
-                self.showAlterWithTitle(nil, alertMessage: message ?? "")
+                self.showAlertWithTitle(nil, alertMessage: message ?? "")
                 self.textFieldEventName.text = ""
                 self.getEvents()
                 self.dispatchGroup.notify(queue: DispatchQueue.main, execute: {
@@ -88,7 +88,7 @@ class EventAttendanceListViewController: BaseViewController {
                     self.view.endEditing(true)
                 })
             }else{
-                self.showAlterWithTitle(nil, alertMessage: message ?? "")
+                self.showAlertWithTitle(nil, alertMessage: message ?? "")
                 LoadingActivityHUD.hideProgressHUD()
                 
             }
@@ -153,7 +153,7 @@ class EventAttendanceListViewController: BaseViewController {
             self.arrayDataSource.sort(by: { $0.eventName < $1.eventName })
            self.dispatchGroup.leave()
         }) { (error, code, message) in
-            self.showAlterWithTitle(nil, alertMessage: message)
+            self.showAlertWithTitle(nil, alertMessage: message)
             LoadingActivityHUD.hideProgressHUD()
         }
     }

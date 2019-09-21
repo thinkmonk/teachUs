@@ -178,7 +178,7 @@ class ProfessorNotesDetailstViewController: BaseViewController {
                 
                 filePathReference.delete { error in
                     if let error = error {
-                        self.showAlterWithTitle("Error", alertMessage: "\(error.localizedDescription)")
+                        self.showAlertWithTitle("Error", alertMessage: "\(error.localizedDescription)")
                     } else {
                         let manager = NetworkHandler()
                         manager.url = URLConstants.ProfessorURL.deleteNotes
@@ -190,7 +190,7 @@ class ProfessorNotesDetailstViewController: BaseViewController {
                             LoadingActivityHUD.hideProgressHUD()
                             if let status = response["status"] as? Int, status == 200, let message = response["message"] as? String{
                                 self.getNotes()
-                                self.showAlterWithTitle("Success", alertMessage:message)
+                                self.showAlertWithTitle("Success", alertMessage:message)
                             }
                         }) { (success, code, errormessage) in
                             LoadingActivityHUD.hideProgressHUD()
@@ -219,7 +219,7 @@ class ProfessorNotesDetailstViewController: BaseViewController {
             ]
             manager.apiPost(apiName: "Upload nOtes", parameters:parameters, completionHandler: { (result, code, response) in
                 if let status = response["status"] as? Int, status == 200, let message = response["message"] as? String{
-                    self.showAlterWithTitle("Success", alertMessage: message)
+                    self.showAlertWithTitle("Success", alertMessage: message)
                     self.textfiledName.text  = ""
                     self.labelFileName.text = "File Name"
                     self.chosenImage.value = nil
@@ -232,7 +232,7 @@ class ProfessorNotesDetailstViewController: BaseViewController {
                 LoadingActivityHUD.hideProgressHUD()
             }
         }) { (errorMessage) in
-            self.showAlterWithTitle("Error", alertMessage: errorMessage)
+            self.showAlertWithTitle("Error", alertMessage: errorMessage)
         }
     }
     
@@ -346,7 +346,7 @@ extension ProfessorNotesDetailstViewController{
             imagePicker!.sourceType = UIImagePickerControllerSourceType.camera
             self .present(imagePicker!, animated: true, completion: nil)
         }else{
-            self.showAlterWithTitle("Oops!", alertMessage: "Camera Access Not Provided")
+            self.showAlertWithTitle("Oops!", alertMessage: "Camera Access Not Provided")
             
         }
     }
@@ -358,7 +358,7 @@ extension ProfessorNotesDetailstViewController{
             imagePicker?.mediaTypes = ["public.image", "public.movie"]
             self.present(imagePicker!, animated: true, completion: nil)
         }else{
-            self.showAlterWithTitle("Oops!", alertMessage: "Photo LIbrary Access Not Provided")
+            self.showAlertWithTitle("Oops!", alertMessage: "Photo LIbrary Access Not Provided")
         }
     }
     
@@ -423,7 +423,7 @@ extension ProfessorNotesDetailstViewController:UIImagePickerControllerDelegate,U
             let fileSizeNumber = fileAttributes?[.size] as? NSNumber
             let fileSize: Int64 = fileSizeNumber?.int64Value ?? 0
             if fileSize > 26214400{
-                self.showAlterWithTitle("ERROR", alertMessage: "File size should be less than 25mb")
+                self.showAlertWithTitle("ERROR", alertMessage: "File size should be less than 25mb")
             }else{
                 self.chosenFile.value = videoURL
                 self.labelFileName.text = "Video selected"

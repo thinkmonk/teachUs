@@ -22,20 +22,36 @@ import ObjectMapper
  "avg_students": "13"
  }
  
+ //For Admin List
+ case courseID = "course_id"
+ case courseName = "course_name"
+ case courseCode = "course_code"
+ case noOfYears = "no_of_years"
+ case streamID = "stream_id"
+ case excelSheetUploadID = "excel_sheet_upload_id"
+ case currentYear = "current_year"
+ case classID = "class_id"
+ case classDivision = "class_division"
+ case year
+ case yearName = "year_name"
+ case specialisation, semester
+ case classMastercol = "class_mastercol"
+
  */
 
 
 
 class CollegeAttendanceList:Mappable{
-    var yearName:String = ""
-    var classDivision:String = ""
-    var classId:String = ""
-    var semester:String = ""
-    var courseCode:String = ""
-    var courseName:String = ""
-    var totalStudents:String = ""
-    var avgStudents:String = ""
+    var yearName:String = ""                    
+    var classDivision:String = ""                   
+    var classId:String = ""                 
+    var semester:String = ""                    
+    var courseCode:String = ""                  
+    var courseName:String = ""                  
+    var totalStudents:String = ""                   
+    var avgStudents:String = ""                 
     var year:String = ""
+    var numberOfYear:String = ""
     
     
     required public init?(map: Map) {
@@ -51,6 +67,7 @@ class CollegeAttendanceList:Mappable{
         self.totalStudents <- map["total_students"]
         self.avgStudents <- map["avg_students"]
         self.year <- map["year"]
+        self.numberOfYear <- map["no_of_years"]
     }
 
 }

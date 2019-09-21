@@ -153,15 +153,15 @@ extension TeachersRatingViewController:UITableViewDataSource, UITableViewDelegat
         let profDetails = self.arrayDataSource[indexPath.section]
         switch profDetails.ratingStatus {
         case "3":
-            self.showAlterWithTitle("Not Started", alertMessage: "Feedback yet not Started")
+            self.showAlertWithTitle("Not Started", alertMessage: "Feedback yet not Started")
             break
             
         case "2":
-            self.showAlterWithTitle("InEligible", alertMessage: "You are not Eligible")
+            self.showAlertWithTitle("InEligible", alertMessage: "You are not Eligible")
             break
             
         case "1":
-            self.showAlterWithTitle(nil, alertMessage: "Ratings already Submitted")
+            self.showAlertWithTitle(nil, alertMessage: "Ratings already Submitted")
             break
             
         default:

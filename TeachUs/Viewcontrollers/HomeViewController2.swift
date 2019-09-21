@@ -82,7 +82,7 @@ class HomeViewController2: BaseViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
         switch UserManager.sharedUserManager.user! {
-        case .Professor:
+        case .professor:
             controllersArray.removeAll()
             let professorAttendanceVC = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorAttendance) as! ProfessorAttedanceViewController
             _ = professorAttendanceVC.view // dummy variable(it will be never used): to load viewController.view & it automatically calls viewController.viewDidLoad()
@@ -95,7 +95,7 @@ class HomeViewController2: BaseViewController {
             
             professorSyllabusStatusVC.title = "Syllabus Status"
             professorSyllabusStatusVC.parentNavigationController = self.navigationController
-            professorSyllabusStatusVC.userType = .Professor
+            professorSyllabusStatusVC.userType = .professor
             
             //controllersArray.append(professorSyllabusStatusVC)
             
@@ -109,7 +109,7 @@ class HomeViewController2: BaseViewController {
             
             break
             
-        case .Student:
+        case .student:
             controllersArray.removeAll()
             let attendanceVC: StudentAttedanceViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.studentAttendace) as! StudentAttedanceViewController
             _ = attendanceVC.view // dummy variable(it will be never used): to load viewController.view & it automatically calls viewController.viewDidLoad()
@@ -123,7 +123,7 @@ class HomeViewController2: BaseViewController {
             syllabusStatusVC.title = "Syllabus Status"
             
             syllabusStatusVC.parentNavigationController = self.navigationController
-            syllabusStatusVC.userType = .Student
+            syllabusStatusVC.userType = .student
             //controllersArray.append(syllabusStatusVC)
             
             let professorRating:TeachersRatingViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorRating) as! TeachersRatingViewController

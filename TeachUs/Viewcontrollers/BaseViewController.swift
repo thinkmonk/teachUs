@@ -97,7 +97,7 @@ class BaseViewController: UIViewController {
         
     }
     
-    func showAlterWithTitle(_ title:String?, alertMessage:String){
+    func showAlertWithTitle(_ title:String?, alertMessage:String){
         let alertTitle = title != nil ? title : nil
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.alert)
         
@@ -211,7 +211,7 @@ class BaseViewController: UIViewController {
             }
             else{
                 let message:String = response["message"] as! String
-                self.showAlterWithTitle(nil, alertMessage: "\(message)")
+                self.showAlertWithTitle(nil, alertMessage: "\(message)")
                 NotificationCenter.default.post(name: .notificationLoginSuccess, object: nil)
             }
             

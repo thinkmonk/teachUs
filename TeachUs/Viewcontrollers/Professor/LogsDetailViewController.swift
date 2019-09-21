@@ -29,6 +29,7 @@ class LogsDetailViewController: BaseViewController {
     //for collegeLogs Details
     var isCollegeLogsSubjectData:Bool = false //for college logs
     var allCollegeSubjects = [SubjectsDetail]()
+    var professorId: String?
     
     @IBOutlet weak var tableLogsDetail: UITableView!
     @IBOutlet weak var buttonPreviousSubject: UIButton!
@@ -106,7 +107,7 @@ class LogsDetailViewController: BaseViewController {
             self.showTableView()
         }) { (success, code, message) in
             LoadingActivityHUD.hideProgressHUD()
-            self.showAlterWithTitle(nil, alertMessage: message)
+            self.showAlertWithTitle(nil, alertMessage: message)
             print(message)
         }
     }
@@ -120,6 +121,7 @@ class LogsDetailViewController: BaseViewController {
         parameters["college_code"] = UserManager.sharedUserManager.appUserCollegeDetails.college_code
         parameters["subject_id"] =  self.allCollegeSubjects[self.selectedIndex].subjectID
         parameters["class_id"] =  self.allCollegeSubjects[self.selectedIndex].classID
+        parameters["professor_id"] = self.professorId ?? ""
 
         if(fromDate != "" && toDate != ""){
             parameters["from_date"] = fromDate
@@ -154,7 +156,7 @@ class LogsDetailViewController: BaseViewController {
             self.showTableView()
         }) { (success, code, message) in
             LoadingActivityHUD.hideProgressHUD()
-            self.showAlterWithTitle(nil, alertMessage: message)
+            self.showAlertWithTitle(nil, alertMessage: message)
             print(message)
         }
     }

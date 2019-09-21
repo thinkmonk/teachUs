@@ -17,7 +17,7 @@ class StudentsProfileDeatilsViewController: BaseViewController {
     var arrayDataSource = [EditProfileDataSource]()
     
     var isProfessorProfileView:Bool{
-        return UserManager.sharedUserManager.user! == .Professor
+        return UserManager.sharedUserManager.user! == .professor
     }
     
     override func viewDidLoad() {
@@ -435,8 +435,10 @@ extension StudentsProfileDeatilsViewController:UITableViewDelegate, UITableViewD
 
 extension StudentsProfileDeatilsViewController:EditProfileDetailsDelegate{
     func profileDetailsEdited() {
-        self.getStudentDetails()
+        if isProfessorProfileView{
+            self.getProfessorDetails()
+        }else{
+            self.getStudentDetails()
+        }
     }
-    
-    
 }
