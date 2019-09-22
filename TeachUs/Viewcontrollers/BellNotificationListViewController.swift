@@ -70,6 +70,9 @@ class BellNotificationListViewController: BaseViewController {
     func getNotificationList(){
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()
+        var parameters = [
+            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+        ]
         switch  UserManager.sharedUserManager.user!{
         case .college:
             manager.url = URLConstants.CollegeURL.getBellNotifications
@@ -79,12 +82,10 @@ class BellNotificationListViewController: BaseViewController {
             manager.url = URLConstants.StudentURL.getBellNotifications
         case .parents:
             manager.url = URLConstants.ParentsURL.getBellNotifications
+            parameters["email"] = UserManager.sharedUserManager.appUserCollegeDetails.studentEmail ?? ""
         }
         
-        let parameters = [
-            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
-        ]
-        manager.apiPostWithDataResponse(apiName: "Get Notice List", parameters:parameters, completionHandler: { (result, code, response) in
+        manager.apiPostWithDataResponse(apiName: "Get bell notification List", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             do{
                 let decoder = JSONDecoder()
@@ -109,6 +110,10 @@ class BellNotificationListViewController: BaseViewController {
     
     func markReadNotification(firebaseID:String){
         let manager = NetworkHandler()
+        var parameters = [
+            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+            "firebaseid":firebaseID
+        ]
         switch  UserManager.sharedUserManager.user!{
         case .college:
             manager.url = URLConstants.CollegeURL.markReadNotification
@@ -119,12 +124,10 @@ class BellNotificationListViewController: BaseViewController {
         
         case .parents:
             manager.url = URLConstants.ParentsURL.markReadNotification
+            parameters["email"] = UserManager.sharedUserManager.appUserCollegeDetails.studentEmail ?? ""
+
         }
         
-        let parameters = [
-            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
-            "firebaseid":firebaseID
-        ]
         
         manager.apiPostWithDataResponse(apiName: "Mark notification read", parameters:parameters, completionHandler: { (result, code, response) in
             

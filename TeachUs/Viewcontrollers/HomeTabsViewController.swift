@@ -140,7 +140,7 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
             syllabusStatusVC.title = "Syllabus Status"
             
             syllabusStatusVC.parentNavigationController = self.parentNavigationController
-            syllabusStatusVC.userType = .student
+            syllabusStatusVC.userType = .parents
             controllersArray.append(syllabusStatusVC)
             
             let collegeNoticeClassListVC:CollegeNoticeListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.collegeNoticeList) as! CollegeNoticeListViewController

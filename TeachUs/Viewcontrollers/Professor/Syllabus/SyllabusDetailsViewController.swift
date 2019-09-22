@@ -66,9 +66,11 @@ class SyllabusDetailsViewController: BaseViewController {
             manager.url = URLConstants.StudentURL.getSyllabusSuubjectDetails
             break
             
-        default:
-            break
+        case .parents:
+            manager.url = URLConstants.ParentsURL.getSyllabusSuubjectDetails
+            parameters["email"] = UserManager.sharedUserManager.appUserCollegeDetails.studentEmail ?? ""
         }
+        
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
 
         manager.apiPost(apiName: "Get Syllabus  details for professor", parameters: parameters, completionHandler: { (sucess, code, response) in

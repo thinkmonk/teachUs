@@ -41,10 +41,16 @@ class StudentsProfileDeatilsViewController: BaseViewController {
     func getStudentDetails(){
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()
-        manager.url = URLConstants.StudentURL.getStudentProfileDetails
-        let parameters = [
+        var parameters = [
             "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)"
         ]
+        
+        if UserManager.sharedUserManager.user! == .student{
+            manager.url = URLConstants.StudentURL.getStudentProfileDetails
+        }else{
+            manager.url = URLConstants.ParentsURL.getStudentProfileDetails
+            parameters["email"] = UserManager.sharedUserManager.appUserCollegeDetails.studentEmail ?? ""
+        }
         manager.apiPostWithDataResponse(apiName: "Get student profile", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             do{

@@ -1536,6 +1536,45 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		81CE9FFE2337813D00320DFB /* Mark Attendance */ = {
+			isa = PBXGroup;
+			children = (
+				81D7CE931FAB988500C4375E /* ProfessorAttedanceViewController.swift */,
+				81C208551FAF627F003D366D /* StudentsListViewController.swift */,
+				81BA3F14232E291400675716 /* StudentListGridViewController.swift */,
+				81FFB0BA1FBF3E6B00C32097 /* MarkCompletedPortionViewController.swift */,
+				819EEC2520A60FF600487467 /* LectureReportViewController.swift */,
+			);
+			path = "Mark Attendance";
+			sourceTree = "<group>";
+		};
+		81CE9FFF2337815000320DFB /* Syllabus */ = {
+			isa = PBXGroup;
+			children = (
+				81D7CE951FAB98C300C4375E /* SyllabusStatusListViewController.swift */,
+				81D76B511FC1D3EC005E861C /* SyllabusDetailsViewController.swift */,
+			);
+			path = Syllabus;
+			sourceTree = "<group>";
+		};
+		81CEA0002337815C00320DFB /* Logs */ = {
+			isa = PBXGroup;
+			children = (
+				81D7CE971FAB98DB00C4375E /* ProfessorLogsListViewController.swift */,
+				810E0CD61FD03AD1006AE5BE /* LogsDetailViewController.swift */,
+			);
+			path = Logs;
+			sourceTree = "<group>";
+		};
+		81CEA0012337817300320DFB /* Notes */ = {
+			isa = PBXGroup;
+			children = (
+				81A6BBFB229C628E00615EDD /* ProfessorNotesSubjectListViewController.swift */,
+				81A6BC05229C6D8300615EDD /* ProfessorNotesDetailstViewController.swift */,
+			);
+			path = Notes;
+			sourceTree = "<group>";
+		};
 		81D2773F22A05FD4003CFC51 /* Student_Notes */ = {
 			isa = PBXGroup;
 			children = (
@@ -1594,17 +1633,10 @@
 		81D7CE8C1FAB980E00C4375E /* Professor */ = {
 			isa = PBXGroup;
 			children = (
-				81D7CE931FAB988500C4375E /* ProfessorAttedanceViewController.swift */,
-				81C208551FAF627F003D366D /* StudentsListViewController.swift */,
-				81BA3F14232E291400675716 /* StudentListGridViewController.swift */,
-				81FFB0BA1FBF3E6B00C32097 /* MarkCompletedPortionViewController.swift */,
-				819EEC2520A60FF600487467 /* LectureReportViewController.swift */,
-				81D7CE951FAB98C300C4375E /* SyllabusStatusListViewController.swift */,
-				81D76B511FC1D3EC005E861C /* SyllabusDetailsViewController.swift */,
-				81D7CE971FAB98DB00C4375E /* ProfessorLogsListViewController.swift */,
-				810E0CD61FD03AD1006AE5BE /* LogsDetailViewController.swift */,
-				81A6BBFB229C628E00615EDD /* ProfessorNotesSubjectListViewController.swift */,
-				81A6BC05229C6D8300615EDD /* ProfessorNotesDetailstViewController.swift */,
+				81CE9FFE2337813D00320DFB /* Mark Attendance */,
+				81CE9FFF2337815000320DFB /* Syllabus */,
+				81CEA0002337815C00320DFB /* Logs */,
+				81CEA0012337817300320DFB /* Notes */,
 			);
 			path = Professor;
 			sourceTree = "<group>";

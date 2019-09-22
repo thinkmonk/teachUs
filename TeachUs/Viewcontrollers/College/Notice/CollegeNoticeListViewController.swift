@@ -37,7 +37,8 @@ class CollegeNoticeListViewController: BaseViewController {
             self.buttonAddNotice.isHidden = true
             self.layoutAddbuttonHeight.constant = 0
         default:
-            break
+            self.buttonAddNotice.isHidden = true
+            self.layoutAddbuttonHeight.constant = 0
 
         }
         self.getNoticeList()
@@ -51,6 +52,10 @@ class CollegeNoticeListViewController: BaseViewController {
     func getNoticeList(){
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()
+        var parameters = [
+            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)"
+        ]
+
         switch  UserManager.sharedUserManager.user!{
         case .college:
             manager.url = URLConstants.CollegeURL.collegeNoticeList
@@ -58,14 +63,11 @@ class CollegeNoticeListViewController: BaseViewController {
             manager.url = URLConstants.ProfessorURL.getNotice
         case .student:
             manager.url = URLConstants.StudentURL.getStudentNotice
-        default:
-            break
-
+        case .parents:
+            manager.url = URLConstants.ParentsURL.getParentsNotice
+            parameters["email"] = UserManager.sharedUserManager.appUserCollegeDetails.studentEmail ?? ""
         }
 
-        let parameters = [
-            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)"
-        ]
         manager.apiPostWithDataResponse(apiName: "Get Notice List", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             do{

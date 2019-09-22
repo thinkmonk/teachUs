@@ -38,12 +38,16 @@ class StudentAttendanceDetailsViewController: BaseViewController {
     func getAttendanceDetails(){
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()
-        manager.url = URLConstants.StudentURL.getAttendanceDetails
-        let parameters = [
+        var parameters = [
             "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
             "subject_id":"\(selectedStudentAttendance.subjectId ?? "")",
-        ]
-        
+        ]        
+        if UserManager.sharedUserManager.user! == .parents{
+            manager.url = URLConstants.ParentsURL.getAttendanceDetails
+            parameters["email"] = UserManager.sharedUserManager.appUserCollegeDetails.studentEmail ?? ""
+        }else{
+            manager.url = URLConstants.StudentURL.getAttendanceDetails
+        }
         manager.apiPostWithDataResponse(apiName: " Get user Attendance details", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             if(code == 200){

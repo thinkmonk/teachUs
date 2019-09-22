@@ -52,27 +52,24 @@ class SyllabusStatusListViewController: BaseViewController {
     func getSyllabus(){
         let manager = NetworkHandler()
         var parameters = [String:Any]()
-        //http://ec2-34-215-84-223.us-west-2.compute.amazonaws.com:8081/teachus/teacher/getSyllabusSummary/Zmlyc3ROYW1lPURldmVuZHJhLG1pZGRsZU5hbWU9QSxsYXN0TmFtZT1GYWRuYXZpcyxyb2xsPVBST0ZFU1NPUixpZD0x?professorId=1&subjectId=1
+        parameters["college_code"] = UserManager.sharedUserManager.appUserCollegeDetails.college_code
         switch userType! {
         case .student:
             manager.url = URLConstants.StudentURL.syllabusSubjectStatus
-            parameters["college_code"] = UserManager.sharedUserManager.appUserCollegeDetails.college_code
             break
             
         case .professor:
             manager.url = URLConstants.ProfessorURL.syllabusSubjectStatus
-            parameters["college_code"] = UserManager.sharedUserManager.appUserCollegeDetails.college_code
             break
             
         case .college:
             manager.url = URLConstants.CollegeURL.getCollegeSubjectSyllabusList
-            parameters["college_code"] = UserManager.sharedUserManager.appUserCollegeDetails.college_code
             parameters["class_id"] = self.selectedClassId
             break
             
-        default:
-            break
-            
+        case .parents:
+            manager.url = URLConstants.ParentsURL.syllabusSubjectStatus
+            parameters["email"] = UserManager.sharedUserManager.appUserCollegeDetails.studentEmail ?? ""
         }
         
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)

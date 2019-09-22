@@ -88,13 +88,19 @@ class StudentAttedanceViewController: BaseViewController {
         }
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()
-        manager.url = URLConstants.StudentURL.getClassAttendance
-        let parameters = [
+        var parameters = [
             "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
             "year":"\(strYear)",
             "month":"\(strMonth)"
         ]
         
+    
+        if UserManager.sharedUserManager.user! == .parents{
+            manager.url = URLConstants.ParentsURL.getClassAttendance
+            parameters["email"] = UserManager.sharedUserManager.appUserCollegeDetails.studentEmail ?? ""
+        }else{            
+            manager.url = URLConstants.StudentURL.getClassAttendance
+        }
         manager.apiPost(apiName: " Get user Attendance for month \(strMonth)", parameters:parameters, completionHandler: { (result, code, response) in
             if(forMonth == 0){
                 self.labelMonthType.text = "Overall"
