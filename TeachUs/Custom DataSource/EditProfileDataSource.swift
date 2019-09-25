@@ -8,20 +8,25 @@
 
 import Foundation
 enum EditProfileCellType{
-    case cellTypeId
-    case cellTypeName
-    case cellTypeEmail
-    case cellTypeMobileNumber
-    case cellTypecollegeName
-    case cellTypeCourseName
-    case cellTypeYear
-    case cellTypeSemester
-    case cellTypeSubjectTitle
-    case cellTypeSubjectList
-    case cellTypeDivision
-    case cellTypeSubjectName
-    case cellTypeProfessorCollegeName
-    case cellTypeProfessorRole
+    case id
+    case name
+    case email
+    case number
+    case collegeName
+    case courseName
+    case typeYear
+    case semester
+    case subjectTitle
+    case subjectList
+    case division
+    case subjectName
+    case professorCollegeName
+    case professorRole
+    case studentName
+    case studetnCollegeName
+    case studentClass
+    case studentDivision
+    case rollNumber
 }
 
 class EditProfileDataSource{

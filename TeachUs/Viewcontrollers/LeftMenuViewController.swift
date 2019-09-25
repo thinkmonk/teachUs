@@ -50,8 +50,8 @@ class LeftMenuViewController: BaseViewController, UIGestureRecognizerDelegate {
     var collegeAdminDataSource = ["Attendance(Reports)", "Attendance(Events)", "Logout"]
     var collegeAdminImageDataSource = ["attendanceReport","syllabusStatusEvent", "logout"]
     
-    var parentsDataSource = ["Attendance", "Syllabus","Notice", "Notification"]
-    var parentImageDataSource = ["attendanceReport", "syllabus", "notice", "notification"]
+    var parentsDataSource = ["Attendance", "Syllabus","Notice", "Notification", "Logout"]
+    var parentImageDataSource = ["attendanceReport", "syllabus", "notice", "notification", "logout"]
 
     
     

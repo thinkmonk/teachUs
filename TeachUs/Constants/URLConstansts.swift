@@ -73,7 +73,7 @@ public struct URLConstants{
         static let syllabusSubjectStatus =          BaseUrl.baseURLV1 + "/parents/student_syllabus_subject_status"
         static let getSyllabusSuubjectDetails =     BaseUrl.baseURLV1 + "/parents/student_detailed_syllabus_status"
         static let getStudentProfileDetails =       BaseUrl.baseURLV1 + "/parents/student_details"
-        static let updateStudentName =              BaseUrl.baseURLV1 + "/parents/student_name_update_request"
+        static let updateParentsName =              BaseUrl.baseURLV1 + "/parents/student_name_update_request"
         static let sendOtpForMobileNumberUpdate =   BaseUrl.baseURLV1 + "/parents/send_auth_password_newcontact"
         static let updateStudentMobileNumber =      BaseUrl.baseURLV1 + "/parents/verify_auth_password_newcontact"
         static let sendOtpForEmailUpdate =          BaseUrl.baseURLV1 + "/parents/send_auth_password_newemail"
@@ -142,7 +142,7 @@ public struct URLConstants{
         static let addAmin =                            BaseUrl.baseURLV1 + "/admin/add_admin"
         static let removeAdmin =                        BaseUrl.baseURLV1 + "/admin/remove_admin"
         static let classRatingList =                    BaseUrl.baseURLV1 + "/ratings/class_rating_list"
-        static let  ClassProfessorRatingList =          BaseUrl.baseURLV1 + "/ratings/class_professor_rating_list"
+        static let ClassProfessorRatingList =           BaseUrl.baseURLV1 + "/ratings/class_professor_rating_list"
         static let getProfessorRatingDetails =          BaseUrl.baseURLV1 + "/ratings/detailed_professor_rating"
         static let getCollegeSyllabusList =             BaseUrl.baseURLV1 + "/syllabus/college_class_syllabus_status"
         static let getCollegeSubjectSyllabusList =      BaseUrl.baseURLV1 + "/syllabus/college_syllabus_subject_status"
@@ -167,6 +167,7 @@ public struct URLConstants{
         static let deleteNotice =                       BaseUrl.baseURLV1 + "/college/notice_delete"
         static let editEventDetails =                   BaseUrl.baseURLV1 + "/events/update_event"
         static let collegAdminClassList =               BaseUrl.baseURLV1 + "/syllabus/class_list"
+        static let collegeAuth =                         BaseUrl.baseURLV1 + "/auth/Professor_college_logs_verify_auth_password"
     }
     
     struct SyllabusURL {

@@ -42,6 +42,7 @@ class EditProfileDetailsViewController: BaseViewController {
     @IBOutlet weak var labelProofOfChange: UILabel!
     @IBOutlet weak var buttonSubmitProof: UIButton!
     var studentDetails:StudentProfileDetails!
+    var parentsDetail:ParentsDetails!
     var viewType:EditViewType?
     var imagePicker:UIImagePickerController?=UIImagePickerController()
     var chosenImage:UIImage?
@@ -105,6 +106,34 @@ class EditProfileDetailsViewController: BaseViewController {
         }).disposed(by: myDisposeBag)
     }
     
+    func geteditValueNameText() -> String{
+        switch UserManager.sharedUserManager.user! {
+        case .professor:
+            return self.professorProfileDetails.professorDetails?.fName ?? ""
+        case .student:
+            return self.studentDetails.studentDetails?.fullName ?? ""
+            
+        case .parents:
+            return "\(UserManager.sharedUserManager.appUserDetails.firstName ?? "") \(UserManager.sharedUserManager.appUserDetails.lastName ?? "")"
+        default:
+            return "NA"
+        }
+    }
+    
+    func geteditValueNumberText() -> String{
+        switch UserManager.sharedUserManager.user! {
+        case .professor:
+            return self.professorProfileDetails.professorDetails?.contact ?? ""
+        case .student:
+            return self.studentDetails.studentDetails?.contact ?? ""
+            
+        case .parents:
+            return "\(UserManager.sharedUserManager.appUserDetails.contact ?? "")"
+        default:
+            return "NA"
+        }
+    }
+    
     func setUpView(type:EditViewType){
         switch type {
         case .EditName:
@@ -114,7 +143,7 @@ class EditProfileDetailsViewController: BaseViewController {
             self.viewProofBg.isHidden = false
             self.viewOtpBg.isHidden = true
             self.viewImageProofBg.isHidden = false
-            self.labelEditValue.text = isProfessorProfileView ? (self.professorProfileDetails.professorDetails?.fName ?? "") : (self.studentDetails.studentDetails?.fullName ?? "")
+            self.labelEditValue.text = geteditValueNameText()
             self.textFieldNewValue.placeholder = "Enter Name"
             self.textFieldNewValue.keyboardType = .default
             
@@ -125,7 +154,7 @@ class EditProfileDetailsViewController: BaseViewController {
             self.viewProofBg.isHidden = false
             self.viewOtpBg.isHidden = false
             self.viewImageProofBg.isHidden = true
-            self.labelEditValue.text = isProfessorProfileView ? (self.professorProfileDetails.professorDetails?.contact ?? "") : (self.studentDetails.studentDetails?.contact ?? "")
+            self.labelEditValue.text = geteditValueNumberText()
             self.textFieldNewValue.placeholder = "Enter Mobile Number"
             self.textFieldNewValue.keyboardType = .numberPad
 
@@ -213,11 +242,27 @@ class EditProfileDetailsViewController: BaseViewController {
         }
         
         parameters["college_code"]  = "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)"
-        parameters["existing_data"] = isProfessorProfileView ? self.professorProfileDetails.professorDetails?.fName : self.studentDetails.studentDetails?.fullName
+        parameters["existing_data"] = self.geteditValueNameText()
         parameters["new_data"] = self.updatedUserValue.value
         parameters["doc_size"] = 0
         let manager = NetworkHandler()
-        manager.url = isProfessorProfileView ? URLConstants.ProfessorURL.updateProfessorName : URLConstants.StudentURL.updateStudentName
+        
+//        manager.url = isProfessorProfileView ? URLConstants.ProfessorURL.updateProfessorName : URLConstants.StudentURL.updateStudentName
+        
+        switch UserManager.sharedUserManager.user! {
+        case .student:
+            manager.url = URLConstants.StudentURL.updateStudentName
+            
+        case .professor:
+            manager.url = URLConstants.ProfessorURL.updateProfessorName
+            
+        case .parents:
+            manager.url = URLConstants.ParentsURL.updateParentsName
+            
+        default:
+            return
+        }
+        
         manager.apiPost(apiName: " Update user Name", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             if (code == 200){
@@ -249,11 +294,26 @@ class EditProfileDetailsViewController: BaseViewController {
         }
         parameters["contact_password"] = self.textfieldEnterOTP.text
         let manager = NetworkHandler()
-        if(isProfessorProfileView){
+//        if(isProfessorProfileView){
+//            manager.url = isEMailVerification ?  URLConstants.ProfessorURL.updateProfessorEmail : URLConstants.ProfessorURL.verifyOTPForNewContact
+//        }else{
+//            manager.url = isEMailVerification ?  URLConstants.StudentURL.updateStudentEmail : URLConstants.StudentURL.updateStudentMobileNumber
+//        }
+        
+        switch UserManager.sharedUserManager.user! {
+        case .student:
             manager.url = isEMailVerification ?  URLConstants.ProfessorURL.updateProfessorEmail : URLConstants.ProfessorURL.verifyOTPForNewContact
-        }else{
-            manager.url = isEMailVerification ?  URLConstants.StudentURL.updateStudentEmail : URLConstants.StudentURL.updateStudentMobileNumber
+
+        case .professor:
+            manager.url = isEMailVerification ?  URLConstants.ProfessorURL.updateProfessorEmail : URLConstants.ProfessorURL.verifyOTPForNewContact
+
+        case .parents:
+            manager.url = URLConstants.ParentsURL.updateStudentMobileNumber
+            
+        default:
+            return
         }
+        
         manager.apiPost(apiName: " verify otp ", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             if (code == 200){
@@ -299,6 +359,22 @@ class EditProfileDetailsViewController: BaseViewController {
         else{
             manager.url = isEMailVerification ?  URLConstants.StudentURL.sendOtpForEmailUpdate : URLConstants.StudentURL.sendOtpForMobileNumberUpdate
         }
+        
+        
+        switch UserManager.sharedUserManager.user! {
+        case .student:
+            manager.url = isEMailVerification ?   URLConstants.StudentURL.sendOtpForEmailUpdate : URLConstants.StudentURL.sendOtpForMobileNumberUpdate
+            
+        case .professor:
+            manager.url = isEMailVerification ?  URLConstants.ProfessorURL.sendOtpForEmailUpdate : URLConstants.ProfessorURL.sendOTPForNewContact
+            
+        case .parents:
+            manager.url = URLConstants.ParentsURL.sendOtpForMobileNumberUpdate
+            
+        default:
+            return
+        }
+        
         manager.apiPost(apiName: " send otp ", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             if let responseCode = response["status"] as? Int,let errorMessage = response["message"] as? String{

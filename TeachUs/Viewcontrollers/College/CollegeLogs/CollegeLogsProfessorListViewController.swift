@@ -14,8 +14,12 @@ class CollegeLogsProfessorListViewController: BaseViewController
 {
     
     @IBOutlet weak var tableViewProfessorName: UITableView!
+    @IBOutlet weak var buttonMailReport: UIButton!
+
     var errorLabel : UILabel!
     var parentNavigationController : UINavigationController?
+    var viewMailReport:ViewProfessorMailReport!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +31,7 @@ class CollegeLogsProfessorListViewController: BaseViewController
         self.tableViewProfessorName.rowHeight = UITableViewAutomaticDimension
         self.tableViewProfessorName.alpha = 0.0
         self.tableViewProfessorName.addSubview(refreshControl)
+        self.buttonMailReport.themeRedButton()
 
     }
     
@@ -66,6 +71,15 @@ class CollegeLogsProfessorListViewController: BaseViewController
                 self.view.addSubview(self.errorLabel)
             }
         }
+    }
+    
+    @IBAction func mailReport(_ sender:Any){
+        self.viewMailReport =  ViewProfessorMailReport.instanceFromNib() as? ViewProfessorMailReport
+        viewMailReport.frame = CGRect(x: 0.0, y: 0.0, width: self.view.width(), height: self.view.height())
+        viewMailReport.makeTableCellEdgesRounded()
+        viewMailReport.delegate = self
+        viewMailReport.labelEmail.text = UserManager.sharedUserManager.appUserDetails.email
+        self.view.addSubview(viewMailReport)
     }
     
 }
@@ -122,5 +136,40 @@ extension CollegeLogsProfessorListViewController:UITableViewDataSource, UITableV
 extension CollegeLogsProfessorListViewController:IndicatorInfoProvider{
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "Logs")
+    }
+}
+
+extension CollegeLogsProfessorListViewController:ViewProfessorMailReportDelegate{
+    func dismissMailReportView() {
+        self.viewMailReport.removeFromSuperview()
+    }
+    
+    func mailReport(fromDate: String, toDate: String) {
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        let manager = NetworkHandler()
+        manager.url = URLConstants.CollegeURL.collegeAuth
+        let profId = ProfessorLogsManager.sharedManager.collegeProfessorList?.professorSubjects.map({$0.professorID ?? "0" })
+        let profIdSring = profId?.joined(separator: ",") ?? ""
+        //get all the class id and join them using ","
+        let parameters = [
+            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+            "role_id":"\(UserManager.sharedUserManager.appUserCollegeDetails.role_id!)",
+            "email":"\(UserManager.sharedUserManager.appUserDetails.email!)",
+            "professor_id":"\(profIdSring)",
+            "from_date":fromDate,
+            "to_date":toDate,
+            ] as [String : Any]
+        
+        manager.apiPost(apiName: "Send AttendanceReport to email", parameters:parameters, completionHandler: { (result, code, response) in
+            LoadingActivityHUD.hideProgressHUD()
+            if(code == 200){
+                let message:String = response["message"] as! String
+                self.viewMailReport.removeFromSuperview()
+                self.showAlertWithTitle(nil, alertMessage: message)
+            }
+        }) { (error, code, message) in
+            print(message)
+            LoadingActivityHUD.hideProgressHUD()
+        }
     }
 }

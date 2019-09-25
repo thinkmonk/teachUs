@@ -116,7 +116,9 @@ class NetworkHandler:SessionManager{
             }
         }else{
             
-            
+            let error = NSError(domain: "", code: Constants.CustomErrorCodes.noInternet, userInfo: nil)
+            failure(error, Constants.CustomErrorCodes.noInternet, "No Internet")
+
             print("NO INTERNET")
             /*
              let emptyMessageView:MessageView = MessageView.instanceFromNib() as! MessageView

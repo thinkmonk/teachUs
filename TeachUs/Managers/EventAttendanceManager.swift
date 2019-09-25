@@ -33,6 +33,14 @@ class EventAttendanceManager{
         self.updateCount()
     }
     
+    func increaseDefaultAttendance(){
+        _ = self.arrayStudents.value.map({$0.attendance.value += 1})
+    }
+    
+    func decreaseDefaultAttendance(){
+        _ = self.arrayStudents.value.map({$0.attendance.value -= 1})
+    }
+    
     
     /*
     var attendanceListJSON:[[String:Any] ]{

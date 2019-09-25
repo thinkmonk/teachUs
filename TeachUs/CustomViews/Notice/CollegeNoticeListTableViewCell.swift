@@ -18,7 +18,7 @@ class CollegeNoticeListTableViewCell: UITableViewCell {
     @IBOutlet weak var viewWrapper: UIView!
     @IBOutlet weak var labelRecipientDetails:UILabel!
     @IBOutlet weak var buttonDeleteNotice: ButtonWithIndexPath!
-    @IBOutlet weak var constraintDownbuttonBotton: NSLayoutConstraint!
+    @IBOutlet var constraintDownbuttonBotton: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -41,9 +41,9 @@ class CollegeNoticeListTableViewCell: UITableViewCell {
         self.labelNoticeDescription.text = noticeObject.noticeDescription ?? ""
         self.labelNoticeClassDetails.text = "Send to \(noticeObject.courses ?? "")"
         if let fileUrl = noticeObject.filePath, !fileUrl.isEmpty{
+            self.constraintDownbuttonBotton.isActive = false
             self.buttonDownload.isHidden = false
             self.buttonDownload.setHeight(30)
-            self.constraintDownbuttonBotton.isActive = false
 
             let imageURL = "\(fileUrl)"
             if let _ = GlobalFunction.checkIfFileExisits(fileUrl: imageURL, name:noticeObject.generatedFileName ?? ""){
@@ -53,9 +53,9 @@ class CollegeNoticeListTableViewCell: UITableViewCell {
                 self.buttonDownload.setTitle("Download", for: .normal)
             }
         }else{
+            self.constraintDownbuttonBotton.isActive = true
             self.buttonDownload.isHidden = true
             self.buttonDownload.setHeight(0)
-            self.constraintDownbuttonBotton.isActive = true
         }
         
         var recipientDetailsString : String = "Notice for "

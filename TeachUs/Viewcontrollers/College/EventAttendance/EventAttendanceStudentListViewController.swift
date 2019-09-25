@@ -35,6 +35,10 @@ class EventAttendanceStudentListViewController: BaseViewController {
     @IBOutlet weak var tableViewStudentList: UITableView!
     @IBOutlet weak var buttonConfirm: UIButton!
     @IBOutlet weak var viewHeader: UIView!
+    @IBOutlet weak var buttonDecreaseCount: ButtonWithIndexPath!
+    @IBOutlet weak var buttonIncreaseCount: ButtonWithIndexPath!
+    @IBOutlet weak var labelDefaultAttendanceCount: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,6 +114,28 @@ class EventAttendanceStudentListViewController: BaseViewController {
         }) { (error, code, message) in
             self.showAlertWithTitle(nil, alertMessage: message)
             LoadingActivityHUD.hideProgressHUD()
+        }
+    }
+    var defaultAttendanceCount:Int = 0
+
+    @IBAction func actionDecreaseCount(_ sender: Any) {
+        if(defaultAttendanceCount > 0){
+            EventAttendanceManager.sharedEventAttendanceManager.decreaseDefaultAttendance()
+            self.defaultAttendanceCount -= 1
+            self.labelDefaultAttendanceCount.text = "\(self.defaultAttendanceCount)"
+            DispatchQueue.main.async {
+                self.tableViewStudentList.reloadData()
+            }
+        }
+    }
+    
+    
+    @IBAction func actionIncreaseCount(_ sender: Any) {
+        self.defaultAttendanceCount += 1
+        EventAttendanceManager.sharedEventAttendanceManager.increaseDefaultAttendance()
+        self.labelDefaultAttendanceCount.text = "\(self.defaultAttendanceCount)"
+        DispatchQueue.main.async {
+            self.tableViewStudentList.reloadData()
         }
     }
     
