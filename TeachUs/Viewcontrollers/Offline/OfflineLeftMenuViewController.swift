@@ -26,7 +26,7 @@ class OfflineLeftMenuViewController: BaseViewController {
     
     var isProfileViewOpen:Bool = false
     
-    var professorDataSource = ["Attendance", "Logout"]
+    var professorDataSource = ["Attendance"]
     
     
     override func viewDidLoad() {
@@ -154,27 +154,10 @@ extension OfflineLeftMenuViewController:UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == self.tableViewOfflneMenu{
-            if arrayDataSource.count-1 == indexPath.row{
-                UserManager.sharedUserManager.setAccessToken("")
-                DatabaseManager.deleteAllEntitiesForEntityName(name: "CollegeDetails")
-                DatabaseManager.deleteAllEntitiesForEntityName(name: "UserDetails")
-                DatabaseManager.deleteAllEntitiesForEntityName(name: "OfflineUserData")
-                DatabaseManager.saveDbContext()
-                UserDefaults.standard.set(nil, forKey: Constants.UserDefaults.collegeName)
-                UserDefaults.standard.set(nil, forKey: Constants.UserDefaults.roleName)
-                UserDefaults.standard.set(nil, forKey: Constants.UserDefaults.offlineCollegeName)
-                UserDefaults.standard.set(nil, forKey: Constants.UserDefaults.accesToken)
-                UserDefaults.standard.set(nil, forKey: Constants.UserDefaults.loginUserType)
-
-                UserDefaults.standard.synchronize()
-                let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let viewController = mainStoryboard.instantiateViewController(withIdentifier: Constants.viewControllerId.LoginSelectNavBarControllerId) as! UINavigationController
-                UIApplication.shared.keyWindow?.rootViewController = viewController
-            }else{
-                self.menuContainerViewController.setMenuState(MFSideMenuStateClosed, completion: nil)
-                if(delegate != nil){
-                    delegate.menuItemSelected(item: indexPath.row)
-                }
+            
+            self.menuContainerViewController.setMenuState(MFSideMenuStateClosed, completion: nil)
+            if(delegate != nil){
+                delegate.menuItemSelected(item: indexPath.row)
             }
         }
         else{

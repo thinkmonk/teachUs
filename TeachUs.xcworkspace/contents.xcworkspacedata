@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:TeachUs/Models/UserRoles/CollegeDetails+CoreDataProperties.swift">
-   </FileRef>
-   <FileRef
       location = "group:TeachUs.xcodeproj">
    </FileRef>
    <FileRef

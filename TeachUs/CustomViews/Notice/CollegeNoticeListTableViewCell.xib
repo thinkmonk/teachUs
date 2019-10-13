@@ -80,9 +80,9 @@
                                 <color key="textColor" red="0.52156862749999999" green="0.52156862749999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Id-Pu-6mG" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
-                                <rect key="frame" x="265" y="15" width="45" height="30"/>
-                                <state key="normal" title="Delete"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Id-Pu-6mG" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
+                                <rect key="frame" x="298" y="15" width="12" height="22"/>
+                                <state key="normal" image="deleteIcon"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -141,4 +141,7 @@
             <point key="canvasLocation" x="137.59999999999999" y="161.01949025487258"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="deleteIcon" width="12" height="14"/>
+    </resources>
 </document>

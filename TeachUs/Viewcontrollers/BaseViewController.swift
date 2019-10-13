@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import StoreKit
 
 class BaseViewController: UIViewController {
     
@@ -18,7 +19,34 @@ class BaseViewController: UIViewController {
         self.automaticallyAdjustsScrollViewInsets = false
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: #selector(BaseViewController.refresh(sender:)), for: UIControlEvents.valueChanged)
+        
         // Do any additional setup after loading the view.
+    }
+    
+    func requestAppReview(){
+        if #available( iOS 10.3,*){
+            if self.shouldAskForReview(){
+                SKStoreReviewController.requestReview()
+                setRatingCounter()
+            }
+        }
+    }
+    
+    
+    func setRatingCounter(){
+        let today = Date()
+        let nextReview = Calendar.current.date(byAdding: .day, value: 15, to: today)
+        #if DEBUG
+        print("Next review date \(String(describing: nextReview))")
+        #endif
+        UserDefaults.standard.set(nextReview, forKey:Constants.UserDefaults.nextUserReviewDate)
+    }
+    
+    func shouldAskForReview() -> Bool{
+        if let nextReviewDate = UserDefaults.standard.object(forKey: Constants.UserDefaults.nextUserReviewDate) as? Date{
+            return Date() >= nextReviewDate
+        }
+        return true //this will return true only for the first time as the user defaults value is not set initially.
     }
     
     @objc func refresh(sender:AnyObject) {

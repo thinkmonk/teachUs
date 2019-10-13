@@ -75,6 +75,7 @@ class CollegeAttendanceListViewController: BaseViewController {
         self.initEmailIdView()
         NotificationCenter.default.addObserver(self, selector: #selector(CollegeAttendanceListViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(CollegeAttendanceListViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        self.requestAppReview()
 
     }
 
@@ -339,11 +340,7 @@ extension CollegeAttendanceListViewController:ViewClassSelectionDelegate{
     }
 }
 
-extension CollegeAttendanceListViewController:IndicatorInfoProvider{
-    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "Attendance (Reports)")
-    }
-}
+
 
 extension CollegeAttendanceListViewController:verifyEmailDelegae{
     func otpSubmitted() {
@@ -388,5 +385,11 @@ extension CollegeAttendanceListViewController:verifyEmailDelegae{
             self.showAlertWithTitle(nil, alertMessage: message)
             LoadingActivityHUD.hideProgressHUD()
         }
+    }
+}
+
+extension CollegeAttendanceListViewController:IndicatorInfoProvider{
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "Attendance (Reports)")
     }
 }

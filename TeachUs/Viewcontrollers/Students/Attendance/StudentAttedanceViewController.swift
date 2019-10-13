@@ -54,6 +54,7 @@ class StudentAttedanceViewController: BaseViewController {
         self.tableViewStudentAttendance.alpha = 0.0
         self.tableViewStudentAttendance.addSubview(refreshControl)
         self.setUpDropDown()
+        self.requestAppReview()
     }
 
     override func didReceiveMemoryWarning() {

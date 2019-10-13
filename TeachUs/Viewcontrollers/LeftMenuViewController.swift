@@ -250,20 +250,7 @@ extension LeftMenuViewController:UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == self.tableViewMenu{
             if arrayDataSource.count-1 == indexPath.row{
-                self.deregisterUserAccessToken()
-                UserManager.sharedUserManager.setAccessToken("")
-                DatabaseManager.deleteAllEntitiesForEntityName(name: "CollegeDetails")
-                DatabaseManager.deleteAllEntitiesForEntityName(name: "UserDetails")
-                DatabaseManager.deleteAllEntitiesForEntityName(name: "OfflineUserData")
-                DatabaseManager.saveDbContext()
-                let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                UserDefaults.standard.set(nil, forKey: Constants.UserDefaults.collegeName)
-                UserDefaults.standard.set(nil, forKey: Constants.UserDefaults.roleName)
-                UserDefaults.standard.set(nil, forKey: Constants.UserDefaults.loginUserType)
-                UserDefaults.standard.set(nil, forKey: Constants.UserDefaults.accesToken)
-                UserDefaults.standard.synchronize()
-                let viewController = mainStoryboard.instantiateViewController(withIdentifier: Constants.viewControllerId.LoginSelectNavBarControllerId) as! UINavigationController
-                UIApplication.shared.keyWindow?.rootViewController = viewController
+                self.showLogoutConfirmationPopup()
             }else{
                 self.menuContainerViewController.setMenuState(MFSideMenuStateClosed, completion: nil)
                 if(delegate != nil){
@@ -284,6 +271,37 @@ extension LeftMenuViewController:UITableViewDelegate, UITableViewDataSource{
             self.tableViewMenu.delegate?.tableView!(self.tableViewMenu, didSelectRowAt: indexPath)
             self.setUpTableView()
         }
+    }
+    
+    func showLogoutConfirmationPopup(){
+        let alert = UIAlertController(title: "", message: "Are you sure you want to logout?", preferredStyle: UIAlertController.Style.alert)
+        
+        // add the actions (buttons)
+        alert.addAction((UIAlertAction(title: "YES", style: .default, handler: { (action) in
+            self.performLogoutActions()
+        })))
+        alert.addAction(UIAlertAction(title: "NO", style: UIAlertAction.Style.cancel, handler: nil))
+        
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func performLogoutActions(){
+        self.deregisterUserAccessToken()
+        UserManager.sharedUserManager.setAccessToken("")
+        DatabaseManager.deleteAllEntitiesForEntityName(name: "CollegeDetails")
+        DatabaseManager.deleteAllEntitiesForEntityName(name: "UserDetails")
+        DatabaseManager.deleteAllEntitiesForEntityName(name: "OfflineUserData")
+        DatabaseManager.saveDbContext()
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        UserDefaults.standard.set(nil, forKey: Constants.UserDefaults.collegeName)
+        UserDefaults.standard.set(nil, forKey: Constants.UserDefaults.roleName)
+        UserDefaults.standard.set(nil, forKey: Constants.UserDefaults.loginUserType)
+        UserDefaults.standard.set(nil, forKey: Constants.UserDefaults.accesToken)
+        UserDefaults.standard.synchronize()
+        let viewController = mainStoryboard.instantiateViewController(withIdentifier: Constants.viewControllerId.LoginSelectNavBarControllerId) as! UINavigationController
+        UIApplication.shared.keyWindow?.rootViewController = viewController
+
     }
 }
 

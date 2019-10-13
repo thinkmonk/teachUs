@@ -36,6 +36,7 @@ class ProfessorAttedanceViewController: BaseViewController {
         self.tableviewCollegeList.register(cellNib, forCellReuseIdentifier: Constants.CustomCellId.ProfessorCollegeList)
         self.buttonMailReport.isHidden = true
         self.buttonMailReport.themeRedButton()
+        self.requestAppReview()
     }
     
     override func viewWillAppear(_ animated: Bool) {

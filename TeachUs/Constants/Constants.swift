@@ -114,6 +114,7 @@ public struct Constants {
         static let offlineCollegeName = "offlineCollegeName"
         static let deviceToken = "deviceToken"
         static let fcmToken = "fcmToken"
+        static let nextUserReviewDate = "reviewDate"
     }
     
     struct NumberConstants {
