@@ -14,6 +14,7 @@ class AttendanceManager {
     
     static let sharedAttendanceManager = AttendanceManager()
     var arrayStudents : Variable<[MarkStudentAttendance]> = Variable([])
+    var defaultAttendanceForAllStudents : Bool = true
     let disposeBag = DisposeBag()
     var presentCount:Int {
         let presentStudent = arrayStudents.value.filter{$0.isPrsent == true}

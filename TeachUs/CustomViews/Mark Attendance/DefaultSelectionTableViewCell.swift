@@ -20,10 +20,8 @@ class DefaultSelectionTableViewCell: UITableViewCell {
     @IBOutlet weak var buttonPresent: UIButton!
     @IBOutlet weak var buttonFetchPreviAttendance: UIButton!
     var delegate:DefaultAttendanceSelectionDelegate?
-    var isPresent:Bool = false //default value of entire edit attendance flow
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.markDefaultAttendance(self.isPresent)
         self.buttonPresent.makeTableCellEdgesRounded()
         // Initialization code
     }
@@ -39,20 +37,21 @@ class DefaultSelectionTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    @IBAction func markDefaultAttendance(_ sender: Any) {
-        isPresent.toggle()
-        if isPresent{
+    func performPresentButtonUIChanges() {
+        if AttendanceManager.sharedAttendanceManager.defaultAttendanceForAllStudents{
             self.buttonPresent.setTitle("Absent All", for: .normal)
             self.buttonPresent.makeButtonwith(background: .white, fontColor: .black, cornerRadius: nil, borderColor: nil, borderWidth: nil)
-            self.buttonPresent.dropShadow()
-
+            
         }else{
             self.buttonPresent.setTitle("Present All", for: .normal)
             self.buttonPresent.makeButtonwith(background: .white, fontColor: .red, cornerRadius: nil, borderColor: nil, borderWidth: nil)
-            self.buttonPresent.removeDropShadow()
-    
         }
-        self.delegate?.selectDefaultAttendance(isPresent)
+    }
+    
+    @IBAction func markDefaultAttendance(_ sender: Any) {
+        AttendanceManager.sharedAttendanceManager.defaultAttendanceForAllStudents.toggle()
+        performPresentButtonUIChanges()
+        self.delegate?.selectDefaultAttendance(AttendanceManager.sharedAttendanceManager.defaultAttendanceForAllStudents)
     }
     
     @IBAction func bringLatAttendance(_ sender:Any){

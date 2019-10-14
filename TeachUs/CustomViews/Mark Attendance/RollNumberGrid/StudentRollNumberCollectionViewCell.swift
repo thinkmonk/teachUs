@@ -26,13 +26,13 @@ class StudentRollNumberCollectionViewCell: UICollectionViewCell {
     
     override var isSelected: Bool{
         didSet{
-            self.viewCelllBg.backgroundColor = self.isSelected ? Constants.colors.themePurple : .white
+            self.viewCelllBg.backgroundColor = self.isSelected ? Constants.colors.themeBlue : .white
             self.labelRollNumber.textColor = self.isSelected ? .white : .black
         }
     }
     
     func setUpCell(studentObj:MarkStudentAttendance){
-        self.labelRollNumber.text = studentObj.student?.studentRollNo ?? "NA"
+        self.labelRollNumber.text = studentObj.student?.trimmedRollNumber ?? "NA"
         self.isSelected = studentObj.isPrsent
     }
     

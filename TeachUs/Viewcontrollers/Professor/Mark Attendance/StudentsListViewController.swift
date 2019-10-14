@@ -17,7 +17,6 @@ class StudentsListViewController: BaseViewController {
     var arrayStudentsDetails:[EnrolledStudentDetail] = []
     var arraySearchStudentDetails = [EnrolledStudentDetail]()
     var arrayDataSource:[AttendanceDatasource] = []
-    var defaultAttendanceForAllStudents:Bool = true
     var datePicker: ViewDatePicker!
     var toTimePicker: ViewDatePicker!
     var fromTimePicker: ViewDatePicker!
@@ -311,7 +310,7 @@ class StudentsListViewController: BaseViewController {
                     studentAttendance = MarkStudentAttendance(student, status.boolValue)
 
                 }else{
-                    studentAttendance = MarkStudentAttendance(student, self.defaultAttendanceForAllStudents)
+                    studentAttendance = MarkStudentAttendance(student, AttendanceManager.sharedAttendanceManager.defaultAttendanceForAllStudents)
                 }
                 let studentDetailDataSource = AttendanceDatasource(celType: .studentProfile, attachedObject: studentAttendance)
                 studentDetailDataSource.isSelected = false
@@ -538,6 +537,7 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
             
             cell.delegate = self
             cell.selectionStyle = .none
+            cell.performPresentButtonUIChanges()
             return cell
             
         case .attendanceCount:
@@ -811,6 +811,7 @@ extension StudentsListViewController:DefaultAttendanceSelectionDelegate{
                 holderFrame.origin.y += self.calenderFloatingView.bottom()
                 holderFrame.size.height -= self.calenderFloatingView.height()
             }
+            
             self.add(gridViewController, frame: holderFrame)
         }
     }
@@ -875,7 +876,7 @@ extension StudentsListViewController:DefaultAttendanceSelectionDelegate{
     }
     
     func selectDefaultAttendance(_ attendance: Bool) {
-        self.defaultAttendanceForAllStudents = attendance
+        AttendanceManager.sharedAttendanceManager.defaultAttendanceForAllStudents = attendance
         self.isDefaultAttencdanceChanged = true
         self.makeDataSource()
     }

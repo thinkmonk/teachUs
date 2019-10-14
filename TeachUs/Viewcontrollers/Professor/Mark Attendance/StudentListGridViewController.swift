@@ -13,7 +13,9 @@ class StudentListGridViewController: UIViewController {
     @IBOutlet weak var collectionViewStudentsGrid: UICollectionView!
     
     @IBOutlet weak var layoutTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var labelAllPresent: UILabel!
     
+    @IBOutlet weak var switchMarkAllPresent: UISwitch!
     @IBOutlet weak var buttonSubmit: UIButton!
     let cellNibName = "StudentRollNumberCollectionViewCell"
     override func viewDidLoad() {
@@ -30,6 +32,8 @@ class StudentListGridViewController: UIViewController {
                 self.showSubmit()
             }
         }
+        switchMarkAllPresent.isOn = AttendanceManager.sharedAttendanceManager.defaultAttendanceForAllStudents
+        performUIChanges()
     }
     
     @IBAction func closeView(_ sender: Any) {
@@ -43,6 +47,20 @@ class StudentListGridViewController: UIViewController {
         if let parentVC = self.parent as? StudentsListViewController, let button = sender as? UIButton{
             parentVC.submitAttendance(button)
         }
+    }
+    fileprivate func performUIChanges() {
+        labelAllPresent.text = switchMarkAllPresent.isOn ? "All Present" : "All Absent"
+        labelAllPresent.textColor = switchMarkAllPresent.isOn ? Constants.colors.themeBlue : .lightGray
+    }
+    
+    @IBAction func actionAllPresntSwitch(_ sender: Any?) {
+        AttendanceManager.sharedAttendanceManager.defaultAttendanceForAllStudents = switchMarkAllPresent.isOn
+        performUIChanges()
+        _ = AttendanceManager.sharedAttendanceManager.arrayStudents.value.map({
+            $0.isPrsent = switchMarkAllPresent.isOn
+        })
+        collectionViewStudentsGrid.reloadData()
+        AttendanceManager.sharedAttendanceManager.defaultAttendanceForAllStudents = switchMarkAllPresent.isOn
     }
     
     func showSubmit() {

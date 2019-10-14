@@ -69,6 +69,7 @@ public class EnrolledStudentDetail :Mappable{
     var percentage:String? = ""
     var lastLectureAttendance:String? = ""
     var studentName:String? = ""
+    var trimmedRollNumber:String? = ""
 
     ///For Edit attendance flow
     var attendanceStatus:String?
@@ -83,26 +84,27 @@ public class EnrolledStudentDetail :Mappable{
     }
 
     public func mapping(map: Map) {
-        self.classId <- map["class_id"]
-        self.studentId <- map["student_id"]
-        self.studentRollNo <- map["roll_number"]
-        self.studentFirstName <- map["f_name"]
-        self.studentMiddleName <- map["m_name"]
-        self.studentLastName <- map["l_name"]
-        self.studentEmail <- map["email"]
-        self.studentGender <- map["gender"]
-        self.studentDob <- map["dob"]
-        self.studentContact <- map["contact"]
-        self.imageUrl <- map["profile"]
-        self.lastPresent <- map["last_present"]
-        self.lectureAttended <- map["lectures_attended"]
-        self.totalLecture <- map["total_lectures"]
-        self.percentage <- map["perecentage_att"]
-        self.lastLectureAttendance = (self.lastPresent == "0") ? "Absent":"Present"
-        self.studentName = "\(self.studentFirstName!) \(self.studentMiddleName!) \(self.studentLastName!)"
-        self.editAttendanceStudentName <- map["student_name"]
-        self.studentName = self.studentName == "  " ? editAttendanceStudentName : self.studentName
-        self.attendanceStatus <- map["att_status"]
+        classId                     <- map["class_id"]
+        studentId                   <- map["student_id"]
+        studentRollNo               <- map["roll_number"]
+        studentFirstName            <- map["f_name"]
+        studentMiddleName           <- map["m_name"]
+        studentLastName             <- map["l_name"]
+        studentEmail                <- map["email"]
+        studentGender               <- map["gender"]
+        studentDob                  <- map["dob"]
+        studentContact              <- map["contact"]
+        imageUrl                    <- map["profile"]
+        lastPresent                 <- map["last_present"]
+        lectureAttended             <- map["lectures_attended"]
+        totalLecture                <- map["total_lectures"]
+        percentage                  <- map["perecentage_att"]
+        lastLectureAttendance       = (self.lastPresent == "0") ? "Absent":"Present"
+        studentName                 = "\(self.studentFirstName!) \(self.studentMiddleName!) \(self.studentLastName!)"
+        editAttendanceStudentName   <- map["student_name"]
+        studentName                 = self.studentName == "  " ? editAttendanceStudentName : self.studentName
+        attendanceStatus            <- map["att_status"]
+        trimmedRollNumber           <- map["trimmed_rollnumber"]
     }
 }
 
