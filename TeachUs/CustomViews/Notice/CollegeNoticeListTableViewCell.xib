@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,11 +14,11 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="208"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="207.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="208"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bjj-rS-c58">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="207.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="208"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M58-tN-iWV">
                                 <rect key="frame" x="20" y="15" width="32.5" height="18"/>
@@ -47,7 +45,7 @@
                                 <color key="textColor" red="0.3411764705882353" green="0.3411764705882353" blue="0.3411764705882353" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JJU-xC-0Rg" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JJU-xC-0Rg" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
                                 <rect key="frame" x="20" y="91" width="61" height="28"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" title="Download">
@@ -91,8 +89,8 @@
                             <constraint firstItem="M58-tN-iWV" firstAttribute="leading" secondItem="Bjj-rS-c58" secondAttribute="leading" constant="20" id="94s-eO-xfX"/>
                             <constraint firstItem="6Kj-qp-HeJ" firstAttribute="leading" secondItem="CL3-20-6ZN" secondAttribute="leading" id="BDb-ec-AII"/>
                             <constraint firstItem="JJU-xC-0Rg" firstAttribute="leading" secondItem="xlR-0T-Rxl" secondAttribute="leading" id="EHx-v8-KMw"/>
+                            <constraint firstAttribute="bottom" secondItem="6Kj-qp-HeJ" secondAttribute="bottom" constant="18" id="GNo-kE-M9J"/>
                             <constraint firstItem="JJU-xC-0Rg" firstAttribute="top" secondItem="xlR-0T-Rxl" secondAttribute="bottom" constant="5" id="Hia-96-gI1"/>
-                            <constraint firstAttribute="bottom" secondItem="6Kj-qp-HeJ" secondAttribute="bottom" constant="17.5" id="I7F-fD-Idv"/>
                             <constraint firstItem="CL3-20-6ZN" firstAttribute="trailing" secondItem="ZAB-Yj-fT0" secondAttribute="trailing" id="IFo-R4-5kM"/>
                             <constraint firstItem="711-bf-oi1" firstAttribute="leading" secondItem="M58-tN-iWV" secondAttribute="leading" id="Ifg-ot-hhY"/>
                             <constraint firstItem="6Kj-qp-HeJ" firstAttribute="trailing" secondItem="CL3-20-6ZN" secondAttribute="trailing" id="Klj-ca-2iy"/>

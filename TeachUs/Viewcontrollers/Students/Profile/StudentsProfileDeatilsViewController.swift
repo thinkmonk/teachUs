@@ -121,6 +121,12 @@ class StudentsProfileDeatilsViewController: BaseViewController {
                 let semesterDs = EditProfileDataSource(profileCell: .semester, profileObject: semesterDetails)
                 self.arrayDataSource.append(semesterDs)
             }
+            
+            if let division = classDetails.classDivision{
+                let studentClassDs = EditProfileDataSource(profileCell: .studentDivision, profileObject: division)
+                self.arrayDataSource.append(studentClassDs)
+            }
+
         }
         
         let subjectTitleDs = EditProfileDataSource(profileCell: .subjectTitle, profileObject: nil)
@@ -427,7 +433,7 @@ extension StudentsProfileDeatilsViewController:UITableViewDelegate, UITableViewD
                 cell.labelValue.text = sem
             }
             cell.viewCellWrapper.backgroundColor = .white
-            cell.viewBottomSeperator.isHidden = false
+            cell.viewBottomSeperator.isHidden = true
             cell.labelColon.isHidden = false
             return cell
             
@@ -541,7 +547,7 @@ extension StudentsProfileDeatilsViewController:UITableViewDelegate, UITableViewD
             }
             cell.viewCellWrapper.backgroundColor = .white
             cell.labelColon.isHidden = true
-            cell.viewBottomSeperator.isHidden = true
+            cell.viewBottomSeperator.isHidden = false
             return cell
             
         case .rollNumber:

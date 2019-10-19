@@ -53,7 +53,7 @@ class HomeViewController: BaseViewController{
     func addNotificaitonLabel(){
         // badge label
         if notificaitonLabel == nil{
-            notificaitonLabel = UILabel(frame: CGRect(x: 10, y: -10, width: 18, height: 18))
+            notificaitonLabel = UILabel(frame: CGRect(x: 10, y: -10, width: 20, height: 20))
             notificaitonLabel.layer.borderColor = UIColor.clear.cgColor
             notificaitonLabel.layer.borderWidth = 2
             notificaitonLabel.layer.cornerRadius = notificaitonLabel.bounds.size.height / 2
@@ -141,9 +141,9 @@ extension HomeViewController:LeftMenuDeleagte{
     
     @objc func updateBellNotificaitonCount(){
         if let label = self.notificaitonLabel{
-            label.text = UserManager.sharedUserManager.appUserCollegeDetails.notificationCount
+            if let count = Int(UserManager.sharedUserManager.appUserCollegeDetails.notificationCount ?? "0"){
+                label.text = count > 100 ? "99+" : "\(count)"
+            }
         }
     }
-    
-
 }

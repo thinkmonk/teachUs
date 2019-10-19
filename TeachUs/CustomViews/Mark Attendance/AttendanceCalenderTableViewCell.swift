@@ -35,13 +35,12 @@ class AttendanceCalenderTableViewCell: UITableViewCell {
     var numberOflecturesTaken:Int!{
         didSet{
             for (index,button) in self.buttonArrayNumberOfLectures.enumerated(){
-                if index == numberOflecturesTaken-1{//FF94BA
-                    button.backgroundColor = UIColor.rgbColor(255, 255, 255)
+                if index == numberOflecturesTaken-1{//Not selected
                     button.setTitleColor(UIColor.black, for: .normal)
-
-                }else{
-                    button.setTitleColor(UIColor.white, for: .normal)
-                    button.backgroundColor = UIColor.rgbColor(255, 148, 186)
+                    button.backgroundColor = UIColor.rgbColor(237,243,248)
+                }else{//selected color
+                    button.setTitleColor(UIColor.black, for: .normal)
+                    button.backgroundColor = UIColor.rgbColor(168, 168, 168)
                 }
             }
         }
@@ -54,6 +53,11 @@ class AttendanceCalenderTableViewCell: UITableViewCell {
         self.viewFromTImeBg.addWhiteBottomBorder()
         self.makeTableCellEdgesRounded()
         self.buttonEdit.dropShadow()
+        textFieldFromTime.attributedPlaceholder = NSAttributedString(string: "Select",
+        attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        textFieldToTime.attributedPlaceholder = NSAttributedString(string: "Select",
+        attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+
         // Initialization code
     }
 

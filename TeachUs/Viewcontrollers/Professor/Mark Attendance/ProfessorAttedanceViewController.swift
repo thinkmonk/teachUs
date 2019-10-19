@@ -124,7 +124,7 @@ extension ProfessorAttedanceViewController:UITableViewDataSource, UITableViewDel
         if(cell == nil){
             let collegeCell:ProfessorCollegeListTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.ProfessorCollegeList, for: indexPath) as! ProfessorCollegeListTableViewCell
             
-            collegeCell.labelSubjectName.text = "\(self.arrayCollegeList![indexPath.section].yearName!)\(self.arrayCollegeList![indexPath.section].courseCode!) - \(self.arrayCollegeList![indexPath.section].subjectName!) - \(self.arrayCollegeList![indexPath.section].classDivision!)"
+            collegeCell.labelSubjectName.text = "\(self.arrayCollegeList![indexPath.section].yearName!)\(self.arrayCollegeList![indexPath.section].courseCode!) - \(self.arrayCollegeList![indexPath.section].classDivision!) - \(self.arrayCollegeList![indexPath.section].subjectName!) "
             collegeCell.selectionStyle = UITableViewCellSelectionStyle.none
             collegeCell.labelLogCount.isHidden = true
             collegeCell.accessoryType = .disclosureIndicator

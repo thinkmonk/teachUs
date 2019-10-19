@@ -805,12 +805,12 @@ extension StudentsListViewController:DefaultAttendanceSelectionDelegate{
     func showGridView() {
         if let gridViewController = self.storyboard?.instantiateViewController(withIdentifier: Constants.viewControllerId.rollNumberGridVC) as? StudentListGridViewController{
             var holderFrame = self.view.frame
-            if let indexScrolled = self.defaultbuttonIndexpath{
-                let indexpathValue = IndexPath(row: 0, section: indexScrolled)
-                self.tableStudentList.scrollToRow(at: indexpathValue, at: .top, animated: true)
-                holderFrame.origin.y += self.calenderFloatingView.bottom()
-                holderFrame.size.height -= self.calenderFloatingView.height()
-            }
+            holderFrame.origin.y += self.calenderFloatingView.bottom()
+            holderFrame.size.height -= self.calenderFloatingView.height()
+//            if let indexScrolled = self.defaultbuttonIndexpath{
+//                let indexpathValue = IndexPath(row: 0, section: indexScrolled)
+//                self.tableStudentList.scrollToRow(at: indexpathValue, at: .top, animated: true)
+//            }
             
             self.add(gridViewController, frame: holderFrame)
         }

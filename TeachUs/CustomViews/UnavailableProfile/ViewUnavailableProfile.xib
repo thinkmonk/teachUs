@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,7 +15,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1bv-BJ-3p7">
-                    <rect key="frame" x="25" y="162" width="270" height="343"/>
+                    <rect key="frame" x="25" y="182.5" width="270" height="302.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KDz-md-dfB">
                             <rect key="frame" x="15" y="15" width="42" height="21"/>
@@ -36,38 +34,30 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="invalidUser" translatesAutoresizingMaskIntoConstraints="NO" id="dPD-bo-gFP">
                             <rect key="frame" x="84.5" y="46" width="101" height="90"/>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your profile is not available with us Please contact our helpline." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a92-qB-ZI1">
-                            <rect key="frame" x="15" y="161" width="240" height="61"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User unavailable" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a92-qB-ZI1">
+                            <rect key="frame" x="15" y="161" width="240" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9AJ-wA-gwu">
-                            <rect key="frame" x="0.0" y="242" width="270" height="1"/>
+                            <rect key="frame" x="0.0" y="201.5" width="270" height="1"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="hNc-DK-Tgt"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Yi-GK-Wm1">
-                            <rect key="frame" x="10" y="253" width="250" height="30"/>
-                            <state key="normal">
-                                <attributedString key="attributedTitle">
-                                    <fragment content="Email id: info@teachuseducation.com">
-                                        <attributes>
-                                            <font key="NSFont" metaFont="system" size="15"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                            </state>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="3Yi-GK-Wm1">
+                            <rect key="frame" x="10" y="212.5" width="250" height="30"/>
+                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                            <state key="normal" title="Email"/>
                             <connections>
                                 <action selector="openEmail:" destination="iN0-l3-epB" eventType="touchUpInside" id="H3g-Ht-pGk"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e9j-zj-ccO">
-                            <rect key="frame" x="10" y="298" width="250" height="30"/>
-                            <state key="normal" title="Call on: +91 9892223453"/>
+                            <rect key="frame" x="10" y="257.5" width="250" height="30"/>
+                            <state key="normal" title="WhatsApp"/>
                             <connections>
                                 <action selector="makePhoneCall:" destination="iN0-l3-epB" eventType="touchUpInside" id="9VQ-Ap-pxO"/>
                             </connections>
@@ -108,6 +98,9 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="buttonEmail" destination="3Yi-GK-Wm1" id="dPs-zf-iBu"/>
+                <outlet property="buttonWhatsapp" destination="e9j-zj-ccO" id="Yqv-g0-HOG"/>
+                <outlet property="labelUnavailableUserBody" destination="a92-qB-ZI1" id="kTP-B6-NeG"/>
                 <outlet property="viewBg" destination="1bv-BJ-3p7" id="hJi-hW-WGP"/>
             </connections>
             <point key="canvasLocation" x="55.200000000000003" y="48.125937031484263"/>

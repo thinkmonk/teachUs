@@ -26,7 +26,7 @@ class StudentRollNumberCollectionViewCell: UICollectionViewCell {
     
     override var isSelected: Bool{
         didSet{
-            self.viewCelllBg.backgroundColor = self.isSelected ? Constants.colors.themeBlue : .white
+            self.viewCelllBg.backgroundColor = self.isSelected ? Constants.colors.themeMainBlue : .white
             self.labelRollNumber.textColor = self.isSelected ? .white : .black
         }
     }

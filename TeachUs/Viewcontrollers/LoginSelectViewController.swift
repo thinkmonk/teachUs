@@ -14,6 +14,16 @@ enum LoginUserType {
     case professor
     case college
     case parents
+    
+    var userTypeString:String{
+        switch self {
+        case .student: return Constants.UserTypeString.Student
+        case .professor: return Constants.UserTypeString.Professor
+        case .college: return Constants.UserTypeString.College
+        case .parents: return Constants.UserTypeString.Parents
+            
+        }
+    }
 }
 
 class LoginSelectViewController: BaseViewController {
@@ -82,6 +92,14 @@ class LoginSelectViewController: BaseViewController {
                 default:
                     break
                 }
+            }
+            
+            if let contact = response["contact"] as? String,
+                let email = response["email"] as? String,
+                let body = response["body"] as? String{
+                UserManager.sharedUserManager.unauthorisedUser.contact = contact
+                UserManager.sharedUserManager.unauthorisedUser.email   = email
+                UserManager.sharedUserManager.unauthorisedUser.body    = body
             }
         }) { (error, code, errorMessage) in
             LoadingActivityHUD.hideProgressHUD()
