@@ -110,6 +110,7 @@
 		813C0DA021EB7C7100B04E61 /* GlobalFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813C0D9F21EB7C7100B04E61 /* GlobalFunction.swift */; };
 		81511A3722AC4D0400B50F44 /* DocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81511A3622AC4D0400B50F44 /* DocumentsViewController.swift */; };
 		8151C3CE22ED7EE300680951 /* BellNotificationReadStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8151C3CD22ED7EE300680951 /* BellNotificationReadStatus.swift */; };
+		81539C792362244100306974 /* CollegeDetails+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81539C782362244100306974 /* CollegeDetails+CoreDataProperties.swift */; };
 		8161AF63222C4650001F73B5 /* ViewClassSelection.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8161AF62222C4650001F73B5 /* ViewClassSelection.xib */; };
 		8161AF65222C467C001F73B5 /* ViewClassSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8161AF64222C467C001F73B5 /* ViewClassSelection.swift */; };
 		8161AF67222C5922001F73B5 /* CollegeClassManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8161AF66222C5922001F73B5 /* CollegeClassManager.swift */; };
@@ -140,7 +141,6 @@
 		8192F5911FD7115A00982601 /* CollegesListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8192F5901FD7115A00982601 /* CollegesListModel.swift */; };
 		81930B301FCDD7700002CDBE /* TeacherProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81930B2F1FCDD7700002CDBE /* TeacherProfile.swift */; };
 		81930B321FCDE2590002CDBE /* ProfessorLogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81930B311FCDE2590002CDBE /* ProfessorLogs.swift */; };
-		8193CE9A23530AA600508E4D /* CollegeDetails+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8193CE9923530AA600508E4D /* CollegeDetails+CoreDataProperties.swift */; };
 		8194881E22A421CC0006CB86 /* AddNewNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8194881D22A421CC0006CB86 /* AddNewNoticeViewController.swift */; };
 		8194882122A462E40006CB86 /* CollegeNotificationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8194882022A462E40006CB86 /* CollegeNotificationListViewController.swift */; };
 		8194882322A462F40006CB86 /* CollegeNotificationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8194882222A462F40006CB86 /* CollegeNotificationDetailsViewController.swift */; };
@@ -210,7 +210,6 @@
 		81B2E2D61FC35B0600E9E852 /* DPDConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B2E2CC1FC35B0600E9E852 /* DPDConstants.swift */; };
 		81B2E2D71FC35B0600E9E852 /* DPDKeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B2E2CD1FC35B0600E9E852 /* DPDKeyboardListener.swift */; };
 		81B2E2D81FC35B0600E9E852 /* DPDUIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B2E2CE1FC35B0600E9E852 /* DPDUIView+Extension.swift */; };
-		81B2E2D91FC35B0600E9E852 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 81B2E2CF1FC35B0600E9E852 /* Info.plist */; };
 		81B2E2DA1FC35B0600E9E852 /* DropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81B2E2D11FC35B0600E9E852 /* DropDownCell.xib */; };
 		81B2E2DB1FC35B0600E9E852 /* DropDown+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B2E2D31FC35B0600E9E852 /* DropDown+Appearance.swift */; };
 		81B2E2DC1FC35B0600E9E852 /* DropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B2E2D41FC35B0600E9E852 /* DropDown.swift */; };
@@ -451,6 +450,7 @@
 		813C0D9F21EB7C7100B04E61 /* GlobalFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunction.swift; sourceTree = "<group>"; };
 		81511A3622AC4D0400B50F44 /* DocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsViewController.swift; sourceTree = "<group>"; };
 		8151C3CD22ED7EE300680951 /* BellNotificationReadStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellNotificationReadStatus.swift; sourceTree = "<group>"; };
+		81539C782362244100306974 /* CollegeDetails+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollegeDetails+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8161AF62222C4650001F73B5 /* ViewClassSelection.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewClassSelection.xib; sourceTree = "<group>"; };
 		8161AF64222C467C001F73B5 /* ViewClassSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewClassSelection.swift; sourceTree = "<group>"; };
 		8161AF66222C5922001F73B5 /* CollegeClassManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeClassManager.swift; sourceTree = "<group>"; };
@@ -488,7 +488,6 @@
 		8192F5901FD7115A00982601 /* CollegesListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegesListModel.swift; sourceTree = "<group>"; };
 		81930B2F1FCDD7700002CDBE /* TeacherProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherProfile.swift; sourceTree = "<group>"; };
 		81930B311FCDE2590002CDBE /* ProfessorLogs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessorLogs.swift; sourceTree = "<group>"; };
-		8193CE9923530AA600508E4D /* CollegeDetails+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CollegeDetails+CoreDataProperties.swift"; path = "/Users/ios/Documents/teachUs/TeachUs/Models/UserRoles/CollegeDetails+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
 		8194881D22A421CC0006CB86 /* AddNewNoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewNoticeViewController.swift; sourceTree = "<group>"; };
 		8194882022A462E40006CB86 /* CollegeNotificationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeNotificationListViewController.swift; sourceTree = "<group>"; };
 		8194882222A462F40006CB86 /* CollegeNotificationDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeNotificationDetailsViewController.swift; sourceTree = "<group>"; };
@@ -1702,8 +1701,8 @@
 		81E67401205318E200321257 /* UserRoles */ = {
 			isa = PBXGroup;
 			children = (
+				81539C782362244100306974 /* CollegeDetails+CoreDataProperties.swift */,
 				8163EB0520557AD9003E4B1D /* CollegeDetails+CoreDataClass.swift */,
-				8193CE9923530AA600508E4D /* CollegeDetails+CoreDataProperties.swift */,
 				81E6740620531B4C00321257 /* UserDetails+CoreDataClass.swift */,
 				81E6740720531B4C00321257 /* UserDetails+CoreDataProperties.swift */,
 			);
@@ -1963,7 +1962,6 @@
 				81B190C21FA24E22004A8A72 /* LoginView.xib in Resources */,
 				819EEC2420A60C2100487467 /* ViewLectureReport.xib in Resources */,
 				81A80EE11FAF3DCB00DDFFA1 /* CollegeList.xib in Resources */,
-				81B2E2D91FC35B0600E9E852 /* Info.plist in Resources */,
 				819E0B3E20A0C9C600D16847 /* ViewLogsCalender.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2150,7 +2148,7 @@
 				81D7CE831FAB8E5D00C4375E /* CAPSPageMenu+UIGestureRecognizerDelegate.swift in Sources */,
 				81A0CDD5209F5B5C0023564B /* LogDetails.swift in Sources */,
 				819BDA541FC4A66E00DD7D2D /* ProfessorDetails.swift in Sources */,
-				8193CE9A23530AA600508E4D /* CollegeDetails+CoreDataProperties.swift in Sources */,
+				81539C792362244100306974 /* CollegeDetails+CoreDataProperties.swift in Sources */,
 				81F92A4522B4E8BD00395413 /* ViewUnavailableProfile.swift in Sources */,
 				81FFB0BB1FBF3E6B00C32097 /* MarkCompletedPortionViewController.swift in Sources */,
 				81BC49A52299CDD800549867 /* ProfileChangeRequestsViewController.swift in Sources */,
@@ -2511,6 +2509,7 @@
 				INFOPLIST_FILE = TeachUs/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.1.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thinkmonk.teachus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "aeddf05d-0430-4eea-8aa6-29bd99785f74";
@@ -2539,6 +2538,7 @@
 				INFOPLIST_FILE = TeachUs/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.1.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thinkmonk.teachus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c97490f5-6a8f-4e89-b72d-9ba422aad757";

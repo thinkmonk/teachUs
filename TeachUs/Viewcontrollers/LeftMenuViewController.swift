@@ -163,7 +163,7 @@ class LeftMenuViewController: BaseViewController, UIGestureRecognizerDelegate {
         else{
             //            self.labelProfile.text = "\(UserManager.sharedUserManager.appUserCollegeDetails.college_name!)"
             self.labelProfile.text = "Profile"
-            self.labelName.text = "\(UserManager.sharedUserManager.appUserDetails.firstName!) \(UserManager.sharedUserManager.appUserDetails.lastName!)"
+            self.labelName.text = "\(UserManager.sharedUserManager.appUserDetails.firstName ?? "") \(UserManager.sharedUserManager.appUserDetails.lastName ?? "")"
             self.labelRole.text = "\(UserManager.sharedUserManager.appUserCollegeDetails.college_name!) (\(UserManager.sharedUserManager.appUserCollegeDetails.role_name!))"
             self.getAndSetUserImage()
         }

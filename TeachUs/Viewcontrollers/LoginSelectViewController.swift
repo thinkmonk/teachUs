@@ -40,7 +40,9 @@ class LoginSelectViewController: BaseViewController {
         super.viewDidLoad()
         self.addDefaultBackGroundImage()
         self.navigationController?.navigationBar.isHidden = false
-
+        if #available(iOS 13.0, *) {
+            self.isModalInPresentation = true
+        }
         self.getRoleList()
     }
 
