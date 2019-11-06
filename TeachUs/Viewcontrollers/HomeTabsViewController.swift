@@ -205,12 +205,12 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
                 controllersArray.append(collegeLogsListVC)
             }
             
-            if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "1"){
+//            if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "1"){
                 let collegeNoticeClassListVC:CollegeNoticeListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.collegeNoticeList) as! CollegeNoticeListViewController
                 collegeNoticeClassListVC.title = "Notice"
                 collegeNoticeClassListVC.parentNavigationController = self.parentNavigationController
                 controllersArray.append(collegeNoticeClassListVC)
-            }
+//            }
             
             
             if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "1"){
@@ -230,13 +230,13 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
             
            
             
-            if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "1"){
+//            if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "1"){
                 let requestListVC:ProfileChangeRequestsViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.ProfileChangeRequestsViewControllerId) as! ProfileChangeRequestsViewController
                 requestListVC.title = "Request"
                 requestListVC.parentNavigationController = self.parentNavigationController
                 controllersArray.append(requestListVC)
 
-            }
+//            }
             
             break
         }
