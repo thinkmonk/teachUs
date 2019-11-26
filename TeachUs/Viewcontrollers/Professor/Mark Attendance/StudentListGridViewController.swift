@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol GridViewDelegate {
+    func gridDismissed()
+}
+
+
 class StudentListGridViewController: UIViewController {
 
     @IBOutlet weak var collectionViewStudentsGrid: UICollectionView!
@@ -17,6 +22,8 @@ class StudentListGridViewController: UIViewController {
     
     @IBOutlet weak var switchMarkAllPresent: UISwitch!
     @IBOutlet weak var buttonSubmit: UIButton!
+    
+    var delegate :GridViewDelegate!
     let cellNibName = "StudentRollNumberCollectionViewCell"
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,10 +44,9 @@ class StudentListGridViewController: UIViewController {
     }
     
     @IBAction func closeView(_ sender: Any) {
-        if let parentVC = self.parent as? StudentsListViewController{
-            parentVC.tableStudentList.reloadData()
+        self.dismiss(animated: true) { [weak self] in
+            self?.delegate.gridDismissed()
         }
-        self.remove()
     }
     
     @IBAction func actionSubmitAttendance(_ sender: Any) {
@@ -65,16 +71,16 @@ class StudentListGridViewController: UIViewController {
     
     func showSubmit() {
         self.buttonSubmit.isHidden = false
-        self.layoutTopConstraint.constant = 0
+        self.layoutTopConstraint.constant = -self.buttonSubmit.height()
         UIView.animate(withDuration: 0.3) {
-            self.layoutTopConstraint.constant -= self.buttonSubmit.height()
+            self.layoutTopConstraint.constant = 0
         }
     }
     
     func hideSubmit() {
-        self.layoutTopConstraint.constant = -self.buttonSubmit.height()
+        self.layoutTopConstraint.constant = 0
         UIView.animate(withDuration: 0.3) {
-            self.layoutTopConstraint.constant = 0
+            self.layoutTopConstraint.constant = -self.buttonSubmit.height()
             self.buttonSubmit.isHidden = true
         }
     }

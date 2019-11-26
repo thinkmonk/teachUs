@@ -553,23 +553,27 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
         case .studentProfile:
             
             let cell : AttendanceStudentListTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.AttendanceStudentListTableViewCellId, for: indexPath) as! AttendanceStudentListTableViewCell
-            let object:MarkStudentAttendance = cellDataSource.attachedObject! as! MarkStudentAttendance
-            cell.labelName.attributedText = object.student?.studentName?.addColorForString(self.searchText, stringColor: Constants.colors.themeRed)
-            cell.labelRollNumber.attributedText = object.student?.studentRollNo?.addColorForString(self.searchText, stringColor: Constants.colors.themeRed)
-            cell.labelAttendanceCount.text = "\(object.student?.totalLecture ?? "NA")"
-            cell.labelAttendancePercent.text = "\(object.student?.percentage ?? "NA") %"
-            cell.labelLastLectureAttendance.text = object.student?.lastLectureAttendance != nil ? object.student?.lastLectureAttendance! : "NIL"
-            cell.clipsToBounds = true
-            if(!(object.student!.imageUrl?.isEmpty)!){
-                cell.imageViewProfile.imageFromServerURL(urlString: (object.student?.imageUrl!)!, defaultImage: Constants.Images.defaultMale)
-            }else{
-                cell.imageViewProfile.image = UIImage(named: Constants.Images.defaultMale)
+            if let enrolledStudent = cellDataSource.attachedObject as? MarkStudentAttendance,
+                let object = AttendanceManager.sharedAttendanceManager.arrayStudents.value.filter({$0.student?.studentId == enrolledStudent.student?.studentId}).first{
+                
+                cell.labelName.attributedText = object.student?.studentName?.addColorForString(self.searchText, stringColor: Constants.colors.themeRed)
+                cell.labelRollNumber.attributedText = object.student?.studentRollNo?.addColorForString(self.searchText, stringColor: Constants.colors.themeRed)
+                cell.labelAttendanceCount.text = "\(object.student?.totalLecture ?? "NA")"
+                cell.labelAttendancePercent.text = "\(object.student?.percentage ?? "NA") %"
+                cell.labelLastLectureAttendance.text = object.student?.lastLectureAttendance != nil ? object.student?.lastLectureAttendance! : "NIL"
+                cell.clipsToBounds = true
+                if(!(object.student!.imageUrl?.isEmpty)!){
+                    cell.imageViewProfile.imageFromServerURL(urlString: (object.student?.imageUrl!)!, defaultImage: Constants.Images.defaultMale)
+                }else{
+                    cell.imageViewProfile.image = UIImage(named: Constants.Images.defaultMale)
+                }
+                cell.buttonAttendance.isSelected = object.isPrsent
+                cell.buttonAttendance.indexPath = indexPath
+                cell.buttonAttendance.addTarget(self, action: #selector(StudentsListViewController.markAttendance), for: .touchUpInside)
+                print("adding value for \(object.student?.studentRollNo ?? "") value \(object.isPrsent ?? false)")
+                cell.setUpCell()
+                cell.selectionStyle = .none
             }
-            cell.buttonAttendance.isSelected = object.isPrsent
-            cell.buttonAttendance.addTarget(self, action: #selector(StudentsListViewController.markAttendance), for: .touchUpInside)
-            cell.buttonAttendance.indexPath = indexPath
-            cell.setUpCell()
-            cell.selectionStyle = .none
             return cell
         }
     }
@@ -801,19 +805,28 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
 
 //MARK:- Default Attendance Selection Delegate
 
-extension StudentsListViewController:DefaultAttendanceSelectionDelegate{
+extension StudentsListViewController:DefaultAttendanceSelectionDelegate, UIAdaptivePresentationControllerDelegate, GridViewDelegate{
+    func gridDismissed() {
+        tableStudentList.reloadData()
+    }
+    
     func showGridView() {
         if let gridViewController = self.storyboard?.instantiateViewController(withIdentifier: Constants.viewControllerId.rollNumberGridVC) as? StudentListGridViewController{
-            var holderFrame = self.view.frame
-            holderFrame.origin.y += self.calenderFloatingView.bottom()
-            holderFrame.size.height -= self.calenderFloatingView.height()
+//            var holderFrame = self.view.frame
+//            holderFrame.origin.y += self.calenderFloatingView.bottom()
+//            holderFrame.size.height -= self.calenderFloatingView.height()
 //            if let indexScrolled = self.defaultbuttonIndexpath{
 //                let indexpathValue = IndexPath(row: 0, section: indexScrolled)
 //                self.tableStudentList.scrollToRow(at: indexpathValue, at: .top, animated: true)
 //            }
-            
-            self.add(gridViewController, frame: holderFrame)
+            gridViewController.delegate = self
+            gridViewController.presentationController?.delegate = self
+            self.present(gridViewController, animated: true, completion: nil)
         }
+    }
+    
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        tableStudentList.reloadData()
     }
     
     fileprivate func addPreviousLectureAttendanceValue() {
