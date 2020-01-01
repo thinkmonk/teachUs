@@ -72,9 +72,18 @@ class AddNewNoticeViewController: BaseViewController {
         self.textfieldNoticeTitle.rx.text.map{$0 ?? ""}.bind(to: self.noticeTitle).disposed(by: myDisposeBag)
         self.textViewDescription.rx.text.map{$0 ?? ""}.bind(to: self.noticeDescription).disposed(by: myDisposeBag)
         
+        
+        
         var isValid : Observable<Bool> {
             return Observable.combineLatest(self.noticeTitle.asObservable(), self.noticeDescription.asObservable(), self.chosenFile.asObservable(), self.chosenImage.asObservable()){ title, description, file, image in
-                
+                UserDefaults.standard.set(title, forKey: Constants.UserDefaults.noticeTitle)
+                UserDefaults.standard.set(description, forKey: Constants.UserDefaults.noticeDescription)
+                if let fileurl = file{
+                    UserDefaults.standard.set(fileurl, forKey: Constants.UserDefaults.noticeFile)
+                }
+                if let imageOBj = image {
+                    UserDefaults.standard.setValue(UIImageJPEGRepresentation(imageOBj, 1), forKey: Constants.UserDefaults.noticeImage)
+                }
                 return title.count > 2 && description.count > 2
             }
         }

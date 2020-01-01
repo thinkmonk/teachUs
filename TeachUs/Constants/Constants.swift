@@ -105,17 +105,21 @@ public struct Constants {
     }
     
     struct UserDefaults {
-        static let accesToken = "AppUserAccessToken"
-        static let userId = "UserId"
-        static let userMobileNumber = "userMobileNumber"
-        static let loginUserType = "loginUserType"
-        static let userImageURL = "userImage"
-        static let collegeName = "collegeName"
-        static let roleName = "roleName"
-        static let offlineCollegeName = "offlineCollegeName"
-        static let deviceToken = "deviceToken"
-        static let fcmToken = "fcmToken"
-        static let nextUserReviewDate = "reviewDate"
+        static let accesToken           = "AppUserAccessToken"
+        static let userId               = "UserId"
+        static let userMobileNumber     = "userMobileNumber"
+        static let loginUserType        = "loginUserType"
+        static let userImageURL         = "userImage"
+        static let collegeName          = "collegeName"
+        static let roleName             = "roleName"
+        static let offlineCollegeName   = "offlineCollegeName"
+        static let deviceToken          = "deviceToken"
+        static let fcmToken             = "fcmToken"
+        static let nextUserReviewDate   = "reviewDate"
+        static let noticeTitle          = "newNoticeTitle"
+        static let noticeDescription    = "newNoticeDescription"
+        static let noticeFile           = "newNoticeFile"
+        static let noticeImage          = "newNoticeImage"
     }
     
     struct NumberConstants {
