@@ -13,6 +13,7 @@ import FirebaseStorage
 import  WebKit
 import RxCocoa
 import RxSwift
+import Photos
 
 class ProfessorNotesDetailstViewController: BaseViewController {
 
@@ -50,11 +51,16 @@ class ProfessorNotesDetailstViewController: BaseViewController {
         self.tableViewNotesDetails.rowHeight = UITableViewAutomaticDimension
         imagePicker?.delegate = self
         self.buttonUploadNotes.isHidden = true
+        setUpDefaultValues()
         self.setUpRx()
         // Do any additional setup after loading the view.
     }
     
-    
+    deinit {
+        #if DEBUG
+        print("ProfessorNotesDetailstViewController deinited")
+        #endif
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -67,14 +73,48 @@ class ProfessorNotesDetailstViewController: BaseViewController {
         super.viewDidAppear(animated)
     }
     
+    func setUpDefaultValues(){
+        if let defaultTitle = UserDefaults.standard.value(forKey: Constants.UserDefaults.notesTitle) as? String{
+            self.textfiledName.text = defaultTitle
+            self.noticeTitle.value = defaultTitle
+        }
+        
+        if let defaultImageData = UserDefaults.standard.object(forKey: Constants.UserDefaults.notesImage) as? Data{
+            self.chosenImage.value = UIImage(data: defaultImageData)
+            labelFileName.text = "Image selected"
+            self.chosenFile.value = nil
+        }
+        
+        if let defaultImageName = UserDefaults.standard.value(forKey: Constants.UserDefaults.notesImageName) as? String, !defaultImageName.isEmpty{
+            labelFileName.text = defaultImageName
+        }
+        
+        if let documentURL = UserDefaults.standard.url(forKey: Constants.UserDefaults.notesFile),
+            let documentName = UserDefaults.standard.string(forKey: Constants.UserDefaults.notesFileName),
+            !documentName.isEmpty{
+            self.chosenFile.value = documentURL
+            self.labelFileName.text = documentName
+            self.chosenImage.value = nil
+        }
+
+    }
+
+    func clearUSerdefaults(){
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaults.notesTitle)
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaults.notesImage)
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaults.notesImageName)
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaults.notesFile)
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaults.notesFileName)
+    }
+    
     
     func setUpRx(){
         self.textfiledName.rx.text.map{$0 ?? ""}.bind(to: self.noticeTitle).disposed(by: myDisposeBag)
         
         var isValid : Observable<Bool> {
-            return Observable.combineLatest(self.noticeTitle.asObservable(), self.chosenFile.asObservable(), self.chosenImage.asObservable()){ title, file, image in
-                
-                return title.count > 2 && (self.chosenImage.value != nil || self.chosenFile.value != nil)
+            return Observable.combineLatest(self.noticeTitle.asObservable(), self.chosenFile.asObservable(), self.chosenImage.asObservable()){ [weak self] title, file, image in
+                UserDefaults.standard.set(title, forKey: Constants.UserDefaults.notesTitle)
+                return title.count > 2 && (self?.chosenImage.value != nil || self?.chosenFile.value != nil)
             }
         }
         
@@ -127,13 +167,13 @@ class ProfessorNotesDetailstViewController: BaseViewController {
             "subject_id" :self.selectedNotesSubject.subjectID ?? "",
             "class_id":self.selectedNotesSubject.classID ?? ""
         ]
-        manager.apiPostWithDataResponse(apiName: "Get Notes Details", parameters:parameters, completionHandler: { (result, code, response) in
+        manager.apiPostWithDataResponse(apiName: "Get Notes Details", parameters:parameters, completionHandler: {[weak self] (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             do{
                 let decoder = JSONDecoder()
-                self.noteListData = try decoder.decode(NotesSubjectDetails.self, from: response)
+                self?.noteListData = try decoder.decode(NotesSubjectDetails.self, from: response)
                 DispatchQueue.main.async {
-                    self.tableViewNotesDetails.reloadData()
+                    self?.tableViewNotesDetails.reloadData()
                 }
             } catch let error{
                 print("err", error)
@@ -155,9 +195,9 @@ class ProfessorNotesDetailstViewController: BaseViewController {
                 self.navigationController?.pushViewController(viewController, animated: true)
             }else{// save file
                 LoadingActivityHUD.showProgressHUD(view: self.view)
-                GlobalFunction.downloadFileAndSaveToDisk(fileUrl: imageURL, customName: notesObejct.generatedFileName ?? "TeachUs\(Date())") { (success) in
+                GlobalFunction.downloadFileAndSaveToDisk(fileUrl: imageURL, customName: notesObejct.generatedFileName ?? "TeachUs\(Date())") { [weak self] (success) in
                     DispatchQueue.main.async {
-                        self.tableViewNotesDetails.reloadRows(at: [sender.indexPath], with: .fade)
+                        self?.tableViewNotesDetails.reloadRows(at: [sender.indexPath], with: .fade)
                         LoadingActivityHUD.hideProgressHUD()
 
                     }
@@ -170,15 +210,15 @@ class ProfessorNotesDetailstViewController: BaseViewController {
     @objc func deleteNote(_ sender:ButtonWithIndexPath)
     {
         let alert = UIAlertController(title: "Confirm Delete", message: "Are you sure you want to delete the selected notes", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "YES", style: .default, handler: { (_) in
-            if let notesObejct = self.noteListData?.notesList?[sender.indexPath.section], let mobilenumber = UserManager.sharedUserManager.appUserDetails.contact{
-                let storageRef = self.storage.reference()
-                let filePathReference = storageRef.child("\(mobilenumber)/Notes/\(notesObejct.originalFileName ?? "")")
+        alert.addAction(UIAlertAction(title: "YES", style: .default, handler: {[weak self] (_) in
+            if let notesObejct = self?.noteListData?.notesList?[sender.indexPath.section], let mobilenumber = UserManager.sharedUserManager.appUserDetails.contact{
+                let storageRef = self?.storage.reference()
+                let filePathReference = storageRef?.child("\(mobilenumber)/Notes/\(notesObejct.originalFileName ?? "")")
                 LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
                 
-                filePathReference.delete { error in
+                filePathReference?.delete { error in
                     if let error = error {
-                        self.showAlertWithTitle("Error", alertMessage: "\(error.localizedDescription)")
+                        self?.showAlertWithTitle("Error", alertMessage: "\(error.localizedDescription)")
                     } else {
                         let manager = NetworkHandler()
                         manager.url = URLConstants.ProfessorURL.deleteNotes
@@ -189,8 +229,8 @@ class ProfessorNotesDetailstViewController: BaseViewController {
                         manager.apiPost(apiName: "delete notes \(notesObejct.title ?? "")", parameters: parameters, completionHandler: { (success, code, response) in
                             LoadingActivityHUD.hideProgressHUD()
                             if let status = response["status"] as? Int, status == 200, let message = response["message"] as? String{
-                                self.getNotes()
-                                self.showAlertWithTitle("Success", alertMessage:message)
+                                self?.getNotes()
+                                self?.showAlertWithTitle("Success", alertMessage:message)
                             }
                         }) { (success, code, errormessage) in
                             LoadingActivityHUD.hideProgressHUD()
@@ -204,35 +244,36 @@ class ProfessorNotesDetailstViewController: BaseViewController {
     }
     
     @IBAction func actionUploadNotesToServer(_ sender:UIButton){
-        self.uploadFileToFirebase(completion: { (fileURL, fileSize, fileName)  in
+        self.uploadFileToFirebase(completion: {[weak self] (fileURL, fileSize, fileName)  in
             LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
             let manager = NetworkHandler()
             manager.url = URLConstants.ProfessorURL.uploadNotes
             let parameters = [
                 "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
-                "subject_id" :self.selectedNotesSubject.subjectID ?? "",
-                "class_id":self.selectedNotesSubject.classID ?? "",
-                "title":self.textfiledName.text ?? "",
+                "subject_id" :self?.selectedNotesSubject.subjectID ?? "",
+                "class_id":self?.selectedNotesSubject.classID ?? "",
+                "title":self?.textfiledName.text ?? "",
                 "doc":fileURL.absoluteString,
                 "file_name":fileName,
                 "doc_size":fileSize
             ]
             manager.apiPost(apiName: "Upload nOtes", parameters:parameters, completionHandler: { (result, code, response) in
                 if let status = response["status"] as? Int, status == 200, let message = response["message"] as? String{
-                    self.showAlertWithTitle("Success", alertMessage: message)
-                    self.textfiledName.text  = ""
-                    self.labelFileName.text = "File Name"
-                    self.chosenImage.value = nil
-                    self.chosenFile.value = nil
-                    self.getNotes()
+                    self?.showAlertWithTitle("Success", alertMessage: message)
+                    self?.textfiledName.text  = ""
+                    self?.labelFileName.text = "File Name"
+                    self?.chosenImage.value = nil
+                    self?.chosenFile.value = nil
+                    self?.clearUSerdefaults()
+                    self?.getNotes()
                 }
                 LoadingActivityHUD.hideProgressHUD()
             }) { (error, code, message) in
                 print(message)
                 LoadingActivityHUD.hideProgressHUD()
             }
-        }) { (errorMessage) in
-            self.showAlertWithTitle("Error", alertMessage: errorMessage)
+        }) {[weak self] (errorMessage) in
+            self?.showAlertWithTitle("Error", alertMessage: errorMessage)
         }
     }
     
@@ -379,12 +420,18 @@ extension ProfessorNotesDetailstViewController:UIDocumentMenuDelegate,UIDocument
         self.chosenFile.value = myURL
         self.chosenImage.value = nil
         self.labelFileName.text = self.chosenFile.value?.lastPathComponent ?? ""
+        UserDefaults.standard.set(myURL, forKey: Constants.UserDefaults.notesFile)
+        UserDefaults.standard.set(myURL.lastPathComponent, forKey: Constants.UserDefaults.notesFileName)
+
         print("import result : \(myURL)")
     }
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
         self.chosenFile.value = url
         self.chosenImage.value = nil
+        self.labelFileName.text = self.chosenFile.value?.lastPathComponent ?? ""
+        UserDefaults.standard.set(url, forKey: Constants.UserDefaults.notesFile)
+        UserDefaults.standard.set(url.lastPathComponent, forKey: Constants.UserDefaults.notesFileName)
         print("import result : \(url)")
         
     }
@@ -409,6 +456,28 @@ extension ProfessorNotesDetailstViewController:UIImagePickerControllerDelegate,U
             self.chosenImage.value = image
             self.chosenFile.value = nil
             self.labelFileName.text = "Image selected"
+            let data = UIImagePNGRepresentation(image)
+            UserDefaults.standard.setValue(data, forKey: Constants.UserDefaults.notesImage)
+            
+            if #available(iOS 11.0, *) {
+                if let asset = info[UIImagePickerControllerPHAsset] as? PHAsset {
+                    let assetResources = PHAssetResource.assetResources(for: asset)
+                    labelFileName.text = assetResources.first!.originalFilename
+                    print(assetResources.first!.originalFilename)
+                    UserDefaults.standard.setValue(assetResources.first!.originalFilename, forKey: Constants.UserDefaults.notesImageName)
+
+                }
+            } else {
+                if let imageURL = info[UIImagePickerControllerReferenceURL] as? URL {
+                    let result = PHAsset.fetchAssets(withALAssetURLs: [imageURL], options: nil)
+                    let assetResources = PHAssetResource.assetResources(for: result.firstObject!)
+                    print(assetResources.first!.originalFilename)
+                    labelFileName.text = assetResources.first!.originalFilename
+                    UserDefaults.standard.setValue(assetResources.first!.originalFilename, forKey: Constants.UserDefaults.notesImageName)
+
+                }
+            }
+
         }
         
         if let videoURL = info["UIImagePickerControllerMediaURL"] as? URL{

@@ -4337,7 +4337,7 @@ Form Library</string>
                                     <constraint firstAttribute="height" constant="35" id="gYw-fy-qNB"/>
                                 </constraints>
                             </stackView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ki2-Db-yUa">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ki2-Db-yUa">
                                 <rect key="frame" x="15" y="79" width="290" height="489"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
@@ -4415,7 +4415,7 @@ Form Library</string>
                                     <constraint firstAttribute="height" constant="35" id="nib-Gl-UIM"/>
                                 </constraints>
                             </stackView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YhL-hd-n1P">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YhL-hd-n1P">
                                 <rect key="frame" x="15" y="79" width="290" height="489"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
@@ -4571,7 +4571,7 @@ Form Library</string>
                                     <constraint firstAttribute="height" constant="35" id="zWo-3j-gqg"/>
                                 </constraints>
                             </stackView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iWE-R2-SkF">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iWE-R2-SkF">
                                 <rect key="frame" x="15" y="79" width="290" height="489"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
@@ -5245,6 +5245,7 @@ Form Library</string>
                         <outlet property="buttonClose" destination="zqd-28-ntu" id="13f-YE-KI0"/>
                         <outlet property="buttonPreviewNotice" destination="rUE-Ub-BeR" id="lnI-0O-42P"/>
                         <outlet property="buttonSelectClass" destination="k9R-9p-yUw" id="CnJ-h8-qaW"/>
+                        <outlet property="labelAttachmentText" destination="hdf-Bk-YpB" id="vUa-2P-gtS"/>
                         <outlet property="labelClassNames" destination="gQu-pO-dw6" id="BI3-Uo-cFh"/>
                         <outlet property="roleSwitch" destination="OMs-u0-zqw" id="4uf-Cu-p4g"/>
                         <outlet property="textViewDescription" destination="225-Rr-bUk" id="vwl-r0-2Rc"/>

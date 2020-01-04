@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,37 +14,38 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="55.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8kg-gC-aEB">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="55.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Note Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gu0-Bq-HTP">
-                                <rect key="frame" x="10" y="17.5" width="204" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mcc-1f-O4D" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
-                                <rect key="frame" x="298" y="10" width="12" height="35.5"/>
-                                <state key="normal" image="deleteIcon"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RKe-14-xHt" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
-                                <rect key="frame" x="219" y="13" width="69" height="30"/>
-                                <state key="normal" title="Download"/>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Ctu-NR-WFl">
+                                <rect key="frame" x="5" y="0.0" width="305" height="56"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Note Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gu0-Bq-HTP">
+                                        <rect key="frame" x="0.0" y="0.0" width="98.5" height="56"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RKe-14-xHt" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
+                                        <rect key="frame" x="161" y="0.0" width="69" height="56"/>
+                                        <state key="normal" title="Download"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mcc-1f-O4D" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
+                                        <rect key="frame" x="293" y="0.0" width="12" height="56"/>
+                                        <state key="normal" image="deleteIcon"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="mcc-1f-O4D" firstAttribute="leading" secondItem="RKe-14-xHt" secondAttribute="trailing" constant="10" id="BtT-9R-Dqn"/>
-                            <constraint firstItem="RKe-14-xHt" firstAttribute="leading" secondItem="gu0-Bq-HTP" secondAttribute="trailing" constant="5" id="GV1-9J-fn6"/>
-                            <constraint firstItem="gu0-Bq-HTP" firstAttribute="leading" secondItem="8kg-gC-aEB" secondAttribute="leading" constant="10" id="QQm-a5-x87"/>
-                            <constraint firstItem="mcc-1f-O4D" firstAttribute="top" secondItem="8kg-gC-aEB" secondAttribute="top" constant="10" id="QvU-4Z-f75"/>
-                            <constraint firstItem="RKe-14-xHt" firstAttribute="centerY" secondItem="mcc-1f-O4D" secondAttribute="centerY" id="Yga-pJ-ubg"/>
-                            <constraint firstAttribute="trailing" secondItem="mcc-1f-O4D" secondAttribute="trailing" constant="10" id="Zit-Y2-H8i"/>
-                            <constraint firstAttribute="bottom" secondItem="mcc-1f-O4D" secondAttribute="bottom" constant="10" id="jyz-8Q-V1G"/>
-                            <constraint firstItem="gu0-Bq-HTP" firstAttribute="centerY" secondItem="RKe-14-xHt" secondAttribute="centerY" id="xai-C2-4E4"/>
+                            <constraint firstItem="Ctu-NR-WFl" firstAttribute="leading" secondItem="8kg-gC-aEB" secondAttribute="leading" constant="5" id="8uw-eM-JpW"/>
+                            <constraint firstItem="Ctu-NR-WFl" firstAttribute="top" secondItem="8kg-gC-aEB" secondAttribute="top" id="Itb-Na-2MG"/>
+                            <constraint firstAttribute="trailing" secondItem="Ctu-NR-WFl" secondAttribute="trailing" constant="10" id="yDU-A2-5x6"/>
+                            <constraint firstAttribute="bottom" secondItem="Ctu-NR-WFl" secondAttribute="bottom" id="yoY-nS-lMg"/>
                         </constraints>
                     </view>
                 </subviews>

@@ -119,7 +119,15 @@ public struct Constants {
         static let noticeTitle          = "newNoticeTitle"
         static let noticeDescription    = "newNoticeDescription"
         static let noticeFile           = "newNoticeFile"
+        static let noticeFileName       = "newNoticeFileName"
         static let noticeImage          = "newNoticeImage"
+        static let noticeImageName      = "newNoticeImageName"
+        static let notesTitle           = "notesTitle"
+        static let notesImage           = "notesImage"
+        static let notesImageName       = "notesImageName"
+        static let notesFile            = "notesFile"
+        static let notesFileName        = "notesFileName"
+        
     }
     
     struct NumberConstants {

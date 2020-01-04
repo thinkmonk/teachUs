@@ -11,8 +11,9 @@ import FirebaseStorage
 import MobileCoreServices
 import RxSwift
 import RxCocoa
+import Photos
 
-protocol AddNewNoticeDelegate {
+protocol AddNewNoticeDelegate:class {
     func viewDismissed(isNoticeAdded:Bool?)
 }
 
@@ -29,14 +30,14 @@ class AddNewNoticeViewController: BaseViewController {
     @IBOutlet weak var buttonSelectClass: UIButton!
     @IBOutlet weak var buttonPreviewNotice: UIButton!
     @IBOutlet weak var roleSwitch: UISwitch!
-    
-    var imagePicker:UIImagePickerController?=UIImagePickerController()
-    var documentPicker:UIDocumentPickerViewController!
+    @IBOutlet weak var labelAttachmentText: UILabel!
+    weak var imagePicker:UIImagePickerController?=UIImagePickerController()
+    weak var documentPicker:UIDocumentPickerViewController!
 //    var chosenFile:URL?
 //    var chosenImage:UIImage?
     var viewClassList : ViewClassSelection!
     let storage = Storage.storage()
-    var delegate:AddNewNoticeDelegate!
+    weak var delegate:AddNewNoticeDelegate?
     
     var noticeTitle = Variable<String>("")
     var noticeDescription = Variable<String>("")
@@ -52,6 +53,7 @@ class AddNewNoticeViewController: BaseViewController {
         self.initClassSelectionView()
         self.buttonPreviewNotice.isHidden = true
         imagePicker?.delegate = self
+        self.setUpDefaultValues()
         self.setUpRx()
     }
     
@@ -61,6 +63,17 @@ class AddNewNoticeViewController: BaseViewController {
         self.viewDescriptionBg.makeEdgesRounded()
         self.viewTilteBg.makeEdgesRounded()
         self.buttonPreviewNotice.roundedRedButton()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    deinit {
+        #if DEBUG
+        print("AddNewNoticeViewController deinited")
+        #endif
     }
     
     func initClassSelectionView(){
@@ -78,12 +91,6 @@ class AddNewNoticeViewController: BaseViewController {
             return Observable.combineLatest(self.noticeTitle.asObservable(), self.noticeDescription.asObservable(), self.chosenFile.asObservable(), self.chosenImage.asObservable()){ title, description, file, image in
                 UserDefaults.standard.set(title, forKey: Constants.UserDefaults.noticeTitle)
                 UserDefaults.standard.set(description, forKey: Constants.UserDefaults.noticeDescription)
-                if let fileurl = file{
-                    UserDefaults.standard.set(fileurl, forKey: Constants.UserDefaults.noticeFile)
-                }
-                if let imageOBj = image {
-                    UserDefaults.standard.setValue(UIImageJPEGRepresentation(imageOBj, 1), forKey: Constants.UserDefaults.noticeImage)
-                }
                 return title.count > 2 && description.count > 2
             }
         }
@@ -94,10 +101,50 @@ class AddNewNoticeViewController: BaseViewController {
         
     }
     
-    @IBAction func acctionDissmissView(_ sender: Any) {
-        self.dismiss(animated: true, completion: {
-            if self.delegate != nil{
-                self.delegate.viewDismissed(isNoticeAdded: self.noticeAddedFlag)
+    func setUpDefaultValues(){
+        if let defaultTitle = UserDefaults.standard.value(forKey: Constants.UserDefaults.noticeTitle) as? String{
+            self.textfieldNoticeTitle.text = defaultTitle
+            self.noticeTitle.value = defaultTitle
+        }
+            
+        if let defaultDesc = UserDefaults.standard.value(forKey: Constants.UserDefaults.noticeDescription) as? String{
+            self.textViewDescription.text = defaultDesc
+            self.noticeDescription.value = defaultDesc
+        }
+        
+        if let defaultImageName = UserDefaults.standard.value(forKey: Constants.UserDefaults.noticeImageName) as? String, !defaultImageName.isEmpty{
+            labelAttachmentText.text = defaultImageName
+        }
+        
+        if let defaultImageData = UserDefaults.standard.object(forKey: Constants.UserDefaults.noticeImage) as? Data{
+            self.chosenImage.value = UIImage(data: defaultImageData)
+            self.chosenFile.value = nil
+        }
+        
+        if let documentURL = UserDefaults.standard.url(forKey: Constants.UserDefaults.noticeFile),
+            let documentName = UserDefaults.standard.string(forKey: Constants.UserDefaults.noticeFileName),
+            !documentName.isEmpty{
+            self.chosenFile.value = documentURL
+            self.labelAttachmentText.text = documentName
+            self.chosenImage.value = nil
+        }
+
+    }
+    
+    func clearUSerdefaults(){
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaults.noticeTitle)
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaults.noticeDescription)
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaults.noticeImage)
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaults.noticeImageName)
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaults.noticeFile)
+        UserDefaults.standard.removeObject(forKey: Constants.UserDefaults.noticeFileName)
+
+    }
+    
+    @IBAction func acctionDissmissView(_ sender: Any?) {
+        self.dismiss(animated: true, completion: { [weak self] in
+            if self?.delegate != nil{
+                self?.delegate?.viewDismissed(isNoticeAdded: self?.noticeAddedFlag)
             }
         })
     }
@@ -117,20 +164,21 @@ class AddNewNoticeViewController: BaseViewController {
             self.postProfessorNotes(parameters)
 
         }else{
-            self.uploadFileToFirebase(completion: { (fileURL, fileSize, fileName)  in
+            let switchStatus = self.roleSwitch.isOn
+            self.uploadFileToFirebase(completion: {[weak self] (fileURL, fileSize, fileName)  in
                 let parameters = [
                     "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
                     "class_id":"\(CollegeClassManager.sharedManager.getSelectedClassList)",
-                    "title":self.textfieldNoticeTitle.text ?? "",
-                    "description":"\(self.textViewDescription.text ?? "")",
+                    "title":self?.textfieldNoticeTitle.text ?? "",
+                    "description":"\(self?.textViewDescription.text ?? "")",
                     "doc":fileURL.absoluteString,
                     "file_name":"\(fileName)",
-                    "role_id": self.roleSwitch.isOn ? "2,3" : "1,3",
+                    "role_id": switchStatus ? "2,3" : "1,3",
                     "doc_size":"\(fileSize)"
                 ]
-                self.postProfessorNotes(parameters)
-            }) { (errorMessage) in
-                self.showAlertWithTitle("Error", alertMessage: errorMessage)
+                self?.postProfessorNotes(parameters)
+            }) { [weak self](errorMessage) in
+                self?.showAlertWithTitle("Error", alertMessage: errorMessage)
             }
         }
     }
@@ -139,14 +187,17 @@ class AddNewNoticeViewController: BaseViewController {
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()
         manager.url = URLConstants.CollegeURL.collegeUploadNotice
-        manager.apiPostWithDataResponse(apiName: "Upload Notice", parameters:params, completionHandler: { (result, code, response) in
+        manager.apiPostWithDataResponse(apiName: "Upload Notice", parameters:params, completionHandler: {[weak self] (result, code, response) in
             
-            self.showAlertWithTitle("Success", alertMessage: "Notice added!")
-            self.chosenImage.value = nil
-            self.chosenFile.value = nil
-            self.noticeAddedFlag = true
-            self.acctionDissmissView(self)
+            self?.showAlertWithTitle("Success", alertMessage: "Notice added!")
+            self?.chosenImage.value = nil
+            self?.chosenFile.value = nil
+            self?.noticeAddedFlag = true
+            DispatchQueue.main.async {
+                self?.clearUSerdefaults()
+            }
             LoadingActivityHUD.hideProgressHUD()
+            self?.acctionDissmissView(nil)
         }) { (error, code, message) in
             print(message)
             LoadingActivityHUD.hideProgressHUD()
@@ -226,7 +277,8 @@ class AddNewNoticeViewController: BaseViewController {
     }
     
     func uploadFileToFirebase(completion:@escaping(_ fileUrl:URL, _ filesize:String,_ fileName:String) -> Void,
-                              failure:@escaping(_ message:String) -> Void){
+                              failure:@escaping(_ message:String) -> Void)
+    {
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         
         if let mobilenumber = UserManager.sharedUserManager.appUserDetails.contact{
@@ -317,12 +369,18 @@ extension AddNewNoticeViewController:UIDocumentMenuDelegate,UIDocumentPickerDele
             return
         }
         self.chosenFile.value = myURL
+        UserDefaults.standard.set(myURL, forKey: Constants.UserDefaults.noticeFile)
+        UserDefaults.standard.set(myURL.lastPathComponent, forKey: Constants.UserDefaults.noticeFileName)
+        self.labelAttachmentText.text = myURL.lastPathComponent
         self.chosenImage.value = nil
         print("import result : \(myURL)")
     }
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
         self.chosenFile.value = url
+        UserDefaults.standard.set(url, forKey: Constants.UserDefaults.noticeFile)
+        UserDefaults.standard.set(url.lastPathComponent, forKey: Constants.UserDefaults.noticeFileName)
+        self.labelAttachmentText.text = url.lastPathComponent
         self.chosenImage.value = nil
         print("import result : \(url)")
 
@@ -353,7 +411,29 @@ extension AddNewNoticeViewController:UIImagePickerControllerDelegate,UINavigatio
     @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage{
             self.chosenImage.value = image
-            self.chosenFile.value = nil
+            self.chosenFile.value = nil//save selected image to user defaults
+            
+            let data = UIImagePNGRepresentation(image)
+            UserDefaults.standard.setValue(data, forKey: Constants.UserDefaults.noticeImage)
+        }
+        
+        if #available(iOS 11.0, *) {
+            if let asset = info[UIImagePickerControllerPHAsset] as? PHAsset {
+                let assetResources = PHAssetResource.assetResources(for: asset)
+                labelAttachmentText.text = assetResources.first!.originalFilename
+                print(assetResources.first!.originalFilename)
+                UserDefaults.standard.setValue(assetResources.first!.originalFilename, forKey: Constants.UserDefaults.noticeImageName)
+
+            }
+        } else {
+            if let imageURL = info[UIImagePickerControllerReferenceURL] as? URL {
+                let result = PHAsset.fetchAssets(withALAssetURLs: [imageURL], options: nil)
+                let assetResources = PHAssetResource.assetResources(for: result.firstObject!)
+                print(assetResources.first!.originalFilename)
+                labelAttachmentText.text = assetResources.first!.originalFilename
+                UserDefaults.standard.setValue(assetResources.first!.originalFilename, forKey: Constants.UserDefaults.noticeImageName)
+
+            }
         }
         
         if let videoURL = info["UIImagePickerControllerMediaURL"] as? URL{

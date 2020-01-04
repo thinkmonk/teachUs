@@ -2513,7 +2513,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.thinkmonk.teachus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "aeddf05d-0430-4eea-8aa6-29bd99785f74";
-				PROVISIONING_PROFILE_SPECIFIER = "Teach Us Development";
+				PROVISIONING_PROFILE_SPECIFIER = "TeachUs Dev Profile";
 				SWIFT_OBJC_BRIDGING_HEADER = "TeachUs/Third Party/TeachUs-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
