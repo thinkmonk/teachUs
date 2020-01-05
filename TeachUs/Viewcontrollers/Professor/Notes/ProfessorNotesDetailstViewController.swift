@@ -83,6 +83,8 @@ class ProfessorNotesDetailstViewController: BaseViewController {
             self.chosenImage.value = UIImage(data: defaultImageData)
             labelFileName.text = "Image selected"
             self.chosenFile.value = nil
+        }else{
+            self.chosenImage.value = nil
         }
         
         if let defaultImageName = UserDefaults.standard.value(forKey: Constants.UserDefaults.notesImageName) as? String, !defaultImageName.isEmpty{
@@ -114,7 +116,7 @@ class ProfessorNotesDetailstViewController: BaseViewController {
         var isValid : Observable<Bool> {
             return Observable.combineLatest(self.noticeTitle.asObservable(), self.chosenFile.asObservable(), self.chosenImage.asObservable()){ [weak self] title, file, image in
                 UserDefaults.standard.set(title, forKey: Constants.UserDefaults.notesTitle)
-                return title.count > 2 && (self?.chosenImage.value != nil || self?.chosenFile.value != nil)
+                return title.count >= 1 && (self?.chosenImage.value != nil || self?.chosenFile.value != nil)
             }
         }
         
