@@ -256,7 +256,13 @@ class BaseViewController: UIViewController {
             let manager = NetworkHandler()
             manager.url = URLConstants.Login.saveDeviceToken
             LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
-            let parameters:[String:Any] = ["device_token":"\(GlobalFunction.getFCMDeviceToken())"]
+            let appVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
+            var parameters:[String:Any] = ["device_token":"\(GlobalFunction.getFCMDeviceToken())"]
+            parameters["os_name"]       = "ios"
+            parameters["os_version"]    = "\(UIDevice.current.systemVersion)"
+            parameters["device_model"]  = "\(UIDevice.modelName)"
+            parameters["app_version"]   = appVersion
+            parameters["device_id"]     = UIDevice.current.identifierForVendor?.uuidString
             manager.apiPost(apiName: "Set user's device token", parameters:parameters, completionHandler: { (result, code, response) in
                 LoadingActivityHUD.hideProgressHUD()
                 if(code == 200){
