@@ -18,10 +18,12 @@ struct CollegeProfessorList: Codable {
 
 struct ProfessorSubject: Codable {
     let professorID, professorName, subjects, profile: String?
+    let totalLectures:String?
     
     enum CodingKeys: String, CodingKey {
         case professorID = "professor_id"
         case professorName = "professor_name"
         case subjects, profile
+        case totalLectures = "total_lec"
     }
 }

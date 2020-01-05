@@ -15,11 +15,14 @@ class CollegeLogsProfessorListViewController: BaseViewController
     
     @IBOutlet weak var tableViewProfessorName: UITableView!
     @IBOutlet weak var buttonMailReport: UIButton!
-
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     var errorLabel : UILabel!
     var parentNavigationController : UINavigationController?
     var viewMailReport:ViewProfessorMailReport!
-
+    var searchText:String = ""
+    var filteredProfessorList : CollegeProfessorList?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,11 +30,12 @@ class CollegeLogsProfessorListViewController: BaseViewController
 
         self.tableViewProfessorName.delegate = self
         self.tableViewProfessorName.dataSource = self
-        self.tableViewProfessorName.estimatedRowHeight = 40
+        self.tableViewProfessorName.estimatedRowHeight = 55
         self.tableViewProfessorName.rowHeight = UITableViewAutomaticDimension
         self.tableViewProfessorName.alpha = 0.0
         self.tableViewProfessorName.addSubview(refreshControl)
         self.buttonMailReport.themeRedButton()
+        searchBar.delegate = self
 
     }
     
@@ -60,6 +64,7 @@ class CollegeLogsProfessorListViewController: BaseViewController
                     self.errorLabel.removeFromSuperview()
                 }
                 DispatchQueue.main.async {
+                    self.filteredProfessorList = ProfessorLogsManager.sharedManager.collegeProfessorList
                     self.tableViewProfessorName.reloadData()
                     self.showTableView()
                 }
@@ -88,7 +93,7 @@ class CollegeLogsProfessorListViewController: BaseViewController
 extension CollegeLogsProfessorListViewController:UITableViewDataSource, UITableViewDelegate{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if let professsorList = ProfessorLogsManager.sharedManager.collegeProfessorList{
+        if let professsorList = self.filteredProfessorList{
             return professsorList.professorSubjects.count
         }
         return 0
@@ -100,8 +105,8 @@ extension CollegeLogsProfessorListViewController:UITableViewDataSource, UITableV
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:TeacherDetailsTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.TeacherDetailsTableViewCellId, for: indexPath) as! TeacherDetailsTableViewCell
-        let details:ProfessorSubject = (ProfessorLogsManager.sharedManager.collegeProfessorList?.professorSubjects[indexPath.section])!
-        cell.setUpProfessorLogCellDetails(tempDetails: details)
+        let details:ProfessorSubject = (self.filteredProfessorList?.professorSubjects[indexPath.section])!
+        cell.setUpProfessorLogCellDetails(tempDetails: details, searchText: self.searchText)
         return cell
 
     }
@@ -120,7 +125,7 @@ extension CollegeLogsProfessorListViewController:UITableViewDataSource, UITableV
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let details:ProfessorSubject = (ProfessorLogsManager.sharedManager.collegeProfessorList?.professorSubjects[indexPath.section])!
+        let details:ProfessorSubject = (self.filteredProfessorList?.professorSubjects[indexPath.section])!
 
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let professorLogsListVC = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.professorLogs) as! ProfessorLogsListViewController
@@ -148,7 +153,7 @@ extension CollegeLogsProfessorListViewController:ViewProfessorMailReportDelegate
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()
         manager.url = URLConstants.CollegeURL.collegeAuth
-        let profId = ProfessorLogsManager.sharedManager.collegeProfessorList?.professorSubjects.map({$0.professorID ?? "0" })
+        let profId = self.filteredProfessorList?.professorSubjects.map({$0.professorID ?? "0" })
         let profIdSring = profId?.joined(separator: ",") ?? ""
         //get all the class id and join them using ","
         let parameters = [
@@ -173,3 +178,21 @@ extension CollegeLogsProfessorListViewController:ViewProfessorMailReportDelegate
         }
     }
 }
+
+//MARK:- UISearchBarDelegate
+extension CollegeLogsProfessorListViewController:UISearchBarDelegate{
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print("searchText = \(searchText)")
+        self.searchText = searchText
+        if !searchText.isEmpty
+        {
+            filteredProfessorList?.professorSubjects = ProfessorLogsManager.sharedManager.collegeProfessorList?.professorSubjects.filter({
+                return $0.professorName?.lowercased().contains(self.searchText.lowercased()) ?? false
+            }) ?? []
+        }else{
+            filteredProfessorList = ProfessorLogsManager.sharedManager.collegeProfessorList
+        }
+        self.tableViewProfessorName.reloadData()
+    }
+}
+

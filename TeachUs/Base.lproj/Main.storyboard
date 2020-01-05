@@ -4171,51 +4171,43 @@ Form Library</string>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d3q-GY-vIB">
-                                <rect key="frame" x="15" y="44" width="290" height="35"/>
+                            <searchBar contentMode="redraw" placeholder="Lecturer Name" translatesAutoresizingMaskIntoConstraints="NO" id="evN-BB-KP6">
+                                <rect key="frame" x="0.0" y="44" width="320" height="56"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                            </searchBar>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="d3q-GY-vIB">
+                                <rect key="frame" x="25" y="100" width="255" height="35"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fto-Ep-EXX">
-                                        <rect key="frame" x="0.0" y="0.0" width="159.5" height="35"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iea-NP-QyM">
+                                        <rect key="frame" x="0.0" y="0.0" width="35.5" height="35"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" red="0.4941176471" green="0.51764705879999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="FqU-Vt-Klw">
+                                        <rect key="frame" x="78" y="0.0" width="177" height="35"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iea-NP-QyM">
-                                                <rect key="frame" x="15" y="9.5" width="144.5" height="16"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Subject" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ooj-5z-5nO">
+                                                <rect key="frame" x="0.0" y="9.5" width="86" height="16"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <color key="textColor" red="0.4941176471" green="0.51764705879999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Lectures" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="efm-8d-TGc">
+                                                <rect key="frame" x="91" y="9.5" width="86" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <color key="textColor" red="0.4941176471" green="0.51764705879999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstItem="iea-NP-QyM" firstAttribute="leading" secondItem="Fto-Ep-EXX" secondAttribute="leading" constant="15" id="BW6-yD-fhS"/>
-                                            <constraint firstItem="iea-NP-QyM" firstAttribute="centerY" secondItem="Fto-Ep-EXX" secondAttribute="centerY" id="BrV-Eh-6n4"/>
-                                            <constraint firstAttribute="trailing" secondItem="iea-NP-QyM" secondAttribute="trailing" id="iga-Fg-DIW"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="arr-FT-GPU">
-                                        <rect key="frame" x="159.5" y="0.0" width="130.5" height="35"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Subject" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ooj-5z-5nO">
-                                                <rect key="frame" x="0.0" y="9.5" width="115.5" height="16"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                <color key="textColor" red="0.4941176471" green="0.51764705879999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="Ooj-5z-5nO" secondAttribute="trailing" constant="15" id="Il2-9f-7tp"/>
-                                            <constraint firstItem="Ooj-5z-5nO" firstAttribute="centerY" secondItem="arr-FT-GPU" secondAttribute="centerY" id="lKF-ab-QSD"/>
-                                            <constraint firstItem="Ooj-5z-5nO" firstAttribute="leading" secondItem="arr-FT-GPU" secondAttribute="leading" id="wg9-XX-uR9"/>
-                                        </constraints>
-                                    </view>
+                                    </stackView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="5Ks-aC-ftZ"/>
-                                    <constraint firstItem="Fto-Ep-EXX" firstAttribute="width" secondItem="d3q-GY-vIB" secondAttribute="width" multiplier="0.55" id="LJP-29-MNg"/>
                                 </constraints>
                             </stackView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UhE-tx-3d5">
-                                <rect key="frame" x="15" y="79" width="290" height="449"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UhE-tx-3d5">
+                                <rect key="frame" x="15" y="135" width="290" height="393"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hFO-Uz-r1B">
@@ -4234,13 +4226,16 @@ Form Library</string>
                         <constraints>
                             <constraint firstItem="UhE-tx-3d5" firstAttribute="top" secondItem="d3q-GY-vIB" secondAttribute="bottom" id="0bb-Rz-wRA"/>
                             <constraint firstItem="hFO-Uz-r1B" firstAttribute="leading" secondItem="cdM-pt-TsS" secondAttribute="leading" id="17f-oR-F5D"/>
+                            <constraint firstItem="evN-BB-KP6" firstAttribute="top" secondItem="cdM-pt-TsS" secondAttribute="top" id="DSj-SY-Ldf"/>
+                            <constraint firstItem="evN-BB-KP6" firstAttribute="leading" secondItem="cdM-pt-TsS" secondAttribute="leading" id="KqZ-Rf-7gE"/>
                             <constraint firstItem="hFO-Uz-r1B" firstAttribute="trailing" secondItem="cdM-pt-TsS" secondAttribute="trailing" id="Nw2-NI-OdR"/>
-                            <constraint firstItem="d3q-GY-vIB" firstAttribute="top" secondItem="cdM-pt-TsS" secondAttribute="top" id="OQg-BQ-AND"/>
                             <constraint firstItem="hFO-Uz-r1B" firstAttribute="top" secondItem="UhE-tx-3d5" secondAttribute="bottom" id="Onw-OY-IlP"/>
-                            <constraint firstItem="d3q-GY-vIB" firstAttribute="leading" secondItem="cdM-pt-TsS" secondAttribute="leading" constant="15" id="R77-Mp-DVS"/>
+                            <constraint firstItem="d3q-GY-vIB" firstAttribute="leading" secondItem="cdM-pt-TsS" secondAttribute="leading" constant="25" id="R77-Mp-DVS"/>
+                            <constraint firstItem="d3q-GY-vIB" firstAttribute="top" secondItem="evN-BB-KP6" secondAttribute="bottom" id="SIr-L9-HYh"/>
                             <constraint firstItem="UhE-tx-3d5" firstAttribute="leading" secondItem="cdM-pt-TsS" secondAttribute="leading" constant="15" id="SfT-eG-hb6"/>
                             <constraint firstItem="cdM-pt-TsS" firstAttribute="bottom" secondItem="hFO-Uz-r1B" secondAttribute="bottom" id="V2v-iQ-uu6"/>
-                            <constraint firstItem="cdM-pt-TsS" firstAttribute="trailing" secondItem="d3q-GY-vIB" secondAttribute="trailing" constant="15" id="jmx-MS-2o4"/>
+                            <constraint firstItem="cdM-pt-TsS" firstAttribute="trailing" secondItem="d3q-GY-vIB" secondAttribute="trailing" constant="40" id="jmx-MS-2o4"/>
+                            <constraint firstItem="evN-BB-KP6" firstAttribute="trailing" secondItem="cdM-pt-TsS" secondAttribute="trailing" id="kfV-f3-mPm"/>
                             <constraint firstItem="cdM-pt-TsS" firstAttribute="trailing" secondItem="UhE-tx-3d5" secondAttribute="trailing" constant="15" id="lCD-7M-IrY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cdM-pt-TsS"/>
@@ -4248,6 +4243,7 @@ Form Library</string>
                     <navigationItem key="navigationItem" id="cmA-hl-kwM"/>
                     <connections>
                         <outlet property="buttonMailReport" destination="hFO-Uz-r1B" id="Msh-6a-c56"/>
+                        <outlet property="searchBar" destination="evN-BB-KP6" id="w8f-u8-z1h"/>
                         <outlet property="tableViewProfessorName" destination="UhE-tx-3d5" id="lkF-Qw-9t0"/>
                     </connections>
                 </viewController>
