@@ -125,6 +125,7 @@ class ProfessorNotesDetailstViewController: BaseViewController {
     }
     
     @IBAction func actionUploadNotes(_ sender: Any) {
+        view.endEditing(true)
         let alert:UIAlertController=UIAlertController(title: "Choose Notes", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
         let cameraAction = UIAlertAction(title: "Camera", style: UIAlertActionStyle.default)
         {
@@ -252,7 +253,7 @@ class ProfessorNotesDetailstViewController: BaseViewController {
                 "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
                 "subject_id" :self?.selectedNotesSubject.subjectID ?? "",
                 "class_id":self?.selectedNotesSubject.classID ?? "",
-                "title":self?.textfiledName.text ?? "",
+                "title":self?.textfiledName.text?.addingPercentEncoding(withAllowedCharacters: .letters) ?? "",
                 "doc":fileURL.absoluteString,
                 "file_name":fileName,
                 "doc_size":fileSize

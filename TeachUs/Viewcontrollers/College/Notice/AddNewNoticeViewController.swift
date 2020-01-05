@@ -31,7 +31,7 @@ class AddNewNoticeViewController: BaseViewController {
     @IBOutlet weak var buttonPreviewNotice: UIButton!
     @IBOutlet weak var roleSwitch: UISwitch!
     @IBOutlet weak var labelAttachmentText: UILabel!
-    weak var imagePicker:UIImagePickerController?=UIImagePickerController()
+    var imagePicker:UIImagePickerController?=UIImagePickerController()
     weak var documentPicker:UIDocumentPickerViewController!
 //    var chosenFile:URL?
 //    var chosenImage:UIImage?
@@ -169,8 +169,8 @@ class AddNewNoticeViewController: BaseViewController {
                 let parameters = [
                     "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
                     "class_id":"\(CollegeClassManager.sharedManager.getSelectedClassList)",
-                    "title":self?.textfieldNoticeTitle.text ?? "",
-                    "description":"\(self?.textViewDescription.text ?? "")",
+                    "title":self?.textfieldNoticeTitle.text?.addingPercentEncoding(withAllowedCharacters: .letters) ?? "",
+                    "description":"\(self?.textViewDescription.text?.addingPercentEncoding(withAllowedCharacters: .letters) ?? "")",
                     "doc":fileURL.absoluteString,
                     "file_name":"\(fileName)",
                     "role_id": switchStatus ? "2,3" : "1,3",
@@ -260,9 +260,9 @@ class AddNewNoticeViewController: BaseViewController {
     
     func openGallery()
     {
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
-            imagePicker!.sourceType = UIImagePickerControllerSourceType.photoLibrary
-            self.present(imagePicker!, animated: true, completion: nil)
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary), let picker = imagePicker{
+            picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+            self.present(picker, animated: true, completion: nil)
         }else{
             self.showAlertWithTitle("Oops!", alertMessage: "Photo Library Access Not Provided")
         }

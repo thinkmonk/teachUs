@@ -37,8 +37,8 @@ class CollegeNoticeListTableViewCell: UITableViewCell {
     
     func setUpNotice(noticeObject:Notice){
         self.labelNoticeDate.text = "\(noticeObject.createdAt?.getDateFromString() ?? "")"
-        self.labelNoticeTitle.text = noticeObject.title ?? ""
-        self.labelNoticeDescription.text = noticeObject.noticeDescription ?? ""
+        self.labelNoticeTitle.text = noticeObject.title?.removingPercentEncoding ?? ""
+        self.labelNoticeDescription.text = noticeObject.noticeDescription?.removingPercentEncoding ?? ""
         self.labelNoticeClassDetails.text = "Send to \(noticeObject.courses ?? "")"
         if let fileUrl = noticeObject.filePath, !fileUrl.isEmpty{
             self.constraintDownbuttonBotton.isActive = false

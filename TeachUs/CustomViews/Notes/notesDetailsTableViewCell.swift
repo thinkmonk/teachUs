@@ -33,7 +33,7 @@ class notesDetailsTableViewCell: UITableViewCell {
     
     func setUpNotes(notesData:NotesList){
         self.notesObject = notesData
-        self.labelNotesTitle.text = notesData.title
+        self.labelNotesTitle.text = notesData.title?.removingPercentEncoding
         if let fileUrl = notesData.filePath{
             let imageURL = "\(fileUrl)"
             if let _ = GlobalFunction.checkIfFileExisits(fileUrl: imageURL, name:notesData.generatedFileName ?? ""){
