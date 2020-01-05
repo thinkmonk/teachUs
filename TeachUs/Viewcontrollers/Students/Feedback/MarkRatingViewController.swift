@@ -141,6 +141,9 @@ extension MarkRatingViewController: UITableViewDelegate, UITableViewDataSource{
             if(self.isTeacherPopular){
                 profileCell.buttonHeart.isSelected = true
             }
+            profileCell.imageViewProfile.callback  = {
+                self.imageTapped(view: profileCell.imageViewProfile)
+            }
             //            profileCell.buttonHeart.addTarget(self, action: #selector(MarkRatingViewController.markTeacherPopular(_:)), for: .touchUpInside)
             return profileCell
             

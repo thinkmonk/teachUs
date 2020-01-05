@@ -123,6 +123,9 @@ extension TeachersRatingViewController:UITableViewDataSource, UITableViewDelegat
         let cell:TeacherDetailsTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.TeacherDetailsTableViewCellId, for: indexPath) as! TeacherDetailsTableViewCell
         let details:ProfessorDetails = self.arrayDataSource[indexPath.section]
                 cell.setUpCellDetails(tempDetails: details)
+        cell.imageProfessor.callback = {
+            self.imageTapped(view: cell.imageProfessor)
+        }
         return cell
     }
     

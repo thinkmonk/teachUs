@@ -326,7 +326,10 @@ extension CollegeAttendanceDetailsViewController:UITableViewDelegate, UITableVie
         cell.labelAttendancePercent.text = "\(object.percentage! ) %"
         cell.clipsToBounds = true
         cell.imageViewProfile.imageFromServerURL(urlString: (object.imageUrl!), defaultImage: Constants.Images.defaultMale)
-        
+        cell.imageViewProfile.callback = {
+            self.imageTapped(view: cell.imageViewProfile)
+            print("imageTapped")
+        }
         cell.selectionStyle = .none
         return cell
     }

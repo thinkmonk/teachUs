@@ -19,7 +19,11 @@ func color(_ rgbColor: Int) -> UIColor{
 
 class TeacherProfileTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var imageViewProfile: UIImageView!
+    @IBOutlet weak var imageViewProfile: UIImageView!{
+        didSet {
+            self.imageViewProfile.tappable = true
+        }
+    }
     @IBOutlet weak var labelteacherName: UILabel!
     @IBOutlet weak var labelTeacherSubject: UILabel!
     @IBOutlet weak var labelHeartDescription: UILabel!

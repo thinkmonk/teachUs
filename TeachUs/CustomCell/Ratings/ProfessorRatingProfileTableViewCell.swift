@@ -12,7 +12,11 @@ class ProfessorRatingProfileTableViewCell: UITableViewCell {
     
     
     @IBOutlet weak var labelSubjectName: UILabel!
-    @IBOutlet weak var imageViewProfessor: UIImageView!
+    @IBOutlet weak var imageViewProfessor: UIImageView!{
+        didSet{
+            self.imageViewProfessor.tappable = true
+        }
+    }
     @IBOutlet weak var labelProfessorName: UILabel!
     @IBOutlet weak var labelPopularity: UILabel!
     @IBOutlet weak var labelRatings: UILabel!

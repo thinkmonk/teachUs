@@ -10,7 +10,11 @@ import UIKit
 
 class StudentProfileTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var imageViewProfile: UIImageView!
+    @IBOutlet weak var imageViewProfile: UIImageView!{
+        didSet {
+            self.imageViewProfile.tappable = true
+        }
+    }
     @IBOutlet weak var labelRollNumber: UILabel!
     @IBOutlet weak var labelName: UILabel!
     

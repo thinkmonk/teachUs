@@ -572,6 +572,9 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
                 cell.buttonAttendance.addTarget(self, action: #selector(StudentsListViewController.markAttendance), for: .touchUpInside)
                 print("adding value for \(object.student?.studentRollNo ?? "") value \(object.isPrsent ?? false)")
                 cell.setUpCell()
+                cell.imageViewProfile.callback = {
+                    self.imageTapped(view: cell.imageViewProfile)
+                }
                 cell.selectionStyle = .none
             }
             return cell

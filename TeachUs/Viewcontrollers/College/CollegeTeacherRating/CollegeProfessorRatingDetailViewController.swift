@@ -167,6 +167,9 @@ extension CollegeProfessorRatingDetailViewController : UITableViewDelegate, UITa
                 profileCell.labelPopularityValue.text = "\(self.ratingProfessor.popularity)"
             }
             profileCell.buttonHeart.isEnabled = false
+            profileCell.imageViewProfile.callback = {
+                self.imageTapped(view: profileCell.imageViewProfile)
+            }
             return profileCell
             
         case .RatingTitle:

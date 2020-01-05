@@ -18,7 +18,11 @@ protocol editProfilePictureDelegate {
 
 
 class EditProfilePictureViewController: BaseViewController{
-    @IBOutlet weak var imageViewProfilePic: UIImageView!
+    @IBOutlet weak var imageViewProfilePic: UIImageView!{
+        didSet {
+            self.imageViewProfilePic.tappable = true
+        }
+    }
     @IBOutlet weak var buttonUploadProfilePic: UIButton!
     @IBOutlet weak var buttonSelectPhotoFromGallery: UIButton!
     @IBOutlet weak var buttonSelectPhotoFromCamera: UIButton!
@@ -36,6 +40,9 @@ class EditProfilePictureViewController: BaseViewController{
         view.isOpaque = false
         self.buttonUploadProfilePic.makeEdgesRounded()
         self.imageViewProfilePic.imageFromServerURL(urlString: profileImageUrl, defaultImage: Constants.Images.defaultProfessor)
+        self.imageViewProfilePic.callback = {
+            self.imageTapped(view: self.imageViewProfilePic)
+        }
 
         // Do any additional setup after loading the view.
     }

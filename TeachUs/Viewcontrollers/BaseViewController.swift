@@ -262,7 +262,7 @@ class BaseViewController: UIViewController {
             parameters["os_version"]    = "\(UIDevice.current.systemVersion)"
             parameters["device_model"]  = "\(UIDevice.modelName)"
             parameters["app_version"]   = appVersion
-            parameters["device_id"]     = UIDevice.current.identifierForVendor?.uuidString
+            parameters["device_id_number"]     = UIDevice.current.identifierForVendor?.uuidString
             manager.apiPost(apiName: "Set user's device token", parameters:parameters, completionHandler: { (result, code, response) in
                 LoadingActivityHUD.hideProgressHUD()
                 if(code == 200){
@@ -299,4 +299,25 @@ class BaseViewController: UIViewController {
 
     }
     
+    func imageTapped(view:UIImageView){
+        let imageView = view
+        let newImageView = UIImageView(image: imageView.image)
+        newImageView.frame = UIScreen.main.bounds
+
+        newImageView.backgroundColor = UIColor.init(red: 1, green: 1, blue: 1, alpha: 0.75)
+        newImageView.contentMode = .scaleAspectFit
+        newImageView.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
+        newImageView.addGestureRecognizer(tap)
+        self.view.addSubview(newImageView)
+        self.navigationController?.isNavigationBarHidden = true
+        self.tabBarController?.tabBar.isHidden = true
+
+    }
+    
+    @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
+        self.navigationController?.isNavigationBarHidden = false
+        self.tabBarController?.tabBar.isHidden = false
+        sender.view?.removeFromSuperview()
+    }
 }

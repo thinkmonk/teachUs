@@ -349,6 +349,9 @@ extension OfflineStudentListViewController: UITableViewDelegate, UITableViewData
             cell.buttonAttendance.indexPath = indexPath
             cell.setUpCell()
             cell.selectionStyle = .none
+            cell.imageViewProfile.callback = {
+                self.imageTapped(view:cell.imageViewProfile)
+            }
             return cell
         }
     }

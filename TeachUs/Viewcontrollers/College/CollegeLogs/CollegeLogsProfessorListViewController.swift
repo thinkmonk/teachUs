@@ -107,6 +107,9 @@ extension CollegeLogsProfessorListViewController:UITableViewDataSource, UITableV
         let cell:TeacherDetailsTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.TeacherDetailsTableViewCellId, for: indexPath) as! TeacherDetailsTableViewCell
         let details:ProfessorSubject = (self.filteredProfessorList?.professorSubjects[indexPath.section])!
         cell.setUpProfessorLogCellDetails(tempDetails: details, searchText: self.searchText)
+        cell.imageProfessor.callback  = {
+            self.imageTapped(view: cell.imageProfessor)
+        }
         return cell
 
     }

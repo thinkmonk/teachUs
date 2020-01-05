@@ -11,7 +11,11 @@ import UIKit
 class TeacherDetailsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var imageViewBackground: UIView!
-    @IBOutlet weak var imageProfessor: UIImageView!
+    @IBOutlet weak var imageProfessor: UIImageView!{
+        didSet{
+            self.imageProfessor.tappable = true
+        }
+    }
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelSubject: UILabel!
     @IBOutlet weak var labelNnumberOfLectures:UILabel!
