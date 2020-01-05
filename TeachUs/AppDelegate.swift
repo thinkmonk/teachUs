@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate {
             print("DB PATH\(path)")
         #endif
         NotificationCenter.default.addObserver(self, selector: #selector(loginSuccess), name: .notificationLoginSuccess, object: nil)
-
+        UNUserNotificationCenter.current().delegate = self
         if #available(iOS 10, *) {
             UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]){ (granted, error) in }
             application.registerForRemoteNotifications()
@@ -79,10 +79,53 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate {
         print("APNs registration failed: \(error)")
     }
     
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        switch application.applicationState{
+        case .inactive:
+            if let mfmenuVc = self.window?.topViewController() as? MFSideMenuContainerViewController,
+            let centerVc = mfmenuVc.centerViewController as? UINavigationController,
+            let homeVc = centerVc.topViewController as? HomeViewController{
+            homeVc.bellNotificationAction()
+        }else{
+            UserDefaults.standard.set(true, forKey: Constants.UserDefaults.notifiocationReceived)
+            }
+        default:
+            break
+        }
+    }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification data: [AnyHashable : Any]) {
         // Print notification payload data
         print("Push notification received: \(data)")
+        
+        switch application.applicationState {
+        case .active:
+            //app is currently active, can update badges count here
+            NotificationCenter.default.post(name: .performNotificationNavigation, object: nil)
+            break
+        case .inactive:
+            //app is transitioning from background to foreground (user taps notification), do what you need when user taps here
+            if let mfmenuVc = self.window?.topViewController() as? MFSideMenuContainerViewController,
+                let centerVc = mfmenuVc.centerViewController as? UINavigationController,
+                let homeVc = centerVc.topViewController as? HomeViewController{
+                homeVc.bellNotificationAction()
+            }else{
+                UserDefaults.standard.set(true, forKey: Constants.UserDefaults.notifiocationReceived)
+            }
+            break
+        case .background:
+            //app is in background, if content-available key of your notification is set to 1, poll to your backend to retrieve data and update your interface here
+           if let mfmenuVc = self.window?.topViewController() as? MFSideMenuContainerViewController,
+               let centerVc = mfmenuVc.centerViewController as? UINavigationController,
+               let homeVc = centerVc.topViewController as? HomeViewController{
+               homeVc.bellNotificationAction()
+           }else{
+                UserDefaults.standard.set(true, forKey: Constants.UserDefaults.notifiocationReceived)
+            }
+            break
+        default:
+            break
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -175,5 +218,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate {
         mfslidemenuContainer.leftMenuViewController = leftMenuController
         mfslidemenuContainer.centerViewController  = centerNavigationController
         UserManager.sharedUserManager.isUserInOfflineMode = false
+    }
+}
+
+extension AppDelegate:UNUserNotificationCenterDelegate{
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
+    {
+        completionHandler([.alert, .badge, .sound])
     }
 }

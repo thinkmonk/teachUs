@@ -23,7 +23,6 @@ class HomeViewController: BaseViewController{
 
         let buttonHamburger = UIBarButtonItem(image: UIImage(named: Constants.Images.hamburger), style: .plain, target: self, action: #selector(HomeViewController.hamburgerAction))
         self.navigationItem.leftBarButtonItem  = buttonHamburger
-        NotificationCenter.default.addObserver(self, selector: #selector(updateBellNotificaitonCount), name: .notificationBellCountUpdate, object: nil)
 
 //        self.makeDataSource()
 //        setUpPageMenu()
@@ -37,6 +36,8 @@ class HomeViewController: BaseViewController{
         // Dispose of any resources that can be recreated.
     }
     
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.title = "\(UserManager.sharedUserManager.userFullName)"
@@ -47,6 +48,19 @@ class HomeViewController: BaseViewController{
 //        pageMenu?.didMove(toParentViewController: self)
         
         self.addNotificaitonLabel()
+        NotificationCenter.default.addObserver(self, selector: #selector(updateBellNotificaitonCount), name: .notificationBellCountUpdate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(bellNotificationAction), name: .performNotificationNavigation, object: nil)
+        let notificationReceived = UserDefaults.standard.bool(forKey: Constants.UserDefaults.notifiocationReceived)
+        if notificationReceived{
+            self.bellNotificationAction()
+            UserDefaults.standard.removeObject(forKey: Constants.UserDefaults.notifiocationReceived)
+        }
+
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        NotificationCenter.default.removeObserver(self)
     }
     
     
