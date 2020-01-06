@@ -303,7 +303,7 @@ class BaseViewController: UIViewController {
         let imageView = view
         let newImageView = UIImageView(image: imageView.image)
         newImageView.frame = UIScreen.main.bounds
-
+        newImageView.center = UIScreen.main.bounds.center
         newImageView.backgroundColor = UIColor.init(red: 1, green: 1, blue: 1, alpha: 0.75)
         newImageView.contentMode = .scaleAspectFit
         newImageView.isUserInteractionEnabled = true

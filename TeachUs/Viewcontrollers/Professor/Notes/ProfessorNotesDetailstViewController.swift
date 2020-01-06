@@ -112,7 +112,6 @@ class ProfessorNotesDetailstViewController: BaseViewController {
     
     func setUpRx(){
         self.textfiledName.rx.text.map{$0 ?? ""}.bind(to: self.noticeTitle).disposed(by: myDisposeBag)
-        
         var isValid : Observable<Bool> {
             return Observable.combineLatest(self.noticeTitle.asObservable(), self.chosenFile.asObservable(), self.chosenImage.asObservable()){ [weak self] title, file, image in
                 UserDefaults.standard.set(title, forKey: Constants.UserDefaults.notesTitle)

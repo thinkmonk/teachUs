@@ -146,7 +146,7 @@ extension CollegeTeachersRatingListViewController:UITableViewDelegate, UITableVi
         cell.labelPopularity.text = "\(ratingObject.popularity)"
         cell.labelSubjectName.text = "\(ratingObject.subjectName)"
         cell.labelProfessorName.text = "\(ratingObject.fullname)"
-        cell.imageViewProfessor.imageFromServerURL(urlString: ratingObject.imageUrl, defaultImage: Constants.Images.defaultProfessor)
+        cell.imageViewProfessor.imageFromServerURL(urlString: ratingObject.imageUrl, defaultImage: Constants.Images.defaultMale)
         cell.accessoryType = .disclosureIndicator
         cell.imageViewProfessor.callback = {
             self.imageTapped(view: cell.imageViewProfessor)

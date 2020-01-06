@@ -63,7 +63,7 @@ class RatingProfessorList: Mappable {
         self.subjectName <- map["subject_name"]
         self.ratings <- map["ratings"]
         self.popularity <- map["popularity"]
-        self.imageUrl <- map[""]
+        self.imageUrl <- map["profile"]
         
         self.fullname = "\(self.firstName) \(self.middleName) \(self.lastName)"
      }

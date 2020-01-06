@@ -154,8 +154,8 @@ class AddNewNoticeViewController: BaseViewController {
             let parameters = [
                 "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
                 "class_id":"\(CollegeClassManager.sharedManager.getSelectedClassList)",
-                "title":self.textfieldNoticeTitle.text ?? "",
-                "description":"\(self.textViewDescription.text ?? "")",
+                "title":self.textfieldNoticeTitle.text?.addingPercentEncoding(withAllowedCharacters: .letters) ?? "",
+                "description":"\(self.textViewDescription.text?.addingPercentEncoding(withAllowedCharacters: .letters) ?? "")",
                 "doc":"",
                 "file_name":"",
                 "role_id": self.roleSwitch.isOn ? "2,3" : "1,3",
