@@ -254,7 +254,7 @@ class ProfessorNotesDetailstViewController: BaseViewController {
                 "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
                 "subject_id" :self?.selectedNotesSubject.subjectID ?? "",
                 "class_id":self?.selectedNotesSubject.classID ?? "",
-                "title":self?.textfiledName.text?.addingPercentEncoding(withAllowedCharacters: .letters) ?? "",
+                "title":self?.textfiledName.text?.encodedString() ?? "",
                 "doc":fileURL.absoluteString,
                 "file_name":fileName,
                 "doc_size":fileSize

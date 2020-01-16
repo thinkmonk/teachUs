@@ -154,8 +154,8 @@ class AddNewNoticeViewController: BaseViewController {
             let parameters = [
                 "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
                 "class_id":"\(CollegeClassManager.sharedManager.getSelectedClassList)",
-                "title":self.textfieldNoticeTitle.text?.addingPercentEncoding(withAllowedCharacters: .letters) ?? "",
-                "description":"\(self.textViewDescription.text?.addingPercentEncoding(withAllowedCharacters: .letters) ?? "")",
+                "title":self.textfieldNoticeTitle.text?.encodedString() ?? "",
+                "description":"\(self.textViewDescription.text?.encodedString() ?? "")",
                 "doc":"",
                 "file_name":"",
                 "role_id": self.roleSwitch.isOn ? "2,3" : "1,3",
@@ -169,8 +169,8 @@ class AddNewNoticeViewController: BaseViewController {
                 let parameters = [
                     "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
                     "class_id":"\(CollegeClassManager.sharedManager.getSelectedClassList)",
-                    "title":self?.textfieldNoticeTitle.text?.addingPercentEncoding(withAllowedCharacters: .letters) ?? "",
-                    "description":"\(self?.textViewDescription.text?.addingPercentEncoding(withAllowedCharacters: .letters) ?? "")",
+                    "title":self?.textfieldNoticeTitle.text?.encodedString() ?? "",
+                    "description":"\(self?.textViewDescription.text?.encodedString() ?? "")",
                     "doc":fileURL.absoluteString,
                     "file_name":"\(fileName)",
                     "role_id": switchStatus ? "2,3" : "1,3",

@@ -162,7 +162,7 @@ extension BellNotificationListViewController:UITableViewDelegate, UITableViewDat
         let cell:BellNotificationListTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.bellNotificationCellId, for: indexPath) as! BellNotificationListTableViewCell
         
         if let bellNotificationObj = self.arrayNotifications?.notifications?[indexPath.section], let isRead = bellNotificationObj.notificationRead?.elementsEqual("1"){
-            cell.labelNotificationDescription.text = "\(bellNotificationObj.data?.message?.removingPercentEncoding ?? "NA")"
+            cell.labelNotificationDescription.text = "\(bellNotificationObj.data?.message?.decodedString() ?? "NA")"
             cell.labelNotificaitondate.text = "\(bellNotificationObj.created ?? "")"
             cell.viewReadDot.isHidden = isRead
             if isRead{

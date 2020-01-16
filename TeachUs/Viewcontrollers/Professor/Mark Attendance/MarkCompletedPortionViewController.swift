@@ -19,34 +19,35 @@ enum SyllabusCompletetionType {
 
 
 class MarkCompletedPortionViewController: BaseViewController {
-
+    
     @IBOutlet weak var tableviewTopics: UITableView!
     @IBOutlet weak var buttonSubmit: UIButton!
     @IBOutlet weak var labelSyllabusCompletion: UILabel!
     var selectedCollege:College!
     var attendanceParameters:[String:Any] = [:]
     var attendanceId:NSNumber!
-    var arrayDataSource:[Unit] = []
     var updatedTopicList:[[String:Any]] = [] {
         didSet{
             self.buttonSubmit.isHidden = !(self.updatedTopicList.count > 0)
         }
     }
-    var syllabusData:[String:Any] = [:]
-
+    var syllabusData:SyllabusStatusData!
+    var attendanceDate:String = ""
+    var lectureDetails:EditAttendanceLectureInfo! //for edit attendance,syllabusaflow
+    var isEditAttendanceFlow:Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.attendanceDate = self.attendanceParameters["lecture_date"] as? String ?? ""
         self.tableviewTopics.register(UINib(nibName: "TopicDetailsTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.TopicDetailsTableViewCellId)
         self.title = "Syllabus Update"
         navigationItem.hidesBackButton = true
         self.tableviewTopics.estimatedRowHeight = 110
         self.tableviewTopics.rowHeight = UITableViewAutomaticDimension
         self.tableviewTopics.alpha = 0.0
-        self.mapTopicsToDataSource()
+        self.isEditAttendanceFlow ? self.getEditSyllabusStatus() : self.getSyllabusStatus()
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -61,59 +62,78 @@ class MarkCompletedPortionViewController: BaseViewController {
     }
     
     func mapTopicsToDataSource(){
-        guard let subjects = self.syllabusData["unit_syllabus_array"] as? [[String:Any]] else{
-            return
-        }
         
-        if let completionPercent = self.syllabusData["syllabus_percentage"]
-        {
-            self.labelSyllabusCompletion.text = "Completion: \(completionPercent)%"
-        }
-        else{
-            return
-        }
-        
-        for subject in subjects{
-            let tempSubject = Mapper<Unit>().map(JSON: subject)
-            self.arrayDataSource.append(tempSubject!)
-        }
+        self.labelSyllabusCompletion.text = "Completion: \(self.syllabusData.syllabusPercentage)%"
         self.makeTableView()
         self.tableviewTopics.reloadData()
         self.showTableView()
     }
     
-    func getTopics(){
+    
+    func getEditSyllabusStatus()
+    {
         let manager = NetworkHandler()
-        manager.url = URLConstants.ProfessorURL.getSyllabusSuubjectDetails
+        manager.url = URLConstants.ProfessorURL.getEditSyllabusAttendanceStatus
         var parameters = [String:Any]()
-        parameters["subject_id"] = "\(selectedCollege.subjectId!)"
-        parameters["class_id"] = "\(selectedCollege.classId!)"
-        parameters["college_code"] = UserManager.sharedUserManager.appUserCollegeDetails.college_code
+        parameters["subject_id"]    = self.lectureDetails.subjectId
+        parameters["class_id"]      = self.lectureDetails.classId
+        parameters["college_code"]  = UserManager.sharedUserManager.appUserCollegeDetails.college_code
+        parameters["lecture_date"]  = self.lectureDetails.lectureDate
+        parameters["to_time"]       = self.lectureDetails.toTime
+        parameters["from_time"]     = self.lectureDetails.fromTime
+        parameters["att_id"] = self.attendanceId
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
-
         
-        manager.apiPost(apiName: "Get topics for professor", parameters: parameters, completionHandler: { (sucess, code, response) in
+        manager.apiPostWithDataResponse(apiName: "Get syllabus status for attendance marking", parameters: parameters, completionHandler: { (sucess, code, response) in
             LoadingActivityHUD.hideProgressHUD()
-            
-            guard let subjects = response["unit_syllabus_array"] as? [[String:Any]] else{
-                return
+            do{
+                let decoder = JSONDecoder()
+                self.syllabusData = try decoder.decode(SyllabusStatusData.self, from: response)
+                self.mapTopicsToDataSource()
+            }
+            catch let error{
+                print("err", error)
             }
             
-            if let completionPercent = response["syllabus_percentage"]
-            {
-                self.labelSyllabusCompletion.text = "Completion: \(completionPercent)%"
+            
+        }) { (error, code, message) in
+            LoadingActivityHUD.hideProgressHUD()
+            print(message)
+            
+        }
+    }
+    
+    
+    func getSyllabusStatus(){
+        let manager = NetworkHandler()
+        manager.url = URLConstants.ProfessorURL.getSyllabusAttendanceStatus
+        var parameters = [String:Any]()
+        parameters["subject_id"]    = "\(selectedCollege.subjectId!)"
+        parameters["class_id"]      = "\(selectedCollege.classId!)"
+        parameters["college_code"]  = UserManager.sharedUserManager.appUserCollegeDetails.college_code
+        if let lectureDate = attendanceParameters["lecture_date"] as? String,
+            let fromTIme = attendanceParameters["from_time"] as? String,
+            let toTIme = attendanceParameters["to_time"] as? String
+        {
+            parameters["lecture_date"]  = lectureDate
+            parameters["to_time"]       = fromTIme
+            parameters["from_time"]     = toTIme
+        }
+        
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        
+        
+        manager.apiPostWithDataResponse(apiName: "Get syllabus status for attendance marking", parameters: parameters, completionHandler: { (sucess, code, response) in
+            LoadingActivityHUD.hideProgressHUD()
+            do{
+                let decoder = JSONDecoder()
+                self.syllabusData = try decoder.decode(SyllabusStatusData.self, from: response)
+                self.mapTopicsToDataSource()
             }
-            else{
-                return
+            catch let error{
+                print("err", error)
             }
             
-            for subject in subjects{
-                let tempSubject = Mapper<Unit>().map(JSON: subject)
-                self.arrayDataSource.append(tempSubject!)
-            }
-            self.makeTableView()
-            self.tableviewTopics.reloadData()
-            self.showTableView()
             
         }) { (error, code, message) in
             LoadingActivityHUD.hideProgressHUD()
@@ -149,7 +169,11 @@ class MarkCompletedPortionViewController: BaseViewController {
     
     func submitAttendanceAndSyllabus(){
         let manager = NetworkHandler()
-        manager.url = URLConstants.ProfessorURL.mergedAttendanceAndSyllabus
+        if self.isEditAttendanceFlow{
+            manager.url = URLConstants.ProfessorURL.submitEditedAttendace
+        }else{
+            manager.url = URLConstants.ProfessorURL.mergedAttendanceAndSyllabus
+        }
         let topicList = ["topic_list":self.updatedTopicList]
         var requestString  =  ""
         if let theJSONData = try? JSONSerialization.data(withJSONObject: topicList,options: []) {
@@ -169,7 +193,17 @@ class MarkCompletedPortionViewController: BaseViewController {
                 let alert = UIAlertController(title: nil, message: response["message"] as? String, preferredStyle: UIAlertControllerStyle.alert)
                 // add an action (button)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { _ in
-                    self.performSegue(withIdentifier: Constants.segues.toLectureReport, sender: self)
+                    if self.isEditAttendanceFlow{
+                        for controller in self.navigationController!.viewControllers as Array {
+                            if controller.isKind(of: LogsDetailViewController.self) {
+                                self.navigationController!.popToViewController(controller, animated: true)
+                                break
+                            }
+                        }
+
+                    }else{
+                        self.performSegue(withIdentifier: Constants.segues.toLectureReport, sender: self)
+                    }
                 }))
                 self.present(alert, animated: true, completion:nil)
                 self.buttonSubmit.isEnabled = true
@@ -180,7 +214,7 @@ class MarkCompletedPortionViewController: BaseViewController {
             self.buttonSubmit.isEnabled = true
         }
     }
-
+    
     func saveAttendanceAndSyllabusToDb(){
         let manager = NetworkHandler()
         manager.url = URLConstants.ProfessorURL.submitSyllabusCovered
@@ -227,22 +261,20 @@ extension MarkCompletedPortionViewController:UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:TopicDetailsTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.TopicDetailsTableViewCellId, for: indexPath) as! TopicDetailsTableViewCell
         
-        let chapterCell:Chapter = self.arrayDataSource[indexPath.section].topicArray![indexPath.row]
-        cell.labelChapterNumber.text = chapterCell.chapterNumber
-        cell.labelChapterName.text = chapterCell.chapterName
+        let chapterCell:TopicList = self.syllabusData.unitSyllabusArray[indexPath.section].topicList[indexPath.row]
+        cell.labelChapterName.text = chapterCell.topicName
         cell.labelStatus.text = chapterCell.setChapterStatus
 //        cell.buttonSetStatus.roundedBlueButton()
         cell.buttonInProgress.indexPath = indexPath
         cell.buttonCompleted.indexPath = indexPath
         cell.buttonInProgress.addTarget(self, action:#selector( MarkCompletedPortionViewController.markChapterInProgress(_:)), for: .touchUpInside)
         cell.buttonCompleted.addTarget(self, action:#selector( MarkCompletedPortionViewController.markChapterInCompleted(_:)), for: .touchUpInside)
-        
         switch chapterCell.chapterStatusTheme! {
         case .Completed:
             cell.buttonCompleted.selectedGreenButton()
             cell.buttonInProgress.selectedDefaultButton()
             cell.labelStatus.textColor = UIColor.rgbColor(0.0, 143.0, 83.0) //#008F53
-            cell.viewDisableCell.alpha = chapterCell.isUpdated ? 0 : 1
+            cell.viewDisableCell.alpha = chapterCell.isUpdated ? 0 : 1 //show disabled view by default.
 //            cell.viewStatusStack.alpha = 0
 //            cell.viewwSeperator.alpha = 0
             break
@@ -251,7 +283,7 @@ extension MarkCompletedPortionViewController:UITableViewDelegate, UITableViewDat
             cell.buttonCompleted.selectedDefaultButton()
             cell.labelStatus.textColor = UIColor.rgbColor(299.0, 0.0, 0.0)   //#E50000
             cell.viewDisableCell.alpha = 0
-            let topicList = ["topic_id":"\(chapterCell.chapterId)",
+            let topicList = ["topic_id":"\(chapterCell.topicId)",
                             "status":"1" ]
             self.updateUnitListArray(list: topicList)
             self.updatedTopicList.append(topicList)
@@ -275,11 +307,11 @@ extension MarkCompletedPortionViewController:UITableViewDelegate, UITableViewDat
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return self.arrayDataSource.count
+        return self.syllabusData.unitSyllabusArray.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (self.arrayDataSource[section].topicArray?.count)!
+        return (self.syllabusData.unitSyllabusArray[section].topicList.count)
     }
     
 //    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -291,7 +323,7 @@ extension MarkCompletedPortionViewController:UITableViewDelegate, UITableViewDat
         headerView.backgroundColor = Constants.colors.themeLightBlue
         let labelView:UILabel  = UILabel(frame: CGRect(x: 15, y: 0, width: self.tableviewTopics.width(), height: 44))
         labelView.center.y = headerView.centerY()
-        labelView.text = self.arrayDataSource[section].unitName
+        labelView.text = self.syllabusData.unitSyllabusArray[section].unitName
         labelView.textColor = UIColor.rgbColor(51, 51, 51)
         headerView.addSubview(labelView)
         return headerView
@@ -306,22 +338,23 @@ extension MarkCompletedPortionViewController:UITableViewDelegate, UITableViewDat
     }
     @objc func markChapterInProgress(_ sender: ButtonWithIndexPath){
         let indexpath = sender.indexPath!
-        if(self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].status != "1"){
-            self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].setChapterStatus = "In Progress"
-            self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].status = "1"
-            self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].chapterStatusTheme = .InProgress
-            self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].isUpdated = true
-            let topicList = ["topic_id":"\(self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].chapterId)",
+        var chapterObj = self.syllabusData.unitSyllabusArray[(indexpath.section)].topicList[(indexpath.row)]
+        if(chapterObj.status != "1"){
+            chapterObj.setChapterStatus = "In Progress"
+            chapterObj.status = "1"
+            chapterObj.chapterStatusTheme = .InProgress
+            chapterObj.isUpdated = true
+            let topicList = ["topic_id":"\(chapterObj.topicId)",
                 "status":"1" ] //status 2 is for completed topic / 1 is for inprogress
             self.updateUnitListArray(list: topicList)
             self.updatedTopicList.append(topicList)
             self.tableviewTopics.reloadRows(at: [indexpath], with: .fade)
         }else{//Not Started
-            self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].setChapterStatus = "Not Started"
-            self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].chapterStatusTheme = .NotStarted
-            self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].status = "0"
-            self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].isUpdated = true
-            let topicList = ["topic_id":"\(self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].chapterId)",
+            chapterObj.setChapterStatus = "Not Started"
+            chapterObj.chapterStatusTheme = .NotStarted
+            chapterObj.status = "0"
+            chapterObj.isUpdated = true
+            let topicList = ["topic_id":"\(chapterObj.topicId)",
                 "status":"1" ]
             self.updateUnitListArray(list: topicList)
             self.tableviewTopics.reloadRows(at: [indexpath], with: .fade)
@@ -331,23 +364,37 @@ extension MarkCompletedPortionViewController:UITableViewDelegate, UITableViewDat
 
     @objc func markChapterInCompleted(_ sender: ButtonWithIndexPath){
         let indexpath = sender.indexPath!
+        var chapterObj = self.syllabusData.unitSyllabusArray[(indexpath.section)].topicList[(indexpath.row)]
         
-        if(self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].status != "2"){
-            self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].setChapterStatus = "Completed"
-            self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].chapterStatusTheme = .Completed
-            self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].status = "2"
-              self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].isUpdated = true
-            let topicList = ["topic_id":"\(self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].chapterId)",
+        
+        if chapterObj.resultStatusFlag == "2"{ //chapter has been mark completed in future hence cannot mark it completed in present.
+            self.showAlertWithTitle("Chapter Completed", alertMessage: "Topic marked completed on \(chapterObj.resultStatusDate ?? "")")
+            return
+        }else if let futureDate = chapterObj.resultStatusDate?.convertToDate(),
+            let attendanceDate = self.attendanceDate.convertToDate(),
+            (chapterObj.resultStatusFlag == "1" && (futureDate > attendanceDate))
+        { //chapter is in progress in the future date as well, hence cannot be mark complted in past
+            self.showAlertWithTitle("Chapter In-Progress", alertMessage: "Topic marked In-Progess on \(futureDate)")
+            return
+        }
+        
+        
+        if(chapterObj.status != "2"){
+            chapterObj.setChapterStatus = "Completed"
+            chapterObj.chapterStatusTheme = .Completed
+            chapterObj.status = "2"
+            chapterObj.isUpdated = true
+            let topicList = ["topic_id":"\(chapterObj.topicId)",
                 "status":"2" ] //status 2 is for completed topic / 1 is for inprogress
             self.updateUnitListArray(list: topicList)
             self.updatedTopicList.append(topicList)
             self.tableviewTopics.reloadRows(at: [indexpath], with: .fade)
         }else{//Not Started
-                self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].setChapterStatus = "Not Started"
-                self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].chapterStatusTheme = .NotStarted
-            self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].status = "0"
-            self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].isUpdated = true
-            let topicList = ["topic_id":"\(self.arrayDataSource[(indexpath.section)].topicArray![(indexpath.row)].chapterId)",
+            chapterObj.setChapterStatus = "Not Started"
+            chapterObj.chapterStatusTheme = .NotStarted
+            chapterObj.status = "0"
+            chapterObj.isUpdated = true
+            let topicList = ["topic_id":"\(chapterObj.topicId)",
                     "status":"1" ]
                 self.updateUnitListArray(list: topicList)
             self.tableviewTopics.reloadRows(at: [indexpath], with: .fade)

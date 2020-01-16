@@ -217,6 +217,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate {
         leftMenuController.delegate = homeVc as LeftMenuDeleagte
         mfslidemenuContainer.leftMenuViewController = leftMenuController
         mfslidemenuContainer.centerViewController  = centerNavigationController
+        mfslidemenuContainer.panMode = MFSideMenuPanModeNone
         UserManager.sharedUserManager.isUserInOfflineMode = false
     }
 }

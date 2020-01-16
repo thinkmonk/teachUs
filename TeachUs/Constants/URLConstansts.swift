@@ -94,6 +94,8 @@ public struct URLConstants{
         static let submitAttendance =                   BaseUrl.baseURLV1 + "/attendance/submit_attendance"
         static let syllabusSubjectStatus =              BaseUrl.baseURLV1 + "/syllabus/professor_syllabus_subject_status"
         static let getSyllabusSuubjectDetails =         BaseUrl.baseURLV1 + "/syllabus/professor_detailed_syllabus_status"
+        static let getSyllabusAttendanceStatus =        BaseUrl.baseURLV1 + "/syllabus/professor_detailed_syllabus_attendance_status"
+        static let getEditSyllabusAttendanceStatus =    BaseUrl.baseURLV1 + "/syllabus/professor_detailed_syllabus_attendanceedit_status"
         static let logsClassList =                      BaseUrl.baseURLV1 + "/syllabus/professor_class_list"
         static let logDetails =                         BaseUrl.baseURLV1 + "/syllabus/detailed_log_subject"
         static let topicList =                          BaseUrl.baseURLV1 + "/syllabus/topic_list"

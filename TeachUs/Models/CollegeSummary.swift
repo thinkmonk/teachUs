@@ -39,6 +39,7 @@ public class College:Mappable{
     var subjectName:String?
     var year:String?
     var yearName:String?
+    var yearNameWithCode:String? = ""
 //    var college_id:String?
 //    var collegeSubjects  = [CollegeSubjects]()
 
@@ -57,6 +58,7 @@ public class College:Mappable{
         self.subjectName <- map["subject_name"]
         self.year <- map["year"]
         self.yearName <- map["year_name"]
+        self.yearNameWithCode = (year ?? "") + (courseCode ?? "")
     }
     
 }

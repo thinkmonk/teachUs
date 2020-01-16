@@ -42,11 +42,7 @@ class LogsDetailViewController: BaseViewController {
         self.tableLogsDetail.dataSource = self
         self.tableLogsDetail.separatorStyle = .none
         self.tableLogsDetail.alpha = 0
-        if self.isCollegeLogsSubjectData{
-            self.getCollgeProfessorLogDetails(fromDate: self.calenderView?.fromDateString ?? "", toDate: self.calenderView?.toDateStirng ?? "")
-        }else{
-            self.getLogs(fromDate: self.calenderView?.fromDateString ?? "", toDate: self.calenderView?.toDateStirng ?? "")
-        }
+    
         self.tableLogsDetail.register(UINib(nibName: "LogsDetailTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.LogsDetailTableViewCellId)
         self.tableLogsDetail.register(UINib(nibName: "SyllabusDetailsTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.SyllabusDetailsTableViewCellId)
         
@@ -54,6 +50,15 @@ class LogsDetailViewController: BaseViewController {
         image = image?.withRenderingMode(.alwaysOriginal)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style:.plain, target: self, action: #selector(LogsDetailViewController.showCalenderView))
         self.setUpButtons()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if self.isCollegeLogsSubjectData{
+                self.getCollgeProfessorLogDetails(fromDate: self.calenderView?.fromDateString ?? "", toDate: self.calenderView?.toDateStirng ?? "")
+            }else{
+                self.getLogs(fromDate: self.calenderView?.fromDateString ?? "", toDate: self.calenderView?.toDateStirng ?? "")
+            }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -275,6 +280,7 @@ extension LogsDetailViewController:UITableViewDelegate, UITableViewDataSource{
             cell.labelTimeOfSubmission.text = "\(logs.dateOfSubmission)"
             cell.selectionStyle = .none
             cell.buttonEditAttendance.indexPath = indexPath
+            cell.buttonEditAttendance.isHidden = self.isCollegeLogsSubjectData //edit edit optioj for college logs
             cell.delegate = self
             return cell
             

@@ -111,6 +111,8 @@ class Chapter:Mappable{
     var chapterNumber:String = ""
     var status:String = ""
     var isUpdated:Bool = false
+    var futureStatus:String = ""
+    var futureDate:String = ""
     
     
     var setChapterStatus:String? = "Not Started"

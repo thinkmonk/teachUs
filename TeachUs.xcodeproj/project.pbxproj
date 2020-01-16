@@ -123,6 +123,7 @@
 		816522BF2234177A00C1BA29 /* ViewCourseSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816522BE2234177A00C1BA29 /* ViewCourseSelection.swift */; };
 		816C5AD822351B2E00B6A7B3 /* AddRemoveAdminTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816C5AD622351B2E00B6A7B3 /* AddRemoveAdminTableViewCell.swift */; };
 		816C5AD922351B2E00B6A7B3 /* AddRemoveAdminTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 816C5AD722351B2E00B6A7B3 /* AddRemoveAdminTableViewCell.xib */; };
+		816CE20C23C7A12500CB9769 /* SyllabusStatusData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816CE20B23C7A12500CB9769 /* SyllabusStatusData.swift */; };
 		81727B8B1F9E6CB8006433E8 /* MFSideMenuShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 81727B841F9E6CB7006433E8 /* MFSideMenuShadow.m */; };
 		81727B8C1F9E6CB8006433E8 /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 81727B851F9E6CB7006433E8 /* UIViewController+MFSideMenuAdditions.m */; };
 		81727B8D1F9E6CB8006433E8 /* MFSideMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81727B891F9E6CB8006433E8 /* MFSideMenuContainerViewController.m */; };
@@ -464,6 +465,7 @@
 		816522BE2234177A00C1BA29 /* ViewCourseSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCourseSelection.swift; sourceTree = "<group>"; };
 		816C5AD622351B2E00B6A7B3 /* AddRemoveAdminTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRemoveAdminTableViewCell.swift; sourceTree = "<group>"; };
 		816C5AD722351B2E00B6A7B3 /* AddRemoveAdminTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddRemoveAdminTableViewCell.xib; sourceTree = "<group>"; };
+		816CE20B23C7A12500CB9769 /* SyllabusStatusData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyllabusStatusData.swift; sourceTree = "<group>"; };
 		81727B841F9E6CB7006433E8 /* MFSideMenuShadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSideMenuShadow.m; sourceTree = "<group>"; };
 		81727B851F9E6CB7006433E8 /* UIViewController+MFSideMenuAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MFSideMenuAdditions.m"; sourceTree = "<group>"; };
 		81727B861F9E6CB7006433E8 /* MFSideMenuContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenuContainerViewController.h; sourceTree = "<group>"; };
@@ -1095,6 +1097,7 @@
 		813EC76D1F9BA4FD00F11A12 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				816CE20A23C7A10700CB9769 /* Syllabus */,
 				81C9AC27233A95230019B29E /* Parents */,
 				8194882422A465130006CB86 /* Notificaion */,
 				81B4E90C22A2C142005AA5F7 /* Notice */,
@@ -1107,7 +1110,6 @@
 				8136E59420F7C34A0080AECA /* OfflineData */,
 				81E67401205318E200321257 /* UserRoles */,
 				81C1D8AC1FCF35790091DA6E /* Users */,
-				81FFB0BD1FBF468000C32097 /* SyllabusChapter.swift */,
 				81A80EDC1FAF11B700DDFFA1 /* CollegeSummary.swift */,
 				810BECD9206ED5B000F560C6 /* CollegeSubjects.swift */,
 				81C208591FAF6CEB003D366D /* EnrolledStudentDetail.swift */,
@@ -1133,7 +1135,6 @@
 				81A7D05D208B78590032A1BC /* RatingProfessorList.swift */,
 				81A7D061208BA7EE0032A1BC /* RatingDetails.swift */,
 				819EEC2720A6145E00487467 /* LectureReport.swift */,
-				81AC9F9220AA051900DEECB1 /* CollegeSyllabusList.swift */,
 				8108D932224D5AB20010A605 /* AppUpdate.swift */,
 				81BC7B5F224FD6C70091B037 /* ForceUpdate.swift */,
 			);
@@ -1184,6 +1185,16 @@
 				816C5AD722351B2E00B6A7B3 /* AddRemoveAdminTableViewCell.xib */,
 			);
 			path = "Add_Remove Admin";
+			sourceTree = "<group>";
+		};
+		816CE20A23C7A10700CB9769 /* Syllabus */ = {
+			isa = PBXGroup;
+			children = (
+				81FFB0BD1FBF468000C32097 /* SyllabusChapter.swift */,
+				816CE20B23C7A12500CB9769 /* SyllabusStatusData.swift */,
+				81AC9F9220AA051900DEECB1 /* CollegeSyllabusList.swift */,
+			);
+			path = Syllabus;
 			sourceTree = "<group>";
 		};
 		81727B771F9E6A0B006433E8 /* Third Party */ = {
@@ -2304,6 +2315,7 @@
 				81FFB0C21FC0278E00C32097 /* TopicDetailsTableViewCell.swift in Sources */,
 				81D76B551FC1D600005E861C /* SyllabusDetailsTableViewCell.swift in Sources */,
 				81F92A4A22B5294700395413 /* BellNotificationList.swift in Sources */,
+				816CE20C23C7A12500CB9769 /* SyllabusStatusData.swift in Sources */,
 				81E4BCE7205E9E7E00674FD4 /* CollegeAttendanceListViewController.swift in Sources */,
 				81A6BC08229C6F5100615EDD /* NotesSubjectDetails.swift in Sources */,
 				819EEC2220A60BF400487467 /* ViewLectureReport.swift in Sources */,
@@ -2513,7 +2525,7 @@
 				INFOPLIST_FILE = TeachUs/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.1.10;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thinkmonk.teachus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "aeddf05d-0430-4eea-8aa6-29bd99785f74";
@@ -2542,7 +2554,7 @@
 				INFOPLIST_FILE = TeachUs/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.1.10;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thinkmonk.teachus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c97490f5-6a8f-4e89-b72d-9ba422aad757";

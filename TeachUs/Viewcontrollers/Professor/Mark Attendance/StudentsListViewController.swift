@@ -27,7 +27,7 @@ class StudentsListViewController: BaseViewController {
     private var currentOpenProfileIndexPath: IndexPath = IndexPath(row: -1, section: 0)
     var isDefaultAttencdanceChanged:Bool = true
     var parameters:[String:Any] = [:]
-    var syllabusData:[String:Any] = [:]
+    var syllabusData:SyllabusStatusData!
     var numberOfLectures = Variable<Int>(1)
 
     let searchBarStudents = UISearchBar()
@@ -212,10 +212,10 @@ class StudentsListViewController: BaseViewController {
                 
                 if let student = self.arrayStudentsDetails.first{
                     if (Int(student.studentRollNo!) != nil){
-                        self.arrayStudentsDetails.sort(by: {Int($0.studentRollNo!)! < Int($1.studentRollNo!)!})
+                        self.arrayStudentsDetails.sort(by: {(Int($0.studentRollNo ?? "") ?? 0) < (Int($1.studentRollNo ?? "") ?? 0)})
 
                     }else{
-                        self.arrayStudentsDetails.sort( by: {$0.studentRollNo!.localizedStandardCompare($1.studentRollNo!) == .orderedAscending})
+                        self.arrayStudentsDetails.sort( by: {$0.studentRollNo!.localizedStandardCompare($1.studentRollNo ?? "") == .orderedAscending})
 
                     }
                 }
@@ -251,10 +251,16 @@ class StudentsListViewController: BaseViewController {
     
         
         
-        manager.apiPost(apiName: "Get topics for professor", parameters: parameters, completionHandler: { (sucess, code, response) in
+        manager.apiPostWithDataResponse(apiName: "Get topics for professor", parameters: parameters, completionHandler: { (sucess, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             if(code == 200){
-                self.syllabusData = response
+            do{
+                let decoder = JSONDecoder()
+                self.syllabusData = try decoder.decode(SyllabusStatusData.self, from: response)
+            }
+            catch let error{
+                print("err", error)
+            }
             }else{
                 self.showErrorAlert(ErrorType.ServerCallFailed, retry: { (retry) in
                     if(retry){
@@ -437,9 +443,9 @@ class StudentsListViewController: BaseViewController {
     }
     
     private func submitEditedAttendance(){
-        let manager = NetworkHandler()
-        manager.url = URLConstants.ProfessorURL.submitEditedAttendace
-        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+//        let manager = NetworkHandler()
+//        manager.url = URLConstants.ProfessorURL.submitEditedAttendace
+//        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         parameters = [
             "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
             "attendance_id":"\(self.selectedAttendanceId ?? 0)",
@@ -450,6 +456,16 @@ class StudentsListViewController: BaseViewController {
             "no_of_lecture":"\(self.numberOfLectures.value)"
         ]
         
+        
+        let alert = UIAlertController(title: nil, message: "Attendance Recorded", preferredStyle: UIAlertControllerStyle.alert)
+        
+        // add an action (button)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { _ in
+            self.performSegue(withIdentifier: Constants.segues.markPortionCompleted, sender: self)
+        }))
+        self.present(alert, animated: true, completion:nil)
+        
+        /*
         manager.apiPost(apiName: "Edit attendance for id \(self.selectedAttendanceId ?? 0)", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             if(code == 200){
@@ -468,6 +484,7 @@ class StudentsListViewController: BaseViewController {
             LoadingActivityHUD.hideProgressHUD()
             self.showAlertWithTitle(nil, alertMessage: errorMessage)
         }
+ */
     }
 }
 
@@ -974,10 +991,12 @@ extension StudentsListViewController:ViewConfirmAttendanceDelegate{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == Constants.segues.markPortionCompleted){
             let destinationVC:MarkCompletedPortionViewController = segue.destination as! MarkCompletedPortionViewController
-            destinationVC.syllabusData = self.syllabusData
-            destinationVC.selectedCollege = self.selectedCollege
-            destinationVC.attendanceId = self.markedAttendanceId
-            destinationVC.attendanceParameters = self.parameters
+            destinationVC.syllabusData          = self.syllabusData
+            destinationVC.selectedCollege       = self.selectedCollege
+            destinationVC.attendanceId          = self.isEditAttendanceFlow ? NSNumber(integerLiteral: self.selectedAttendanceId ?? 0) : self.markedAttendanceId
+            destinationVC.isEditAttendanceFlow  = self.isEditAttendanceFlow
+            destinationVC.attendanceParameters  = self.parameters
+            destinationVC.lectureDetails        = self.lectureDetails
         }
     }
 }

@@ -48,4 +48,13 @@ extension String{
         attribute.addAttribute(NSAttributedStringKey.foregroundColor, value: stringColor , range: range)
         return attribute
     }
+    
+    func decodedString() -> String {
+        return replacingOccurrences(of: "+", with: " ").removingPercentEncoding ?? ""
+    }
+
+    func encodedString() -> String {
+        return self.addingPercentEncoding(withAllowedCharacters: .letters) ?? ""
+    }
+
 }
