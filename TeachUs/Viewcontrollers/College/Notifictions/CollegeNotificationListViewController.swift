@@ -52,7 +52,7 @@ class CollegeNotificationListViewController: BaseViewController {
             "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
         ]
         
-        manager.apiPostWithDataResponse(apiName: "Get Notice List", parameters:parameters, completionHandler: { (result, code, response) in
+        manager.apiPostWithDataResponse(apiName: "Get Notification List", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             do{
                 let decoder = JSONDecoder()

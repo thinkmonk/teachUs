@@ -197,6 +197,8 @@ extension CollegeNoticeListViewController:UITableViewDelegate, UITableViewDataSo
             cell.buttonDownload.indexPath = indexPath
             cell.buttonDeleteNotice.indexPath = indexPath
             cell.buttonDownload.addTarget(self, action: #selector(CollegeNoticeListViewController.downloadNotices(_:)), for: .touchUpInside)
+            
+            cell.buttonDeleteNotice.isHidden = noticeObject.deleteFlag == .otherUser //hide the delete notice button for the user that has not created it.
             cell.buttonDeleteNotice.addTarget(self, action: #selector(CollegeNoticeListViewController.deleteNotices(_:)), for: .touchUpInside)
 
         }

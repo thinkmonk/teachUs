@@ -92,12 +92,22 @@ class MarkCompletedPortionViewController: BaseViewController {
                 self.mapTopicsToDataSource()
             }
             catch let error{
+                self.showErrorAlert(.ParsingError) { (retry) in
+                    if (retry){
+                        self.getSyllabusStatus()
+                    }
+                }
                 print("err", error)
             }
             
             
         }) { (error, code, message) in
             LoadingActivityHUD.hideProgressHUD()
+            self.showErrorAlert(.ServerCallFailed) { (retry) in
+                if (retry){
+                    self.getSyllabusStatus()
+                }
+            }
             print(message)
             
         }
@@ -121,8 +131,6 @@ class MarkCompletedPortionViewController: BaseViewController {
         }
         
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
-        
-        
         manager.apiPostWithDataResponse(apiName: "Get syllabus status for attendance marking", parameters: parameters, completionHandler: { (sucess, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             do{
@@ -131,12 +139,20 @@ class MarkCompletedPortionViewController: BaseViewController {
                 self.mapTopicsToDataSource()
             }
             catch let error{
+                self.showErrorAlert(.ParsingError) { (retry) in
+                    if (retry){
+                        self.getSyllabusStatus()
+                    }
+                }
                 print("err", error)
             }
-            
-            
         }) { (error, code, message) in
             LoadingActivityHUD.hideProgressHUD()
+            self.showErrorAlert(.ServerCallFailed) { (retry) in
+                if (retry){
+                    self.getSyllabusStatus()
+                }
+            }
             print(message)
             
         }

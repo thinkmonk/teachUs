@@ -151,6 +151,7 @@ class BaseViewController: UIViewController {
     enum ErrorType{
         case NoInternet
         case ServerCallFailed
+        case ParsingError
     }
     
     func showErrorAlert(_ errorType:ErrorType, retry: @escaping (_ retry:Bool) -> Void){
@@ -159,12 +160,16 @@ class BaseViewController: UIViewController {
         
         switch errorType {
         case .NoInternet:
-            title = "No Internet"
+            title       = "No Internet"
             description = "Please check your internet connection"
             
         case .ServerCallFailed:
-            title = "Error"
+            title       = "Error"
             description = "Failed to conect to server, Please Retry"
+            
+        case .ParsingError:
+            title       = "Invalid data received"
+            description = ""
         }
         let alertController = UIAlertController(title: title, message: description, preferredStyle: .alert)
         // Create the actions
