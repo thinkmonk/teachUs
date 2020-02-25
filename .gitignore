@@ -16,7 +16,7 @@
 xcuserdata/
 project.xcworkspace/
 DerivedData/
-
+*.DS_Store
 # build products
 build/
 *.[oa]
