@@ -2512,6 +2512,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = ADA58029E3089D434D630F56 /* Pods-TeachUs.debug.xcconfig */;
 			buildSettings = {
+				APP_DISPLAY_NAME = "$(PRODUCT_NAME)_UAT";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BASE_URL = "$(BASE_URL_HOME)/api_uat";
 				BASE_URL_HOME = "http://teachusedumation.com";
@@ -2542,6 +2543,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 817553511B457FEB4E645FC1 /* Pods-TeachUs.release.xcconfig */;
 			buildSettings = {
+				APP_DISPLAY_NAME = "$(PRODUCT_NAME)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BASE_URL = "$(BASE_URL_HOME)/api_v2";
 				BASE_URL_HOME = "http://teachusedumation.com";

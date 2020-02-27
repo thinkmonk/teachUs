@@ -115,16 +115,26 @@ class CollegeNoticeListViewController: BaseViewController {
         
         if let indexpath = sender.indexPath, let notice = self.notesList?.notices?[indexpath.section]
         {
-            let alert = UIAlertController(title: nil, message: "Are you sure, you want to delete this notice?", preferredStyle: UIAlertControllerStyle.alert)
-            
-            // add an action (button)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { _ in
-                self.deleteNoticeApiCall(noticeObj: notice)
-            }))
-            
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            // show the alert
-            self.present(alert, animated: true, completion:nil)
+            if notice.deleteFlag == .otherUser{
+                let alert = UIAlertController(title: nil, message: "Only the notice creator can delete this notice", preferredStyle: UIAlertControllerStyle.alert)
+                
+                // add an action (button)
+                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                
+                self.present(alert, animated: true, completion:nil)
+
+            }else{
+                let alert = UIAlertController(title: nil, message: "Are you sure, you want to delete this notice?", preferredStyle: UIAlertControllerStyle.alert)
+                
+                // add an action (button)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { _ in
+                    self.deleteNoticeApiCall(noticeObj: notice)
+                }))
+                
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                // show the alert
+                self.present(alert, animated: true, completion:nil)
+            }
         }
     }
     
@@ -198,7 +208,6 @@ extension CollegeNoticeListViewController:UITableViewDelegate, UITableViewDataSo
             cell.buttonDeleteNotice.indexPath = indexPath
             cell.buttonDownload.addTarget(self, action: #selector(CollegeNoticeListViewController.downloadNotices(_:)), for: .touchUpInside)
             
-            cell.buttonDeleteNotice.isHidden = noticeObject.deleteFlag == .otherUser //hide the delete notice button for the user that has not created it.
             cell.buttonDeleteNotice.addTarget(self, action: #selector(CollegeNoticeListViewController.deleteNotices(_:)), for: .touchUpInside)
 
         }
