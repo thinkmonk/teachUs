@@ -386,6 +386,7 @@ class StudentsListViewController: BaseViewController {
     
     @IBAction func submitAttendance(_ sender: UIButton) {
         if(self.checkLectureTiming()){
+            Vibration.warning.vibrate()
             if(viewConfirmAttendance == nil){
                 viewConfirmAttendance = ViewConfirmAttendance.instanceFromNib() as? ViewConfirmAttendance
                 viewConfirmAttendance.delegate = self

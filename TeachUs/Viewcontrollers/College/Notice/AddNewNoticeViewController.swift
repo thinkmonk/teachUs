@@ -25,7 +25,6 @@ class AddNewNoticeViewController: BaseViewController {
     @IBOutlet weak var textfieldNoticeTitle: UITextField!
     @IBOutlet weak var viewDescriptionBg: UIView!
     @IBOutlet weak var textViewDescription: UITextView!
-    @IBOutlet weak var buttonAddNotice: UIButton!
     @IBOutlet weak var labelClassNames: UILabel!
     @IBOutlet weak var buttonSelectClass: UIButton!
     @IBOutlet weak var buttonPreviewNotice: UIButton!

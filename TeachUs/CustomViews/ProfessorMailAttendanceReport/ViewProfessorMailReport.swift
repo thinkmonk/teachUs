@@ -141,6 +141,7 @@ class ViewProfessorMailReport: UIView {
     
     @IBAction func submitDates(_ sender: Any) {
         if delegate != nil && self.verifyDate(){
+            Vibration.light.vibrate()
             self.delegate.mailReport(fromDate: self.fromDateString, toDate: self.toDateStirng)
         }
     }

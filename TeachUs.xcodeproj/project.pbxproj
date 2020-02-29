@@ -279,6 +279,7 @@
 		81D7CE961FAB98C300C4375E /* SyllabusStatusListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D7CE951FAB98C300C4375E /* SyllabusStatusListViewController.swift */; };
 		81D7CE981FAB98DB00C4375E /* ProfessorLogsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D7CE971FAB98DB00C4375E /* ProfessorLogsListViewController.swift */; };
 		81D7CE9A1FAB9A1D00C4375E /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D7CE991FAB9A1D00C4375E /* UserManager.swift */; };
+		81DB2B4C240AB9E00091CAA5 /* FeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DB2B4B240AB9E00091CAA5 /* FeedbackGenerator.swift */; };
 		81DC5C73224614BB00D9F3B7 /* StudentAttendanceDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DC5C72224614BB00D9F3B7 /* StudentAttendanceDetails.swift */; };
 		81DC5C7722462D0500D9F3B7 /* StudentDetailsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DC5C7622462D0400D9F3B7 /* StudentDetailsDataSource.swift */; };
 		81E01F2923C213FC00EF2E1D /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E01F2823C213FC00EF2E1D /* UIDevice.swift */; };
@@ -631,6 +632,7 @@
 		81D7CE951FAB98C300C4375E /* SyllabusStatusListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyllabusStatusListViewController.swift; sourceTree = "<group>"; };
 		81D7CE971FAB98DB00C4375E /* ProfessorLogsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessorLogsListViewController.swift; sourceTree = "<group>"; };
 		81D7CE991FAB9A1D00C4375E /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		81DB2B4B240AB9E00091CAA5 /* FeedbackGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackGenerator.swift; sourceTree = "<group>"; };
 		81DC5C72224614BB00D9F3B7 /* StudentAttendanceDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentAttendanceDetails.swift; sourceTree = "<group>"; };
 		81DC5C7622462D0400D9F3B7 /* StudentDetailsDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentDetailsDataSource.swift; sourceTree = "<group>"; };
 		81E01F2823C213FC00EF2E1D /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
@@ -996,6 +998,7 @@
 				817BDAE41FB898C700492822 /* ButtonWithIndexPath.swift */,
 				813C0D9F21EB7C7100B04E61 /* GlobalFunction.swift */,
 				8161AF66222C5922001F73B5 /* CollegeClassManager.swift */,
+				81DB2B4B240AB9E00091CAA5 /* FeedbackGenerator.swift */,
 			);
 			path = CustomClass;
 			sourceTree = "<group>";
@@ -2174,6 +2177,7 @@
 				819216EC1FB81BA6009B56C0 /* ViewNumberPicker.swift in Sources */,
 				81A7D056208B6E550032A1BC /* RatingClassList.swift in Sources */,
 				81D7CE841FAB8E5D00C4375E /* CAPSPageMenu+UIConfiguration.swift in Sources */,
+				81DB2B4C240AB9E00091CAA5 /* FeedbackGenerator.swift in Sources */,
 				81D2774A22A074F2003CFC51 /* CollegeNotesSubjectListViewController.swift in Sources */,
 				81A3585120820F2C00B93239 /* EventAttendanceManager.swift in Sources */,
 				81B4E91022A2D182005AA5F7 /* CollegeNoticeDetailsViewController.swift in Sources */,

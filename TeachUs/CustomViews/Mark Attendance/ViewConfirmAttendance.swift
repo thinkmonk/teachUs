@@ -74,7 +74,7 @@ class ViewConfirmAttendance: UIView {
 
     }
     @IBAction func confirmAttendance(_ sender: Any) {
-        
+        Vibration.success.vibrate()
         self.transform = CGAffineTransform.identity
         UIView.animate(withDuration: 0.3, animations: {
             self.alpha = 1.0

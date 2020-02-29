@@ -205,6 +205,7 @@ class MarkCompletedPortionViewController: BaseViewController {
                 return
             }
             if (status == 200){
+                Vibration.success.vibrate()
                 self.attendanceId = response["att_id"] as? NSNumber
                 let alert = UIAlertController(title: nil, message: response["message"] as? String, preferredStyle: UIAlertControllerStyle.alert)
                 // add an action (button)

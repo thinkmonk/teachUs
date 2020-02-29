@@ -100,6 +100,7 @@ class ProfessorAttedanceViewController: BaseViewController {
     }
     
     @IBAction func mailReport(_ sender:Any){
+        Vibration.light.vibrate()
         self.viewMailReport =  ViewProfessorMailReport.instanceFromNib() as? ViewProfessorMailReport
         viewMailReport.frame = self.view.frame
         viewMailReport.makeTableCellEdgesRounded()
@@ -184,6 +185,7 @@ extension ProfessorAttedanceViewController:ViewProfessorMailReportDelegate{
         manager.apiPost(apiName: "Send AttendanceReport to email", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             if(code == 200){
+                Vibration.success.vibrate()
                 self.viewMailReport.removeFromSuperview()
                 let message:String = response["message"] as! String
                 self.showAlertWithTitle(nil, alertMessage: message)

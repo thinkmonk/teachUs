@@ -19,6 +19,7 @@ class EventAttendanceClassListViewController: BaseViewController {
     @IBOutlet weak var tableViewClassList: UITableView!
     @IBOutlet weak var buttonConfirm: UIButton!
     var viewCourseList : ViewCourseSelection!
+    var classObj :ClassListObj?
 
     
     override func viewDidLoad() {
@@ -31,7 +32,9 @@ class EventAttendanceClassListViewController: BaseViewController {
         self.tableViewClassList.alpha = 0
         self.title = "\(self.currentEvent.eventName)"
         self.buttonConfirm.alpha = 0
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(EventAttendanceClassListViewController.editClassForEvents))
+        let buttonEdit = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(EventAttendanceClassListViewController.editClassForEvents))
+        let delete = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(EventAttendanceClassListViewController.deleteEvent))
+        self.navigationItem.rightBarButtonItems = [delete, buttonEdit]
         
         // Do any additional setup after loading the view.
     }
@@ -47,7 +50,6 @@ class EventAttendanceClassListViewController: BaseViewController {
     }
 
     //MARK:- Custom functions
-    
     func getClassList()
     {
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
@@ -59,23 +61,27 @@ class EventAttendanceClassListViewController: BaseViewController {
             "event_id":"\(self.currentEvent.eventId)"
         ]
         
-        manager.apiPost(apiName: " Get all class", parameters:parameters, completionHandler: { (result, code, response) in
+        manager.apiPostWithDataResponse(apiName: " Get all class", parameters:parameters, completionHandler: { [weak self] (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
-            guard let classArray = response["class_list"] as? [[String:Any]] else{
-                return
-            }
-            self.arrayDataSource.removeAll()
-            for className in classArray{
-                let tempEvent = Mapper<ClassList>().map(JSONObject: className)
-                self.arrayDataSource.append(tempEvent!)
+            do{
+                let decoder = JSONDecoder()
+                self?.classObj  = try decoder.decode(ClassListObj.self, from: response)
+                self?.arrayDataSource.removeAll()
+                for classObj in self?.classObj?.classList ?? []{
+                    self?.arrayDataSource.append(classObj)
+                }
+                self?.arrayDataSource.sort(by: { ($0.year ?? "", $0.courseName ?? "", $0.classDivision ?? "") < ($1.year ?? "", $1.courseName ?? "", $1.classDivision ?? "") })
+                self?.tableViewClassList.reloadData()
+                self?.showTableView()
+            } catch let error{
+                print(error)
+                self?.showErrorAlert(.ParsingError, retry: { (retry) in
+                    self?.navigationController?.popViewController(animated: true)
+                })
             }
             
-            self.arrayDataSource.sort(by: { ($0.year, $0.courseName, $0.classDivision) < ($1.year, $1.courseName, $1.classDivision) })
-            self.tableViewClassList.reloadData()
-            self.showTableView()
-            
-        }) { (error, code, message) in
-            self.showAlertWithTitle(nil, alertMessage: message)
+        }) { [weak self] (error, code, message) in
+            self?.showAlertWithTitle(nil, alertMessage: message)
             LoadingActivityHUD.hideProgressHUD()
         }
     }
@@ -101,6 +107,23 @@ class EventAttendanceClassListViewController: BaseViewController {
         self.viewCourseList.selecCourses(courseIdArray: self.currentEvent.courseSpecificArray)
         self.view.addSubview(self.viewCourseList)
     }
+    
+    @objc func deleteEvent(){
+        switch self.classObj?.deleteStatus {
+        case .currentUser: //flag == 1
+            self.showAlertWithTitle("Delete", alertMessage: "Ok")
+            
+        case .defaultFlag:// cannot delete //flag == 0
+            self.showAlertWithTitle("Only the notice creator can delete this notice", alertMessage: "OK")
+            
+        case .otherUser: //attendance already marked //flag == 2
+            self.showAlertWithTitle("You can't delete this event, since attendance is marked,", alertMessage: "OK")
+            
+        case .none:
+            break
+        }
+    }
+    
     //MARK:- Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.segues.toStudentList {
@@ -123,7 +146,7 @@ extension EventAttendanceClassListViewController:UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:ClassListTableViewCell = self.tableViewClassList.dequeueReusableCell(withIdentifier: Constants.CustomCellId.ClassListTableViewCellId, for: indexPath) as! ClassListTableViewCell
-        cell.labelClassName.text = "\(self.arrayDataSource[indexPath.section].courseName) - \(self.arrayDataSource[indexPath.section].classDivision)"
+        cell.labelClassName.text = "\(self.arrayDataSource[indexPath.section].courseName ?? "") - \(self.arrayDataSource[indexPath.section].classDivision ?? "")"
         cell.labelParticipantCount.text = self.arrayDataSource[indexPath.section].totalParticipants
         cell.selectionStyle = .none
         

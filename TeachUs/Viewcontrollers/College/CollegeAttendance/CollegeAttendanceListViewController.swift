@@ -273,6 +273,7 @@ class CollegeAttendanceListViewController: BaseViewController {
     }
     
     @IBAction func mailReport(_ sender: Any) {
+        Vibration.light.vibrate()
         if(!self.isMailReportVisible){
             self.showMailView(value: true)
         }else{
@@ -377,6 +378,7 @@ extension CollegeAttendanceListViewController:verifyEmailDelegae{
             LoadingActivityHUD.hideProgressHUD()
             let status = response["status"] as! Int
             if (status == 200){
+                Vibration.light.vibrate()
                 let message:String = response["message"] as! String
                 self.showAlertWithTitle(nil, alertMessage: message)
                 self.showMailView(value: false)

@@ -49,6 +49,7 @@ class DefaultSelectionTableViewCell: UITableViewCell {
     }
     
     @IBAction func markDefaultAttendance(_ sender: Any) {
+        Vibration.light.vibrate()
         AttendanceManager.sharedAttendanceManager.defaultAttendanceForAllStudents.toggle()
         performPresentButtonUIChanges()
         self.delegate?.selectDefaultAttendance(AttendanceManager.sharedAttendanceManager.defaultAttendanceForAllStudents)
