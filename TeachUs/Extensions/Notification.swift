@@ -13,6 +13,7 @@ extension Notification.Name {
     static let notificationOfflineUploadSuccess = Notification.Name("offlineDataUploaded")
     static let notificationBellCountUpdate      = Notification.Name("bellIconDataUpdated")
     static let performNotificationNavigation    = Notification.Name("performNotificationNavigation")
+    static let eventDeleted                     = Notification.Name("eventDeleted")
 
 
 }

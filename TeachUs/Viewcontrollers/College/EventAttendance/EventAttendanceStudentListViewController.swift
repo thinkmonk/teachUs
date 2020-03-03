@@ -56,7 +56,7 @@ class EventAttendanceStudentListViewController: BaseViewController {
         searchBar = UISearchBar()
         searchBar?.showsCancelButton = true
         searchBar?.delegate = self
-        self.title = "\(self.classList.courseName) - \(self.classList.classDivision)"
+        self.title = "\(self.classList.courseName ?? "") - \(self.classList.classDivision ?? "")"
         
         self.buttonConfirm.themeRedButton()
         
@@ -97,7 +97,7 @@ class EventAttendanceStudentListViewController: BaseViewController {
         let parameters = [
             "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
             "event_id":"\(self.currentEvent.eventId)",
-            "class_id":"\(self.classList.classId)",
+            "class_id":"\(self.classList.classId ?? "")",
             "student_list":requestString
             ] as [String : Any]
        print("Add event attendance parameters \(parameters)")
@@ -147,7 +147,7 @@ class EventAttendanceStudentListViewController: BaseViewController {
         let parameters = [
             "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
             "event_id":"\(self.currentEvent.eventId)",
-            "class_id":"\(self.classList.classId)"
+            "class_id":"\(self.classList.classId ?? "")"
         ]
         
         manager.apiPost(apiName: " Get all class", parameters:parameters, completionHandler: { (result, code, response) in
@@ -175,7 +175,7 @@ class EventAttendanceStudentListViewController: BaseViewController {
 //            EventAttendanceManager.sharedEventAttendanceManager.totalPresentCount.asObservable().subscribe(onNext: { (count) in
 //                self.labelTotalParticipants.text = "\(count)"
 //            }).disposed(by: self.disposeBag)
-            self.labelClass.text = "\(self.classList.courseName) - \(self.classList.classDivision)"
+            self.labelClass.text = "\(self.classList.courseName ?? "") - \(self.classList.classDivision ?? "")"
             self.labelTotalParticipants.text  = "\(self.totalParticipants!)"
             self.tableViewStudentList.reloadData()
             self.showTableView()

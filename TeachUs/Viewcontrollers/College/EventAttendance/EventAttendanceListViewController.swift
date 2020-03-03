@@ -42,7 +42,7 @@ class EventAttendanceListViewController: BaseViewController {
             self.tableViewEvents.reloadData()
             self.showTableView()
         }
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(getEventsAndReloadData), name: .eventDeleted, object: nil)
         
         // Do any additional setup after loading the view.
     }
@@ -130,8 +130,37 @@ class EventAttendanceListViewController: BaseViewController {
                 }
             }
     }
+    
+    
+    @objc func getEventsAndReloadData(){
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        let manager = NetworkHandler()
+        manager.url = URLConstants.CollegeURL.getEventlList
+        let parameters = [
+            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)"
+        ]
+        
+        manager.apiPost(apiName: " Get all events", parameters:parameters, completionHandler: { (result, code, response) in
+            LoadingActivityHUD.hideProgressHUD()
+            guard let evetArray = response["events_list"] as? [[String:Any]] else{
+                return
+            }
+            self.arrayDataSource.removeAll()
+            for event in evetArray{
+                let tempEvent = Mapper<Event>().map(JSONObject: event)
+                self.arrayDataSource.append(tempEvent!)
+            }
+            self.arrayDataSource.sort(by: { $0.eventName < $1.eventName })
+            DispatchQueue.main.async {
+                self.tableViewEvents.reloadData()
+            }
+        }) { (error, code, message) in
+            self.showAlertWithTitle(nil, alertMessage: message)
+            LoadingActivityHUD.hideProgressHUD()
+        }
+    }
 
-    func getEvents(){
+    @objc func getEvents(){
         self.dispatchGroup.enter()
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()

@@ -111,18 +111,56 @@ class EventAttendanceClassListViewController: BaseViewController {
     @objc func deleteEvent(){
         switch self.classObj?.deleteStatus {
         case .currentUser: //flag == 1
-            self.showAlertWithTitle("Delete", alertMessage: "Ok")
+            let alert = UIAlertController(title: nil, message: "Are you sure, you want to delete this event?", preferredStyle: UIAlertControllerStyle.alert)
+            
+            // add an action (button)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { _ in
+                self.deleteEventApiCall()
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            // show the alert
+            self.present(alert, animated: true, completion:nil)
             
         case .defaultFlag:// cannot delete //flag == 0
-            self.showAlertWithTitle("Only the notice creator can delete this notice", alertMessage: "OK")
+            self.showAlertWithTitle("", alertMessage: "Only the notice creator can delete this notice")
             
         case .otherUser: //attendance already marked //flag == 2
-            self.showAlertWithTitle("You can't delete this event, since attendance is marked,", alertMessage: "OK")
+            self.showAlertWithTitle("", alertMessage: "You can't delete this event, since attendance is marked")
             
         case .none:
             break
         }
     }
+    
+    func deleteEventApiCall(){
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        let manager = NetworkHandler()
+        manager.url = URLConstants.CollegeURL.deleteEvent
+        let parameters:[String:Any] =
+            [
+                "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code ?? "")",
+                "event_id":"\(self.currentEvent.eventId)",
+        ]
+        manager.apiPost(apiName: "Delete Event \(self.currentEvent.eventName)", parameters:parameters, completionHandler: { (result, code, response) in
+            LoadingActivityHUD.hideProgressHUD()
+            if (code == 200){
+                let message = response["message"] as? String
+                let alert = UIAlertController(title: nil, message: message, preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { _ in
+                    NotificationCenter.default.post(name: .eventDeleted, object: nil)
+                    self.navigationController?.popViewController(animated: true)
+                }))
+                self.present(alert, animated: true, completion:nil)
+            }else{
+                self.showAlertWithTitle("Error", alertMessage: "Unable to delete.")
+            }
+        }) { (error, code, message) in
+            print(message)
+            LoadingActivityHUD.hideProgressHUD()
+        }
+    }
+    
     
     //MARK:- Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

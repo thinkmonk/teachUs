@@ -54,7 +54,16 @@ enum DeleteFlag :Codable{
     
     init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        let rawValue = try container.decode(Int.self)
+        var rawValue :Int
+        if let x = try? container.decode(Int.self) {
+            rawValue = x
+            
+        }else if let stringNumber = try? container.decode(String.self), let intValue = Int(stringNumber) {
+            rawValue = intValue
+        }else{
+            throw DecodingError.typeMismatch(DynamicValueEnum.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for DynamicValueEnum"))
+        }
+        
         switch rawValue {
         case 0:
             self = .defaultFlag

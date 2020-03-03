@@ -169,7 +169,8 @@ public struct URLConstants{
         static let deleteNotice =                       BaseUrl.baseURLV1 + "/college/notice_delete"
         static let editEventDetails =                   BaseUrl.baseURLV1 + "/events/update_event"
         static let collegAdminClassList =               BaseUrl.baseURLV1 + "/syllabus/class_list"
-        static let collegeAuth =                         BaseUrl.baseURLV1 + "/auth/Professor_college_logs_verify_auth_password"
+        static let collegeAuth =                        BaseUrl.baseURLV1 + "/auth/Professor_college_logs_verify_auth_password"
+        static let deleteEvent =                        BaseUrl.baseURLV1 + "/events/delete_event"
     }
     
     struct SyllabusURL {
