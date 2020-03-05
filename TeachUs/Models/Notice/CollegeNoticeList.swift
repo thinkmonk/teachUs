@@ -19,7 +19,7 @@ struct Notice: Codable {
     let universityID, collegeID, streamID, classID: String?
     let roleID, status, createdAt, updatedAt: String?
     let docSize, courses: String?
-    let deleteFlag:DeleteFlag
+    let deleteFlag:DeleteFlag?
     
     enum CodingKeys: String, CodingKey {
         case noticeID           = "notice_id"
