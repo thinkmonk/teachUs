@@ -145,19 +145,19 @@ extension SyllabusStatusListViewController:UITableViewDelegate, UITableViewDataS
        return 1
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell:SyllabusStatusTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.SyllabusStatusTableViewCellId, for: indexPath)  as! SyllabusStatusTableViewCell
-        
-        let cellSubject = arrayDataSource[indexPath.section]
-        cell.labelNumberOfLectures.text = "\(cellSubject.numberOfLectures)"
-        cell.labelSubject.text = "\(cellSubject.courseName) - \(cellSubject.classDivision) \(cellSubject.subjectName)"
-        cell.labelSubject.text = self.userType! == LoginUserType.professor ? "\(cellSubject.courseName) - \(cellSubject.classDivision) \(cellSubject.subjectName)" : "\(cellSubject.subjectName)"
-        cell.labelAttendancePercent.text = "\(cellSubject.completion)%"
-        cell.selectionStyle = .none
-        cell.accessoryType = .disclosureIndicator
-        cell.backgroundColor = UIColor.white
-        return cell
-    }
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            let cell:SyllabusStatusTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.SyllabusStatusTableViewCellId, for: indexPath)  as! SyllabusStatusTableViewCell
+            
+            let cellSubject = arrayDataSource[indexPath.section]
+            cell.labelNumberOfLectures.text = "\(cellSubject.numberOfLectures)"
+            cell.labelSubject.text = "\(cellSubject.courseName)\(cellSubject.classDivision.addHyphenToString()) \(cellSubject.subjectName)"
+            cell.labelSubject.text = self.userType! == LoginUserType.professor ? "\(cellSubject.courseName)\(cellSubject.classDivision.addHyphenToString()) \(cellSubject.subjectName)" : "\(cellSubject.subjectName)"
+            cell.labelAttendancePercent.text = "\(cellSubject.completion)%"
+            cell.selectionStyle = .none
+            cell.accessoryType = .disclosureIndicator
+            cell.backgroundColor = UIColor.white
+            return cell
+        }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 15

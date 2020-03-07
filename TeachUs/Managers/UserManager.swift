@@ -330,20 +330,29 @@ class UserManager{
     func getOfflineData(){
         let manager = NetworkHandler()
         manager.url = URLConstants.OfflineURL.getOfflineData
-        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        DispatchQueue.main.async {
+            LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        }
         let parameters:[String:Any] = [:]
-        manager.apiPost(apiName: "Get User Details for offline mode", parameters:parameters, completionHandler: { (result, code, response) in
-            if(code == 200){
-                self.saveOfflineDataToDb(offlineData: response)
-            }
-            else{
-                let message:String = response["message"] as! String
-                
-            }
+        DispatchQueue.global(qos: .background).async
+            {
+                manager.apiPost(apiName: "Get User Details for offline mode usermanager:", parameters:parameters, completionHandler: { (result, code, response) in
+                    DispatchQueue.main.async {
+                        LoadingActivityHUD.hideProgressHUD()
+                    }
 
-        }) { (error, code, message) in
-            LoadingActivityHUD.hideProgressHUD()
-            print(message)
+                    if(code == 200){
+                        self.saveOfflineDataToDb(offlineData: response)
+                    }
+                    else{
+                        let message:String = response["message"] as! String
+                        print(message)
+                    }
+                    
+                }) { (error, code, message) in
+                    LoadingActivityHUD.hideProgressHUD()
+                    print(message)
+                }
         }
     }
     

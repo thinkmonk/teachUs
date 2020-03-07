@@ -9,7 +9,7 @@
 import Foundation
 
 struct CourseDetails: Codable {
-    let courseList: [CourseList]
+    var courseList: [CourseList]
     
     enum CodingKeys: String, CodingKey {
         case courseList = "course_list"

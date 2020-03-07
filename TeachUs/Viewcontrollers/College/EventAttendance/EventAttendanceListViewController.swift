@@ -110,7 +110,8 @@ class EventAttendanceListViewController: BaseViewController {
     func initCourseSelectionView(){
         self.viewCourseList = ViewCourseSelection.instanceFromNib() as? ViewCourseSelection
         self.viewCourseList.delegate = self
-        
+        CollegeClassManager.sharedManager.selectedCourseArray.removeAll()
+
         //init class selection list after sorting
         if let listData = CollegeClassManager.sharedManager.courseListData{
             
@@ -119,16 +120,16 @@ class EventAttendanceListViewController: BaseViewController {
                 let selectedCourse = SelectCollegeCourse(course, true)
                 CollegeClassManager.sharedManager.selectedCourseArray.append(selectedCourse)
             }
-            }else{
-                CollegeClassManager.sharedManager.getCourseList { (_) in
-                    if let listData = CollegeClassManager.sharedManager.courseListData{
-                        for course in listData.courseList{
-                            let selectedCourse = SelectCollegeCourse(course, true)
-                            CollegeClassManager.sharedManager.selectedCourseArray.append(selectedCourse)
-                        }
+        }else{
+            CollegeClassManager.sharedManager.getCourseList { (_) in
+                if let listData = CollegeClassManager.sharedManager.courseListData{
+                    for course in listData.courseList{
+                        let selectedCourse = SelectCollegeCourse(course, true)
+                        CollegeClassManager.sharedManager.selectedCourseArray.append(selectedCourse)
                     }
                 }
             }
+        }
     }
     
     

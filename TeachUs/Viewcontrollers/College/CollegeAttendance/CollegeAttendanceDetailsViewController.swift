@@ -45,7 +45,7 @@ class CollegeAttendanceDetailsViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "\(self.collegeClass.courseName) - \(self.collegeClass.classDivision)"
+        self.title = "\(self.collegeClass.courseName)\(self.collegeClass.classDivision.addHyphenToString())"
         self.navigationController!.navigationBar.topItem!.title = ""
 
         self.labelNoRecordFound.alpha = 0

@@ -56,5 +56,17 @@ extension String{
     func encodedString() -> String {
         return self.addingPercentEncoding(withAllowedCharacters: .letters) ?? ""
     }
+    
+    func addHyphenToString() -> String{
+        return self != "" ? " - " + self : ""
+    }
+}
 
+extension Optional where Wrapped == String{
+    func addHyphenToString() -> String{
+        guard let `self` = self else{
+            return ""
+        }
+        return self != "" ? " - " + self : ""
+    }
 }

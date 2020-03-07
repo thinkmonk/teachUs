@@ -121,7 +121,7 @@ class ProfessorLogsListViewController: BaseViewController {
                 let tempLog = Mapper<College>().map(JSON: log)
                 self.arrayDataSource.append(tempLog!)
             }
-            self.arrayDataSource.sort(by: { ($0.year!,$0.classDivision! ,$0.subjectName!) < ($1.year!,$0.classDivision!,$1.subjectName!) })
+            self.arrayDataSource.sort(by: { ($0.year ?? "",$0.classDivision ?? "",$0.subjectName ?? "") < ($1.year ?? "",$0.classDivision ?? "" ,$1.subjectName ?? "") })
             
             self.makeTableView()
             self.showTableView()
@@ -180,10 +180,11 @@ extension ProfessorLogsListViewController:UITableViewDelegate, UITableViewDataSo
 
             }
             else{
-                collegeCell.labelSubjectName.text = "\(self.arrayDataSource![indexPath.section].yearName!)\(self.arrayDataSource![indexPath.section].courseCode!) - \(self.arrayDataSource![indexPath.section].subjectName!) - \(self.arrayDataSource![indexPath.section].classDivision!)"
+                let collegeObj = self.arrayDataSource[indexPath.section]
+                collegeCell.labelSubjectName.text = "\(collegeObj.yearName ?? "")\(collegeObj.courseCode ?? "") - \(collegeObj.subjectName ?? "")\(collegeObj.classDivision.addHyphenToString())"
                 collegeCell.labelLogCount.isHidden = true
                 collegeCell.isUserInteractionEnabled =  true
-
+                
             }
             collegeCell.selectionStyle = UITableViewCellSelectionStyle.none
             collegeCell.accessoryType = .disclosureIndicator

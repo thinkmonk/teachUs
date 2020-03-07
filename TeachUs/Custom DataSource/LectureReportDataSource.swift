@@ -10,6 +10,7 @@ import Foundation
 enum LectureReportCellType{
     case ClassName
     case LectureTIme
+    case LectureDate
     case NumberOfLecture
     case TotalAttendance
     case TimeOfSubmission

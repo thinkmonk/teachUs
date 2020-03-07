@@ -68,10 +68,11 @@ class CollegeClassManager{
             "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)"
         ]
         
-        manager.apiPostWithDataResponse(apiName: " Get all Course List", parameters:parameters, completionHandler: { (result, code, response) in
+        manager.apiPostWithDataResponse(apiName: " Get all Course List college class manager", parameters:parameters, completionHandler: {[weak self] (result, code, response) in
+            self?.courseListData?.courseList.removeAll()
             do{
                 let decoder = JSONDecoder()
-                self.courseListData = try decoder.decode(CourseDetails.self, from: response)
+                self?.courseListData = try decoder.decode(CourseDetails.self, from: response)
                 completion?(true)
             }
             catch let error{

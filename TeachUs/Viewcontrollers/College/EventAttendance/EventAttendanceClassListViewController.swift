@@ -184,7 +184,8 @@ extension EventAttendanceClassListViewController:UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:ClassListTableViewCell = self.tableViewClassList.dequeueReusableCell(withIdentifier: Constants.CustomCellId.ClassListTableViewCellId, for: indexPath) as! ClassListTableViewCell
-        cell.labelClassName.text = "\(self.arrayDataSource[indexPath.section].courseName ?? "") - \(self.arrayDataSource[indexPath.section].classDivision ?? "")"
+        let classObj = self.arrayDataSource[indexPath.section]
+        cell.labelClassName.text = "\(classObj.courseName ?? "")\(classObj.classDivision.addHyphenToString())"
         cell.labelParticipantCount.text = self.arrayDataSource[indexPath.section].totalParticipants
         cell.selectionStyle = .none
         

@@ -59,14 +59,14 @@ class LectureReportViewController: BaseViewController {
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         
         
-        manager.apiPost(apiName: "Get Lecture report for professor", parameters: parameters, completionHandler: { (sucess, code, response) in
+        manager.apiPost(apiName: "Get Lecture report for professor", parameters: parameters, completionHandler: {[weak self] (sucess, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             
             guard let subjects = response["lecture_report"] as? [String:Any] else{
                 return
             }
-            self.lectureReportModel = Mapper<LectureReport>().map(JSON: subjects)
-            self.makeDataSource()
+            self?.lectureReportModel = Mapper<LectureReport>().map(JSON: subjects)
+            self?.makeDataSource()
             
         }) { (error, code, message) in
             LoadingActivityHUD.hideProgressHUD()
@@ -80,6 +80,9 @@ class LectureReportViewController: BaseViewController {
         let classDataSource = LectureReportDataSource(cellType: .ClassName, object: nil)
         self.arrayDataSource.append(classDataSource)
         
+        let dateDataSource = LectureReportDataSource(cellType: .LectureDate, object: nil)
+        self.arrayDataSource.append(dateDataSource)
+
         let timeDataSource = LectureReportDataSource(cellType: .LectureTIme, object: nil)
         self.arrayDataSource.append(timeDataSource)
 
@@ -96,8 +99,10 @@ class LectureReportViewController: BaseViewController {
         self.arrayDataSource.append(subjectDataSource)
         
         self.makeTableView()
-        self.tableLectureReport.reloadData()
-        self.showTableView()
+        DispatchQueue.main.async {
+            self.tableLectureReport.reloadData()
+            self.showTableView()
+        }
 
     }
     
@@ -184,6 +189,15 @@ extension LectureReportViewController:UITableViewDelegate, UITableViewDataSource
             cell.labelSubjectTitle.text = "Topics Covered :"
             cell.labelSubjectDescription.text = stringTopicCovered
             return cell
+            
+        case .LectureDate:
+                        let cell:LectureReportTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.LectureReportCellId, for: indexPath) as! LectureReportTableViewCell
+
+            cell.imageViewReportIcon.image = UIImage(named: "calenderRed")
+            cell.labelReportTitle.text = "Lecture Date:"
+                        cell.labelReportDescription.text = "\(lectureReportModel.lectureDate)"
+            return cell
+
         }
     }
     

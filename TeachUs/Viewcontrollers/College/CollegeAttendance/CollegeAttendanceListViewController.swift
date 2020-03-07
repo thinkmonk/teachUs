@@ -312,7 +312,7 @@ extension  CollegeAttendanceListViewController: UITableViewDelegate, UITableView
         //***have reused the syllabus-details cell***
 
         let cell:SyllabusStatusTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.SyllabusStatusTableViewCellId, for: indexPath) as! SyllabusStatusTableViewCell
-        cell.labelSubject.text = "\(self.arrayDataSource![indexPath.section].courseName) - \(self.arrayDataSource![indexPath.section].classDivision)"
+        cell.labelSubject.text = "\(self.arrayDataSource![indexPath.section].courseName)\(self.arrayDataSource![indexPath.section].classDivision.addHyphenToString())"
         cell.labelNumberOfLectures.text =  "\(self.arrayDataSource![indexPath.section].totalStudents)"
         cell.labelAttendancePercent.text = "\(self.arrayDataSource![indexPath.section].avgStudents)"
         cell.accessoryType = .disclosureIndicator

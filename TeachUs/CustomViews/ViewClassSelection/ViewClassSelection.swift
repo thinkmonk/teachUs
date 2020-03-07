@@ -95,10 +95,11 @@ extension ViewClassSelection:UITableViewDelegate, UITableViewDataSource{
             }
             return cell
         }()
-        
-        cell.textLabel?.text = "\(dataSOurceArray[indexPath.row].collegeClass?.yearName ?? "")\(dataSOurceArray[indexPath.row].collegeClass?.courseCode ?? "") - \(dataSOurceArray[indexPath.row].collegeClass?.classDivision ?? "")"
-        
-        cell.accessoryType = dataSOurceArray[indexPath.row].isSelected! ? .checkmark : .none
+        if let classObj = dataSOurceArray[indexPath.row].collegeClass {
+            cell.textLabel?.text = "\(classObj.yearName )\(classObj.courseCode)\(classObj.classDivision)"
+            
+            cell.accessoryType = dataSOurceArray[indexPath.row].isSelected! ? .checkmark : .none
+        }
         return cell
     }
     
