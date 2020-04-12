@@ -31,7 +31,7 @@ class AddNewNoticeViewController: BaseViewController {
     @IBOutlet weak var roleSwitch: UISwitch!
     @IBOutlet weak var labelAttachmentText: UILabel!
     var imagePicker:UIImagePickerController?=UIImagePickerController()
-    weak var documentPicker:UIDocumentPickerViewController!
+    var documentPicker:UIDocumentPickerViewController!
 //    var chosenFile:URL?
 //    var chosenImage:UIImage?
     var viewClassList : ViewClassSelection!
@@ -78,6 +78,13 @@ class AddNewNoticeViewController: BaseViewController {
     func initClassSelectionView(){
         self.viewClassList = ViewClassSelection.instanceFromNib() as? ViewClassSelection
         self.viewClassList.delegate = self
+        if CollegeClassManager.sharedManager.selectedAdminClassArray.isEmpty{
+            CollegeClassManager.sharedManager.getAllClass { (isCompleted) in
+                self.viewClassList.setUpView(array: CollegeClassManager.sharedManager.selectedAdminClassArray)
+            }
+        }else{
+            self.viewClassList.setUpView(array: CollegeClassManager.sharedManager.selectedAdminClassArray)
+        }
     }
     
     func setUpRx(){
@@ -206,7 +213,7 @@ class AddNewNoticeViewController: BaseViewController {
     @IBAction func actionShowClassList(_ sender: Any) {
         self.view.endEditing(true)
         if (CollegeClassManager.sharedManager.selectedClassArray.count > 0){
-            self.viewClassList.setUpView(array: CollegeClassManager.sharedManager.selectedClassArray, isAdminScreenFlag: false)
+            self.viewClassList.setUpView(array: CollegeClassManager.sharedManager.selectedClassArray)
             self.viewClassList.frame = CGRect(x: 0.0, y: 0.0, width: self.view.width(), height: self.view.height())
             self.view.addSubview(self.viewClassList)
         }
@@ -398,7 +405,25 @@ extension AddNewNoticeViewController:UIDocumentMenuDelegate,UIDocumentPickerDele
 }
 
 extension AddNewNoticeViewController:ViewClassSelectionDelegate{
-    func classViewDismissed() {
+    func selectAllClasses(_ dataSourceObj: Any?) {
+        CollegeClassManager.sharedManager.selectedClassArray = CollegeClassManager.sharedManager.selectedClassArray.map({classSelected in
+            classSelected.isSelected = true
+            return classSelected
+        })
+        self.viewClassList.setUpView(array: CollegeClassManager.sharedManager.selectedClassArray )
+        
+    }
+    
+    func deselectAllClasses(_ dataSourceObj: Any?) {
+        CollegeClassManager.sharedManager.selectedClassArray = CollegeClassManager.sharedManager.selectedClassArray.map({classSelected in
+            classSelected.isSelected = false
+            return classSelected
+        })
+        self.viewClassList.setUpView(array: CollegeClassManager.sharedManager.selectedClassArray)
+        
+    }
+        
+    func classViewDismissed(_ dataSourceObj: Any?) {
         self.viewClassList.removeFromSuperview()
         print("class dismissed")
     }

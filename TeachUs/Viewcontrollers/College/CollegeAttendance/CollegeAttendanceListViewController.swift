@@ -147,8 +147,8 @@ class CollegeAttendanceListViewController: BaseViewController {
         for college in self.arrayDataSource!{
             let selectedCollegeList = SelectCollegeClass(college, true)
             CollegeClassManager.sharedManager.selectedClassArray.append(selectedCollegeList)
-            self.viewClassList.setUpView(array: CollegeClassManager.sharedManager.selectedClassArray, isAdminScreenFlag: false)
         }
+        self.viewClassList.setUpView(array: CollegeClassManager.sharedManager.selectedClassArray)
     }
     
     func initEmailIdView(){
@@ -333,7 +333,24 @@ extension  CollegeAttendanceListViewController: UITableViewDelegate, UITableView
 }
 
 extension CollegeAttendanceListViewController:ViewClassSelectionDelegate{
-    func classViewDismissed() {
+    func selectAllClasses(_ dataSourceObj: Any?) {
+        CollegeClassManager.sharedManager.selectedClassArray = CollegeClassManager.sharedManager.selectedClassArray.map({classSelected in
+            classSelected.isSelected = true
+            return classSelected
+        })
+        self.viewClassList.setUpView(array: CollegeClassManager.sharedManager.selectedClassArray )
+        
+    }
+    
+    func deselectAllClasses(_ dataSourceObj: Any?) {
+        CollegeClassManager.sharedManager.selectedClassArray = CollegeClassManager.sharedManager.selectedClassArray.map({classSelected in
+            classSelected.isSelected = false
+            return classSelected
+        })
+        self.viewClassList.setUpView(array: CollegeClassManager.sharedManager.selectedClassArray)
+    }
+        
+    func classViewDismissed(_ dataSourceObj: Any?) {
         self.viewClassList.removeFromSuperview()
         let selectedClassCount = CollegeClassManager.sharedManager.selectedClassArray.filter({$0.isSelected == true}).count
         self.buttonSelectClass.setTitle("\(selectedClassCount) class", for: .normal)

@@ -95,7 +95,7 @@ class CollegeClassManager{
             guard let attendanceListArray = response["class_list"] as? [[String:Any]] else{
                 return
             }
-            self.selectedClassArray.removeAll()
+            self.selectedAdminClassArray.removeAll()
             for attendancelist in attendanceListArray{
                 guard let tempList = Mapper<CollegeAttendanceList>().map(JSONObject: attendancelist) else{
                     return

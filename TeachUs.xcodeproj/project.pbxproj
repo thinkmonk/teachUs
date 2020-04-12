@@ -93,6 +93,7 @@
 		8135B89B20790D2F008E3E4B /* EventListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8135B89920790D2F008E3E4B /* EventListTableViewCell.xib */; };
 		8135B89D207911CE008E3E4B /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8135B89C207911CE008E3E4B /* Event.swift */; };
 		8135B89F20797DE2008E3E4B /* EventAttendanceClassListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8135B89E20797DE2008E3E4B /* EventAttendanceClassListViewController.swift */; };
+		8136CBE2243A290C00A9C464 /* ApplicationTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8136CBE1243A290C00A9C464 /* ApplicationTabs.swift */; };
 		8136E5A120F7C6880080AECA /* Offline_Topic_list.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8136E59A20F7C6870080AECA /* Offline_Topic_list.swift */; };
 		8136E5A220F7C6880080AECA /* OfflineColleges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8136E59B20F7C6870080AECA /* OfflineColleges.swift */; };
 		8136E5A320F7C6880080AECA /* Offline_Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8136E59C20F7C6880080AECA /* Offline_Profile.swift */; };
@@ -198,6 +199,7 @@
 		81AD3D9822918D3C00373C68 /* EditProfileDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AD3D9722918D3C00373C68 /* EditProfileDetailsViewController.swift */; };
 		81AE8A061F9FC37B00D49749 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AE8A051F9FC37B00D49749 /* BaseViewController.swift */; };
 		81B0281B20506BA90045A0A2 /* UserRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B0281A20506BA90045A0A2 /* UserRole.swift */; };
+		81B1034324438E0400A7E9F6 /* UserControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B1034224438E0400A7E9F6 /* UserControls.swift */; };
 		81B190C01FA24E19004A8A72 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B190BF1FA24E19004A8A72 /* LoginView.swift */; };
 		81B190C21FA24E22004A8A72 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81B190C11FA24E22004A8A72 /* LoginView.xib */; };
 		81B190C41FA24F87004A8A72 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B190C31FA24F87004A8A72 /* UIButton.swift */; };
@@ -436,6 +438,7 @@
 		8135B89920790D2F008E3E4B /* EventListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventListTableViewCell.xib; sourceTree = "<group>"; };
 		8135B89C207911CE008E3E4B /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		8135B89E20797DE2008E3E4B /* EventAttendanceClassListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAttendanceClassListViewController.swift; sourceTree = "<group>"; };
+		8136CBE1243A290C00A9C464 /* ApplicationTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationTabs.swift; sourceTree = "<group>"; };
 		8136E59A20F7C6870080AECA /* Offline_Topic_list.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Offline_Topic_list.swift; sourceTree = "<group>"; };
 		8136E59B20F7C6870080AECA /* OfflineColleges.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfflineColleges.swift; sourceTree = "<group>"; };
 		8136E59C20F7C6880080AECA /* Offline_Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Offline_Profile.swift; sourceTree = "<group>"; };
@@ -548,6 +551,7 @@
 		81AD3D9722918D3C00373C68 /* EditProfileDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileDetailsViewController.swift; sourceTree = "<group>"; };
 		81AE8A051F9FC37B00D49749 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		81B0281A20506BA90045A0A2 /* UserRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRole.swift; sourceTree = "<group>"; };
+		81B1034224438E0400A7E9F6 /* UserControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserControls.swift; sourceTree = "<group>"; };
 		81B190BF1FA24E19004A8A72 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		81B190C11FA24E22004A8A72 /* LoginView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
 		81B190C31FA24F87004A8A72 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
@@ -947,6 +951,15 @@
 			path = EventAttendance;
 			sourceTree = "<group>";
 		};
+		8136CBE0243A28F100A9C464 /* Admin */ = {
+			isa = PBXGroup;
+			children = (
+				81ACF7F420851EAC00167203 /* Admin.swift */,
+				8136CBE1243A290C00A9C464 /* ApplicationTabs.swift */,
+			);
+			path = Admin;
+			sourceTree = "<group>";
+		};
 		8136E59420F7C34A0080AECA /* OfflineData */ = {
 			isa = PBXGroup;
 			children = (
@@ -1100,6 +1113,8 @@
 		813EC76D1F9BA4FD00F11A12 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				81B1034124438DF200A7E9F6 /* UserControls */,
+				8136CBE0243A28F100A9C464 /* Admin */,
 				816CE20A23C7A10700CB9769 /* Syllabus */,
 				81C9AC27233A95230019B29E /* Parents */,
 				8194882422A465130006CB86 /* Notificaion */,
@@ -1133,7 +1148,6 @@
 				8135B89C207911CE008E3E4B /* Event.swift */,
 				81E02A3D207C972200EB6BA8 /* ClassList.swift */,
 				81E02A45207CFC6800EB6BA8 /* EventStudents.swift */,
-				81ACF7F420851EAC00167203 /* Admin.swift */,
 				81A7D055208B6E550032A1BC /* RatingClassList.swift */,
 				81A7D05D208B78590032A1BC /* RatingProfessorList.swift */,
 				81A7D061208BA7EE0032A1BC /* RatingDetails.swift */,
@@ -1388,6 +1402,14 @@
 				81A7D05F208BA5D80032A1BC /* CollegeProfessorRatingDetailViewController.swift */,
 			);
 			path = CollegeTeacherRating;
+			sourceTree = "<group>";
+		};
+		81B1034124438DF200A7E9F6 /* UserControls */ = {
+			isa = PBXGroup;
+			children = (
+				81B1034224438E0400A7E9F6 /* UserControls.swift */,
+			);
+			path = UserControls;
 			sourceTree = "<group>";
 		};
 		81B190BE1FA24DA5004A8A72 /* Login */ = {
@@ -2155,6 +2177,7 @@
 				81D7CE9A1FAB9A1D00C4375E /* UserManager.swift in Sources */,
 				81727B8C1F9E6CB8006433E8 /* UIViewController+MFSideMenuAdditions.m in Sources */,
 				810FAC5A1FB7549400945DD6 /* AttendanceCountTableViewCell.swift in Sources */,
+				81B1034324438E0400A7E9F6 /* UserControls.swift in Sources */,
 				810200CD224BFBD600C87EA3 /* MiscallenousExtensions.swift in Sources */,
 				8102FDF52243577100A7067B /* StudentAttendanceDetailsViewController.swift in Sources */,
 				81165BE922330078003EE106 /* VerifyEmail.swift in Sources */,
@@ -2191,6 +2214,7 @@
 				8163EB0720557AD9003E4B1D /* CollegeDetails+CoreDataClass.swift in Sources */,
 				8123F3C62155681300A15182 /* LectureReportTableViewCell.swift in Sources */,
 				818C26081FB6FAFF002638E5 /* MarkStudentAttendance.swift in Sources */,
+				8136CBE2243A290C00A9C464 /* ApplicationTabs.swift in Sources */,
 				810610B71FA5F4ED0067273E /* OtpView.swift in Sources */,
 				81D7CE861FAB8E9E00C4375E /* CAPSPageMenu+Options.swift in Sources */,
 				81B4E90622A2B610005AA5F7 /* CollegeNoticeListViewController.swift in Sources */,
@@ -2549,7 +2573,7 @@
 			buildSettings = {
 				APP_DISPLAY_NAME = "$(PRODUCT_NAME)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BASE_URL = "$(BASE_URL_HOME)/api_v2";
+				BASE_URL = "$(BASE_URL_HOME)/api_uat";
 				BASE_URL_HOME = "http://teachusedumation.com";
 				BASE_URL_V1 = "$(BASE_URL)/teachus";
 				CLANG_ENABLE_MODULES = YES;

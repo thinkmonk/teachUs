@@ -26,6 +26,8 @@ class AddRemoveAdminViewController: BaseViewController {
     @IBOutlet weak var buttonContact: UIButton!
     @IBOutlet weak var viewSelectClass: UIView!
     @IBOutlet weak var buttonSelectClass: UIButton!
+    @IBOutlet weak var buttonSelectTabControl: UIButton!
+
     let adminDropdown = DropDown()
     var parentNavigationController : UINavigationController?
     var arrayAdminList:[Admin] = []
@@ -33,6 +35,7 @@ class AddRemoveAdminViewController: BaseViewController {
     var courseListData:CourseDetails!
     var dispatchGroup = DispatchGroup()
     var viewClassList : ViewClassSelection!
+    var applicationTabsObj  : ApplicationTabs!
 
     
     
@@ -47,7 +50,7 @@ class AddRemoveAdminViewController: BaseViewController {
         self.tableViewAdminList.dataSource = self
         self.initContactList()
         self.tableViewAdminList.alpha = 1.0
-        self.getAdminList()
+        self.performAPICalls()
 //        self.getCourseList()
         initClassSelectionView()
         self.setUpRx()
@@ -107,27 +110,46 @@ class AddRemoveAdminViewController: BaseViewController {
     @IBAction func showCourseList(_ sender: Any) {
         
         self.view.endEditing(true)
-        self.viewClassList.frame = self.tableViewAdminList.frame
-        self.view.addSubview(self.viewClassList)
-
+        if CollegeClassManager.sharedManager.selectedAdminClassArray.isEmpty{
+            CollegeClassManager.sharedManager.getAllClass { (isCompleted) in
+                self.viewClassList.setUpView(array: CollegeClassManager.sharedManager.selectedAdminClassArray)
+                self.viewClassList.frame = CGRect(x: 0.0, y: 0.0, width: self.view.width(), height: self.view.height())
+                self.view.addSubview(self.viewClassList)
+            }
+        }else{
+            self.viewClassList.setUpView(array: CollegeClassManager.sharedManager.selectedAdminClassArray)
+            self.viewClassList.frame = CGRect(x: 0.0, y: 0.0, width: self.view.width(), height: self.view.height())
+            self.view.addSubview(self.viewClassList)
+        }
+        
+        
 //        if(self.viewCourseList != nil){
 //            self.viewCourseList.frame = CGRect(x: 0.0, y:0.0, width: self.view.width(), height: self.view.height())
 //            self.view.addSubview(self.viewCourseList)
 //        }
     }
     
+    
+    @IBAction func showControlsList(_ sender: Any) {
+        
+        self.view.endEditing(true)
+        if self.applicationTabsObj.userControls.count > 0 {
+            self.viewClassList.frame = CGRect(x: 0.0, y: 0.0, width: self.view.width(), height: self.view.height())
+            self.viewClassList.dataSOurceArray = []
+            self.viewClassList.dataSOurceArray = self.applicationTabsObj.userControls
+            self.view.addSubview(self.viewClassList)
+            self.viewClassList.tableviewClassList.reloadData()
+        }
+    }
+    
+    
+    
     func initClassSelectionView(){
         self.viewClassList = ViewClassSelection.instanceFromNib() as? ViewClassSelection
         self.viewClassList.delegate = self
         
         //init class selection list after sorting
-        if CollegeClassManager.sharedManager.selectedAdminClassArray.isEmpty{
-            CollegeClassManager.sharedManager.getAllClass { (isCompleted) in
-                self.viewClassList.setUpView(array: CollegeClassManager.sharedManager.selectedAdminClassArray, isAdminScreenFlag: true)
-            }
-        }else{
-            self.viewClassList.setUpView(array: CollegeClassManager.sharedManager.selectedAdminClassArray, isAdminScreenFlag: true)
-        }
+       
         
     }
     
@@ -238,35 +260,7 @@ class AddRemoveAdminViewController: BaseViewController {
     }
     
     
-    func getAdminList(){
-        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
-        let manager = NetworkHandler()
-        manager.url = URLConstants.CollegeURL.getAdminList
-        let adminType  = isSuperAdmin.isOn ? "1" : "2"
-        let parameters = [
-            "college_id":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_id!)",
-            "role_id":"\(UserManager.sharedUserManager.appUserCollegeDetails.role_id!)",
-            "admin_type":"\(adminType)"
-        ]
-        
-        manager.apiPost(apiName: " Get all admin list", parameters:parameters, completionHandler: { (result, code, response) in
-            LoadingActivityHUD.hideProgressHUD()
-            guard let adminListArray = response["admin_list"] as? [[String:Any]] else{
-                return
-            }
-            self.arrayAdminList.removeAll()
-            for admin in adminListArray{
-                let tempList = Mapper<Admin>().map(JSONObject: admin)
-                self.arrayAdminList.append(tempList!)
-            }
-            self.tableViewAdminList.reloadData()
-            self.showTableView()
-//            self.setupDropdown()
-        }) { (error, code, message) in
-            self.showAlertWithTitle(nil, alertMessage: message)
-            LoadingActivityHUD.hideProgressHUD()
-        }
-    }
+    
     
     func showTableView(){
         self.tableViewAdminList.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
@@ -283,6 +277,81 @@ class AddRemoveAdminViewController: BaseViewController {
                 self.buttonAdd.isHidden = !((self.textFieldPhoneNumber.text?.count ?? 0) >= 10)
             }).disposed(by: disposeBag)
         
+    }
+    
+    //MARK:- API CALLS
+    
+    func performAPICalls(){
+        if let window = UIApplication.shared.keyWindow {
+            LoadingActivityHUD.showProgressHUD(view: window)
+        }
+        getAdminList()
+        getAllApptabs()
+        dispatchGroup.notify(queue: .main) {
+            LoadingActivityHUD.hideProgressHUD()
+            if !self.arrayAdminList.isEmpty && self.applicationTabsObj != nil{
+                self.tableViewAdminList.reloadData()
+                self.showTableView()
+            }else{
+                LoadingActivityHUD.hideProgressHUD()
+                self.showErrorAlert(.ServerCallFailed) { (_) in
+                    self.performAPICalls()
+                }
+            }
+        }
+    }
+    
+    func getAdminList(){
+        dispatchGroup.enter()
+        let manager = NetworkHandler()
+        manager.url = URLConstants.CollegeURL.getAdminList
+        let adminType  = isSuperAdmin.isOn ? "1" : "2"
+        let parameters = [
+            "college_id":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_id!)",
+            "role_id":"\(UserManager.sharedUserManager.appUserCollegeDetails.role_id!)",
+            "admin_type":"\(adminType)"
+        ]
+        
+        manager.apiPost(apiName: " Get all admin list", parameters:parameters, completionHandler: { [weak self] (result, code, response) in
+            
+            guard let adminListArray = response["admin_list"] as? [[String:Any]] else{
+                self?.dispatchGroup.leave()
+                return
+            }
+            self?.arrayAdminList.removeAll()
+            for admin in adminListArray{
+                let tempList = Mapper<Admin>().map(JSONObject: admin)
+                self?.arrayAdminList.append(tempList!)
+            }
+            self?.dispatchGroup.leave()
+        }) { [weak self] (error, code, message) in
+            self?.showAlertWithTitle(nil, alertMessage: message)
+            self?.dispatchGroup.leave()
+        }
+    }
+    
+    func getAllApptabs(){
+        dispatchGroup.enter()
+        let manager = NetworkHandler()
+        manager.url = URLConstants.CollegeURL.getTabsForAdminProfile
+        let parameters = [
+            "college_id":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_id!)",
+            "role_id":"\(UserManager.sharedUserManager.appUserCollegeDetails.role_id!)",
+        ]
+        
+        manager.apiPostWithDataResponse(apiName: " Get all tabs for admin list", parameters:parameters, completionHandler: { [weak self](result, code, response) in
+            do{
+                let decoder = JSONDecoder()
+                self?.applicationTabsObj = try decoder.decode(ApplicationTabs.self, from: response) as ApplicationTabs
+            }catch let error{
+                self?.dispatchGroup.leave()
+                print(error.localizedDescription)
+            }
+            self?.dispatchGroup.leave()
+        }) {[weak self] (error, code, message) in
+            self?.showAlertWithTitle(nil, alertMessage: message)
+            self?.dispatchGroup.leave()
+        }
     }
 }
 
@@ -343,10 +412,52 @@ extension AddRemoveAdminViewController:CNContactPickerDelegate{
 }
 
 extension AddRemoveAdminViewController:ViewClassSelectionDelegate{
-    func classViewDismissed() {
+    func selectAllClasses(_ dataSourceObj: Any?) {
+        if let _ = dataSourceObj as? [SelectCollegeClass]{
+            CollegeClassManager.sharedManager.selectedAdminClassArray = CollegeClassManager.sharedManager.selectedAdminClassArray.map({classSelected in
+                classSelected.isSelected = true
+                return classSelected
+            })
+            self.viewClassList.setUpView(array: CollegeClassManager.sharedManager.selectedAdminClassArray)
+        }
+        
+        if let _  = dataSourceObj as? [UserControl]{
+            self.applicationTabsObj.userControls = self.applicationTabsObj.userControls.map({control in
+                control.isSelected = true
+                return control
+            })
+            self.viewClassList.setUpView(array: self.applicationTabsObj.userControls)
+        }
+    }
+    
+    func deselectAllClasses(_ dataSourceObj: Any?) {
+        if let _ = dataSourceObj as? [SelectCollegeClass]{
+            CollegeClassManager.sharedManager.selectedAdminClassArray = CollegeClassManager.sharedManager.selectedAdminClassArray.map({classSelected in
+                classSelected.isSelected = false
+                return classSelected
+            })
+            self.viewClassList.setUpView(array: CollegeClassManager.sharedManager.selectedAdminClassArray)
+            
+        }
+        if let _  = dataSourceObj as? [UserControl]{
+            self.applicationTabsObj.userControls = self.applicationTabsObj.userControls.map({control in
+                control.isSelected = false
+                return control
+            })
+            self.viewClassList.setUpView(array: self.applicationTabsObj.userControls)
+        }
+    }
+        
+    func classViewDismissed(_ dataSourceObj: Any?) {
         self.viewClassList.removeFromSuperview()
-        let selectedClassCount = CollegeClassManager.sharedManager.selectedAdminClassArray.filter({$0.isSelected == true}).count
-        self.buttonSelectClass.setTitle("\(selectedClassCount) class", for: .normal)
+        if let _ = dataSourceObj as? [SelectCollegeClass]{
+            let selectedClassCount = CollegeClassManager.sharedManager.selectedAdminClassArray.filter({$0.isSelected == true}).count
+            self.buttonSelectClass.setTitle("\(selectedClassCount) class", for: .normal)
+        }
+        if let dataSource  = dataSourceObj as? [UserControl]{
+            let selectedTabCount = dataSource.filter({$0.isSelected == true}).count
+            self.buttonSelectTabControl.setTitle("\(selectedTabCount) controls", for: .normal)
+        }
         print("class dismissed")
     }
 }
