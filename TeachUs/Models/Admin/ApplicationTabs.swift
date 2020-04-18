@@ -15,7 +15,9 @@ class ApplicationTabs: Codable {
 
         let selectedControlsArray =  self.userControls.filter({$0.isSelected == true})
         let selectedControls:[String] = selectedControlsArray.map({($0.id ?? "")})
-        return selectedControls.joined(separator: ",")
+        var idString = selectedControls.joined(separator: ",")
+        return idString.count > 0 ? idString : "0"
+        
     }
     enum CodingKeys: String, CodingKey {
         case userControls = "user_controls"

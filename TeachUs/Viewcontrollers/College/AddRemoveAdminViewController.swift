@@ -70,7 +70,7 @@ class AddRemoveAdminViewController: BaseViewController {
     
     //MARK:- Outlet methods
     @IBAction func adminTypeChanged(_ sender: UISwitch) {
-        self.getAdminList()
+        self.getAdminList(shouldRefresh: true)
     }
     
     @IBAction func addNewAdmin(_ sender: Any) {
@@ -83,7 +83,8 @@ class AddRemoveAdminViewController: BaseViewController {
             "role_id":"\(UserManager.sharedUserManager.appUserCollegeDetails.role_id!)",
             "contact":"\(self.textFieldPhoneNumber.text!)",
             "admin_type":"\(adminType)",
-            "class":"\(CollegeClassManager.sharedManager.getSelectedAminClassList)"
+            "class":"\(CollegeClassManager.sharedManager.getSelectedAminClassList)",
+            "user_control": "\(self.applicationTabsObj.selecetedIdString)"
         ]
         manager.apiPost(apiName: " Add new admin", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
@@ -91,7 +92,7 @@ class AddRemoveAdminViewController: BaseViewController {
             if (status == 200){
                 let message:String = response["message"] as! String
                 self.showAlertWithTitle(nil, alertMessage: message)
-                self.getAdminList()
+                self.getAdminList(shouldRefresh: true)
             }
         }) { (error, code, message) in
             self.showAlertWithTitle(nil, alertMessage: message)
@@ -175,7 +176,7 @@ class AddRemoveAdminViewController: BaseViewController {
                 if (status == 200){
                     let message:String = response["message"] as! String
                     self.showAlertWithTitle(nil, alertMessage: message)
-                    self.getAdminList()
+                    self.getAdminList(shouldRefresh: true)
                 }
             }) { (error, code, message) in
                 self.showAlertWithTitle(nil, alertMessage: message)
@@ -285,7 +286,7 @@ class AddRemoveAdminViewController: BaseViewController {
         if let window = UIApplication.shared.keyWindow {
             LoadingActivityHUD.showProgressHUD(view: window)
         }
-        getAdminList()
+        getAdminList(shouldRefresh: false)
         getAllApptabs()
         dispatchGroup.notify(queue: .main) {
             LoadingActivityHUD.hideProgressHUD()
@@ -301,7 +302,7 @@ class AddRemoveAdminViewController: BaseViewController {
         }
     }
     
-    func getAdminList(){
+    func getAdminList(shouldRefresh:Bool){
         dispatchGroup.enter()
         let manager = NetworkHandler()
         manager.url = URLConstants.CollegeURL.getAdminList
@@ -324,6 +325,10 @@ class AddRemoveAdminViewController: BaseViewController {
                 self?.arrayAdminList.append(tempList!)
             }
             self?.dispatchGroup.leave()
+            if shouldRefresh{
+                self?.tableViewAdminList.reloadData()
+                self?.showTableView()
+            }
         }) { [weak self] (error, code, message) in
             self?.showAlertWithTitle(nil, alertMessage: message)
             self?.dispatchGroup.leave()
