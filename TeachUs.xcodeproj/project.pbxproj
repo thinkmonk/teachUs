@@ -160,6 +160,7 @@
 		819BDA591FC4AD5D00DD7D2D /* TeacherDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 819BDA571FC4AD5D00DD7D2D /* TeacherDetailsTableViewCell.xib */; };
 		819E0B3E20A0C9C600D16847 /* ViewLogsCalender.xib in Resources */ = {isa = PBXBuildFile; fileRef = 819E0B3D20A0C9C600D16847 /* ViewLogsCalender.xib */; };
 		819E0B4020A0C9D700D16847 /* ViewLogsCalender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819E0B3F20A0C9D700D16847 /* ViewLogsCalender.swift */; };
+		819E393F244B3DBC00625F4F /* AttendanceTimeSlots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819E393E244B3DBC00625F4F /* AttendanceTimeSlots.swift */; };
 		819EEC2220A60BF400487467 /* ViewLectureReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819EEC2120A60BF400487467 /* ViewLectureReport.swift */; };
 		819EEC2420A60C2100487467 /* ViewLectureReport.xib in Resources */ = {isa = PBXBuildFile; fileRef = 819EEC2320A60C2100487467 /* ViewLectureReport.xib */; };
 		819EEC2620A60FF600487467 /* LectureReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819EEC2520A60FF600487467 /* LectureReportViewController.swift */; };
@@ -512,6 +513,7 @@
 		819BDA571FC4AD5D00DD7D2D /* TeacherDetailsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TeacherDetailsTableViewCell.xib; sourceTree = "<group>"; };
 		819E0B3D20A0C9C600D16847 /* ViewLogsCalender.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewLogsCalender.xib; sourceTree = "<group>"; };
 		819E0B3F20A0C9D700D16847 /* ViewLogsCalender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLogsCalender.swift; sourceTree = "<group>"; };
+		819E393E244B3DBC00625F4F /* AttendanceTimeSlots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceTimeSlots.swift; sourceTree = "<group>"; };
 		819EEC2120A60BF400487467 /* ViewLectureReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLectureReport.swift; sourceTree = "<group>"; };
 		819EEC2320A60C2100487467 /* ViewLectureReport.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewLectureReport.xib; sourceTree = "<group>"; };
 		819EEC2520A60FF600487467 /* LectureReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LectureReportViewController.swift; sourceTree = "<group>"; };
@@ -1113,6 +1115,7 @@
 		813EC76D1F9BA4FD00F11A12 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				819E393D244B3DA000625F4F /* Attendance */,
 				81B1034124438DF200A7E9F6 /* UserControls */,
 				8136CBE0243A28F100A9C464 /* Admin */,
 				816CE20A23C7A10700CB9769 /* Syllabus */,
@@ -1312,6 +1315,14 @@
 				819E0B3F20A0C9D700D16847 /* ViewLogsCalender.swift */,
 			);
 			path = LogDetails;
+			sourceTree = "<group>";
+		};
+		819E393D244B3DA000625F4F /* Attendance */ = {
+			isa = PBXGroup;
+			children = (
+				819E393E244B3DBC00625F4F /* AttendanceTimeSlots.swift */,
+			);
+			path = Attendance;
 			sourceTree = "<group>";
 		};
 		819EEC2020A60B8000487467 /* LectureReport */ = {
@@ -2131,6 +2142,7 @@
 				81B203D91FD551FF00936F0F /* Teacher+CoreDataProperties.swift in Sources */,
 				81B203DD1FD551FF00936F0F /* SuperAdmin+CoreDataProperties.swift in Sources */,
 				81FEC7FB20F10436003FBDBE /* Reachability.swift in Sources */,
+				819E393F244B3DBC00625F4F /* AttendanceTimeSlots.swift in Sources */,
 				81B2E2DB1FC35B0600E9E852 /* DropDown+Appearance.swift in Sources */,
 				81D7CE811FAB8E5D00C4375E /* CAPSPageMenu+UIScrollViewDelegate.swift in Sources */,
 				81727B8D1F9E6CB8006433E8 /* MFSideMenuContainerViewController.m in Sources */,

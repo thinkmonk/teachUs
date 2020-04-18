@@ -589,6 +589,10 @@ extension OfflineStudentListViewController: DefaultAttendanceSelectionDelegate{
 //MARK:- Calender delegate methods
 
 extension OfflineStudentListViewController:AttendanceCalenderTableViewCellDelegate{
+    func timeSlotSelected(slotObj: AttendanceSlot) {
+        //TODO:add code here.
+    }
+    
     func numberOfLecturesSelected(lectures: Int) {
         self.numberOfLectures.value = lectures
         self.makeDataSource()

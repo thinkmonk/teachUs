@@ -14,6 +14,7 @@ protocol AttendanceCalenderTableViewCellDelegate {
     func showSubmit()
     func hideSubmit()
     func numberOfLecturesSelected(lectures:Int)
+    func timeSlotSelected(slotObj:AttendanceSlot)
 }
 
 class AttendanceCalenderTableViewCell: UITableViewCell {
@@ -27,8 +28,11 @@ class AttendanceCalenderTableViewCell: UITableViewCell {
     @IBOutlet weak var buttonEdit: UIButton!
     @IBOutlet weak var labelDate: UILabel!
     @IBOutlet var buttonArrayNumberOfLectures: [UIButton]!
+    @IBOutlet weak var viewTimeSlotBg: UIView!
+    @IBOutlet weak var labelTimeSLot: UILabel!
+    @IBOutlet weak var stckViewTimeSlots: UIStackView!
     
-    
+    var dropDownSlot = DropDown()
     let disposeBag = DisposeBag()
     var delegate:AttendanceCalenderTableViewCellDelegate!
     
@@ -88,6 +92,25 @@ class AttendanceCalenderTableViewCell: UITableViewCell {
         }
     }
     
+    func setupDropdown(slots:AttendancetimeSlots){
+        self.dropDownSlot.anchorView = self.viewTimeSlotBg
+        self.dropDownSlot.bottomOffset = CGPoint(x: 0, y: self.viewTimeSlotBg.height())
+        self.dropDownSlot.dataSource.removeAll()
+        for slotObj in slots.attendanceSlot ?? []{
+            let slotTime = "\(slotObj.fromTime ?? "") - \(slotObj.toTime ?? "")"
+            self.dropDownSlot.dataSource.append(slotTime)
+        }
+        self.dropDownSlot.selectionAction = { [unowned self] (index, item) in
+            print("Selected college \(item)")
+            if let slotObj = slots.attendanceSlot?[index]{
+                let slotTime = "\(slotObj.fromTime ?? "") - \(slotObj.toTime ?? "")"
+                self.labelTimeSLot.text = slotTime
+                self.delegate.timeSlotSelected(slotObj: slotObj)
+            }
+        }
+        DropDown.appearance().backgroundColor = UIColor.white
+    }
+    
     func setUpRx(){
         self.textFieldToTime.rx.text.map{ $0 ?? ""}.bind(to: attendanceToTime).disposed(by: disposeBag)
         self.textFieldFromTime.rx.text.map{$0 ?? ""}.bind(to: attendanceFromTime).disposed(by: disposeBag)
@@ -101,4 +124,9 @@ class AttendanceCalenderTableViewCell: UITableViewCell {
             }
         }).disposed(by: disposeBag)
     }
+    
+    @objc func showDropdown(){
+        self.dropDownSlot.show()
+    }
+    
 }

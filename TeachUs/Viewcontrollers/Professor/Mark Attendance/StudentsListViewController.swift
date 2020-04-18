@@ -31,6 +31,7 @@ class StudentsListViewController: BaseViewController {
     var numberOfLectures = Variable<Int>(1)
 
     let searchBarStudents = UISearchBar()
+    var timeSlotsObj : AttendancetimeSlots?
     var searchText:String = ""
     
     let disposeBag = DisposeBag()
@@ -48,7 +49,7 @@ class StudentsListViewController: BaseViewController {
     var selectedAttendanceId:Int?
     var lectureDetails:EditAttendanceLectureInfo!
     var previousLectureAttendanceList:LastLectureAttendance?
-    
+    var dispatchGroup = DispatchGroup()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -58,14 +59,15 @@ class StudentsListViewController: BaseViewController {
             if(selectedCollege != nil)
             {
                 self.title = selectedCollege.subjectName!
-                let dataQueue = OperationQueue()
-                dataQueue.addOperation {
-                    self.getEnrolledStudentsList()
+                self.getEnrolledStudentsList()
+                self.getTopics()
+                self.getTimeSlots()
+                self.dispatchGroup.notify(queue: DispatchQueue.main) {
+                    if(self.arrayStudentsDetails.count > 0){
+                        self.initDatPicker()
+                        self.setUpTableView()
+                    }
                 }
-                dataQueue.addOperation {
-                    self.getTopics()
-                }
-                dataQueue.waitUntilAllOperationsAreFinished()
             }
         }
         
@@ -189,7 +191,40 @@ class StudentsListViewController: BaseViewController {
         
     }
     
+    func getTimeSlots()
+    {
+        dispatchGroup.enter()
+        let manager = NetworkHandler()
+        manager.url = URLConstants.ProfessorURL.getAttendanceTimeSlots
+        DispatchQueue.main.async {
+            LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        }
+        let parameters = [
+            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+            "class_id":"\(self.selectedCollege.classId!)",
+        ]
+        manager.apiPostWithDataResponse(apiName: "Get Attendance time slots", parameters: parameters, completionHandler: {[weak self] (result, code, response) in
+            
+            if code == 200{
+                do {
+                    let decoder = JSONDecoder()
+                    self?.timeSlotsObj = try decoder.decode(AttendancetimeSlots.self, from: response)
+                }
+                catch let error{
+                    print(error.localizedDescription)
+                }
+            }
+            LoadingActivityHUD.hideProgressHUD()
+            self?.dispatchGroup.leave()
+        }) {[weak self] (error, code, message) in
+            LoadingActivityHUD.hideProgressHUD()
+            print(message)
+            self?.dispatchGroup.leave()
+        }
+    }
+    
     func getEnrolledStudentsList(){
+        dispatchGroup.enter()
         let manager = NetworkHandler()
         manager.url = URLConstants.ProfessorURL.getStudentList
         DispatchQueue.main.async {
@@ -200,45 +235,43 @@ class StudentsListViewController: BaseViewController {
             "class_id":"\(self.selectedCollege.classId!)",
             "subject_id":"\(self.selectedCollege.subjectId!)"
         ]
-        manager.apiPost(apiName: "Get student list", parameters:parameters, completionHandler: { (result, code, response) in
+        manager.apiPost(apiName: "Get student list", parameters:parameters, completionHandler: { [weak self] (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             if(code == 200){
                 let studentDetailArray = response["student_list"] as! [[String:Any]]
                 for student in studentDetailArray{
                     let studentDetail = Mapper<EnrolledStudentDetail>().map(JSON: student)
-                    self.arrayStudentsDetails.append(studentDetail!)
+                    self?.arrayStudentsDetails.append(studentDetail!)
                 }
                 
                 
-                if let student = self.arrayStudentsDetails.first{
+                if let student = self?.arrayStudentsDetails.first{
                     if (Int(student.studentRollNo!) != nil){
-                        self.arrayStudentsDetails.sort(by: {(Int($0.studentRollNo ?? "") ?? 0) < (Int($1.studentRollNo ?? "") ?? 0)})
+                        self?.arrayStudentsDetails.sort(by: {(Int($0.studentRollNo ?? "") ?? 0) < (Int($1.studentRollNo ?? "") ?? 0)})
 
                     }else{
-                        self.arrayStudentsDetails.sort( by: {$0.studentRollNo!.localizedStandardCompare($1.studentRollNo ?? "") == .orderedAscending})
+                        self?.arrayStudentsDetails.sort( by: {$0.studentRollNo!.localizedStandardCompare($1.studentRollNo ?? "") == .orderedAscending})
 
                     }
-                }
-                
-                if(self.arrayStudentsDetails.count > 0){
-                    self.initDatPicker()
-                    self.setUpTableView()
                 }
             }
             else{
-                self.showErrorAlert(ErrorType.ServerCallFailed, retry: { (retry) in
+                self?.showErrorAlert(ErrorType.ServerCallFailed, retry: { (retry) in
                     if(retry){
-                        self.getEnrolledStudentsList()
+                        self?.getEnrolledStudentsList()
                     }
                 })
             }
-        }) { (error, code, errorMessage) in
+            self?.dispatchGroup.leave()
+        }) {[weak self] (error, code, errorMessage) in
             LoadingActivityHUD.hideProgressHUD()
             print(errorMessage)
+            self?.dispatchGroup.leave()
         }
     }
     
     func getTopics(){
+        dispatchGroup.enter()
         let manager = NetworkHandler()
         manager.url = URLConstants.ProfessorURL.getSyllabusSuubjectDetails
         var parameters = [String:Any]()
@@ -248,30 +281,29 @@ class StudentsListViewController: BaseViewController {
         DispatchQueue.main.async {
             LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         }
-    
         
-        
-        manager.apiPostWithDataResponse(apiName: "Get topics for professor", parameters: parameters, completionHandler: { (sucess, code, response) in
+        manager.apiPostWithDataResponse(apiName: "Get topics for professor", parameters: parameters, completionHandler: {[weak self] (sucess, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             if(code == 200){
             do{
                 let decoder = JSONDecoder()
-                self.syllabusData = try decoder.decode(SyllabusStatusData.self, from: response)
+                self?.syllabusData = try decoder.decode(SyllabusStatusData.self, from: response)
             }
             catch let error{
                 print("err", error)
             }
             }else{
-                self.showErrorAlert(ErrorType.ServerCallFailed, retry: { (retry) in
+                self?.showErrorAlert(ErrorType.ServerCallFailed, retry: { (retry) in
                     if(retry){
-                        self.getTopics()
+                        self?.getTopics()
                     }
                 })
             }
-        }) { (error, code, message) in
+            self?.dispatchGroup.leave()
+        }) { [weak self] (error, code, message) in
             LoadingActivityHUD.hideProgressHUD()
-            self.showAlertWithTitle("Error", alertMessage: message)
-            
+            self?.showAlertWithTitle("Error", alertMessage: message)
+            self?.dispatchGroup.leave()
         }
     }
     
@@ -531,7 +563,7 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
             //from time
             cell.buttonFromTime.addTarget(self, action: #selector(StudentsListViewController.showFromTimePicker), for: .touchUpInside)
             let fromTimeTap = UITapGestureRecognizer(target: self, action: #selector(StudentsListViewController.showFromTimePicker))
-            tap.numberOfTapsRequired = 1
+            fromTimeTap.numberOfTapsRequired = 1
             cell.textFieldFromTime.tag = indexPath.row
             cell.textFieldFromTime.isUserInteractionEnabled = true
             cell.textFieldFromTime.addGestureRecognizer(fromTimeTap)
@@ -544,6 +576,18 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
             cell.numberOflecturesTaken = self.numberOfLectures.value
             tap.numberOfTapsRequired = 1
             
+            
+            //timeSlots
+            if let slotsObj = self.timeSlotsObj,(slotsObj.attendanceSlot?.count ?? 0) > 0{
+                cell.stckViewTimeSlots.isHidden = false
+                cell.setupDropdown(slots: slotsObj)
+                let slotsTap = UITapGestureRecognizer(target: cell, action: #selector(cell.showDropdown))
+                slotsTap.numberOfTapsRequired = 1
+                cell.viewTimeSlotBg.addGestureRecognizer(slotsTap)
+            }else{
+                cell.stckViewTimeSlots.isHidden = true
+                print("slots not received")
+            }
             cell.delegate = self
             cell.setUpRx()
             cell.selectionStyle = .none
@@ -603,7 +647,7 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
         let cellDataSource = arrayDataSource[indexPath.section]
         switch cellDataSource.AttendanceCellType! {
         case .calender:
-            return 208
+            return 230
             
         case .defaultSelection:
             return 50
@@ -919,6 +963,25 @@ extension StudentsListViewController:DefaultAttendanceSelectionDelegate, UIAdapt
 //MARK:- Calender delegate methods
 
 extension StudentsListViewController:AttendanceCalenderTableViewCellDelegate{
+    func timeSlotSelected(slotObj: AttendanceSlot) {
+        if let toTimeObj = slotObj.toTime?.convertTimeStringToDate(){
+            if self.toTimePicker != nil{
+                self.toTimePicker.picker.date = toTimeObj
+            }else{
+                self.initToTimePicker()
+            }
+            self.toTimePicker.picker.date = toTimeObj
+        }
+        if let FromTimeObj = slotObj.fromTime?.convertTimeStringToDate(){
+            if self.fromTimePicker != nil{
+            }else{
+                self.initFromTimePicker()
+            }
+            self.fromTimePicker.picker.date = FromTimeObj
+        }
+        self.makeDataSource()
+    }
+    
     func numberOfLecturesSelected(lectures: Int) {
         self.numberOfLectures.value = lectures
         self.makeDataSource()

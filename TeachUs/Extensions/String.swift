@@ -41,6 +41,16 @@ extension String{
         return date ?? Date()
     }
     
+    func convertTimeStringToDate() -> Date? {
+        let strDate = self
+        print(strDate)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh:mm:ss"
+        let date = dateFormatter.date(from: strDate)
+        return date ?? Date()
+
+    }
+    
     func addColorForString(_ string:String, stringColor:UIColor) -> NSAttributedString{
         
         let range = (self.lowercased() as NSString).range(of: string.lowercased())
