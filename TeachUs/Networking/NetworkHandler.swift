@@ -31,7 +31,7 @@ class NetworkHandler:SessionManager{
                 case .success:
                     #if DEBUG
                         print("***** NETWORK CALL RESPONSE *****")
-                        print("status code: \((response.response?.statusCode)!), responseData: \(response.result.value ?? Dictionary<String, Any>())")
+                    print("url: \(self.url ?? ""), \n status code: \((response.response?.statusCode)!), \n responseData: \(response.result.value ?? Dictionary<String, Any>())")
                     #endif
                     if let responseArray = response.result.value as? [Any]{
                         let responseDict :[String:Any] = ["role_list":responseArray]
@@ -92,7 +92,7 @@ class NetworkHandler:SessionManager{
                     #if DEBUG
                     print("Validation Successful")
                         print("***** NETWORK CALL RESPONSE *****")
-                        print("status code: \((response.response?.statusCode)!), responseData: \(response.result.value ?? Dictionary<String, Any>())")
+                        print("url: \(self.url ?? ""), \n status code: \((response.response?.statusCode)!), \n responseData: \(response.result.value ?? Dictionary<String, Any>())")
                     #endif
                     completionHandler(response.data!, (response.response?.statusCode)!)
                 case .failure(let error):
@@ -152,7 +152,7 @@ class NetworkHandler:SessionManager{
                     #if DEBUG
                     print("Validation Successful")
                         print("***** NETWORK CALL RESPONSE *****")
-                        print("status code: \((response.response?.statusCode)!), responseData: \(response.result.value!)")
+                        print("url: \(self.url ?? ""), \n status code: \((response.response?.statusCode)!), \n responseData: \(response.result.value!)")
                     #endif
                     completionHandler(response.result.value!, (response.response?.statusCode)!)
 
@@ -223,7 +223,8 @@ class NetworkHandler:SessionManager{
                 switch response.result {
                 case .success:
                     #if DEBUG
-                        print(response)
+                        print("***** NETWORK CALL RESPONSE *****")
+                        print("url: \(self.url ?? ""), \n status code: \((response.response?.statusCode)!), \n responseData: \(response)")
                     #endif
                     completionHandler(true, (response.response?.statusCode)!, response.result.value as! [String : Any])
                     break
@@ -280,7 +281,8 @@ class NetworkHandler:SessionManager{
                 switch response.result {
                 case .success:
                     #if DEBUG
-                    print(response)
+                        print("***** NETWORK CALL RESPONSE *****")
+                        print("url: \(self.url ?? ""), \n status code: \((response.response?.statusCode)!), \n responseData: \(response)")
                     #endif
                     completionHandler(true, (response.response?.statusCode)!, response.data!)
                     break
@@ -340,7 +342,8 @@ class NetworkHandler:SessionManager{
                 switch response.result {
                 case .success:
                     #if DEBUG
-                    print(response)
+                        print("***** NETWORK CALL RESPONSE *****")
+                        print("url: \(self.url ?? ""), \n status code: \((response.response?.statusCode)!), \n responseData: \(response)")
                     #endif
                     completionHandler(true, (response.response?.statusCode)!, response.result.value as! [String : Any])
                     break

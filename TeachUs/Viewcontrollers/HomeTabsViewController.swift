@@ -158,86 +158,83 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
             
         case .college:
             self.controllersArray.removeAll()
-            let collegeAttendanceListVC:CollegeAttendanceListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.CollegeAttendanceListViewControllerId) as! CollegeAttendanceListViewController
-            collegeAttendanceListVC.title = "Attendance (Reports)"
-            collegeAttendanceListVC.parentNavigationController = self.parentNavigationController
-            controllersArray.append(collegeAttendanceListVC)
             
-            let eventAttendanceListVc:EventAttendanceListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.EventAttendanceListViewControllerId) as! EventAttendanceListViewController
-            eventAttendanceListVc.title = "Attendance (Events)"
-            eventAttendanceListVc.parentNavigationController = self.parentNavigationController
-            controllersArray.append(eventAttendanceListVc)
-            
-            //SUPER ADMIN
-//            if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! == "2"){
-            if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "1"){//1-super-admin, 2-admin
-            let collegeSyllabusStatusVC:CollegeSyllabusStatusViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.CollegeSyllabusStatusViewControllerId) as! CollegeSyllabusStatusViewController
-            collegeSyllabusStatusVC.title = "Syllabus"
-            collegeSyllabusStatusVC.parentNavigationController = self.parentNavigationController
-            controllersArray.append(collegeSyllabusStatusVC)
+            for tab in UserManager.sharedUserManager.allowedCollegeUserTabs{
+                switch tab {
+                case .atendanceReport: //Attendance (Reports)
+                    let collegeAttendanceListVC:CollegeAttendanceListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.CollegeAttendanceListViewControllerId) as! CollegeAttendanceListViewController
+                    collegeAttendanceListVC.title = "\(tab.titleName)"
+                    collegeAttendanceListVC.parentNavigationController = self.parentNavigationController
+                    controllersArray.append(collegeAttendanceListVC)
+                    
+                case .attendanceEvent://Attendance (Events)
+                    let eventAttendanceListVc:EventAttendanceListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.EventAttendanceListViewControllerId) as! EventAttendanceListViewController
+                    eventAttendanceListVc.title = "\(tab.titleName)"
+                    eventAttendanceListVc.parentNavigationController = self.parentNavigationController
+                    controllersArray.append(eventAttendanceListVc)
+                    
+                case .syllabus: //Syllabus
+                    if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "1"){//1-super-admin, 2-admin
+                        let collegeSyllabusStatusVC:CollegeSyllabusStatusViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.CollegeSyllabusStatusViewControllerId) as! CollegeSyllabusStatusViewController
+                        collegeSyllabusStatusVC.title = "\(tab.titleName)"
+                        collegeSyllabusStatusVC.parentNavigationController = self.parentNavigationController
+                        controllersArray.append(collegeSyllabusStatusVC)
+                    }
+                    
+                case .addRemoveAdmin: //Add/Remove Admin
+                    if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "1"){//1-super-admin, 2-admin
+                        
+                        let addRemoveAdminVC:AddRemoveAdminViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.AddRemoveAdminViewControllerId) as! AddRemoveAdminViewController
+                        addRemoveAdminVC.title = "\(tab.titleName)"
+                        addRemoveAdminVC.parentNavigationController = self.parentNavigationController
+                        controllersArray.append(addRemoveAdminVC)
+                    }
+                    
+                case .feedbcak: //"Ratings"
+                    if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "1"){
+                        let collegeRatingListVC:CollegeClassRatingListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.CollegeClassRatingListViewControllerId) as! CollegeClassRatingListViewController
+                        collegeRatingListVC.title = "\(tab.titleName)"
+                        collegeRatingListVC.parentNavigationController = self.parentNavigationController
+                        controllersArray.append(collegeRatingListVC)
+                    }
+                    
+                case .logs: //"Logs"
+                    if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "1"){
+                        let collegeLogsListVC:CollegeLogsProfessorListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.CollegeLogsProfessorListViewControllerId) as! CollegeLogsProfessorListViewController
+                        collegeLogsListVC.title = "\(tab.titleName)"
+                        collegeLogsListVC.parentNavigationController = self.parentNavigationController
+                        controllersArray.append(collegeLogsListVC)
+                    }
+                    
+                case .notice: //"Notice"
+                    let collegeNoticeClassListVC:CollegeNoticeListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.collegeNoticeList) as! CollegeNoticeListViewController
+                    collegeNoticeClassListVC.title = "\(tab.titleName)"
+                    collegeNoticeClassListVC.parentNavigationController = self.parentNavigationController
+                    controllersArray.append(collegeNoticeClassListVC)
+                    
+                case .notification: //"Notification"
+                    if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "1"){
+                        let collegeNotificationListVC:CollegeNotificationListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.collegeNotificationList) as! CollegeNotificationListViewController
+                        collegeNotificationListVC.title = "\(tab.titleName)"
+                        collegeNotificationListVC.parentNavigationController = self.parentNavigationController
+                        controllersArray.append(collegeNotificationListVC)
+                    }
+                    
+                case .notes: //"Notes"
+                    if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "1"){
+                        let collegeNotesClassListVC:CollegeNotesClassListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.collegeNotesClassList) as! CollegeNotesClassListViewController
+                        collegeNotesClassListVC.title = "\(tab.titleName)"
+                        collegeNotesClassListVC.parentNavigationController = self.parentNavigationController
+                        controllersArray.append(collegeNotesClassListVC)
+                    }
+                    
+                case .request: //"Request" 
+                    let requestListVC:ProfileChangeRequestsViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.ProfileChangeRequestsViewControllerId) as! ProfileChangeRequestsViewController
+                    requestListVC.title = "\(tab.titleName)"
+                    requestListVC.parentNavigationController = self.parentNavigationController
+                    controllersArray.append(requestListVC)
+                }
             }
-            
-            
-            
-            //SUPER ADMIN
-//            if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! == "2"){
-                if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "1"){//1-super-admin, 2-admin
-
-                let addRemoveAdminVC:AddRemoveAdminViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.AddRemoveAdminViewControllerId) as! AddRemoveAdminViewController
-                addRemoveAdminVC.title = "Add/Remove Admin"
-                addRemoveAdminVC.parentNavigationController = self.parentNavigationController
-                controllersArray.append(addRemoveAdminVC)
-            }
-
-            //SUPER ADMIN
-//            if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! == "2"){//1-super-admin, 2-admin
-            if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "1"){
-            let collegeRatingListVC:CollegeClassRatingListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.CollegeClassRatingListViewControllerId) as! CollegeClassRatingListViewController
-                collegeRatingListVC.title = "Ratings"
-                collegeRatingListVC.parentNavigationController = self.parentNavigationController
-                controllersArray.append(collegeRatingListVC)
-            }
-            
-            if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "1"){
-                let collegeLogsListVC:CollegeLogsProfessorListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.CollegeLogsProfessorListViewControllerId) as! CollegeLogsProfessorListViewController
-                collegeLogsListVC.title = "Logs"
-                collegeLogsListVC.parentNavigationController = self.parentNavigationController
-                controllersArray.append(collegeLogsListVC)
-            }
-            
-//            if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "1"){
-                let collegeNoticeClassListVC:CollegeNoticeListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.collegeNoticeList) as! CollegeNoticeListViewController
-                collegeNoticeClassListVC.title = "Notice"
-                collegeNoticeClassListVC.parentNavigationController = self.parentNavigationController
-                controllersArray.append(collegeNoticeClassListVC)
-//            }
-            
-            
-            if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "1"){
-                let collegeNotificationListVC:CollegeNotificationListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.collegeNotificationList) as! CollegeNotificationListViewController
-                collegeNotificationListVC.title = "Notification"
-                collegeNotificationListVC.parentNavigationController = self.parentNavigationController
-                controllersArray.append(collegeNotificationListVC)
-            }
-            
-            
-            if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "1"){
-                let collegeNotesClassListVC:CollegeNotesClassListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.collegeNotesClassList) as! CollegeNotesClassListViewController
-                collegeNotesClassListVC.title = "Notes"
-                collegeNotesClassListVC.parentNavigationController = self.parentNavigationController
-                controllersArray.append(collegeNotesClassListVC)
-            }
-            
-           
-            
-//            if(UserManager.sharedUserManager.appUserCollegeDetails.privilege! ==  "1"){
-                let requestListVC:ProfileChangeRequestsViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.ProfileChangeRequestsViewControllerId) as! ProfileChangeRequestsViewController
-                requestListVC.title = "Request"
-                requestListVC.parentNavigationController = self.parentNavigationController
-                controllersArray.append(requestListVC)
-
-//            }
-            
             break
         }
         return controllersArray

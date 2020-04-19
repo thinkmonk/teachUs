@@ -55,10 +55,10 @@ import Foundation
  */
 
 
-enum UserTabControls:Int{
+enum UserTabControls:Int, CaseIterable{
     case atendanceReport = 1
     case attendanceEvent = 2
-    case Syllabus        = 3
+    case syllabus        = 3
     case addRemoveAdmin  = 4
     case feedbcak        = 5
     case logs            = 6
@@ -74,7 +74,7 @@ enum UserTabControls:Int{
             
         case .attendanceEvent: return "Attendance (Event)"
             
-        case .Syllabus: return "Syllabus"
+        case .syllabus: return "Syllabus"
             
         case .addRemoveAdmin: return "Add/Remove Admin"
             

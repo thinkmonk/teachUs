@@ -44,7 +44,8 @@ class LeftMenuViewController: BaseViewController, UIGestureRecognizerDelegate {
     var professorDataSource = ["Attendance", "Syllabus", "My Logs", "Notice", "Notification" ,"Notes", "Logout"]
     var professorImageDataSource = ["attendanceReport", "syllabus", "logs", "notice", "notification", "notes", "logout"]
     
-    var collegeSuperAdminDataSource = ["Attendance(Reports)","Attendance(Events)", "Syllabus Status","Add/Remove Admin","Feedback", "Logs", "Notice", "Notification" , "Notes","Request","Logout" ]
+//    var collegeSuperAdminDataSource = ["Attendance(Reports)","Attendance(Events)", "Syllabus Status","Add/Remove Admin","Feedback", "Logs", "Notice", "Notification" , "Notes","Request","Logout" ]
+    var collegeSuperAdminDataSource = UserManager.sharedUserManager.allowedCollegeUserTabs.map({$0.titleName })
     var collegeSuperAdminImageDataSource = ["attendanceReport", "syllabusStatusEvent", "syllabus", "addRemoveAdmin","feedback", "logs","notice", "notification", "notes", "request", "logout"]
     
     var collegeAdminDataSource = ["Attendance(Reports)", "Attendance(Events)", "Notice", "Request" ,"Logout"]
@@ -111,10 +112,10 @@ class LeftMenuViewController: BaseViewController, UIGestureRecognizerDelegate {
             self.buttonEditProfile.isHidden = false
             break
         case .college://1 is for super admin, 2 is for admin
-            if let privilege = UserManager.sharedUserManager.appUserCollegeDetails.privilege{
-                arrayDataSource = privilege == "1" ? collegeSuperAdminDataSource : collegeAdminDataSource
-                imageDataSource = privilege == "1" ? collegeSuperAdminImageDataSource : collegeAdminImageDataSource
-            }
+            arrayDataSource = collegeSuperAdminDataSource
+            imageDataSource = collegeSuperAdminImageDataSource
+//            if let privilege = UserManager.sharedUserManager.appUserCollegeDetails.privilege{
+//            }
             //                arrayDataSource = UserManager.sharedUserManager.appUserCollegeDetails.privilege! == "2" ? collegeSuperAdminDataSource : collegeSuperAdminDataSource
             self.buttonEditProfile.isHidden = true
             break

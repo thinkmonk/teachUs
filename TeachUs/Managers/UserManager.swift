@@ -26,6 +26,24 @@ class UserManager{
     var appUserDetails:UserDetails!
     var appUserCollegeDetails:CollegeDetails!
     var appUserCollegeArray:[CollegeDetails]! = []
+    var allowedCollegeUserTabs:[UserTabControls]{
+        var availableControlTabs = [UserTabControls]()
+        if let controlObj = self.appUserCollegeDetails.userControlTabs{
+            let controlArray = controlObj.components(separatedBy: ",").map({Int($0) ?? 0})
+            for control in controlArray{
+                if control == 0 {
+                    for tab in UserTabControls.allCases {
+                        availableControlTabs.append(tab)
+                    }
+                }else{
+                    if let tempTabObj = UserTabControls(rawValue: control){
+                        availableControlTabs.append(tempTabObj)
+                    }
+                }
+            }
+        }
+        return availableControlTabs
+    }
     
     var offlineAppUserData:OfflineData!
     var offlineAppuserCollegeDetails:Offline_Colleges!
@@ -304,6 +322,8 @@ class UserManager{
         collegeDetails.college_name = college["college_name"] as? String
         collegeDetails.college_code = college["college_code"] as? String
         collegeDetails.role_name = college["role_name"] as? String
+        collegeDetails.userControlTabs = college["user_control"] as? String
+
         if let notificationsCount = college["total_notification"] as? String{
             collegeDetails.notificationCount = notificationsCount
         }
