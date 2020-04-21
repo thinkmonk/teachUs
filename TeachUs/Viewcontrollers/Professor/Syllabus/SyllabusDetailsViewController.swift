@@ -123,8 +123,19 @@ extension SyllabusDetailsViewController:UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:SyllabusDetailsTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.SyllabusDetailsTableViewCellId, for: indexPath) as! SyllabusDetailsTableViewCell
         let chapter = self.arrayDataSource[indexPath.section].topicArray![indexPath.row]
-        cell.labelChapterDetails.text = chapter.chapterNumber       //Small text
+        var completionText :String {
+            var detailText = ""
+            if chapter.completionDate != "0"{
+                let date = chapter.completionDate.getFormaatedDate(format: "dd MMM yyyy")
+                detailText =  "Completion date : \(date)"
+            }
+            if let name = chapter.professorName, name != ""{
+                detailText += " (\(name))"
+            }
+            return detailText
+        }
         cell.labelChapterNumber.text = chapter.chapterName        //Big Text
+        cell.labelChapterDetails.text = completionText       //Small text
         switch chapter.status {
         case "0": //Not Startted
             cell.imageViewStatus.image = UIImage(named: Constants.Images.syllabusNotStarted)

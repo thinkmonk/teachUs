@@ -113,6 +113,8 @@ class Chapter:Mappable{
     var isUpdated:Bool = false
     var futureStatus:String = ""
     var futureDate:String = ""
+    var professorName:String?
+    var completionDate:String = ""
     
     
     var setChapterStatus:String? = "Not Started"
@@ -146,6 +148,9 @@ class Chapter:Mappable{
         default:
             break
         }
+        
+        self.completionDate <- map["completed_date"]
+        self.professorName <- map["professor_name"]
     }
 }
 

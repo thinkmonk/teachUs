@@ -21,4 +21,13 @@ extension String {
         dateFormatter.locale = tempLocale // reset the locale
         return dateFormatter.string(from: date)
     }
+    
+    func getFormaatedDate(format:String) -> String{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let date = dateFormatter.date(from: self)!
+        dateFormatter.dateFormat = format //dd MMM yyyy
+        return dateFormatter.string(from: date)
+
+    }
 }
