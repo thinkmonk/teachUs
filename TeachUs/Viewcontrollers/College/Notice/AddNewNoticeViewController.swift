@@ -17,6 +17,18 @@ protocol AddNewNoticeDelegate:class {
     func viewDismissed(isNoticeAdded:Bool?)
 }
 
+class RoleNameId {
+    var id:Int?
+    var key:String?
+    var isSelected:Bool = false
+    
+    init(userId:Int, userKey:String, userSelected:Bool) {
+        self.id = userId
+        self.key = userKey
+        self.isSelected = userSelected
+    }
+}
+
 class AddNewNoticeViewController: BaseViewController {
     
     @IBOutlet weak var viewAddNoticeWrapper: UIView!
@@ -25,11 +37,17 @@ class AddNewNoticeViewController: BaseViewController {
     @IBOutlet weak var textfieldNoticeTitle: UITextField!
     @IBOutlet weak var viewDescriptionBg: UIView!
     @IBOutlet weak var textViewDescription: UITextView!
-    @IBOutlet weak var labelClassNames: UILabel!
     @IBOutlet weak var buttonSelectClass: UIButton!
     @IBOutlet weak var buttonPreviewNotice: UIButton!
-    @IBOutlet weak var roleSwitch: UISwitch!
     @IBOutlet weak var labelAttachmentText: UILabel!
+    @IBOutlet weak var buttonSelectRole: UIButton!
+    var arrayAllRoles   = [RoleNameId]()
+    var selectedRolesId : String{
+        let selecteedRole = self.arrayAllRoles.filter({$0.isSelected == true})
+        var selectedRoleString : [String] = selecteedRole.map({"\($0.id ?? 0)"})
+        selectedRoleString.append("3")
+        return selectedRoleString.joined(separator: ",")
+    }
     var imagePicker:UIImagePickerController?=UIImagePickerController()
     var documentPicker:UIDocumentPickerViewController!
 //    var chosenFile:URL?
@@ -54,6 +72,7 @@ class AddNewNoticeViewController: BaseViewController {
         imagePicker?.delegate = self
         self.setUpDefaultValues()
         self.setUpRx()
+        self.makeRoleDataSource()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -107,6 +126,13 @@ class AddNewNoticeViewController: BaseViewController {
         
     }
     
+    func makeRoleDataSource(){
+        let roleStudent     = RoleNameId(userId: 1, userKey: "STUDENT", userSelected: false)
+        let roleProfessor   = RoleNameId(userId: 2, userKey: "PROFESSOR", userSelected: false)
+        let roleParent      = RoleNameId(userId: 3, userKey: "PARENT", userSelected: false)
+        self.arrayAllRoles  = [roleStudent, roleProfessor, roleParent]
+    }
+    
     func setUpDefaultValues(){
         if let defaultTitle = UserDefaults.standard.value(forKey: Constants.UserDefaults.noticeTitle) as? String{
             self.textfieldNoticeTitle.text = defaultTitle
@@ -155,6 +181,7 @@ class AddNewNoticeViewController: BaseViewController {
         })
     }
     
+    
     @IBAction func actionUploadNotice(_ sender: Any) {
         if self.chosenFile.value == nil && self.chosenImage.value == nil{
             let parameters = [
@@ -164,13 +191,12 @@ class AddNewNoticeViewController: BaseViewController {
                 "description":"\(self.textViewDescription.text?.encodedString() ?? "")",
                 "doc":"",
                 "file_name":"",
-                "role_id": self.roleSwitch.isOn ? "2,3" : "1,3",
+                "role_id": self.selectedRolesId,
                 "doc_size":""
             ]
             self.postProfessorNotes(parameters)
 
         }else{
-            let switchStatus = self.roleSwitch.isOn
             self.uploadFileToFirebase(completion: {[weak self] (fileURL, fileSize, fileName)  in
                 let parameters = [
                     "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
@@ -179,7 +205,7 @@ class AddNewNoticeViewController: BaseViewController {
                     "description":"\(self?.textViewDescription.text?.encodedString() ?? "")",
                     "doc":fileURL.absoluteString,
                     "file_name":"\(fileName)",
-                    "role_id": switchStatus ? "2,3" : "1,3",
+                    "role_id": self?.selectedRolesId,
                     "doc_size":"\(fileSize)"
                 ]
                 self?.postProfessorNotes(parameters)
@@ -217,6 +243,15 @@ class AddNewNoticeViewController: BaseViewController {
             self.viewClassList.frame = CGRect(x: 0.0, y: 0.0, width: self.view.width(), height: self.view.height())
             self.view.addSubview(self.viewClassList)
         }
+    }
+    
+    @IBAction func actionShowRoleList(_ sender:Any){
+        if (self.arrayAllRoles.count > 0){
+            self.viewClassList.setUpView(array: self.arrayAllRoles)
+            self.viewClassList.frame = CGRect(x: 0.0, y: 0.0, width: self.view.width(), height: self.view.height())
+            self.view.addSubview(self.viewClassList)
+        }
+
     }
     
     @IBAction func actionUploadDocument(_ sender: Any) {
@@ -406,21 +441,41 @@ extension AddNewNoticeViewController:UIDocumentMenuDelegate,UIDocumentPickerDele
 
 extension AddNewNoticeViewController:ViewClassSelectionDelegate{
     func selectAllClasses(_ dataSourceObj: Any?) {
-        CollegeClassManager.sharedManager.selectedClassArray = CollegeClassManager.sharedManager.selectedClassArray.map({classSelected in
-            classSelected.isSelected = true
-            return classSelected
-        })
-        self.viewClassList.setUpView(array: CollegeClassManager.sharedManager.selectedClassArray )
-        
+        if let _ = dataSourceObj as? [SelectCollegeClass] {
+            CollegeClassManager.sharedManager.selectedClassArray = CollegeClassManager.sharedManager.selectedClassArray.map({classSelected in
+                classSelected.isSelected = true
+                return classSelected
+            })
+            self.viewClassList.setUpView(array: CollegeClassManager.sharedManager.selectedClassArray)
+        }
+
+        if let _ = dataSourceObj as? [RoleNameId] {
+            self.arrayAllRoles = self.arrayAllRoles.map({ (role) in
+                role.isSelected = true
+                return role
+            })
+            self.viewClassList.setUpView(array:self.arrayAllRoles )
+        }
+
     }
     
     func deselectAllClasses(_ dataSourceObj: Any?) {
-        CollegeClassManager.sharedManager.selectedClassArray = CollegeClassManager.sharedManager.selectedClassArray.map({classSelected in
-            classSelected.isSelected = false
-            return classSelected
-        })
-        self.viewClassList.setUpView(array: CollegeClassManager.sharedManager.selectedClassArray)
-        
+        if let _ = dataSourceObj as? [SelectCollegeClass] {
+            CollegeClassManager.sharedManager.selectedClassArray = CollegeClassManager.sharedManager.selectedClassArray.map({classSelected in
+                classSelected.isSelected = false
+                return classSelected
+            })
+            self.viewClassList.setUpView(array: CollegeClassManager.sharedManager.selectedClassArray)
+        }
+
+        if let _ = dataSourceObj as? [RoleNameId] {
+            self.arrayAllRoles = self.arrayAllRoles.map({ (role) in
+                role.isSelected = false
+                return role
+            })
+            self.viewClassList.setUpView(array:self.arrayAllRoles )
+
+        }
     }
         
     func classViewDismissed(_ dataSourceObj: Any?) {

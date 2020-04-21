@@ -121,6 +121,11 @@ extension ViewClassSelection:UITableViewDelegate, UITableViewDataSource{
             cell.textLabel?.text = controlObj.user ?? ""
             cell.accessoryType = dataSource[indexPath.row].isSelected ? .checkmark : .none
         }
+        if let dataSource = dataSOurceArray as? [RoleNameId] {
+            let role = dataSource[indexPath.row]
+            cell.textLabel?.text = role.key ?? ""
+            cell.accessoryType = dataSource[indexPath.row].isSelected ? .checkmark : .none
+        }
         return cell
     }
     
@@ -131,6 +136,10 @@ extension ViewClassSelection:UITableViewDelegate, UITableViewDataSource{
         if let dataSource = dataSOurceArray as? [UserControl]{
             dataSource[indexPath.row].isSelected.toggle()
         }
+        if let dataSource = dataSOurceArray as? [RoleNameId] {
+            dataSource[indexPath.row].isSelected.toggle()
+        }
+        
         self.tableviewClassList.reloadData()
     }
     
@@ -141,6 +150,10 @@ extension ViewClassSelection:UITableViewDelegate, UITableViewDataSource{
         if let dataSource = dataSOurceArray as? [UserControl]{
             dataSource[indexPath.row].isSelected.toggle()
         }
+        if let dataSource = dataSOurceArray as? [RoleNameId] {
+            dataSource[indexPath.row].isSelected.toggle()
+        }
+
         self.tableviewClassList.reloadData()
     }
     

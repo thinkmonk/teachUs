@@ -36,7 +36,6 @@ class AddRemoveAdminViewController: BaseViewController {
     var dispatchGroup = DispatchGroup()
     var viewClassList : ViewClassSelection!
     var applicationTabsObj  : ApplicationTabs!
-
     
     
     //AddRemoveAdminTableViewCellId
@@ -128,6 +127,10 @@ class AddRemoveAdminViewController: BaseViewController {
 //            self.viewCourseList.frame = CGRect(x: 0.0, y:0.0, width: self.view.width(), height: self.view.height())
 //            self.view.addSubview(self.viewCourseList)
 //        }
+    }
+    
+    func showRoleList(){
+        
     }
     
     
