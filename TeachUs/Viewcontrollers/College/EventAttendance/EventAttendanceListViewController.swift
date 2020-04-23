@@ -20,6 +20,9 @@ class EventAttendanceListViewController: BaseViewController {
     @IBOutlet weak var buttonAllClass: UIButton!
     @IBOutlet weak var buttonShowClassList: UIButton!
     @IBOutlet weak var textFieldEventName: UITextField!
+    @IBOutlet weak var textFieldEventInchargeName: UITextField!
+    @IBOutlet weak var switchAddToAttendance: UISwitch!
+
     var arrayDataSource:[Event] = []
     var disposeBag = DisposeBag()
     var viewCourseList : ViewCourseSelection!
@@ -67,6 +70,7 @@ class EventAttendanceListViewController: BaseViewController {
         let date = Date()
         let inputFormatter = DateFormatter()
         inputFormatter.dateFormat = "yyyy-MM-dd"
+        let addAttendanceFlag = self.switchAddToAttendance.isOn ? "1" : "0"
         let resultDateString = inputFormatter.string(from: date)
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let parameters = [
@@ -75,7 +79,9 @@ class EventAttendanceListViewController: BaseViewController {
             "event_code":"\(self.textFieldEventName.text ?? "")",
             "event_description":"\(self.textFieldEventName.text ?? "")",
             "event_date":"\(resultDateString)",
-            "course_id":"\(CollegeClassManager.sharedManager.getSelectedCourseList)"
+            "course_id":"\(CollegeClassManager.sharedManager.getSelectedCourseList)",
+            "event_incharge":"\(self.textFieldEventInchargeName.text ?? "")",
+            "add_attendance": "\(addAttendanceFlag)"
         ]
         
         EventManager.shared.addEvent(params: parameters) { (successFlag, message) in
