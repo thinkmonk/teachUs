@@ -213,7 +213,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="leftMenuBackground" translatesAutoresizingMaskIntoConstraints="NO" id="gCW-AG-obA">
-                                <rect key="frame" x="0.0" y="0.0" width="320.00000000000023" height="568.00000000000045"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aAR-hT-63q">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="199"/>
@@ -263,7 +263,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="12j-5s-uFj">
-                                        <rect key="frame" x="281.5" y="5" width="23.5" height="25"/>
+                                        <rect key="frame" x="258" y="5" width="47" height="50"/>
                                         <state key="normal" image="editProfile">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -3793,7 +3793,7 @@ Form Library</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="leftMenuBackground" translatesAutoresizingMaskIntoConstraints="NO" id="YYu-fX-P2P">
-                                <rect key="frame" x="0.0" y="0.0" width="320.00000000000023" height="568.00000000000045"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xwc-FN-gyn">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="199"/>
