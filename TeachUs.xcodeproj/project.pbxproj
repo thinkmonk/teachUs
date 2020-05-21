@@ -2586,7 +2586,7 @@
 			buildSettings = {
 				APP_DISPLAY_NAME = "$(PRODUCT_NAME)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BASE_URL = "$(BASE_URL_HOME)/api_uat";
+				BASE_URL = "$(BASE_URL_HOME)/api_v2";
 				BASE_URL_HOME = "http://teachusedumation.com";
 				BASE_URL_V1 = "$(BASE_URL)/teachus";
 				CLANG_ENABLE_MODULES = YES;
