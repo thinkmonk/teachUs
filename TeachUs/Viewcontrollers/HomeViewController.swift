@@ -27,8 +27,7 @@ class HomeViewController: BaseViewController{
 //        self.makeDataSource()
 //        setUpPageMenu()
         
-
-        
+        self.addNotificaitonLabel()
     }
 
     override func didReceiveMemoryWarning() {
@@ -47,7 +46,6 @@ class HomeViewController: BaseViewController{
 //        self.view.addSubview(pageMenu!.view)
 //        pageMenu?.didMove(toParentViewController: self)
         
-        self.addNotificaitonLabel()
         NotificationCenter.default.addObserver(self, selector: #selector(updateBellNotificaitonCount), name: .notificationBellCountUpdate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(bellNotificationAction), name: .performNotificationNavigation, object: nil)
         let notificationReceived = UserDefaults.standard.bool(forKey: Constants.UserDefaults.notifiocationReceived)
@@ -73,11 +71,12 @@ class HomeViewController: BaseViewController{
             notificaitonLabel.layer.cornerRadius = notificaitonLabel.bounds.size.height / 2
             notificaitonLabel.textAlignment = .center
             notificaitonLabel.layer.masksToBounds = true
-            notificaitonLabel.font = UIFont.systemFont(ofSize: 12)
+            notificaitonLabel.font = UIFont.systemFont(ofSize: 10)
             notificaitonLabel.textColor = .white
             notificaitonLabel.backgroundColor = .red
-            notificaitonLabel.text = UserManager.sharedUserManager.appUserCollegeDetails.notificationCount
-            
+            if let count = Int(UserManager.sharedUserManager.appUserCollegeDetails.notificationCount ?? "0"){
+                notificaitonLabel.text = count > 100 ? "99+" : "\(count)"
+            }
             // button
             let rightButton = UIButton(frame: CGRect(x: 0, y: 0, width: 20, height: 20 ))
             rightButton.setBackgroundImage(UIImage(named: "bellNotification"), for: .normal)
@@ -86,12 +85,24 @@ class HomeViewController: BaseViewController{
             rightButton.addSubview(notificaitonLabel)
             
             // Bar button item
-            let rightBarButtomItem = UIBarButtonItem(customView: rightButton)
-            navigationItem.rightBarButtonItem = rightBarButtomItem
+            let bellButtomItem = UIBarButtonItem(customView: rightButton)
+            navigationItem.rightBarButtonItems  = [bellButtomItem]
         }
 
+        if UserManager.sharedUserManager.user == .student{
+            let admissionButton = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 20 ))
+            admissionButton.setTitle("Admission", for: .normal)
+            admissionButton.layer.borderWidth = 1.0
+            admissionButton.layer.borderColor = UIColor.white.cgColor
+            admissionButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+            admissionButton.addTarget(self, action: #selector(admissionFormAction), for: .touchUpInside)
+            let addmissionBarButton = UIBarButtonItem(customView: admissionButton)
+            navigationItem.rightBarButtonItems?.append(addmissionBarButton)
+        }
+        
+
     }
-    
+  
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -120,6 +131,10 @@ class HomeViewController: BaseViewController{
     
     @objc func bellNotificationAction(){
         self.performSegue(withIdentifier: Constants.segues.toBellNotificationList, sender: self)
+    }
+    
+    @objc func admissionFormAction(){
+        self.performSegue(withIdentifier: Constants.segues.toAdmissionForm, sender: self)
     }
 
     @objc func hamburgerAction() {

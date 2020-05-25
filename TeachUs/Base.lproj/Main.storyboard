@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pVO-0S-wfc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pVO-0S-wfc">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -263,7 +263,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="12j-5s-uFj">
-                                        <rect key="frame" x="258" y="5" width="47" height="50"/>
+                                        <rect key="frame" x="281.5" y="5" width="23.5" height="25"/>
                                         <state key="normal" image="editProfile">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -749,6 +749,7 @@ Form Library</string>
                     <connections>
                         <segue destination="3Ky-B3-8mm" kind="show" identifier="toEditProfile" id="tgg-fJ-z21"/>
                         <segue destination="fbb-JT-spQ" kind="show" identifier="toBellNotification" id="dag-7N-tkT"/>
+                        <segue destination="5Ac-bl-w11" kind="show" identifier="toAdmissionForm" id="hRS-Pa-7Zl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WbJ-Y2-iKd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1920,13 +1921,13 @@ Form Library</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vXF-gi-fbY">
-                                <rect key="frame" x="15" y="54" width="290" height="80"/>
+                                <rect key="frame" x="15" y="54" width="290" height="81.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tWy-U0-9zB">
-                                        <rect key="frame" x="10" y="10" width="270" height="27"/>
+                                        <rect key="frame" x="10" y="10" width="270" height="28.5"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Event Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cfj-1D-5oz">
-                                                <rect key="frame" x="5" y="5" width="260" height="17"/>
+                                                <rect key="frame" x="5" y="5" width="260" height="18.5"/>
                                                 <color key="backgroundColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -1941,7 +1942,7 @@ Form Library</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C74-ym-7ag">
-                                        <rect key="frame" x="10" y="42" width="181" height="28"/>
+                                        <rect key="frame" x="10" y="43.5" width="181" height="28"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZc-Hq-wjR">
                                                 <rect key="frame" x="10" y="5" width="49" height="18"/>
@@ -1985,7 +1986,7 @@ Form Library</string>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ysr-7l-WXt">
-                                        <rect key="frame" x="201" y="42" width="79" height="28"/>
+                                        <rect key="frame" x="201" y="43.5" width="79" height="28"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                         <inset key="contentEdgeInsets" minX="25" minY="5" maxX="25" maxY="5"/>
                                         <state key="normal" title="Add">
@@ -2012,7 +2013,7 @@ Form Library</string>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="efy-eZ-l5e">
-                                <rect key="frame" x="15" y="144" width="290" height="424"/>
+                                <rect key="frame" x="15" y="145.5" width="290" height="422.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
@@ -2275,6 +2276,25 @@ Form Library</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bbe-Kt-btd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5340" y="797.53521126760563"/>
+        </scene>
+        <!--Admissions View Controller-->
+        <scene sceneID="8VD-pq-Cqw">
+            <objects>
+                <tableViewController id="5Ac-bl-w11" customClass="AdmissionsViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" id="UmE-Yq-ALT">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <connections>
+                            <outlet property="dataSource" destination="5Ac-bl-w11" id="49H-6Z-1Oa"/>
+                            <outlet property="delegate" destination="5Ac-bl-w11" id="Lps-mG-F8U"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="fJW-Lh-SL1"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JL7-c7-x9C" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="728" y="2274"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="adN-y3-fh9">
@@ -4143,7 +4163,7 @@ Form Library</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="THH-FZ-zLd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1908.75" y="2273.2394366197182"/>
+            <point key="canvasLocation" x="1532" y="2274"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Gut-SP-gwr">
@@ -4684,13 +4704,13 @@ Form Library</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h1M-sm-ySS">
-                                <rect key="frame" x="15" y="49" width="290" height="117"/>
+                                <rect key="frame" x="15" y="49" width="290" height="118.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vsq-PG-R6m">
-                                        <rect key="frame" x="10" y="10" width="270" height="27"/>
+                                        <rect key="frame" x="10" y="10" width="270" height="28.5"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Notes Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EI4-b6-UCs">
-                                                <rect key="frame" x="5" y="5" width="260" height="17"/>
+                                                <rect key="frame" x="5" y="5" width="260" height="18.5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -4705,26 +4725,26 @@ Form Library</string>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="File:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M5I-F7-7tZ">
-                                        <rect key="frame" x="10" y="42" width="28" height="30"/>
+                                        <rect key="frame" x="10" y="43.5" width="28" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ycb-2w-kEn">
-                                        <rect key="frame" x="235" y="42" width="45" height="30"/>
+                                        <rect key="frame" x="235" y="43.5" width="45" height="30"/>
                                         <state key="normal" title="Attach"/>
                                         <connections>
                                             <action selector="actionUploadNotes:" destination="M0q-tu-FAD" eventType="touchUpInside" id="prt-2x-lJF"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="File Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sqm-dB-Yme">
-                                        <rect key="frame" x="41" y="48" width="189" height="18"/>
+                                        <rect key="frame" x="41" y="49.5" width="189" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eaG-NA-HFz">
-                                        <rect key="frame" x="10" y="77" width="270" height="30"/>
+                                        <rect key="frame" x="10" y="78.5" width="270" height="30"/>
                                         <state key="normal" title="Upload"/>
                                         <connections>
                                             <action selector="actionUploadNotesToServer:" destination="M0q-tu-FAD" eventType="touchUpInside" id="UC1-Ut-2KN"/>
@@ -4751,7 +4771,7 @@ Form Library</string>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="B92-pc-KZl">
-                                <rect key="frame" x="15" y="166" width="290" height="402"/>
+                                <rect key="frame" x="15" y="167.5" width="290" height="400.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
@@ -5036,7 +5056,7 @@ Form Library</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gtp-wr-2W3">
-                                <rect key="frame" x="20" y="120.5" width="280" height="327"/>
+                                <rect key="frame" x="20" y="120" width="280" height="328.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zqd-28-ntu">
                                         <rect key="frame" x="261" y="10" width="9" height="22"/>
@@ -5052,10 +5072,10 @@ Form Library</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rmM-Dd-o3r">
-                                        <rect key="frame" x="10" y="55" width="260" height="27"/>
+                                        <rect key="frame" x="10" y="55" width="260" height="28.5"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nWl-Yq-sVZ">
-                                                <rect key="frame" x="10" y="5" width="240" height="17"/>
+                                                <rect key="frame" x="10" y="5" width="240" height="18.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -5069,13 +5089,13 @@ Form Library</string>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0pP-MT-yE9">
-                                        <rect key="frame" x="10" y="92" width="260" height="18"/>
+                                        <rect key="frame" x="10" y="93.5" width="260" height="18"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="chH-BV-rqP">
-                                        <rect key="frame" x="10" y="110" width="260" height="90"/>
+                                        <rect key="frame" x="10" y="111.5" width="260" height="90"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="225-Rr-bUk">
                                                 <rect key="frame" x="10" y="5" width="240" height="80"/>
@@ -5096,20 +5116,20 @@ Form Library</string>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Attachment: Doc, PDF, Image" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hdf-Bk-YpB">
-                                        <rect key="frame" x="10" y="211" width="201" height="18"/>
+                                        <rect key="frame" x="10" y="212.5" width="201" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.43137254901960786" green="0.43137254901960786" blue="0.43137254901960786" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5s4-Lm-rEN">
-                                        <rect key="frame" x="226" y="205" width="44" height="30"/>
+                                        <rect key="frame" x="226" y="206.5" width="44" height="30"/>
                                         <state key="normal" title="Add"/>
                                         <connections>
                                             <action selector="actionUploadDocument:" destination="um7-4p-3vh" eventType="touchUpInside" id="sI9-5w-0zl"/>
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="RdE-Ym-W9O">
-                                        <rect key="frame" x="10" y="244" width="255" height="35"/>
+                                        <rect key="frame" x="10" y="245.5" width="255" height="35"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="DZJ-R6-ISl">
                                                 <rect key="frame" x="0.0" y="0.0" width="88.5" height="35"/>
@@ -5161,7 +5181,7 @@ Form Library</string>
                                         </constraints>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rUE-Ub-BeR">
-                                        <rect key="frame" x="105.5" y="289" width="69" height="28"/>
+                                        <rect key="frame" x="105.5" y="290.5" width="69" height="28"/>
                                         <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
                                         <state key="normal" title="Submit"/>
                                         <connections>
