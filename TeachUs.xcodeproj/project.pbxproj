@@ -80,6 +80,10 @@
 		812C34F01FB794DB0048DD3C /* ViewDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812C34EF1FB794DB0048DD3C /* ViewDatePicker.swift */; };
 		812C34F21FB794E30048DD3C /* ViewDatePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 812C34F11FB794E30048DD3C /* ViewDatePicker.xib */; };
 		812CB758206FA01200D31C05 /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812CB757206FA01200D31C05 /* CALayer.swift */; };
+		81304725247EE8E900B0B6B6 /* AdmissionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81304724247EE8E900B0B6B6 /* AdmissionData.swift */; };
+		81304728247EF01400B0B6B6 /* AdmissionFormDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81304727247EF01400B0B6B6 /* AdmissionFormDataSource.swift */; };
+		8130472B247F0B1D00B0B6B6 /* AdmissionHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81304729247F0B1D00B0B6B6 /* AdmissionHeaderTableViewCell.swift */; };
+		8130472C247F0B1D00B0B6B6 /* AdmissionHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8130472A247F0B1D00B0B6B6 /* AdmissionHeaderTableViewCell.xib */; };
 		81316DE12165575200820481 /* OfflineHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81316DDA2165574900820481 /* OfflineHomeViewController.swift */; };
 		81316DE22165575200820481 /* UploadOfflineDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81316DDB2165574900820481 /* UploadOfflineDataViewController.swift */; };
 		81316DE32165575200820481 /* OfflineLeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81316DDC2165574900820481 /* OfflineLeftMenuViewController.swift */; };
@@ -426,6 +430,10 @@
 		812C34EF1FB794DB0048DD3C /* ViewDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDatePicker.swift; sourceTree = "<group>"; };
 		812C34F11FB794E30048DD3C /* ViewDatePicker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewDatePicker.xib; sourceTree = "<group>"; };
 		812CB757206FA01200D31C05 /* CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
+		81304724247EE8E900B0B6B6 /* AdmissionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdmissionData.swift; sourceTree = "<group>"; };
+		81304727247EF01400B0B6B6 /* AdmissionFormDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdmissionFormDataSource.swift; sourceTree = "<group>"; };
+		81304729247F0B1D00B0B6B6 /* AdmissionHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdmissionHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		8130472A247F0B1D00B0B6B6 /* AdmissionHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdmissionHeaderTableViewCell.xib; sourceTree = "<group>"; };
 		81316DDA2165574900820481 /* OfflineHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfflineHomeViewController.swift; sourceTree = "<group>"; };
 		81316DDB2165574900820481 /* UploadOfflineDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadOfflineDataViewController.swift; sourceTree = "<group>"; };
 		81316DDC2165574900820481 /* OfflineLeftMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfflineLeftMenuViewController.swift; sourceTree = "<group>"; };
@@ -868,6 +876,7 @@
 		810FAC551FB7517200945DD6 /* Custom DataSource */ = {
 			isa = PBXGroup;
 			children = (
+				81304726247EF00400B0B6B6 /* Admission */,
 				81DC5C7622462D0400D9F3B7 /* StudentDetailsDataSource.swift */,
 				810FAC561FB7518A00945DD6 /* AttendanceDataSource.swift */,
 				81CCAE571FC82E310070907A /* RatingDataSource.swift */,
@@ -927,6 +936,22 @@
 				812B152320BAA65B00693183 /* Init.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		81304723247EE8D100B0B6B6 /* Admission */ = {
+			isa = PBXGroup;
+			children = (
+				81304724247EE8E900B0B6B6 /* AdmissionData.swift */,
+			);
+			path = Admission;
+			sourceTree = "<group>";
+		};
+		81304726247EF00400B0B6B6 /* Admission */ = {
+			isa = PBXGroup;
+			children = (
+				81304727247EF01400B0B6B6 /* AdmissionFormDataSource.swift */,
+			);
+			path = Admission;
 			sourceTree = "<group>";
 		};
 		81316DD92165574900820481 /* Offline */ = {
@@ -1107,6 +1132,7 @@
 		813EC76D1F9BA4FD00F11A12 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				81304723247EE8D100B0B6B6 /* Admission */,
 				816CE20A23C7A10700CB9769 /* Syllabus */,
 				81C9AC27233A95230019B29E /* Parents */,
 				8194882422A465130006CB86 /* Notificaion */,
@@ -1238,6 +1264,8 @@
 			children = (
 				818587C1247C3CD0002F6A94 /* AdmissionFormInputTableViewCell.swift */,
 				818587C2247C3CD0002F6A94 /* AdmissionFormInputTableViewCell.xib */,
+				81304729247F0B1D00B0B6B6 /* AdmissionHeaderTableViewCell.swift */,
+				8130472A247F0B1D00B0B6B6 /* AdmissionHeaderTableViewCell.xib */,
 			);
 			path = Admission;
 			sourceTree = "<group>";
@@ -1995,6 +2023,7 @@
 				81BEA4BB224671FE009C4D79 /* ViewProfessorMailReport.xib in Resources */,
 				8102F2A722871698007920EF /* ProfileDetailsEditTableViewCell.xib in Resources */,
 				810610B91FA5F4FB0067273E /* OtpView.xib in Resources */,
+				8130472C247F0B1D00B0B6B6 /* AdmissionHeaderTableViewCell.xib in Resources */,
 				81BC49A92299D0F100549867 /* ProfileChangeRequestTableViewCell.xib in Resources */,
 				812C34F21FB794E30048DD3C /* ViewDatePicker.xib in Resources */,
 				81E02A4C207D06AC00EB6BA8 /* EventStudentListTableViewCell.xib in Resources */,
@@ -2247,6 +2276,7 @@
 				8187B72320E7CE1600C42DF6 /* StudentAttendanceCellDatasource.swift in Sources */,
 				81E3E3B42077A24A002CFC1D /* String.swift in Sources */,
 				819AADEF1FB6DBBD0061C471 /* DefaultSelectionTableViewCell.swift in Sources */,
+				8130472B247F0B1D00B0B6B6 /* AdmissionHeaderTableViewCell.swift in Sources */,
 				81A560D3205D07DC00DAE086 /* HomeViewController2.swift in Sources */,
 				81D76B521FC1D3EC005E861C /* SyllabusDetailsViewController.swift in Sources */,
 				81ACF7F320851E1700167203 /* AddRemoveAdminViewController.swift in Sources */,
@@ -2269,6 +2299,7 @@
 				812B152D20BAA65C00693183 /* Spark.swift in Sources */,
 				81316DE22165575200820481 /* UploadOfflineDataViewController.swift in Sources */,
 				819EEC2820A6145E00487467 /* LectureReport.swift in Sources */,
+				81304725247EE8E900B0B6B6 /* AdmissionData.swift in Sources */,
 				8163EB0420541D38003E4B1D /* TeachUs.xcdatamodeld in Sources */,
 				81F92A4E22B52B8800395413 /* BellNotificationListTableViewCell.swift in Sources */,
 				8192F5911FD7115A00982601 /* CollegesListModel.swift in Sources */,
@@ -2282,6 +2313,7 @@
 				810BECD8206E65D600F560C6 /* CollegeAttendanceDetailsViewController.swift in Sources */,
 				81A6BBFC229C628E00615EDD /* ProfessorNotesSubjectListViewController.swift in Sources */,
 				810C14D6205D173B00678369 /* HomeTabsViewController.swift in Sources */,
+				81304728247EF01400B0B6B6 /* AdmissionFormDataSource.swift in Sources */,
 				810E0CD71FD03AD1006AE5BE /* LogsDetailViewController.swift in Sources */,
 				812B152A20BAA65C00693183 /* Geometry.swift in Sources */,
 				81B2E2D81FC35B0600E9E852 /* DPDUIView+Extension.swift in Sources */,

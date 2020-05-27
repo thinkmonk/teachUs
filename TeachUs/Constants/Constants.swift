@@ -174,6 +174,8 @@ public struct Constants {
         static let notificationCellId = "NotificationListTableViewCellId"
         static let bellNotificationCellId = "BellNotificationListTableViewCellId"
         static let rollNumberGrid = "StudentRollNumberCollectionViewCellId"
+        static let admissionCell = "AdmissionFormInputTableViewCellId"
+        static let admissionHeader = "AdmissionHeaderTableViewCellId"
     }
     
     struct UserTypeString {

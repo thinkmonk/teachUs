@@ -185,5 +185,8 @@ public struct URLConstants{
         static let storeLink = "https://itunes.apple.com/in/app/teach-us/id1392613722?mt=8"
     }
 
+    struct Admission {
+        static let getAdmssionStudentInfo = BaseUrl.baseURLV1 + "/admission/personal_information"
+    }
 
 }
