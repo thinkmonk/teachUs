@@ -21,6 +21,7 @@ class AdmissionsViewController: BaseTableViewController {
         self.tableView.estimatedRowHeight = 60
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.getyUserdetails()
+        setupGeneriPicker()
     }
     
     func getyUserdetails()
@@ -45,6 +46,23 @@ class AdmissionsViewController: BaseTableViewController {
             print(message)
             LoadingActivityHUD.hideProgressHUD()
         }
+    }
+    
+    func setupGeneriPicker(){
+        let stringArray = [["A","B","C"]]
+        let frame = CGRect(x: 0, y: 50, width: 100, height: 300)
+        let pickerObj = Picker(data: stringArray)
+//        pickerObj.data = stringArray
+        
+        pickerObj.selectionUpdated = { stringArray in
+            print(stringArray)
+        }
+        
+        pickerObj.frame = frame
+        self.view.addSubview(pickerObj)
+        pickerObj.backgroundColor = .purple
+    
+        
     }
     
     func makeDataSource(){

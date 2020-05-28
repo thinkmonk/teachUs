@@ -247,6 +247,7 @@
 		81C208541FAF4EF9003D366D /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C208531FAF4EF9003D366D /* UIColor.swift */; };
 		81C208561FAF627F003D366D /* StudentsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C208551FAF627F003D366D /* StudentsListViewController.swift */; };
 		81C2085A1FAF6CEB003D366D /* EnrolledStudentDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C208591FAF6CEB003D366D /* EnrolledStudentDetail.swift */; };
+		81C59D902480388700A2DA5D /* Picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C59D8F2480388700A2DA5D /* Picker.swift */; };
 		81C88B42232C3AF9001B58B1 /* LastLectureAttendance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C88B41232C3AF9001B58B1 /* LastLectureAttendance.swift */; };
 		81C9AC29233A95410019B29E /* ParentDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C9AC28233A95410019B29E /* ParentDetails.swift */; };
 		81CAD6EA1FC9AEF300B55845 /* ViewRatingInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81CAD6E91FC9AEF300B55845 /* ViewRatingInfo.xib */; };
@@ -606,6 +607,7 @@
 		81C208531FAF4EF9003D366D /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		81C208551FAF627F003D366D /* StudentsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsListViewController.swift; sourceTree = "<group>"; };
 		81C208591FAF6CEB003D366D /* EnrolledStudentDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrolledStudentDetail.swift; sourceTree = "<group>"; };
+		81C59D8F2480388700A2DA5D /* Picker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Picker.swift; sourceTree = "<group>"; };
 		81C88B41232C3AF9001B58B1 /* LastLectureAttendance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastLectureAttendance.swift; sourceTree = "<group>"; };
 		81C9AC28233A95410019B29E /* ParentDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentDetails.swift; sourceTree = "<group>"; };
 		81CAD6E91FC9AEF300B55845 /* ViewRatingInfo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewRatingInfo.xib; sourceTree = "<group>"; };
@@ -1031,6 +1033,7 @@
 				813C0D9F21EB7C7100B04E61 /* GlobalFunction.swift */,
 				8161AF66222C5922001F73B5 /* CollegeClassManager.swift */,
 				81DB2B4B240AB9E00091CAA5 /* FeedbackGenerator.swift */,
+				81C59D8F2480388700A2DA5D /* Picker.swift */,
 			);
 			path = CustomClass;
 			sourceTree = "<group>";
@@ -2173,6 +2176,7 @@
 				8135B89F20797DE2008E3E4B /* EventAttendanceClassListViewController.swift in Sources */,
 				81A35853208282C800B93239 /* ObservableArray.swift in Sources */,
 				81E6740A20531B4C00321257 /* UserDetails+CoreDataClass.swift in Sources */,
+				81C59D902480388700A2DA5D /* Picker.swift in Sources */,
 				8135B89D207911CE008E3E4B /* Event.swift in Sources */,
 				81316DE32165575200820481 /* OfflineLeftMenuViewController.swift in Sources */,
 				8194882122A462E40006CB86 /* CollegeNotificationListViewController.swift in Sources */,
