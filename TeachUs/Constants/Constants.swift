@@ -103,6 +103,7 @@ public struct Constants {
         static let collegeNotificationList = "CollegeNotificationListViewControllerId"
         static let documentsVC = "DocumentsViewControllerId"
         static let rollNumberGridVC = "StudentListGridViewControllerId"
+        static let addmissionStatusViewControlelr = "AdmissionStatusViewControllerId"
     }
     
     struct UserDefaults {

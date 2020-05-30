@@ -35,13 +35,8 @@ class AdmissionFormInputTableViewCell: UITableViewCell {
     
     func setUpcell(_ cellObj:AdmissionFormDataSource){
         //disabled if mobileNumber
-        if cellObj.cellType == AdmissionCellType.MobileNumber{
-            self.isUserInteractionEnabled = false
-            self.viewtextfieldBg.backgroundColor = .lightGray
-        }else{
-            self.isUserInteractionEnabled = true
-            self.viewtextfieldBg.backgroundColor = .white
-        }
+        self.isUserInteractionEnabled = !(cellObj.cellType == .MobileNumber)
+        self.viewtextfieldBg.backgroundColor = cellObj.cellType == .MobileNumber ? .lightGray : .white
         
         //Set text from datasource
         if let textValue = cellObj.attachedObject as? String{

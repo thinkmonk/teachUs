@@ -8,23 +8,25 @@
 
 import UIKit
 
-class AdmissionsViewController: BaseTableViewController {
+class AdmissionsViewController: BaseTableViewController    {
 
     var arrayDataSource = [AdmissionFormSectionDataSource]()
     
     override func viewDidLoad() {
-        self.addGrdientToNavBar()
         super.viewDidLoad()
+        self.addGradientNew()
         self.tableView.register(UINib(nibName: "AdmissionFormInputTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.admissionCell)
         self.tableView.register(UINib(nibName: "AdmissionHeaderTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.admissionHeader)
         self.tableView.estimatedRowHeight = 60
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.getyUserdetails()
         setupGeneriPicker()
+        addRightBarButton()
     }
     
     func getyUserdetails()
     {
+        self.title = "Page 1/4"
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()
         manager.url = URLConstants.Admission.getAdmssionStudentInfo
@@ -46,6 +48,38 @@ class AdmissionsViewController: BaseTableViewController {
             LoadingActivityHUD.hideProgressHUD()
         }
     }
+    
+    func addRightBarButton(){
+        let rightButton = UIButton(frame: CGRect(x: 0, y: 0, width: 20, height: 20 ))
+        rightButton.setTitle("Proceed", for: .normal)
+        rightButton.setTitleColor(.white, for: .normal)
+        rightButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        rightButton.addTarget(self, action: #selector(proceedAction), for: .touchUpInside)
+        
+        // Bar button item
+        let bellButtomItem = UIBarButtonItem(customView: rightButton)
+        navigationItem.rightBarButtonItems  = [bellButtomItem]
+
+    }
+    var formId:Int?
+    @objc func proceedAction(){
+        self.view.endEditing(true)
+        if (AdmissionFormManager.shared.validateData()){
+            AdmissionFormManager.shared.sendFormOneData({ (dict) in
+                if let message  = dict?["message"] as? String{
+                    self.showAlertWithTitle("Success", alertMessage: message)
+                }
+                if let id = dict?["admission_form_id"] as? Int{
+                    self.formId = id
+                }
+            }) {
+                self.showAlertWithTitle("Failed", alertMessage: "Please Retry")
+            }
+        }else{
+            self.showAlertWithTitle("Failed", alertMessage: "Please fill up all the required text fields")
+        }
+    }
+    
     var dataPicker = Picker(data: [[]])
     let toolBar = UIToolbar()
 
@@ -93,11 +127,11 @@ class AdmissionsViewController: BaseTableViewController {
         self.arrayDataSource.append(infozsection)
         
         
-        let correspondingAddress = AdmissionFormManager.shared.getAddressDataSource(false)
+        let correspondingAddress = AdmissionFormManager.shared.getAddressDataSource(false, isCopy: false)
         let correspondingAddressSection = AdmissionFormSectionDataSource(sectionType: .CorrespondingAddress, obj: correspondingAddress)
         self.arrayDataSource.append(correspondingAddressSection)
         
-        let permanantAddress = AdmissionFormManager.shared.getAddressDataSource(true)
+        let permanantAddress = AdmissionFormManager.shared.getAddressDataSource(true, isCopy: false)
         let permanentAddressSection = AdmissionFormSectionDataSource(sectionType: .PermanenttAddress, obj: permanantAddress)
         self.arrayDataSource.append(permanentAddressSection)
         
@@ -124,6 +158,7 @@ extension AdmissionsViewController{
              .CorrespondanceAddress,
              .PermannentAddress:
             let cell:AdmissionHeaderTableViewCell  = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.admissionHeader, for: indexPath) as! AdmissionHeaderTableViewCell
+            cell.delegate = self
             cell.setUPcell(dsObject: cellDataSource)
             
             return cell
@@ -147,6 +182,8 @@ extension AdmissionsViewController{
             cell.buttonDropdown.isHidden = true
             cell.textFieldAnswer.indexpath = indexPath
             cell.textFieldAnswer.keyboardType = .default
+            cell.textFieldAnswer.delegate = self
+
             return cell
             
         case .MobileNumber:
@@ -161,6 +198,7 @@ extension AdmissionsViewController{
             cell.setUpcell(cellDataSource)
             cell.textFieldAnswer.keyboardType = .emailAddress
             cell.buttonDropdown.isHidden = true
+            cell.textFieldAnswer.delegate = self
             
             return cell
             
@@ -169,6 +207,7 @@ extension AdmissionsViewController{
             cell.setUpcell(cellDataSource)
             cell.textFieldAnswer.keyboardType = .numberPad
             cell.buttonDropdown.isHidden = true
+            cell.textFieldAnswer.delegate = self
 
             return cell
             
@@ -239,10 +278,36 @@ extension AdmissionsViewController:UITextFieldDelegate{
         }
     }
     
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
-                if let `textField` = textField as? CustomTextField{
+        if let `textField` = textField as? CustomTextField,
+            let indexPath = textField.indexpath
+        {
+            let cellDataSource = arrayDataSource[indexPath.section].attachedObj[indexPath.row]
+            let permanentAddressFlag = arrayDataSource[indexPath.section].sectionType == .PermanenttAddress
+            cellDataSource.setValues(value: textField.text ?? "", otherObj: nil, ispermanenetAddress: permanentAddressFlag)
+        }
+        
+    }
+    
+    
+}
+
+extension AdmissionsViewController:AdmissionHeaderTableViewCellDelegate{
+    func copyCorrespondenceAddress() {
+        for (index,value) in self.arrayDataSource.enumerated(){
+            if value.sectionType == .PermanenttAddress{
+                arrayDataSource.remove(at: index)
+                let coresspondingAddress = AdmissionFormManager.shared.getAddressDataSource(false, isCopy: true)
+                let permanentAddressSection = AdmissionFormSectionDataSource(sectionType: .PermanenttAddress, obj: coresspondingAddress)
+                arrayDataSource.insert(permanentAddressSection, at: index)
+                DispatchQueue.main.async {
+                    self.tableView.reloadSections([index], with: .fade)
+                }
+            }
             
         }
-
     }
+    
+    
 }

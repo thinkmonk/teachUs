@@ -134,6 +134,9 @@
 		81727B901F9E6EB1006433E8 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81727B8F1F9E6EB1006433E8 /* Notification.swift */; };
 		81727B921F9E70CC006433E8 /* LeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81727B911F9E70CC006433E8 /* LeftMenuViewController.swift */; };
 		81727B941F9E70EE006433E8 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81727B931F9E70EE006433E8 /* HomeViewController.swift */; };
+		8176675D2482A11E00DDF3EB /* AdmissionStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8176675C2482A11E00DDF3EB /* AdmissionStatusViewController.swift */; };
+		8176675F2482C8E000DDF3EB /* AdmissionFormManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8176675E2482C8E000DDF3EB /* AdmissionFormManager.swift */; };
+		817667622482C93000DDF3EB /* AdmissionConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817667612482C93000DDF3EB /* AdmissionConstants.swift */; };
 		817BDAE51FB898C700492822 /* ButtonWithIndexPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817BDAE41FB898C700492822 /* ButtonWithIndexPath.swift */; };
 		817C28A9223D50D8000E0544 /* CollegeProfSubjectDetials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817C28A8223D50D8000E0544 /* CollegeProfSubjectDetials.swift */; };
 		8180D9081FD3D21B00CE803F /* SuperAdminProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8180D9071FD3D21B00CE803F /* SuperAdminProfile.swift */; };
@@ -492,6 +495,9 @@
 		81727B931F9E70EE006433E8 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		8174684622BE78A700488B50 /* TeachUs (Offline) 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeachUs (Offline) 2.xcdatamodel"; sourceTree = "<group>"; };
 		817553511B457FEB4E645FC1 /* Pods-TeachUs.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeachUs.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeachUs/Pods-TeachUs.release.xcconfig"; sourceTree = "<group>"; };
+		8176675C2482A11E00DDF3EB /* AdmissionStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdmissionStatusViewController.swift; sourceTree = "<group>"; };
+		8176675E2482C8E000DDF3EB /* AdmissionFormManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdmissionFormManager.swift; sourceTree = "<group>"; };
+		817667612482C93000DDF3EB /* AdmissionConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdmissionConstants.swift; sourceTree = "<group>"; };
 		817BDAE41FB898C700492822 /* ButtonWithIndexPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWithIndexPath.swift; sourceTree = "<group>"; };
 		817C28A8223D50D8000E0544 /* CollegeProfSubjectDetials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeProfSubjectDetials.swift; sourceTree = "<group>"; };
 		8180D9071FD3D21B00CE803F /* SuperAdminProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperAdminProfile.swift; sourceTree = "<group>"; };
@@ -1019,6 +1025,7 @@
 		8137EF511FA1099D00045D97 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
+				817667602482C92200DDF3EB /* Admission */,
 				8137EF541FA10AD400045D97 /* Constants.swift */,
 				81A80ED81FADFC6200DDFFA1 /* URLConstansts.swift */,
 			);
@@ -1128,6 +1135,7 @@
 				811F28FE2104D7AC002B810F /* OfflineAttendanceManager.swift */,
 				811EA45A223D175400D55899 /* ProfessorLogsManager.swift */,
 				811353132326870B001D485A /* EventManager.swift */,
+				8176675E2482C8E000DDF3EB /* AdmissionFormManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1262,6 +1270,14 @@
 			path = "Side Menu";
 			sourceTree = "<group>";
 		};
+		817667602482C92200DDF3EB /* Admission */ = {
+			isa = PBXGroup;
+			children = (
+				817667612482C93000DDF3EB /* AdmissionConstants.swift */,
+			);
+			path = Admission;
+			sourceTree = "<group>";
+		};
 		818587C0247C3CA4002F6A94 /* Admission */ = {
 			isa = PBXGroup;
 			children = (
@@ -1294,6 +1310,7 @@
 			isa = PBXGroup;
 			children = (
 				8188FCB2247BF6D70013B54D /* AdmissionsViewController.swift */,
+				8176675C2482A11E00DDF3EB /* AdmissionStatusViewController.swift */,
 			);
 			path = Admission;
 			sourceTree = "<group>";
@@ -2292,6 +2309,7 @@
 				810E0CDE1FD046AA006AE5BE /* ProfessorLogsDetailDataSource.swift in Sources */,
 				81D76B4F1FC1AA4D005E861C /* SyllabusStatusTableViewCell.swift in Sources */,
 				8102F2AD2287308D007920EF /* EditProfileDataSource.swift in Sources */,
+				8176675D2482A11E00DDF3EB /* AdmissionStatusViewController.swift in Sources */,
 				81316DE62165575200820481 /* OfflineMarkCompletedPortionViewController.swift in Sources */,
 				81D7CE961FAB98C300C4375E /* SyllabusStatusListViewController.swift in Sources */,
 				8102F29E22871251007920EF /* StudentsProfileDeatilsViewController.swift in Sources */,
@@ -2311,9 +2329,11 @@
 				81B190C01FA24E19004A8A72 /* LoginView.swift in Sources */,
 				81D2774C22A07512003CFC51 /* CollegeNotesSubjectDetialsViewController.swift in Sources */,
 				81511A3722AC4D0400B50F44 /* DocumentsViewController.swift in Sources */,
+				8176675F2482C8E000DDF3EB /* AdmissionFormManager.swift in Sources */,
 				81E02A46207CFC6800EB6BA8 /* EventStudents.swift in Sources */,
 				812B152820BAA65C00693183 /* Constraints+.swift in Sources */,
 				18A627DD1F90F9870099C106 /* AppDelegate.swift in Sources */,
+				817667622482C93000DDF3EB /* AdmissionConstants.swift in Sources */,
 				810BECD8206E65D600F560C6 /* CollegeAttendanceDetailsViewController.swift in Sources */,
 				81A6BBFC229C628E00615EDD /* ProfessorNotesSubjectListViewController.swift in Sources */,
 				810C14D6205D173B00678369 /* HomeTabsViewController.swift in Sources */,

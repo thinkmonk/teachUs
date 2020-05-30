@@ -11,6 +11,8 @@ class AdmissionData: Codable {
     var personalInformation: PersonalInformation?
     var admissionCategory: [AdmissionCategory]?
 
+
+    
     enum CodingKeys: String, CodingKey {
         case personalInformation = "personal_information"
         case admissionCategory = "admission_category"
@@ -64,6 +66,17 @@ class PersonalInformation: Codable {
     var permanentAddressCountry: String?
     var caste: String?
     var domicileOfState: String?
+    
+    func validateClassData() -> Bool{
+        let tempObj = Mirror(reflecting: self as Any)
+        return !tempObj.children.contains(where: { (label, value) -> Bool in
+            if case Optional<Any>.none = value{
+                return true
+            }
+            return false
+        })
+    }
+
 
     enum CodingKeys: String, CodingKey {
         case id = "id"

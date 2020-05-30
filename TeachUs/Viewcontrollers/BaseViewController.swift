@@ -360,8 +360,8 @@ class BaseTableViewController:UITableViewController{
         self.navigationController?.navigationBar.backgroundColor = UIColor.clear
         let gradient = CAGradientLayer()
         var viewHeight = statusBarHeight + navBarHeight
-
-        gradient.frame = CGRect(x: 0, y: -viewHeight, width: UIApplication.shared.statusBarFrame.width, height: viewHeight)
+        
+        gradient.frame = CGRect(x: 0, y: -statusBarHeight, width: UIApplication.shared.statusBarFrame.width, height: viewHeight)
         gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradient.endPoint = CGPoint(x: 1, y: 1)
         //        let color1 = UIColor(red: 116/255, green: 104/255, blue: 218/255, alpha: 1.0)
@@ -371,7 +371,9 @@ class BaseTableViewController:UITableViewController{
         
         gradient.colors = [color1.cgColor, color2.cgColor]
         UIApplication.shared.windows.last?.layer.addSublayer(gradient)
-        self.view.layer.addSublayer(gradient)
+        self.navigationController?.navigationBar.layer.addSublayer(gradient)
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+
         
     }
     
@@ -396,8 +398,64 @@ class BaseTableViewController:UITableViewController{
         gradient.colors = [color1.cgColor, color2.cgColor]
         //        UIApplication.shared.windows.last?.layer.addSublayer(gradient)
         //        self.view.layer.addSublayer(gradient)
-        self.view.layer.insertSublayer(gradient, at: 0)
+        self.navigationController?.navigationBar.layer.insertSublayer(gradient, at: 0)
         
     }
+    
+    func addGradientNew(){
+        if let navigationBar = self.navigationController?.navigationBar {
+            let gradient = CAGradientLayer()
+            var bounds = navigationBar.bounds
+            bounds.size.height += UIApplication.shared.statusBarFrame.size.height
+            gradient.frame = bounds
+            
+            let color1 = UIColor(red: 18/255, green: 63/255, blue: 148/255, alpha: 1.0)
+            let color2 = UIColor(red: 8/255, green: 47/255, blue: 136/255, alpha: 1.0)
+
+            gradient.colors = [color1.cgColor, color2.cgColor]
+            gradient.startPoint = CGPoint(x: 0, y: 0)
+            gradient.endPoint = CGPoint(x: 1, y: 1)
+
+            if let image = getImageFrom(gradientLayer: gradient) {
+                navigationBar.setBackgroundImage(image, for: UIBarMetrics.default)
+            }else{
+                print("************** IMAGE NA MILA ***************")
+            }
+        }
+
+    }
+    
+    func getImageFrom(gradientLayer:CAGradientLayer) -> UIImage? {
+        var gradientImage:UIImage?
+        UIGraphicsBeginImageContext(gradientLayer.frame.size)
+        if let context = UIGraphicsGetCurrentContext() {
+            gradientLayer.render(in: context)
+            gradientImage = UIGraphicsGetImageFromCurrentImageContext()?.resizableImage(withCapInsets: UIEdgeInsets.zero, resizingMode: .tile)
+        }
+        UIGraphicsEndImageContext()
+        return gradientImage
+    }
+
+    func showAlertWithTitle(_ title:String?, alertMessage:String){
+        let alertTitle = title != nil ? title : nil
+        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.alert)
+        
+        // add an action (button)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        
+        // show the alert
+        
+        var rootViewController = UIApplication.shared.keyWindow?.rootViewController
+        if let navigationController = rootViewController as? UINavigationController {
+            rootViewController = navigationController.viewControllers.first
+        }
+        if (rootViewController!.isViewLoaded && (rootViewController!.view.window != nil)) {
+            rootViewController?.present(alert, animated: true, completion: nil)
+        }
+        else{
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+
 
 }

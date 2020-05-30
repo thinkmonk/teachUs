@@ -7,6 +7,10 @@
 //
 
 import UIKit
+protocol AdmissionHeaderTableViewCellDelegate {
+    func copyCorrespondenceAddress()
+}
+
 
 class AdmissionHeaderTableViewCell: UITableViewCell {
     @IBOutlet weak var viewBg: UIView!
@@ -15,7 +19,8 @@ class AdmissionHeaderTableViewCell: UITableViewCell {
     @IBOutlet weak var viewCopy: UIStackView!
     @IBOutlet weak var labelCopyAddress: UILabel!
     
-    
+    @IBOutlet weak var switchCopy: UISwitch!
+    var delegate:AdmissionHeaderTableViewCellDelegate!
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
@@ -28,6 +33,11 @@ class AdmissionHeaderTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    @IBAction func actionCopyCorrespondenceAddress(_ sender: Any) {
+        if switchCopy.isOn{
+            self.delegate.copyCorrespondenceAddress()
+        }
+    }
     
     func setUPcell(dsObject:AdmissionFormDataSource){
         self.labelSectionTitle.text = dsObject.cellType.rawValue
