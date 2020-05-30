@@ -10,7 +10,6 @@ import UIKit
 
 class AdmissionsViewController: BaseTableViewController {
 
-    var admissionData:AdmissionData!
     var arrayDataSource = [AdmissionFormSectionDataSource]()
     
     override func viewDidLoad() {
@@ -37,7 +36,7 @@ class AdmissionsViewController: BaseTableViewController {
             LoadingActivityHUD.hideProgressHUD()
             do{
                 let decoder = JSONDecoder()
-                self.admissionData = try decoder.decode(AdmissionData.self, from: response)
+                AdmissionFormManager.shared.admissionData = try decoder.decode(AdmissionData.self, from: response)
                 self.makeDataSource()
             } catch let error{
                 print("err", error)
@@ -47,22 +46,42 @@ class AdmissionsViewController: BaseTableViewController {
             LoadingActivityHUD.hideProgressHUD()
         }
     }
+    var dataPicker = Picker(data: [[]])
+    let toolBar = UIToolbar()
+
     
     func setupGeneriPicker(){
-        let stringArray = [["A","B","C"]]
-        let frame = CGRect(x: 0, y: 50, width: 100, height: 300)
-        let pickerObj = Picker(data: stringArray)
+//        let stringArray = [["A","B","C"]]
+        let height = UIScreen.main.bounds.height * 0.35
+        let width  = UIScreen.main.bounds.width
+        let yPosi  = UIScreen.main.bounds.height - height
+        let frame = CGRect(x: 0, y: yPosi, width: width, height: height)
+//        let pickerObj = Picker(data: stringArray)
 //        pickerObj.data = stringArray
+//
+//        pickerObj.selectionUpdated = { stringArray in
+//            print(stringArray)
+//        }
         
-        pickerObj.selectionUpdated = { stringArray in
-            print(stringArray)
-        }
-        
-        pickerObj.frame = frame
-        self.view.addSubview(pickerObj)
-        pickerObj.backgroundColor = .purple
+        dataPicker.frame = frame
+//        self.view.addSubview(dataPicker)
+        dataPicker.backgroundColor = .lightGray
+        dataPicker.isHidden = true
     
-        
+        toolBar.barStyle = UIBarStyle.default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1)
+        toolBar.sizeToFit()
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.done, target: self, action: #selector(self.donePicker))
+        toolBar.setItems([doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+
+
+    }
+    
+    @objc func donePicker(){
+        self.dataPicker.isHidden = true
+        self.view.endEditing(true)
     }
     
     func makeDataSource(){
@@ -106,6 +125,7 @@ extension AdmissionsViewController{
              .PermannentAddress:
             let cell:AdmissionHeaderTableViewCell  = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.admissionHeader, for: indexPath) as! AdmissionHeaderTableViewCell
             cell.setUPcell(dsObject: cellDataSource)
+            
             return cell
             
         case .SureName,
@@ -120,28 +140,28 @@ extension AdmissionsViewController{
              .RoomFloorBldg,
              .AreaLandamrk,
              .City,
-             .PinCode:
+             .PinCode,
+             .Country:
             let cell:AdmissionFormInputTableViewCell  = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.admissionCell, for: indexPath) as! AdmissionFormInputTableViewCell
             cell.setUpcell(cellDataSource)
             cell.buttonDropdown.isHidden = true
+            cell.textFieldAnswer.indexpath = indexPath
+            cell.textFieldAnswer.keyboardType = .default
             return cell
             
         case .MobileNumber:
             let cell:AdmissionFormInputTableViewCell  = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.admissionCell, for: indexPath) as! AdmissionFormInputTableViewCell
             cell.setUpcell(cellDataSource)
-            cell.isUserInteractionEnabled = false
-            cell.viewtextfieldBg.backgroundColor = .lightGray
             cell.buttonDropdown.isHidden = true
-            cell.textFieldAnswer.text = admissionData.personalInformation?.contact ?? UserManager.sharedUserManager.getUserMobileNumber()
+            cell.textFieldAnswer.text = AdmissionFormManager.shared.admissionData.personalInformation?.contact ?? UserManager.sharedUserManager.getUserMobileNumber()
             return cell
             
         case .EmailAddress:
             let cell:AdmissionFormInputTableViewCell  = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.admissionCell, for: indexPath) as! AdmissionFormInputTableViewCell
             cell.setUpcell(cellDataSource)
             cell.textFieldAnswer.keyboardType = .emailAddress
-            cell.viewtextfieldBg.backgroundColor = .clear
-
             cell.buttonDropdown.isHidden = true
+            
             return cell
             
         case .Aadhar:
@@ -149,7 +169,6 @@ extension AdmissionsViewController{
             cell.setUpcell(cellDataSource)
             cell.textFieldAnswer.keyboardType = .numberPad
             cell.buttonDropdown.isHidden = true
-            cell.viewtextfieldBg.backgroundColor = .clear
 
             return cell
             
@@ -163,16 +182,22 @@ extension AdmissionsViewController{
             let cell:AdmissionFormInputTableViewCell  = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.admissionCell, for: indexPath) as! AdmissionFormInputTableViewCell
             cell.setUpcell(cellDataSource)
             cell.buttonDropdown.isHidden = false
-            cell.viewtextfieldBg.backgroundColor = .clear
-
+            cell.textFieldAnswer.indexpath = indexPath
+            cell.textFieldAnswer.inputView = dataPicker
+            cell.textFieldAnswer.inputAccessoryView = toolBar
+            cell.textFieldAnswer.delegate = self
+            
             return cell
             
-        case .Country,
-             .State:
+        case .State:
             let cell:AdmissionFormInputTableViewCell  = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.admissionCell, for: indexPath) as! AdmissionFormInputTableViewCell
             cell.setUpcell(cellDataSource)
             cell.buttonDropdown.isHidden = true
-            cell.viewtextfieldBg.backgroundColor = .clear
+            cell.textFieldAnswer.indexpath = indexPath
+            cell.textFieldAnswer.inputView = dataPicker
+            cell.textFieldAnswer.inputAccessoryView = toolBar
+            cell.textFieldAnswer.delegate = self
+
 
             return cell
             
@@ -190,4 +215,34 @@ extension AdmissionsViewController{
     }
     
     
+}
+
+
+extension AdmissionsViewController:UITextFieldDelegate{
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if let `textField` = textField as? CustomTextField,
+            let indexPath = textField.indexpath
+        {
+            let cellDataSource = arrayDataSource[indexPath.section].attachedObj[indexPath.row]
+            if let attachedOBj = cellDataSource.dataSourceObject as? [String]{
+                dataPicker.data = [attachedOBj]
+                dataPicker.isHidden = false
+                dataPicker.selectionUpdated = { stringObj in
+                    if let `stringObj` = stringObj.first as? String{
+                        textField.text = `stringObj`
+                    }
+                }
+            }else{
+                textField.inputView = nil
+                textField.inputAccessoryView = nil
+            }
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+                if let `textField` = textField as? CustomTextField{
+            
+        }
+
+    }
 }

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-struct AdmissionData: Codable {
+class AdmissionData: Codable {
     var personalInformation: PersonalInformation?
     var admissionCategory: [AdmissionCategory]?
 
@@ -18,7 +18,7 @@ struct AdmissionData: Codable {
 }
 
 // MARK: - AdmissionCategory
-struct AdmissionCategory: Codable {
+class AdmissionCategory: Codable {
     var admissionCategoryId: String?
     var collegeId: String?
     var categoryName: String?
@@ -31,7 +31,7 @@ struct AdmissionCategory: Codable {
 }
 
 // MARK: - PersonalInformation
-struct PersonalInformation: Codable {
+class PersonalInformation: Codable {
     var id: String?
     var surname: String?
     var firstName: String?
@@ -48,8 +48,8 @@ struct PersonalInformation: Codable {
     var motherTongue: String?
     var maritalStatus: String?
     var bloodGroup: String?
-    var fName: String?
-    var fNameDevnagriScript: String?
+    var fullName: String?
+    var fullNameDevnagriScript: String?
     var correspondenceAddressRoom: String?
     var correspondenceAddressArea: String?
     var correspondenceAddressCity: String?
@@ -82,8 +82,8 @@ struct PersonalInformation: Codable {
         case motherTongue = "mother_tongue"
         case maritalStatus = "marital_status"
         case bloodGroup = "blood_group"
-        case fName = "f_name"
-        case fNameDevnagriScript = "f_name_devnagri_script"
+        case fullName = "f_name"
+        case fullNameDevnagriScript = "f_name_devnagri_script"
         case correspondenceAddressRoom = "correspondence_address_room"
         case correspondenceAddressArea = "correspondence_address_area"
         case correspondenceAddressCity = "correspondence_address_city"

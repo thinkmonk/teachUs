@@ -8,11 +8,15 @@
 
 import UIKit
 
+class CustomTextField:UITextField{
+    var indexpath:IndexPath?
+}
+
 class AdmissionFormInputTableViewCell: UITableViewCell {
     @IBOutlet weak var labelFormHeader: UILabel!
     @IBOutlet weak var viewtextfieldBg: UIView!
     @IBOutlet weak var labelrequired: UILabel!
-    @IBOutlet weak var textFieldAnswer: UITextField!
+    @IBOutlet weak var textFieldAnswer: CustomTextField!
     @IBOutlet weak var buttonDropdown: UIButton!
     
     override func awakeFromNib() {
@@ -20,6 +24,7 @@ class AdmissionFormInputTableViewCell: UITableViewCell {
         // Initialization code
         self.viewtextfieldBg.layer.borderColor = UIColor.lightGray.cgColor
         self.viewtextfieldBg.layer.borderWidth = 1
+        self.selectionStyle = .none
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -29,6 +34,22 @@ class AdmissionFormInputTableViewCell: UITableViewCell {
     }
     
     func setUpcell(_ cellObj:AdmissionFormDataSource){
+        //disabled if mobileNumber
+        if cellObj.cellType == AdmissionCellType.MobileNumber{
+            self.isUserInteractionEnabled = false
+            self.viewtextfieldBg.backgroundColor = .lightGray
+        }else{
+            self.isUserInteractionEnabled = true
+            self.viewtextfieldBg.backgroundColor = .white
+        }
+        
+        //Set text from datasource
+        if let textValue = cellObj.attachedObject as? String{
+            self.textFieldAnswer.text = textValue
+        }else{
+            self.textFieldAnswer.placeholder = cellObj.cellType.rawValue
+            
+        }
         self.labelFormHeader.text = cellObj.cellType.rawValue
     }
     

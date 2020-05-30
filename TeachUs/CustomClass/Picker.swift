@@ -35,12 +35,13 @@ class PickerSource : NSObject, UIPickerViewDelegate, UIPickerViewDataSource {
     }
 }
 
-class Picker<T : CustomStringConvertible> : UIPickerView {
+class Picker<T : Any> : UIPickerView {
     
     var data: [[T]] = [] {
         didSet {
             source.data = data.map { $0.map { "\($0)" } }
             reloadAllComponents()
+            self.selectRow(0, inComponent: 0, animated: false)
         }
     }
     
