@@ -160,3 +160,44 @@ class AdmissionFormManager{
         }
     }
 }
+
+
+class AdmissioSubjectManager {
+    static let shared = AdmissioSubjectManager()
+    var subjectData:AdmissioSubjectnData!
+    
+    func getProgramSelectionDataSource() -> [AdmisionSubjectDataSource]{
+        var dataSource = [AdmisionSubjectDataSource]()
+        
+        let programheader = AdmisionSubjectDataSource(detailsCell: .programHeader, detailsObject: nil, dataSource: nil)
+        dataSource.append(programheader)
+        
+        let streamData = self.subjectData.admissionForm?.map({$0.specilaization})
+        let selectStream = AdmisionSubjectDataSource(detailsCell: .steam, detailsObject: nil, dataSource: streamData)
+        dataSource.append(selectStream)
+        return dataSource
+    }
+    
+    func getAllProgramDatasource() -> [AdmisionSubjectDataSource]{
+        var dataSource = [AdmisionSubjectDataSource]()
+        
+        let programheader = AdmisionSubjectDataSource(detailsCell: .programHeader, detailsObject: nil, dataSource: nil)
+        dataSource.append(programheader)
+        
+        let streamData = self.subjectData.admissionForm?.map({$0.specilaization})
+        let selectStream = AdmisionSubjectDataSource(detailsCell: .steam, detailsObject: nil, dataSource: streamData)
+        dataSource.append(selectStream)
+        
+        let lavelDs = AdmisionSubjectDataSource(detailsCell: .level, detailsObject: nil, dataSource: nil)
+        dataSource.append(lavelDs)
+        
+        let courseDs = AdmisionSubjectDataSource(detailsCell: .course, detailsObject: nil, dataSource: nil)
+        dataSource.append(courseDs)
+        
+        let yearDs = AdmisionSubjectDataSource(detailsCell: .academicYear, detailsObject: nil, dataSource: nil)
+        dataSource.append(yearDs)
+        
+        
+        return dataSource
+    }
+}

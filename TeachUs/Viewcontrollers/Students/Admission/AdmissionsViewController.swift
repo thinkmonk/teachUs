@@ -11,7 +11,10 @@ import UIKit
 class AdmissionsViewController: BaseTableViewController    {
 
     var arrayDataSource = [AdmissionFormSectionDataSource]()
-    
+    var dataPicker = Picker(data: [[]])
+    let toolBar = UIToolbar()
+    var formId:Int?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addGradientNew()
@@ -61,7 +64,6 @@ class AdmissionsViewController: BaseTableViewController    {
         navigationItem.rightBarButtonItems  = [bellButtomItem]
 
     }
-    var formId:Int?
     @objc func proceedAction(){
         self.view.endEditing(true)
         if (AdmissionFormManager.shared.validateData()){
@@ -80,25 +82,14 @@ class AdmissionsViewController: BaseTableViewController    {
         }
     }
     
-    var dataPicker = Picker(data: [[]])
-    let toolBar = UIToolbar()
 
     
     func setupGeneriPicker(){
-//        let stringArray = [["A","B","C"]]
         let height = UIScreen.main.bounds.height * 0.35
         let width  = UIScreen.main.bounds.width
         let yPosi  = UIScreen.main.bounds.height - height
         let frame = CGRect(x: 0, y: yPosi, width: width, height: height)
-//        let pickerObj = Picker(data: stringArray)
-//        pickerObj.data = stringArray
-//
-//        pickerObj.selectionUpdated = { stringArray in
-//            print(stringArray)
-//        }
-        
         dataPicker.frame = frame
-//        self.view.addSubview(dataPicker)
         dataPicker.backgroundColor = .lightGray
         dataPicker.isHidden = true
     
@@ -109,8 +100,6 @@ class AdmissionsViewController: BaseTableViewController    {
         let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.done, target: self, action: #selector(self.donePicker))
         toolBar.setItems([doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
-
-
     }
     
     @objc func donePicker(){

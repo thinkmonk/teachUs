@@ -188,6 +188,7 @@ public struct URLConstants{
     struct Admission {
         static let getAdmssionStudentInfo = BaseUrl.baseURLV1 + "/admission/personal_information"
         static let submitStudentInfo      = BaseUrl.baseURLV1 + "/admission/personal_information_form"
+        static let getCampusClass         = BaseUrl.baseURLV1 + "/admission/campus_class"
     }
 
 }
