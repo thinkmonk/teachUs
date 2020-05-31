@@ -48,4 +48,21 @@ class AdmissionFormInputTableViewCell: UITableViewCell {
         self.labelFormHeader.text = cellObj.cellType.rawValue
     }
     
+    func setUpcell(_ cellObj:AdmissionSubjectDataSource){
+        //disabled if mobileNumber
+        let disabledCells : [SubjectCellType] = [.level, .course, .academicYear]
+        let isDisabledCell = disabledCells.contains(cellObj.cellType)
+        self.isUserInteractionEnabled = !isDisabledCell
+        self.viewtextfieldBg.backgroundColor = isDisabledCell ? .lightGray : .white
+        
+        //Set text from datasource
+        if let textValue = cellObj.attachedObject as? String{
+            self.textFieldAnswer.text = textValue
+        }else{
+            self.textFieldAnswer.placeholder = cellObj.cellType.value
+            
+        }
+        self.labelFormHeader.text = cellObj.cellType.value
+    }
+    
 }

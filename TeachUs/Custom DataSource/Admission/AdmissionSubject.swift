@@ -7,7 +7,7 @@
 //
 
 import Foundation
-enum SubjectCellType {
+enum SubjectCellType:Equatable {
     case programHeader
     case steam
     case level
@@ -47,7 +47,7 @@ class AdmissionSubjectSectionDataSource{
     }
     
 }
-class AdmisionSubjectDataSource{
+class AdmissionSubjectDataSource{
     var cellType:SubjectCellType!
     var attachedObject:Any?
     var dataSourceObject:Any?

@@ -44,4 +44,9 @@ class AdmissionHeaderTableViewCell: UITableViewCell {
         self.viewCopy.isHidden = dsObject.cellType! != . PermannentAddress
         self.labelCopyAddress.text = "Copy coresspondence address?"
     }
+    
+    func setUpCell(dsObject:AdmissionSubjectDataSource){
+        self.labelSectionTitle.text = dsObject.cellType.value
+        self.viewCopy.isHidden = true
+    }
 }

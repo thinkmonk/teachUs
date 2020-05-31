@@ -40,13 +40,13 @@ class Picker<T : Any> : UIPickerView {
     var data: [[T]] = [] {
         didSet {
             source.data = data.map { $0.map { "\($0)" } }
-            reloadAllComponents()
             self.selectRow(0, inComponent: 0, animated: false)
+            reloadAllComponents()
         }
     }
     
     var selectionUpdated: ((_ selections: [T?]) -> Void)?
-    
+    var selectedRow:Int?
     private let source = PickerSource()
     
     // MARK: Initialization
@@ -81,6 +81,7 @@ class Picker<T : Any> : UIPickerView {
         delegate = source
         source.selectionUpdated = { [weak self] component, row in
             if let _self = self {
+                _self.selectedRow = row
                 var selections: [T?] = []
                 for (idx, componentData) in (_self.data).enumerated() {
                     let selectedRow = _self.selectedRow(inComponent: idx)

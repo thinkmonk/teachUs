@@ -2317,10 +2317,32 @@ Form Library</string>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="fJW-Lh-SL1"/>
+                    <connections>
+                        <segue destination="Tyi-Im-dLF" kind="show" identifier="toSubjectForm" id="0w1-mK-nu6"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JL7-c7-x9C" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="728" y="2274"/>
+            <point key="canvasLocation" x="-144" y="3067"/>
+        </scene>
+        <!--Admission Subjects View Controller-->
+        <scene sceneID="M8D-qS-HgE">
+            <objects>
+                <tableViewController id="Tyi-Im-dLF" customClass="AdmissionSubjectsViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" id="Eoo-FC-M5c">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <connections>
+                            <outlet property="dataSource" destination="Tyi-Im-dLF" id="69s-nP-on4"/>
+                            <outlet property="delegate" destination="Tyi-Im-dLF" id="Vxt-6x-AyS"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="GA4-Ux-KEK"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZdX-y1-Q2x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="720" y="3067"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="adN-y3-fh9">

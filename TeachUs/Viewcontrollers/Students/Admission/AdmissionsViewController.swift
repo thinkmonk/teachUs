@@ -68,12 +68,14 @@ class AdmissionsViewController: BaseTableViewController    {
         self.view.endEditing(true)
         if (AdmissionFormManager.shared.validateData()){
             AdmissionFormManager.shared.sendFormOneData({ (dict) in
-                if let message  = dict?["message"] as? String{
-                    self.showAlertWithTitle("Success", alertMessage: message)
+//                if let message  = dict?["message"] as? String{
+//                    self.showAlertWithTitle("Success", alertMessage: message)
+//                }
+                if let id = dict?["admission_form_id"] as? String, let _id = Int(id){
+                    self.formId = _id
                 }
-                if let id = dict?["admission_form_id"] as? Int{
-                    self.formId = id
-                }
+                self.performSegue(withIdentifier: Constants.segues.toSubjectForm, sender: self)
+
             }) {
                 self.showAlertWithTitle("Failed", alertMessage: "Please Retry")
             }
@@ -81,7 +83,14 @@ class AdmissionsViewController: BaseTableViewController    {
             self.showAlertWithTitle("Failed", alertMessage: "Please fill up all the required text fields")
         }
     }
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Constants.segues.toSubjectForm {
+            if let destiationVC = segue.destination as? AdmissionSubjectsViewController{
+                destiationVC.formId = self.formId ?? 0
+                
+            }
+        }
+    }
 
     
     func setupGeneriPicker(){

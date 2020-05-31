@@ -60,6 +60,10 @@ extension String{
     func addHyphenToString() -> String{
         return self != "" ? " - " + self : ""
     }
+    
+    func boolValue() -> Bool{
+        return self == "1"
+    }
 }
 
 extension Optional where Wrapped == String{
