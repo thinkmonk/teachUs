@@ -81,7 +81,7 @@ enum FormSections{
 
 class AdmissionFormSectionDataSource{
     var sectionType:FormSections
-    var attachedObj:[AdmissionFormDataSource]
+    var attachedObj = [AdmissionFormDataSource]()
     var rowCount:Int!
     
     init(sectionType:FormSections, obj:[AdmissionFormDataSource]) {

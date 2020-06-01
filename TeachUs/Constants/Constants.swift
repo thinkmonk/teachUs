@@ -42,7 +42,7 @@ public struct Constants {
         static let toAddNewNotice = "addNewNotice"
         static let toAdmissionForm = "toAdmissionForm"
         static let toSubjectForm = "toSubjectForm"
-
+        static let toRecords = "toRecords"
         
     }
     
@@ -178,6 +178,8 @@ public struct Constants {
         static let rollNumberGrid = "StudentRollNumberCollectionViewCellId"
         static let admissionCell = "AdmissionFormInputTableViewCellId"
         static let admissionHeader = "AdmissionHeaderTableViewCellId"
+        static let addRecordCell = "AddRecordTableViewCellId"
+        static let recordTitleHeaderCell = "RecordHeaderTableViewCell"
     }
     
     struct UserTypeString {

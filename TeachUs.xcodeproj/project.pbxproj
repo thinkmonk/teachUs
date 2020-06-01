@@ -253,6 +253,14 @@
 		81C208541FAF4EF9003D366D /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C208531FAF4EF9003D366D /* UIColor.swift */; };
 		81C208561FAF627F003D366D /* StudentsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C208551FAF627F003D366D /* StudentsListViewController.swift */; };
 		81C2085A1FAF6CEB003D366D /* EnrolledStudentDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C208591FAF6CEB003D366D /* EnrolledStudentDetail.swift */; };
+		81C44304248570A4006D7C3E /* AdmissionAcademicRecordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C44303248570A4006D7C3E /* AdmissionAcademicRecordTableViewController.swift */; };
+		81C443062485719C006D7C3E /* AcademicRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C443052485719C006D7C3E /* AcademicRecord.swift */; };
+		81C443082485747C006D7C3E /* AdmissionAcademicDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C443072485747C006D7C3E /* AdmissionAcademicDataSource.swift */; };
+		81C4430B24857991006D7C3E /* AdmissionAcademicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C4430A24857991006D7C3E /* AdmissionAcademicManager.swift */; };
+		81C4430E24858558006D7C3E /* RecordHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C4430C24858558006D7C3E /* RecordHeaderTableViewCell.swift */; };
+		81C4430F24858558006D7C3E /* RecordHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81C4430D24858558006D7C3E /* RecordHeaderTableViewCell.xib */; };
+		81C4431224858640006D7C3E /* AddRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C4431024858640006D7C3E /* AddRecordTableViewCell.swift */; };
+		81C4431324858640006D7C3E /* AddRecordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81C4431124858640006D7C3E /* AddRecordTableViewCell.xib */; };
 		81C59D902480388700A2DA5D /* Picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C59D8F2480388700A2DA5D /* Picker.swift */; };
 		81C88B42232C3AF9001B58B1 /* LastLectureAttendance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C88B41232C3AF9001B58B1 /* LastLectureAttendance.swift */; };
 		81C9AC29233A95410019B29E /* ParentDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C9AC28233A95410019B29E /* ParentDetails.swift */; };
@@ -619,6 +627,14 @@
 		81C208531FAF4EF9003D366D /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		81C208551FAF627F003D366D /* StudentsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsListViewController.swift; sourceTree = "<group>"; };
 		81C208591FAF6CEB003D366D /* EnrolledStudentDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrolledStudentDetail.swift; sourceTree = "<group>"; };
+		81C44303248570A4006D7C3E /* AdmissionAcademicRecordTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdmissionAcademicRecordTableViewController.swift; sourceTree = "<group>"; };
+		81C443052485719C006D7C3E /* AcademicRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademicRecord.swift; sourceTree = "<group>"; };
+		81C443072485747C006D7C3E /* AdmissionAcademicDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdmissionAcademicDataSource.swift; sourceTree = "<group>"; };
+		81C4430A24857991006D7C3E /* AdmissionAcademicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdmissionAcademicManager.swift; sourceTree = "<group>"; };
+		81C4430C24858558006D7C3E /* RecordHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		81C4430D24858558006D7C3E /* RecordHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecordHeaderTableViewCell.xib; sourceTree = "<group>"; };
+		81C4431024858640006D7C3E /* AddRecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordTableViewCell.swift; sourceTree = "<group>"; };
+		81C4431124858640006D7C3E /* AddRecordTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddRecordTableViewCell.xib; sourceTree = "<group>"; };
 		81C59D8F2480388700A2DA5D /* Picker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Picker.swift; sourceTree = "<group>"; };
 		81C88B41232C3AF9001B58B1 /* LastLectureAttendance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastLectureAttendance.swift; sourceTree = "<group>"; };
 		81C9AC28233A95410019B29E /* ParentDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentDetails.swift; sourceTree = "<group>"; };
@@ -957,6 +973,7 @@
 			children = (
 				81304724247EE8E900B0B6B6 /* AdmissionData.swift */,
 				817667632482FBC400DDF3EB /* AdmissionSubjectData.swift */,
+				81C443052485719C006D7C3E /* AcademicRecord.swift */,
 			);
 			path = Admission;
 			sourceTree = "<group>";
@@ -966,6 +983,7 @@
 			children = (
 				81304727247EF01400B0B6B6 /* AdmissionFormDataSource.swift */,
 				817667672482FE7A00DDF3EB /* AdmissionSubject.swift */,
+				81C443072485747C006D7C3E /* AdmissionAcademicDataSource.swift */,
 			);
 			path = Admission;
 			sourceTree = "<group>";
@@ -1063,9 +1081,9 @@
 				81727B911F9E70CC006433E8 /* LeftMenuViewController.swift */,
 				81727B931F9E70EE006433E8 /* HomeViewController.swift */,
 				810C14D5205D173B00678369 /* HomeTabsViewController.swift */,
-				81A560D2205D07DC00DAE086 /* HomeViewController2.swift */,
 				8185E33F20581D5600752F81 /* EditProfilePictureViewController.swift */,
 				81D020242059A131003742FD /* RootViewController.swift */,
+				81A560D2205D07DC00DAE086 /* HomeViewController2.swift */,
 				81511A3622AC4D0400B50F44 /* DocumentsViewController.swift */,
 				81F92A4622B5277B00395413 /* BellNotificationListViewController.swift */,
 				81D7CE8B1FAB980300C4375E /* Students */,
@@ -1135,6 +1153,7 @@
 		813EC76C1F9BA4B300F11A12 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				81C4430924857971006D7C3E /* Admission */,
 				81D7CE991FAB9A1D00C4375E /* UserManager.swift */,
 				819AADF21FB6F88F0061C471 /* AttendanceManager.swift */,
 				81A3585020820F2C00B93239 /* EventAttendanceManager.swift */,
@@ -1143,7 +1162,6 @@
 				811F28FE2104D7AC002B810F /* OfflineAttendanceManager.swift */,
 				811EA45A223D175400D55899 /* ProfessorLogsManager.swift */,
 				811353132326870B001D485A /* EventManager.swift */,
-				8176675E2482C8E000DDF3EB /* AdmissionFormManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1293,6 +1311,10 @@
 				818587C2247C3CD0002F6A94 /* AdmissionFormInputTableViewCell.xib */,
 				81304729247F0B1D00B0B6B6 /* AdmissionHeaderTableViewCell.swift */,
 				8130472A247F0B1D00B0B6B6 /* AdmissionHeaderTableViewCell.xib */,
+				81C4430C24858558006D7C3E /* RecordHeaderTableViewCell.swift */,
+				81C4430D24858558006D7C3E /* RecordHeaderTableViewCell.xib */,
+				81C4431024858640006D7C3E /* AddRecordTableViewCell.swift */,
+				81C4431124858640006D7C3E /* AddRecordTableViewCell.xib */,
 			);
 			path = Admission;
 			sourceTree = "<group>";
@@ -1320,6 +1342,7 @@
 				8176675C2482A11E00DDF3EB /* AdmissionStatusViewController.swift */,
 				8188FCB2247BF6D70013B54D /* AdmissionsViewController.swift */,
 				817667652482FC1F00DDF3EB /* AdmissionSubjectsViewController.swift */,
+				81C44303248570A4006D7C3E /* AdmissionAcademicRecordTableViewController.swift */,
 			);
 			path = Admission;
 			sourceTree = "<group>";
@@ -1607,6 +1630,15 @@
 				81B203D71FD551FF00936F0F /* SuperAdmin+CoreDataProperties.swift */,
 			);
 			path = Users;
+			sourceTree = "<group>";
+		};
+		81C4430924857971006D7C3E /* Admission */ = {
+			isa = PBXGroup;
+			children = (
+				8176675E2482C8E000DDF3EB /* AdmissionFormManager.swift */,
+				81C4430A24857991006D7C3E /* AdmissionAcademicManager.swift */,
+			);
+			path = Admission;
 			sourceTree = "<group>";
 		};
 		81C9AC27233A95230019B29E /* Parents */ = {
@@ -2008,10 +2040,12 @@
 				81A7D05A208B75710032A1BC /* ProfessorRatingProfileTableViewCell.xib in Resources */,
 				819BDA591FC4AD5D00DD7D2D /* TeacherDetailsTableViewCell.xib in Resources */,
 				81FFB0B51FBEE0EB00C32097 /* ViewCalenderTop.xib in Resources */,
+				81C4431324858640006D7C3E /* AddRecordTableViewCell.xib in Resources */,
 				81165BE72233006E003EE106 /* VerifyEmail.xib in Resources */,
 				81F92A4F22B52B8800395413 /* BellNotificationListTableViewCell.xib in Resources */,
 				81BA3F1A232E2AA700675716 /* StudentRollNumberCollectionViewCell.xib in Resources */,
 				819AADF01FB6DBBD0061C471 /* DefaultSelectionTableViewCell.xib in Resources */,
+				81C4430F24858558006D7C3E /* RecordHeaderTableViewCell.xib in Resources */,
 				81E3E3B62077AF46002CFC1D /* VerifyAuthPasswordView.xib in Resources */,
 				8126312B1FB2289200CD80D6 /* AttendanceStudentListTableViewCell.xib in Resources */,
 				81F78EAD1FB0DFE600A016B0 /* AttendanceCalenderTableViewCell.xib in Resources */,
@@ -2196,6 +2230,7 @@
 				81B2E2DB1FC35B0600E9E852 /* DropDown+Appearance.swift in Sources */,
 				81D7CE811FAB8E5D00C4375E /* CAPSPageMenu+UIScrollViewDelegate.swift in Sources */,
 				81727B8D1F9E6CB8006433E8 /* MFSideMenuContainerViewController.m in Sources */,
+				81C443082485747C006D7C3E /* AdmissionAcademicDataSource.swift in Sources */,
 				81B203D81FD551FF00936F0F /* Teacher+CoreDataClass.swift in Sources */,
 				81A80EDD1FAF11B700DDFFA1 /* CollegeSummary.swift in Sources */,
 				81B69E7C1FA902BD0098F16D /* UITextField.swift in Sources */,
@@ -2210,6 +2245,7 @@
 				810610C21FA660890067273E /* Connectivity.swift in Sources */,
 				81A769D120A88A7200A4A2B7 /* CollegeSyllabusTableViewCell.swift in Sources */,
 				81E01F2923C213FC00EF2E1D /* UIDevice.swift in Sources */,
+				81C4430E24858558006D7C3E /* RecordHeaderTableViewCell.swift in Sources */,
 				8151C3CE22ED7EE300680951 /* BellNotificationReadStatus.swift in Sources */,
 				811BD5FF229DC03800FDFEB6 /* notesDetailsTableViewCell.swift in Sources */,
 				81A7D05E208B78590032A1BC /* RatingProfessorList.swift in Sources */,
@@ -2280,6 +2316,7 @@
 				818587C3247C3CD0002F6A94 /* AdmissionFormInputTableViewCell.swift in Sources */,
 				810610B71FA5F4ED0067273E /* OtpView.swift in Sources */,
 				81D7CE861FAB8E9E00C4375E /* CAPSPageMenu+Options.swift in Sources */,
+				81C443062485719C006D7C3E /* AcademicRecord.swift in Sources */,
 				81B4E90622A2B610005AA5F7 /* CollegeNoticeListViewController.swift in Sources */,
 				81AC9F9320AA051900DEECB1 /* CollegeSyllabusList.swift in Sources */,
 				810BECDA206ED5B000F560C6 /* CollegeSubjects.swift in Sources */,
@@ -2290,6 +2327,7 @@
 				81C88B42232C3AF9001B58B1 /* LastLectureAttendance.swift in Sources */,
 				81ACF7F520851EAC00167203 /* Admin.swift in Sources */,
 				81AE8A061F9FC37B00D49749 /* BaseViewController.swift in Sources */,
+				81C4431224858640006D7C3E /* AddRecordTableViewCell.swift in Sources */,
 				812B152B20BAA65C00693183 /* Init.swift in Sources */,
 				8102F2A2228714AB007920EF /* ProfileStudentIdTableViewCell.swift in Sources */,
 				81E02A4B207D06AC00EB6BA8 /* EventStudentListTableViewCell.swift in Sources */,
@@ -2298,6 +2336,7 @@
 				81A7D054208B64AA0032A1BC /* CollegeClassRatingListViewController.swift in Sources */,
 				810FAC571FB7518A00945DD6 /* AttendanceDataSource.swift in Sources */,
 				81D2774E22A077A2003CFC51 /* CollegeNotesClass.swift in Sources */,
+				81C44304248570A4006D7C3E /* AdmissionAcademicRecordTableViewController.swift in Sources */,
 				816522BA22340F9B00C1BA29 /* CouseList.swift in Sources */,
 				810610BE1FA65EE00067273E /* Loader.swift in Sources */,
 				81C208541FAF4EF9003D366D /* UIColor.swift in Sources */,
@@ -2390,6 +2429,7 @@
 				81A523971FA7956100B3B557 /* CollegeLogin.swift in Sources */,
 				8194881E22A421CC0006CB86 /* AddNewNoticeViewController.swift in Sources */,
 				81AD3D9822918D3C00373C68 /* EditProfileDetailsViewController.swift in Sources */,
+				81C4430B24857991006D7C3E /* AdmissionAcademicManager.swift in Sources */,
 				819EEC2620A60FF600487467 /* LectureReportViewController.swift in Sources */,
 				81B2E2DD1FC35B0600E9E852 /* DropDownCell.swift in Sources */,
 				81E02A3E207C972200EB6BA8 /* ClassList.swift in Sources */,
