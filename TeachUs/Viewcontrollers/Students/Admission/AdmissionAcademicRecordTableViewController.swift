@@ -118,10 +118,20 @@ class AdmissionAcademicRecordTableViewController: BaseTableViewController {
     }
     
     @objc func deleteRecord(_ sender:ButtonWithIndexPath){
-    
+        if let indexPath = sender.indexPath{
+            AdmissionAcademicManager.shared.removeRecordAtIndexPath(at: indexPath, completetion: {
+                self.tableView.reloadData()
+                self.showAlertWithTitle("Success", alertMessage: "Record deleted succesfully")
+            })
+        }
     }
     
     @objc func addnewRecord(){
+        AdmissionAcademicManager.shared.addNewAcademicRecord(completetion: {
+            self.tableView.reloadData()
+            self.showAlertWithTitle("Success", alertMessage: "Record added succesfully")
+
+        })
         
     }
 
@@ -157,11 +167,11 @@ extension AdmissionAcademicRecordTableViewController{
              .passingYear,
              .atkt:
             let cell:AdmissionFormInputTableViewCell  = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.admissionCell, for: indexPath) as! AdmissionFormInputTableViewCell
+            cell.setUpCell(cellDataSource)
             cell.textFieldAnswer.inputView = dataPicker
             cell.textFieldAnswer.inputAccessoryView = toolBar
             cell.textFieldAnswer.indexpath = indexPath
             cell.textFieldAnswer.delegate = self
-            cell.setUpCell(cellDataSource)
             return cell
             
             
@@ -192,7 +202,7 @@ extension AdmissionAcademicRecordTableViewController{
             return cell
             
         case .addNewRecord:
-            let cell:AddRecordTableViewCell  = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.recordTitleHeaderCell, for: indexPath) as! AddRecordTableViewCell
+            let cell:AddRecordTableViewCell  = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.addRecordCell, for: indexPath) as! AddRecordTableViewCell
             cell.buttonaddResult.addTarget(self, action: #selector(AdmissionAcademicRecordTableViewController.addnewRecord), for: .touchUpInside)
             return cell
             
@@ -218,7 +228,7 @@ extension AdmissionAcademicRecordTableViewController:UITextFieldDelegate{
         if let `textField` = textField as? CustomTextField,
             let indexPath = textField.indexpath
         {
-            let cellDataSource = arrayDataSource[indexPath.section].attachedObj[indexPath.row]
+            let cellDataSource = AdmissionAcademicManager.shared.dataSource[indexPath.section].attachedObj[indexPath.row]
             if let attachedOBj = cellDataSource.attachedDs as? [String]{
                 dataPicker.data = [attachedOBj]
                 dataPicker.isHidden = false
@@ -240,8 +250,12 @@ extension AdmissionAcademicRecordTableViewController:UITextFieldDelegate{
         if let `textField` = textField as? CustomTextField,
             let indexPath = textField.indexpath
         {
-            let cellDataSource = arrayDataSource[indexPath.section].attachedObj[indexPath.row]
+            let cellDataSource = AdmissionAcademicManager.shared.dataSource[indexPath.section].attachedObj[indexPath.row]
             cellDataSource.setValues(value: textField.text ?? "", otherObj: nil, indexPath: indexPath)
+            if cellDataSource.cellType == .resultDeclared{
+                AdmissionAcademicManager.shared.makeDataSource()
+                self.tableView.reloadSections([indexPath.section], with: .fade)
+            }
         }
         
     }

@@ -64,6 +64,10 @@ extension String{
     func boolValue() -> Bool{
         return self == "1"
     }
+    
+    func boolValuefromYesNo() -> Bool{
+        return self.lowercased() == "Yes".lowercased()
+    }
 }
 
 extension Optional where Wrapped == String{

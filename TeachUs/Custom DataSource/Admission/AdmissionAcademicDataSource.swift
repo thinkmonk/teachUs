@@ -38,6 +38,7 @@ enum AcademicCellType:String{
 enum RecordSections{
     case previousRecords
     case recordsData
+    case addNewRecord
 }
 
 
@@ -71,32 +72,39 @@ class AcademicRowDataSource{
 
 extension AcademicRowDataSource{
     func setValues(value:String, otherObj:Any?, indexPath:IndexPath){
-        if var academicInfo = AdmissionAcademicManager.shared.recordData, var recordInfo = academicInfo.academicRecord?.result?[indexPath.row]
-{
-            switch self.cellType! {
-            case .inHouse:
-                academicInfo.academicRecord?.inHouse = value
-            case .academicYear:
-                recordInfo.academicYear = value
-            case .semester:
-                recordInfo.academicSemester = value
-            case .resultDeclared:
-                recordInfo.resultStatus = value
-            case .cgpa:
-                recordInfo.marks = value
-            case .creditEarned:
-                recordInfo.creditEarned = value
-            case .grade:
-                recordInfo.grade = value
-            case .passingMonth:
-                recordInfo.passingMonth = value
-            case .atkt:
-                recordInfo.passingMonth = value
-                
-            default:break
+        if var academicInfo = AdmissionAcademicManager.shared.recordData
+        {
+            if self.cellType == .inHouse{
+                AdmissionAcademicManager.shared.recordData?.academicRecord?.inHouse = value
+        
+            }else if self.cellType == .prnNuber{
+                AdmissionAcademicManager.shared.recordData?.academicRecord?.prnNo = value
+            }else if AdmissionAcademicManager.shared.dataSource[indexPath.section].headerType == .recordsData, var recordInfo = academicInfo.academicRecord?.result?[indexPath.section-1]{
+                //-1 as first indexpath is previous record section
+                switch self.cellType! {
+                case .academicYear:
+                    recordInfo.academicYear = value
+                case .semester:
+                    recordInfo.academicSemester = value
+                case .resultDeclared:
+                    recordInfo.resultStatus = value
+                case .cgpa:
+                    recordInfo.marks = value
+                case .creditEarned:
+                    recordInfo.creditEarned = value
+                case .grade:
+                    recordInfo.grade = value
+                case .passingMonth:
+                    recordInfo.passingMonth = value
+                case .atkt:
+                    recordInfo.passingMonth = value
+                    
+                default:break
+                }
+                AdmissionAcademicManager.shared.recordData?.academicRecord?.result?[indexPath.section-1] = recordInfo
             }
         }
-
+        
     }
 
 }

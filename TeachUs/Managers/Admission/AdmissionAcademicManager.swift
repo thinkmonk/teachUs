@@ -8,7 +8,7 @@
 
 import Foundation
 class AdmissionAcademicManager{
-    static let shared = AdmissionAcademicManager()
+    static var shared = AdmissionAcademicManager()
     var recordData:AdmissionAcademicRecord?
     var dataSource = [AcademicSectionDataSource]()
     
@@ -20,8 +20,14 @@ class AdmissionAcademicManager{
         self.dataSource.append(sectionDs)
         
         let recordDs = self.getRecordSectionDatasource()
-        let recordSectionDataSource = AcademicSectionDataSource(type: .recordsData, attachedObj: recordDs)
-        self.dataSource.append(recordSectionDataSource)
+        self.dataSource.append(contentsOf: recordDs)
+        
+        
+        let newRecordAddd = AcademicRowDataSource(type: .addNewRecord, obj: nil, dataSource: nil, compulsoryFlag: false, greyedOut: false)
+        let ds = AcademicSectionDataSource(type: .addNewRecord, attachedObj: [newRecordAddd])
+        self.dataSource.append(ds)
+        
+
     }
     
     func getPreviousAcademicRecordDataSource() -> [AcademicRowDataSource]{
@@ -51,21 +57,22 @@ class AdmissionAcademicManager{
         rownDs.append(univNameDs)
 
         let flag = ["Yes","No"]
-        let inHouseds = AcademicRowDataSource(type: .inHouse, obj: recordObj?.nameOfDegree, dataSource: flag, compulsoryFlag: true, greyedOut: false)
+        let inHouseds = AcademicRowDataSource(type: .inHouse, obj: recordObj?.inHouse, dataSource: flag, compulsoryFlag: true, greyedOut: false)
         rownDs.append(inHouseds)
 
-        let instiDs = AcademicRowDataSource(type: .InstituteName, obj: recordObj?.instituteName, dataSource: flag, compulsoryFlag: false, greyedOut: true)
+        let instiDs = AcademicRowDataSource(type: .InstituteName, obj: recordObj?.instituteName, dataSource: nil, compulsoryFlag: false, greyedOut: true)
         rownDs.append(instiDs)
         
-        let markingDs = AcademicRowDataSource(type: .markingSystem, obj: recordObj?.markingSystem, dataSource: flag, compulsoryFlag: false, greyedOut: true)
+        let markingDs = AcademicRowDataSource(type: .markingSystem, obj: recordObj?.markingSystem, dataSource: nil, compulsoryFlag: false, greyedOut: true)
         rownDs.append(markingDs)
 
         return rownDs
     }
     
     
-    func getRecordSectionDatasource() -> [AcademicRowDataSource]{
+    func getRecordSectionDatasource() -> [AcademicSectionDataSource]{
         var rowDs = [AcademicRowDataSource]()
+        var _dataSource = [AcademicSectionDataSource]()
         if let recordObj = self.recordData?.academicRecord{
             
             for (index,resultObj) in recordObj.result?.enumerated() ?? [].enumerated(){
@@ -81,7 +88,7 @@ class AdmissionAcademicManager{
                 let resultDeclard = AcademicRowDataSource(type: .resultDeclared, obj: resultObj.resultStatus, dataSource: AdmissionConstantData.In_house, compulsoryFlag: false, greyedOut: false)
                 rowDs.append(resultDeclard)
                 
-                let resultDeclared =  resultObj.resultStatus?.boolValue() ?? false
+                let resultDeclared =  resultObj.resultStatus?.boolValuefromYesNo() ?? true
                 
                 
                 let cgpa = AcademicRowDataSource(type: .cgpa, obj: resultObj.marks, dataSource: nil, compulsoryFlag: !resultDeclared, greyedOut: !resultDeclared) //negation helps the proper setup
@@ -97,19 +104,49 @@ class AdmissionAcademicManager{
                 rowDs.append(passingMonth)
 
                 
-                let passingyear = AcademicRowDataSource(type: .passingMonth, obj: resultObj.academicYear, dataSource: nil, compulsoryFlag: !resultDeclared, greyedOut: !resultDeclared)
+                let passingyear = AcademicRowDataSource(type: .passingYear, obj: resultObj.academicYear, dataSource: nil, compulsoryFlag: !resultDeclared, greyedOut: !resultDeclared)
                 rowDs.append(passingyear)
 
                 
                 let atkt = AcademicRowDataSource(type: .atkt, obj: resultObj.noOfAtkt, dataSource: AdmissionConstantData.BacklogNo, compulsoryFlag: !resultDeclared, greyedOut: !resultDeclared)
                 rowDs.append(atkt)
+                
+                
+                let recordSectionDataSource = AcademicSectionDataSource(type: .recordsData, attachedObj: rowDs)
+                _dataSource.append(recordSectionDataSource)
+                rowDs.removeAll()
+
+                
             }//for loop ends
             
             //add new record add button
             
-            let newRecordAddd = AcademicRowDataSource(type: .addNewRecord, obj: nil, dataSource: nil, compulsoryFlag: false, greyedOut: false)
-            rowDs.append(newRecordAddd)
         }
-        return rowDs
+        
+        return _dataSource
+    }
+    
+    func removeRecordAtIndexPath(at indexpath:IndexPath, completetion: @escaping () -> ()){
+        if let academicInfo = AdmissionAcademicManager.shared.recordData, dataSource[indexpath.section].headerType == .recordsData{
+            if academicInfo.academicRecord?.result?.count == 1{
+                AdmissionAcademicManager.shared.recordData?.academicRecord?.result?.removeAll()
+            }else{
+                AdmissionAcademicManager.shared.recordData?.academicRecord?.result?.remove(at: indexpath.section-1) //-1 as the first section is used bt admission info
+            }
+            self.makeDataSource()
+            completetion()
+        }
+    }
+    
+    func addNewAcademicRecord(completetion: @escaping () -> ()){
+        let record = Result()
+        if AdmissionAcademicManager.shared.recordData?.academicRecord?.result == nil{
+            AdmissionAcademicManager.shared.recordData?.academicRecord?.result = [Result]()
+            AdmissionAcademicManager.shared.recordData?.academicRecord?.result?.append(record)
+        }else{
+            AdmissionAcademicManager.shared.recordData?.academicRecord?.result?.append(record)
+        }
+        self.makeDataSource()
+        completetion()
     }
 }

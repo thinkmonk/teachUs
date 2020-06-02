@@ -14,6 +14,7 @@ class RecordHeaderTableViewCell: UITableViewCell {
     @IBOutlet weak var buttonDeleteRecord: ButtonWithIndexPath!
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.selectionStyle = .none
         // Initialization code
     }
 

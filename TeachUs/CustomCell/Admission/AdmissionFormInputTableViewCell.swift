@@ -68,6 +68,11 @@ class AdmissionFormInputTableViewCell: UITableViewCell {
     func setUpCell(_ cellObj: AcademicRowDataSource){
         self.isUserInteractionEnabled = !cellObj.isgreyedOUt
         self.viewtextfieldBg.backgroundColor = cellObj.isgreyedOUt ? .lightGray : .white
+        if let attachedDs = cellObj.attachedDs as? [String], attachedDs.count > 0{ //hide dropdown if dropdown is no datasource is present
+            self.buttonDropdown.isHidden  = cellObj.isgreyedOUt
+        }else{
+            self.buttonDropdown.isHidden  = true
+        }
         //Set text from datasource
         if let textValue = cellObj.attachedObj as? String{
             self.textFieldAnswer.text = textValue

@@ -49,15 +49,15 @@ struct AcademicRecord: Codable {
 
 // MARK: - Result
 struct Result: Codable {
-    var academicYear: String?
-    var academicSemester: String?
-    var marks: String?
-    var creditEarned: String?
-    var grade: String?
-    var passingMonth: String?
-    var passingYear: String?
-    var noOfAtkt: String?
-    var resultStatus: String?
+    var academicYear: String? = ""
+    var academicSemester: String? = ""
+    var marks: String? = ""
+    var creditEarned: String? = ""
+    var grade: String? = ""
+    var passingMonth: String? = ""
+    var passingYear: String? =  ""
+    var noOfAtkt: String? =  ""
+    var resultStatus: String? =  ""
 
     enum CodingKeys: String, CodingKey {
         case academicYear = "academic_year"
