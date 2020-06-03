@@ -80,6 +80,6 @@ class AdmissionFormInputTableViewCell: UITableViewCell {
             self.textFieldAnswer.placeholder = cellObj.cellType.rawValue
         }
         self.labelFormHeader.text = cellObj.cellType.rawValue
-        self.labelrequired.isHidden = !cellObj.isCumpulsory
+        self.labelrequired.isHidden = !cellObj.isCumpulsory || cellObj.isgreyedOUt
     }
 }

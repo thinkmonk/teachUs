@@ -85,7 +85,7 @@ class AdmissionAcademicManager{
                 let sesmester = AcademicRowDataSource(type: .semester, obj: resultObj.academicSemester, dataSource: AdmissionConstantData.semsters, compulsoryFlag: true, greyedOut: false)
                 rowDs.append(sesmester)
 
-                let resultDeclard = AcademicRowDataSource(type: .resultDeclared, obj: resultObj.resultStatus, dataSource: AdmissionConstantData.In_house, compulsoryFlag: false, greyedOut: false)
+                let resultDeclard = AcademicRowDataSource(type: .resultDeclared, obj: resultObj.resultStatus, dataSource: AdmissionConstantData.In_house, compulsoryFlag: true, greyedOut: false)
                 rowDs.append(resultDeclard)
                 
                 let resultDeclared =  resultObj.resultStatus?.boolValuefromYesNo() ?? true
@@ -148,5 +148,71 @@ class AdmissionAcademicManager{
         }
         self.makeDataSource()
         completetion()
+    }
+    
+    func validateaAllInputData() -> Bool{
+        return self.recordData?.academicRecord?.isDataPresent ?? false
+    }
+    
+    func sendFormThreeData(formId:Int,_ completion:@escaping ([String:Any]?) -> (),
+                         _ failure:@escaping () -> ())
+    {
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        let manager = NetworkHandler()
+        manager.url = URLConstants.Admission.submitAcademicRecordForm
+        var params = [String:Any]()
+        do {
+            let personalInfoData = try JSONEncoder().encode(self.recordData?.academicRecord)
+            let json = try JSONSerialization.jsonObject(with: personalInfoData, options: [])
+            guard let dictionary = json as? [String : Any] else {
+                LoadingActivityHUD.hideProgressHUD()
+                return
+            }
+            params = dictionary
+        } catch let error{
+            print("err", error)
+        }
+        
+        //reports conversion
+//        do{
+//            let resultData = try JSONEncoder().encode(self.recordData?.academicRecord?.result)
+//
+//            let json = try JSONSerialization.jsonObject(with: resultData, options: [])
+//            guard let dictionary = json as? [String : Any] else {
+//                LoadingActivityHUD.hideProgressHUD()
+//                return
+//            }
+//            var requestString  =  ""
+//            if let theJSONData = try? JSONSerialization.data(withJSONObject: dictionary,options: []) {
+//                let theJSONText = String(data: theJSONData,encoding: .ascii)
+//                requestString = theJSONText!
+//                print("requestString = \(theJSONText!)")
+//                params["result"] = requestString
+//            }
+//        }
+//        catch let error{
+//            print("err", error)
+//        }
+        
+        params["college_code"] = "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)"
+        params["role_id"] = "1"
+        params["admission_form_id"] = "\(formId)"
+
+        manager.apiPostResponseString(apiName: "Update academic form data.", parameters:params , completionHandler: { (result, code, response) in
+            LoadingActivityHUD.hideProgressHUD()
+//            do {
+//                let decoded = try JSONSerialization.jsonObject(with: response, options: [])
+//                if let dictFromJSON = decoded as? [String:Any] {
+//                    completion(dictFromJSON)
+//                }
+//            } catch{
+//                print("parsing error \(error)")
+//                completion([:])
+//            }
+        }) { (error, code, message) in
+            failure()
+            print(message)
+            LoadingActivityHUD.hideProgressHUD()
+        }
     }
 }

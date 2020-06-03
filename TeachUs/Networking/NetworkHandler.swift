@@ -342,7 +342,7 @@ class NetworkHandler:SessionManager{
                     #if DEBUG
                     print(response)
                     #endif
-                    completionHandler(true, (response.response?.statusCode)!, response.result.value as! [String : Any])
+                    completionHandler(true, (response.response?.statusCode) ?? 200, response.result.value as? [String : Any] ?? ["":""])
                     break
                     
                 case .failure(let error):

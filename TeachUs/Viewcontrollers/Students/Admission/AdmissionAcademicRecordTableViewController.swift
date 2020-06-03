@@ -65,21 +65,22 @@ class AdmissionAcademicRecordTableViewController: BaseTableViewController {
     
     @objc func proceedAction(){
         self.view.endEditing(true)
-//        if (AdmissionFormManager.shared.validateData()){
-//            AdmissionFormManager.shared.sendFormOneData({ (dict) in
-//                if let message  = dict?["message"] as? String{
-//                    self.showAlertWithTitle("Success", alertMessage: message)
-//                }
-//                if let id = dict?["admission_form_id"] as? Int{
-//                    self.formId = id
-//                }
-//            }) {
-//                self.showAlertWithTitle("Failed", alertMessage: "Please Retry")
-//            }
-//        }else{
-//            self.showAlertWithTitle("Failed", alertMessage: "Please fill up all the required text fields")
-//        }
-        self.performSegue(withIdentifier: Constants.segues.toRecords, sender: self)
+        if (AdmissionAcademicManager.shared.validateaAllInputData()){
+            
+            AdmissionAcademicManager.shared.sendFormThreeData(formId: self.formId, { (dict) in
+                if let message  = dict?["message"] as? String{
+                    self.showAlertWithTitle("Success", alertMessage: message)
+                }
+                if let id = dict?["admission_form_id"] as? Int{
+                    self.formId = id
+                }
+            }) {
+                self.showAlertWithTitle("Failed", alertMessage: "Please Retry")
+            }
+        }else{
+           self.showAlertWithTitle("Failed", alertMessage: "Please fill up all the required text fields")
+        }
+//        self.performSegue(withIdentifier: Constants.segues.toRecords, sender: self)
     }
     
     @objc func donePicker(){

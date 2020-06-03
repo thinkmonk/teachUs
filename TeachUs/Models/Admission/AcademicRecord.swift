@@ -31,6 +31,10 @@ struct AcademicRecord: Codable {
     var prnNo: String?
     var inHouse: String?
     var result: [Result]?
+    
+    var isDataPresent:Bool{
+        return !(self.inHouse?.isEmpty ?? true) && !((self.result?.map({$0.isDataPresent}))?.contains(false) ?? true)
+    }
 
     enum CodingKeys: String, CodingKey {
         case nameOfDegree = "name_of_degree"
@@ -59,6 +63,11 @@ struct Result: Codable {
     var noOfAtkt: String? =  ""
     var resultStatus: String? =  ""
 
+    var isDataPresent:Bool{
+        return !(self.academicYear?.isEmpty ?? true) ||
+        !(self.academicSemester?.isEmpty ?? true) ||
+        !(self.resultStatus?.isEmpty ?? true)
+    }
     enum CodingKeys: String, CodingKey {
         case academicYear = "academic_year"
         case academicSemester = "academic_semester"
