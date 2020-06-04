@@ -169,15 +169,47 @@ class AdmissionAcademicManager{
                 return
             }
             params = dictionary
+            var resultArray = [[String:Any]]()
+            for result in self.recordData?.academicRecord?.result ?? []{
+//                let resultData = try JSONEncoder().encode(result)
+//                            let json = try JSONSerialization.jsonObject(with: resultData, options: [])
+//                guard let dictionary = json as? [String : Any] else {
+//                    print("Yeh b fata")
+//                    return
+//                }
+                let resultParams:[String:Any] = [
+                    "academic_year" : "First Year",
+                    "marks" : "7.00",
+                    "credit_earned" : "20",
+                    "grade":"B+",
+                    "passing_month":"April",
+                    "passing_year":"2019",
+                    "no_of_atkt":"0",
+                    "result_status":"False",
+                    "academic_semester":2,
+                ]
+                resultArray.append(resultParams)
+            }
+            
+            params["result"] = resultArray
+            params["in_house"] = "False"
         } catch let error{
             print("err", error)
         }
         
+        
+        
+        
+        
+        
+        /*
         //reports conversion
-//        do{
-//            let resultData = try JSONEncoder().encode(self.recordData?.academicRecord?.result)
-//
-//            let json = try JSONSerialization.jsonObject(with: resultData, options: [])
+        do{
+            let resultData = try JSONEncoder().encode(self.recordData?.academicRecord?.result)
+                let jsonData = try? JSONSerialization.jsonObject(with: resultData, options: [])
+            if let `jsonData` = jsonData, let jsonString = String(data: jsonData as! Data, encoding: .utf8){
+                    params["result"] = jsonString
+                }
 //            guard let dictionary = json as? [String : Any] else {
 //                LoadingActivityHUD.hideProgressHUD()
 //                return
@@ -189,16 +221,28 @@ class AdmissionAcademicManager{
 //                print("requestString = \(theJSONText!)")
 //                params["result"] = requestString
 //            }
-//        }
-//        catch let error{
-//            print("err", error)
-//        }
+            
+        }
+        catch let error{
+            print("err", error.localizedDescription)
+        }
+        */
         
+        /*
+        var jsonString = [Data]()
+        if let resultObj = self.recordData?.academicRecord?.result{
+            for result in resultObj{
+                jsonString.append(getJSON(for: result))
+            }
+        }
+        let jsonOBj = jsonString
+        params["result"] = "\([jsonOBj])"
+        */
         params["college_code"] = "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)"
         params["role_id"] = "1"
         params["admission_form_id"] = "\(formId)"
 
-        manager.apiPostResponseString(apiName: "Update academic form data.", parameters:params , completionHandler: { (result, code, response) in
+        manager.apiPostWithDataResponse(apiName: "Update academic form data.", parameters:params , completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
 //            do {
 //                let decoded = try JSONSerialization.jsonObject(with: response, options: [])
@@ -215,4 +259,20 @@ class AdmissionAcademicManager{
             LoadingActivityHUD.hideProgressHUD()
         }
     }
+    
+    func getJSON(for dataObj:Result) -> Data{
+        do{
+            let jsonEncoder = JSONEncoder()
+            let jsonData = try jsonEncoder.encode(dataObj)
+            return jsonData
+            
+            let json = String(data: jsonData, encoding: String.Encoding.utf8)
+            print(json ?? "")
+        }
+        catch let error{
+            print("err", error.localizedDescription)
+        }
+        return Data()
+    }
+    
 }

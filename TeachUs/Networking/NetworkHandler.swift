@@ -206,11 +206,12 @@ class NetworkHandler:SessionManager{
             print("URL : \(self.url!)")
             print("***** POST NETWORK CALL DETAILS *****")
             print("Api name: \(apiName)")
+            print("parameters pre serialisation = \(parameters ?? [:])")
         if let theJSONData = try? JSONSerialization.data(withJSONObject: parameters ?? [:],options: []) {
                 let theJSONText = String(data: theJSONData,encoding: .ascii)
 //                let params = theJSONText?.split(separator: ",")
 //                let paramPretty = params?.joined(separator: ", \n")
-                print("parameters = \(theJSONText!)")
+                print("parameters = \(theJSONText ?? "")")
         }
             
             //print("parameters:\(theJSONText)")
@@ -264,8 +265,9 @@ class NetworkHandler:SessionManager{
         print("URL : \(self.url!)")
         print("***** POST NETWORK CALL DETAILS *****")
         print("Api name: \(apiName)")
+        print("parameters pre serialisation = \(parameters ?? [:])")
         if let theJSONData = try? JSONSerialization.data(withJSONObject: parameters,options: []) {
-            let theJSONText = String(data: theJSONData,encoding: .ascii)
+            let theJSONText = String(data: theJSONData,encoding: .utf8)
             print("parameters = \(theJSONText!)")
         }
         
