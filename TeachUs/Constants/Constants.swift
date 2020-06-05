@@ -41,9 +41,9 @@ public struct Constants {
         static let toBellNotificationList = "toBellNotification"
         static let toAddNewNotice = "addNewNotice"
         static let toAdmissionForm = "toAdmissionForm"
-        static let toSubjectForm = "toSubjectForm"
-        static let toRecords = "toRecords"
-        
+        static let toSubjectForm = "toSubjectForm" //admisison
+        static let toRecords = "toRecords" //admisison
+        static let toFamilyInfo = "toFamilyInfo" //admisison
     }
     
     struct Images {

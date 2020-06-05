@@ -65,9 +65,9 @@ class AdmissionAcademicRecordTableViewController: BaseTableViewController {
     
     @objc func proceedAction(){
         self.view.endEditing(true)
-        if (AdmissionAcademicManager.shared.validateaAllInputData()){
+        if (AdmissionResultManager.shared.validateaAllInputData()){
             
-            AdmissionAcademicManager.shared.sendFormThreeData(formId: self.formId, { (dict) in
+            AdmissionResultManager.shared.sendFormThreeData(formId: self.formId, { (dict) in
                 if let message  = dict?["message"] as? String{
                     self.showAlertWithTitle("Success", alertMessage: message)
                 }
@@ -104,8 +104,8 @@ class AdmissionAcademicRecordTableViewController: BaseTableViewController {
             do{
                 let decoder = JSONDecoder()
                 let data = try decoder.decode(AdmissionAcademicRecord.self, from: response)
-                AdmissionAcademicManager.shared.recordData = data
-                AdmissionAcademicManager.shared.makeDataSource()
+                AdmissionResultManager.shared.recordData = data
+                AdmissionResultManager.shared.makeDataSource()
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
@@ -120,7 +120,7 @@ class AdmissionAcademicRecordTableViewController: BaseTableViewController {
     
     @objc func deleteRecord(_ sender:ButtonWithIndexPath){
         if let indexPath = sender.indexPath{
-            AdmissionAcademicManager.shared.removeRecordAtIndexPath(at: indexPath, completetion: {
+            AdmissionResultManager.shared.removeRecordAtIndexPath(at: indexPath, completetion: {
                 self.tableView.reloadData()
                 self.showAlertWithTitle("Success", alertMessage: "Record deleted succesfully")
             })
@@ -128,12 +128,20 @@ class AdmissionAcademicRecordTableViewController: BaseTableViewController {
     }
     
     @objc func addnewRecord(){
-        AdmissionAcademicManager.shared.addNewAcademicRecord(completetion: {
+        AdmissionResultManager.shared.addNewAcademicRecord(completetion: {
             self.tableView.reloadData()
             self.showAlertWithTitle("Success", alertMessage: "Record added succesfully")
 
         })
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Constants.segues.toFamilyInfo{
+            if let destinationVC = segue.destination as? AdmissionFamilyDetailsTableViewController{
+                destinationVC.formId = self.formId
+            }
+        }
     }
 
 }
@@ -143,15 +151,15 @@ class AdmissionAcademicRecordTableViewController: BaseTableViewController {
 // MARK: - Table view data source
 extension AdmissionAcademicRecordTableViewController{
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return AdmissionAcademicManager.shared.dataSource.count
+        return AdmissionResultManager.shared.dataSource.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return AdmissionAcademicManager.shared.dataSource[section].rowCount
+        return AdmissionResultManager.shared.dataSource[section].rowCount
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellDataSource = AdmissionAcademicManager.shared.dataSource[indexPath.section].attachedObj[indexPath.row]
+        let cellDataSource = AdmissionResultManager.shared.dataSource[indexPath.section].attachedObj[indexPath.row]
         switch cellDataSource.cellType{
         case .academincRecordHeader,
              .recordHeader:
@@ -229,7 +237,7 @@ extension AdmissionAcademicRecordTableViewController:UITextFieldDelegate{
         if let `textField` = textField as? CustomTextField,
             let indexPath = textField.indexpath
         {
-            let cellDataSource = AdmissionAcademicManager.shared.dataSource[indexPath.section].attachedObj[indexPath.row]
+            let cellDataSource = AdmissionResultManager.shared.dataSource[indexPath.section].attachedObj[indexPath.row]
             if let attachedOBj = cellDataSource.attachedDs as? [String]{
                 dataPicker.data = [attachedOBj]
                 dataPicker.isHidden = false
@@ -251,10 +259,10 @@ extension AdmissionAcademicRecordTableViewController:UITextFieldDelegate{
         if let `textField` = textField as? CustomTextField,
             let indexPath = textField.indexpath
         {
-            let cellDataSource = AdmissionAcademicManager.shared.dataSource[indexPath.section].attachedObj[indexPath.row]
+            let cellDataSource = AdmissionResultManager.shared.dataSource[indexPath.section].attachedObj[indexPath.row]
             cellDataSource.setValues(value: textField.text ?? "", otherObj: nil, indexPath: indexPath)
             if cellDataSource.cellType == .resultDeclared{
-                AdmissionAcademicManager.shared.makeDataSource()
+                AdmissionResultManager.shared.makeDataSource()
                 self.tableView.reloadSections([indexPath.section], with: .fade)
             }
         }

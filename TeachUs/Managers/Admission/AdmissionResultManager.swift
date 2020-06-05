@@ -7,8 +7,8 @@
 //
 
 import Foundation
-class AdmissionAcademicManager{
-    static var shared = AdmissionAcademicManager()
+class AdmissionResultManager{
+    static var shared = AdmissionResultManager()
     var recordData:AdmissionAcademicRecord?
     var dataSource = [AcademicSectionDataSource]()
     
@@ -127,11 +127,11 @@ class AdmissionAcademicManager{
     }
     
     func removeRecordAtIndexPath(at indexpath:IndexPath, completetion: @escaping () -> ()){
-        if let academicInfo = AdmissionAcademicManager.shared.recordData, dataSource[indexpath.section].headerType == .recordsData{
+        if let academicInfo = AdmissionResultManager.shared.recordData, dataSource[indexpath.section].headerType == .recordsData{
             if academicInfo.academicRecord?.result?.count == 1{
-                AdmissionAcademicManager.shared.recordData?.academicRecord?.result?.removeAll()
+                AdmissionResultManager.shared.recordData?.academicRecord?.result?.removeAll()
             }else{
-                AdmissionAcademicManager.shared.recordData?.academicRecord?.result?.remove(at: indexpath.section-1) //-1 as the first section is used bt admission info
+                AdmissionResultManager.shared.recordData?.academicRecord?.result?.remove(at: indexpath.section-1) //-1 as the first section is used bt admission info
             }
             self.makeDataSource()
             completetion()
@@ -140,11 +140,11 @@ class AdmissionAcademicManager{
     
     func addNewAcademicRecord(completetion: @escaping () -> ()){
         let record = Result()
-        if AdmissionAcademicManager.shared.recordData?.academicRecord?.result == nil{
-            AdmissionAcademicManager.shared.recordData?.academicRecord?.result = [Result]()
-            AdmissionAcademicManager.shared.recordData?.academicRecord?.result?.append(record)
+        if AdmissionResultManager.shared.recordData?.academicRecord?.result == nil{
+            AdmissionResultManager.shared.recordData?.academicRecord?.result = [Result]()
+            AdmissionResultManager.shared.recordData?.academicRecord?.result?.append(record)
         }else{
-            AdmissionAcademicManager.shared.recordData?.academicRecord?.result?.append(record)
+            AdmissionResultManager.shared.recordData?.academicRecord?.result?.append(record)
         }
         self.makeDataSource()
         completetion()

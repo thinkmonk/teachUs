@@ -82,4 +82,19 @@ class AdmissionFormInputTableViewCell: UITableViewCell {
         self.labelFormHeader.text = cellObj.cellType.rawValue
         self.labelrequired.isHidden = !cellObj.isCumpulsory || cellObj.isgreyedOUt
     }
+    
+    func setUpCell(_ cellObj: FamilyCellDataSource){
+        if let attachedDs = cellObj.attachedDs as? [String], attachedDs.count > 0{ //hide dropdown if dropdown is no datasource is present
+            self.buttonDropdown.isHidden  = false
+        }else{
+            self.buttonDropdown.isHidden  = true
+        }
+        if let textValue = cellObj.attachedObj as? String{
+            self.textFieldAnswer.text = textValue
+        }else{
+            self.textFieldAnswer.placeholder = cellObj.cellType.rawValue
+        }
+        self.labelrequired.isHidden = !cellObj.isCumpulsory
+    }
+
 }

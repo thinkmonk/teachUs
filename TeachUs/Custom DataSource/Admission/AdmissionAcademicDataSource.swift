@@ -72,14 +72,14 @@ class AcademicRowDataSource{
 
 extension AcademicRowDataSource{
     func setValues(value:String, otherObj:Any?, indexPath:IndexPath){
-        if var academicInfo = AdmissionAcademicManager.shared.recordData
+        if var academicInfo = AdmissionResultManager.shared.recordData
         {
             if self.cellType == .inHouse{
-                AdmissionAcademicManager.shared.recordData?.academicRecord?.inHouse = value
+                AdmissionResultManager.shared.recordData?.academicRecord?.inHouse = value
         
             }else if self.cellType == .prnNuber{
-                AdmissionAcademicManager.shared.recordData?.academicRecord?.prnNo = value
-            }else if AdmissionAcademicManager.shared.dataSource[indexPath.section].headerType == .recordsData, var recordInfo = academicInfo.academicRecord?.result?[indexPath.section-1]{
+                AdmissionResultManager.shared.recordData?.academicRecord?.prnNo = value
+            }else if AdmissionResultManager.shared.dataSource[indexPath.section].headerType == .recordsData, var recordInfo = academicInfo.academicRecord?.result?[indexPath.section-1]{
                 //-1 as first indexpath is previous record section
                 switch self.cellType! {
                 case .academicYear:
@@ -101,7 +101,7 @@ extension AcademicRowDataSource{
                     
                 default:break
                 }
-                AdmissionAcademicManager.shared.recordData?.academicRecord?.result?[indexPath.section-1] = recordInfo
+                AdmissionResultManager.shared.recordData?.academicRecord?.result?[indexPath.section-1] = recordInfo
             }
         }
         
