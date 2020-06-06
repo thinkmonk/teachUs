@@ -80,7 +80,7 @@ class AdmissionAcademicRecordTableViewController: BaseTableViewController {
         }else{
            self.showAlertWithTitle("Failed", alertMessage: "Please fill up all the required text fields")
         }
-//        self.performSegue(withIdentifier: Constants.segues.toRecords, sender: self)
+        self.performSegue(withIdentifier: Constants.segues.toFamilyInfo, sender: self)
     }
     
     @objc func donePicker(){
