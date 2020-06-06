@@ -93,7 +93,7 @@ class EditProfilePictureViewController: BaseViewController{
 //        }
         
         if UIImagePickerController.isSourceTypeAvailable(.camera){
-            picker.allowsEditing = false
+            picker.allowsEditing = true
             picker.sourceType = UIImagePickerControllerSourceType.camera
             picker.cameraCaptureMode = .photo
             picker.modalPresentationStyle = .fullScreen

@@ -80,9 +80,9 @@ class AdmissionDocumentsTableViewController: BaseTableViewController {
     
     @objc func proceedAction(){
         self.view.endEditing(true)
-        if (AdmissionFamilyManager.shared.validateaAllInputData()){
+        if (AdmissionDocumentsManager.shared.validateaAllInputData()){
             
-            AdmissionFamilyManager.shared.sendformFourData(formId: self.formId, { (dict) in
+            AdmissionDocumentsManager.shared.uploadDocumentstoServer(formId: self.formId, { (dict) in
                 if let message  = dict?["message"] as? String{
                     self.showAlertWithTitle("Success", alertMessage: message)
                 }
@@ -132,12 +132,12 @@ class AdmissionDocumentsTableViewController: BaseTableViewController {
         let ds = AdmissionDocumentsManager.shared.dataSource[indexPath.row]
         if ds.cellType == .photo || ds.cellType == .signatue{
             if ds.attachedObject != nil{
-                return 200
+                return 300
             }
         }else if ds.cellType == .dcoumentsTitle{
             return 60
         }
-        return 150
+        return 100
     }
 
 }

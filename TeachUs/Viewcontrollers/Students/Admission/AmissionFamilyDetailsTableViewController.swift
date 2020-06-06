@@ -79,7 +79,6 @@ class AdmissionFamilyDetailsTableViewController: BaseTableViewController {
         // Bar button item
         let bellButtomItem = UIBarButtonItem(customView: rightButton)
         navigationItem.rightBarButtonItems  = [bellButtomItem]
-        
     }
     
     func setupGeneriPicker(){
@@ -122,7 +121,7 @@ class AdmissionFamilyDetailsTableViewController: BaseTableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Constants.segues.toDocumentsView, let destinationVC:AdmissionDocumentPicketTableViewCell = segue.destination as? AdmissionDocumentPicketTableViewCell{
+        if segue.identifier == Constants.segues.toDocumentsView, let destinationVC:AdmissionDocumentsTableViewController = segue.destination as? AdmissionDocumentsTableViewController{
             destinationVC.formId = self.formId
         }
     }
