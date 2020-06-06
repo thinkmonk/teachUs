@@ -64,12 +64,10 @@ class AdmissionDocumentPicketTableViewCell: UITableViewCell {
                 print("image downloaded: \(image)")
                 self.imageViewData.isHidden = false
                 self.imageViewData.image = image
-            }else{//user has uploaded document
+            }else{//image download failed
+                self.buttonUploadImage.isHidden = false
                 self.imageViewData.isHidden = true
-                if let url = URL(string: urlString){
-                    self.buttonUploadImage.isHidden = false
-                    self.buttonUploadImage.setTitle("\(url.lastPathComponent) selected.", for: .normal)
-                }
+                
                 
             }
         }

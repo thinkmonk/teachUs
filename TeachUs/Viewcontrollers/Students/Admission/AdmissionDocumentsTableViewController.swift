@@ -15,7 +15,6 @@ class AdmissionDocumentsTableViewController: BaseTableViewController {
 
     var formId:Int!
     var imagePicker:UIImagePickerController = UIImagePickerController()
-    var documentPicker:UIDocumentPickerViewController!
     var curentCellIndexPath:IndexPath!
 
     override func viewDidLoad() {
@@ -143,7 +142,7 @@ class AdmissionDocumentsTableViewController: BaseTableViewController {
 
 }
 
-extension AdmissionDocumentsTableViewController:UIDocumentMenuDelegate,UIDocumentPickerDelegate{
+extension AdmissionDocumentsTableViewController{
     func actionUploadDocument(_ sender: Any?) {
         let alert:UIAlertController=UIAlertController(title: "Choose Notes", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
         let cameraAction = UIAlertAction(title: "Camera", style: UIAlertActionStyle.default)
@@ -158,11 +157,6 @@ extension AdmissionDocumentsTableViewController:UIDocumentMenuDelegate,UIDocumen
             self.openGallery()
         }
         
-        let documentAction = UIAlertAction(title: "Document", style: UIAlertActionStyle.default)
-        {
-            UIAlertAction in
-            self.openDocumentPicker()
-        }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel)
         {
@@ -173,7 +167,6 @@ extension AdmissionDocumentsTableViewController:UIDocumentMenuDelegate,UIDocumen
         alert.addAction(cameraAction)
         alert.addAction(galleryAction)
         alert.addAction(cancelAction)
-        alert.addAction(documentAction)
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -198,43 +191,6 @@ extension AdmissionDocumentsTableViewController:UIDocumentMenuDelegate,UIDocumen
             self.showAlertWithTitle("Oops!", alertMessage: "Photo Library Access Not Provided")
         }
     }
-    
-    func openDocumentPicker(){
-        let types = [kUTTypePDF, kUTTypeText, kUTTypeRTF, kUTTypeItem]
-        self.documentPicker = UIDocumentPickerViewController(documentTypes: types as [String], in: .import)
-        documentPicker.delegate = self
-        documentPicker.modalPresentationStyle = .formSheet
-        self.present(self.documentPicker, animated: true, completion: nil)
-    }
-    
-    public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        guard let myURL = urls.first else {
-            return
-        }
-        let cellDataSource = AdmissionDocumentsManager.shared.dataSource[curentCellIndexPath.row]
-        cellDataSource.setValues(value: myURL)
-        self.tableView.reloadRows(at: [curentCellIndexPath], with: .fade)
-        print("import result : \(myURL)")
-    }
-    
-    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
-        print("import result : \(url)")
-        let cellDataSource = AdmissionDocumentsManager.shared.dataSource[curentCellIndexPath.row]
-        cellDataSource.setValues(value: url)
-        self.tableView.reloadRows(at: [curentCellIndexPath], with: .fade)
-    }
-    
-    public func documentMenu(_ documentMenu:UIDocumentMenuViewController, didPickDocumentPicker documentPicker: UIDocumentPickerViewController) {
-        documentPicker.delegate = self
-        present(documentPicker, animated: true, completion: nil)
-    }
-    
-    
-    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
-        print("view was cancelled")
-        self.documentPicker.dismiss(animated: true, completion: nil)
-    }
-
 }
 
 
