@@ -14,7 +14,7 @@ class AdmissionFamilyManager{
     
     func makeMotherDetailsDs() -> [FamilyCellDataSource] {
         var rowDs = [FamilyCellDataSource]()
-
+        
         // mother
         let mothertitleDs = FamilyCellDataSource(type: .fathersDetails, obj: self.familyData.familyDetailsInformation?.motherFullName, dataSource: nil, compulsoryFlag: true)
         rowDs.append(mothertitleDs)
@@ -94,7 +94,7 @@ class AdmissionFamilyManager{
         
         
         let titleDs = FamilyCellDataSource(type: .FamilyDetailsSection, obj: nil, dataSource: nil, compulsoryFlag: false)
-        let header  = FamilySectionCellData(type: .header, attachedObj: titleDs)
+        let header  = FamilySectionCellData(type: .header, attachedObj: [titleDs])
         dataSource.append(header)
         
         
@@ -104,5 +104,53 @@ class AdmissionFamilyManager{
         
         let motherDs = FamilySectionCellData(type: .mother, attachedObj: self.makeMotherDetailsDs())
         dataSource.append(motherDs)
+    }
+    
+    func validateaAllInputData() -> Bool{
+        return self.familyData.familyDetailsInformation?.isDataPresent ?? false
+    }
+    
+    
+    func sendformFourData(formId:Int,_ completion:@escaping ([String:Any]?) -> (),
+                          _ failure:@escaping () -> ())
+    {
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        let manager = NetworkHandler()
+        manager.url = URLConstants.Admission.submitFamilyData
+        var params = [String:Any]()
+        do {
+            let personalInfoData = try JSONEncoder().encode(self.familyData.familyDetailsInformation)
+            let json = try JSONSerialization.jsonObject(with: personalInfoData, options: [])
+            guard let dictionary = json as? [String : Any] else {
+                LoadingActivityHUD.hideProgressHUD()
+                return
+            }
+            params = dictionary
+        } catch let error{
+            print("err", error)
+        }
+        
+        
+        
+        params["college_code"] = "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)"
+        params["role_id"] = "1"
+        params["admission_form_id"] = "\(formId)"
+        
+        manager.apiPostWithDataResponse(apiName: "Update academic form data.", parameters:params , completionHandler: { (result, code, response) in
+            LoadingActivityHUD.hideProgressHUD()
+            do {
+                let decoded = try JSONSerialization.jsonObject(with: response, options: [])
+                if let dictFromJSON = decoded as? [String:Any] {
+                    completion(dictFromJSON)
+                }
+            } catch{
+                print("parsing error \(error)")
+                completion([:])
+            }
+        }) { (error, code, message) in
+            failure()
+            print(message)
+            LoadingActivityHUD.hideProgressHUD()
+        }
     }
 }

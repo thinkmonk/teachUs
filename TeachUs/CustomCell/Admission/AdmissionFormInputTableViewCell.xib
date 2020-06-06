@@ -17,7 +17,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OA1-ws-Bn8">
+                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OA1-ws-Bn8">
                         <rect key="frame" x="10" y="5" width="292" height="10"/>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F2Z-6Q-WBS">
@@ -64,7 +64,6 @@
                     <constraint firstItem="OA1-ws-Bn8" firstAttribute="height" secondItem="kro-8I-KGo" secondAttribute="height" multiplier="0.5" id="LbQ-wz-PCH"/>
                     <constraint firstItem="F2Z-6Q-WBS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="aCn-nQ-RWT"/>
                     <constraint firstItem="OA1-ws-Bn8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="b98-y2-yuh"/>
-                    <constraint firstItem="OA1-ws-Bn8" firstAttribute="trailing" secondItem="F2Z-6Q-WBS" secondAttribute="trailing" id="dwG-Nz-VbW"/>
                     <constraint firstAttribute="trailing" secondItem="OYo-2X-OsR" secondAttribute="trailing" constant="5" id="fpq-hO-ftX"/>
                     <constraint firstItem="F2Z-6Q-WBS" firstAttribute="top" secondItem="OA1-ws-Bn8" secondAttribute="bottom" constant="-1" id="jPQ-hl-06H"/>
                     <constraint firstItem="OYo-2X-OsR" firstAttribute="centerY" secondItem="kro-8I-KGo" secondAttribute="centerY" id="kd6-28-A6R"/>

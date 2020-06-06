@@ -171,27 +171,27 @@ class AdmissionResultManager{
             params = dictionary
             var resultArray = [[String:Any]]()
             for result in self.recordData?.academicRecord?.result ?? []{
-//                let resultData = try JSONEncoder().encode(result)
-//                            let json = try JSONSerialization.jsonObject(with: resultData, options: [])
-//                guard let dictionary = json as? [String : Any] else {
-//                    print("Yeh b fata")
-//                    return
-//                }
-                let resultParams:[String:Any] = [
-                    "academic_year" : "First Year",
-                    "marks" : "7.00",
-                    "credit_earned" : "20",
-                    "grade":"B+",
-                    "passing_month":"April",
-                    "passing_year":"2019",
-                    "no_of_atkt":"0",
-                    "result_status":"False",
-                    "academic_semester":2,
-                ]
-                resultArray.append(resultParams)
+                let resultData = try JSONEncoder().encode(result)
+                            let json = try JSONSerialization.jsonObject(with: resultData, options: [])
+                guard let dictionary = json as? [String : Any] else {
+                    print("Yeh b fata")
+                    return
+                }
+//                let resultParams:[String:Any] = [
+//                    "academic_year" : "First Year",
+//                    "marks" : "7.00",
+//                    "credit_earned" : "20",
+//                    "grade":"B+",
+//                    "passing_month":"April",
+//                    "passing_year":"2019",
+//                    "no_of_atkt":"0",
+//                    "result_status":"False",
+//                    "academic_semester":2,
+//                ]
+                resultArray.append(dictionary)
             }
             
-            params["result"] = resultArray
+            params["result"] = "\(resultArray)"
             params["in_house"] = "False"
         } catch let error{
             print("err", error)

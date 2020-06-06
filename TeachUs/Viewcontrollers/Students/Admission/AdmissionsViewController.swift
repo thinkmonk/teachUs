@@ -29,7 +29,7 @@ class AdmissionsViewController: BaseTableViewController    {
     
     func getyUserdetails()
     {
-        self.title = "Page 1/4"
+        self.title = "Page 1/5"
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()
         manager.url = URLConstants.Admission.getAdmssionStudentInfo

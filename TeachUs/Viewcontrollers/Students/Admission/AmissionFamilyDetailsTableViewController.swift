@@ -14,8 +14,9 @@ class AdmissionFamilyDetailsTableViewController: BaseTableViewController {
     let toolBar = UIToolbar()
     var formId:Int!
     var arrayDataSource = [FamilySectionCellData]()
-    var activetextField:CustomTextField!
-    
+    var dobTextField:CustomTextField!
+    let picker = UIDatePicker()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,10 +28,18 @@ class AdmissionFamilyDetailsTableViewController: BaseTableViewController {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         setupGeneriPicker()
         addRightBarButton()
+        initDatePicker()
         self.getRecordData()
     }
     
+    func initDatePicker(){
+        picker.datePickerMode = .date
+        picker.addTarget(self, action: #selector(updateDateField(sender:)), for: .valueChanged)
+
+    }
+    
     func getRecordData(){
+        self.title = "Page 4/5"
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()
         manager.url = URLConstants.Admission.familyData
@@ -94,9 +103,9 @@ class AdmissionFamilyDetailsTableViewController: BaseTableViewController {
     
     @objc func proceedAction(){
         self.view.endEditing(true)
-        if (AdmissionResultManager.shared.validateaAllInputData()){
+        if (AdmissionFamilyManager.shared.validateaAllInputData()){
             
-            AdmissionResultManager.shared.sendFormThreeData(formId: self.formId, { (dict) in
+            AdmissionFamilyManager.shared.sendformFourData(formId: self.formId, { (dict) in
                 if let message  = dict?["message"] as? String{
                     self.showAlertWithTitle("Success", alertMessage: message)
                 }
@@ -109,7 +118,13 @@ class AdmissionFamilyDetailsTableViewController: BaseTableViewController {
         }else{
             self.showAlertWithTitle("Failed", alertMessage: "Please fill up all the required text fields")
         }
-        //        self.performSegue(withIdentifier: Constants.segues.toRecords, sender: self)
+        self.performSegue(withIdentifier: Constants.segues.toDocumentsView, sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Constants.segues.toDocumentsView, let destinationVC:AdmissionDocumentPicketTableViewCell = segue.destination as? AdmissionDocumentPicketTableViewCell{
+            destinationVC.formId = self.formId
+        }
     }
     
     @objc func donePicker(){
@@ -157,7 +172,6 @@ class AdmissionFamilyDetailsTableViewController: BaseTableViewController {
             return cell
 
         case .fullName,
-             .DOB,
              .age,
              .contactNumber,
              .emailAddress,
@@ -169,6 +183,15 @@ class AdmissionFamilyDetailsTableViewController: BaseTableViewController {
             cell.textFieldAnswer.indexpath = indexPath
             return cell
 
+        case .DOB:
+            let cell:AdmissionFormInputTableViewCell  = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.admissionCell, for: indexPath) as! AdmissionFormInputTableViewCell
+            cell.textFieldAnswer.delegate = self
+            cell.textFieldAnswer.inputAccessoryView = toolBar
+            cell.textFieldAnswer.inputView = picker
+            cell.textFieldAnswer.text = formatDateForDisplay(date: picker.date)
+            cell.textFieldAnswer.indexpath = indexPath
+            return cell
+            
         default:
             return UITableViewCell()
 
@@ -189,24 +212,20 @@ extension AdmissionFamilyDetailsTableViewController:UITextFieldDelegate{
         {
             let cellDataSource = AdmissionFamilyManager.shared.dataSource[indexPath.section].attachedObj[indexPath.row]
             if let attachedOBj = cellDataSource.attachedDs as? [String]{
-                activetextField = textField
-                if cellDataSource.cellType == .DOB{
-                    let picker = UIDatePicker()
-                    picker.datePickerMode = .date
-                    picker.addTarget(self, action: #selector(updateDateField(sender:)), for: .valueChanged)
-                    textField.inputView = picker
-                    textField.text = formatDateForDisplay(date: picker.date)
-
-                }else{
-                    dataPicker.data = [attachedOBj]
-                    dataPicker.isHidden = false
-                    dataPicker.selectionUpdated = { stringObj in
-                        if let `stringObj` = stringObj.first as? String{
-                            textField.text = `stringObj`
-                        }
+                dataPicker.data = [attachedOBj]
+                dataPicker.isHidden = false
+                dataPicker.selectionUpdated = { stringObj in
+                    if let `stringObj` = stringObj.first as? String{
+                        textField.text = `stringObj`
                     }
                 }
-            }else{
+            }else if cellDataSource.cellType == .DOB{
+                dobTextField = textField
+                textField.inputAccessoryView = toolBar
+                textField.inputView = picker
+
+            }
+            else{
                 textField.inputView = nil
                 textField.inputAccessoryView = nil
             }
@@ -214,7 +233,13 @@ extension AdmissionFamilyDetailsTableViewController:UITextFieldDelegate{
     }
     
     @objc func updateDateField(sender: UIDatePicker) {
-        activetextField?.text = formatDateForDisplay(date: sender.date)
+        dobTextField?.text = formatDateForDisplay(date: sender.date)
+        if let textField = dobTextField,
+            let indexPath = textField.indexpath
+        {
+            let cellDataSource = AdmissionFamilyManager.shared.dataSource[indexPath.section].attachedObj[indexPath.row]
+            cellDataSource.setValues(value: textField.text ?? "", otherObj: nil, indexPath: indexPath)
+        }
     }
     
     fileprivate func formatDateForDisplay(date: Date) -> String {

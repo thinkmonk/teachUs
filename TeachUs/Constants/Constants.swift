@@ -41,9 +41,10 @@ public struct Constants {
         static let toBellNotificationList = "toBellNotification"
         static let toAddNewNotice = "addNewNotice"
         static let toAdmissionForm = "toAdmissionForm"
-        static let toSubjectForm = "toSubjectForm" //admisison
-        static let toRecords = "toRecords" //admisison
-        static let toFamilyInfo = "toFamilyInfo" //admisison
+        static let toSubjectForm = "toSubjectForm" //admisison - subject selection
+        static let toRecords = "toRecords" //admisison - add previous record
+        static let toFamilyInfo = "toFamilyInfo" //admisison - family info
+        static let toDocumentsView = "toDocumentsView" //admission - documents viewer
     }
     
     struct Images {
@@ -105,6 +106,7 @@ public struct Constants {
         static let documentsVC = "DocumentsViewControllerId"
         static let rollNumberGridVC = "StudentListGridViewControllerId"
         static let addmissionStatusViewControlelr = "AdmissionStatusViewControllerId"
+        
     }
     
     struct UserDefaults {
@@ -180,6 +182,7 @@ public struct Constants {
         static let admissionHeader = "AdmissionHeaderTableViewCellId"
         static let addRecordCell = "AddRecordTableViewCellId"
         static let recordTitleHeaderCell = "RecordHeaderTableViewCell"
+        static let documentsImageCell   =  "AdmissionDocumentPicketTableViewCellId"
     }
     
     struct UserTypeString {

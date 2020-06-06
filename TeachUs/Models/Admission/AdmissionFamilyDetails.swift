@@ -51,7 +51,23 @@ struct FamilyDetailsInformation: Codable {
     var admissionStatus: String?
     var feeStatus: String?
     var preferenceStatus: String?
-
+    
+    var isDataPresent:Bool{
+        return !(self.fatherDob?.isEmpty ?? true) &&
+        !(self.fatherContactNumber?.isEmpty ?? true) &&
+        !(self.fatherProfession?.isEmpty ?? true) &&
+        !(self.fatherIndustry?.isEmpty ?? true) &&
+        !(self.fatherTotalIncome?.isEmpty ?? true) &&
+        !(self.fatherCounty?.isEmpty ?? true) &&
+        !(self.motherDob?.isEmpty ?? true) &&
+        !(self.motherContactNumber?.isEmpty ?? true) &&
+        !(self.motherProfession?.isEmpty ?? true) &&
+        !(self.motherIndustry?.isEmpty ?? true) &&
+        !(self.motherTotalIncome?.isEmpty ?? true) &&
+        !(self.motherCountry?.isEmpty ?? true)
+        
+    }
+    
     enum CodingKeys: String, CodingKey {
         case admissionFormId = "admission_form_id"
         case collegeId = "college_id"

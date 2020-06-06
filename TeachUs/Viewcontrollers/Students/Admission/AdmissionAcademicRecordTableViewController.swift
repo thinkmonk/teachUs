@@ -90,6 +90,7 @@ class AdmissionAcademicRecordTableViewController: BaseTableViewController {
     
     
     func getRecordData(){
+        self.title = "Page 3/5"
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()
         manager.url = URLConstants.Admission.getrecordData

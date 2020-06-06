@@ -31,7 +31,7 @@ class AddNewNoticeViewController: BaseViewController {
     @IBOutlet weak var roleSwitch: UISwitch!
     @IBOutlet weak var labelAttachmentText: UILabel!
     var imagePicker:UIImagePickerController?=UIImagePickerController()
-    weak var documentPicker:UIDocumentPickerViewController!
+    var documentPicker:UIDocumentPickerViewController!
 //    var chosenFile:URL?
 //    var chosenImage:UIImage?
     var viewClassList : ViewClassSelection!

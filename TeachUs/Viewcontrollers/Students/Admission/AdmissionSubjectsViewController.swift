@@ -34,7 +34,7 @@ class AdmissionSubjectsViewController: BaseTableViewController {
     
     func getStreamdetails()
     {
-        self.title = "Page 2/4"
+        self.title = "Page 2/5"
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()
         manager.url = URLConstants.Admission.getCampusClass

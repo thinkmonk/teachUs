@@ -59,4 +59,9 @@ class AdmissionHeaderTableViewCell: UITableViewCell {
         self.labelSectionTitle.text = dsObject.cellType.rawValue
         self.viewCopy.isHidden = true
     }
+    
+    func setUp(dsObj:AdmissionDocumentsRowDatasource){
+        self.labelSectionTitle.text = dsObj.cellType.rawValue
+        self.viewCopy.isHidden = true
+    }
 }

@@ -63,6 +63,7 @@ class AdmissionFormInputTableViewCell: UITableViewCell {
             
         }
         self.labelFormHeader.text = cellObj.cellType.value
+        self.textFieldAnswer.placeholder = cellObj.cellType.value
     }
     
     func setUpCell(_ cellObj: AcademicRowDataSource){
@@ -81,6 +82,7 @@ class AdmissionFormInputTableViewCell: UITableViewCell {
         }
         self.labelFormHeader.text = cellObj.cellType.rawValue
         self.labelrequired.isHidden = !cellObj.isCumpulsory || cellObj.isgreyedOUt
+        self.textFieldAnswer.placeholder = cellObj.cellType.rawValue
     }
     
     func setUpCell(_ cellObj: FamilyCellDataSource){
@@ -95,6 +97,8 @@ class AdmissionFormInputTableViewCell: UITableViewCell {
             self.textFieldAnswer.placeholder = cellObj.cellType.rawValue
         }
         self.labelrequired.isHidden = !cellObj.isCumpulsory
+        self.labelFormHeader.text = cellObj.cellType.rawValue
+        self.textFieldAnswer.placeholder = cellObj.cellType.rawValue
     }
 
 }
