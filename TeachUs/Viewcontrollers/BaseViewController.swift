@@ -457,5 +457,54 @@ class BaseTableViewController:UITableViewController{
         }
     }
 
+    
+    func showAlertWithOKTitleAndCompletionHandlers(_ title:String?, alertMessage:String, okButtonString:String?,okAction:@escaping (()->())){
+        let alertTitle = title != nil ? title : nil
+        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.alert)
+        
+        // add an action (button)
+        alert.addAction(UIAlertAction(title: okButtonString ?? "OK", style: .default, handler: { (_) in
+            okAction()
+        }))
+        
+        var rootViewController = UIApplication.shared.keyWindow?.rootViewController
+        if let navigationController = rootViewController as? UINavigationController {
+            rootViewController = navigationController.viewControllers.first
+        }
+        if (rootViewController!.isViewLoaded && (rootViewController!.view.window != nil)) {
+            rootViewController?.present(alert, animated: true, completion: nil)
+        }
+        else{
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func showAlertWithTitleAndCompletionHandlers(_ title:String?, alertMessage:String, okButtonString:String?, canelString:String?,okAction:@escaping (()->()), cancelAction:@escaping(()->())){
+        let alertTitle = title != nil ? title : nil
+        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.alert)
+        
+        // add an action (button)
+        alert.addAction(UIAlertAction(title: okButtonString ?? "OK", style: .default, handler: { (_) in
+            okAction()
+        }))
+        // show the alert
+        
+        alert.addAction(UIAlertAction(title: canelString ?? "CANCEL", style: .cancel, handler: { (_) in
+            cancelAction()
+        }))
+
+        
+        var rootViewController = UIApplication.shared.keyWindow?.rootViewController
+        if let navigationController = rootViewController as? UINavigationController {
+            rootViewController = navigationController.viewControllers.first
+        }
+        if (rootViewController!.isViewLoaded && (rootViewController!.view.window != nil)) {
+            rootViewController?.present(alert, animated: true, completion: nil)
+        }
+        else{
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
 
 }

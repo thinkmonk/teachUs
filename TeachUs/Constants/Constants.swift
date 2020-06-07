@@ -45,7 +45,7 @@ public struct Constants {
         static let toRecords = "toRecords" //admisison - add previous record
         static let toFamilyInfo = "toFamilyInfo" //admisison - family info
         static let toDocumentsView = "toDocumentsView" //admission - documents viewer
-        static let toFinalForm = "toFinalForm" //admission - final view and email form
+        static let toFinalPDFForm = "toFinalForm" //admission - final view and email form
     }
     
     struct Images {

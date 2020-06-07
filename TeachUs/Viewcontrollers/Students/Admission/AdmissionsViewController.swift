@@ -13,7 +13,6 @@ class AdmissionsViewController: BaseTableViewController    {
     var arrayDataSource = [AdmissionFormSectionDataSource]()
     var dataPicker = Picker(data: [[]])
     let toolBar = UIToolbar()
-    var formId:Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +71,7 @@ class AdmissionsViewController: BaseTableViewController    {
 //                    self.showAlertWithTitle("Success", alertMessage: message)
 //                }
                 if let id = dict?["admission_form_id"] as? String, let _id = Int(id){
-                    self.formId = _id
+                    AdmissionBaseManager.shared.formID = _id
                 }
                 self.performSegue(withIdentifier: Constants.segues.toSubjectForm, sender: self)
 
@@ -81,14 +80,6 @@ class AdmissionsViewController: BaseTableViewController    {
             }
         }else{
             self.showAlertWithTitle("Failed", alertMessage: "Please fill up all the required text fields")
-        }
-    }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Constants.segues.toSubjectForm {
-            if let destiationVC = segue.destination as? AdmissionSubjectsViewController{
-                destiationVC.formId = self.formId ?? 0
-                
-            }
         }
     }
 

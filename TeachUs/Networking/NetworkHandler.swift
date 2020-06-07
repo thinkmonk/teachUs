@@ -252,6 +252,7 @@ class NetworkHandler:SessionManager{
     //MARK:- Post Api with  DATA response type
     func apiPostWithDataResponse(apiName: String,
                  parameters: [String: Any],
+                 shouldPrint:Bool? = true,
                  completionHandler: @escaping (_ success:Bool,_ code:Int, _ response: Data) -> Void,
                  failure: @escaping (_ success:Bool,_ code:Int, _ error: String) -> Void){
         
@@ -265,8 +266,7 @@ class NetworkHandler:SessionManager{
         print("URL : \(self.url!)")
         print("***** POST NETWORK CALL DETAILS *****")
         print("Api name: \(apiName)")
-        print("parameters pre serialisation = \(parameters ?? [:])")
-        if let theJSONData = try? JSONSerialization.data(withJSONObject: parameters,options: []) {
+        if let theJSONData = try? JSONSerialization.data(withJSONObject: parameters,options: []),shouldPrint ?? true {
             let theJSONText = String(data: theJSONData,encoding: .utf8)
             print("parameters = \(theJSONText!)")
         }

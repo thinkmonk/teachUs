@@ -13,7 +13,6 @@ import MobileCoreServices
 
 class AdmissionDocumentsTableViewController: BaseTableViewController {
 
-    var formId:Int!
     var imagePicker:UIImagePickerController = UIImagePickerController()
     var curentCellIndexPath:IndexPath!
 
@@ -43,7 +42,7 @@ class AdmissionDocumentsTableViewController: BaseTableViewController {
         let parameters = [
             "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
             "role_id": "\(1)",
-            "admission_form_id":"\(formId ?? 0)",
+            "admission_form_id":"\(AdmissionBaseManager.shared.formID ?? 0)",
         ]
         
         manager.apiPostWithDataResponse(apiName: "get docuemnts data", parameters:parameters, completionHandler: { (result, code, response) in
@@ -80,25 +79,34 @@ class AdmissionDocumentsTableViewController: BaseTableViewController {
     
     @objc func proceedAction(){
         self.view.endEditing(true)
+        
+        
         if (AdmissionDocumentsManager.shared.validateaAllInputData()){
-            
-            AdmissionDocumentsManager.shared.uploadDocumentstoServer(formId: self.formId, { (dict) in
-                if let message  = dict?["message"] as? String{
-                    self.showAlertWithTitle("Success", alertMessage: message)
-                }
-                if let id = dict?["admission_form_id"] as? Int{
-                    self.formId = id
+            self.showAlertWithTitleAndCompletionHandlers("Confirm submission", alertMessage: "Are you sure you want to submit the admission form? \n \n You won't be able to edit it afterwards", okButtonString: "Confirm", canelString: "Recheck", okAction: {
+                AdmissionDocumentsManager.shared.uploadDocumentstoServer(formId: AdmissionBaseManager.shared.formID, { (dict) in
+                    if let message  = dict?["message"] as? String{
+                        self.showAlertWithOKTitleAndCompletionHandlers("Success", alertMessage: message, okButtonString: "OK") {//go to status view controller
+                            for controller in self.navigationController!.viewControllers as Array {
+                                if controller.isKind(of: AdmissionStatusViewController.self) {
+                                    self.navigationController!.popToViewController(controller, animated: true)
+                                    break
+                                }
+                            }
+                        }
+                    }
+                }) {
+                    self.showAlertWithTitle("Failed", alertMessage: "Please Retry")
                 }
             }) {
-                self.showAlertWithTitle("Failed", alertMessage: "Please Retry")
+                //cancel clicked do nothing.
             }
         }else{
             self.showAlertWithTitle("Failed", alertMessage: "Please fill up all the required text fields")
         }
-        //        self.performSegue(withIdentifier: Constants.segues.toRecords, sender: self)
     }
     
-
+    
+    
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -144,7 +152,7 @@ class AdmissionDocumentsTableViewController: BaseTableViewController {
 
 extension AdmissionDocumentsTableViewController{
     func actionUploadDocument(_ sender: Any?) {
-        let alert:UIAlertController=UIAlertController(title: "Choose Notes", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        let alert:UIAlertController=UIAlertController(title: "Choose documents", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
         let cameraAction = UIAlertAction(title: "Camera", style: UIAlertActionStyle.default)
         {
             UIAlertAction in

@@ -8,21 +8,22 @@
 
 import Foundation
 
-struct AdmissionSingleFormSubjectData:Codable{
-    var admissionForm: AdmissionForm?
-
-    enum CodingKeys: String, CodingKey {
-        case admissionForm = "admission_form"
-    }
-
-}
+// MARK: - AdmissioSubjectData
 
 struct AdmissioSubjectData: Codable {
     var admissionForm: [AdmissionForm]?
 
+    enum CodingKeys: String, CodingKey { //parent entity will hold all the details of available streams
+        case admissionForm = "admission_form"
+    }
+}
+struct AdmissionSingleFormSubjectData:Codable{
+    var admissionForm: AdmissionForm?
+    
     enum CodingKeys: String, CodingKey {
         case admissionForm = "admission_form"
     }
+    
 }
 
 // MARK: - AdmissionForm
@@ -32,8 +33,7 @@ struct AdmissionForm: Codable {
     var collegeClassId: String?
     var className: String?
     var specilaization: String?
-    var maxSubjectForm1: String?
-    var maxSubjectForm2: String?
+    var isPreferenceFlow: String?
     var level: String?
     var discipline: String?
     var durationOfDegree: String?
@@ -45,18 +45,16 @@ struct AdmissionForm: Codable {
     var admissionEndDate: String?
     var examSubmitStatus: String?
     var admissionFeeStatus: String?
-    var selectedSubject: AdmissionSubject?
-    var defaultSubjectList: AdmissionSubjectList?
-    var isPrefrenceFlow:String?
-    
+    var subjectSelected: AdmissionSubject?
+    var defaultSubjectList: AdmissionSubject? //locally renamed
+
     enum CodingKeys: String, CodingKey {
         case classMasterId = "class_master_id"
         case collegeId = "college_id"
         case collegeClassId = "college_class_id"
         case className = "class_name"
         case specilaization = "specilaization"
-        case maxSubjectForm1 = "max_subject_form1"
-        case maxSubjectForm2 = "max_subject_form2"
+        case isPreferenceFlow = "is_preference_flow"
         case level = "level"
         case discipline = "discipline"
         case durationOfDegree = "duration_of_degree"
@@ -68,43 +66,15 @@ struct AdmissionForm: Codable {
         case admissionEndDate = "admission_end_date"
         case examSubmitStatus = "exam_submit_status"
         case admissionFeeStatus = "admission_fee_status"
-        case selectedSubject = "subjectSelected"
+        case subjectSelected = "subjectSelected"
         case defaultSubjectList = "subjectList"
-        case isPrefrenceFlow = "is_preference_flow"
     }
 }
 
 // MARK: - Subject
 struct AdmissionSubject: Codable {
-    var semester3: [SubjectSemester3]?
-    var semester4: [SubjectSemester3]?
-
-    enum CodingKeys: String, CodingKey {
-        case semester3 = "Semester 3"
-        case semester4 = "Semester 4"
-    }
-}
-
-// MARK: - SubjectSemester3
-struct SubjectSemester3: Codable {
-    var subjectId: String?
-    var subjectName: String?
-    var semester: String?
-    var mandatory: String?
-
-    enum CodingKeys: String, CodingKey {
-        case subjectId = "subject_id"
-        case subjectName = "subject_name"
-        case semester = "semester"
-        case mandatory = "mandatory"
-    }
-}
-
-// MARK: - SubjectList - received from server
-// MARK: - SubjectList
-struct AdmissionSubjectList: Codable {
-    var semester3: Semester?
-    var semester4: Semester?
+    var semester3: AdmissionSemester?
+    var semester4: AdmissionSemester?
 
     enum CodingKeys: String, CodingKey {
         case semester3 = "Semester 3"
@@ -113,28 +83,50 @@ struct AdmissionSubjectList: Codable {
 }
 
 // MARK: - Semester
-struct Semester: Codable {
-    var subjectList: [SubjectListElement]?
+struct AdmissionSemester: Codable {
+    var subjectList: [AdmnissionSubjectList]?
     var maxSubject: String?
     var optionalSubjectCount: String?
     var maxPreferenceCount: String?
+    var preferenceList: [PreferenceList]?
 
     enum CodingKeys: String, CodingKey {
         case subjectList = "subject_list"
         case maxSubject = "max_subject"
         case optionalSubjectCount = "optional_subject_count"
         case maxPreferenceCount = "max_preference_count"
+        case preferenceList = "preference_list"
     }
 }
 
-// MARK: - SubjectListElement
-struct SubjectListElement: Codable {
+// MARK: - PreferenceList
+struct PreferenceList: Codable {
+    var subjectId: String?
+    var subjectName: String?
+    var semester: String?
+    var mandatory: String?
+    var preference:String?
+    
+    enum CodingKeys: String, CodingKey {
+        case subjectId = "subject_id"
+        case subjectName = "subject_name"
+        case semester = "semester"
+        case mandatory = "mandatory"
+        case preference = "preference"
+
+    }
+}
+
+// MARK: - SubjectList
+struct AdmnissionSubjectList: Codable {
     var subjectId: String?
     var subjectName: String?
     var collegeId: String?
     var classId: String?
     var semester: String?
     var mandatory: String?
+    var preference:String?
+
 
     enum CodingKeys: String, CodingKey {
         case subjectId = "subject_id"
@@ -143,8 +135,10 @@ struct SubjectListElement: Codable {
         case classId = "class_id"
         case semester = "semester"
         case mandatory = "mandatory"
+        case preference = "preference"
     }
 }
+
 
 /// TO be sent to server
 struct AdmissionSubjectFormForAPI:Codable{
@@ -170,12 +164,13 @@ struct AdmissionFormSubject:Codable{
     var subjectId: String?
     var subjectName: String?
     var semester: String?
+    var preference:String? = "0"
     
     enum CodingKeys: String, CodingKey {
         case subjectId = "subject_id"
         case subjectName = "subject_name"
         case semester = "semester"
+        case preference = "preference"
     }
 
 }
-

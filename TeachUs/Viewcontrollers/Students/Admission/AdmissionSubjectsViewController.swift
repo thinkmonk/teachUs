@@ -13,7 +13,6 @@ class AdmissionSubjectsViewController: BaseTableViewController {
     
     var dataPicker = Picker(data: [[]])
     let toolBar = UIToolbar()
-    var formId:Int!
     var arrayDataSource = [AdmissionSubjectSectionDataSource]()
     var selectedStreamIndex:Int!
     var shouldFetchData:Bool = false //a boool value that indicates wether to fetch data when stream is selected
@@ -27,8 +26,6 @@ class AdmissionSubjectsViewController: BaseTableViewController {
         setupGeneriPicker()
         addRightBarButton()
         self.getStreamdetails()
-        
-        
     }
     
     
@@ -41,7 +38,7 @@ class AdmissionSubjectsViewController: BaseTableViewController {
         let parameters = [
             "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
             "role_id": "\(1)",
-            "admission_form_id":"\(formId ?? 0)"
+            "admission_form_id":"\(String(describing: AdmissionBaseManager.shared.formID))"
         ]
         
         manager.apiPostWithDataResponse(apiName: "Get class Stream data for admission", parameters:parameters, completionHandler: { (result, code, response) in
@@ -66,7 +63,7 @@ class AdmissionSubjectsViewController: BaseTableViewController {
         }
         
         if  subjectdata.defaultSubjectList != nil{
-            AdmissionSubjectManager.shared.selectedSubject = subjectdata
+            AdmissionSubjectManager.shared.selectedStream = subjectdata
             self.makeDataSource(true) //data is present no need to make API call. just reload the data
         }else{
             
@@ -76,7 +73,7 @@ class AdmissionSubjectsViewController: BaseTableViewController {
             let parameters = [
                 "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
                 "role_id": "\(1)",
-                "admission_form_id":"\(formId ?? 0)",
+                "admission_form_id":"\(AdmissionBaseManager.shared.formID ?? 0)",
                 "class_id":"\(streamClassId)"
             ]
             
@@ -86,10 +83,11 @@ class AdmissionSubjectsViewController: BaseTableViewController {
                     let decoder = JSONDecoder()
                     let form = try decoder.decode(AdmissionSingleFormSubjectData.self, from: response)
                     subjectdata.defaultSubjectList = form.admissionForm?.defaultSubjectList
-                    AdmissionSubjectManager.shared.selectedSubject = form.admissionForm
+                    AdmissionSubjectManager.shared.selectedStream = form.admissionForm
+                    AdmissionSubjectManager.shared.copyDefaultSubjectToSelectedSubject() //For ui
                     AdmissionSubjectManager.shared.prepareAPIData()
-//                    AdmissionSubjectManager.shared.segregateCompulsaryAndOptionalSubject()
                     self.makeDataSource(true)
+//                    AdmissionSubjectManager.shared.segregateCompulsaryAndOptionalSubject()
                 } catch let error{
                     print("err", error)
                 }
@@ -134,37 +132,27 @@ class AdmissionSubjectsViewController: BaseTableViewController {
     
     @objc func proceedAction(){
         self.view.endEditing(true)
-//        if (AdmissionFormManager.shared.validateData()){
-//            AdmissionFormManager.shared.sendFormOneData({ (dict) in
-//                if let message  = dict?["message"] as? String{
-//                    self.showAlertWithTitle("Success", alertMessage: message)
-//                }
-//                if let id = dict?["admission_form_id"] as? Int{
-//                    self.formId = id
-//                }
-//            }) {
-//                self.showAlertWithTitle("Failed", alertMessage: "Please Retry")
-//            }
-//        }else{
-//            self.showAlertWithTitle("Failed", alertMessage: "Please fill up all the required text fields")
-//        }
-        self.performSegue(withIdentifier: Constants.segues.toRecords, sender: self)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Constants.segues.toRecords {
-            if let destiationVC = segue.destination as? AdmissionAcademicRecordTableViewController{
-                destiationVC.formId = self.formId ?? 0
-                
+        if self.selectedStreamIndex != nil && AdmissionSubjectManager.shared.isDataValid(){
+            AdmissionSubjectManager.shared.sendFormtwoData({ [weak self] (dict) in
+                if let message  = dict?["message"] as? String{
+                    self?.performSegue(withIdentifier: Constants.segues.toRecords, sender: self)
+                    self?.showAlertWithTitle("Success", alertMessage: message)
+                }
+                else{
+                     self?.showAlertWithTitle("Failed", alertMessage: "Please Retry")
+                }
+            }) {[weak self] in
+                 self?.showAlertWithTitle("Failed", alertMessage: "Please Retry")
             }
-        }
+        }        
     }
-
     
     @objc func donePicker(){
         self.dataPicker.isHidden = true
         self.view.endEditing(true)
-        self.getSubjectDetails(for: AdmissionSubjectManager.shared.getClassMasterId(selection: self.selectedStreamIndex))
+        if self.shouldFetchData{
+            self.getSubjectDetails(for: AdmissionSubjectManager.shared.getClassMasterId(selection: self.selectedStreamIndex))
+        }
     }
     
     
@@ -238,6 +226,16 @@ extension AdmissionSubjectsViewController {
             cell.setUpcell(cellDataSource)
             return cell
             
+            
+        case .some(.subjectSelectCell(_)):
+            let cell:AdmissionFormInputTableViewCell  = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.admissionCell, for: indexPath) as! AdmissionFormInputTableViewCell
+            cell.textFieldAnswer.inputView = dataPicker
+            cell.textFieldAnswer.inputAccessoryView = toolBar
+            cell.textFieldAnswer.indexpath = indexPath
+            cell.textFieldAnswer.delegate = self//not adding text field delegate as we dont want to change the textfield input
+            cell.setUpcell(cellDataSource)
+            return cell
+            
         }
     }
     
@@ -249,6 +247,7 @@ extension AdmissionSubjectsViewController {
 }
 extension AdmissionSubjectsViewController:UITextFieldDelegate{
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.shouldFetchData = false
         if let `textField` = textField as? CustomTextField,
             let indexPath = textField.indexpath
         {
@@ -262,13 +261,54 @@ extension AdmissionSubjectsViewController:UITextFieldDelegate{
                             textField.text = `stringObj`
                             self.selectedStreamIndex = self.dataPicker.selectedRow
                         }
+//                        if cellDataSource.cellType == .some(.subjectSelectCell(cellDataSource.cellType.value)){
+//                            textField.text = `stringObj`
+//                        }
                     }
                     self.shouldFetchData = cellDataSource.cellType == .steam
                 }
-            }else{
+            }else if let attachedObj = cellDataSource.dataSourceObject as? [AdmnissionSubjectList]{
+                let stringDs = attachedObj.map({$0.subjectName ?? ""})
+                dataPicker.data = [stringDs]
+                dataPicker.isHidden = false
+                dataPicker.selectionUpdated = {stringObj in
+                    if let `stringObj` = stringObj.first as? String{
+                        textField.text = stringObj
+                    }
+                    //we take the subject selected frm picker and add it to the existing formsubject for api wihthout changing the preferenc
+                    if let row = self.dataPicker.selectedRow, var formObj = cellDataSource.attachedObject as? AdmissionFormSubject ,row < attachedObj.count{
+                        let subject = attachedObj[row]
+//                        formObj.semester       = subject.semester
+//                        formObj.subjectName    = subject.subjectName
+//                        formObj.subjectId      = subject.subjectId
+//                        cellDataSource.attachedObject = formObj
+                        AdmissionSubjectManager.shared.subjectFormData.subject = AdmissionSubjectManager.shared.subjectFormData.subject?.map({ formObjMap -> AdmissionFormSubject in
+                            if formObjMap.semester == formObj.semester && formObjMap.preference == formObj.preference{
+                                var newForm = AdmissionFormSubject()
+                                newForm.semester       = subject.semester
+                                newForm.subjectName    = subject.subjectName
+                                newForm.subjectId      = subject.subjectId
+                                newForm.preference     = formObjMap.preference //we are adding preferences while making data source
+                                return newForm
+                            }
+                            return formObjMap
+                        })
+                        /*
+                         if formObjMap.semester == formObj.semester && formObjMap.preference == formObj.preference{
+                         return formObj
+                         }
+                         
+                         */
+                    }
+                }
+            }
+            else{
                 textField.inputView = nil
                 textField.inputAccessoryView = nil
+                self.shouldFetchData = false
             }
+        }else{
+            self.shouldFetchData = false
         }
     }
     

@@ -70,7 +70,7 @@ class AdmissionDocumentsManager{
             }
         }
         dispatchGroup.notify(queue: .main) {
-            manager.apiPostWithDataResponse(apiName: "Update document form data.", parameters:params , completionHandler: { (result, code, response) in
+            manager.apiPostWithDataResponse(apiName: "Update document form data.", parameters:params , shouldPrint:false, completionHandler: { (result, code, response) in
                 LoadingActivityHUD.hideProgressHUD()
                 do {
                     let decoded = try JSONSerialization.jsonObject(with: response, options: [])
@@ -115,7 +115,7 @@ class AdmissionDocumentsManager{
             let bcf = ByteCountFormatter()
             bcf.allowedUnits = [.useKB] // optional: restricts the units to MB only
             bcf.countStyle = .file
-            print("compresss \(bcf.string(fromByteCount: Int64(imageData.count)))")
+            print("compresss size \(bcf.string(fromByteCount: Int64(imageData.count))) ratio \(compressionRatio)")
             DispatchQueue.main.async {
                  completion(imageData.base64EncodedString(options: .lineLength64Characters))
             }

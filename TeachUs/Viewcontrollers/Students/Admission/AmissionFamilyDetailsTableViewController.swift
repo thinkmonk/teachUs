@@ -12,7 +12,6 @@ class AdmissionFamilyDetailsTableViewController: BaseTableViewController {
     
     var dataPicker = Picker(data: [[]])
     let toolBar = UIToolbar()
-    var formId:Int!
     var arrayDataSource = [FamilySectionCellData]()
     var dobTextField:CustomTextField!
     let picker = UIDatePicker()
@@ -46,7 +45,7 @@ class AdmissionFamilyDetailsTableViewController: BaseTableViewController {
         let parameters = [
             "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
             "role_id": "\(1)",
-            "admission_form_id":"\(formId ?? 0)",
+            "admission_form_id":"\(AdmissionBaseManager.shared.formID ?? 0)",
         ]
         
         manager.apiPostWithDataResponse(apiName: "get family data record data", parameters:parameters, completionHandler: { (result, code, response) in
@@ -104,12 +103,9 @@ class AdmissionFamilyDetailsTableViewController: BaseTableViewController {
         self.view.endEditing(true)
         if (AdmissionFamilyManager.shared.validateaAllInputData()){
             
-            AdmissionFamilyManager.shared.sendformFourData(formId: self.formId, { (dict) in
+            AdmissionFamilyManager.shared.sendformFourData(formId: AdmissionBaseManager.shared.formID, { (dict) in
                 if let message  = dict?["message"] as? String{
                     self.showAlertWithTitle("Success", alertMessage: message)
-                }
-                if let id = dict?["admission_form_id"] as? Int{
-                    self.formId = id
                 }
             }) {
                 self.showAlertWithTitle("Failed", alertMessage: "Please Retry")
@@ -118,12 +114,6 @@ class AdmissionFamilyDetailsTableViewController: BaseTableViewController {
             self.showAlertWithTitle("Failed", alertMessage: "Please fill up all the required text fields")
         }
         self.performSegue(withIdentifier: Constants.segues.toDocumentsView, sender: self)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Constants.segues.toDocumentsView, let destinationVC:AdmissionDocumentsTableViewController = segue.destination as? AdmissionDocumentsTableViewController{
-            destinationVC.formId = self.formId
-        }
     }
     
     @objc func donePicker(){

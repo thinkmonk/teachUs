@@ -104,7 +104,7 @@ class AdmissionResultManager{
                 rowDs.append(passingMonth)
 
                 
-                let passingyear = AcademicRowDataSource(type: .passingYear, obj: resultObj.academicYear, dataSource: nil, compulsoryFlag: !resultDeclared, greyedOut: !resultDeclared)
+                let passingyear = AcademicRowDataSource(type: .passingYear, obj: resultObj.passingYear, dataSource: AdmissionConstantData.years, compulsoryFlag: !resultDeclared, greyedOut: !resultDeclared)
                 rowDs.append(passingyear)
 
                 
@@ -170,13 +170,34 @@ class AdmissionResultManager{
             }
             params = dictionary
             var resultArray = [[String:Any]]()
-            for result in self.recordData?.academicRecord?.result ?? []{
-                let resultData = try JSONEncoder().encode(result)
-                            let json = try JSONSerialization.jsonObject(with: resultData, options: [])
-                guard let dictionary = json as? [String : Any] else {
-                    print("Yeh b fata")
-                    return
-                }
+            for record in self.recordData?.academicRecord?.result ?? []{
+                var resultParams:[String:Any] = ["academic_year":"\(record.academicYear ?? "")"]
+                resultParams["marks"] = "\(record.marks ?? "")"
+                resultParams["credit_earned"] = "\(record.creditEarned ?? "")"
+                resultParams["grade"] = "\(record.grade ?? "")"
+                resultParams["passing_month"] = "\(record.passingMonth ?? "")"
+                resultParams["no_of_atkt"] = "\(record.noOfAtkt ?? "")"
+                resultParams["result_status"] = "\(record.resultStatus ?? "")"
+                resultParams["academic_semester"] = "\(record.academicSemester ?? "")"
+                resultParams["passing_year"] = "\(record.passingYear ?? "")"
+                resultArray.append(resultParams)
+            }
+            
+            let resultList = resultArray
+            var requestText = ""
+            if let theJSONData = try? JSONSerialization.data(withJSONObject: resultList,options: []){
+                let theJSONText = String(data: theJSONData,encoding: .ascii)
+                requestText = theJSONText ?? "NA"
+                print("requestString = \(theJSONText!)")
+            }
+            
+//            for result in self.recordData?.academicRecord?.result ?? []{
+//                let resultData = try JSONEncoder().encode(result)
+//                            let json = try JSONSerialization.jsonObject(with: resultData, options: [])
+//                guard let dictionary = json as? [String : Any] else {
+//                    print("Yeh b fata")
+//                    return
+//                }
 //                let resultParams:[String:Any] = [
 //                    "academic_year" : "First Year",
 //                    "marks" : "7.00",
@@ -188,11 +209,11 @@ class AdmissionResultManager{
 //                    "result_status":"False",
 //                    "academic_semester":2,
 //                ]
-                resultArray.append(dictionary)
-            }
+//                resultArray.append(dictionary)
+//            }
             
-            params["result"] = "\(resultArray)"
-            params["in_house"] = "False"
+            params["result"] = requestText
+            params["in_house"] = self.recordData?.academicRecord?.inHouse?.boolValuefromYesNo()
         } catch let error{
             print("err", error)
         }
@@ -244,15 +265,15 @@ class AdmissionResultManager{
 
         manager.apiPostWithDataResponse(apiName: "Update academic form data.", parameters:params , completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
-//            do {
-//                let decoded = try JSONSerialization.jsonObject(with: response, options: [])
-//                if let dictFromJSON = decoded as? [String:Any] {
-//                    completion(dictFromJSON)
-//                }
-//            } catch{
-//                print("parsing error \(error)")
-//                completion([:])
-//            }
+            do {
+                let decoded = try JSONSerialization.jsonObject(with: response, options: [])
+                if let dictFromJSON = decoded as? [String:Any] {
+                    completion(dictFromJSON)
+                }
+            } catch{
+                print("parsing error \(error)")
+                completion([:])
+            }
         }) { (error, code, message) in
             failure()
             print(message)

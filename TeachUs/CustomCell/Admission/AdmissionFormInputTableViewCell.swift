@@ -33,6 +33,7 @@ class AdmissionFormInputTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    ///For first form - AdmissionsViewController
     func setUpcell(_ cellObj:AdmissionFormDataSource){
         //disabled if mobileNumber
         self.isUserInteractionEnabled = !(cellObj.cellType == .MobileNumber)
@@ -48,6 +49,7 @@ class AdmissionFormInputTableViewCell: UITableViewCell {
         self.labelFormHeader.text = cellObj.cellType.rawValue
     }
     
+    ///For first form - AdmissionSubjectsViewController
     func setUpcell(_ cellObj:AdmissionSubjectDataSource){
         //disabled if mobileNumber
         let disabledCells : [SubjectCellType] = [.level, .course, .academicYear]
@@ -63,7 +65,10 @@ class AdmissionFormInputTableViewCell: UITableViewCell {
             
         }
         self.labelFormHeader.text = cellObj.cellType.value
-        self.textFieldAnswer.placeholder = cellObj.cellType.value
+        self.textFieldAnswer.placeholder = cellObj.cellType.placeHolder
+        if let form = cellObj.attachedObject as? AdmissionFormSubject{
+            self.textFieldAnswer.text  = form.subjectName ?? ""
+        }
     }
     
     func setUpCell(_ cellObj: AcademicRowDataSource){

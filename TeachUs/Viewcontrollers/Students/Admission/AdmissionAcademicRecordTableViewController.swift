@@ -12,7 +12,7 @@ class AdmissionAcademicRecordTableViewController: BaseTableViewController {
     
     var dataPicker = Picker(data: [[]])
     let toolBar = UIToolbar()
-    var formId:Int!
+
     var arrayDataSource = [AcademicSectionDataSource]()
     var activetextField:CustomTextField!
     override func viewDidLoad() {
@@ -67,12 +67,10 @@ class AdmissionAcademicRecordTableViewController: BaseTableViewController {
         self.view.endEditing(true)
         if (AdmissionResultManager.shared.validateaAllInputData()){
             
-            AdmissionResultManager.shared.sendFormThreeData(formId: self.formId, { (dict) in
+            AdmissionResultManager.shared.sendFormThreeData(formId: AdmissionBaseManager.shared.formID ?? 0, { (dict) in
                 if let message  = dict?["message"] as? String{
+                    self.performSegue(withIdentifier: Constants.segues.toFamilyInfo, sender: self)
                     self.showAlertWithTitle("Success", alertMessage: message)
-                }
-                if let id = dict?["admission_form_id"] as? Int{
-                    self.formId = id
                 }
             }) {
                 self.showAlertWithTitle("Failed", alertMessage: "Please Retry")
@@ -80,7 +78,6 @@ class AdmissionAcademicRecordTableViewController: BaseTableViewController {
         }else{
            self.showAlertWithTitle("Failed", alertMessage: "Please fill up all the required text fields")
         }
-        self.performSegue(withIdentifier: Constants.segues.toFamilyInfo, sender: self)
     }
     
     @objc func donePicker(){
@@ -97,7 +94,7 @@ class AdmissionAcademicRecordTableViewController: BaseTableViewController {
         let parameters = [
             "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
             "role_id": "\(1)",
-            "admission_form_id":"\(formId ?? 0)",
+            "admission_form_id":"\(AdmissionBaseManager.shared.formID ?? 0)",
         ]
         
         manager.apiPostWithDataResponse(apiName: "get admission record data", parameters:parameters, completionHandler: { (result, code, response) in
@@ -135,14 +132,6 @@ class AdmissionAcademicRecordTableViewController: BaseTableViewController {
 
         })
         
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Constants.segues.toFamilyInfo{
-            if let destinationVC = segue.destination as? AdmissionFamilyDetailsTableViewController{
-                destinationVC.formId = self.formId
-            }
-        }
     }
 
 }

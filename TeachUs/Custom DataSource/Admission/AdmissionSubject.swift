@@ -15,6 +15,7 @@ enum SubjectCellType:Equatable {
     case academicYear
     case subjectHeader
     case subjectDetails(String)
+    case subjectSelectCell(String)
     
     var value:String{
         switch self {
@@ -25,8 +26,24 @@ enum SubjectCellType:Equatable {
         case .academicYear      : return "Academic Year"
         case .subjectHeader           :return "Subject"
         case .subjectDetails(let value)    :return value
+        case .subjectSelectCell(let value): return value
         }
     }
+    
+    var placeHolder:String{
+        switch self {
+        case .programHeader     : return "Program/Subject"
+        case .steam             : return "Select Stream"
+        case .level             : return "Level"
+        case .course            : return "Course"
+        case .academicYear      : return "Academic Year"
+        case .subjectHeader           :return "Subject"
+        case .subjectDetails( _)    :return "Click to view list"
+            
+        case .subjectSelectCell(_): return "Click to select subject"
+        }
+    }
+    
 }
 
 
@@ -59,3 +76,6 @@ class AdmissionSubjectDataSource{
     }
     
 }
+
+
+
