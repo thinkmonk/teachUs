@@ -123,6 +123,9 @@
 		8161AF65222C467C001F73B5 /* ViewClassSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8161AF64222C467C001F73B5 /* ViewClassSelection.swift */; };
 		8161AF67222C5922001F73B5 /* CollegeClassManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8161AF66222C5922001F73B5 /* CollegeClassManager.swift */; };
 		8161AF69222C5B63001F73B5 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8161AF68222C5B63001F73B5 /* Array.swift */; };
+		816345BA248CC820001FF04B /* AdmissionFinalFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816345B9248CC820001FF04B /* AdmissionFinalFormViewController.swift */; };
+		816345BC248CD085001FF04B /* AdmissionBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816345BB248CD085001FF04B /* AdmissionBaseManager.swift */; };
+		816345BE248CD117001FF04B /* AdmissionPDFDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816345BD248CD117001FF04B /* AdmissionPDFDetail.swift */; };
 		8163DC5B229F1A8800DA95AA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8163DC5A229F1A8700DA95AA /* GoogleService-Info.plist */; };
 		8163EB0420541D38003E4B1D /* TeachUs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8163EB0220541D38003E4B1D /* TeachUs.xcdatamodeld */; };
 		8163EB0720557AD9003E4B1D /* CollegeDetails+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8163EB0520557AD9003E4B1D /* CollegeDetails+CoreDataClass.swift */; };
@@ -498,6 +501,9 @@
 		8161AF64222C467C001F73B5 /* ViewClassSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewClassSelection.swift; sourceTree = "<group>"; };
 		8161AF66222C5922001F73B5 /* CollegeClassManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeClassManager.swift; sourceTree = "<group>"; };
 		8161AF68222C5B63001F73B5 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		816345B9248CC820001FF04B /* AdmissionFinalFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdmissionFinalFormViewController.swift; sourceTree = "<group>"; };
+		816345BB248CD085001FF04B /* AdmissionBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdmissionBaseManager.swift; sourceTree = "<group>"; };
+		816345BD248CD117001FF04B /* AdmissionPDFDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdmissionPDFDetail.swift; sourceTree = "<group>"; };
 		8163DC5A229F1A8700DA95AA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8163EB0320541D38003E4B1D /* TeachUs.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TeachUs.xcdatamodel; sourceTree = "<group>"; };
 		8163EB0520557AD9003E4B1D /* CollegeDetails+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollegeDetails+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -996,6 +1002,7 @@
 				81C443052485719C006D7C3E /* AcademicRecord.swift */,
 				815E1D88248ABC5600E5E91C /* AdmissionFamilyDetails.swift */,
 				8188E568248BC6D7005BD92E /* AdmissionDocuments.swift */,
+				816345BD248CD117001FF04B /* AdmissionPDFDetail.swift */,
 			);
 			path = Admission;
 			sourceTree = "<group>";
@@ -1371,6 +1378,7 @@
 				81C44303248570A4006D7C3E /* AdmissionAcademicRecordTableViewController.swift */,
 				815E1D86248ABB0E00E5E91C /* AmissionFamilyDetailsTableViewController.swift */,
 				8188E56A248BC835005BD92E /* AdmissionDocumentsTableViewController.swift */,
+				816345B9248CC820001FF04B /* AdmissionFinalFormViewController.swift */,
 			);
 			path = Admission;
 			sourceTree = "<group>";
@@ -1667,6 +1675,7 @@
 				81C4430A24857991006D7C3E /* AdmissionResultManager.swift */,
 				815E1D8C248AC18200E5E91C /* AdmissionFamilyManager.swift */,
 				8188E56E248BCB0D005BD92E /* AdmissionDocumentsManager.swift */,
+				816345BB248CD085001FF04B /* AdmissionBaseManager.swift */,
 			);
 			path = Admission;
 			sourceTree = "<group>";
@@ -2307,6 +2316,7 @@
 				81C208511FAF4182003D366D /* ProfessorCollegeListTableViewCell.swift in Sources */,
 				8185E34020581D5600752F81 /* EditProfilePictureViewController.swift in Sources */,
 				81D7CE9A1FAB9A1D00C4375E /* UserManager.swift in Sources */,
+				816345BE248CD117001FF04B /* AdmissionPDFDetail.swift in Sources */,
 				81727B8C1F9E6CB8006433E8 /* UIViewController+MFSideMenuAdditions.m in Sources */,
 				810FAC5A1FB7549400945DD6 /* AttendanceCountTableViewCell.swift in Sources */,
 				810200CD224BFBD600C87EA3 /* MiscallenousExtensions.swift in Sources */,
@@ -2317,6 +2327,7 @@
 				81D020252059A131003742FD /* RootViewController.swift in Sources */,
 				81C9AC29233A95410019B29E /* ParentDetails.swift in Sources */,
 				8126312A1FB2289200CD80D6 /* AttendanceStudentListTableViewCell.swift in Sources */,
+				816345BA248CC820001FF04B /* AdmissionFinalFormViewController.swift in Sources */,
 				81BA3F15232E291400675716 /* StudentListGridViewController.swift in Sources */,
 				81D7CE831FAB8E5D00C4375E /* CAPSPageMenu+UIGestureRecognizerDelegate.swift in Sources */,
 				81A0CDD5209F5B5C0023564B /* LogDetails.swift in Sources */,
@@ -2398,6 +2409,7 @@
 				8102F29E22871251007920EF /* StudentsProfileDeatilsViewController.swift in Sources */,
 				812B152F20BAA65C00693183 /* Ring.swift in Sources */,
 				81D7CE941FAB988500C4375E /* ProfessorAttedanceViewController.swift in Sources */,
+				816345BC248CD085001FF04B /* AdmissionBaseManager.swift in Sources */,
 				81CCAE511FC805F70070907A /* RatingTitleTableViewCell.swift in Sources */,
 				812298CD2108F61C003C2EE3 /* OfflineApiRequest+CoreDataClass.swift in Sources */,
 				8123F3C52155681300A15182 /* LectureReportSubjectTableViewCell.swift in Sources */,

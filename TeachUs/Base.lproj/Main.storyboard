@@ -2285,9 +2285,8 @@ Form Library</string>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pft-RM-kdW">
-                                <rect key="frame" x="105" y="518" width="111" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pft-RM-kdW">
+                                <rect key="frame" x="20" y="518" width="280" height="30"/>
                                 <state key="normal" title="Proceed to form"/>
                                 <connections>
                                     <segue destination="5Ac-bl-w11" kind="show" id="PGm-XH-D8A"/>
@@ -2295,6 +2294,11 @@ Form Library</string>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="NCe-eP-IMn" firstAttribute="bottom" secondItem="Pft-RM-kdW" secondAttribute="bottom" constant="20" id="Hm5-xd-LP2"/>
+                            <constraint firstItem="NCe-eP-IMn" firstAttribute="trailing" secondItem="Pft-RM-kdW" secondAttribute="trailing" constant="20" id="bvG-DV-kg6"/>
+                            <constraint firstItem="Pft-RM-kdW" firstAttribute="leading" secondItem="NCe-eP-IMn" secondAttribute="leading" constant="20" id="oRB-tL-GTl"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="NCe-eP-IMn"/>
                     </view>
                     <navigationItem key="navigationItem" id="dj2-Ac-fer"/>
@@ -2504,10 +2508,90 @@ Form Library</string>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="64S-PW-roP"/>
+                    <connections>
+                        <segue destination="MYX-XM-XvO" kind="show" identifier="toFinalForm" id="16z-hz-ohg"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iW4-fM-3aM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="720" y="3879"/>
+        </scene>
+        <!--Admission Final Form View Controller-->
+        <scene sceneID="y2k-nA-rMh">
+            <objects>
+                <viewController id="MYX-XM-XvO" customClass="AdmissionFinalFormViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="uXO-Lb-zKz">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="oQ3-Xv-fyM">
+                                <rect key="frame" x="12" y="64" width="296" height="197"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkBox_filled" translatesAutoresizingMaskIntoConstraints="NO" id="gtr-xf-8Vd">
+                                        <rect key="frame" x="138" y="0.0" width="20" height="20"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Giw-Hb-26a">
+                                        <rect key="frame" x="127" y="35" width="42" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="Jd9-ZJ-PSA">
+                                        <rect key="frame" x="22" y="70.5" width="252" height="81.5"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pdf" translatesAutoresizingMaskIntoConstraints="NO" id="VZj-nJ-VHE">
+                                                <rect key="frame" x="0.0" y="0.0" width="16" height="81.5"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Document Name Document Name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uzn-Ch-WPF">
+                                                <rect key="frame" x="57.5" y="0.0" width="84" height="81.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lTw-rt-FtH">
+                                                <rect key="frame" x="183" y="0.0" width="69" height="81.5"/>
+                                                <state key="normal" title="Download"/>
+                                                <connections>
+                                                    <action selector="actionDownloadDocument:" destination="MYX-XM-XvO" eventType="touchUpInside" id="W41-1r-1NI"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o65-lH-3Zm">
+                                        <rect key="frame" x="129.5" y="167" width="37" height="30"/>
+                                        <state key="normal" title="Email"/>
+                                        <connections>
+                                            <action selector="actionEmailForm:" destination="MYX-XM-XvO" eventType="touchUpInside" id="t30-Y9-bv4"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Jd9-ZJ-PSA" firstAttribute="centerX" secondItem="oQ3-Xv-fyM" secondAttribute="centerX" id="ZvI-L8-3fx"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="oQ3-Xv-fyM" secondAttribute="trailing" constant="12" id="5MZ-mY-i4A"/>
+                            <constraint firstItem="oQ3-Xv-fyM" firstAttribute="top" secondItem="7ks-XI-pqY" secondAttribute="top" constant="20" id="Gu1-Rs-d0M"/>
+                            <constraint firstItem="oQ3-Xv-fyM" firstAttribute="leading" secondItem="uXO-Lb-zKz" secondAttribute="leading" constant="12" id="KtJ-Pa-BTs"/>
+                            <constraint firstItem="7ks-XI-pqY" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="oQ3-Xv-fyM" secondAttribute="bottom" constant="20" id="daN-r0-JQ3"/>
+                            <constraint firstItem="oQ3-Xv-fyM" firstAttribute="centerX" secondItem="uXO-Lb-zKz" secondAttribute="centerX" id="is8-6i-hYB"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="7ks-XI-pqY"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="v79-Mo-b0U"/>
+                    <connections>
+                        <outlet property="buttonDownloadDocument" destination="lTw-rt-FtH" id="tuo-vK-8bF"/>
+                        <outlet property="buttonSendEmail" destination="o65-lH-3Zm" id="A5R-0d-DOA"/>
+                        <outlet property="imageViewTick" destination="gtr-xf-8Vd" id="85G-SD-X19"/>
+                        <outlet property="labelDocumetnName" destination="uzn-Ch-WPF" id="sf4-Mq-STY"/>
+                        <outlet property="labelSuccessMessage" destination="Giw-Hb-26a" id="jHG-LP-o77"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Sj6-q0-7wY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1578.75" y="3878.8732394366198"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="l2G-Ag-UdH">
@@ -5525,6 +5609,7 @@ Form Library</string>
     <resources>
         <image name="addEvent" width="20" height="20"/>
         <image name="calenderRed" width="15" height="15"/>
+        <image name="checkBox_filled" width="20" height="20"/>
         <image name="clockIcon" width="64" height="70"/>
         <image name="college_default" width="68" height="68"/>
         <image name="college_selection" width="114" height="114"/>
@@ -5535,6 +5620,7 @@ Form Library</string>
         <image name="editProfile" width="23.5" height="25"/>
         <image name="leftMenuBackground" width="998" height="2390"/>
         <image name="parents" width="68" height="68"/>
+        <image name="pdf" width="16" height="16"/>
         <image name="professor_default" width="68" height="68"/>
         <image name="professor_selection" width="114" height="114"/>
         <image name="student_default" width="68" height="68"/>
