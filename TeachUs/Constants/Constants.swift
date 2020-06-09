@@ -61,6 +61,8 @@ public struct Constants {
         static let defaultMale = "defaule_male"
         static let leftMenuTopView = "left_menu_topView"
         static let checkMarkReadAll = "checkMark"
+        static let greenCheck = "checkBox_filled"
+        static let errorIcon  = "errorIcon"
     }
     
     struct  colors {

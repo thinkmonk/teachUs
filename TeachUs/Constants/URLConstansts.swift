@@ -199,6 +199,7 @@ public struct URLConstants{
         static let submitDocuments          = BaseUrl.baseURLV1 + "/admission/upload_doc_form"
         static let getSavedData             = BaseUrl.baseURLV1 + "/admission/admission_status"
         static let emailPDF                 = BaseUrl.baseURLV1 + "/admission/pdf_mail"
+        static let feePaymentDetails        = BaseUrl.baseURLV1 + "/admission/fee_payment_form"
     }
 
 }

@@ -16,9 +16,9 @@ struct AdmissionPdfDetails: Codable {
     var admissionFormId: String?
     var admissionStatus: String?
     var admissionStatusText: String?
-    var feeAmount: Int?
+    var feeAmount: String?
     var bankDetails: BankDetails?
-
+    
     enum CodingKeys: String, CodingKey {
         case status = "status"
         case message = "message"
@@ -38,12 +38,14 @@ struct BankDetails: Codable {
     var holderName: String?
     var upi: String?
     var branch: String?
-
+    var bankName: String?
+    
     enum CodingKeys: String, CodingKey {
         case accountNumber = "account_number"
         case ifscCode = "ifsc_code"
         case holderName = "holder_name"
         case upi = "upi"
         case branch = "branch"
+        case bankName = "bank_name"
     }
 }

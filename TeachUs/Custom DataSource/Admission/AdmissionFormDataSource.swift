@@ -14,7 +14,7 @@ enum AdmissionCellType:String {
     case FirstName              = "First Name"
     case FathersName            = "Father's Name"
     case MothersName            = "Mother's Name"
-    case NameOnMarkSheet        = "Name as per last qualifying examination marksheet"
+    case NameOnMarkSheet        = "Name as per HSC marksheet"
     case DevnagriName           = "Full name in devnagri script"
     case DOB                    = "Date of birth"
     case MobileNumber           = "Mobile number"
@@ -96,11 +96,14 @@ class AdmissionFormDataSource{
     var cellType:AdmissionCellType!
     var attachedObject:Any?
     var dataSourceObject:Any?
+    var isCompulsaey:Bool?
     
-    init(detailsCell:AdmissionCellType, detailsObject:Any?, dataSource:Any?) {
+    init(detailsCell:AdmissionCellType, detailsObject:Any?, dataSource:Any?, isMandatory:Bool?) {
         self.cellType = detailsCell
         self.attachedObject = detailsObject
         self.dataSourceObject = dataSource
+        self.isCompulsaey = isMandatory
+        
     }
     
 }

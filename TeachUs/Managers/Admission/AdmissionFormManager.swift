@@ -14,68 +14,68 @@ class AdmissionFormManager{
     func makePersonalInfoDataSource() -> [AdmissionFormDataSource]{
         var arrayDataSource = [AdmissionFormDataSource]()
         
-        let personalInfo = AdmissionFormDataSource(detailsCell: .PersonalInfo, detailsObject: nil, dataSource:nil)
+        let personalInfo = AdmissionFormDataSource(detailsCell: .PersonalInfo, detailsObject: nil, dataSource:nil, isMandatory: false)
         arrayDataSource.append(personalInfo)
         
         let personalInfoObj = self.admissionData.personalInformation
         
         
-        let SureName  = AdmissionFormDataSource(detailsCell: .SureName, detailsObject: personalInfoObj?.surname, dataSource:nil)
+        let SureName  = AdmissionFormDataSource(detailsCell: .SureName, detailsObject: personalInfoObj?.surname, dataSource:nil, isMandatory: true)
         arrayDataSource.append(SureName)
         
-        let FirstName  = AdmissionFormDataSource(detailsCell: .FirstName, detailsObject: personalInfoObj?.firstName, dataSource:nil)
+        let FirstName  = AdmissionFormDataSource(detailsCell: .FirstName, detailsObject: personalInfoObj?.firstName, dataSource:nil, isMandatory: true)
         arrayDataSource.append(FirstName)
         
-        let FathersName  = AdmissionFormDataSource(detailsCell: .FathersName, detailsObject: personalInfoObj?.fatherName, dataSource:nil)
+        let FathersName  = AdmissionFormDataSource(detailsCell: .FathersName, detailsObject: personalInfoObj?.fatherName, dataSource:nil, isMandatory: true)
         arrayDataSource.append(FathersName)
         
-        let MothersName  = AdmissionFormDataSource(detailsCell: .MothersName, detailsObject: personalInfoObj?.motherName, dataSource:nil)
+        let MothersName  = AdmissionFormDataSource(detailsCell: .MothersName, detailsObject: personalInfoObj?.motherName, dataSource:nil, isMandatory: true)
         arrayDataSource.append(MothersName)
         
-        let NameOnMarkSheet  = AdmissionFormDataSource(detailsCell: .NameOnMarkSheet, detailsObject: personalInfoObj?.fullName, dataSource:nil)
+        let NameOnMarkSheet  = AdmissionFormDataSource(detailsCell: .NameOnMarkSheet, detailsObject: personalInfoObj?.fullName, dataSource:nil, isMandatory: true)
         arrayDataSource.append(NameOnMarkSheet)
         
-        let DevnagriName  = AdmissionFormDataSource(detailsCell: .DevnagriName, detailsObject: personalInfoObj?.fullNameDevnagriScript, dataSource:nil)
+        let DevnagriName  = AdmissionFormDataSource(detailsCell: .DevnagriName, detailsObject: personalInfoObj?.fullNameDevnagriScript, dataSource:nil, isMandatory: true)
         arrayDataSource.append(DevnagriName)
         
-        let DOB  = AdmissionFormDataSource(detailsCell: .DOB, detailsObject: personalInfoObj?.dob, dataSource:nil)
+        let DOB  = AdmissionFormDataSource(detailsCell: .DOB, detailsObject: personalInfoObj?.dob, dataSource:nil, isMandatory: true)
         arrayDataSource.append(DOB)
         
-        let MobileNumber  = AdmissionFormDataSource(detailsCell: .MobileNumber, detailsObject: personalInfoObj?.contact, dataSource:nil)
+        let MobileNumber  = AdmissionFormDataSource(detailsCell: .MobileNumber, detailsObject: personalInfoObj?.contact, dataSource:nil, isMandatory: false)
         arrayDataSource.append(MobileNumber)
         
-        let EmailAddress  = AdmissionFormDataSource(detailsCell: .EmailAddress, detailsObject: personalInfoObj?.email, dataSource:nil)
+        let EmailAddress  = AdmissionFormDataSource(detailsCell: .EmailAddress, detailsObject: personalInfoObj?.email, dataSource:nil, isMandatory: true)
         arrayDataSource.append(EmailAddress)
                 
         let cateoryDs = self.admissionData.admissionCategory?.map({$0.categoryName})
-        let Category  = AdmissionFormDataSource(detailsCell: .Category, detailsObject: personalInfoObj?.category, dataSource:cateoryDs)
+        let Category  = AdmissionFormDataSource(detailsCell: .Category, detailsObject: personalInfoObj?.category, dataSource:cateoryDs, isMandatory: true)
         arrayDataSource.append(Category)
         
-        let Gender  = AdmissionFormDataSource(detailsCell: .Gender, detailsObject:personalInfoObj?.gender, dataSource:AdmissionConstantData.genders)
+        let Gender  = AdmissionFormDataSource(detailsCell: .Gender, detailsObject:personalInfoObj?.gender, dataSource:AdmissionConstantData.genders, isMandatory: true)
         arrayDataSource.append(Gender)
         
-        let Aadhar  = AdmissionFormDataSource(detailsCell: .Aadhar, detailsObject: personalInfoObj?.aadharCard, dataSource:nil)
+        let Aadhar  = AdmissionFormDataSource(detailsCell: .Aadhar, detailsObject: personalInfoObj?.aadharCard, dataSource:nil,isMandatory: true)
         arrayDataSource.append(Aadhar)
         
-        let Religiion  = AdmissionFormDataSource(detailsCell: .Religiion, detailsObject:personalInfoObj?.religion , dataSource:AdmissionConstantData.religions)
+        let Religiion  = AdmissionFormDataSource(detailsCell: .Religiion, detailsObject:personalInfoObj?.religion , dataSource:AdmissionConstantData.religions, isMandatory: true)
         arrayDataSource.append(Religiion)
         
-        let Caste  = AdmissionFormDataSource(detailsCell: .Caste, detailsObject: personalInfoObj?.caste, dataSource:nil)
+        let Caste  = AdmissionFormDataSource(detailsCell: .Caste, detailsObject: personalInfoObj?.caste, dataSource:nil,isMandatory: false)
         arrayDataSource.append(Caste)
         
-        let Domicile  = AdmissionFormDataSource(detailsCell: .Domicile, detailsObject:personalInfoObj?.domicileOfState , dataSource:AdmissionConstantData.states)
+        let Domicile  = AdmissionFormDataSource(detailsCell: .Domicile, detailsObject:personalInfoObj?.domicileOfState , dataSource:AdmissionConstantData.states,isMandatory: true)
         arrayDataSource.append(Domicile)
         
-        let Nationality  = AdmissionFormDataSource(detailsCell: .Nationality, detailsObject: personalInfoObj?.nationality, dataSource:nil)
+        let Nationality  = AdmissionFormDataSource(detailsCell: .Nationality, detailsObject: personalInfoObj?.nationality, dataSource:nil,isMandatory: true)
         arrayDataSource.append(Nationality)
         
-        let MotherTongue  = AdmissionFormDataSource(detailsCell: .MotherTongue, detailsObject:personalInfoObj?.motherTongue , dataSource:AdmissionConstantData.mothertongue)
+        let MotherTongue  = AdmissionFormDataSource(detailsCell: .MotherTongue, detailsObject:personalInfoObj?.motherTongue , dataSource:AdmissionConstantData.mothertongue, isMandatory: true)
         arrayDataSource.append(MotherTongue)
         
-        let MaritialStatus  = AdmissionFormDataSource(detailsCell: .MaritialStatus, detailsObject:personalInfoObj?.maritalStatus , dataSource:AdmissionConstantData.maritialStatus)
+        let MaritialStatus  = AdmissionFormDataSource(detailsCell: .MaritialStatus, detailsObject:personalInfoObj?.maritalStatus , dataSource:AdmissionConstantData.maritialStatus, isMandatory: true)
         arrayDataSource.append(MaritialStatus)
         
-        let BloodGroup  = AdmissionFormDataSource(detailsCell: .BloodGroup, detailsObject: personalInfoObj?.bloodGroup, dataSource:AdmissionConstantData.bloodGroup)
+        let BloodGroup  = AdmissionFormDataSource(detailsCell: .BloodGroup, detailsObject: personalInfoObj?.bloodGroup, dataSource:AdmissionConstantData.bloodGroup, isMandatory: false)
         arrayDataSource.append(BloodGroup)
                 
         return arrayDataSource
@@ -86,34 +86,43 @@ class AdmissionFormManager{
 
         var arrayDataSource = [AdmissionFormDataSource]()
         
-        let headerDs = isPermanent || isCopy ? AdmissionFormDataSource(detailsCell: .PermannentAddress, detailsObject: nil, dataSource:nil) : AdmissionFormDataSource(detailsCell: .CorrespondanceAddress, detailsObject: nil, dataSource:nil)
+        let headerDs = isPermanent || isCopy ? AdmissionFormDataSource(detailsCell: .PermannentAddress, detailsObject: nil, dataSource:nil, isMandatory: false) : AdmissionFormDataSource(detailsCell: .CorrespondanceAddress, detailsObject: nil, dataSource:nil, isMandatory: false)
         arrayDataSource.append(headerDs)
         
         
         let roomValue = isPermanent ? personalInfoObj?.permanentAddressRoom : personalInfoObj?.correspondenceAddressRoom
-        let roomDs = AdmissionFormDataSource(detailsCell: .RoomFloorBldg, detailsObject: roomValue, dataSource:nil)
+        let roomDs = AdmissionFormDataSource(detailsCell: .RoomFloorBldg, detailsObject: roomValue, dataSource:nil,isMandatory: true)
         arrayDataSource.append(roomDs)
         
         
         let areaValue = isPermanent ? personalInfoObj?.permanentAddressArea : personalInfoObj?.correspondenceAddressArea
-        let areaDs = AdmissionFormDataSource(detailsCell: .AreaLandamrk, detailsObject: areaValue, dataSource:nil)
+        let areaDs = AdmissionFormDataSource(detailsCell: .AreaLandamrk, detailsObject: areaValue, dataSource:nil, isMandatory: true)
         arrayDataSource.append(areaDs)
         
         let cityValue = isPermanent ? personalInfoObj?.permanentAddressCity : personalInfoObj?.correspondenceAddressCity
-        let cityDS = AdmissionFormDataSource(detailsCell: .City, detailsObject: cityValue, dataSource:nil)
+        let cityDS = AdmissionFormDataSource(detailsCell: .City, detailsObject: cityValue, dataSource:nil, isMandatory: true )
         arrayDataSource.append(cityDS)
         
         let pinValue = isPermanent ? personalInfoObj?.permanentAddressPinCode : personalInfoObj?.correspondenceAddressPinCode
-        let pincode = AdmissionFormDataSource(detailsCell: .PinCode, detailsObject: pinValue, dataSource:nil)
+        let pincode = AdmissionFormDataSource(detailsCell: .PinCode, detailsObject: pinValue, dataSource:nil,  isMandatory: true )
         arrayDataSource.append(pincode)
         
         let stateValue = isPermanent ? personalInfoObj?.permanentAddressState : personalInfoObj?.correspondenceAddressState
-        let stateDs = AdmissionFormDataSource(detailsCell: .State ,detailsObject:stateValue , dataSource:AdmissionConstantData.states)
+        let stateDs = AdmissionFormDataSource(detailsCell: .State ,detailsObject:stateValue , dataSource:AdmissionConstantData.states, isMandatory: true )
         arrayDataSource.append(stateDs)
         
         let countryValue = isPermanent ? personalInfoObj?.permanentAddressCountry : personalInfoObj?.correspondenceAddressCountry
-        let country = AdmissionFormDataSource(detailsCell: .Country, detailsObject: countryValue, dataSource:nil)
+        let country = AdmissionFormDataSource(detailsCell: .Country, detailsObject: countryValue, dataSource:nil, isMandatory: true )
         arrayDataSource.append(country)
+        
+        if isCopy{//copy address in local model as well 
+            self.admissionData.personalInformation?.permanentAddressRoom    = self.admissionData.personalInformation?.correspondenceAddressRoom
+            self.admissionData.personalInformation?.permanentAddressArea    = self.admissionData.personalInformation?.correspondenceAddressArea
+            self.admissionData.personalInformation?.permanentAddressCity    = self.admissionData.personalInformation?.correspondenceAddressCity
+            self.admissionData.personalInformation?.permanentAddressPinCode = self.admissionData.personalInformation?.correspondenceAddressPinCode
+            self.admissionData.personalInformation?.permanentAddressState   = self.admissionData.personalInformation?.correspondenceAddressState
+            self.admissionData.personalInformation?.permanentAddressCountry = self.admissionData.personalInformation?.correspondenceAddressCountry
+        }
         
         return arrayDataSource
     }
@@ -440,9 +449,13 @@ class AdmissionSubjectManager {
     }
     
     func isDataValid() -> Bool{
-       return self.subjectFormData.subject?.contains(where: { (subject) -> Bool in
-            return subject.preference != nil
-        }) ?? false
+        if !(selectedStream.isPreferenceFlow?.boolValue() ?? true){
+            return true
+        }else{
+            return self.subjectFormData.subject?.contains(where: { (subject) -> Bool in
+                return subject.preference != nil
+            }) ?? false
+        }
     }
     
     func sendFormtwoData(_ completion:@escaping ([String:Any]?) -> (),

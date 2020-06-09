@@ -38,7 +38,7 @@ class AdmissionFormInputTableViewCell: UITableViewCell {
         //disabled if mobileNumber
         self.isUserInteractionEnabled = !(cellObj.cellType == .MobileNumber)
         self.viewtextfieldBg.backgroundColor = cellObj.cellType == .MobileNumber ? .lightGray : .white
-        
+        self.labelrequired.isHidden = !(cellObj.isCompulsaey ?? false)
         //Set text from datasource
         if let textValue = cellObj.attachedObject as? String{
             self.textFieldAnswer.text = textValue
@@ -49,7 +49,7 @@ class AdmissionFormInputTableViewCell: UITableViewCell {
         self.labelFormHeader.text = cellObj.cellType.rawValue
     }
     
-    ///For first form - AdmissionSubjectsViewController
+    ///For second form - AdmissionSubjectsViewController
     func setUpcell(_ cellObj:AdmissionSubjectDataSource){
         //disabled if mobileNumber
         let disabledCells : [SubjectCellType] = [.level, .course, .academicYear]

@@ -22,10 +22,10 @@ class AdmissionResultManager{
         let recordDs = self.getRecordSectionDatasource()
         self.dataSource.append(contentsOf: recordDs)
         
-        
-        let newRecordAddd = AcademicRowDataSource(type: .addNewRecord, obj: nil, dataSource: nil, compulsoryFlag: false, greyedOut: false)
-        let ds = AcademicSectionDataSource(type: .addNewRecord, attachedObj: [newRecordAddd])
-        self.dataSource.append(ds)
+        //*********  REMOVING THIS AS IT WILLL BE RECEIVED FROM THE SERVER ***********
+//        let newRecordAddd = AcademicRowDataSource(type: .addNewRecord, obj: nil, dataSource: nil, compulsoryFlag: false, greyedOut: false)
+//        let ds = AcademicSectionDataSource(type: .addNewRecord, attachedObj: [newRecordAddd])
+//        self.dataSource.append(ds)
         
 
     }
@@ -73,51 +73,54 @@ class AdmissionResultManager{
     func getRecordSectionDatasource() -> [AcademicSectionDataSource]{
         var rowDs = [AcademicRowDataSource]()
         var _dataSource = [AcademicSectionDataSource]()
-        if let recordObj = self.recordData?.academicRecord{
-            
-            for (index,resultObj) in recordObj.result?.enumerated() ?? [].enumerated(){
-                let recordNumber = AcademicRowDataSource(type: .recordNumberHeader, obj: "Record \(index+1)", dataSource: nil, compulsoryFlag: false, greyedOut: false)
-                rowDs.append(recordNumber)
-
-                let acadmeicYr = AcademicRowDataSource(type: .academicYear, obj: resultObj.academicYear, dataSource: AdmissionConstantData.academicYear, compulsoryFlag: true, greyedOut: false)
-                rowDs.append(acadmeicYr)
-
-                let sesmester = AcademicRowDataSource(type: .semester, obj: resultObj.academicSemester, dataSource: AdmissionConstantData.semsters, compulsoryFlag: true, greyedOut: false)
-                rowDs.append(sesmester)
-
-                let resultDeclard = AcademicRowDataSource(type: .resultDeclared, obj: resultObj.resultStatus, dataSource: AdmissionConstantData.In_house, compulsoryFlag: true, greyedOut: false)
-                rowDs.append(resultDeclard)
-                
-                let resultDeclared =  resultObj.resultStatus?.boolValuefromYesNo() ?? true
+        if let recordObj = self.recordData?.academicRecord, let maxCount = self.recordData?.academicRecord?.maxAllowedResults {
+            if  (self.recordData?.academicRecord?.result?.count == maxCount){
                 
                 
-                let cgpa = AcademicRowDataSource(type: .cgpa, obj: resultObj.marks, dataSource: nil, compulsoryFlag: !resultDeclared, greyedOut: !resultDeclared) //negation helps the proper setup
-                rowDs.append(cgpa)
-                
-                let credits = AcademicRowDataSource(type: .creditEarned, obj: resultObj.creditEarned, dataSource: nil, compulsoryFlag: !resultDeclared, greyedOut: !resultDeclared)
-                rowDs.append(credits)
-                
-                let grade = AcademicRowDataSource(type: .grade, obj: resultObj.grade, dataSource: AdmissionConstantData.grade, compulsoryFlag: !resultDeclared, greyedOut: !resultDeclared)
-                rowDs.append(grade)
-
-                let passingMonth = AcademicRowDataSource(type: .passingMonth, obj: resultObj.passingMonth, dataSource: AdmissionConstantData.months, compulsoryFlag: !resultDeclared, greyedOut: !resultDeclared)
-                rowDs.append(passingMonth)
-
-                
-                let passingyear = AcademicRowDataSource(type: .passingYear, obj: resultObj.passingYear, dataSource: AdmissionConstantData.years, compulsoryFlag: !resultDeclared, greyedOut: !resultDeclared)
-                rowDs.append(passingyear)
-
-                
-                let atkt = AcademicRowDataSource(type: .atkt, obj: resultObj.noOfAtkt, dataSource: AdmissionConstantData.BacklogNo, compulsoryFlag: !resultDeclared, greyedOut: !resultDeclared)
-                rowDs.append(atkt)
-                
-                
-                let recordSectionDataSource = AcademicSectionDataSource(type: .recordsData, attachedObj: rowDs)
-                _dataSource.append(recordSectionDataSource)
-                rowDs.removeAll()
-
-                
-            }//for loop ends
+                for (index,resultObj) in recordObj.result?.enumerated() ?? [].enumerated(){
+                    let recordNumber = AcademicRowDataSource(type: .recordNumberHeader, obj: "Record \(index+1)", dataSource: nil, compulsoryFlag: false, greyedOut: false)
+                    rowDs.append(recordNumber)
+                    
+                    let acadmeicYr = AcademicRowDataSource(type: .academicYear, obj: resultObj.academicYear, dataSource: AdmissionConstantData.academicYear, compulsoryFlag: true, greyedOut: false)
+                    rowDs.append(acadmeicYr)
+                    
+                    let sesmester = AcademicRowDataSource(type: .semester, obj: resultObj.academicSemester, dataSource: AdmissionConstantData.semsters, compulsoryFlag: true, greyedOut: false)
+                    rowDs.append(sesmester)
+                    
+                    let resultDeclard = AcademicRowDataSource(type: .resultDeclared, obj: resultObj.resultStatus, dataSource: AdmissionConstantData.In_house, compulsoryFlag: true, greyedOut: false)
+                    rowDs.append(resultDeclard)
+                    
+                    let resultDeclared =  resultObj.resultStatus?.boolValuefromYesNo() ?? true
+                    
+                    
+                    let cgpa = AcademicRowDataSource(type: .cgpa, obj: resultObj.marks, dataSource: nil, compulsoryFlag: !resultDeclared, greyedOut: !resultDeclared) //negation helps the proper setup
+                    rowDs.append(cgpa)
+                    
+                    let credits = AcademicRowDataSource(type: .creditEarned, obj: resultObj.creditEarned, dataSource: nil, compulsoryFlag: !resultDeclared, greyedOut: !resultDeclared)
+                    rowDs.append(credits)
+                    
+                    let grade = AcademicRowDataSource(type: .grade, obj: resultObj.grade, dataSource: AdmissionConstantData.grade, compulsoryFlag: !resultDeclared, greyedOut: !resultDeclared)
+                    rowDs.append(grade)
+                    
+                    let passingMonth = AcademicRowDataSource(type: .passingMonth, obj: resultObj.passingMonth, dataSource: AdmissionConstantData.months, compulsoryFlag: !resultDeclared, greyedOut: !resultDeclared)
+                    rowDs.append(passingMonth)
+                    
+                    
+                    let passingyear = AcademicRowDataSource(type: .passingYear, obj: resultObj.passingYear, dataSource: AdmissionConstantData.years, compulsoryFlag: !resultDeclared, greyedOut: !resultDeclared)
+                    rowDs.append(passingyear)
+                    
+                    
+                    let atkt = AcademicRowDataSource(type: .atkt, obj: resultObj.noOfAtkt, dataSource: AdmissionConstantData.BacklogNo, compulsoryFlag: !resultDeclared, greyedOut: !resultDeclared)
+                    rowDs.append(atkt)
+                    
+                    
+                    let recordSectionDataSource = AcademicSectionDataSource(type: .recordsData, attachedObj: rowDs)
+                    _dataSource.append(recordSectionDataSource)
+                    rowDs.removeAll()
+                }//for loop ends
+            }else{
+                self.addNewAcademicRecord()
+            }
             
             //add new record add button
             
@@ -148,6 +151,20 @@ class AdmissionResultManager{
         }
         self.makeDataSource()
         completetion()
+    }
+    
+    
+    func addNewAcademicRecord(){
+        for _ in 0..<(self.recordData?.academicRecord?.result?.count ?? 0){
+            let record = Result()
+            if AdmissionResultManager.shared.recordData?.academicRecord?.result == nil{
+                AdmissionResultManager.shared.recordData?.academicRecord?.result = [Result]()
+                AdmissionResultManager.shared.recordData?.academicRecord?.result?.append(record)
+            }else{
+                AdmissionResultManager.shared.recordData?.academicRecord?.result?.append(record)
+            }
+        }
+        self.makeDataSource()
     }
     
     func validateaAllInputData() -> Bool{

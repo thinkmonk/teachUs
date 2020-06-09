@@ -63,7 +63,8 @@ extension FamilyCellDataSource{
     func setValues(value:String, otherObj:Any?, indexPath:IndexPath){
         let sectionType = AdmissionFamilyManager.shared.dataSource[indexPath.section]
         
-        if sectionType.headerType == .father, let fatherDs = sectionType.attachedObj as?  [FamilyCellDataSource]{
+        if sectionType.headerType == .father{
+            let fatherDs = sectionType.attachedObj
             let rowCell = fatherDs[indexPath.row]
             
             switch rowCell.cellType {
@@ -72,6 +73,9 @@ extension FamilyCellDataSource{
                 
             case .DOB:
                 AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.fatherDob = value
+                if let number = otherObj as? Int{
+                    AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.fatherAge = "\(number)"
+                }
                 
             case .age:
                 AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.fatherAge = value
@@ -102,7 +106,8 @@ extension FamilyCellDataSource{
                 
             }
             
-        }else if sectionType.headerType == .mother,let motherDs = sectionType.attachedObj as?  [FamilyCellDataSource]{
+        }else if sectionType.headerType == .mother{
+            let motherDs = sectionType.attachedObj
             let rowCell = motherDs[indexPath.row]
             
             switch rowCell.cellType {
@@ -111,6 +116,9 @@ extension FamilyCellDataSource{
                 
             case .DOB:
                 AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.motherDob = value
+                if let number = otherObj as? Int{
+                    AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.motherAge = "\(number)"
+                }
                 
             case .age:
                 AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.motherAge = value

@@ -13,6 +13,8 @@ class AdmissionsViewController: BaseTableViewController    {
     var arrayDataSource = [AdmissionFormSectionDataSource]()
     var dataPicker = Picker(data: [[]])
     let toolBar = UIToolbar()
+    let picker = UIDatePicker()
+    var dobTextField:CustomTextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +25,7 @@ class AdmissionsViewController: BaseTableViewController    {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.getyUserdetails()
         setupGeneriPicker()
+        initDatePicker()
         addRightBarButton()
     }
     
@@ -49,6 +52,32 @@ class AdmissionsViewController: BaseTableViewController    {
             print(message)
             LoadingActivityHUD.hideProgressHUD()
         }
+    }
+    
+    func initDatePicker(){
+        picker.datePickerMode = .date
+        picker.maximumDate = Calendar.current.date(byAdding: .year, value: -17, to: Date())
+        picker.addTarget(self, action: #selector(updateDateField(sender:)), for: .valueChanged)
+
+    }
+    
+    @objc func updateDateField(sender: UIDatePicker) {
+        dobTextField?.text = formatDateForDisplay(date: sender.date)
+        if let textField = dobTextField,
+            let indexPath = textField.indexpath
+        {
+            let cellDataSource = arrayDataSource[indexPath.section].attachedObj[indexPath.row]
+            let permanentAddressFlag = arrayDataSource[indexPath.section].sectionType == .PermanenttAddress
+            cellDataSource.setValues(value: textField.text ?? "", otherObj: nil, ispermanenetAddress: permanentAddressFlag)
+            arrayDataSource[indexPath.section].attachedObj[indexPath.row].attachedObject = textField.text
+            self.tableView.reloadRows(at: [indexPath], with: .fade)
+        }
+    }
+
+    fileprivate func formatDateForDisplay(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMM yyyy"
+        return formatter.string(from: date)
     }
     
     func addRightBarButton(){
@@ -158,7 +187,6 @@ extension AdmissionsViewController{
              .MothersName,
              .NameOnMarkSheet,
              .DevnagriName,
-             .DOB,
              .Caste,
              .Nationality,
              .RoomFloorBldg,
@@ -172,7 +200,7 @@ extension AdmissionsViewController{
             cell.textFieldAnswer.indexpath = indexPath
             cell.textFieldAnswer.keyboardType = .default
             cell.textFieldAnswer.delegate = self
-
+            
             return cell
             
         case .MobileNumber:
@@ -188,6 +216,7 @@ extension AdmissionsViewController{
             cell.textFieldAnswer.keyboardType = .emailAddress
             cell.buttonDropdown.isHidden = true
             cell.textFieldAnswer.delegate = self
+            cell.textFieldAnswer.indexpath = indexPath
             
             return cell
             
@@ -197,7 +226,8 @@ extension AdmissionsViewController{
             cell.textFieldAnswer.keyboardType = .numberPad
             cell.buttonDropdown.isHidden = true
             cell.textFieldAnswer.delegate = self
-
+            cell.textFieldAnswer.indexpath = indexPath
+            
             return cell
             
         case .Category,
@@ -220,18 +250,28 @@ extension AdmissionsViewController{
         case .State:
             let cell:AdmissionFormInputTableViewCell  = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.admissionCell, for: indexPath) as! AdmissionFormInputTableViewCell
             cell.setUpcell(cellDataSource)
-            cell.buttonDropdown.isHidden = true
+            cell.buttonDropdown.isHidden = false
             cell.textFieldAnswer.indexpath = indexPath
             cell.textFieldAnswer.inputView = dataPicker
             cell.textFieldAnswer.inputAccessoryView = toolBar
             cell.textFieldAnswer.delegate = self
-
-
+            
+            
             return cell
+            
+        case .DOB:
+            let cell:AdmissionFormInputTableViewCell  = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.admissionCell, for: indexPath) as! AdmissionFormInputTableViewCell
+            cell.textFieldAnswer.delegate = self
+            cell.textFieldAnswer.inputAccessoryView = toolBar
+            cell.textFieldAnswer.inputView = picker
+            cell.textFieldAnswer.text = formatDateForDisplay(date: picker.date)
+            cell.textFieldAnswer.indexpath = indexPath
+            return cell
+            
             
         case .none:
             let cell:AdmissionFormInputTableViewCell  = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.admissionCell, for: indexPath) as! AdmissionFormInputTableViewCell
-
+            
             return cell
             
         }
@@ -260,6 +300,11 @@ extension AdmissionsViewController:UITextFieldDelegate{
                         textField.text = `stringObj`
                     }
                 }
+            }else if cellDataSource.cellType == .DOB{
+                dobTextField = textField
+                textField.inputAccessoryView = toolBar
+                textField.inputView = picker
+
             }else{
                 textField.inputView = nil
                 textField.inputAccessoryView = nil
@@ -275,6 +320,9 @@ extension AdmissionsViewController:UITextFieldDelegate{
             let cellDataSource = arrayDataSource[indexPath.section].attachedObj[indexPath.row]
             let permanentAddressFlag = arrayDataSource[indexPath.section].sectionType == .PermanenttAddress
             cellDataSource.setValues(value: textField.text ?? "", otherObj: nil, ispermanenetAddress: permanentAddressFlag)
+            arrayDataSource[indexPath.section].attachedObj[indexPath.row].attachedObject = textField.text
+            self.tableView.reloadRows(at: [indexPath], with: .fade)
+            
         }
         
     }

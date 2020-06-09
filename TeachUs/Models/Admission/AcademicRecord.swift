@@ -31,6 +31,7 @@ struct AcademicRecord: Codable {
     var prnNo: String?
     var inHouse: String?
     var result: [Result]?
+    var maxAllowedResults:Int?
     
     var isDataPresent:Bool{
         return !(self.inHouse?.isEmpty ?? true) && !((self.result?.map({$0.isDataPresent}))?.contains(false) ?? true)
@@ -48,6 +49,7 @@ struct AcademicRecord: Codable {
         case prnNo = "prn_no"
         case inHouse = "in_house"
         case result = "result"
+        case maxAllowedResults = "result_details_count"
     }
 }
 
@@ -64,8 +66,8 @@ struct Result: Codable {
     var resultStatus: String? =  ""
 
     var isDataPresent:Bool{
-        return !(self.academicYear?.isEmpty ?? true) ||
-        !(self.academicSemester?.isEmpty ?? true) ||
+        return !(self.academicYear?.isEmpty ?? true) &&
+        !(self.academicSemester?.isEmpty ?? true) &&
         !(self.resultStatus?.isEmpty ?? true)
     }
     enum CodingKeys: String, CodingKey {

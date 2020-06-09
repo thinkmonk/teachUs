@@ -144,7 +144,9 @@ class AdmissionSubjectsViewController: BaseTableViewController {
             }) {[weak self] in
                  self?.showAlertWithTitle("Failed", alertMessage: "Please Retry")
             }
-        }        
+        }else{
+            self.showAlertWithTitle("Failed", alertMessage: "Please fill up all the required text fields")
+        }
     }
     
     @objc func donePicker(){

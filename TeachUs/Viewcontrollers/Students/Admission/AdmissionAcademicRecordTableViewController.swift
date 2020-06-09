@@ -101,7 +101,8 @@ class AdmissionAcademicRecordTableViewController: BaseTableViewController {
             LoadingActivityHUD.hideProgressHUD()
             do{
                 let decoder = JSONDecoder()
-                let data = try decoder.decode(AdmissionAcademicRecord.self, from: response)
+                var data = try decoder.decode(AdmissionAcademicRecord.self, from: response)
+                data.academicRecord?.maxAllowedResults = 2
                 AdmissionResultManager.shared.recordData = data
                 AdmissionResultManager.shared.makeDataSource()
                 DispatchQueue.main.async {

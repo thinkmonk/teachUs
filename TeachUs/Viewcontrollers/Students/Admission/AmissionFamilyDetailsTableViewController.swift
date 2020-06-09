@@ -15,6 +15,8 @@ class AdmissionFamilyDetailsTableViewController: BaseTableViewController {
     var arrayDataSource = [FamilySectionCellData]()
     var dobTextField:CustomTextField!
     let picker = UIDatePicker()
+    var ageMotherIndexpath:IndexPath?
+    var ageFatherIndexpath:IndexPath?
 
     
     override func viewDidLoad() {
@@ -119,6 +121,7 @@ class AdmissionFamilyDetailsTableViewController: BaseTableViewController {
     @objc func donePicker(){
         self.dataPicker.isHidden = true
         self.view.endEditing(true)
+        self.tableView.reloadData()
     }
     
     
@@ -158,6 +161,7 @@ class AdmissionFamilyDetailsTableViewController: BaseTableViewController {
             cell.textFieldAnswer.inputAccessoryView = toolBar
             cell.textFieldAnswer.indexpath = indexPath
             cell.textFieldAnswer.delegate = self
+            cell.textFieldAnswer.isUserInteractionEnabled = true
             return cell
 
         case .fullName,
@@ -170,6 +174,13 @@ class AdmissionFamilyDetailsTableViewController: BaseTableViewController {
             cell.textFieldAnswer.delegate = self
             cell.setUpCell(cellDataSource)
             cell.textFieldAnswer.indexpath = indexPath
+            cell.textFieldAnswer.isUserInteractionEnabled = (cellDataSource.cellType == .age)
+            if AdmissionFamilyManager.shared.dataSource[indexPath.section].headerType == .father{
+                self.ageFatherIndexpath = indexPath
+            }
+            if AdmissionFamilyManager.shared.dataSource[indexPath.section].headerType == .mother{
+                self.ageMotherIndexpath = indexPath
+            }
             return cell
 
         case .DOB:
@@ -179,6 +190,7 @@ class AdmissionFamilyDetailsTableViewController: BaseTableViewController {
             cell.textFieldAnswer.inputView = picker
             cell.textFieldAnswer.text = formatDateForDisplay(date: picker.date)
             cell.textFieldAnswer.indexpath = indexPath
+            cell.textFieldAnswer.isUserInteractionEnabled = true
             return cell
             
         default:
@@ -227,7 +239,12 @@ extension AdmissionFamilyDetailsTableViewController:UITextFieldDelegate{
             let indexPath = textField.indexpath
         {
             let cellDataSource = AdmissionFamilyManager.shared.dataSource[indexPath.section].attachedObj[indexPath.row]
-            cellDataSource.setValues(value: textField.text ?? "", otherObj: nil, indexPath: indexPath)
+            let age =  getAge()
+            cellDataSource.setValues(value: textField.text ?? "", otherObj: age, indexPath: indexPath)
+            if let motherIp = ageFatherIndexpath, let fatherIp = ageFatherIndexpath{
+                self.tableView.reloadRows(at: [motherIp,fatherIp], with: .none)
+            }
+            
         }
     }
     
@@ -235,6 +252,16 @@ extension AdmissionFamilyDetailsTableViewController:UITextFieldDelegate{
         let formatter = DateFormatter()
         formatter.dateFormat = "dd MMM yyyy"
         return formatter.string(from: date)
+    }
+    
+    func getAge() -> Int{
+        let now = Date()
+        let birthday: Date = picker.date
+        let calendar = Calendar.current
+
+        let ageComponents = calendar.dateComponents([.year], from: birthday, to: now)
+        return ageComponents.year ?? 0
+
     }
 
 
@@ -245,7 +272,17 @@ extension AdmissionFamilyDetailsTableViewController:UITextFieldDelegate{
             let indexPath = textField.indexpath
         {
             let cellDataSource = AdmissionFamilyManager.shared.dataSource[indexPath.section].attachedObj[indexPath.row]
-            cellDataSource.setValues(value: textField.text ?? "", otherObj: nil, indexPath: indexPath)
+            if cellDataSource.cellType == .DOB{
+                let age =  getAge()
+                cellDataSource.setValues(value: textField.text ?? "", otherObj: age, indexPath: indexPath)
+                
+            }else{
+                cellDataSource.setValues(value: textField.text ?? "", otherObj: nil, indexPath: indexPath)
+            }
+            if let motherIp = ageFatherIndexpath, let fatherIp = ageFatherIndexpath{
+                
+                self.tableView.reloadRows(at: [motherIp,fatherIp], with: .none)
+            }
         }
         
     }

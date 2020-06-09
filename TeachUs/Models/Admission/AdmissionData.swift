@@ -67,14 +67,45 @@ class PersonalInformation: Codable {
     var caste: String?
     var domicileOfState: String?
     
+//    func validateClassData() -> Bool{
+//        let tempObj = Mirror(reflecting: self as Any)
+//        return !tempObj.children.contains(where: { (label, value) -> Bool in
+//            if case Optional<Any>.none = value{
+//                return true
+//            }
+//            return false
+//        })
+//    }
+    
+    
     func validateClassData() -> Bool{
-        let tempObj = Mirror(reflecting: self as Any)
-        return !tempObj.children.contains(where: { (label, value) -> Bool in
-            if case Optional<Any>.none = value{
-                return true
-            }
-            return false
-        })
+        return !(self.surname?.isEmpty ?? true) &&
+            !(self.firstName?.isEmpty ?? true) &&
+            !(self.fatherName?.isEmpty ?? true) &&
+            !(self.motherName?.isEmpty ?? true) &&
+            !(self.fullName?.isEmpty ?? true) &&
+            !(self.dob?.isEmpty ?? true) &&
+            !(self.email?.isEmpty ?? true) &&
+            !(self.category?.isEmpty ?? true) &&
+            !(self.gender?.isEmpty ?? true) &&
+            !(self.aadharCard?.isEmpty ?? true) &&
+            !(self.religion?.isEmpty ?? true) &&
+            !(self.domicileOfState?.isEmpty ?? true) &&
+            !(self.nationality?.isEmpty ?? true) &&
+            !(self.motherTongue?.isEmpty ?? true) &&
+            !(self.maritalStatus?.isEmpty ?? true) &&
+            !(self.correspondenceAddressRoom?.isEmpty ?? true) &&
+            !(self.correspondenceAddressArea?.isEmpty ?? true) &&
+            !(self.correspondenceAddressCity?.isEmpty ?? true) &&
+            !(self.correspondenceAddressPinCode?.isEmpty ?? true) &&
+            !(self.correspondenceAddressState?.isEmpty ?? true) &&
+            !(self.correspondenceAddressCountry?.isEmpty ?? true) &&
+            !(self.permanentAddressRoom?.isEmpty ?? true) &&
+            !(self.permanentAddressArea?.isEmpty ?? true) &&
+            !(self.permanentAddressCity?.isEmpty ?? true) &&
+            !(self.permanentAddressPinCode?.isEmpty ?? true) &&
+            !(self.permanentAddressState?.isEmpty ?? true) &&
+            !(self.permanentAddressCountry?.isEmpty ?? true)
     }
 
 
