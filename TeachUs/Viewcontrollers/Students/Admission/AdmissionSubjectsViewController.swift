@@ -26,6 +26,7 @@ class AdmissionSubjectsViewController: BaseTableViewController {
         setupGeneriPicker()
         addRightBarButton()
         self.getStreamdetails()
+        navigationItem.rightBarButtonItem?.isEnabled = false
     }
     
     
@@ -41,12 +42,17 @@ class AdmissionSubjectsViewController: BaseTableViewController {
             "admission_form_id":"\(String(describing: AdmissionBaseManager.shared.formID))"
         ]
         
-        manager.apiPostWithDataResponse(apiName: "Get class Stream data for admission", parameters:parameters, completionHandler: { (result, code, response) in
+        manager.apiPostWithDataResponse(apiName: "Get class Stream data for admission", parameters:parameters, completionHandler: { [weak self](result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
+            self?.navigationItem.rightBarButtonItem?.isEnabled = true
             do{
                 let decoder = JSONDecoder()
                 AdmissionSubjectManager.shared.subjectData = try decoder.decode(AdmissioSubjectData.self, from: response)
-                self.makeDataSource(false)
+                if AdmissionSubjectManager.shared.subjectData.admissionForm?.count == 1{
+                    self?.selectedStreamIndex = 0
+                    self?.getSubjectDetails(for: AdmissionSubjectManager.shared.getClassMasterId(selection: self?.selectedStreamIndex ?? 0))
+                }
+                self?.makeDataSource(false)
             } catch let error{
                 print("err", error)
             }
@@ -234,7 +240,7 @@ extension AdmissionSubjectsViewController {
             cell.textFieldAnswer.inputView = dataPicker
             cell.textFieldAnswer.inputAccessoryView = toolBar
             cell.textFieldAnswer.indexpath = indexPath
-            cell.textFieldAnswer.delegate = self//not adding text field delegate as we dont want to change the textfield input
+            cell.textFieldAnswer.delegate = self
             cell.setUpcell(cellDataSource)
             return cell
             
@@ -285,7 +291,7 @@ extension AdmissionSubjectsViewController:UITextFieldDelegate{
 //                        formObj.subjectId      = subject.subjectId
 //                        cellDataSource.attachedObject = formObj
                         AdmissionSubjectManager.shared.subjectFormData.subject = AdmissionSubjectManager.shared.subjectFormData.subject?.map({ formObjMap -> AdmissionFormSubject in
-                            if formObjMap.semester == formObj.semester && formObjMap.preference == formObj.preference{
+                            if formObjMap.semester == formObj.semester && formObjMap.preference == formObj.preference && formObj.preference != "0"{//for preference flow
                                 var newForm = AdmissionFormSubject()
                                 newForm.semester       = subject.semester
                                 newForm.subjectName    = subject.subjectName
@@ -293,6 +299,18 @@ extension AdmissionSubjectsViewController:UITextFieldDelegate{
                                 newForm.preference     = formObjMap.preference //we are adding preferences while making data source
                                 return newForm
                             }
+                            
+                            if (formObjMap.semester == formObj.semester && ((formObj.subjectName ?? "").isEmpty) && ((formObj.subjectId ?? "").isEmpty)){ //normal stream selection flow without prefereces. here the semester is alreadty added and we adding the rest of the values when a subject is selected.
+                                var newForm = AdmissionFormSubject()
+                                newForm.subjectName    = subject.subjectName
+                                newForm.subjectId      = subject.subjectId
+                                newForm.semester       = formObjMap.semester
+                                return newForm
+                            }
+                            
+                            
+                            
+                            
                             return formObjMap
                         })
                         /*

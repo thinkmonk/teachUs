@@ -75,10 +75,14 @@ struct AdmissionForm: Codable {
 struct AdmissionSubject: Codable {
     var semester3: AdmissionSemester?
     var semester4: AdmissionSemester?
+    var semester5: AdmissionSemester?
+    var semester6: AdmissionSemester?
 
     enum CodingKeys: String, CodingKey {
         case semester3 = "Semester 3"
         case semester4 = "Semester 4"
+        case semester5 = "Semester 5"
+        case semester6 = "Semester 6"
     }
 }
 

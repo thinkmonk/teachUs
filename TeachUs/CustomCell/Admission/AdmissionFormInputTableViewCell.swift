@@ -42,10 +42,8 @@ class AdmissionFormInputTableViewCell: UITableViewCell {
         //Set text from datasource
         if let textValue = cellObj.attachedObject as? String{
             self.textFieldAnswer.text = textValue
-        }else{
-            self.textFieldAnswer.placeholder = cellObj.cellType.rawValue
-            
         }
+        self.textFieldAnswer.placeholder = cellObj.cellType.rawValue
         self.labelFormHeader.text = cellObj.cellType.rawValue
     }
     

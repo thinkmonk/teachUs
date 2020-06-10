@@ -70,7 +70,6 @@ class AdmissionsViewController: BaseTableViewController    {
             let permanentAddressFlag = arrayDataSource[indexPath.section].sectionType == .PermanenttAddress
             cellDataSource.setValues(value: textField.text ?? "", otherObj: nil, ispermanenetAddress: permanentAddressFlag)
             arrayDataSource[indexPath.section].attachedObj[indexPath.row].attachedObject = textField.text
-            self.tableView.reloadRows(at: [indexPath], with: .fade)
         }
     }
 
@@ -134,6 +133,15 @@ class AdmissionsViewController: BaseTableViewController    {
     @objc func donePicker(){
         self.dataPicker.isHidden = true
         self.view.endEditing(true)
+        
+        //refresh table view cell if the dob text field is selected
+        if let textField = dobTextField,
+            let indexPath = textField.indexpath,
+        arrayDataSource[indexPath.section].attachedObj[indexPath.row].cellType == .DOB
+        {
+            self.tableView.reloadRows(at: [indexPath], with: .fade)
+        }
+
     }
     
     func makeDataSource(){
@@ -266,6 +274,7 @@ extension AdmissionsViewController{
             cell.textFieldAnswer.inputView = picker
             cell.textFieldAnswer.text = formatDateForDisplay(date: picker.date)
             cell.textFieldAnswer.indexpath = indexPath
+            cell.labelFormHeader.text = cellDataSource.cellType.rawValue
             return cell
             
             

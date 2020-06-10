@@ -73,7 +73,7 @@ class AdmissionResultManager{
     func getRecordSectionDatasource() -> [AcademicSectionDataSource]{
         var rowDs = [AcademicRowDataSource]()
         var _dataSource = [AcademicSectionDataSource]()
-        if let recordObj = self.recordData?.academicRecord, let maxCount = self.recordData?.academicRecord?.maxAllowedResults {
+        if let recordObj = self.recordData?.academicRecord, let maxCount = self.recordData?.academicRecord?.maxNumberOfResults {
             if  (self.recordData?.academicRecord?.result?.count == maxCount){
                 
                 
@@ -155,16 +155,18 @@ class AdmissionResultManager{
     
     
     func addNewAcademicRecord(){
-        for _ in 0..<(self.recordData?.academicRecord?.result?.count ?? 0){
-            let record = Result()
-            if AdmissionResultManager.shared.recordData?.academicRecord?.result == nil{
-                AdmissionResultManager.shared.recordData?.academicRecord?.result = [Result]()
-                AdmissionResultManager.shared.recordData?.academicRecord?.result?.append(record)
-            }else{
-                AdmissionResultManager.shared.recordData?.academicRecord?.result?.append(record)
+        if let count = self.recordData?.academicRecord?.maxNumberOfResults{
+            for _ in 0..<count{
+                let record = Result()
+                if self.recordData?.academicRecord?.result == nil{
+                    self.recordData?.academicRecord?.result = [Result]()
+                    self.recordData?.academicRecord?.result?.append(record)
+                }else{
+                    self.recordData?.academicRecord?.result?.append(record)
+                }
             }
+            self.makeDataSource()
         }
-        self.makeDataSource()
     }
     
     func validateaAllInputData() -> Bool{

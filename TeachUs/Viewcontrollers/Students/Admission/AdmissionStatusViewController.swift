@@ -42,6 +42,7 @@ class AdmissionStatusViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.stackViewBg.isHidden = true
         self.addGradientToNavBar()
         self.addDefaultBackGroundImage()
         buttonDownloadDocument.themeRedButton()
@@ -55,7 +56,6 @@ class AdmissionStatusViewController: BaseViewController {
         imagePicker.delegate = self
         imagePicker.mediaTypes = ["public.image"]
         imagePicker.allowsEditing = true
-        self.stackViewBg.isHidden = true
         self.buttonSendEmail.themeDisabledGreyButton()
         
     }
@@ -66,8 +66,8 @@ class AdmissionStatusViewController: BaseViewController {
     }
     
     func getFormData(){
-        self.stackViewBg.isHidden = false
         AdmissionBaseManager.shared.getAdmissionPDFDetails(completion: { [weak self] (admissionOBj) in
+            self?.stackViewBg.isHidden = false
             self?.setUpUIData(obj: admissionOBj)
         }) { (message) in
             self.showAlertWithTitle("Failed", alertMessage: message)

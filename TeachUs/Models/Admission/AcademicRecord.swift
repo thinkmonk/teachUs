@@ -31,7 +31,10 @@ struct AcademicRecord: Codable {
     var prnNo: String?
     var inHouse: String?
     var result: [Result]?
-    var maxAllowedResults:Int?
+    private var maxAllowedResults:String?
+    var maxNumberOfResults:Int{
+        return Int(maxAllowedResults ?? "0") ?? 0
+    }
     
     var isDataPresent:Bool{
         return !(self.inHouse?.isEmpty ?? true) && !((self.result?.map({$0.isDataPresent}))?.contains(false) ?? true)
