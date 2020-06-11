@@ -206,7 +206,7 @@ extension AdmissionSubjectsViewController {
             let cell:AdmissionFormInputTableViewCell  = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.admissionCell, for: indexPath) as! AdmissionFormInputTableViewCell
             cell.setUpcell(cellDataSource)
             return cell
-            
+            //AdmissionSubjectDataSource) //subjectDetails
         case .steam:
             let cell:AdmissionFormInputTableViewCell  = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.admissionCell, for: indexPath) as! AdmissionFormInputTableViewCell
             cell.setUpcell(cellDataSource)

@@ -122,8 +122,8 @@ extension AdmissionFormDataSource{
             personalinfo?.motherName = value
         case .some(.NameOnMarkSheet):
             personalinfo?.fullName = value
-        case .some(.DevnagriName):
-            personalinfo?.fullNameDevnagriScript = value
+//        case .some(.DevnagriName):
+//            personalinfo?.fullNameDevnagriScript = value
         case .some(.DOB):
             personalinfo?.dob = value
         case .some(.MobileNumber):

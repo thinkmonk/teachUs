@@ -42,6 +42,8 @@ class Picker<T : Any> : UIPickerView {
             source.data = data.map { $0.map { "\($0)" } }
             self.selectRow(0, inComponent: 0, animated: false)
             reloadAllComponents()
+            if ((data.first?.count ?? 0) > 0){
+                }
         }
     }
     
@@ -72,6 +74,10 @@ class Picker<T : Any> : UIPickerView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
+    }
+    
+    func manuallySelectRow(row:Int, componnent:Int){
+        source.pickerView(self, didSelectRow:0, inComponent: 0)
     }
     
     // MARK: Setup

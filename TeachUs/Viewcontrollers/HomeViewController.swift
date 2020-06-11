@@ -39,7 +39,7 @@ class HomeViewController: BaseViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.title = "\(UserManager.sharedUserManager.userFullName)"
+        self.title = "\(UserManager.sharedUserManager.userFullName) "
         
         self.addColorToNavBarText(color: UIColor.white)
 //        self.addChildViewController(pageMenu!)
@@ -96,6 +96,8 @@ class HomeViewController: BaseViewController{
             admissionButton.layer.borderColor = UIColor.white.cgColor
             admissionButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
             admissionButton.addTarget(self, action: #selector(admissionFormAction), for: .touchUpInside)
+            admissionButton.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+
             let addmissionBarButton = UIBarButtonItem(customView: admissionButton)
             navigationItem.rightBarButtonItems?.append(addmissionBarButton)
         }

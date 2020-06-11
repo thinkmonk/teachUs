@@ -38,7 +38,7 @@ enum SubjectCellType:Equatable {
         case .course            : return "Course"
         case .academicYear      : return "Academic Year"
         case .subjectHeader           :return "Subject"
-        case .subjectDetails( _)    :return "Click to view list"
+        case .subjectDetails(let value)    :return value  
             
         case .subjectSelectCell(_): return "Click to select subject"
         }

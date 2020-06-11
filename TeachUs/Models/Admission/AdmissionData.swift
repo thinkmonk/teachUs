@@ -51,7 +51,7 @@ class PersonalInformation: Codable {
     var maritalStatus: String?
     var bloodGroup: String?
     var fullName: String?
-    var fullNameDevnagriScript: String?
+//    var fullNameDevnagriScript: String?
     var correspondenceAddressRoom: String?
     var correspondenceAddressArea: String?
     var correspondenceAddressCity: String?
@@ -66,6 +66,7 @@ class PersonalInformation: Codable {
     var permanentAddressCountry: String?
     var caste: String?
     var domicileOfState: String?
+    
     
 //    func validateClassData() -> Bool{
 //        let tempObj = Mirror(reflecting: self as Any)
@@ -107,6 +108,7 @@ class PersonalInformation: Codable {
             !(self.permanentAddressState?.isEmpty ?? true) &&
             !(self.permanentAddressCountry?.isEmpty ?? true)
     }
+        
 
 
     enum CodingKeys: String, CodingKey {
@@ -127,7 +129,7 @@ class PersonalInformation: Codable {
         case maritalStatus = "marital_status"
         case bloodGroup = "blood_group"
         case fullName = "f_name"
-        case fullNameDevnagriScript = "f_name_devnagri_script"
+//        case fullNameDevnagriScript = "f_name_devnagri_script"
         case correspondenceAddressRoom = "correspondence_address_room"
         case correspondenceAddressArea = "correspondence_address_area"
         case correspondenceAddressCity = "correspondence_address_city"

@@ -85,6 +85,7 @@ class AdmissionsViewController: BaseTableViewController    {
         rightButton.setTitleColor(.white, for: .normal)
         rightButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         rightButton.addTarget(self, action: #selector(proceedAction), for: .touchUpInside)
+        rightButton.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         
         // Bar button item
         let bellButtomItem = UIBarButtonItem(customView: rightButton)
@@ -200,7 +201,6 @@ extension AdmissionsViewController{
              .RoomFloorBldg,
              .AreaLandamrk,
              .City,
-             .PinCode,
              .Country:
             let cell:AdmissionFormInputTableViewCell  = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.admissionCell, for: indexPath) as! AdmissionFormInputTableViewCell
             cell.setUpcell(cellDataSource)
@@ -210,6 +210,17 @@ extension AdmissionsViewController{
             cell.textFieldAnswer.delegate = self
             
             return cell
+
+        case .PinCode:
+            let cell:AdmissionFormInputTableViewCell  = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.admissionCell, for: indexPath) as! AdmissionFormInputTableViewCell
+            cell.setUpcell(cellDataSource)
+            cell.buttonDropdown.isHidden = true
+            cell.textFieldAnswer.indexpath = indexPath
+            cell.textFieldAnswer.keyboardType = .default
+            cell.textFieldAnswer.delegate = self
+            cell.textFieldAnswer.keyboardType = .numberPad
+            return cell
+
             
         case .MobileNumber:
             let cell:AdmissionFormInputTableViewCell  = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.admissionCell, for: indexPath) as! AdmissionFormInputTableViewCell
@@ -304,9 +315,10 @@ extension AdmissionsViewController:UITextFieldDelegate{
             if let attachedOBj = cellDataSource.dataSourceObject as? [String]{
                 dataPicker.data = [attachedOBj]
                 dataPicker.isHidden = false
+                textField.text = attachedOBj.first
                 dataPicker.selectionUpdated = { stringObj in
-                    if let `stringObj` = stringObj.first as? String{
-                        textField.text = `stringObj`
+                    if let _stringObj = stringObj.first as? String{
+                        textField.text = _stringObj
                     }
                 }
             }else if cellDataSource.cellType == .DOB{

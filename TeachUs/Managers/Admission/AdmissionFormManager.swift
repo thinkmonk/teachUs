@@ -35,8 +35,8 @@ class AdmissionFormManager{
         let NameOnMarkSheet  = AdmissionFormDataSource(detailsCell: .NameOnMarkSheet, detailsObject: personalInfoObj?.fullName, dataSource:nil, isMandatory: true)
         arrayDataSource.append(NameOnMarkSheet)
         
-        let DevnagriName  = AdmissionFormDataSource(detailsCell: .DevnagriName, detailsObject: personalInfoObj?.fullNameDevnagriScript, dataSource:nil, isMandatory: true)
-        arrayDataSource.append(DevnagriName)
+//        let DevnagriName  = AdmissionFormDataSource(detailsCell: .DevnagriName, detailsObject: personalInfoObj?.fullNameDevnagriScript, dataSource:nil, isMandatory: true)
+//        arrayDataSource.append(DevnagriName)
         
         let DOB  = AdmissionFormDataSource(detailsCell: .DOB, detailsObject: personalInfoObj?.dob, dataSource:nil, isMandatory: true)
         arrayDataSource.append(DOB)
@@ -131,6 +131,10 @@ class AdmissionFormManager{
         return self.admissionData.personalInformation?.validateClassData() ?? false
     }
     
+    func validateAadhar() -> Bool{
+        return self.admissionData.personalInformation?.aadharCard?.count == 12
+    }
+    
     func sendFormOneData(_ completion:@escaping ([String:Any]?) -> (),
                          _ failure:@escaping () -> ())
     {
@@ -203,7 +207,7 @@ class AdmissionSubjectManager {
         
         let sem3Compulsary = self.getCompulsarySubject(data: self.selectedStream.defaultSubjectList?.semester3?.subjectList ?? [])
         let sem3CompulsaryStringDs = sem3Compulsary.map({$0.subjectName})
-        let compulsarySubjectDs = AdmissionSubjectDataSource(detailsCell: .subjectDetails("Compulsary Sem 3 subjects"), detailsObject: nil, dataSource: sem3CompulsaryStringDs)
+                let compulsarySubjectDs = AdmissionSubjectDataSource(detailsCell: .subjectDetails("Compulsary Sem 3 subjects"), detailsObject: nil, dataSource: sem3CompulsaryStringDs)
         dataSource.append(compulsarySubjectDs)
         
         
@@ -262,7 +266,7 @@ class AdmissionSubjectManager {
         
         let sem6Compulsary = self.getCompulsarySubject(data: self.selectedStream.defaultSubjectList?.semester6?.subjectList ?? [])
         let sem6CompulsaryStringDs = sem6Compulsary.map({$0.subjectName})
-        let compulsarysem6ubjectDs = AdmissionSubjectDataSource(detailsCell: .subjectDetails("Compulsary Sem 6 subjects"), detailsObject: nil, dataSource: sem6CompulsaryStringDs)
+        let compulsarysem6ubjectDs = AdmissionSubjectDataSource(detailsCell: .subjectDetails("Compulsary Sem 6 subjectsc"), detailsObject: nil, dataSource: sem6CompulsaryStringDs)
         dataSource.append(compulsarysem6ubjectDs)
         //add subject to api form obj
         self.selectedStream.subjectSelected?.semester6?.subjectList?.forEach({ (obj) in
