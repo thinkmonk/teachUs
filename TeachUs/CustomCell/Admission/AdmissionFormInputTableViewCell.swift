@@ -53,17 +53,18 @@ class AdmissionFormInputTableViewCell: UITableViewCell {
         let disabledCells : [SubjectCellType] = [.level, .course, .academicYear]
         let isDisabledCell = disabledCells.contains(cellObj.cellType)
         self.isUserInteractionEnabled = !isDisabledCell
+        self.buttonDropdown.isHidden = isDisabledCell
         self.viewtextfieldBg.backgroundColor = isDisabledCell ? .lightGray : .white
         
         //Set text from datasource
         if let textValue = cellObj.attachedObject as? String{
             self.textFieldAnswer.text = textValue
-        }else{
-            self.textFieldAnswer.placeholder = cellObj.cellType.value
+        }else if let detailsObject = cellObj.attachedObject as? AdmissionFormSubject{
+            self.textFieldAnswer.text = detailsObject.subjectName ?? "NA"
             
         }
         self.labelFormHeader.text = cellObj.cellType.value
-        self.textFieldAnswer.placeholder = cellObj.cellType.placeHolder
+        self.textFieldAnswer.placeholder = cellObj.placeHolderText ?? cellObj.cellType.placeHolder
         if let form = cellObj.attachedObject as? AdmissionFormSubject{
             self.textFieldAnswer.text  = form.subjectName ?? ""
         }

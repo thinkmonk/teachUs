@@ -110,7 +110,8 @@ class AdmissionSubjectsViewController: BaseTableViewController {
         rightButton.setTitleColor(.white, for: .normal)
         rightButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         rightButton.addTarget(self, action: #selector(proceedAction), for: .touchUpInside)
-        
+        rightButton.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+
         // Bar button item
         let bellButtomItem = UIBarButtonItem(customView: rightButton)
         navigationItem.rightBarButtonItems  = [bellButtomItem]
@@ -250,7 +251,6 @@ extension AdmissionSubjectsViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
-
     
 }
 extension AdmissionSubjectsViewController:UITextFieldDelegate{
@@ -275,42 +275,42 @@ extension AdmissionSubjectsViewController:UITextFieldDelegate{
                     }
                     self.shouldFetchData = cellDataSource.cellType == .steam
                 }
+                dataPicker.manuallySelectRow(row: 0, componnent: 0)
             }else if let attachedObj = cellDataSource.dataSourceObject as? [AdmnissionSubjectList]{
                 let stringDs = attachedObj.map({$0.subjectName ?? ""})
                 dataPicker.data = [stringDs]
                 dataPicker.isHidden = false
+                textField.text = stringDs.first
                 dataPicker.selectionUpdated = {stringObj in
                     if let `stringObj` = stringObj.first as? String{
                         textField.text = stringObj
                     }
                     //we take the subject selected frm picker and add it to the existing formsubject for api wihthout changing the preferenc
-                    if let row = self.dataPicker.selectedRow, var formObj = cellDataSource.attachedObject as? AdmissionFormSubject ,row < attachedObj.count{
+                    if let row = self.dataPicker.selectedRow, let formObj = cellDataSource.attachedObject as? AdmissionFormSubject ,row < attachedObj.count, let preferenceFlowFlag = AdmissionSubjectManager.shared.selectedStream.isPreferenceFlow?.boolValue(){
                         let subject = attachedObj[row]
-//                        formObj.semester       = subject.semester
-//                        formObj.subjectName    = subject.subjectName
-//                        formObj.subjectId      = subject.subjectId
-//                        cellDataSource.attachedObject = formObj
                         AdmissionSubjectManager.shared.subjectFormData.subject = AdmissionSubjectManager.shared.subjectFormData.subject?.map({ formObjMap -> AdmissionFormSubject in
-                            if formObjMap.semester == formObj.semester && formObjMap.preference == formObj.preference && formObj.preference != "0"{//for preference flow
-                                var newForm = AdmissionFormSubject()
-                                newForm.semester       = subject.semester
-                                newForm.subjectName    = subject.subjectName
-                                newForm.subjectId      = subject.subjectId
-                                newForm.preference     = formObjMap.preference //we are adding preferences while making data source
-                                return newForm
+                            
+                            if preferenceFlowFlag{
+                                if formObjMap.semester == formObj.semester && formObjMap.preference == formObj.preference && formObj.preference != "0"{//for preference flow
+                                    var newForm = AdmissionFormSubject()
+                                    newForm.semester       = subject.semester
+                                    newForm.subjectName    = subject.subjectName
+                                    newForm.subjectId      = subject.subjectId
+                                    newForm.preference     = formObjMap.preference //we are adding preferences while making data source
+                                    cellDataSource.attachedObject = newForm
+                                    return newForm
+                                }
+                            }else{
+                                
+                                if (formObjMap.semester == formObj.semester && ((formObj.subjectName ?? "").isEmpty) && ((formObj.subjectId ?? "").isEmpty)){ //normal stream selection flow without prefereces. here the semester is alreadty added and we adding the rest of the values when a subject is selected.
+                                    var newForm = AdmissionFormSubject()
+                                    newForm.subjectName    = subject.subjectName
+                                    newForm.subjectId      = subject.subjectId
+                                    newForm.semester       = formObjMap.semester
+                                    cellDataSource.attachedObject = newForm
+                                    return newForm
+                                }
                             }
-                            
-                            if (formObjMap.semester == formObj.semester && ((formObj.subjectName ?? "").isEmpty) && ((formObj.subjectId ?? "").isEmpty)){ //normal stream selection flow without prefereces. here the semester is alreadty added and we adding the rest of the values when a subject is selected.
-                                var newForm = AdmissionFormSubject()
-                                newForm.subjectName    = subject.subjectName
-                                newForm.subjectId      = subject.subjectId
-                                newForm.semester       = formObjMap.semester
-                                return newForm
-                            }
-                            
-                            
-                            
-                            
                             return formObjMap
                         })
                         /*
@@ -321,6 +321,7 @@ extension AdmissionSubjectsViewController:UITextFieldDelegate{
                          */
                     }
                 }
+                dataPicker.manuallySelectRow(row: 0, componnent: 0)
             }
             else{
                 textField.inputView = nil

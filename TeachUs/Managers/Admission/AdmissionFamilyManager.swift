@@ -19,6 +19,9 @@ class AdmissionFamilyManager{
         let mothertitleDs = FamilyCellDataSource(type: .fathersDetails, obj: self.familyData.familyDetailsInformation?.motherFullName, dataSource: nil, compulsoryFlag: true)
         rowDs.append(mothertitleDs)
         
+        let nameDs = FamilyCellDataSource(type: .fullName, obj: self.familyData.familyDetailsInformation?.motherFullName, dataSource: nil, compulsoryFlag: true)
+        rowDs.append(nameDs)
+
         
         let motherdob = FamilyCellDataSource(type: .DOB, obj: self.familyData.familyDetailsInformation?.motherDob, dataSource: nil, compulsoryFlag: true)
         rowDs.append(motherdob)
@@ -37,8 +40,8 @@ class AdmissionFamilyManager{
         rowDs.append(motherprofessionalDs)
         
         
-        let motherindustryDs = FamilyCellDataSource(type: .industry, obj: self.familyData.familyDetailsInformation?.motherIndustry, dataSource: nil, compulsoryFlag: true)
-        rowDs.append(motherindustryDs)
+//        let motherindustryDs = FamilyCellDataSource(type: .industry, obj: self.familyData.familyDetailsInformation?.motherIndustry, dataSource: nil, compulsoryFlag: true)
+//        rowDs.append(motherindustryDs)
         
         
         let mothertotalIncomeDs = FamilyCellDataSource(type: .totalIncome, obj: self.familyData.familyDetailsInformation?.motherTotalIncome, dataSource: AdmissionConstantData.incomeList, compulsoryFlag: true)
@@ -53,8 +56,12 @@ class AdmissionFamilyManager{
     func makeFatherRowDataSource()-> [FamilyCellDataSource]{
         var rowDs = [FamilyCellDataSource]()
         // father
-        let titleDs = FamilyCellDataSource(type: .fathersDetails, obj: self.familyData.familyDetailsInformation?.fatherFullName, dataSource: nil, compulsoryFlag: true)
+        let titleDs = FamilyCellDataSource(type: .fathersDetails, obj: nil, dataSource: nil, compulsoryFlag: true)
         rowDs.append(titleDs)
+        
+        let nameDs = FamilyCellDataSource(type: .fullName, obj: self.familyData.familyDetailsInformation?.fatherFullName, dataSource: nil, compulsoryFlag: true)
+        rowDs.append(nameDs)
+
         
         
         let dob = FamilyCellDataSource(type: .DOB, obj: self.familyData.familyDetailsInformation?.fatherDob, dataSource: nil, compulsoryFlag: true)
@@ -74,8 +81,8 @@ class AdmissionFamilyManager{
         rowDs.append(professionalDs)
         
         
-        let industryDs = FamilyCellDataSource(type: .industry, obj: self.familyData.familyDetailsInformation?.fatherIndustry, dataSource: nil, compulsoryFlag: true)
-        rowDs.append(industryDs)
+//        let industryDs = FamilyCellDataSource(type: .industry, obj: self.familyData.familyDetailsInformation?.fatherIndustry, dataSource: nil, compulsoryFlag: true)
+//        rowDs.append(industryDs)
         
         
         let totalIncomeDs = FamilyCellDataSource(type: .totalIncome, obj: self.familyData.familyDetailsInformation?.fatherTotalIncome, dataSource: AdmissionConstantData.incomeList, compulsoryFlag: true)

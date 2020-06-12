@@ -315,12 +315,12 @@ extension AdmissionsViewController:UITextFieldDelegate{
             if let attachedOBj = cellDataSource.dataSourceObject as? [String]{
                 dataPicker.data = [attachedOBj]
                 dataPicker.isHidden = false
-                textField.text = attachedOBj.first
                 dataPicker.selectionUpdated = { stringObj in
                     if let _stringObj = stringObj.first as? String{
                         textField.text = _stringObj
                     }
                 }
+                dataPicker.manuallySelectRow(row: 0, componnent: 0)
             }else if cellDataSource.cellType == .DOB{
                 dobTextField = textField
                 textField.inputAccessoryView = toolBar

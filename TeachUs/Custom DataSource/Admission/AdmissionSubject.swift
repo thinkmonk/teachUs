@@ -68,11 +68,19 @@ class AdmissionSubjectDataSource{
     var cellType:SubjectCellType!
     var attachedObject:Any?
     var dataSourceObject:Any?
+    var placeHolderText:String?
     
     init(detailsCell:SubjectCellType, detailsObject:Any?, dataSource:Any?) {
         self.cellType = detailsCell
         self.attachedObject = detailsObject
         self.dataSourceObject = dataSource
+    }
+    
+    init(detailsCell:SubjectCellType, detailsObject:Any?, dataSource:Any?, placeholder:String) {
+        self.cellType = detailsCell
+        self.attachedObject = detailsObject
+        self.dataSourceObject = dataSource
+        self.placeHolderText = placeholder
     }
     
 }

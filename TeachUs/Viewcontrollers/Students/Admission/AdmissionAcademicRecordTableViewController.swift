@@ -36,7 +36,7 @@ class AdmissionAcademicRecordTableViewController: BaseTableViewController {
         rightButton.setTitleColor(.white, for: .normal)
         rightButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         rightButton.addTarget(self, action: #selector(proceedAction), for: .touchUpInside)
-        
+        rightButton.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         // Bar button item
         let bellButtomItem = UIBarButtonItem(customView: rightButton)
         navigationItem.rightBarButtonItems  = [bellButtomItem]
@@ -236,6 +236,7 @@ extension AdmissionAcademicRecordTableViewController:UITextFieldDelegate{
                         textField.text = `stringObj`
                     }
                 }
+                dataPicker.manuallySelectRow(row: 0, componnent: 0)
             }else{
                 textField.inputView = nil
                 textField.inputAccessoryView = nil

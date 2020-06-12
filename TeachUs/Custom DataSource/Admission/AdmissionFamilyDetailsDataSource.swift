@@ -16,7 +16,7 @@ enum AcademicFamilyCellType:String{
     case contactNumber          = "Contact number"
     case emailAddress           = "Email address"
     case profession             = "Profession"
-    case industry               = "Industry"
+//    case industry               = "Industry"
     case totalIncome            = "Total Income"
     case countryOfWork          = "Country (of work)"
     case mothersDetails         = "Mother's Details"
@@ -72,9 +72,11 @@ extension FamilyCellDataSource{
                 AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.fatherFullName = value
                 
             case .DOB:
-                AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.fatherDob = value
+                
                 if let number = otherObj as? Int{
                     AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.fatherAge = "\(number)"
+                }else{
+                    AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.fatherDob = value
                 }
                 
             case .age:
@@ -92,8 +94,8 @@ extension FamilyCellDataSource{
             case .profession:
                 AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.fatherProfession = value
                 
-            case .industry:
-                AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.fatherIndustry = value
+//            case .industry:
+//                AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.fatherIndustry = value
                 
                 
             case .totalIncome:
@@ -115,9 +117,11 @@ extension FamilyCellDataSource{
                 AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.motherFullName = value
                 
             case .DOB:
-                AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.motherDob = value
                 if let number = otherObj as? Int{
                     AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.motherAge = "\(number)"
+                }else{
+                    AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.motherDob = value
+
                 }
                 
             case .age:
@@ -135,9 +139,9 @@ extension FamilyCellDataSource{
             case .profession:
                 AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.motherProfession = value
                 
-            case .industry:
-                AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.motherIndustry = value
-                
+//            case .industry:
+//                AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.motherIndustry = value
+//                
                 
             case .totalIncome:
                 AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.motherTotalIncome = value

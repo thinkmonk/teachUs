@@ -70,7 +70,7 @@ class AdmissionDocumentsTableViewController: BaseTableViewController {
         rightButton.setTitleColor(.white, for: .normal)
         rightButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         rightButton.addTarget(self, action: #selector(proceedAction), for: .touchUpInside)
-        
+        rightButton.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         // Bar button item
         let bellButtomItem = UIBarButtonItem(customView: rightButton)
         navigationItem.rightBarButtonItems  = [bellButtomItem]

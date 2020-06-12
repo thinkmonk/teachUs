@@ -35,6 +35,7 @@ class AdmissionFamilyDetailsTableViewController: BaseTableViewController {
     
     func initDatePicker(){
         picker.datePickerMode = .date
+        picker.maximumDate = Calendar.current.date(byAdding: .year, value: -17, to: Date())
         picker.addTarget(self, action: #selector(updateDateField(sender:)), for: .valueChanged)
 
     }
@@ -76,7 +77,7 @@ class AdmissionFamilyDetailsTableViewController: BaseTableViewController {
         rightButton.setTitleColor(.white, for: .normal)
         rightButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         rightButton.addTarget(self, action: #selector(proceedAction), for: .touchUpInside)
-        
+        rightButton.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         // Bar button item
         let bellButtomItem = UIBarButtonItem(customView: rightButton)
         navigationItem.rightBarButtonItems  = [bellButtomItem]
@@ -168,17 +169,18 @@ class AdmissionFamilyDetailsTableViewController: BaseTableViewController {
              .age,
              .contactNumber,
              .emailAddress,
-             .industry,
              .countryOfWork:
             let cell:AdmissionFormInputTableViewCell  = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.admissionCell, for: indexPath) as! AdmissionFormInputTableViewCell
             cell.textFieldAnswer.delegate = self
             cell.setUpCell(cellDataSource)
             cell.textFieldAnswer.indexpath = indexPath
-            cell.textFieldAnswer.isUserInteractionEnabled = (cellDataSource.cellType == .age)
-            if AdmissionFamilyManager.shared.dataSource[indexPath.section].headerType == .father{
+            cell.textFieldAnswer.isUserInteractionEnabled = (cellDataSource.cellType != .age)
+            
+            let datadourceObj = AdmissionFamilyManager.shared.dataSource[indexPath.section]
+            if datadourceObj.headerType == .father, datadourceObj.attachedObj[indexPath.row].cellType == .age{
                 self.ageFatherIndexpath = indexPath
             }
-            if AdmissionFamilyManager.shared.dataSource[indexPath.section].headerType == .mother{
+            if datadourceObj.headerType == .father, datadourceObj.attachedObj[indexPath.row].cellType == .age{
                 self.ageMotherIndexpath = indexPath
             }
             return cell
@@ -191,6 +193,7 @@ class AdmissionFamilyDetailsTableViewController: BaseTableViewController {
             cell.textFieldAnswer.text = formatDateForDisplay(date: picker.date)
             cell.textFieldAnswer.indexpath = indexPath
             cell.textFieldAnswer.isUserInteractionEnabled = true
+            cell.labelFormHeader.text = cellDataSource.cellType.rawValue
             return cell
             
         default:
@@ -220,6 +223,7 @@ extension AdmissionFamilyDetailsTableViewController:UITextFieldDelegate{
                         textField.text = `stringObj`
                     }
                 }
+                dataPicker.manuallySelectRow(row: 0, componnent: 0)
             }else if cellDataSource.cellType == .DOB{
                 dobTextField = textField
                 textField.inputAccessoryView = toolBar
@@ -238,13 +242,24 @@ extension AdmissionFamilyDetailsTableViewController:UITextFieldDelegate{
         if let textField = dobTextField,
             let indexPath = textField.indexpath
         {
-            let cellDataSource = AdmissionFamilyManager.shared.dataSource[indexPath.section].attachedObj[indexPath.row]
             let age =  getAge()
-            cellDataSource.setValues(value: textField.text ?? "", otherObj: age, indexPath: indexPath)
-            if let motherIp = ageFatherIndexpath, let fatherIp = ageFatherIndexpath{
-                self.tableView.reloadRows(at: [motherIp,fatherIp], with: .none)
+            var indexSection:Int?
+            for (index,obj) in AdmissionFamilyManager.shared.dataSource[indexPath.section].attachedObj.enumerated(){
+                if (obj.cellType == .age)
+                {
+                    indexSection = index
+                }
             }
-            
+            if let `indexSection` = indexSection{
+                
+                let cellDataSource = AdmissionFamilyManager.shared.dataSource[indexPath.section].attachedObj[indexSection]
+                cellDataSource.setValues(value: textField.text ?? "", otherObj: age, indexPath: indexPath)
+                cellDataSource.attachedObj = age
+                AdmissionFamilyManager.shared.dataSource[indexPath.section].attachedObj[indexSection].attachedObj = age
+                if let motherIp = ageFatherIndexpath, let fatherIp = ageFatherIndexpath{
+                    self.tableView.reloadRows(at: [motherIp,fatherIp], with: .none)
+                }
+            }
         }
     }
     

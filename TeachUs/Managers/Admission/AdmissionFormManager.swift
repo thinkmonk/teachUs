@@ -207,24 +207,24 @@ class AdmissionSubjectManager {
         
         let sem3Compulsary = self.getCompulsarySubject(data: self.selectedStream.defaultSubjectList?.semester3?.subjectList ?? [])
         let sem3CompulsaryStringDs = sem3Compulsary.map({$0.subjectName})
-                let compulsarySubjectDs = AdmissionSubjectDataSource(detailsCell: .subjectDetails("Compulsary Sem 3 subjects"), detailsObject: nil, dataSource: sem3CompulsaryStringDs)
+                let compulsarySubjectDs = AdmissionSubjectDataSource(detailsCell: .subjectDetails("List of compulsary subjects (semester 3)"), detailsObject: nil, dataSource: sem3CompulsaryStringDs)
         dataSource.append(compulsarySubjectDs)
         
         
         let sem3Optional = self.getOptionalSubject(data: self.selectedStream.defaultSubjectList?.semester3?.subjectList ?? [])
         let sem3OptionalStringDs = sem3Optional.map({$0.subjectName})
-        let optionalSubjectDs = AdmissionSubjectDataSource(detailsCell: .subjectDetails("Optional Sem 3 subjects"), detailsObject: nil, dataSource: sem3OptionalStringDs)
+        let optionalSubjectDs = AdmissionSubjectDataSource(detailsCell: .subjectDetails("List of optional subjects (semester 3)"), detailsObject: nil, dataSource: sem3OptionalStringDs)
         dataSource.append(optionalSubjectDs)
         
         let sem4Compulsary = self.getCompulsarySubject(data: self.selectedStream.defaultSubjectList?.semester4?.subjectList ?? [])
         let sem4CompulsaryStringDs = sem4Compulsary.map({$0.subjectName})
-        let compulsarysem4ubjectDs = AdmissionSubjectDataSource(detailsCell: .subjectDetails("Compulsary Sem 4 subjects"), detailsObject: nil, dataSource: sem4CompulsaryStringDs)
+        let compulsarysem4ubjectDs = AdmissionSubjectDataSource(detailsCell: .subjectDetails("List of compulsary subjects (semester 4)"), detailsObject: nil, dataSource: sem4CompulsaryStringDs)
         dataSource.append(compulsarysem4ubjectDs)
         
         
         let sem4Optional = self.getOptionalSubject(data: self.selectedStream.defaultSubjectList?.semester4?.subjectList ?? [])
         let sem4OptionalStringDs = sem4Optional.map({$0.subjectName})
-        let compulsarysem4SubjectDs = AdmissionSubjectDataSource(detailsCell: .subjectDetails("Optional Sem 4 subjects"), detailsObject: nil, dataSource: sem4OptionalStringDs)
+        let compulsarysem4SubjectDs = AdmissionSubjectDataSource(detailsCell: .subjectDetails("List of optional subjects (semester 4)"), detailsObject: nil, dataSource: sem4OptionalStringDs)
         dataSource.append(compulsarysem4SubjectDs)
     }
     
@@ -233,7 +233,7 @@ class AdmissionSubjectManager {
         
         let sem5Compulsary = self.getCompulsarySubject(data: self.selectedStream.defaultSubjectList?.semester5?.subjectList ?? [])
         let sem5CompulsaryStringDs = sem5Compulsary.map({$0.subjectName})
-        let compulsarySubjectDs = AdmissionSubjectDataSource(detailsCell: .subjectDetails("Compulsary Sem 5 subjects"), detailsObject: nil, dataSource: sem5CompulsaryStringDs)
+        let compulsarySubjectDs = AdmissionSubjectDataSource(detailsCell: .subjectDetails("List of compulsary subjects (semester 5)"), detailsObject: nil, dataSource: sem5CompulsaryStringDs)
         dataSource.append(compulsarySubjectDs)
         
         //add subject to api form obj
@@ -257,7 +257,7 @@ class AdmissionSubjectManager {
             var form = AdmissionFormSubject()
             //add empty form obbject which willl be filled when user makes selection from dropdoown
             form.semester = sem5Optional.first?.semester
-            let optionalSubjectDs = AdmissionSubjectDataSource(detailsCell: .subjectSelectCell("Optional Sem 5 subjects"), detailsObject: form, dataSource: sem5Optional)
+            let optionalSubjectDs = AdmissionSubjectDataSource(detailsCell: .subjectSelectCell("List of optional subjects (semester 5)"), detailsObject: form, dataSource: sem5Optional)
             dataSource.append(optionalSubjectDs)
             self.subjectFormData.subject?.append(form)
             
@@ -266,7 +266,7 @@ class AdmissionSubjectManager {
         
         let sem6Compulsary = self.getCompulsarySubject(data: self.selectedStream.defaultSubjectList?.semester6?.subjectList ?? [])
         let sem6CompulsaryStringDs = sem6Compulsary.map({$0.subjectName})
-        let compulsarysem6ubjectDs = AdmissionSubjectDataSource(detailsCell: .subjectDetails("Compulsary Sem 6 subjectsc"), detailsObject: nil, dataSource: sem6CompulsaryStringDs)
+        let compulsarysem6ubjectDs = AdmissionSubjectDataSource(detailsCell: .subjectDetails("List of compulsary subjects (semester 6)"), detailsObject: nil, dataSource: sem6CompulsaryStringDs)
         dataSource.append(compulsarysem6ubjectDs)
         //add subject to api form obj
         self.selectedStream.subjectSelected?.semester6?.subjectList?.forEach({ (obj) in
@@ -289,7 +289,7 @@ class AdmissionSubjectManager {
             //add empty form obbject which willl be filled when user makes selection from dropdoown
             form.semester = sem6Optional.first?.semester
             self.subjectFormData.subject?.append(form)
-            let compulsarysem6SubjectDs = AdmissionSubjectDataSource(detailsCell: .subjectSelectCell("Optional Sem 6 subjects"), detailsObject: form, dataSource: sem6Optional)
+            let compulsarysem6SubjectDs = AdmissionSubjectDataSource(detailsCell: .subjectSelectCell("List of optional subjects (semester 6)"), detailsObject: form, dataSource: sem6Optional)
             dataSource.append(compulsarysem6SubjectDs)
 
         }
@@ -338,10 +338,10 @@ class AdmissionSubjectManager {
                 form.semester       = subject.semester
                 form.subjectName    = subject.subjectName
                 form.subjectId      = subject.subjectId
-                form.preference     = subject.preference
+                form.preference     = subject.preference ?? "0"
                 self.subjectFormData.subject?.append(form)
             }
-            let compulsarySubjectDs = AdmissionSubjectDataSource(detailsCell: .subjectDetails("Compulsary Sem 3 subjects"), detailsObject: nil, dataSource: sem3CompulsaryStringDs)
+            let compulsarySubjectDs = AdmissionSubjectDataSource(detailsCell: .subjectDetails("List of compulsary subjects (semester 3)"), detailsObject: nil, dataSource: sem3CompulsaryStringDs, placeholder: "\(sem3Compulsary.count) Subjects")
             dataSource.append(compulsarySubjectDs)
             
             //optional subject based on preferences
@@ -351,7 +351,7 @@ class AdmissionSubjectManager {
                 for optionalSub in 0..<optionalSubjectCount{
                     for i in 0..<count{
                         let optionalSUbjectLIst = self.getOptionalSubject(data: self.selectedStream.defaultSubjectList?.semester3?.subjectList ?? [])
-                        //                        let sem3OptionalStringDs = optionalSUbjectLIst.map({$0.subjectName})
+//                        let sem3OptionalStringDs = optionalSUbjectLIst.map({$0.subjectName})
                         //form data for api
                         var form = AdmissionFormSubject()
                         if self.selectedStream.subjectSelected?.semester3?.preferenceList != nil{
@@ -362,6 +362,7 @@ class AdmissionSubjectManager {
                                 return false
                             }).first
                             //add info if received from the server
+                            form.subjectId      = thisFormObj?.subjectId
                             form.semester       = thisFormObj?.semester
                             form.subjectName    = thisFormObj?.subjectName
                         }
@@ -370,7 +371,7 @@ class AdmissionSubjectManager {
                         preferenceCounter += 1
                         self.subjectFormData.subject?.append(form)
 //                        let cellText = form.subjectName ?? "Optional Subject \(optionalSub + 1), Preference \(i+1)"
-                        let optionalSubjectDS = AdmissionSubjectDataSource(detailsCell: .subjectSelectCell("Optional Subject \(optionalSub + 1), Preference \(i+1)"), detailsObject: form, dataSource: optionalSUbjectLIst) //add form obj in ds and maipulate it when the poreference is selected
+                        let optionalSubjectDS = AdmissionSubjectDataSource(detailsCell: .subjectSelectCell("Optional Subject \(optionalSub + 1), Preference \(i+1)"), detailsObject: form, dataSource: optionalSUbjectLIst, placeholder: "\(optionalSUbjectLIst.count) Subjects") //add form obj in ds and maipulate it when the poreference is selected
                         dataSource.append(optionalSubjectDS)
                     }
                 }
@@ -385,10 +386,10 @@ class AdmissionSubjectManager {
                 form.semester       = subject.semester
                 form.subjectName    = subject.subjectName
                 form.subjectId      = subject.subjectId
-                form.preference     = subject.preference
+                form.preference     = subject.preference ?? "0"
                 self.subjectFormData.subject?.append(form)
             }
-            let compulsarySem4SubjectDs = AdmissionSubjectDataSource(detailsCell: .subjectDetails("Compulsary Sem 4 subjects"), detailsObject: nil, dataSource: sem4CompulsaryStringDs)
+            let compulsarySem4SubjectDs = AdmissionSubjectDataSource(detailsCell: .subjectDetails("List of compulsary subjects (semester 4)"), detailsObject: nil, dataSource: sem4CompulsaryStringDs, placeholder: "\(sem4Compulsary.count) Subjects")
             dataSource.append(compulsarySem4SubjectDs)
             
             //optional subject based on preferences
@@ -408,6 +409,7 @@ class AdmissionSubjectManager {
                                 return false
                             }).first
                             //add info if received from the server
+                            form.subjectId      = thisFormObj?.subjectId
                             form.semester       = thisFormObj?.semester
                             form.subjectName    = thisFormObj?.subjectName
                         }
@@ -416,7 +418,7 @@ class AdmissionSubjectManager {
                         preferenceCounter += 1
                         self.subjectFormData.subject?.append(form)
 //                        let cellText = form.subjectName ?? "Optional Subject \(optionalSub + 1), Preference \(i+1)"
-                        let optionalSubjectDS = AdmissionSubjectDataSource(detailsCell: .subjectSelectCell("Optional Subject \(optionalSub + 1), Preference \(i+1)"), detailsObject: form, dataSource: optionalSUbjectLIst)
+                        let optionalSubjectDS = AdmissionSubjectDataSource(detailsCell: .subjectSelectCell("Optional Subject \(optionalSub + 1), Preference \(i+1)"), detailsObject: form, dataSource: optionalSUbjectLIst, placeholder: "\(optionalSUbjectLIst.count) Subjects")
                         dataSource.append(optionalSubjectDS)
                     }
                 }
@@ -544,9 +546,9 @@ class AdmissionSubjectManager {
         if !(selectedStream.isPreferenceFlow?.boolValue() ?? true){
             return true
         }else{
-            return self.subjectFormData.subject?.contains(where: { (subject) -> Bool in
-                return subject.preference != nil
-            }) ?? false
+            return !(self.subjectFormData.subject?.contains(where: { (subject) -> Bool in
+                return (subject.preference == nil || subject.subjectId == nil || subject.subjectName == nil)
+            }) ?? false)
         }
     }
     
