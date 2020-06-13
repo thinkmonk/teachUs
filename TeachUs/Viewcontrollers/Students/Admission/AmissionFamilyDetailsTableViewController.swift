@@ -183,6 +183,7 @@ class AdmissionFamilyDetailsTableViewController: BaseTableViewController {
             if datadourceObj.headerType == .father, datadourceObj.attachedObj[indexPath.row].cellType == .age{
                 self.ageMotherIndexpath = indexPath
             }
+            
             return cell
 
         case .DOB:

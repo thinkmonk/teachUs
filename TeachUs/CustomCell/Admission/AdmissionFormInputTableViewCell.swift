@@ -50,15 +50,21 @@ class AdmissionFormInputTableViewCell: UITableViewCell {
     ///For second form - AdmissionSubjectsViewController
     func setUpcell(_ cellObj:AdmissionSubjectDataSource){
         //disabled if mobileNumber
-        let disabledCells : [SubjectCellType] = [.level, .course, .academicYear]
+        var disabledCells : [SubjectCellType] = [.level, .course, .academicYear]
+        if cellObj.shouldDisable ?? false{
+            disabledCells.append(.steam)
+        }
         let isDisabledCell = disabledCells.contains(cellObj.cellType)
         self.isUserInteractionEnabled = !isDisabledCell
         self.buttonDropdown.isHidden = isDisabledCell
         self.viewtextfieldBg.backgroundColor = isDisabledCell ? .lightGray : .white
         
+        
         //Set text from datasource
         if let textValue = cellObj.attachedObject as? String{
             self.textFieldAnswer.text = textValue
+        }else if (cellObj.shouldDisable ?? false) && (cellObj.cellType == .steam){
+            self.textFieldAnswer.text = "Under Graduate"
         }else if let detailsObject = cellObj.attachedObject as? AdmissionFormSubject{
             self.textFieldAnswer.text = detailsObject.subjectName ?? "NA"
             
@@ -106,6 +112,15 @@ class AdmissionFormInputTableViewCell: UITableViewCell {
         self.labelrequired.isHidden = !cellObj.isCumpulsory
         self.labelFormHeader.text = cellObj.cellType.rawValue
         self.textFieldAnswer.placeholder = cellObj.cellType.rawValue
+        
+        switch cellObj.cellType {
+        case .contactNumber:
+            self.textFieldAnswer.keyboardType = .numberPad
+        case .emailAddress:
+            self.textFieldAnswer.keyboardType = .emailAddress
+        default:
+            self.textFieldAnswer.keyboardType = .default
+        }
     }
 
 }

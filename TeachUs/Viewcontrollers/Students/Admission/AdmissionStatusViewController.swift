@@ -57,7 +57,26 @@ class AdmissionStatusViewController: BaseViewController {
         imagePicker.mediaTypes = ["public.image"]
         imagePicker.allowsEditing = true
         self.buttonSendEmail.themeDisabledGreyButton()
-        
+        self.textFieldEmailAddress.text = UserManager.sharedUserManager.appUserDetails.email ?? ""
+        addNavbarButton()
+        addKeyboardObservers()
+        self.textfieldTransactionNumber.delegate = self
+    }
+    
+    
+    func addNavbarButton(){
+        let refreshButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(actionRefresh))
+        self.navigationItem.rightBarButtonItem = refreshButton
+    }
+    
+    func addKeyboardObservers(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+
+    }
+    
+    @objc func actionRefresh() {
+        self.getFormData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -81,10 +100,10 @@ class AdmissionStatusViewController: BaseViewController {
         self.hideEverything()
         if let pdfstring = obj.pdfUrl, let pdfUrl = URL(string: pdfstring) {
             if let _ = GlobalFunction.checkIfFileExisits(fileUrl: pdfstring, name:pdfUrl.lastPathComponent){
-                self.buttonDownloadDocument.setTitle("View", for: .normal)
+                self.buttonDownloadDocument.setTitle("View Form", for: .normal)
             }
             else{
-                self.buttonDownloadDocument.setTitle("Download", for: .normal)
+                self.buttonDownloadDocument.setTitle("Download Form", for: .normal)
             }
         }
         
@@ -306,6 +325,7 @@ class AdmissionStatusViewController: BaseViewController {
 }
 extension AdmissionStatusViewController:UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
         return true
     }
 }
@@ -337,4 +357,33 @@ extension AdmissionStatusViewController:UIImagePickerControllerDelegate,UINaviga
             //cancel clicked do nothing.
         }
     }
+}
+
+extension AdmissionStatusViewController{
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size{
+            let frame = self.stackViewReceiptDetails.convert(self.textfieldTransactionNumber.frame, to: self.view)
+            if frame.origin.y > keyboardSize.height{
+                self.view.frame.origin.y -= ((frame.origin.y - keyboardSize.height) + 15)
+
+            }
+//            else if(self.view.frame.origin.y >= 0)
+//            {
+//                self.view.frame.origin.y -= keyboardSize.height/2
+//            }else{
+//                self.view.frame.origin.y = 0
+//                self.view.frame.origin.y -= keyboardSize.height/2
+//            }
+            
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
+        
+    }
+    
+    
 }

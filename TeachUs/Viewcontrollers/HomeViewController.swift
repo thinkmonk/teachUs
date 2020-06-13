@@ -96,8 +96,8 @@ class HomeViewController: BaseViewController{
             admissionButton.layer.borderColor = UIColor.white.cgColor
             admissionButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
             admissionButton.addTarget(self, action: #selector(admissionFormAction), for: .touchUpInside)
-            admissionButton.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
-
+            admissionButton.setContentCompressionResistancePriority(.required, for: .horizontal)
+            navigationItem.titleView?.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
             let addmissionBarButton = UIBarButtonItem(customView: admissionButton)
             navigationItem.rightBarButtonItems?.append(addmissionBarButton)
         }

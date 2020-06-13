@@ -39,7 +39,7 @@ class AdmissionSubjectsViewController: BaseTableViewController {
         let parameters = [
             "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
             "role_id": "\(1)",
-            "admission_form_id":"\(String(describing: AdmissionBaseManager.shared.formID))"
+            "admission_form_id":"\(AdmissionBaseManager.shared.formID ?? 0)"
         ]
         
         manager.apiPostWithDataResponse(apiName: "Get class Stream data for admission", parameters:parameters, completionHandler: { [weak self](result, code, response) in
@@ -49,6 +49,7 @@ class AdmissionSubjectsViewController: BaseTableViewController {
                 let decoder = JSONDecoder()
                 AdmissionSubjectManager.shared.subjectData = try decoder.decode(AdmissioSubjectData.self, from: response)
                 if AdmissionSubjectManager.shared.subjectData.admissionForm?.count == 1{
+                    AdmissionSubjectManager.shared.shouldDisableStreamSelection = true
                     self?.selectedStreamIndex = 0
                     self?.getSubjectDetails(for: AdmissionSubjectManager.shared.getClassMasterId(selection: self?.selectedStreamIndex ?? 0))
                 }

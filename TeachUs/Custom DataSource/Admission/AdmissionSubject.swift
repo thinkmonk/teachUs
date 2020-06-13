@@ -69,11 +69,13 @@ class AdmissionSubjectDataSource{
     var attachedObject:Any?
     var dataSourceObject:Any?
     var placeHolderText:String?
+    var shouldDisable:Bool?
     
-    init(detailsCell:SubjectCellType, detailsObject:Any?, dataSource:Any?) {
+    init(detailsCell:SubjectCellType, detailsObject:Any?, dataSource:Any?, shouldDisableObj:Bool? = false) {
         self.cellType = detailsCell
         self.attachedObject = detailsObject
         self.dataSourceObject = dataSource
+        self.shouldDisable = shouldDisableObj
     }
     
     init(detailsCell:SubjectCellType, detailsObject:Any?, dataSource:Any?, placeholder:String) {
