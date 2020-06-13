@@ -151,7 +151,6 @@ class AdmissionStatusViewController: BaseViewController {
             break
         }
         
-        self.buttonProceedToForm.isHidden = false
     }
     
     func hideEverything(){
