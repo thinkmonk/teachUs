@@ -230,26 +230,25 @@ class AdmissionSubjectManager {
     
     fileprivate func getDataSourceForTY(_ dataSource: inout [AdmissionSubjectDataSource]) {
         //TY FLOW
-        
+        //will be same for selected and default.
         let sem5Compulsary = self.getCompulsarySubject(data: self.selectedStream.defaultSubjectList?.semester5?.subjectList ?? [])
         let sem5CompulsaryStringDs = sem5Compulsary.map({$0.subjectName})
         let compulsarySubjectDs = AdmissionSubjectDataSource(detailsCell: .subjectDetails("List of compulsary subjects (semester 5)"), detailsObject: nil, dataSource: sem5CompulsaryStringDs)
         dataSource.append(compulsarySubjectDs)
         
-        //add subject to api form obj
-        self.selectedStream.subjectSelected?.semester5?.subjectList?.forEach({ (obj) in
+        
+        sem5Compulsary.forEach({ (obj) in
             var form = AdmissionFormSubject()
             form.semester = obj.semester
             form.subjectName = obj.subjectName
             form.subjectId = obj.subjectId
             form.preference = obj.preference
+            form.mandatory  = obj.mandatory
             self.subjectFormData.subject?.append(form)
         })
 
-        
-        
-        
-        for _ in 0..<(Int(self.selectedStream.defaultSubjectList?.semester5?.optionalSubjectCount ?? "") ?? 0){
+
+        for i in 0..<(Int(self.selectedStream.defaultSubjectList?.semester5?.optionalSubjectCount ?? "") ?? 0){
             
             let sem5Optional = self.getOptionalSubject(data: self.selectedStream.defaultSubjectList?.semester5?.subjectList ?? [])
 //            let sem5OptionalStringDs = sem5Optional.map({$0.subjectName})
@@ -257,11 +256,23 @@ class AdmissionSubjectManager {
             var form = AdmissionFormSubject()
             //add empty form obbject which willl be filled when user makes selection from dropdoown
             form.semester = sem5Optional.first?.semester
+            form.mandatory = sem5Optional.first?.mandatory
+            form.optionalSubjectRank = "\(i)"
+            
+            
+            //if we get selected subject from API
+            if  ((self.selectedStream.subjectSelected?.semester5?.subjectList?.count ?? 0) > 0){
+                let sem5SelectedOptional = self.getOptionalSubject(data: self.selectedStream.subjectSelected?.semester5?.subjectList ?? [])
+                if i < sem5SelectedOptional.count{
+                    let selectedSubject = sem5SelectedOptional[i]
+                    form.subjectName = selectedSubject.subjectName
+                    form.subjectId = selectedSubject.subjectId
+                }
+            }
+            
             let optionalSubjectDs = AdmissionSubjectDataSource(detailsCell: .subjectSelectCell("List of optional subjects (semester 5)"), detailsObject: form, dataSource: sem5Optional)
             dataSource.append(optionalSubjectDs)
             self.subjectFormData.subject?.append(form)
-            
-            
         }
         
         let sem6Compulsary = self.getCompulsarySubject(data: self.selectedStream.defaultSubjectList?.semester6?.subjectList ?? [])
@@ -269,28 +280,51 @@ class AdmissionSubjectManager {
         let compulsarysem6ubjectDs = AdmissionSubjectDataSource(detailsCell: .subjectDetails("List of compulsary subjects (semester 6)"), detailsObject: nil, dataSource: sem6CompulsaryStringDs)
         dataSource.append(compulsarysem6ubjectDs)
         //add subject to api form obj
-        self.selectedStream.subjectSelected?.semester6?.subjectList?.forEach({ (obj) in
+//        self.selectedStream.defaultSubjectList?.semester6?.subjectList?.forEach({ (obj) in
+//            var form = AdmissionFormSubject()
+//            form.semester = obj.semester
+//            form.subjectName = obj.subjectName
+//            form.subjectId = obj.subjectId
+//            form.preference = obj.preference
+//            form.mandatory  = obj.mandatory
+//            self.subjectFormData.subject?.append(form)
+//        })
+ 
+        sem6Compulsary.forEach({ (obj) in
             var form = AdmissionFormSubject()
             form.semester = obj.semester
             form.subjectName = obj.subjectName
             form.subjectId = obj.subjectId
             form.preference = obj.preference
+            form.mandatory  = obj.mandatory
             self.subjectFormData.subject?.append(form)
         })
 
         
         
-        
-        
-        for _ in 0..<(Int(self.selectedStream.defaultSubjectList?.semester6?.optionalSubjectCount ?? "") ?? 0){
+        for i in 0..<(Int(self.selectedStream.defaultSubjectList?.semester6?.optionalSubjectCount ?? "") ?? 0){
             let sem6Optional = self.getOptionalSubject(data: self.selectedStream.defaultSubjectList?.semester6?.subjectList ?? [])
 //            let sem6OptionalStringDs = sem6Optional.map({$0.subjectName})
             var form = AdmissionFormSubject()
             //add empty form obbject which willl be filled when user makes selection from dropdoown
             form.semester = sem6Optional.first?.semester
+            form.mandatory = sem6Optional.first?.mandatory
+            form.optionalSubjectRank = "\(i)"
             self.subjectFormData.subject?.append(form)
-            let compulsarysem6SubjectDs = AdmissionSubjectDataSource(detailsCell: .subjectSelectCell("List of optional subjects (semester 6)"), detailsObject: form, dataSource: sem6Optional)
-            dataSource.append(compulsarysem6SubjectDs)
+            
+            //if we get selected subject from API
+            if  ((self.selectedStream.subjectSelected?.semester6?.subjectList?.count ?? 0) > 0){
+                let sem6SelectedOptional = self.getOptionalSubject(data: self.selectedStream.subjectSelected?.semester6?.subjectList ?? [])
+                if i < sem6SelectedOptional.count{
+                    let selectedSubject = sem6SelectedOptional[i]
+                    form.subjectName = selectedSubject.subjectName
+                    form.subjectId = selectedSubject.subjectId
+                }
+            }
+
+            
+            let optionalsem6SubjectDs = AdmissionSubjectDataSource(detailsCell: .subjectSelectCell("List of optional subjects (semester 6)"), detailsObject: form, dataSource: sem6Optional)
+            dataSource.append(optionalsem6SubjectDs)
 
         }
     }

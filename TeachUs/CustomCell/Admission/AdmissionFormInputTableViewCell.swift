@@ -97,8 +97,11 @@ class AdmissionFormInputTableViewCell: UITableViewCell {
         }
         if let textValue = cellObj.attachedObj as? String{
             self.textFieldAnswer.text = textValue
+        }else if let textValue = cellObj.attachedObj as? Int{
+            self.textFieldAnswer.text = "\(textValue)"
         }else{
             self.textFieldAnswer.placeholder = cellObj.cellType.rawValue
+            
         }
         self.labelrequired.isHidden = !cellObj.isCumpulsory
         self.labelFormHeader.text = cellObj.cellType.rawValue

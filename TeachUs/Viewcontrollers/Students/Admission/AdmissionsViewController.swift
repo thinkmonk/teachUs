@@ -75,7 +75,7 @@ class AdmissionsViewController: BaseTableViewController    {
 
     fileprivate func formatDateForDisplay(date: Date) -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd MMM yyyy"
+        formatter.dateFormat = "dd MMMM yyyy"
         return formatter.string(from: date)
     }
     

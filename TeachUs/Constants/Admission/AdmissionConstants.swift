@@ -48,5 +48,5 @@ struct AdmissionConstantData{
     
     static let professionList = ["Business","Job/Service","Professional","Self-employed","Not employed","Others"]
     
-    static let incomeList = ["None","Job","< 2.5 Lakhs","2.5 Lakh - 5 Lakh","5 Lakh - 10 Lakh","> 10 Lakh"]
+    static let incomeList = ["None","< 2.5 Lakhs","2.5 Lakh - 5 Lakh","5 Lakh - 10 Lakh","> 10 Lakh"]
 }

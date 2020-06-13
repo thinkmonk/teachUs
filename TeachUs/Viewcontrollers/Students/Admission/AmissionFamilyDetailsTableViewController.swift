@@ -190,7 +190,7 @@ class AdmissionFamilyDetailsTableViewController: BaseTableViewController {
             cell.textFieldAnswer.delegate = self
             cell.textFieldAnswer.inputAccessoryView = toolBar
             cell.textFieldAnswer.inputView = picker
-            cell.textFieldAnswer.text = formatDateForDisplay(date: picker.date)
+            cell.textFieldAnswer.text = cellDataSource.attachedObj as? String
             cell.textFieldAnswer.indexpath = indexPath
             cell.textFieldAnswer.isUserInteractionEnabled = true
             cell.labelFormHeader.text = cellDataSource.cellType.rawValue
@@ -239,9 +239,11 @@ extension AdmissionFamilyDetailsTableViewController:UITextFieldDelegate{
     
     @objc func updateDateField(sender: UIDatePicker) {
         dobTextField?.text = formatDateForDisplay(date: sender.date)
+        
         if let textField = dobTextField,
             let indexPath = textField.indexpath
         {
+            AdmissionFamilyManager.shared.dataSource[indexPath.section].attachedObj[indexPath.row].attachedObj = dobTextField?.text
             let age =  getAge()
             var indexSection:Int?
             for (index,obj) in AdmissionFamilyManager.shared.dataSource[indexPath.section].attachedObj.enumerated(){
@@ -265,7 +267,7 @@ extension AdmissionFamilyDetailsTableViewController:UITextFieldDelegate{
     
     fileprivate func formatDateForDisplay(date: Date) -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd MMM yyyy"
+        formatter.dateFormat = "dd MMMM yyyy"
         return formatter.string(from: date)
     }
     
@@ -288,16 +290,15 @@ extension AdmissionFamilyDetailsTableViewController:UITextFieldDelegate{
         {
             let cellDataSource = AdmissionFamilyManager.shared.dataSource[indexPath.section].attachedObj[indexPath.row]
             if cellDataSource.cellType == .DOB{
-                let age =  getAge()
-                cellDataSource.setValues(value: textField.text ?? "", otherObj: age, indexPath: indexPath)
-                
+                cellDataSource.setValues(value: textField.text ?? "", otherObj: textField.text, indexPath: indexPath)
+//                if let motherIp = ageFatherIndexpath, let fatherIp = ageFatherIndexpath{
+//                    self.tableView.reloadRows(at: [motherIp,fatherIp], with: .none)
+//                }
             }else{
                 cellDataSource.setValues(value: textField.text ?? "", otherObj: nil, indexPath: indexPath)
+                self.tableView.reloadRows(at: [indexPath], with: .fade)
             }
-            if let motherIp = ageFatherIndexpath, let fatherIp = ageFatherIndexpath{
-                
-                self.tableView.reloadRows(at: [motherIp,fatherIp], with: .none)
-            }
+            
         }
         
     }

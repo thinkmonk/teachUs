@@ -280,7 +280,6 @@ extension AdmissionSubjectsViewController:UITextFieldDelegate{
                 let stringDs = attachedObj.map({$0.subjectName ?? ""})
                 dataPicker.data = [stringDs]
                 dataPicker.isHidden = false
-                textField.text = stringDs.first
                 dataPicker.selectionUpdated = {stringObj in
                     if let `stringObj` = stringObj.first as? String{
                         textField.text = stringObj
@@ -301,12 +300,15 @@ extension AdmissionSubjectsViewController:UITextFieldDelegate{
                                     return newForm
                                 }
                             }else{
-                                
-                                if (formObjMap.semester == formObj.semester && ((formObj.subjectName ?? "").isEmpty) && ((formObj.subjectId ?? "").isEmpty)){ //normal stream selection flow without prefereces. here the semester is alreadty added and we adding the rest of the values when a subject is selected.
+                                var tempformObjForedit = formObj
+                                tempformObjForedit.subjectName = ""
+                                tempformObjForedit.subjectId =   ""
+                                if (formObjMap.semester == tempformObjForedit.semester && (formObjMap.mandatory == "0")){ //normal stream selection flow without prefereces. here the semester is alreadty added and we adding the rest of the values when a subject is selected.
                                     var newForm = AdmissionFormSubject()
                                     newForm.subjectName    = subject.subjectName
                                     newForm.subjectId      = subject.subjectId
                                     newForm.semester       = formObjMap.semester
+                                    newForm.mandatory     = formObjMap.mandatory
                                     cellDataSource.attachedObject = newForm
                                     return newForm
                                 }
@@ -338,7 +340,7 @@ extension AdmissionSubjectsViewController:UITextFieldDelegate{
         if let `textField` = textField as? CustomTextField,
             let indexPath = textField.indexpath
         {
-            let cellDataSource = arrayDataSource[indexPath.section].attachedObj[indexPath.row]
+            _ = arrayDataSource[indexPath.section].attachedObj[indexPath.row]
         }
         
     }

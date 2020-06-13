@@ -69,29 +69,32 @@ extension FamilyCellDataSource{
             
             switch rowCell.cellType {
             case .fullName:
+                rowCell.attachedObj = value
                 AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.fatherFullName = value
                 
-            case .DOB:
-                
+            case .DOB://seperately calculated added. hence not using rowCell.attachedObj = value
                 if let number = otherObj as? Int{
                     AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.fatherAge = "\(number)"
                 }else{
                     AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.fatherDob = value
                 }
                 
-            case .age:
+            case .age://seperately calculated added. hence not using rowCell.attachedObj = value
                 AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.fatherAge = value
                 
                 
             case .contactNumber:
+                rowCell.attachedObj = value
                 AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.fatherContactNumber = value
                 
                 
             case .emailAddress:
+                rowCell.attachedObj = value
                 AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.fatherEmail = value
                 
                 
             case .profession:
+                rowCell.attachedObj = value
                 AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.fatherProfession = value
                 
 //            case .industry:
@@ -99,9 +102,11 @@ extension FamilyCellDataSource{
                 
                 
             case .totalIncome:
+                rowCell.attachedObj = value
                 AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.fatherTotalIncome = value
                 
             case .countryOfWork:
+                rowCell.attachedObj = value
                 AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.fatherCounty = value
                 
             default: break
@@ -114,29 +119,34 @@ extension FamilyCellDataSource{
             
             switch rowCell.cellType {
             case .fullName:
+                rowCell.attachedObj = value
                 AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.motherFullName = value
                 
-            case .DOB:
+            case .DOB://seperately calculated added. hence not using rowCell.attachedObj = value
                 if let number = otherObj as? Int{
                     AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.motherAge = "\(number)"
                 }else{
+                    rowCell.attachedObj = value
                     AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.motherDob = value
 
                 }
                 
-            case .age:
+            case .age://seperately calculated added. hence not using rowCell.attachedObj = value
                 AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.motherAge = value
                 
                 
             case .contactNumber:
+                rowCell.attachedObj = value
                 AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.motherContactNumber = value
                 
                 
             case .emailAddress:
+                rowCell.attachedObj = value
                 AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.motherEmail = value
                 
                 
             case .profession:
+                rowCell.attachedObj = value
                 AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.motherProfession = value
                 
 //            case .industry:
@@ -144,9 +154,11 @@ extension FamilyCellDataSource{
 //                
                 
             case .totalIncome:
+                rowCell.attachedObj = value
                 AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.motherTotalIncome = value
                 
             case .countryOfWork:
+                rowCell.attachedObj = value
                 AdmissionFamilyManager.shared.familyData.familyDetailsInformation?.motherCountry = value
                 
             default: break

@@ -169,6 +169,8 @@ struct AdmissionFormSubject:Codable{
     var subjectName: String?
     var semester: String?
     var preference:String? = "0"
+    var mandatory: String?
+    var optionalSubjectRank:String?
     
     enum CodingKeys: String, CodingKey {
         case subjectId = "subject_id"
