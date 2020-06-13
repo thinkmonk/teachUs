@@ -89,7 +89,7 @@ class HomeViewController: BaseViewController{
             navigationItem.rightBarButtonItems  = [bellButtomItem]
         }
 
-        if UserManager.sharedUserManager.user == .student{
+        if UserManager.sharedUserManager.user == .student && UserManager.sharedUserManager.shouldShowAdmissionButton{
             let admissionButton = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 20 ))
             admissionButton.setTitle("Admission", for: .normal)
             admissionButton.layer.borderWidth = 1.0

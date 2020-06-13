@@ -16,7 +16,7 @@ class AdmissionFamilyManager{
         var rowDs = [FamilyCellDataSource]()
         
         // mother
-        let mothertitleDs = FamilyCellDataSource(type: .fathersDetails, obj: self.familyData.familyDetailsInformation?.motherFullName, dataSource: nil, compulsoryFlag: true)
+        let mothertitleDs = FamilyCellDataSource(type: .mothersDetails, obj: self.familyData.familyDetailsInformation?.motherFullName, dataSource: nil, compulsoryFlag: true)
         rowDs.append(mothertitleDs)
         
         let nameDs = FamilyCellDataSource(type: .fullName, obj: self.familyData.familyDetailsInformation?.motherFullName, dataSource: nil, compulsoryFlag: true)

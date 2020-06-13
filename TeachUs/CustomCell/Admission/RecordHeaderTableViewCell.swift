@@ -15,6 +15,7 @@ class RecordHeaderTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
+        self.buttonDeleteRecord.isHidden = true
         // Initialization code
     }
 

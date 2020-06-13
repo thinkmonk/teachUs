@@ -28,13 +28,13 @@
 import Foundation
 
 enum FormStatus:Int, Codable{
-    case processNotStarted       = 1
-    case formIsIncomplete        = 2
-    case formSubmitted           = 3
-    case formRejected            = 4
-    case incompleteFormSubmitted = 5
-    case formAccepted            = 6
-    case feesPaid                = 7
-    case incorrectfeeDetials     = 8
-    case seatConfirmed           = 9
+    case processNotStarted       = 0
+    case formIsIncomplete        = 1
+    case formSubmitted           = 2
+    case formRejected            = 3
+    case incompleteFormSubmitted = 4
+    case formAccepted            = 5
+    case feesPaid                = 6
+    case incorrectfeeDetials     = 7
+    case seatConfirmed           = 8
 }

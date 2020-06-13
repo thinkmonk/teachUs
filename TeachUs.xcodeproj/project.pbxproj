@@ -604,6 +604,7 @@
 		81A80EDC1FAF11B700DDFFA1 /* CollegeSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeSummary.swift; sourceTree = "<group>"; };
 		81A80EDE1FAF3DAD00DDFFA1 /* CollegeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeList.swift; sourceTree = "<group>"; };
 		81A80EE01FAF3DCB00DDFFA1 /* CollegeList.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollegeList.xib; sourceTree = "<group>"; };
+		81AB072C2494DA0D005966C4 /* TeachUs 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeachUs 4.xcdatamodel"; sourceTree = "<group>"; };
 		81AC9F9220AA051900DEECB1 /* CollegeSyllabusList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeSyllabusList.swift; sourceTree = "<group>"; };
 		81ACF7F220851E1700167203 /* AddRemoveAdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRemoveAdminViewController.swift; sourceTree = "<group>"; };
 		81ACF7F420851EAC00167203 /* Admin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Admin.swift; sourceTree = "<group>"; };
@@ -2886,12 +2887,13 @@
 		8163EB0220541D38003E4B1D /* TeachUs.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				81AB072C2494DA0D005966C4 /* TeachUs 4.xcdatamodel */,
 				81CE9FFD23365D2900320DFB /* TeachUs 3.xcdatamodel */,
 				8174684622BE78A700488B50 /* TeachUs (Offline) 2.xcdatamodel */,
 				81FEC7FC20F113D7003FBDBE /* TeachUs 2(Offline).xcdatamodel */,
 				8163EB0320541D38003E4B1D /* TeachUs.xcdatamodel */,
 			);
-			currentVersion = 81CE9FFD23365D2900320DFB /* TeachUs 3.xcdatamodel */;
+			currentVersion = 81AB072C2494DA0D005966C4 /* TeachUs 4.xcdatamodel */;
 			path = TeachUs.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

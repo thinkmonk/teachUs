@@ -27,6 +27,7 @@ class AdmissionsViewController: BaseTableViewController    {
         setupGeneriPicker()
         initDatePicker()
         addRightBarButton()
+        addBackButton()
     }
     
     func getyUserdetails()
@@ -92,6 +93,31 @@ class AdmissionsViewController: BaseTableViewController    {
         navigationItem.rightBarButtonItems  = [bellButtomItem]
 
     }
+    
+    func addBackButton(){
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.plain, target: self, action: #selector(back(sender:)))
+        self.navigationItem.leftBarButtonItem = newBackButton
+
+    }
+    
+    @objc func back(sender: UIBarButtonItem) {
+        self.showAlertWithTitleAndCompletionHandlers(nil, alertMessage: "Do you want to save before exit", okButtonString: "Yes", canelString: "No", okAction: {//ok flow
+            AdmissionFormManager.shared.sendFormOneData({ (dict) in
+                if let id = dict?["admission_form_id"] as? String, let _id = Int(id){
+                    AdmissionBaseManager.shared.formID = _id
+                }
+                self.navigationController?.popViewController(animated: true)
+            }) {
+                self.showAlertWithTitle("Failed", alertMessage: "Please Retry")
+            }
+            
+        }) { //cancel flow
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    
     @objc func proceedAction(){
         self.view.endEditing(true)
         if (AdmissionFormManager.shared.validateData()){

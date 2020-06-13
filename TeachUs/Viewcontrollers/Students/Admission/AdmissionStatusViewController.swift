@@ -93,20 +93,22 @@ class AdmissionStatusViewController: BaseViewController {
         self.labelSuccessMessage.text = AdmissionBaseManager.shared.formDetails.admissionStatusText
         self.labelSuccessMessage.isHidden = false
         self.stackViewBg.isHidden = false
+        self.imageViewTick.isHidden = false
+
         guard  let statusString = obj.admissionStatus, let intStatus = Int(statusString) else {
             return
         }
         let status = FormStatus(rawValue: intStatus)
         switch status {
-        case .processNotStarted: break
+        case .processNotStarted: break //Only Status message
             //show status message only
             
-        case .formIsIncomplete:
+        case .formIsIncomplete://Status message and Proceed button
             self.imageViewTick.isHidden = false
             self.imageViewTick.image = UIImage(named: Constants.Images.errorIcon)
             self.buttonProceedToForm.isHidden = false
             
-        case .formSubmitted:
+        case .formSubmitted://Status message, Download Form & Email Form
             self.imageViewTick.isHidden = false
             self.imageViewTick.image = UIImage(named: Constants.Images.greenCheck)
             self.stackViewEmail.isHidden = false
@@ -114,34 +116,34 @@ class AdmissionStatusViewController: BaseViewController {
             self.buttonSendEmail.isHidden = false
             self.buttonDownloadDocument.isHidden = false
             
-        case .formRejected:
+        case .formRejected://Only Status message
             self.imageViewTick.isHidden = false
             self.imageViewTick.image = UIImage(named: Constants.Images.errorIcon)
             
-        case .incompleteFormSubmitted:
+        case .incompleteFormSubmitted://Status message & Proceed button
             self.imageViewTick.isHidden = false
             self.imageViewTick.image = UIImage(named: Constants.Images.errorIcon)
             self.buttonProceedToForm.isHidden = false
             
             
-        case .formAccepted:
+        case .formAccepted://Status message, Bank Details, Transaction No Text Box and Upload receipt button
             self.imageViewTick.isHidden = false
             self.imageViewTick.image = UIImage(named: Constants.Images.greenCheck)
             self.stackViewPaymentDetails.isHidden = false
             self.stackViewReceiptDetails.isHidden = false
             
-        case .feesPaid:
+        case .feesPaid://Only Status message.
             self.imageViewTick.isHidden = false
             self.imageViewTick.image = UIImage(named: Constants.Images.greenCheck)
             
-        case .incorrectfeeDetials:
+        case .incorrectfeeDetials://Status message, Bank Details, Transaction No Text Box and Upload receipt button
             self.imageViewTick.isHidden = false
             self.imageViewTick.image = UIImage(named: Constants.Images.errorIcon)
             self.stackViewPaymentDetails.isHidden = false
             self.stackViewReceiptDetails.isHidden = false
 
 
-        case .seatConfirmed:
+        case .seatConfirmed://Only Status message
             self.imageViewTick.isHidden = false
             self.imageViewTick.image = UIImage(named: Constants.Images.greenCheck)
 

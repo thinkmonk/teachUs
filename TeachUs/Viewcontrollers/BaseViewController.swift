@@ -125,6 +125,10 @@ class BaseViewController: UIViewController {
         
     }
     
+    /// Shows alert only with title and "Ok" button
+    /// - Parameters:
+    ///   - title: title to be displayed
+    ///   - alertMessage: "Ok" button label
     func showAlertWithTitle(_ title:String?, alertMessage:String){
         let alertTitle = title != nil ? title : nil
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.alert)
@@ -335,6 +339,15 @@ class BaseViewController: UIViewController {
         sender.view?.removeFromSuperview()
     }
     
+    /// Shows alert with ok button and custom action block and cancel button with custom action block
+    /// - Parameters:
+    ///   - title: Title of the alert
+    ///   - alertMessage: message
+    ///   - okButtonString: ok button
+    ///   - canelString: cancel button label
+    ///   - okAction: ok action
+    ///   - cancelAction: cancel action
+    /// - Returns: nothing
     func showAlertWithTitleAndCompletionHandlers(_ title:String?, alertMessage:String, okButtonString:String?, canelString:String?,okAction:@escaping (()->()), cancelAction:@escaping(()->())){
         let alertTitle = title != nil ? title : nil
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.alert)
@@ -463,7 +476,10 @@ class BaseTableViewController:UITableViewController{
         UIGraphicsEndImageContext()
         return gradientImage
     }
-
+    /// Shows alert only with title and "Ok" button
+    /// - Parameters:
+    ///   - title: title to be displayed
+    ///   - alertMessage: "Ok" button label
     func showAlertWithTitle(_ title:String?, alertMessage:String){
         let alertTitle = title != nil ? title : nil
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.alert)
@@ -486,6 +502,13 @@ class BaseTableViewController:UITableViewController{
     }
 
     
+    /// Shows alert only with ok button and completion handler
+    /// - Parameters:
+    ///   - title: Alert title
+    ///   - alertMessage: alert message
+    ///   - okButtonString: ok button title
+    ///   - okAction: ok button action
+    /// - Returns: NA
     func showAlertWithOKTitleAndCompletionHandlers(_ title:String?, alertMessage:String, okButtonString:String?,okAction:@escaping (()->())){
         let alertTitle = title != nil ? title : nil
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.alert)
@@ -507,6 +530,15 @@ class BaseTableViewController:UITableViewController{
         }
     }
     
+    /// Shows alert with ok button and custom action block and cancel button with custom action block
+    /// - Parameters:
+    ///   - title: Title of the alert
+    ///   - alertMessage: message
+    ///   - okButtonString: ok button
+    ///   - canelString: cancel button label
+    ///   - okAction: ok action
+    ///   - cancelAction: cancel action
+    /// - Returns: nothing
     func showAlertWithTitleAndCompletionHandlers(_ title:String?, alertMessage:String, okButtonString:String?, canelString:String?,okAction:@escaping (()->()), cancelAction:@escaping(()->())){
         let alertTitle = title != nil ? title : nil
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.alert)
