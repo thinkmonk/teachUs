@@ -309,7 +309,7 @@ extension AdmissionsViewController{
             cell.textFieldAnswer.delegate = self
             cell.textFieldAnswer.inputAccessoryView = toolBar
             cell.textFieldAnswer.inputView = picker
-            cell.textFieldAnswer.text = formatDateForDisplay(date: picker.date)
+            cell.textFieldAnswer.text = cellDataSource.attachedObject as? String
             cell.textFieldAnswer.indexpath = indexPath
             cell.labelFormHeader.text = cellDataSource.cellType.rawValue
             return cell
@@ -365,13 +365,22 @@ extension AdmissionsViewController:UITextFieldDelegate{
             let indexPath = textField.indexpath
         {
             let cellDataSource = arrayDataSource[indexPath.section].attachedObj[indexPath.row]
-            let permanentAddressFlag = arrayDataSource[indexPath.section].sectionType == .PermanenttAddress
-            cellDataSource.setValues(value: textField.text ?? "", otherObj: nil, ispermanenetAddress: permanentAddressFlag)
-            arrayDataSource[indexPath.section].attachedObj[indexPath.row].attachedObject = textField.text
-            self.tableView.reloadRows(at: [indexPath], with: .fade)
-            
+            if cellDataSource.cellType == .Aadhar{
+                if AdmissionFormManager.shared.validateAadhar(textObj: textField.text ?? ""){
+                    let permanentAddressFlag = arrayDataSource[indexPath.section].sectionType == .PermanenttAddress
+                    cellDataSource.setValues(value: textField.text ?? "", otherObj: nil, ispermanenetAddress: permanentAddressFlag)
+                    arrayDataSource[indexPath.section].attachedObj[indexPath.row].attachedObject = textField.text
+                    self.tableView.reloadRows(at: [indexPath], with: .fade)
+                }else{
+                    self.showAlertWithTitle("Invalid Input", alertMessage: "AADHAR number should be 12 digits")
+                }
+            }else{
+                let permanentAddressFlag = arrayDataSource[indexPath.section].sectionType == .PermanenttAddress
+                cellDataSource.setValues(value: textField.text ?? "", otherObj: nil, ispermanenetAddress: permanentAddressFlag)
+                arrayDataSource[indexPath.section].attachedObj[indexPath.row].attachedObject = textField.text
+                self.tableView.reloadRows(at: [indexPath], with: .fade)
+            }
         }
-        
     }
     
     

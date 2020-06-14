@@ -15,7 +15,6 @@ class HomeViewController: BaseViewController{
     var controllersArray : [UIViewController] = []
     var notificaitonLabel:UILabel!
     let purpleInspireColor = UIColor(red:0.13, green:0.03, blue:0.25, alpha:1.0)
-
     override func viewDidLoad() {
         
         self.addGradientToNavBarWithMenu()
@@ -28,6 +27,8 @@ class HomeViewController: BaseViewController{
 //        setUpPageMenu()
         
         self.addNotificaitonLabel()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(showHideAdmissionButton), name: .showHideAdmissionButton, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -89,18 +90,36 @@ class HomeViewController: BaseViewController{
             navigationItem.rightBarButtonItems  = [bellButtomItem]
         }
 
-        if UserManager.sharedUserManager.user == .student && UserManager.sharedUserManager.shouldShowAdmissionButton{
-            let admissionButton = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 20 ))
-            admissionButton.setTitle("Admission", for: .normal)
-            admissionButton.layer.borderWidth = 1.0
-            admissionButton.layer.borderColor = UIColor.white.cgColor
-            admissionButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-            admissionButton.addTarget(self, action: #selector(admissionFormAction), for: .touchUpInside)
-            admissionButton.setContentCompressionResistancePriority(.required, for: .horizontal)
-            navigationItem.titleView?.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-            let addmissionBarButton = UIBarButtonItem(customView: admissionButton)
-            navigationItem.rightBarButtonItems?.append(addmissionBarButton)
+        
+        //button is present
+        if let buttonPresentFlag = self.navigationItem.rightBarButtonItems?.contains(where: {$0.tag == Constants.NumberConstants.tagAdmissionButton}),
+            buttonPresentFlag
+        {//if this condition is moved up then it will add the button twice.
+            if !UserManager.sharedUserManager.shouldShowAdmissionButton,
+                let newItems = self.navigationItem.rightBarButtonItems?.filter({$0.tag != Constants.NumberConstants.tagAdmissionButton}),
+                newItems.count > 0
+            {
+                self.navigationItem.rightBarButtonItems = newItems
+            }
+        }else{
+            if UserManager.sharedUserManager.user == .student && UserManager.sharedUserManager.shouldShowAdmissionButton, !(self.navigationItem.rightBarButtonItems?.contains(where: {$0.tag == Constants.NumberConstants.tagAdmissionButton}) ?? true)
+            {
+                let admissionButton = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 20 ))
+                admissionButton.setTitle("Admission", for: .normal)
+                admissionButton.layer.borderWidth = 1.0
+                admissionButton.layer.borderColor = UIColor.white.cgColor
+                admissionButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+                admissionButton.addTarget(self, action: #selector(admissionFormAction), for: .touchUpInside)
+                admissionButton.setContentCompressionResistancePriority(.required, for: .horizontal)
+                admissionButton.tag = Constants.NumberConstants.tagAdmissionButton
+                navigationItem.titleView?.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+                let addmissionBarButton = UIBarButtonItem(customView: admissionButton)
+                addmissionBarButton.tag = Constants.NumberConstants.tagAdmissionButton
+                navigationItem.rightBarButtonItems?.append(addmissionBarButton)
+            }
         }
+        
+
         
 
     }
@@ -142,6 +161,10 @@ class HomeViewController: BaseViewController{
     @objc func hamburgerAction() {
         self.menuContainerViewController.toggleLeftSideMenuCompletion {
         }
+    }
+    
+    @objc func showHideAdmissionButton(){
+        self.addNotificaitonLabel()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

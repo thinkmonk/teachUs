@@ -143,6 +143,7 @@ public struct Constants {
         static let homeTabBarHeight = 44.0
         static let navbarHeight = 65.0
         static let cornerRadius = 3
+        static let tagAdmissionButton = 100
     }
     
     struct CustomCellId {

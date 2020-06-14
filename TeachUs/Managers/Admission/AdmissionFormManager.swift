@@ -41,7 +41,7 @@ class AdmissionFormManager{
         let DOB  = AdmissionFormDataSource(detailsCell: .DOB, detailsObject: personalInfoObj?.dob, dataSource:nil, isMandatory: true)
         arrayDataSource.append(DOB)
         
-        let MobileNumber  = AdmissionFormDataSource(detailsCell: .MobileNumber, detailsObject: personalInfoObj?.contact, dataSource:nil, isMandatory: false)
+        let MobileNumber  = AdmissionFormDataSource(detailsCell: .MobileNumber, detailsObject: personalInfoObj?.contact, dataSource:nil, isMandatory: false, isDisabledObj: true)
         arrayDataSource.append(MobileNumber)
         
         let EmailAddress  = AdmissionFormDataSource(detailsCell: .EmailAddress, detailsObject: personalInfoObj?.email, dataSource:nil, isMandatory: true)
@@ -107,13 +107,25 @@ class AdmissionFormManager{
         let pincode = AdmissionFormDataSource(detailsCell: .PinCode, detailsObject: pinValue, dataSource:nil,  isMandatory: true )
         arrayDataSource.append(pincode)
         
+        
         let stateValue = isPermanent ? personalInfoObj?.permanentAddressState : personalInfoObj?.correspondenceAddressState
-        let stateDs = AdmissionFormDataSource(detailsCell: .State ,detailsObject:stateValue , dataSource:AdmissionConstantData.states, isMandatory: true )
-        arrayDataSource.append(stateDs)
+        if isCopy{
+            let stateDs = AdmissionFormDataSource(detailsCell: .State ,detailsObject:stateValue , dataSource:AdmissionConstantData.states, isMandatory: true )
+            arrayDataSource.append(stateDs)
+            
+        }else{
+            let stateDs = AdmissionFormDataSource(detailsCell: .State ,detailsObject:stateValue , dataSource:isPermanent ? AdmissionConstantData.states : nil, isMandatory: true, isDisabledObj: !isPermanent )
+            arrayDataSource.append(stateDs)
+        }
         
         let countryValue = isPermanent ? personalInfoObj?.permanentAddressCountry : personalInfoObj?.correspondenceAddressCountry
-        let country = AdmissionFormDataSource(detailsCell: .Country, detailsObject: countryValue, dataSource:nil, isMandatory: true )
-        arrayDataSource.append(country)
+        if isCopy{
+            let country = AdmissionFormDataSource(detailsCell: .Country, detailsObject: countryValue, dataSource:nil, isMandatory: true )
+            arrayDataSource.append(country)
+        }else{
+            let country = AdmissionFormDataSource(detailsCell: .Country, detailsObject: countryValue, dataSource:nil, isMandatory: true,isDisabledObj: !isPermanent )
+            arrayDataSource.append(country)
+        }
         
         if isCopy{//copy address in local model as well 
             self.admissionData.personalInformation?.permanentAddressRoom    = self.admissionData.personalInformation?.correspondenceAddressRoom
@@ -131,8 +143,8 @@ class AdmissionFormManager{
         return self.admissionData.personalInformation?.validateClassData() ?? false
     }
     
-    func validateAadhar() -> Bool{
-        return self.admissionData.personalInformation?.aadharCard?.count == 12
+    func validateAadhar(textObj:String) -> Bool{
+        return textObj.count == 12
     }
     
     func sendFormOneData(_ completion:@escaping ([String:Any]?) -> (),

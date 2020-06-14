@@ -97,13 +97,14 @@ class AdmissionFormDataSource{
     var attachedObject:Any?
     var dataSourceObject:Any?
     var isCompulsaey:Bool?
+    var isdisabled:Bool?
     
-    init(detailsCell:AdmissionCellType, detailsObject:Any?, dataSource:Any?, isMandatory:Bool?) {
+    init(detailsCell:AdmissionCellType, detailsObject:Any?, dataSource:Any?, isMandatory:Bool?, isDisabledObj:Bool = false) {
         self.cellType = detailsCell
         self.attachedObject = detailsObject
         self.dataSourceObject = dataSource
         self.isCompulsaey = isMandatory
-        
+        self.isdisabled = isDisabledObj
     }
     
 }
