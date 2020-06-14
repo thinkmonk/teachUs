@@ -170,6 +170,8 @@ class AdmissionStatusViewController: BaseViewController {
             break
         }
         
+        self.stackViewPaymentDetails.isHidden = false
+        
     }
     
     func hideEverything(){
@@ -190,10 +192,11 @@ class AdmissionStatusViewController: BaseViewController {
     func setUpBankDetails(){
         self.labelBankName.text = "Bank Name: \(self.admissionFormData.bankDetails?.bankName ?? "")"
         self.labelBranchName.text = "Branch Name: \(self.admissionFormData.bankDetails?.branch ?? "")"
-        self.labelAccountHolder.text = "Account Number: \(self.admissionFormData.bankDetails?.accountNumber ?? "")"
+        self.labelAccountNumber.text = "Account Number: \(self.admissionFormData.bankDetails?.accountNumber ?? "")"
         self.labelIFSCCode.text = "IFSC Code: \(self.admissionFormData.bankDetails?.ifscCode ?? "")"
-        self.labelAccountHolder.text = "Holder Name: \(self.admissionFormData.bankDetails?.bankName ?? "")"
+        self.labelAccountHolder.text = "Holder Name: \(self.admissionFormData.bankDetails?.holderName ?? "")"
         self.labelAmount.text = "Fee Amount: \(self.admissionFormData.feeAmount ?? "")"
+        self.labelUpi.text = "UPI: \(self.admissionFormData.bankDetails?.upi ?? "")"
     }
     
     @IBAction func actionDownloadDocument(_ sender: Any) {
