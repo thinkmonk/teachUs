@@ -255,6 +255,57 @@ extension AdmissionSubjectsViewController {
     
 }
 extension AdmissionSubjectsViewController:UITextFieldDelegate{
+    fileprivate func modifyApiDataSourxe(cellDataSource: AdmissionSubjectDataSource, attachedObj: [AdmnissionSubjectList]) {
+        //we take the subject selected frm picker and add it to the existing formsubject for api wihthout changing the preferenc
+        if let row = self.dataPicker.selectedRow,
+            let preAttachedDatasourceSubject = cellDataSource.attachedObject as? AdmissionFormSubject ,
+            row < attachedObj.count,
+            let preferenceFlowFlag = AdmissionSubjectManager.shared.selectedStream.isPreferenceFlow?.boolValue()
+        {
+            let selectedSubject = attachedObj[row]
+            AdmissionSubjectManager.shared.subjectFormData.subject = AdmissionSubjectManager.shared.subjectFormData.subject?.map({ subjectInMap -> AdmissionFormSubject in
+                //                            if subjectInMap.subjectName?.lowercased() == selectedSubject.subjectName?.lowercased() {
+                //                                print(" ***** same subject found *******")
+                //                                textField.text = ""
+                //                                return subjectInMap
+                //                            }
+                if preferenceFlowFlag{
+                    if subjectInMap.semester == preAttachedDatasourceSubject.semester && subjectInMap.preference == preAttachedDatasourceSubject.preference && preAttachedDatasourceSubject.preference != "0"{//for preference flow
+                        var modifiedSubject = AdmissionFormSubject()
+                        modifiedSubject.semester       = selectedSubject.semester
+                        modifiedSubject.subjectName    = selectedSubject.subjectName
+                        modifiedSubject.subjectId      = selectedSubject.subjectId
+                        modifiedSubject.preference     = subjectInMap.preference //we are adding preferences while making data source
+                        cellDataSource.attachedObject = modifiedSubject
+                        return modifiedSubject
+                    }
+                }else{
+                    var tempformObjForedit = preAttachedDatasourceSubject
+                    tempformObjForedit.subjectName = ""
+                    tempformObjForedit.subjectId =   ""
+                    
+                    if (subjectInMap.semester == tempformObjForedit.semester && (subjectInMap.mandatory == "0") && cellDataSource.preferenceCount == subjectInMap.preferenceRank){ //normal stream selection flow without prefereces. here the semester is alreadty added and we adding the rest of the values when a subject is selected.
+                        var modified = AdmissionFormSubject()
+                        modified.subjectName    = selectedSubject.subjectName
+                        modified.subjectId      = selectedSubject.subjectId
+                        modified.semester       = subjectInMap.semester
+                        modified.mandatory     = subjectInMap.mandatory
+                        modified.preferenceRank = subjectInMap.preferenceRank
+                        cellDataSource.attachedObject = modified
+                        return modified
+                    }
+                }
+                return subjectInMap
+            })
+            /*
+             if formObjMap.semester == formObj.semester && formObjMap.preference == formObj.preference{
+             return formObj
+             }
+             
+             */
+        }
+    }
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         self.shouldFetchData = false
         if let `textField` = textField as? CustomTextField,
@@ -285,44 +336,6 @@ extension AdmissionSubjectsViewController:UITextFieldDelegate{
                     if let `stringObj` = stringObj.first as? String{
                         textField.text = stringObj
                     }
-                    //we take the subject selected frm picker and add it to the existing formsubject for api wihthout changing the preferenc
-                    if let row = self.dataPicker.selectedRow, let formObj = cellDataSource.attachedObject as? AdmissionFormSubject ,row < attachedObj.count, let preferenceFlowFlag = AdmissionSubjectManager.shared.selectedStream.isPreferenceFlow?.boolValue(){
-                        let subject = attachedObj[row]
-                        AdmissionSubjectManager.shared.subjectFormData.subject = AdmissionSubjectManager.shared.subjectFormData.subject?.map({ formObjMap -> AdmissionFormSubject in
-                            
-                            if preferenceFlowFlag{
-                                if formObjMap.semester == formObj.semester && formObjMap.preference == formObj.preference && formObj.preference != "0"{//for preference flow
-                                    var newForm = AdmissionFormSubject()
-                                    newForm.semester       = subject.semester
-                                    newForm.subjectName    = subject.subjectName
-                                    newForm.subjectId      = subject.subjectId
-                                    newForm.preference     = formObjMap.preference //we are adding preferences while making data source
-                                    cellDataSource.attachedObject = newForm
-                                    return newForm
-                                }
-                            }else{
-                                var tempformObjForedit = formObj
-                                tempformObjForedit.subjectName = ""
-                                tempformObjForedit.subjectId =   ""
-                                if (formObjMap.semester == tempformObjForedit.semester && (formObjMap.mandatory == "0")){ //normal stream selection flow without prefereces. here the semester is alreadty added and we adding the rest of the values when a subject is selected.
-                                    var newForm = AdmissionFormSubject()
-                                    newForm.subjectName    = subject.subjectName
-                                    newForm.subjectId      = subject.subjectId
-                                    newForm.semester       = formObjMap.semester
-                                    newForm.mandatory     = formObjMap.mandatory
-                                    cellDataSource.attachedObject = newForm
-                                    return newForm
-                                }
-                            }
-                            return formObjMap
-                        })
-                        /*
-                         if formObjMap.semester == formObj.semester && formObjMap.preference == formObj.preference{
-                         return formObj
-                         }
-                         
-                         */
-                    }
                 }
                 dataPicker.manuallySelectRow(row: 0, componnent: 0)
             }
@@ -336,14 +349,28 @@ extension AdmissionSubjectsViewController:UITextFieldDelegate{
         }
     }
     
-    
     func textFieldDidEndEditing(_ textField: UITextField) {
         if let `textField` = textField as? CustomTextField,
             let indexPath = textField.indexpath
         {
-            _ = arrayDataSource[indexPath.section].attachedObj[indexPath.row]
+            let cellDataSource = arrayDataSource[indexPath.section].attachedObj[indexPath.row] //this not optional
+            if let attachedObj = cellDataSource.dataSourceObject as? [AdmnissionSubjectList]
+            {   if let row = self.dataPicker.selectedRow, let subjectObj = attachedObj[row] as? AdmnissionSubjectList,
+                !AdmissionSubjectManager.shared.checkForDuplicateSubejects(subjectObj) //add if not duplicated are found
+            {
+                self.modifyApiDataSourxe(cellDataSource: cellDataSource, attachedObj: attachedObj)
+            }
+            else
+            {
+                if let formSubject = cellDataSource.attachedObject as? AdmissionFormSubject,
+                    !(formSubject.subjectName?.lowercased() == textField.text?.lowercased()){ //show error if same suject is seleced for different field. and no error when same subject is selected for same field
+                    self.showAlertWithTitle("Duplicate subject selected", alertMessage: "\(textField.text ?? "") is already selected")
+                    textField.text = ""
+                    self.tableView.reloadRows(at: [indexPath], with: .fade)
+                }
+                }
+            }
         }
-        
     }
     
     

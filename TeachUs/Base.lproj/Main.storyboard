@@ -2330,7 +2330,7 @@ Form Library</string>
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="NOr-Ap-Zrv">
-                                        <rect key="frame" x="12" y="195.5" width="296" height="186.5"/>
+                                        <rect key="frame" x="12" y="195.5" width="296" height="189.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="wZc-Zd-uNf">
                                                 <rect key="frame" x="0.0" y="0.0" width="284" height="23.5"/>
@@ -2344,27 +2344,46 @@ Form Library</string>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="aPk-TO-9Wu">
-                                                <rect key="frame" x="0.0" y="23.5" width="47.5" height="23"/>
+                                                <rect key="frame" x="0.0" y="23.5" width="47.5" height="24"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ueD-K0-yn0">
-                                                        <rect key="frame" x="0.0" y="0.0" width="47.5" height="23"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="47.5" height="24"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
                                             </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="6RG-Xu-zaX">
+                                                <rect key="frame" x="0.0" y="47.5" width="284" height="23.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Account Holder Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ulg-Bk-Azt">
+                                                        <rect key="frame" x="0.0" y="0.0" width="124.5" height="23.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RGd-l3-0Hv">
+                                                        <rect key="frame" x="254" y="0.0" width="30" height="23.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                        <state key="normal" title="Copy"/>
+                                                        <connections>
+                                                            <action selector="actionAccountHolderName:" destination="zgX-Aj-ohK" eventType="touchUpInside" id="G1o-DS-6no"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="u6X-4z-xLY">
-                                                <rect key="frame" x="0.0" y="46.5" width="284" height="23.5"/>
+                                                <rect key="frame" x="0.0" y="71" width="284" height="24"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Bank Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O0m-S5-sAl">
-                                                        <rect key="frame" x="0.0" y="0.0" width="64.5" height="23.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="64.5" height="24"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHF-ZN-rBa">
-                                                        <rect key="frame" x="254" y="0.0" width="30" height="23.5"/>
+                                                        <rect key="frame" x="254" y="0.0" width="30" height="24"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                         <state key="normal" title="Copy"/>
                                                         <connections>
@@ -2374,7 +2393,7 @@ Form Library</string>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="syk-4T-0N0">
-                                                <rect key="frame" x="0.0" y="70" width="284" height="23.5"/>
+                                                <rect key="frame" x="0.0" y="95" width="284" height="23.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Branch Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="baP-c7-Y5O">
                                                         <rect key="frame" x="0.0" y="0.0" width="76.5" height="23.5"/>
@@ -2393,16 +2412,16 @@ Form Library</string>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="oV0-BB-3bt">
-                                                <rect key="frame" x="0.0" y="93.5" width="284" height="23"/>
+                                                <rect key="frame" x="0.0" y="118.5" width="284" height="23.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Account Number" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="obX-5m-yMg">
-                                                        <rect key="frame" x="0.0" y="0.0" width="95.5" height="23"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="95.5" height="23.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="knE-La-etZ">
-                                                        <rect key="frame" x="254" y="0.0" width="30" height="23"/>
+                                                        <rect key="frame" x="254" y="0.0" width="30" height="23.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                         <state key="normal" title="Copy"/>
                                                         <connections>
@@ -2412,16 +2431,16 @@ Form Library</string>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="r41-aA-iG6">
-                                                <rect key="frame" x="0.0" y="116.5" width="284" height="23.5"/>
+                                                <rect key="frame" x="0.0" y="142" width="284" height="24"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="IFSC Code" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hxu-MQ-Xmc">
-                                                        <rect key="frame" x="0.0" y="0.0" width="60" height="23.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="60" height="24"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7uo-sm-am8">
-                                                        <rect key="frame" x="254" y="0.0" width="30" height="23.5"/>
+                                                        <rect key="frame" x="254" y="0.0" width="30" height="24"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                         <state key="normal" title="Copy"/>
                                                         <connections>
@@ -2430,27 +2449,8 @@ Form Library</string>
                                                     </button>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="6RG-Xu-zaX">
-                                                <rect key="frame" x="0.0" y="140" width="284" height="23"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Account Holder Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ulg-Bk-Azt">
-                                                        <rect key="frame" x="0.0" y="0.0" width="124.5" height="23"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RGd-l3-0Hv">
-                                                        <rect key="frame" x="254" y="0.0" width="30" height="23"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                                        <state key="normal" title="Copy"/>
-                                                        <connections>
-                                                            <action selector="actionAccountHolderName:" destination="zgX-Aj-ohK" eventType="touchUpInside" id="G1o-DS-6no"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                            </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="9cb-w7-lp9">
-                                                <rect key="frame" x="0.0" y="163" width="284" height="23.5"/>
+                                                <rect key="frame" x="0.0" y="166" width="284" height="23.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="UPI" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wrq-tB-AnK">
                                                         <rect key="frame" x="0.0" y="0.0" width="20" height="23.5"/>
@@ -2480,21 +2480,36 @@ Form Library</string>
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="qhU-xd-fOZ">
-                                        <rect key="frame" x="12" y="397" width="296" height="67"/>
+                                        <rect key="frame" x="12" y="400" width="296" height="64"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Transaction number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zJy-et-RhZ">
                                                 <rect key="frame" x="0.0" y="0.0" width="296" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yoU-cK-ONQ">
-                                                <rect key="frame" x="43.5" y="39" width="209" height="28"/>
-                                                <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
-                                                <state key="normal" title="Upload Transaction Receipt"/>
-                                                <connections>
-                                                    <action selector="actionAddTransactionImage:" destination="zgX-Aj-ohK" eventType="touchUpInside" id="eXo-x7-ocY"/>
-                                                </connections>
-                                            </button>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="L0d-pI-7Wj">
+                                                <rect key="frame" x="4.5" y="39" width="287" height="25"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yoU-cK-ONQ">
+                                                        <rect key="frame" x="0.0" y="0.0" width="176" height="25"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                        <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
+                                                        <state key="normal" title="Upload Transaction Receipt"/>
+                                                        <connections>
+                                                            <action selector="actionAddTransactionImage:" destination="zgX-Aj-ohK" eventType="touchUpInside" id="eXo-x7-ocY"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zL8-uB-qcC">
+                                                        <rect key="frame" x="181" y="0.0" width="106" height="25"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                        <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
+                                                        <state key="normal" title="Submit Receipt"/>
+                                                        <connections>
+                                                            <action selector="actionSubmitReceipt:" destination="zgX-Aj-ohK" eventType="touchUpInside" id="It2-Sa-CWk"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="zJy-et-RhZ" firstAttribute="leading" secondItem="qhU-xd-fOZ" secondAttribute="leading" id="MI0-FU-CmI"/>
@@ -2538,6 +2553,7 @@ Form Library</string>
                         <outlet property="buttonDownloadDocument" destination="Dbm-Rb-Jdi" id="DqF-GV-cPA"/>
                         <outlet property="buttonProceedToForm" destination="Pft-RM-kdW" id="QjR-dJ-yp9"/>
                         <outlet property="buttonSendEmail" destination="qpX-vB-0wa" id="bit-3K-Xyh"/>
+                        <outlet property="buttonSubmitReceipt" destination="zL8-uB-qcC" id="PYV-sD-B4a"/>
                         <outlet property="buttonUploadTransaction" destination="yoU-cK-ONQ" id="UIl-dm-y1f"/>
                         <outlet property="imageViewCheckbox" destination="Ua6-Bs-d2Z" id="WIr-Fy-W0q"/>
                         <outlet property="imageViewTick" destination="Ua6-Bs-d2Z" id="9dg-jP-4xJ"/>

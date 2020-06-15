@@ -38,6 +38,7 @@ class AdmissionStatusViewController: BaseViewController {
     var imagePicker:UIImagePickerController = UIImagePickerController()
     var transactionImage:UIImage?
     
+    @IBOutlet weak var buttonSubmitReceipt: UIButton!
     
     
     override func viewDidLoad() {
@@ -57,6 +58,7 @@ class AdmissionStatusViewController: BaseViewController {
         imagePicker.mediaTypes = ["public.image"]
         imagePicker.allowsEditing = true
         self.buttonSendEmail.themeDisabledGreyButton()
+        self.buttonSubmitReceipt.themeDisabledGreyButton()
         self.textFieldEmailAddress.text = UserManager.sharedUserManager.appUserDetails.email ?? ""
         addNavbarButton()
         addKeyboardObservers()
@@ -169,9 +171,6 @@ class AdmissionStatusViewController: BaseViewController {
         case .none:
             break
         }
-        
-        self.stackViewPaymentDetails.isHidden = false
-        
     }
     
     func hideEverything(){
@@ -269,9 +268,11 @@ class AdmissionStatusViewController: BaseViewController {
     }
     @objc func checkTransactionInput(sender:UITextField){
         self.buttonUploadTransaction.isEnabled = (sender.text?.count ?? 0) > 1
-        if (sender.text?.count ?? 0) > 1 {
+        if (sender.text?.count ?? 0) > 1  && self.transactionImage != nil{
+            self.buttonSubmitReceipt.themeRedButton()
+        }else if (sender.text?.count ?? 0) > 1{
             self.buttonUploadTransaction.themeRedButton()
-        }else{
+        }else {
             self.buttonUploadTransaction.themeDisabledGreyButton()
         }
     }
@@ -304,6 +305,21 @@ class AdmissionStatusViewController: BaseViewController {
         
     }
     
+    @IBAction func actionSubmitReceipt(_ sender: Any) {
+        self.showAlertWithTitleAndCompletionHandlers("Confirm submission", alertMessage: "Are you sure you want to submit the receipt", okButtonString: "Confirm", canelString: "Cancel", okAction: {
+            AdmissionBaseManager.shared.uploadTransactionDetails(self.textfieldTransactionNumber.text ?? "", self.transactionImage ?? UIImage(), completion: { (dict) in
+                if let message  = dict?["message"] as? String{
+                    self.showAlertWithTitle("Success", alertMessage: message)
+                    self.getFormData()
+                }
+            }) { (message) in
+                    self.showAlertWithTitle("Failed", alertMessage: message)
+            }
+        }) {
+            //cancel clicked do nothing.
+        }
+
+    }
     func openCamera()
     {
         if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.camera))
@@ -338,7 +354,12 @@ extension AdmissionStatusViewController:UIImagePickerControllerDelegate,UINaviga
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage{
             self.transactionImage = image
             imagePicker.dismiss(animated: true) {
-                self.showAlert()
+                if self.transactionImage != nil{
+                    self.showAlertWithTitle("Success", alertMessage: "Image selected!")
+                    self.buttonSubmitReceipt.themeRedButton()
+                }else{
+                    self.buttonSubmitReceipt.themeDisabledGreyButton()
+                }
             }
         }
         

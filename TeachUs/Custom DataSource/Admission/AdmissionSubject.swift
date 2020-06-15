@@ -70,19 +70,23 @@ class AdmissionSubjectDataSource{
     var dataSourceObject:Any?
     var placeHolderText:String?
     var shouldDisable:Bool?
+    var preferenceCount:String?
     
-    init(detailsCell:SubjectCellType, detailsObject:Any?, dataSource:Any?, shouldDisableObj:Bool? = false) {
+    init(detailsCell:SubjectCellType, detailsObject:Any?, dataSource:Any?, shouldDisableObj:Bool? = false, preferenceCountObj:String? = nil) {
         self.cellType = detailsCell
         self.attachedObject = detailsObject
         self.dataSourceObject = dataSource
         self.shouldDisable = shouldDisableObj
+        self.preferenceCount = preferenceCountObj
     }
     
-    init(detailsCell:SubjectCellType, detailsObject:Any?, dataSource:Any?, placeholder:String) {
+    init(detailsCell:SubjectCellType, detailsObject:Any?, dataSource:Any?, placeholder:String,preferenceCountObj:String? = nil) {
         self.cellType = detailsCell
         self.attachedObject = detailsObject
         self.dataSourceObject = dataSource
         self.placeHolderText = placeholder
+        self.preferenceCount = preferenceCountObj
+
     }
     
 }

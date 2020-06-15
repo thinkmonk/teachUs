@@ -252,6 +252,7 @@
 		81BA3F19232E2AA700675716 /* StudentRollNumberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BA3F17232E2AA700675716 /* StudentRollNumberCollectionViewCell.swift */; };
 		81BA3F1A232E2AA700675716 /* StudentRollNumberCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81BA3F18232E2AA700675716 /* StudentRollNumberCollectionViewCell.xib */; };
 		81BA3F1C232E378C00675716 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BA3F1B232E378C00675716 /* UIViewController.swift */; };
+		81BA78D92497DC8000334E55 /* AdmissionSubjectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BA78D82497DC8000334E55 /* AdmissionSubjectManager.swift */; };
 		81BC49A52299CDD800549867 /* ProfileChangeRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BC49A42299CDD800549867 /* ProfileChangeRequestsViewController.swift */; };
 		81BC49A82299D0F100549867 /* ProfileChangeRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BC49A62299D0F100549867 /* ProfileChangeRequestTableViewCell.swift */; };
 		81BC49A92299D0F100549867 /* ProfileChangeRequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81BC49A72299D0F100549867 /* ProfileChangeRequestTableViewCell.xib */; };
@@ -641,6 +642,7 @@
 		81BA3F17232E2AA700675716 /* StudentRollNumberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentRollNumberCollectionViewCell.swift; sourceTree = "<group>"; };
 		81BA3F18232E2AA700675716 /* StudentRollNumberCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StudentRollNumberCollectionViewCell.xib; sourceTree = "<group>"; };
 		81BA3F1B232E378C00675716 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		81BA78D82497DC8000334E55 /* AdmissionSubjectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdmissionSubjectManager.swift; sourceTree = "<group>"; };
 		81BC49A42299CDD800549867 /* ProfileChangeRequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileChangeRequestsViewController.swift; sourceTree = "<group>"; };
 		81BC49A62299D0F100549867 /* ProfileChangeRequestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileChangeRequestTableViewCell.swift; sourceTree = "<group>"; };
 		81BC49A72299D0F100549867 /* ProfileChangeRequestTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileChangeRequestTableViewCell.xib; sourceTree = "<group>"; };
@@ -1680,6 +1682,7 @@
 				815E1D8C248AC18200E5E91C /* AdmissionFamilyManager.swift */,
 				8188E56E248BCB0D005BD92E /* AdmissionDocumentsManager.swift */,
 				816345BB248CD085001FF04B /* AdmissionBaseManager.swift */,
+				81BA78D82497DC8000334E55 /* AdmissionSubjectManager.swift */,
 			);
 			path = Admission;
 			sourceTree = "<group>";
@@ -2267,6 +2270,7 @@
 				81C2085A1FAF6CEB003D366D /* EnrolledStudentDetail.swift in Sources */,
 				81A80ED91FADFC6200DDFFA1 /* URLConstansts.swift in Sources */,
 				81F92A4722B5277B00395413 /* BellNotificationListViewController.swift in Sources */,
+				81BA78D92497DC8000334E55 /* AdmissionSubjectManager.swift in Sources */,
 				810200CB224BF1B400C87EA3 /* EditAttendanceLectureInfo.swift in Sources */,
 				81B203D91FD551FF00936F0F /* Teacher+CoreDataProperties.swift in Sources */,
 				81B203DD1FD551FF00936F0F /* SuperAdmin+CoreDataProperties.swift in Sources */,
