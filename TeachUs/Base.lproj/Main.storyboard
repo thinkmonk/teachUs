@@ -199,6 +199,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="3Um-aB-i1y"/>
                     </view>
+                    <navigationItem key="navigationItem" id="lJf-MS-1we"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Sz-DN-ibU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -2164,7 +2165,7 @@ Form Library</string>
                     </view>
                     <navigationItem key="navigationItem" id="Dzi-49-4jZ"/>
                     <connections>
-                        <segue destination="LZn-5B-LbX" kind="show" identifier="toLoginSelect" id="Wld-2f-kAB"/>
+                        <segue destination="LZn-5B-LbX" kind="presentation" identifier="toLoginSelect" modalPresentationStyle="fullScreen" id="Wld-2f-kAB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ump-qs-4Wt" userLabel="First Responder" sceneMemberID="firstResponder"/>
