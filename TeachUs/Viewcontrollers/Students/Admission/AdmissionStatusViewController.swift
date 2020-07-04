@@ -57,9 +57,14 @@ class AdmissionStatusViewController: BaseViewController {
         imagePicker.delegate = self
         imagePicker.mediaTypes = ["public.image"]
         imagePicker.allowsEditing = true
-        self.buttonSendEmail.themeDisabledGreyButton()
         self.buttonSubmitReceipt.themeDisabledGreyButton()
-        self.textFieldEmailAddress.text = UserManager.sharedUserManager.appUserDetails.email ?? ""
+        if let email = UserManager.sharedUserManager.appUserDetails.email{
+            self.textFieldEmailAddress.text = email
+            self.buttonSendEmail.themeRedButton()
+        }else{
+            self.textFieldEmailAddress.text = ""
+            self.buttonSendEmail.themeDisabledGreyButton()
+        }
         addNavbarButton()
         addKeyboardObservers()
         self.textfieldTransactionNumber.delegate = self
@@ -171,6 +176,10 @@ class AdmissionStatusViewController: BaseViewController {
         case .none:
             break
         }
+        
+        #if DEBUG
+        self.buttonProceedToForm.isHidden = false
+        #endif
     }
     
     func hideEverything(){
@@ -273,7 +282,9 @@ class AdmissionStatusViewController: BaseViewController {
         }else if (sender.text?.count ?? 0) > 1{
             self.buttonUploadTransaction.themeRedButton()
         }else {
+            self.transactionImage = nil
             self.buttonUploadTransaction.themeDisabledGreyButton()
+            self.buttonSubmitReceipt.themeDisabledGreyButton()
         }
     }
     
@@ -357,6 +368,7 @@ extension AdmissionStatusViewController:UIImagePickerControllerDelegate,UINaviga
                 if self.transactionImage != nil{
                     self.showAlertWithTitle("Success", alertMessage: "Image selected!")
                     self.buttonSubmitReceipt.themeRedButton()
+                    self.buttonSubmitReceipt.isEnabled = true
                 }else{
                     self.buttonSubmitReceipt.themeDisabledGreyButton()
                 }

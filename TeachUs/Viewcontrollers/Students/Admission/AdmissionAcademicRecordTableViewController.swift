@@ -31,7 +31,7 @@ class AdmissionAcademicRecordTableViewController: BaseTableViewController {
     }
     
     func addRightBarButton(){
-        let rightButton = UIButton(frame: CGRect(x: 0, y: 0, width: 20, height: 20 ))
+        let rightButton = UIButton(frame: CGRect(x: 0, y: 0, width: 80, height: 25  ))
         rightButton.setTitle("Proceed", for: .normal)
         rightButton.setTitleColor(.white, for: .normal)
         rightButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
@@ -252,6 +252,8 @@ extension AdmissionAcademicRecordTableViewController:UITextFieldDelegate{
         {
             let cellDataSource = AdmissionResultManager.shared.dataSource[indexPath.section].attachedObj[indexPath.row]
             cellDataSource.setValues(value: textField.text ?? "", otherObj: nil, indexPath: indexPath)
+            AdmissionResultManager.shared.dataSource[indexPath.section].attachedObj[indexPath.row].attachedObj = textField.text ?? ""
+            self.tableView.reloadRows(at: [indexPath], with: .fade)
             if cellDataSource.cellType == .resultDeclared{
                 AdmissionResultManager.shared.makeDataSource()
                 self.tableView.reloadSections([indexPath.section], with: .fade)

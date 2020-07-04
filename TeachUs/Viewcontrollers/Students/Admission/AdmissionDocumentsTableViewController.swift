@@ -65,7 +65,7 @@ class AdmissionDocumentsTableViewController: BaseTableViewController {
     }
     
     func addRightBarButton(){
-        let rightButton = UIButton(frame: CGRect(x: 0, y: 0, width: 20, height: 20 ))
+        let rightButton = UIButton(frame: CGRect(x: 0, y: 0, width: 80, height: 25  ))
         rightButton.setTitle("Proceed", for: .normal)
         rightButton.setTitleColor(.white, for: .normal)
         rightButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)

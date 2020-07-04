@@ -104,13 +104,14 @@ class HomeViewController: BaseViewController{
         }else{
             if UserManager.sharedUserManager.user == .student && UserManager.sharedUserManager.shouldShowAdmissionButton, !(self.navigationItem.rightBarButtonItems?.contains(where: {$0.tag == Constants.NumberConstants.tagAdmissionButton}) ?? true)
             {
-                let admissionButton = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 20 ))
+                let admissionButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 20 ))
                 admissionButton.setTitle("Admission", for: .normal)
                 admissionButton.layer.borderWidth = 1.0
                 admissionButton.layer.borderColor = UIColor.white.cgColor
                 admissionButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
                 admissionButton.addTarget(self, action: #selector(admissionFormAction), for: .touchUpInside)
-                admissionButton.setContentCompressionResistancePriority(.required, for: .horizontal)
+                admissionButton.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+                admissionButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
                 admissionButton.tag = Constants.NumberConstants.tagAdmissionButton
                 navigationItem.titleView?.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
                 let addmissionBarButton = UIBarButtonItem(customView: admissionButton)

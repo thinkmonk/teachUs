@@ -79,7 +79,8 @@ extension AcademicRowDataSource{
         
             }else if self.cellType == .prnNuber{
                 AdmissionResultManager.shared.recordData?.academicRecord?.prnNo = value
-            }else if AdmissionResultManager.shared.dataSource[indexPath.section].headerType == .recordsData, var recordInfo = academicInfo.academicRecord?.result?[indexPath.section-1]{
+            }else if AdmissionResultManager.shared.dataSource[indexPath.section].headerType == .recordsData,
+                var recordInfo = academicInfo.academicRecord?.result?[indexPath.section-1]{
                 //-1 as first indexpath is previous record section
                 switch self.cellType! {
                 case .academicYear:
@@ -96,8 +97,11 @@ extension AcademicRowDataSource{
                     recordInfo.grade = value
                 case .passingMonth:
                     recordInfo.passingMonth = value
+                    
+                case .passingYear:
+                    recordInfo.passingYear = value
                 case .atkt:
-                    recordInfo.passingMonth = value
+                    recordInfo.noOfAtkt = value
                     
                 default:break
                 }
