@@ -271,6 +271,7 @@ extension LeftMenuViewController:UITableViewDelegate, UITableViewDataSource{
             self.tableViewMenu.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
             self.tableViewMenu.delegate?.tableView!(self.tableViewMenu, didSelectRowAt: indexPath)
             self.setUpTableView()
+            NotificationCenter.default.post(.init(name: .showHideAdmissionButton, object: nil, userInfo: nil))
         }
     }
     

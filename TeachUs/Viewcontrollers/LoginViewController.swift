@@ -17,7 +17,7 @@ class LoginViewController: BaseViewController {
     var username:String = ""
     var otpTime:Int = 180
     var otpTimeUpdated:Int!
-    var otpTimer:Timer!
+    var otpTimer:Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -216,7 +216,7 @@ extension LoginViewController:OtpDelegate{
             self.StudentOtpView.buttonSendOtp.backgroundColor = Constants.colors.themeBlue
             self.StudentOtpView.buttonSendOtp.isEnabled = true
             self.StudentOtpView.buttonSendOtp.setTitle("Resend OTP", for: UIControlState.normal)
-            otpTimer.invalidate()
+            otpTimer?.invalidate()
         }
     }
     
@@ -233,7 +233,7 @@ extension LoginViewController:OtpDelegate{
         ]
         manager.apiPost(apiName: "Verify OTP", parameters: parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
-            self.otpTimer.invalidate()
+            self.otpTimer?.invalidate()
             if(code == 200){
                 let accessToken:String = response["token"] as! String
                 UserManager.sharedUserManager.setAccessToken(accessToken)
@@ -244,7 +244,7 @@ extension LoginViewController:OtpDelegate{
                 self.showAlertWithTitle(nil, alertMessage: message)
             }
         }) { (error, code, message) in
-            self.otpTimer.invalidate()
+            self.otpTimer?.invalidate()
             LoadingActivityHUD.hideProgressHUD()
             print(message)
         }
@@ -309,7 +309,7 @@ extension LoginViewController:CollegeLoginDelegate{
             self.collegeLogin.buttonSendOtp.backgroundColor = Constants.colors.themeBlue
             self.collegeLogin.buttonSendOtp.isEnabled = true
             self.collegeLogin.buttonSendOtp.setTitle("Resend OTP", for: UIControlState.normal)
-            otpTimer.invalidate()
+            otpTimer?.invalidate()
         }
     }
     
@@ -325,7 +325,7 @@ extension LoginViewController:CollegeLoginDelegate{
         ]
         manager.apiPost(apiName: "Verify OTP", parameters: parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
-            self.otpTimer.invalidate()
+            self.otpTimer?.invalidate()
             if(code == 200){
                 let accessToken:String = response["token"] as! String
                 UserManager.sharedUserManager.setAccessToken(accessToken)
@@ -335,7 +335,7 @@ extension LoginViewController:CollegeLoginDelegate{
                 self.showAlertWithTitle(nil, alertMessage: message)
             }
         }) { (error, code, message) in
-            self.otpTimer.invalidate()
+            self.otpTimer?.invalidate()
             LoadingActivityHUD.hideProgressHUD()
             print(message)
         }

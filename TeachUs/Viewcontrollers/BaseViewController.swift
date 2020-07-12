@@ -125,6 +125,10 @@ class BaseViewController: UIViewController {
         
     }
     
+    /// Shows alert only with title and "Ok" button
+    /// - Parameters:
+    ///   - title: title to be displayed
+    ///   - alertMessage: "Ok" button label
     func showAlertWithTitle(_ title:String?, alertMessage:String){
         let alertTitle = title != nil ? title : nil
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.alert)
@@ -334,4 +338,233 @@ class BaseViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
         sender.view?.removeFromSuperview()
     }
+    
+    /// Shows alert with ok button and custom action block and cancel button with custom action block
+    /// - Parameters:
+    ///   - title: Title of the alert
+    ///   - alertMessage: message
+    ///   - okButtonString: ok button
+    ///   - canelString: cancel button label
+    ///   - okAction: ok action
+    ///   - cancelAction: cancel action
+    /// - Returns: nothing
+    func showAlertWithTitleAndCompletionHandlers(_ title:String?, alertMessage:String, okButtonString:String?, canelString:String?,okAction:@escaping (()->()), cancelAction:@escaping(()->())){
+        let alertTitle = title != nil ? title : nil
+        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.alert)
+        
+        // add an action (button)
+        alert.addAction(UIAlertAction(title: okButtonString ?? "OK", style: .default, handler: { (_) in
+            okAction()
+        }))
+        // show the alert
+        
+        alert.addAction(UIAlertAction(title: canelString ?? "CANCEL", style: .cancel, handler: { (_) in
+            cancelAction()
+        }))
+
+        
+        var rootViewController = UIApplication.shared.keyWindow?.rootViewController
+        if let navigationController = rootViewController as? UINavigationController {
+            rootViewController = navigationController.viewControllers.first
+        }
+        if (rootViewController!.isViewLoaded && (rootViewController!.view.window != nil)) {
+            rootViewController?.present(alert, animated: true, completion: nil)
+        }
+        else{
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+
+}
+
+
+class BaseTableViewController:UITableViewController{
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.automaticallyAdjustsScrollViewInsets = true
+    }
+    
+    var navBarHeight:CGFloat {
+        return self.navigationController!.navigationBar.frame.height
+    }
+    
+    var statusBarHeight:CGFloat{
+        return UIApplication.shared.statusBarFrame.height
+    }
+
+    
+    func addGrdientToNavBar()
+    {
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.backgroundColor = UIColor.clear
+        let gradient = CAGradientLayer()
+        var viewHeight = statusBarHeight + navBarHeight
+        
+        gradient.frame = CGRect(x: 0, y: -statusBarHeight, width: UIApplication.shared.statusBarFrame.width, height: viewHeight)
+        gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
+        gradient.endPoint = CGPoint(x: 1, y: 1)
+        //        let color1 = UIColor(red: 116/255, green: 104/255, blue: 218/255, alpha: 1.0)
+        //      let color2 = UIColor(red: 126/255, green: 74/255, blue: 187/255, alpha: 1.0)
+        let color1 = UIColor(red: 18/255, green: 63/255, blue: 148/255, alpha: 1.0)
+        let color2 = UIColor(red: 8/255, green: 47/255, blue: 136/255, alpha: 1.0)
+        
+        gradient.colors = [color1.cgColor, color2.cgColor]
+        UIApplication.shared.windows.last?.layer.addSublayer(gradient)
+        self.navigationController?.navigationBar.layer.addSublayer(gradient)
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+
+        
+    }
+    
+    func addGradientToNavBarWithMenu(){
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.backgroundColor = UIColor.clear
+        let gradient = CAGradientLayer()
+        gradient.frame = CGRect(x: 0,
+                                y: 0,
+                                width: UIApplication.shared.statusBarFrame.width,
+                                height: statusBarHeight + navBarHeight + CGFloat(Constants.NumberConstants.homeTabBarHeight))
+        gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
+        gradient.endPoint = CGPoint(x: 1, y: 1)
+        //  let color1 = UIColor(red: 116/255, green: 104/255, blue: 218/255, alpha: 1.0)
+        //let color2 = UIColor(red: 126/255, green: 74/255, blue: 187/255, alpha: 1.0)
+        
+        let color1 = UIColor(red: 18/255, green: 63/255, blue: 148/255, alpha: 1.0)
+        let color2 = UIColor(red: 8/255, green: 47/255, blue: 136/255, alpha: 1.0)
+        
+        gradient.colors = [color1.cgColor, color2.cgColor]
+        //        UIApplication.shared.windows.last?.layer.addSublayer(gradient)
+        //        self.view.layer.addSublayer(gradient)
+        self.navigationController?.navigationBar.layer.insertSublayer(gradient, at: 0)
+        
+    }
+    
+    func addGradientNew(){
+        if let navigationBar = self.navigationController?.navigationBar {
+            let gradient = CAGradientLayer()
+            var bounds = navigationBar.bounds
+            bounds.size.height += UIApplication.shared.statusBarFrame.size.height
+            gradient.frame = bounds
+            
+            let color1 = UIColor(red: 18/255, green: 63/255, blue: 148/255, alpha: 1.0)
+            let color2 = UIColor(red: 8/255, green: 47/255, blue: 136/255, alpha: 1.0)
+
+            gradient.colors = [color1.cgColor, color2.cgColor]
+            gradient.startPoint = CGPoint(x: 0, y: 0)
+            gradient.endPoint = CGPoint(x: 1, y: 1)
+
+            if let image = getImageFrom(gradientLayer: gradient) {
+                navigationBar.setBackgroundImage(image, for: UIBarMetrics.default)
+            }else{
+                print("************** IMAGE NA MILA ***************")
+            }
+        }
+
+    }
+    
+    func getImageFrom(gradientLayer:CAGradientLayer) -> UIImage? {
+        var gradientImage:UIImage?
+        UIGraphicsBeginImageContext(gradientLayer.frame.size)
+        if let context = UIGraphicsGetCurrentContext() {
+            gradientLayer.render(in: context)
+            gradientImage = UIGraphicsGetImageFromCurrentImageContext()?.resizableImage(withCapInsets: UIEdgeInsets.zero, resizingMode: .tile)
+        }
+        UIGraphicsEndImageContext()
+        return gradientImage
+    }
+    /// Shows alert only with title and "Ok" button
+    /// - Parameters:
+    ///   - title: title to be displayed
+    ///   - alertMessage: "Ok" button label
+    func showAlertWithTitle(_ title:String?, alertMessage:String){
+        let alertTitle = title != nil ? title : nil
+        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.alert)
+        
+        // add an action (button)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        
+        // show the alert
+        
+        var rootViewController = UIApplication.shared.keyWindow?.rootViewController
+        if let navigationController = rootViewController as? UINavigationController {
+            rootViewController = navigationController.viewControllers.first
+        }
+        if (rootViewController!.isViewLoaded && (rootViewController!.view.window != nil)) {
+            rootViewController?.present(alert, animated: true, completion: nil)
+        }
+        else{
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+
+    
+    /// Shows alert only with ok button and completion handler
+    /// - Parameters:
+    ///   - title: Alert title
+    ///   - alertMessage: alert message
+    ///   - okButtonString: ok button title
+    ///   - okAction: ok button action
+    /// - Returns: NA
+    func showAlertWithOKTitleAndCompletionHandlers(_ title:String?, alertMessage:String, okButtonString:String?,okAction:@escaping (()->())){
+        let alertTitle = title != nil ? title : nil
+        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.alert)
+        
+        // add an action (button)
+        alert.addAction(UIAlertAction(title: okButtonString ?? "OK", style: .default, handler: { (_) in
+            okAction()
+        }))
+        
+        var rootViewController = UIApplication.shared.keyWindow?.rootViewController
+        if let navigationController = rootViewController as? UINavigationController {
+            rootViewController = navigationController.viewControllers.first
+        }
+        if (rootViewController!.isViewLoaded && (rootViewController!.view.window != nil)) {
+            rootViewController?.present(alert, animated: true, completion: nil)
+        }
+        else{
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    /// Shows alert with ok button and custom action block and cancel button with custom action block
+    /// - Parameters:
+    ///   - title: Title of the alert
+    ///   - alertMessage: message
+    ///   - okButtonString: ok button
+    ///   - canelString: cancel button label
+    ///   - okAction: ok action
+    ///   - cancelAction: cancel action
+    /// - Returns: nothing
+    func showAlertWithTitleAndCompletionHandlers(_ title:String?, alertMessage:String, okButtonString:String?, canelString:String?,okAction:@escaping (()->()), cancelAction:@escaping(()->())){
+        let alertTitle = title != nil ? title : nil
+        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.alert)
+        
+        // add an action (button)
+        alert.addAction(UIAlertAction(title: okButtonString ?? "OK", style: .default, handler: { (_) in
+            okAction()
+        }))
+        // show the alert
+        
+        alert.addAction(UIAlertAction(title: canelString ?? "CANCEL", style: .cancel, handler: { (_) in
+            cancelAction()
+        }))
+
+        
+        var rootViewController = UIApplication.shared.keyWindow?.rootViewController
+        if let navigationController = rootViewController as? UINavigationController {
+            rootViewController = navigationController.viewControllers.first
+        }
+        if (rootViewController!.isViewLoaded && (rootViewController!.view.window != nil)) {
+            rootViewController?.present(alert, animated: true, completion: nil)
+        }
+        else{
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+
 }

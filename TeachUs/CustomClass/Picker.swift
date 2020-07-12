@@ -1,0 +1,104 @@
+//
+//  Picker.swift
+//  TeachUs
+//
+//  Created by iOS on 28/05/20.
+//  Copyright © 2020 TeachUs. All rights reserved.
+//
+
+import Foundation
+class PickerSource : NSObject, UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return data.count
+    }
+    
+    
+    var data: [[String]] = []
+    var selectionUpdated: ((_ component: Int, _ row: Int) -> Void)?
+    
+    // MARK: UIPickerViewDataSource
+    
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        let rows = data[component]
+        return rows.count
+    }
+    
+    // MARK: UIPickerViewDelegate
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return "\(data[component][row])"
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        selectionUpdated?(component, row)
+    }
+}
+
+class Picker<T : Any> : UIPickerView {
+    
+    var data: [[T]] = [] {
+        didSet {
+            source.data = data.map { $0.map { "\($0)" } }
+            self.selectRow(0, inComponent: 0, animated: false)
+            reloadAllComponents()
+            if ((data.first?.count ?? 0) > 0){
+                }
+        }
+    }
+    
+    var selectionUpdated: ((_ selections: [T?]) -> Void)?
+    var selectedRow:Int?
+    private let source = PickerSource()
+    
+    // MARK: Initialization
+    
+    convenience init() {
+        self.init(frame: CGRect.zero)
+    }
+    
+    convenience init(data: [[T]]) {
+        self.init(frame: CGRect.zero)
+        setData(newData: data)
+    }
+    
+    private func setData (newData:[[T]]){
+        self.data = newData
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    func manuallySelectRow(row:Int, componnent:Int){
+        source.pickerView(self, didSelectRow:0, inComponent: 0)
+    }
+    
+    // MARK: Setup
+    
+    private func setup() {
+        dataSource = source
+        delegate = source
+        source.selectionUpdated = { [weak self] component, row in
+            if let _self = self {
+                _self.selectedRow = row
+                var selections: [T?] = []
+                for (idx, componentData) in (_self.data).enumerated() {
+                    let selectedRow = _self.selectedRow(inComponent: idx)
+                    if selectedRow >= 0 {
+                        selections.append(componentData[selectedRow])
+                    } else {
+                        selections.append(nil)
+                    }
+                }
+                _self.selectionUpdated?(selections)
+            }
+        }
+    }
+}

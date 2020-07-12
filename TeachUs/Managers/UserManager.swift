@@ -67,7 +67,9 @@ class UserManager{
         }
         return nil
     }
-    
+    var shouldShowAdmissionButton:Bool{
+        return self.appUserCollegeDetails.admissionFlag == "0"
+    }
     var userProfilesArray:[AppUser] = []
     var userEmail:String = ""
     var userName:String = ""
@@ -324,6 +326,9 @@ class UserManager{
         collegeDetails.role_name = college["role_name"] as? String
         collegeDetails.userControlTabs = college["user_control"] as? String
 
+        if let admissionFlag = college["is_admission_active"] as? String{
+            collegeDetails.admissionFlag = admissionFlag
+        }
         if let notificationsCount = college["total_notification"] as? String{
             collegeDetails.notificationCount = notificationsCount
         }

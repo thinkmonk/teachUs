@@ -14,6 +14,6 @@ extension Notification.Name {
     static let notificationBellCountUpdate      = Notification.Name("bellIconDataUpdated")
     static let performNotificationNavigation    = Notification.Name("performNotificationNavigation")
     static let eventDeleted                     = Notification.Name("eventDeleted")
-
+    static let showHideAdmissionButton          = Notification.Name("showHideNotification")
 
 }

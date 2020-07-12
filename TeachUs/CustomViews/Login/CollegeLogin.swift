@@ -38,8 +38,15 @@ class CollegeLogin: UIView {
     func setUpReactive()
     {
         let otpValid = textFieldOtp.rx.text.orEmpty
-            .map { $0.count > 0 }
+            .map { $0.count == 4 }
             .share(replay: 1) // without this map would be executed once for each binding, rx is stateless by default
+
+        otpValid.subscribe(onNext:{ isValid in
+//            if isValid{
+//                self.buttonVerifyOtp.sendActions(for: .touchUpInside)
+//            }
+            self.buttonVerifyOtp.isEnabled = isValid
+        }).disposed(by: disposeBag)
         
         otpValid
             .bind(to: buttonVerifyOtp.rx.isEnabled)
@@ -122,6 +129,15 @@ class CollegeLogin: UIView {
             self.transform = CGAffineTransform.identity
         }, completion: { (result) in
         })
+//        self.buttonVerifyOtp.addTarget(self, action: #selector(actionVerfiyOtp), for: .touchUpInside)
+        self.buttonVerifyOtp.isEnabled = true
+        self.buttonVerifyOtp.isUserInteractionEnabled = true
+    }
+    
+    @objc func actionVerfiyOtp(){
+        if(self.delegate != nil){
+            delegate.verifyCollegeOtp()
+        }
     }
 
     class func instanceFromNib() -> UIView {

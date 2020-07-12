@@ -31,7 +31,7 @@ class OtpView: UIView {
     var userType:LoginUserType!
     var OtpText = Variable<String>("")
     var username: String = "User"
-    var mobileNumber:String = "9876543210"
+    var mobileNumber:String = ""
 //
 //    let otpValid: Observable<Bool> = userNameText.rx_text
 //        .map{ text -> Bool in

@@ -187,5 +187,21 @@ public struct URLConstants{
         static let storeLink = "https://itunes.apple.com/in/app/teach-us/id1392613722?mt=8"
     }
 
+    struct Admission {
+        static let getAdmssionStudentInfo   = BaseUrl.baseURLV1 + "/admission/personal_information"
+        static let submitStudentInfo        = BaseUrl.baseURLV1 + "/admission/personal_information_form"
+        static let getCampusClass           = BaseUrl.baseURLV1 + "/admission/campus_class"
+        static let getCampusSubject         = BaseUrl.baseURLV1 + "/admission/campus"
+        static let submitCampusDetails      = BaseUrl.baseURLV1 + "/admission/campus_form"
+        static let getrecordData            = BaseUrl.baseURLV1 + "/admission/academic_record"
+        static let submitAcademicRecordForm = BaseUrl.baseURLV1 + "/admission/academic_record_form"
+        static let familyData               = BaseUrl.baseURLV1 + "/admission/family_info"
+        static let submitFamilyData         = BaseUrl.baseURLV1 + "/admission/family_info_form"
+        static let getDocuments             = BaseUrl.baseURLV1 + "/admission/upload_doc"
+        static let submitDocuments          = BaseUrl.baseURLV1 + "/admission/upload_doc_form"
+        static let getSavedData             = BaseUrl.baseURLV1 + "/admission/admission_status"
+        static let emailPDF                 = BaseUrl.baseURLV1 + "/admission/pdf_mail"
+        static let feePaymentDetails        = BaseUrl.baseURLV1 + "/admission/fee_payment_form"
+    }
 
 }

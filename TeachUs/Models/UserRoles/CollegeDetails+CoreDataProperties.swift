@@ -28,5 +28,5 @@ extension CollegeDetails {
     @NSManaged public var studentEmail: String?
     @NSManaged public var studentName: String?
     @NSManaged public var userControlTabs: String?
-
+    @NSManaged public var admissionFlag: String?
 }

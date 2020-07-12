@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import Firebase
 import UserNotifications
-import FirebaseMessaging
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate {
 

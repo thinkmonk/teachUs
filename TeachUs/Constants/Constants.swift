@@ -40,8 +40,12 @@ public struct Constants {
         static let toNotificationDetails = "toNotificationDetails"
         static let toBellNotificationList = "toBellNotification"
         static let toAddNewNotice = "addNewNotice"
-
-        
+        static let toAdmissionForm = "toAdmissionForm"
+        static let toSubjectForm = "toSubjectForm" //admisison - subject selection
+        static let toRecords = "toRecords" //admisison - add previous record
+        static let toFamilyInfo = "toFamilyInfo" //admisison - family info
+        static let toDocumentsView = "toDocumentsView" //admission - documents viewer
+        static let toFinalPDFForm = "toFinalForm" //admission - final view and email form
     }
     
     struct Images {
@@ -57,6 +61,8 @@ public struct Constants {
         static let defaultMale = "defaule_male"
         static let leftMenuTopView = "left_menu_topView"
         static let checkMarkReadAll = "checkMark"
+        static let greenCheck = "checkBox_filled"
+        static let errorIcon  = "errorIcon"
     }
     
     struct  colors {
@@ -102,6 +108,8 @@ public struct Constants {
         static let collegeNotificationList = "CollegeNotificationListViewControllerId"
         static let documentsVC = "DocumentsViewControllerId"
         static let rollNumberGridVC = "StudentListGridViewControllerId"
+        static let addmissionStatusViewControlelr = "AdmissionStatusViewControllerId"
+        
     }
     
     struct UserDefaults {
@@ -135,6 +143,7 @@ public struct Constants {
         static let homeTabBarHeight = 44.0
         static let navbarHeight = 65.0
         static let cornerRadius = 3
+        static let tagAdmissionButton = 100
     }
     
     struct CustomCellId {
@@ -173,6 +182,11 @@ public struct Constants {
         static let notificationCellId = "NotificationListTableViewCellId"
         static let bellNotificationCellId = "BellNotificationListTableViewCellId"
         static let rollNumberGrid = "StudentRollNumberCollectionViewCellId"
+        static let admissionCell = "AdmissionFormInputTableViewCellId"
+        static let admissionHeader = "AdmissionHeaderTableViewCellId"
+        static let addRecordCell = "AddRecordTableViewCellId"
+        static let recordTitleHeaderCell = "RecordHeaderTableViewCell"
+        static let documentsImageCell   =  "AdmissionDocumentPicketTableViewCellId"
     }
     
     struct UserTypeString {

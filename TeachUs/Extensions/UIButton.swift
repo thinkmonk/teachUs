@@ -32,6 +32,7 @@ extension UIButton{
 
     
     func themeRedButton(){
+        self.isEnabled = true
         let bgColor:UIColor = Constants.colors.themeRed
         let fontColor:UIColor = UIColor.white
         self.makeButtonwith(background: bgColor, fontColor: fontColor, cornerRadius: nil, borderColor: nil, borderWidth: 0.0)

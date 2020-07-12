@@ -206,11 +206,12 @@ class NetworkHandler:SessionManager{
             print("URL : \(self.url!)")
             print("***** POST NETWORK CALL DETAILS *****")
             print("Api name: \(apiName)")
+            print("parameters pre serialisation = \(parameters ?? [:])")
         if let theJSONData = try? JSONSerialization.data(withJSONObject: parameters ?? [:],options: []) {
                 let theJSONText = String(data: theJSONData,encoding: .ascii)
 //                let params = theJSONText?.split(separator: ",")
 //                let paramPretty = params?.joined(separator: ", \n")
-                print("parameters = \(theJSONText!)")
+                print("parameters = \(theJSONText ?? "")")
         }
             
             //print("parameters:\(theJSONText)")
@@ -252,6 +253,7 @@ class NetworkHandler:SessionManager{
     //MARK:- Post Api with  DATA response type
     func apiPostWithDataResponse(apiName: String,
                  parameters: [String: Any],
+                 shouldPrint:Bool? = true,
                  completionHandler: @escaping (_ success:Bool,_ code:Int, _ response: Data) -> Void,
                  failure: @escaping (_ success:Bool,_ code:Int, _ error: String) -> Void){
         
@@ -265,8 +267,8 @@ class NetworkHandler:SessionManager{
         print("URL : \(self.url!)")
         print("***** POST NETWORK CALL DETAILS *****")
         print("Api name: \(apiName)")
-        if let theJSONData = try? JSONSerialization.data(withJSONObject: parameters,options: []) {
-            let theJSONText = String(data: theJSONData,encoding: .ascii)
+        if let theJSONData = try? JSONSerialization.data(withJSONObject: parameters,options: []),shouldPrint ?? true {
+            let theJSONText = String(data: theJSONData,encoding: .utf8)
             print("parameters = \(theJSONText!)")
         }
         
@@ -345,7 +347,7 @@ class NetworkHandler:SessionManager{
                         print("***** NETWORK CALL RESPONSE *****")
                         print("url: \(self.url ?? ""), \n status code: \((response.response?.statusCode)!), \n responseData: \(response)")
                     #endif
-                    completionHandler(true, (response.response?.statusCode)!, response.result.value as! [String : Any])
+                    completionHandler(true, (response.response?.statusCode) ?? 200, response.result.value as? [String : Any] ?? ["":""])
                     break
                     
                 case .failure(let error):
