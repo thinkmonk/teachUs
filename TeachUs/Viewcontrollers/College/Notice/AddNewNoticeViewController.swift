@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import FirebaseStorage
+import Firebase
 import MobileCoreServices
 import RxSwift
 import RxCocoa
