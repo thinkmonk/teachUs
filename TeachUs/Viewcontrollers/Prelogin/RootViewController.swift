@@ -9,8 +9,7 @@
 import UIKit
 
 class RootViewController: BaseViewController {
-
-    var forceUpdateObject:DeviceUpdate!
+    private let forceUpdateManager = ForceUpdateManager.sharedForceUpdateManager
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,47 +25,21 @@ class RootViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.checkForceUpdate()
-    }
-    
-    func checkForceUpdate(){
-        
-        let manager = NetworkHandler()
-        manager.url = URLConstants.Login.forceUpdateCheck
-        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
-        manager.apiGetWithDataResponse(apiName: "Check Force update for app", completionHandler: { (response, code) in
-            LoadingActivityHUD.hideProgressHUD()
-            if(code == 200){
-                do{
-                    if let datareposne = response as? Data{
-                        let decoder = JSONDecoder()
-                        let forceUpdate = try decoder.decode(ForceUpdate.self, from: datareposne)
-                        self.forceUpdateObject = forceUpdate.deviceUpdate?.filter({$0.osType?.caseInsensitiveCompare("IOS") == .orderedSame}).first
-                        self.checkAndShowAppUpdateDialogue()
-                    }else{
-                        print("Failed to convert data")
-                    }
-                }
-                catch let error{
-                    print("err", error)
-                }
-            }
-            else{
-                print("Error in fetching data")
-            }
-        }) { (error, code, errorMessage) in
-            LoadingActivityHUD.hideProgressHUD()
+        ForceUpdateManager.sharedForceUpdateManager.checkForceUpdate { [weak self] in
+            self?.checkAndShowAppUpdateDialogue()
         }
     }
+    
+    
 
 
     func checkAndShowAppUpdateDialogue() {
         //TEMPORARY CHECK <-------
 //        if (!(self.forceUpdateObject.isForceUpdate?.caseInsensitiveCompare("yes") == .orderedSame))
-        if (self.forceUpdateObject.isForceUpdate?.caseInsensitiveCompare("yes") == .orderedSame && self.checkforNewVersoin())
+        if (forceUpdateManager.forceUpdateObject.isForceUpdate?.caseInsensitiveCompare("yes") == .orderedSame && self.checkforNewVersoin())
         {
             // create the alert
-            let alert = UIAlertController(title: "\(self.forceUpdateObject.forceUpdateTextTitle)", message: "\(self.forceUpdateObject.forceUpdateText)", preferredStyle: UIAlertController.Style.alert)
+            let alert = UIAlertController(title: "\(forceUpdateManager.forceUpdateObject.forceUpdateTextTitle)", message: "\(forceUpdateManager.forceUpdateObject.forceUpdateText)", preferredStyle: UIAlertController.Style.alert)
             
             // add the actions (buttons)
             alert.addAction((UIAlertAction(title: "Go to AppStore", style: .default, handler: { (action) in
@@ -81,7 +54,7 @@ class RootViewController: BaseViewController {
             // show the alert
             self.present(alert, animated: true, completion: nil)
         }else if (self.checkforNewVersoin()) {
-            let alert = UIAlertController(title: "New Version Available!", message: "\(self.forceUpdateObject.appUpdateText)", preferredStyle: UIAlertController.Style.alert)
+            let alert = UIAlertController(title: "New Version Available!", message: "\(forceUpdateManager.forceUpdateObject.appUpdateText)", preferredStyle: UIAlertController.Style.alert)
             
             // add the actions (buttons)
             alert.addAction((UIAlertAction(title: "Go to AppStore", style: .default, handler: { (action) in
@@ -106,17 +79,25 @@ class RootViewController: BaseViewController {
     func checkforNewVersoin() -> Bool{
         let appVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
         let appversionNumber = Int(appVersion?.replacingOccurrences(of: ".", with: "") ?? "0")
-        let serverAppversionNumber = Int(self.forceUpdateObject.version?.replacingOccurrences(of: ".", with: "") ?? "0")
+        let serverAppversionNumber = Int(forceUpdateManager.forceUpdateObject.version?.replacingOccurrences(of: ".", with: "") ?? "0")
         return serverAppversionNumber! > appversionNumber!
     }
     
-     func checkLogin(){
+    
+    
+    
+    func checkLogin(){
         if(!UserManager.sharedUserManager.getAccessToken().isEmpty){
-            if(ReachabilityManager.shared.isOfflineDataAvailable){
-                ReachabilityManager.shared.networkReachbleActions()
+            if forceUpdateManager.checkMaintainenceFlag(){
+                self.performSegue(withIdentifier: Constants.segues.rootToMaintainence, sender: self)
             }
             else{
-                self.getAndSaveUserToDb(true)
+                if(ReachabilityManager.shared.isOfflineDataAvailable){
+                    ReachabilityManager.shared.networkReachbleActions()
+                }
+                else{
+                    self.getAndSaveUserToDb(true)
+                }
             }
         }
         else{

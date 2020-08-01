@@ -58,7 +58,7 @@ class BaseViewController: UIViewController {
     }
     
     var navBarHeight:CGFloat {
-        return self.navigationController!.navigationBar.frame.height
+        return self.navigationController?.navigationBar.frame.height ?? 0.0
     }
     
     var statusBarHeight:CGFloat{

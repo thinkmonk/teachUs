@@ -56,20 +56,28 @@ class ViewUnavailableProfile:UIView, MFMailComposeViewControllerDelegate{
         controller.dismiss(animated: true, completion: nil)
     }
 
-    
+    //send whatsapp message
     @IBAction func makePhoneCall(_ sender: Any) {
-        //Call on: +91 9892223453
         print("\(getErrorHeaderText()+getUserErrorText())")
         if let busPhone = UserManager.sharedUserManager.unauthorisedUser.contact?.replacingOccurrences(of: " ", with: "")
-{
-            if let url = URL(string: "http://api.whatsapp.com/send?phone=\(busPhone)&text=\(getErrorHeaderText()+getUserErrorText())"), UIApplication.shared.canOpenURL(url) {
-                if #available(iOS 10, *) {
-                    UIApplication.shared.open(url)
-                } else {
-                    UIApplication.shared.openURL(url)
+        {
+            let message = getErrorHeaderText()+getUserErrorText()
+            let urlWhats = "https://api.whatsapp.com/send?phone=\(busPhone)&text=\(message)"
+            
+            if let urlString = urlWhats.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed) {
+                if let whatsappURL = URL(string: urlString) {
+                    
+                    if UIApplication.shared.canOpenURL(whatsappURL) {
+                        if #available(iOS 10.0, *) {
+                            UIApplication.shared.open(whatsappURL, options: [:], completionHandler: nil)
+                        }
+                        else {
+                            UIApplication.shared.openURL(whatsappURL)
+                        }
+                    } else {
+                        // WhatsApp is not installed
+                    }
                 }
-            }else{
-                print("unable to open URL")
             }
         }
     }

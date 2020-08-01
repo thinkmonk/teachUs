@@ -123,7 +123,7 @@ class EventAttendanceClassListViewController: BaseViewController {
             self.present(alert, animated: true, completion:nil)
             
         case .defaultFlag:// cannot delete //flag == 0
-            self.showAlertWithTitle("", alertMessage: "Only the notice creator can delete this notice")
+            self.showAlertWithTitle("", alertMessage: "Only the event creator can delete this event")
             
         case .otherUser: //attendance already marked //flag == 2
             self.showAlertWithTitle("", alertMessage: "You can't delete this event, since attendance is marked")

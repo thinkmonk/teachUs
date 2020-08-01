@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pVO-0S-wfc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pVO-0S-wfc">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -168,6 +168,7 @@
                     <navigationItem key="navigationItem" title="Select Login" id="HbF-6v-pXG"/>
                     <connections>
                         <segue destination="XXj-oB-jWg" kind="show" identifier="loginSelect" id="9Wc-wv-DcB"/>
+                        <segue destination="pZb-fe-lg8" kind="show" identifier="profileToMaintainence" id="QVC-5u-Xbl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -1171,7 +1172,7 @@ Form Library</string>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="KaM-7X-Gc4"/>
                                 </constraints>
-                                <state key="normal" title="Go to Dashboard"/>
+                                <state key="normal" title="Go to home"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.92549019610000005" green="0.95294117649999999" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -2203,6 +2204,7 @@ Form Library</string>
                     <navigationItem key="navigationItem" id="Dzi-49-4jZ"/>
                     <connections>
                         <segue destination="LZn-5B-LbX" kind="presentation" identifier="toLoginSelect" modalPresentationStyle="fullScreen" id="Wld-2f-kAB"/>
+                        <segue destination="pZb-fe-lg8" kind="presentation" identifier="rootToMaintainence" modalPresentationStyle="fullScreen" id="KB7-HH-oTl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ump-qs-4Wt" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -5989,9 +5991,55 @@ Form Library</string>
             </objects>
             <point key="canvasLocation" x="7896" y="44"/>
         </scene>
+        <!--Maintainence View Controller-->
+        <scene sceneID="032-Bf-HDf">
+            <objects>
+                <viewController id="pZb-fe-lg8" customClass="MaintainenceViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iJg-jf-XNI">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="yQP-pW-qmA">
+                                <rect key="frame" x="15" y="218.5" width="290" height="131.5"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appUnderMaintainence" translatesAutoresizingMaskIntoConstraints="NO" id="w5m-vK-2c1">
+                                        <rect key="frame" x="125" y="0.0" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="w5m-vK-2c1" secondAttribute="height" multiplier="1:1" id="7Aj-E8-zwe"/>
+                                            <constraint firstAttribute="height" constant="40" id="BQi-AJ-qhz"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Application is currently under maintenance  It will be up soon!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CKP-xl-mK1">
+                                        <rect key="frame" x="31" y="50" width="228.5" height="81.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="yQP-pW-qmA" firstAttribute="centerY" secondItem="iJg-jf-XNI" secondAttribute="centerY" id="Btp-fJ-6I7"/>
+                            <constraint firstItem="yQP-pW-qmA" firstAttribute="centerX" secondItem="iJg-jf-XNI" secondAttribute="centerX" id="RZt-Ed-2EE"/>
+                            <constraint firstAttribute="trailing" secondItem="yQP-pW-qmA" secondAttribute="trailing" constant="15" id="TDW-ND-dMe"/>
+                            <constraint firstItem="yQP-pW-qmA" firstAttribute="leading" secondItem="iJg-jf-XNI" secondAttribute="leading" constant="15" id="YuP-iH-yqG"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="RPh-lg-mPD"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="RTW-Mx-fqd"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Rr-CX-4q7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2100" y="1391"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="QVC-5u-Xbl"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="addEvent" width="20" height="20"/>
+        <image name="appUnderMaintainence" width="24" height="24"/>
         <image name="calenderRed" width="15" height="15"/>
         <image name="checkBox_filled" width="20" height="20"/>
         <image name="clockIcon" width="64" height="70"/>
