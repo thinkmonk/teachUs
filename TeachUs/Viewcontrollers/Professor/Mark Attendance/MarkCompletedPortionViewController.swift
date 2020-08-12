@@ -10,6 +10,7 @@ import UIKit
 import Foundation
 import ObjectMapper
 import CoreData
+import RxSwift
 
 enum SyllabusCompletetionType {
     case NotStarted
@@ -31,20 +32,29 @@ class MarkCompletedPortionViewController: BaseViewController {
             self.buttonSubmit.isHidden = !(self.updatedTopicList.count > 0)
         }
     }
+    
+    var arrayDataSource = [MarkSyllabusDataSource]()
     var syllabusData:SyllabusStatusData!
     var attendanceDate:String = ""
     var lectureDetails:EditAttendanceLectureInfo! //for edit attendance,syllabusaflow
     var isEditAttendanceFlow:Bool = false
+    var customTopicString = Variable<String>("")
+    var doneToolbarButton:UIToolbar!
+    private var myDisposeBag = DisposeBag()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.attendanceDate = self.attendanceParameters["lecture_date"] as? String ?? ""
         self.tableviewTopics.register(UINib(nibName: "TopicDetailsTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.TopicDetailsTableViewCellId)
+        self.tableviewTopics.register(UINib(nibName: "CustomSyllabusTopicTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.CustomSyllabusTopicTableViewCellId)
         self.title = "Syllabus Update"
-        navigationItem.hidesBackButton = true
         self.tableviewTopics.estimatedRowHeight = 110
         self.tableviewTopics.rowHeight = UITableViewAutomaticDimension
         self.tableviewTopics.alpha = 0.0
         self.isEditAttendanceFlow ? self.getEditSyllabusStatus() : self.getSyllabusStatus()
+        NotificationCenter.default.addObserver(self, selector: #selector(MarkCompletedPortionViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MarkCompletedPortionViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        initToolbar()
+        setUpRx()
         // Do any additional setup after loading the view.
     }
     
@@ -61,14 +71,11 @@ class MarkCompletedPortionViewController: BaseViewController {
         self.buttonSubmit.isHidden = !(self.updatedTopicList.count > 0)
     }
     
-    func mapTopicsToDataSource(){
-        
-        self.labelSyllabusCompletion.text = "Completion: \(self.syllabusData.syllabusPercentage)%"
-        self.makeTableView()
-        self.tableviewTopics.reloadData()
-        self.showTableView()
+    func setUpRx(){
+        self.customTopicString.asObservable().subscribe(onNext: { (newValue) in
+            self.buttonSubmit.isHidden = newValue.count == 0
+        }).disposed(by: myDisposeBag)
     }
-    
     
     func getEditSyllabusStatus()
     {
@@ -89,7 +96,7 @@ class MarkCompletedPortionViewController: BaseViewController {
             do{
                 let decoder = JSONDecoder()
                 self.syllabusData = try decoder.decode(SyllabusStatusData.self, from: response)
-                self.mapTopicsToDataSource()
+                self.makeDataSource()
             }
             catch let error{
                 self.showErrorAlert(.ParsingError) { (retry) in
@@ -136,7 +143,7 @@ class MarkCompletedPortionViewController: BaseViewController {
             do{
                 let decoder = JSONDecoder()
                 self.syllabusData = try decoder.decode(SyllabusStatusData.self, from: response)
-                self.mapTopicsToDataSource()
+                self.makeDataSource()
             }
             catch let error{
                 self.showErrorAlert(.ParsingError) { (retry) in
@@ -155,6 +162,27 @@ class MarkCompletedPortionViewController: BaseViewController {
             }
             print(message)
             
+        }
+    }
+    
+    func makeDataSource(){
+        arrayDataSource.removeAll()
+        
+        if self.syllabusData.unitSyllabusArray.count > 0{
+            for unitObj in self.syllabusData.unitSyllabusArray{
+                let dsObj = MarkSyllabusDataSource(cellType: .Unit, attachedObject: unitObj)
+                arrayDataSource.append(dsObj)
+            }
+            
+            let otherUniObj = MarkSyllabusDataSource(cellType: .Other, attachedObject: nil)
+            arrayDataSource.append(otherUniObj)
+        }
+        
+        DispatchQueue.main.async {
+            self.labelSyllabusCompletion.text = "Completion: \(self.syllabusData.syllabusPercentage)%"
+            self.makeTableView()
+            self.tableviewTopics.reloadData()
+            self.showTableView()
         }
     }
     
@@ -198,6 +226,7 @@ class MarkCompletedPortionViewController: BaseViewController {
             print("requestString = \(theJSONText!)")
         }
         self.attendanceParameters["topic_list"] = requestString
+        self.attendanceParameters["otherstopic"] = self.customTopicString.value
         
         manager.apiPost(apiName: "mark syllabus professor", parameters: self.attendanceParameters, completionHandler: { (sucess, code, response) in
             LoadingActivityHUD.hideProgressHUD()
@@ -225,10 +254,11 @@ class MarkCompletedPortionViewController: BaseViewController {
                 self.present(alert, animated: true, completion:nil)
                 self.buttonSubmit.isEnabled = true
             }
-        }) { (error, code, message) in
+        }) { [weak self] (error, code, message) in
             LoadingActivityHUD.hideProgressHUD()
             print(message)
-            self.buttonSubmit.isEnabled = true
+            self?.showAlertWithTitle("Error", alertMessage: message)
+            self?.buttonSubmit.isEnabled = true
         }
     }
     
@@ -247,6 +277,7 @@ class MarkCompletedPortionViewController: BaseViewController {
             print("requestString = \(theJSONText!)")
         }
         parameters["topic_list"] = requestString
+        parameters["otherstopic"] = self.customTopicString.value
         
         let api:OfflineApiRequest = NSEntityDescription.insertNewObject(forEntityName: "OfflineApiRequest", into: DatabaseManager.managedContext) as! OfflineApiRequest
         api.attendanceParams = self.attendanceParameters as NSObject
@@ -276,74 +307,105 @@ class MarkCompletedPortionViewController: BaseViewController {
 
 extension MarkCompletedPortionViewController:UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell:TopicDetailsTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.TopicDetailsTableViewCellId, for: indexPath) as! TopicDetailsTableViewCell
-        
-        let chapterCell:TopicList = self.syllabusData.unitSyllabusArray[indexPath.section].topicList[indexPath.row]
-        cell.labelChapterName.text = chapterCell.topicName
-        cell.labelStatus.text = chapterCell.setChapterStatus
-//        cell.buttonSetStatus.roundedBlueButton()
-        cell.buttonInProgress.indexPath = indexPath
-        cell.buttonCompleted.indexPath = indexPath
-        cell.buttonInProgress.addTarget(self, action:#selector( MarkCompletedPortionViewController.markChapterInProgress(_:)), for: .touchUpInside)
-        cell.buttonCompleted.addTarget(self, action:#selector( MarkCompletedPortionViewController.markChapterInCompleted(_:)), for: .touchUpInside)
-        switch chapterCell.chapterStatusTheme! {
-        case .Completed:
-            cell.buttonCompleted.selectedGreenButton()
-            cell.buttonInProgress.selectedDefaultButton()
-            cell.labelStatus.textColor = UIColor.rgbColor(0.0, 143.0, 83.0) //#008F53
-            cell.viewDisableCell.alpha = chapterCell.isUpdated ? 0 : 1 //show disabled view by default.
-//            cell.viewStatusStack.alpha = 0
-//            cell.viewwSeperator.alpha = 0
-            break
-        case .InProgress:
-            cell.buttonInProgress.selectedRedButton()
-            cell.buttonCompleted.selectedDefaultButton()
-            cell.labelStatus.textColor = UIColor.rgbColor(299.0, 0.0, 0.0)   //#E50000
-            cell.viewDisableCell.alpha = 0
-            let topicList = ["topic_id":"\(chapterCell.topicId)",
-                            "status":"1" ]
-            self.updateUnitListArray(list: topicList)
-            self.updatedTopicList.append(topicList)
-
-//            cell.viewStatusStack.alpha = 1
-//            cell.viewwSeperator.alpha = 1
-
-            break
-        case .NotStarted:
-            cell.buttonCompleted.selectedDefaultButton()
-            cell.buttonInProgress.selectedDefaultButton()
-            cell.labelStatus.textColor = UIColor.rgbColor(126.0, 132.0, 155.0) //#7E849B
-            cell.viewDisableCell.alpha = 0
-//            cell.viewStatusStack.alpha = 1
-//            cell.viewwSeperator.alpha = 1
-
-            break
+        let dataSourceObj:MarkSyllabusDataSource = arrayDataSource[indexPath.section]
+        switch dataSourceObj.syallbusCellType {
+        case .Unit:
+            let cell:TopicDetailsTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.TopicDetailsTableViewCellId, for: indexPath) as! TopicDetailsTableViewCell
+            
+            guard let unitObj = dataSourceObj.attachedObject as? UnitSyllabusArray else{
+                return cell
+            }
+            let chapterCell = unitObj.topicList[indexPath.row]
+            cell.labelChapterName.text = chapterCell.topicName
+            cell.labelStatus.text = chapterCell.setChapterStatus
+            //        cell.buttonSetStatus.roundedBlueButton()
+            cell.buttonInProgress.indexPath = indexPath
+            cell.buttonCompleted.indexPath = indexPath
+            cell.buttonInProgress.addTarget(self, action:#selector( MarkCompletedPortionViewController.markChapterInProgress(_:)), for: .touchUpInside)
+            cell.buttonCompleted.addTarget(self, action:#selector( MarkCompletedPortionViewController.markChapterInCompleted(_:)), for: .touchUpInside)
+            switch chapterCell.chapterStatusTheme! {
+            case .Completed:
+                cell.buttonCompleted.selectedGreenButton()
+                cell.buttonInProgress.selectedDefaultButton()
+                cell.labelStatus.textColor = UIColor.rgbColor(0.0, 143.0, 83.0) //#008F53
+                cell.viewDisableCell.alpha = chapterCell.isUpdated ? 0 : 1 //show disabled view by default.
+                //            cell.viewStatusStack.alpha = 0
+                //            cell.viewwSeperator.alpha = 0
+                break
+            case .InProgress:
+                cell.buttonInProgress.selectedRedButton()
+                cell.buttonCompleted.selectedDefaultButton()
+                cell.labelStatus.textColor = UIColor.rgbColor(299.0, 0.0, 0.0)   //#E50000
+                cell.viewDisableCell.alpha = 0
+                let topicList = ["topic_id":"\(chapterCell.topicId)",
+                    "status":"1" ]
+                self.updateUnitListArray(list: topicList)
+                self.updatedTopicList.append(topicList)
+                
+                //            cell.viewStatusStack.alpha = 1
+                //            cell.viewwSeperator.alpha = 1
+                
+                break
+            case .NotStarted:
+                cell.buttonCompleted.selectedDefaultButton()
+                cell.buttonInProgress.selectedDefaultButton()
+                cell.labelStatus.textColor = UIColor.rgbColor(126.0, 132.0, 155.0) //#7E849B
+                cell.viewDisableCell.alpha = 0
+                //            cell.viewStatusStack.alpha = 1
+                //            cell.viewwSeperator.alpha = 1
+                
+                break
+            }
+            cell.selectionStyle = .none
+            return cell
+            
+        case .Other:
+            let cell:CustomSyllabusTopicTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.CustomSyllabusTopicTableViewCellId, for: indexPath) as! CustomSyllabusTopicTableViewCell
+            cell.textFieldTopicInput.rx.text.map{ $0 ?? ""}.bind(to: self.customTopicString).disposed(by: cell.myCellDisposeBag)
+            cell.selectionStyle = .none
+            cell.textFieldTopicInput.inputAccessoryView = doneToolbarButton
+            return cell
+            
+        case .none:
+            return UITableViewCell()
         }
-        cell.selectionStyle = .none
-        return cell
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return self.syllabusData.unitSyllabusArray.count
+        return self.arrayDataSource.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (self.syllabusData.unitSyllabusArray[section].topicList.count)
+        let dataSourceObj:MarkSyllabusDataSource = arrayDataSource[section]
+        switch dataSourceObj.syallbusCellType {
+        case .Unit:
+            return dataSourceObj.rowCount
+        case .Other: return 1
+        case .none: return 0
+        }
     }
     
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return self.arrayDataSource[section].unitName
-//    }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableviewTopics.width(), height: 44))
-        headerView.backgroundColor = Constants.colors.themeLightBlue
-        let labelView:UILabel  = UILabel(frame: CGRect(x: 15, y: 0, width: self.tableviewTopics.width(), height: 44))
-        labelView.center.y = headerView.centerY()
-        labelView.text = self.syllabusData.unitSyllabusArray[section].unitName
-        labelView.textColor = UIColor.rgbColor(51, 51, 51)
-        headerView.addSubview(labelView)
-        return headerView
+        let dataSourceObj:MarkSyllabusDataSource = arrayDataSource[section]
+        switch dataSourceObj.syallbusCellType {
+        case.Unit:
+            let headerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableviewTopics.width(), height: 44))
+            headerView.backgroundColor = Constants.colors.themeLightBlue
+            let labelView:UILabel  = UILabel(frame: CGRect(x: 15, y: 0, width: self.tableviewTopics.width(), height: 44))
+            labelView.center.y = headerView.centerY()
+            guard let unitObj = dataSourceObj.attachedObject as? UnitSyllabusArray else{
+                return nil
+            }
+            labelView.text = unitObj.unitName
+            labelView.textColor = UIColor.rgbColor(51, 51, 51)
+            headerView.addSubview(labelView)
+            return headerView
+            
+            
+        default:return nil
+        }
+        
     }
     /*
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -351,11 +413,16 @@ extension MarkCompletedPortionViewController:UITableViewDelegate, UITableViewDat
     }
  */
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 44
+        let dataSourceObj:MarkSyllabusDataSource = arrayDataSource[section]
+        switch dataSourceObj.syallbusCellType {
+        case.Unit: return 44
+        default : return 0
+        }
     }
+    
     @objc func markChapterInProgress(_ sender: ButtonWithIndexPath){
         let indexpath = sender.indexPath!
-        var chapterObj = self.syllabusData.unitSyllabusArray[(indexpath.section)].topicList[(indexpath.row)]
+        let chapterObj = self.syllabusData.unitSyllabusArray[(indexpath.section)].topicList[(indexpath.row)]
         if(chapterObj.status != "1"){
             chapterObj.setChapterStatus = "In Progress"
             chapterObj.status = "1"
@@ -428,6 +495,45 @@ extension MarkCompletedPortionViewController:UITableViewDelegate, UITableViewDat
                 return
             }
         }
+    }
+
+}
+
+
+//MARK:- Keyboard delegate methods
+extension MarkCompletedPortionViewController{
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        
+        if let keyboardSize = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size{
+            let newContentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0)
+            self.tableviewTopics.contentInset = newContentInsets
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        let newContentInsets = UIEdgeInsets.zero
+        self.tableviewTopics.contentInset = newContentInsets
+    }
+    
+    func initToolbar(){
+        doneToolbarButton = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.width(), height: 50))
+        doneToolbarButton.barStyle       = UIBarStyle.default
+        let flexSpace              = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        let done: UIBarButtonItem  = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: self, action: #selector(MarkCompletedPortionViewController.doneButtonAction))
+
+        var items = [UIBarButtonItem]()
+        items.append(flexSpace)
+        items.append(done)
+
+        doneToolbarButton.items = items
+        doneToolbarButton.sizeToFit()
+
+    }
+    
+
+    @objc func doneButtonAction() {
+        self.view.endEditing(true)
     }
 
 }

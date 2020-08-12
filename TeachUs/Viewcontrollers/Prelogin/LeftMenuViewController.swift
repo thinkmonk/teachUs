@@ -46,7 +46,7 @@ class LeftMenuViewController: BaseViewController, UIGestureRecognizerDelegate {
     
 //    var collegeSuperAdminDataSource = ["Attendance(Reports)","Attendance(Events)", "Syllabus Status","Add/Remove Admin","Feedback", "Logs", "Notice", "Notification" , "Notes","Request","Logout" ]
     var collegeSuperAdminDataSource = UserManager.sharedUserManager.allowedCollegeUserTabs.map({$0.titleName })
-    var collegeSuperAdminImageDataSource = ["attendanceReport", "syllabusStatusEvent", "syllabus", "addRemoveAdmin","feedback", "logs","notice", "notification", "notes", "request", "logout"]
+    var collegeSuperAdminImageDataSource = UserManager.sharedUserManager.allowedCollegeUserTabs.map({$0.imageName })
     
     var collegeAdminDataSource = ["Attendance(Reports)", "Attendance(Events)", "Notice", "Request" ,"Logout"]
     var collegeAdminImageDataSource = ["attendanceReport","syllabusStatusEvent", "notice","request","logout"]
@@ -58,6 +58,11 @@ class LeftMenuViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if  UserManager.sharedUserManager.user == .college,  !collegeSuperAdminDataSource.contains(UserTabControls.logout.titleName){
+            let newTab = UserTabControls.logout
+            collegeSuperAdminDataSource.append(newTab.titleName)
+            collegeAdminImageDataSource.append(newTab.imageName)
+        }
         self.navigationController?.isNavigationBarHidden = true
         self.updateUserDetails()
         self.tableViewProfile.alpha  = isProfileViewOpen ? 1 : 0

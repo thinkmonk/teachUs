@@ -9,7 +9,7 @@
 import UIKit
 
 class TopicDetailsTableViewCell: UITableViewCell {
-    @IBOutlet weak var labelChapterNumber: UILabel!
+    @IBOutlet weak var labelChapterNameHeader: UILabel!
     @IBOutlet weak var labelChapterName: UILabel!
     @IBOutlet weak var labelStatus: UILabel!    
     

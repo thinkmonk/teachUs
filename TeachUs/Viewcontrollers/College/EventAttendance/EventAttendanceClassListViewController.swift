@@ -225,8 +225,15 @@ extension EventAttendanceClassListViewController:ViewCourseSelectionDelegate{
             "course_id":"\(CollegeClassManager.sharedManager.getSelectedCourseList)",
             "event_id":"\(self.currentEvent.eventId)"
         ]
-        EventManager.shared.editEvent(params: parameters) { (_) in
+        EventManager.shared.editEvent(params: parameters) { (success, message) in
             self.viewCourseList.removeFromSuperview()
+            if success{
+                
+                self.getClassList()
+            }
+            else{
+                self.showAlertWithTitle(nil, alertMessage: message)
+            }
         }
     }
     

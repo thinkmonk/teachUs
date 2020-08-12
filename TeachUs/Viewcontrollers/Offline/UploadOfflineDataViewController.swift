@@ -109,12 +109,15 @@ class UploadOfflineDataViewController: BaseViewController {
         manager.url = URLConstants.ProfessorURL.mergedAttendanceAndSyllabus
         if currentIndex < arrayApiReqestParameters.count{
             let dataTransformable:OfflineApiRequest = arrayApiReqestParameters[currentIndex]
-            var parameters = dataTransformable.attendanceParams as? [String:Any]
-            let syllabusParamets = dataTransformable.syllabusParams as? [String:Any]
-            parameters!["topic_list"] = syllabusParamets!["topic_list"]
+            guard var parameters = dataTransformable.attendanceParams as? [String:Any],
+                let syllabusParamers = dataTransformable.syllabusParams as? [String:Any] else {
+                    return
+            }
             
+            parameters["topic_list"] = syllabusParamers["topic_list"]
+            parameters["otherstopic"] = syllabusParamers["otherstopic"]
             
-            manager.apiPost(apiName: "mark syllabus professor", parameters: parameters!, completionHandler: { (sucess, code, response) in
+            manager.apiPost(apiName: "mark syllabus professor", parameters: parameters, completionHandler: { (sucess, code, response) in
                 LoadingActivityHUD.hideProgressHUD()
                 guard let status = response["status"] as? NSNumber else{
                     return
@@ -150,6 +153,7 @@ class UploadOfflineDataViewController: BaseViewController {
                 }
             }) { (error, code, message) in
                 LoadingActivityHUD.hideProgressHUD()
+                self.showAlertWithTitle("Failed", alertMessage: "\(message)")
                 print(message)
                 
             }

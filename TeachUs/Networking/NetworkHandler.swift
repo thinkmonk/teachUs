@@ -30,7 +30,7 @@ class NetworkHandler:SessionManager{
                 switch response.result {
                 case .success:
                     #if DEBUG
-                        print("***** NETWORK CALL RESPONSE *****")
+                    print("***** NETWORK CALL RESPONSE *****")
                     print("url: \(self.url ?? ""), \n status code: \((response.response?.statusCode)!), \n responseData: \(response.result.value ?? Dictionary<String, Any>())")
                     #endif
                     if let responseArray = response.result.value as? [Any]{
@@ -53,10 +53,16 @@ class NetworkHandler:SessionManager{
                     let errorCode:Int = responseError.code
                     let error = NSError(domain: "", code: 0, userInfo: nil)
                     #if DEBUG
-                        print("***** NETWORK CALL FAILURE RESPONSE *****")
-                        print("error code: \(errorCode), error String \(errorString)")
+                    print("***** NETWORK CALL FAILURE RESPONSE *****")
+                    print("Api name: \(apiName), \(self.url ?? "NA")")
+                    print("error code: \(errorCode), error String \(errorString)")
                     #endif
-                    failure(error, errorCode, errorString)
+                    guard let dataObj = response.data, let jsonObj = try? JSONSerialization.jsonObject(with: dataObj, options: []) as? [String : Any], let errorMessage = jsonObj?["message"] as? String  else{
+                        failure(error, errorCode, errorString)
+                        return
+                    }
+                    
+                    failure(error, errorCode, errorMessage)
                 }
             }
         }else{
@@ -108,9 +114,15 @@ class NetworkHandler:SessionManager{
                         let error = NSError(domain: "", code: 0, userInfo: nil)
                         #if DEBUG
                             print("***** NETWORK CALL FAILURE RESPONSE *****")
+                            print("Api name: \(apiName), \(self.url ?? "NA")")
                             print("error code: \(errorCode), error String \(errorString)")
                         #endif
-                        failure(error, errorCode, errorString)
+                        guard let dataObj = response.data, let jsonObj = try? JSONSerialization.jsonObject(with: dataObj, options: []) as? [String : Any], let errorMessage = jsonObj?["message"] as? String  else{
+                            failure(error, errorCode, errorString)
+                            return
+                        }
+                        
+                        failure(error, errorCode, errorMessage)
                     }
                 }
             }
@@ -167,9 +179,15 @@ class NetworkHandler:SessionManager{
                     let error = NSError(domain: "", code: 0, userInfo: nil)
                     #if DEBUG
                         print("***** NETWORK CALL FAILURE RESPONSE *****")
+                        print("Api name: \(apiName), \(self.url ?? "NA")")
                         print("error code: \(errorCode), error String \(errorString)")
                     #endif
-                    failure(error, errorCode, errorString)
+                    guard let dataObj = response.data, let jsonObj = try? JSONSerialization.jsonObject(with: dataObj, options: []) as? [String : Any], let errorMessage = jsonObj?["message"] as? String  else{
+                        failure(error, errorCode, errorString)
+                        return
+                    }
+                    
+                    failure(error, errorCode, errorMessage)
 
                     }
                 }
@@ -219,7 +237,7 @@ class NetworkHandler:SessionManager{
         
         if(Connectivity.isConnectedToInternet){
             
-            Alamofire.request(self.url!, method: .post, parameters:parameters,encoding: URLEncoding.httpBody, headers: self.headers).responseJSON {
+            Alamofire.request(self.url!, method: .post, parameters:parameters,encoding: URLEncoding.httpBody, headers: self.headers).validate().responseJSON {
                 response in
                 switch response.result {
                 case .success:
@@ -239,9 +257,16 @@ class NetworkHandler:SessionManager{
                         _ = NSError(domain: "", code: 0, userInfo: nil)
                         #if DEBUG
                         print("***** NETWORK CALL FAILURE RESPONSE *****")
+                        print("Api name: \(apiName), \(self.url ?? "NA")")
                         print("error code: \(errorCode), error String \(errorString)")
                         #endif
-                        failure(false, errorCode, errorString)
+                                            
+                        guard let dataObj = response.data, let jsonObj = try? JSONSerialization.jsonObject(with: dataObj, options: []) as? [String : Any], let errorMessage = jsonObj?["message"] as? String  else{
+                            failure(false, errorCode, errorString)
+                            return
+                        }
+                        
+                        failure(false, errorCode, errorMessage)
                     }
                 }
             }
@@ -278,7 +303,7 @@ class NetworkHandler:SessionManager{
         
         if(Connectivity.isConnectedToInternet){
             
-            Alamofire.request(self.url!, method: .post, parameters:parameters,encoding: URLEncoding.httpBody, headers: self.headers).responseJSON {
+            Alamofire.request(self.url!, method: .post, parameters:parameters,encoding: URLEncoding.httpBody, headers: self.headers).validate().responseJSON {
                 response in
                 switch response.result {
                 case .success:
@@ -286,7 +311,12 @@ class NetworkHandler:SessionManager{
                         print("***** NETWORK CALL RESPONSE *****")
                         print("url: \(self.url ?? ""), \n status code: \((response.response?.statusCode)!), \n responseData: \(response)")
                     #endif
-                    completionHandler(true, (response.response?.statusCode)!, response.data!)
+                    guard let codeObj = response.response?.statusCode, let dataObj = response.data
+                    else {
+                        failure(false, response.response?.statusCode ?? 0, "")
+                        return
+                    }
+                    completionHandler(true, codeObj, dataObj)
                     break
                 case .failure(let error):
                     let responseError:NSError = error as NSError
@@ -298,9 +328,16 @@ class NetworkHandler:SessionManager{
                         _ = NSError(domain: "", code: 0, userInfo: nil)
                         #if DEBUG
                         print("***** NETWORK CALL FAILURE RESPONSE *****")
+                        print("Api name: \(apiName), \(self.url ?? "NA")")
                         print("error code: \(errorCode), error String \(errorString)")
                         #endif
-                        failure(false, errorCode, errorString)
+                        guard let dataObj = response.data, let jsonObj = try? JSONSerialization.jsonObject(with: dataObj, options: []) as? [String : Any], let errorMessage = jsonObj?["message"] as? String  else{
+                            failure(false, errorCode, errorString)
+                            return
+                        }
+                        
+                        failure(false, errorCode, errorMessage)
+                        
                     }
                 }
             }
@@ -360,9 +397,16 @@ class NetworkHandler:SessionManager{
                         _ = NSError(domain: "", code: 0, userInfo: nil)
                         #if DEBUG
                         print("***** NETWORK CALL FAILURE RESPONSE *****")
+                        print("Api name: \(apiName), \(self.url ?? "NA")")
                         print("error code: \(errorCode), error String \(errorString)")
                         #endif
-                        failure(false, errorCode, errorString)
+                        guard let dataObj = response.data, let jsonObj = try? JSONSerialization.jsonObject(with: dataObj, options: []) as? [String : Any], let errorMessage = jsonObj?["message"] as? String  else{
+                            failure(false, errorCode, errorString)
+                            return
+                        }
+                        
+                        failure(false, errorCode, errorMessage)
+                        
                     }
                 }
                 

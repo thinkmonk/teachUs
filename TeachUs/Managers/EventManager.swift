@@ -29,7 +29,7 @@ class EventManager{
     }
     
     final func editEvent(params:[String:Any]?,
-                         completionHandler: ((_ successFlag:Bool) -> Void)?){
+                         completionHandler: ((_ successFlag:Bool, _ errorMessage:String) -> Void)?){
         let manager = NetworkHandler()
         manager.url = URLConstants.CollegeURL.editEventDetails
         manager.apiPost(apiName: " Edit Event", parameters:params, completionHandler: { (result, code, response) in
@@ -37,10 +37,10 @@ class EventManager{
             let status = response["status"] as! Int
             if (status == 200){
                // let message:String = response["message"] as! String
-                completionHandler?(true)
+                completionHandler?(true, "")
             }
         }) { (error, code, message) in
-            completionHandler?(false)
+            completionHandler?(false, message)
         }
         
     }

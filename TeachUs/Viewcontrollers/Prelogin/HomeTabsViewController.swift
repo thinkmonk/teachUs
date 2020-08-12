@@ -233,6 +233,8 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
                     requestListVC.title = "\(tab.titleName)"
                     requestListVC.parentNavigationController = self.parentNavigationController
                     controllersArray.append(requestListVC)
+                case .logout:
+                    break
                 }
             }
             break

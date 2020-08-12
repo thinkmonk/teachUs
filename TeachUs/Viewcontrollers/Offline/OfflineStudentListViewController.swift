@@ -683,7 +683,7 @@ extension OfflineStudentListViewController:ViewConfirmAttendanceDelegate{
             let destinationVC:OfflineMarkCompletedPortionViewController = segue.destination as! OfflineMarkCompletedPortionViewController
             destinationVC.selectedCollege = self.selectedCollege
             destinationVC.attendanceParameters = self.parameters
-            destinationVC.arrayDataSource = self.selectedCollege.unit_syllabus_array!
+            destinationVC.syllabusData = self.selectedCollege.unit_syllabus_array!
         }
         //        TODO: pass parameters here
     }

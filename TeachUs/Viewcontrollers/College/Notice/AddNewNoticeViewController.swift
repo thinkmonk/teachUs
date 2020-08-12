@@ -41,6 +41,7 @@ class AddNewNoticeViewController: BaseViewController {
     @IBOutlet weak var buttonPreviewNotice: UIButton!
     @IBOutlet weak var labelAttachmentText: UILabel!
     @IBOutlet weak var buttonSelectRole: UIButton!
+    @IBOutlet weak var labelSelectedRoles: UILabel!
     var arrayAllRoles   = [RoleNameId]()
     var selectedRolesId : String{
         let selecteedRole = self.arrayAllRoles.filter({$0.isSelected == true})
@@ -48,6 +49,7 @@ class AddNewNoticeViewController: BaseViewController {
         selectedRoleString.append("3")
         return selectedRoleString.joined(separator: ",")
     }
+    var doneToolbarButton:UIToolbar!
     var imagePicker:UIImagePickerController?=UIImagePickerController()
     var documentPicker:UIDocumentPickerViewController!
 //    var chosenFile:URL?
@@ -73,6 +75,8 @@ class AddNewNoticeViewController: BaseViewController {
         self.setUpDefaultValues()
         self.setUpRx()
         self.makeRoleDataSource()
+        labelSelectedRoles.isHidden = true
+        initToolbar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -129,7 +133,7 @@ class AddNewNoticeViewController: BaseViewController {
     func makeRoleDataSource(){
         let roleStudent     = RoleNameId(userId: 1, userKey: "STUDENT", userSelected: false)
         let roleProfessor   = RoleNameId(userId: 2, userKey: "PROFESSOR", userSelected: false)
-        let roleParent      = RoleNameId(userId: 3, userKey: "PARENT", userSelected: false)
+        let roleParent      = RoleNameId(userId: 4, userKey: "PARENT", userSelected: false)
         self.arrayAllRoles  = [roleStudent, roleProfessor, roleParent]
     }
     
@@ -145,7 +149,7 @@ class AddNewNoticeViewController: BaseViewController {
         }
         
         if let defaultImageName = UserDefaults.standard.value(forKey: Constants.UserDefaults.noticeImageName) as? String, !defaultImageName.isEmpty{
-            labelAttachmentText.text = defaultImageName
+            labelAttachmentText.text = "Attachemnt: (defaultImageName)"
         }
         
         if let defaultImageData = UserDefaults.standard.object(forKey: Constants.UserDefaults.noticeImage) as? Data{
@@ -157,7 +161,7 @@ class AddNewNoticeViewController: BaseViewController {
             let documentName = UserDefaults.standard.string(forKey: Constants.UserDefaults.noticeFileName),
             !documentName.isEmpty{
             self.chosenFile.value = documentURL
-            self.labelAttachmentText.text = documentName
+            self.labelAttachmentText.text = "Attachment: \(documentName)"
             self.chosenImage.value = nil
         }
 
@@ -174,8 +178,10 @@ class AddNewNoticeViewController: BaseViewController {
     }
     
     @IBAction func acctionDissmissView(_ sender: Any?) {
+        self.view.endEditing(true)
         self.dismiss(animated: true, completion: { [weak self] in
             if self?.delegate != nil{
+                self?.clearUSerdefaults()
                 self?.delegate?.viewDismissed(isNoticeAdded: self?.noticeAddedFlag)
             }
         })
@@ -232,6 +238,7 @@ class AddNewNoticeViewController: BaseViewController {
             self?.acctionDissmissView(nil)
         }) { (error, code, message) in
             print(message)
+            self.showAlertWithTitle(nil, alertMessage: message)
             LoadingActivityHUD.hideProgressHUD()
         }
     }
@@ -246,6 +253,7 @@ class AddNewNoticeViewController: BaseViewController {
     }
     
     @IBAction func actionShowRoleList(_ sender:Any){
+        self.view.endEditing(true)
         if (self.arrayAllRoles.count > 0){
             self.viewClassList.setUpView(array: self.arrayAllRoles)
             self.viewClassList.frame = CGRect(x: 0.0, y: 0.0, width: self.view.width(), height: self.view.height())
@@ -255,6 +263,7 @@ class AddNewNoticeViewController: BaseViewController {
     }
     
     @IBAction func actionUploadDocument(_ sender: Any) {
+        self.view.endEditing(true)
         let alert:UIAlertController=UIAlertController(title: "Choose Notes", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
         let cameraAction = UIAlertAction(title: "Camera", style: UIAlertActionStyle.default)
         {
@@ -339,6 +348,7 @@ class AddNewNoticeViewController: BaseViewController {
                             failure("Unable to upload")
                             return
                         }
+                        print("file URL: \(downloadURL)")
                         completion(downloadURL,"\(metadata.size)",fileNameRef.name)
                     }
                 }
@@ -368,6 +378,7 @@ class AddNewNoticeViewController: BaseViewController {
                             print("errorObject \(errorObject.localizedDescription)")
                             failure("Unable to upload")
                         }
+                        print("file URL: \(downloadURL)")
                         completion(downloadURL, "\(metadata.size)", fileNameRef.name)
                     }
                 }
@@ -412,7 +423,7 @@ extension AddNewNoticeViewController:UIDocumentMenuDelegate,UIDocumentPickerDele
         self.chosenFile.value = myURL
         UserDefaults.standard.set(myURL, forKey: Constants.UserDefaults.noticeFile)
         UserDefaults.standard.set(myURL.lastPathComponent, forKey: Constants.UserDefaults.noticeFileName)
-        self.labelAttachmentText.text = myURL.lastPathComponent
+        self.labelAttachmentText.text = "Attachemnt: \(myURL.lastPathComponent)"
         self.chosenImage.value = nil
         print("import result : \(myURL)")
     }
@@ -421,7 +432,7 @@ extension AddNewNoticeViewController:UIDocumentMenuDelegate,UIDocumentPickerDele
         self.chosenFile.value = url
         UserDefaults.standard.set(url, forKey: Constants.UserDefaults.noticeFile)
         UserDefaults.standard.set(url.lastPathComponent, forKey: Constants.UserDefaults.noticeFileName)
-        self.labelAttachmentText.text = url.lastPathComponent
+        self.labelAttachmentText.text = "Attachemnt: \(url.lastPathComponent)"
         self.chosenImage.value = nil
         print("import result : \(url)")
 
@@ -480,6 +491,11 @@ extension AddNewNoticeViewController:ViewClassSelectionDelegate{
         
     func classViewDismissed(_ dataSourceObj: Any?) {
         self.viewClassList.removeFromSuperview()
+        if let _ = dataSourceObj as? [RoleNameId] {
+            let selectedRolesString = self.arrayAllRoles.filter({$0.isSelected}).map({$0.key ?? ""}).joined(separator: ", ")
+            labelSelectedRoles.isHidden = selectedRolesString.isEmpty
+            labelSelectedRoles.text = "Selected Roles: \(selectedRolesString)"
+        }
         print("class dismissed")
     }
 }
@@ -491,7 +507,7 @@ extension AddNewNoticeViewController:UIImagePickerControllerDelegate,UINavigatio
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage{
             self.chosenImage.value = image
             self.chosenFile.value = nil//save selected image to user defaults
-            
+            labelAttachmentText.text = "Attachemnt: Image Selected!"
             let data = UIImagePNGRepresentation(image)
             UserDefaults.standard.setValue(data, forKey: Constants.UserDefaults.noticeImage)
         }
@@ -499,8 +515,8 @@ extension AddNewNoticeViewController:UIImagePickerControllerDelegate,UINavigatio
         if #available(iOS 11.0, *) {
             if let asset = info[UIImagePickerControllerPHAsset] as? PHAsset {
                 let assetResources = PHAssetResource.assetResources(for: asset)
-                labelAttachmentText.text = assetResources.first!.originalFilename
-                print(assetResources.first!.originalFilename)
+                labelAttachmentText.text = "Attachemnt: \(assetResources.first?.originalFilename ?? "Selected!")"
+                print(assetResources.first?.originalFilename ?? "")
                 UserDefaults.standard.setValue(assetResources.first!.originalFilename, forKey: Constants.UserDefaults.noticeImageName)
 
             }
@@ -509,7 +525,7 @@ extension AddNewNoticeViewController:UIImagePickerControllerDelegate,UINavigatio
                 let result = PHAsset.fetchAssets(withALAssetURLs: [imageURL], options: nil)
                 let assetResources = PHAssetResource.assetResources(for: result.firstObject!)
                 print(assetResources.first!.originalFilename)
-                labelAttachmentText.text = assetResources.first!.originalFilename
+                labelAttachmentText.text = "Attachemnt: \(assetResources.first?.originalFilename ?? "Selected")"
                 UserDefaults.standard.setValue(assetResources.first!.originalFilename, forKey: Constants.UserDefaults.noticeImageName)
 
             }
@@ -540,4 +556,27 @@ extension AddNewNoticeViewController:UIImagePickerControllerDelegate,UINavigatio
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         imagePicker?.dismiss(animated: true, completion: nil)
     }
+}
+
+extension AddNewNoticeViewController{
+    func initToolbar(){
+        doneToolbarButton = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.width(), height: 50))
+        doneToolbarButton.barStyle       = UIBarStyle.default
+        let flexSpace              = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        let done: UIBarButtonItem  = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: self, action: #selector(AddNewNoticeViewController.doneButtonAction))
+
+        var items = [UIBarButtonItem]()
+        items.append(flexSpace)
+        items.append(done)
+
+        doneToolbarButton.items = items
+        doneToolbarButton.sizeToFit()
+        self.textViewDescription.inputAccessoryView = doneToolbarButton
+
+    }
+    
+    @objc func doneButtonAction() {
+        self.view.endEditing(true)
+    }
+
 }

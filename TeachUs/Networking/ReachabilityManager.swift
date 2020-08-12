@@ -128,6 +128,7 @@ class ReachabilityManager: NSObject {
             if dataResponse.count > 0{
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let controller:UploadOfflineDataViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.UploadOfflineDataViewControllerId) as! UploadOfflineDataViewController
+                controller.modalPresentationStyle = .fullScreen
                 UIApplication.shared.keyWindow?.rootViewController?.present(controller, animated: true, completion: nil)
             }
             else{

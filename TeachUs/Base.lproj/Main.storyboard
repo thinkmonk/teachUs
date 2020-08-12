@@ -975,7 +975,7 @@ Form Library</string>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cX6-cB-34O">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cX6-cB-34O">
                                 <rect key="frame" x="0.0" y="92" width="320" height="436"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
@@ -5673,10 +5673,11 @@ Form Library</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gtp-wr-2W3">
-                                <rect key="frame" x="20" y="103" width="280" height="362.5"/>
+                                <rect key="frame" x="20" y="91.5" width="280" height="385.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zqd-28-ntu">
-                                        <rect key="frame" x="261" y="10" width="9" height="22"/>
+                                        <rect key="frame" x="245" y="10" width="25" height="22"/>
+                                        <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
                                         <state key="normal" image="cross"/>
                                         <connections>
                                             <action selector="acctionDissmissView:" destination="um7-4p-3vh" eventType="touchUpInside" id="xqa-S5-xnH"/>
@@ -5746,7 +5747,7 @@ Form Library</string>
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="RdE-Ym-W9O">
-                                        <rect key="frame" x="10" y="245.5" width="255" height="69"/>
+                                        <rect key="frame" x="10" y="245.5" width="255" height="92"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="DZJ-R6-ISl">
                                                 <rect key="frame" x="0.0" y="0.0" width="255" height="32"/>
@@ -5792,10 +5793,16 @@ Form Library</string>
                                                     </button>
                                                 </subviews>
                                             </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Selected roles:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ICx-6U-xmf">
+                                                <rect key="frame" x="0.0" y="74" width="255" height="18"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <color key="textColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rUE-Ub-BeR">
-                                        <rect key="frame" x="105.5" y="324.5" width="69" height="28"/>
+                                        <rect key="frame" x="105.5" y="347.5" width="69" height="28"/>
                                         <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
                                         <state key="normal" title="Submit"/>
                                         <connections>
@@ -5848,6 +5855,7 @@ Form Library</string>
                         <outlet property="buttonSelectClass" destination="k9R-9p-yUw" id="CnJ-h8-qaW"/>
                         <outlet property="buttonSelectRole" destination="VVW-Nn-bJZ" id="iJs-LK-z9g"/>
                         <outlet property="labelAttachmentText" destination="hdf-Bk-YpB" id="vUa-2P-gtS"/>
+                        <outlet property="labelSelectedRoles" destination="ICx-6U-xmf" id="FsX-n3-Gb0"/>
                         <outlet property="textViewDescription" destination="225-Rr-bUk" id="vwl-r0-2Rc"/>
                         <outlet property="textfieldNoticeTitle" destination="nWl-Yq-sVZ" id="9Qz-Fu-7Qo"/>
                         <outlet property="viewAddNoticeWrapper" destination="gtp-wr-2W3" id="Cw9-OX-p2w"/>

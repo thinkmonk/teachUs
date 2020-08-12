@@ -66,6 +66,7 @@ enum UserTabControls:Int, CaseIterable{
     case notification    = 8
     case notes           = 9
     case request         = 10
+    case logout          = 11
     
     
     var titleName:String{
@@ -89,6 +90,33 @@ enum UserTabControls:Int, CaseIterable{
         case .notes: return "Notes"
             
         case .request: return "Request"
+        case .logout : return "Logout"
+        }
+    }
+    //["attendanceReport", "syllabusStatusEvent", "syllabus", "addRemoveAdmin","feedback", "logs","notice", "notification", "notes", "request", "logout"]
+    var imageName:String{
+        switch self {
+        case .atendanceReport   : return "attendanceReport"
+            
+        case .attendanceEvent   : return "syllabusStatusEvent"
+            
+        case .syllabus          : return "syllabus"
+            
+        case .addRemoveAdmin    : return "addRemoveAdmin"
+            
+        case .feedbcak          : return "feedback"
+            
+        case .logs              : return "logs"
+            
+        case .notice            : return "notice"
+            
+        case .notification      : return "notification"
+            
+        case .notes             : return "notes"
+            
+        case .request           : return "request"
+            
+        case .logout            : return "logout"
             
         }
     }

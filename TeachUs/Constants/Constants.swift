@@ -156,6 +156,7 @@ public struct Constants {
         static let DefaultSelectionTableViewCellId = "DefaultSelectionTableViewCellId"
         static let AttendanceCountTableViewCellId = "AttendanceCountTableViewCellId"
         static let TopicDetailsTableViewCellId = "TopicDetailsTableViewCellId"
+        static let CustomSyllabusTopicTableViewCellId = "CustomSyllabusTopicTableViewCellId"
         static let SyllabusStatusTableViewCellId = "SyllabusStatusTableViewCellId"
         static let SyllabusDetailsTableViewCellId = "SyllabusDetailsTableViewCellId"
         static let TeacherDetailsTableViewCellId = "TeacherDetailsTableViewCellId"

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,8 +17,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chapter number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NFO-he-lg1">
-                        <rect key="frame" x="10" y="15" width="96" height="14.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chapter name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NFO-he-lg1">
+                        <rect key="frame" x="10" y="15" width="83" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -119,7 +119,7 @@
                 <outlet property="buttonCompleted" destination="kZf-Pr-NEU" id="waW-xz-Mbk"/>
                 <outlet property="buttonInProgress" destination="osx-bb-h23" id="EMY-Qi-rhO"/>
                 <outlet property="labelChapterName" destination="H59-at-n8m" id="N6C-ZS-ufo"/>
-                <outlet property="labelChapterNumber" destination="NFO-he-lg1" id="qTg-LX-134"/>
+                <outlet property="labelChapterNameHeader" destination="NFO-he-lg1" id="LGs-oC-yO9"/>
                 <outlet property="labelStatus" destination="DmB-Lt-gFg" id="Z70-R6-w8o"/>
                 <outlet property="viewDisableCell" destination="9m5-K4-p9n" id="YaO-aR-IRl"/>
                 <outlet property="viewStatusStack" destination="D8V-tc-fvA" id="8C4-wD-202"/>

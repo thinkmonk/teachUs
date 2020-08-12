@@ -57,6 +57,7 @@ class EventAttendanceListViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.getEvents()
     }
     
     override func refresh(sender: AnyObject) {

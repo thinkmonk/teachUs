@@ -91,6 +91,9 @@ class StudentsListViewController: BaseViewController {
         self.addColorToNavBarText(color: UIColor.white)
         self.buttonSubmit.themeRedButton()
         self.buttonSubmit.isHidden = true
+        if self.arrayDataSource.count > 0{
+            self.tableStudentList.reloadData()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -632,7 +635,6 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
                 cell.buttonAttendance.isSelected = object.isPrsent
                 cell.buttonAttendance.indexPath = indexPath
                 cell.buttonAttendance.addTarget(self, action: #selector(StudentsListViewController.markAttendance), for: .touchUpInside)
-                print("adding value for \(object.student?.studentRollNo ?? "") value \(object.isPrsent ?? false)")
                 cell.setUpCell()
                 cell.imageViewProfile.callback = {
                     self.imageTapped(view: cell.imageViewProfile)
@@ -647,7 +649,14 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
         let cellDataSource = arrayDataSource[indexPath.section]
         switch cellDataSource.AttendanceCellType! {
         case .calender:
-            return 230
+            if let slotsObj = self.timeSlotsObj,(slotsObj.attendanceSlot?.count ?? 0) > 0{
+                return 220
+
+            }else{
+                return 180
+            }
+            
+
             
         case .defaultSelection:
             return 50
@@ -1061,6 +1070,7 @@ extension StudentsListViewController:ViewConfirmAttendanceDelegate{
             destinationVC.isEditAttendanceFlow  = self.isEditAttendanceFlow
             destinationVC.attendanceParameters  = self.parameters
             destinationVC.lectureDetails        = self.lectureDetails
+            self.navigationItem.backBarButtonItem?.title = ""
         }
     }
 }
@@ -1068,12 +1078,10 @@ extension StudentsListViewController:ViewConfirmAttendanceDelegate{
 //MARK:- UISearchBarDelegate
 extension StudentsListViewController:UISearchBarDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("searchText = \(searchText)")
         self.searchText = searchText
         arraySearchStudentDetails = self.arrayStudentsDetails.filter({ (enrolledStudentObject) -> Bool in
             return (enrolledStudentObject.studentName?.lowercased().contains(self.searchText.lowercased()) ?? false ) || (enrolledStudentObject.studentRollNo?.contains(self.searchText.lowercased()) ?? false)
         })
-        print("arraySearchStudentDetails \(arraySearchStudentDetails.count)")
         self.makeDataSource()
     }
 }
