@@ -50,7 +50,7 @@ class AddNewNoticeViewController: BaseViewController {
         return selectedRoleString.joined(separator: ",")
     }
     var doneToolbarButton:UIToolbar!
-    var imagePicker:UIImagePickerController?=UIImagePickerController()
+    var imagePicker:UIImagePickerController!
     var documentPicker:UIDocumentPickerViewController!
 //    var chosenFile:URL?
 //    var chosenImage:UIImage?
@@ -71,6 +71,7 @@ class AddNewNoticeViewController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(AddNewNoticeViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         self.initClassSelectionView()
         self.buttonPreviewNotice.isHidden = true
+        imagePicker = UIImagePickerController()
         imagePicker?.delegate = self
         self.setUpDefaultValues()
         self.setUpRx()
@@ -205,13 +206,13 @@ class AddNewNoticeViewController: BaseViewController {
         }else{
             self.uploadFileToFirebase(completion: {[weak self] (fileURL, fileSize, fileName)  in
                 let parameters = [
-                    "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+                    "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code ?? "")",
                     "class_id":"\(CollegeClassManager.sharedManager.getSelectedClassList)",
-                    "title":self?.textfieldNoticeTitle.text?.encodedString() ?? "",
+                    "title":"\(self?.textfieldNoticeTitle.text?.encodedString() ?? "")",
                     "description":"\(self?.textViewDescription.text?.encodedString() ?? "")",
-                    "doc":fileURL.absoluteString,
+                    "doc":"\(fileURL.absoluteString)",
                     "file_name":"\(fileName)",
-                    "role_id": self?.selectedRolesId,
+                    "role_id": "\(self?.selectedRolesId ?? "")",
                     "doc_size":"\(fileSize)"
                 ]
                 self?.postProfessorNotes(parameters)
