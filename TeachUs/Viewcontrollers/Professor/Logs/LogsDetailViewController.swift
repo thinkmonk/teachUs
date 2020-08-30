@@ -189,8 +189,8 @@ class LogsDetailViewController: BaseViewController {
             for unit in log.unitArray{
                 for chapter in unit.topicArray!{
                     let attachedSyllabus = LogDetailSyllabus()
-                    attachedSyllabus.unitName = unit.unitName
-                    attachedSyllabus.unitNumber = unit.unitNumber
+                    attachedSyllabus.unitName = unit.unitName ?? ""
+                    attachedSyllabus.unitNumber = unit.unitNumber ?? ""
                     attachedSyllabus.chapter = chapter
                     let syllabusDatasource = ProfessorLogsDataSource(celType: .SyllabusDetail, attachedObject: attachedSyllabus)
                     self.arrayDataSource.append(syllabusDatasource)
@@ -280,7 +280,9 @@ extension LogsDetailViewController:UITableViewDelegate, UITableViewDataSource{
             cell.labelTimeOfSubmission.text = "\(logs.dateOfSubmission)"
             cell.selectionStyle = .none
             cell.buttonEditAttendance.indexPath = indexPath
-            cell.buttonEditAttendance.isHidden = self.isCollegeLogsSubjectData //edit edit optioj for college logs
+            cell.buttonDelete.indexPath = indexPath
+            cell.buttonEditAttendance.isHidden = self.isCollegeLogsSubjectData //edit option not available for college logs
+            cell.buttonDelete.isHidden = self.isCollegeLogsSubjectData //delete option not available for college logs
             cell.delegate = self
             return cell
             
@@ -309,13 +311,58 @@ extension LogsDetailViewController:UITableViewDelegate, UITableViewDataSource{
 }
 
 extension LogsDetailViewController:LogsDetailCellDelegate{
+    func actionDidDeleteAttendance(_ indexpath: IndexPath) {
+        guard let logDetailsObj = self.arrayDataSource[indexpath.row].attachedObject as? LogDetails,
+            let attendanceId = Int(logDetailsObj.attendanceId)
+            else {
+                return
+        }
+        
+        print("selected attendance id = \(attendanceId)")
+        
+        let alertController = UIAlertController(title: "Delete Attendance!", message: "Are you sure you want to delete this lecture's log?", preferredStyle: .alert)
+        alertController.addTextField { textField in
+            textField.placeholder = "Enter a reason to delete."
+            textField.isSecureTextEntry = false
+            
+        }
+        
+        
+        let confirmAction = UIAlertAction(title: "SUBMIT", style: .default) { [weak alertController, weak self] _ in
+            guard let alertController = alertController, let textField = alertController.textFields?.first else { return }
+            NotificationCenter.default.removeObserver(alertController)
+            let deleteAttendanceObj = DeleteAttendanceObject(attendanceId: attendanceId, reasonToDelete: textField.text ?? "")
+            self?.makeDeleAttendanceRequest(deleteAttendanceObj)
+            print("Reason entered is: \(textField.text ?? "")")
+        }
+        confirmAction.isEnabled = false
+        
+        //enable confirm only when textfield has reason.
+        NotificationCenter.default.addObserver(forName: .UITextFieldTextDidChange, object: alertController.textFields?.first, queue: .main) { (notification) in
+            confirmAction.isEnabled = !(alertController.textFields?.first?.text?.isEmpty ?? true)
+        }
+        
+        alertController.addAction(confirmAction)
+        let cancelAction = UIAlertAction(title: "CANCEL", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
+        
+    }
+    
     func actionDidEditAttendance(_ indexpath: IndexPath) {
-
-        print("selected attendance id = \((self.arrayDataSource[indexpath.row].attachedObject as! LogDetails).attendanceId )")
+        
+        
+        guard let logDetailsObj = self.arrayDataSource[indexpath.row].attachedObject as? LogDetails,
+            let attendanceId = Int(logDetailsObj.attendanceId)
+            else {
+                return
+            }
+        
+        
         
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let destinationVC:StudentsListViewController =  storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.studentList) as! StudentsListViewController
-        destinationVC.selectedAttendanceId = Int((self.arrayDataSource[indexpath.row].attachedObject as! LogDetails).attendanceId)
+        destinationVC.selectedAttendanceId = attendanceId
         destinationVC.isEditAttendanceFlow = true
         self.navigationController?.pushViewController(destinationVC, animated: true)
     }
@@ -334,5 +381,42 @@ extension LogsDetailViewController:ViewLogsCalenderDelegate{
     
     func dismissCalenderView(){
         self.calenderView?.removeFromSuperview()
+    }
+}
+
+extension LogsDetailViewController{
+    struct DeleteAttendanceObject {
+        let attendanceId:Int
+        let reasonToDelete:String
+    }
+    func makeDeleAttendanceRequest(_ object: DeleteAttendanceObject){
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        let manager = NetworkHandler()
+        manager.url = URLConstants.ProfessorURL.deleteAttendanceRequest
+        var parameters = [String:Any]()
+        parameters["college_code"] = UserManager.sharedUserManager.appUserCollegeDetails.college_code
+        parameters["attendance_id"] = "\(object.attendanceId)"
+        parameters["comment"] = "\(object.reasonToDelete)"
+        
+        manager.apiPost(apiName: "Make delete attendance request for id \(object.attendanceId)", parameters: parameters, completionHandler: { (result, code, response) in
+            LoadingActivityHUD.hideProgressHUD()
+            guard let status = response["status"] as? NSNumber else{
+                return
+            }
+            if (status == 200){
+                guard let message:String = response["message"] as? String else { return }
+                self.showAlertWithTitle(nil, alertMessage: message)
+            }
+            else{
+                self.showAlertWithTitle("Failed", alertMessage: "Failed to create request, Please retry.")
+            }
+        }) { (success, code, message) in
+            LoadingActivityHUD.hideProgressHUD()
+            #if DEBUG
+            self.showAlertWithTitle(nil, alertMessage: message)
+            #endif
+        }
+
+        
     }
 }

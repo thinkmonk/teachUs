@@ -181,7 +181,7 @@ extension LectureReportViewController:UITableViewDelegate, UITableViewDataSource
             cell.labelReportDescription.text = lectureReportModel.subjectName
             var stringTopicCovered = ""
             for unit in lectureReportModel.unitDetails{
-                stringTopicCovered = stringTopicCovered + unit.unitName + ":"
+                stringTopicCovered = stringTopicCovered + (unit.unitName ?? "NA") + ":"
                 for topic in unit.topicArray!{
                     stringTopicCovered = stringTopicCovered + topic.chapterName + "\n"
                 }

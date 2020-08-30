@@ -28,6 +28,13 @@ class ProfileChangeRequestTableViewCell: UITableViewCell {
         self.labelChangeRequestType.text = data.requestType ?? ""
         self.labelUserName.text = data.existingData ?? ""
     }
+    
+    func setUpCell(data:LogArray){
+        self.labelUserTyppe.text = data.userType ?? "NA"
+        self.labelChangeRequestType.text = data.requestType ?? "NA"
+        self.labelUserName.text = data.professorName ?? "NA"
+
+    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

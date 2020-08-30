@@ -79,9 +79,9 @@ import ObjectMapper
 
 class Unit:Mappable{
     
-    var unitId:String = ""
-    var unitName:String = ""
-    var unitNumber:String = ""
+    var unitId:String? = ""
+    var unitName:String? = ""
+    var unitNumber:String? = ""
     var topicArray:[Chapter]? = []
     
     required public init?(map: Map) {

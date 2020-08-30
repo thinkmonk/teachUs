@@ -17,7 +17,7 @@ class ProfileChangeRequestsViewController: BaseViewController {
     var parentNavigationController : UINavigationController?
     var selectedDetailsObject:RequestData!
     var viewRequestDetails:ViewProfileRequestDetails!
-
+    var arrayDataSource = [ChangeRequestsDataSource]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +26,7 @@ class ProfileChangeRequestsViewController: BaseViewController {
         self.tableViewRequestLIst.dataSource = self
         self.tableViewRequestLIst.estimatedRowHeight = 35
         self.tableViewRequestLIst.rowHeight = UITableViewAutomaticDimension
-        self.tableViewRequestLIst.contentInset = UIEdgeInsetsMake(20, 0, 0, 20)
+        self.tableViewRequestLIst.contentInset.top = 20
         self.tableViewRequestLIst.addSubview(refreshControl)
         self.getRequestChangeData()
 
@@ -45,12 +45,13 @@ class ProfileChangeRequestsViewController: BaseViewController {
             "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)"
         ]
         
-        manager.apiPostWithDataResponse(apiName: "Get Profile chnages requests", parameters: parameters, completionHandler: { (result, code, response) in
+        manager.apiPostWithDataResponse(apiName: "Get Profile changes requests", parameters: parameters, completionHandler: { [weak self] (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
+            guard let `self`  = self else { return }
             do{
                 let decoder = JSONDecoder()
                 self.changeRequestObject = try decoder.decode(ChangeRequest.self, from: response)
-                self.tableViewRequestLIst.reloadData()
+                self.makeDataSource()
             }catch let error {
                 print("parsing error \(error)")
             }
@@ -72,13 +73,31 @@ class ProfileChangeRequestsViewController: BaseViewController {
         }
     }
     
+    func makeDataSource(){
+        arrayDataSource.removeAll()
+        
+        //name change requests
+        for nameReq in changeRequestObject.requestData ?? []{
+            let ds = ChangeRequestsDataSource(celType: .nameChange, attachedObject: nameReq)
+            arrayDataSource.append(ds)
+        }
+        
+        for log in changeRequestObject.logArray ?? []{
+            let ds = ChangeRequestsDataSource(celType: .deleteAttendance, attachedObject: log)
+            arrayDataSource.append(ds)
+        }
+        
+        
+        self.tableViewRequestLIst.reloadData()
+    }
+    
     func updateRequestData(_ isApproved:Bool){
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()
         manager.url = URLConstants.CollegeURL.updateRequestDetails
         var parameters = [String:Any]()
         parameters["college_code"] = "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code ?? "")"
-        parameters["request_id"]  = Int(self.selectedDetailsObject?.verifyDocumentsID ?? "0")
+        parameters["request_id"]  = Int(self.selectedDetailsObject?.verifyDocumentsId ?? "0")
         parameters["status"] = isApproved ? 1 : 2
         manager.apiPost(apiName: "Update profile change request", parameters: parameters, completionHandler: { (result, code, reponse) in
             LoadingActivityHUD.hideProgressHUD()
@@ -93,12 +112,21 @@ class ProfileChangeRequestsViewController: BaseViewController {
         }
     }
     
+    func showDeleteAttendanceView(for logObject:LogArray){
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let destinationVC:AttendanceDeleteRequestViewController =  storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.attendanceDeleteRequest) as! AttendanceDeleteRequestViewController
+        destinationVC.logDetails = logObject
+        destinationVC.delegate = self
+        self.present(destinationVC, animated: true, completion: nil)
+
+    }
+    
 }
 
 extension ProfileChangeRequestsViewController:UITableViewDelegate, UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return self.changeRequestObject?.requestData?.count ?? 0
+        return arrayDataSource.count
 
     }
     
@@ -107,17 +135,34 @@ extension ProfileChangeRequestsViewController:UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let requestObject = self.changeRequestObject?.requestData![indexPath.section]
-        let cell:ProfileChangeRequestTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.profileChangeRequestTableViewCellId) as! ProfileChangeRequestTableViewCell
-        cell.setUpCell(data:requestObject!)
+         let dataSource = arrayDataSource[indexPath.section]
         
-        cell.accessoryType = .disclosureIndicator
-        cell.selectionStyle = .none
-        return cell
+        switch  dataSource.cellType{
+        case .nameChange:
+            let requestObject = dataSource.attachedObject as? RequestData
+            let cell:ProfileChangeRequestTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.profileChangeRequestTableViewCellId) as! ProfileChangeRequestTableViewCell
+            cell.setUpCell(data:requestObject!)
+            
+            cell.accessoryType = .disclosureIndicator
+            cell.selectionStyle = .none
+            return cell
+
+        case .deleteAttendance:
+            let requestObject = dataSource.attachedObject as? LogArray
+            let cell:ProfileChangeRequestTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.profileChangeRequestTableViewCellId) as! ProfileChangeRequestTableViewCell
+            cell.setUpCell(data:requestObject!)
+            cell.accessoryType = .disclosureIndicator
+            cell.selectionStyle = .none
+            return cell
+
+        case .none:
+            return UITableViewCell()
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableViewRequestLIst.width(), height: 15))
+        let headerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 15))
         headerView.backgroundColor = UIColor.clear
         return headerView
     }
@@ -130,8 +175,23 @@ extension ProfileChangeRequestsViewController:UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.selectedDetailsObject = self.changeRequestObject?.requestData![indexPath.section]
-        self.setupUpDetailView()
+        let dataSource = arrayDataSource[indexPath.section]
+        switch dataSource.cellType {
+        case .nameChange:
+            if let data = dataSource.attachedObject as? RequestData{
+                
+                self.selectedDetailsObject = data
+                self.setupUpDetailView()
+            }
+            
+        case .deleteAttendance:
+            if let logObj = dataSource.attachedObject as? LogArray{
+                self.showDeleteAttendanceView(for: logObj)
+            }
+            break
+            
+        case .none:  break
+        }
     }
 }
 
@@ -148,17 +208,6 @@ extension ProfileChangeRequestsViewController:ViewProfileRequestDetailsDelegate{
                 viewController.fileURL = imageURL
                 self.navigationController?.pushViewController(viewController, animated: true)
 
-                
-                /*
-                let webView = UIWebView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.size.width, height:UIScreen.main.bounds.size.height))
-                webView.loadRequest(URLRequest(url: URL(fileURLWithPath: filePath)))
-                let pdfVC = BaseViewController() //create a view controller for view only purpose
-                pdfVC.view.addSubview(webView)
-                webView.scalesPageToFit = true
-                pdfVC.title = "\(URL(string: fileUrl)?.lastPathComponent ?? "")"
-                self.navigationController?.pushViewController(pdfVC, animated: true)
-                pdfVC.addGradientToNavBar()
- */
             }else{// save file
                 GlobalFunction.downloadFileAndSaveToDisk(fileUrl: imageURL)
             }
@@ -184,5 +233,11 @@ extension ProfileChangeRequestsViewController:ViewProfileRequestDetailsDelegate{
 extension ProfileChangeRequestsViewController:IndicatorInfoProvider{
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "Request")
+    }
+}
+
+extension ProfileChangeRequestsViewController:DeleteRequestDelegate{
+    func requestUpdated() {
+        self.getRequestChangeData()
     }
 }

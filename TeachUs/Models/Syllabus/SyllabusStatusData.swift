@@ -21,8 +21,8 @@ class SyllabusStatusData: Codable {
 
 // MARK: - UnitSyllabusArray
 class UnitSyllabusArray: Codable {
-    let unitName: String
-    let unitId: String
+    let unitName: String?
+    let unitId: String?
     let topicList: [TopicList]
 
     enum CodingKeys: String, CodingKey {
@@ -34,10 +34,12 @@ class UnitSyllabusArray: Codable {
 
 // MARK: - TopicList
 class TopicList: Codable {
-    let topicName: String
-    let topicId: String
-    let topicDescription: String
-    var status: String
+    var unitName:String?
+    var unitId:String?
+    let topicName: String?
+    let topicId: String?
+    let topicDescription: String?
+    var status: String?
     let resultStatus: String?
     var resultStatusFlag:String?
     var resultStatusDate:String?
@@ -57,9 +59,9 @@ class TopicList: Codable {
     required init(from decoder: Decoder) throws {
         let container       = try decoder.container(keyedBy: CodingKeys.self)
         topicName           = try container.decode(String.self, forKey: .topicName)
-        topicDescription    = try container.decode(String.self, forKey: .topicDescription)
+        topicDescription    = try container.decodeIfPresent(String.self, forKey: .topicDescription)
         topicId             = try container.decode(String.self, forKey: .topicId)
-        status              = try container.decode(String.self, forKey: .status)
+        status              = try container.decodeIfPresent(String.self, forKey: .status)
         do {
             
             resultStatus    = try container.decode(String.self, forKey: .resultStatus)

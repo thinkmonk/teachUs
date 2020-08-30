@@ -112,6 +112,7 @@ public struct Constants {
         static let documentsVC = "DocumentsViewControllerId"
         static let rollNumberGridVC = "StudentListGridViewControllerId"
         static let addmissionStatusViewControlelr = "AdmissionStatusViewControllerId"
+        static let attendanceDeleteRequest = "AttendanceDeleteRequestViewControllerId"
         
     }
     
@@ -191,6 +192,8 @@ public struct Constants {
         static let addRecordCell = "AddRecordTableViewCellId"
         static let recordTitleHeaderCell = "RecordHeaderTableViewCell"
         static let documentsImageCell   =  "AdmissionDocumentPicketTableViewCellId"
+        static let customKeyValueTableViewCellId = "CustomKeyValueTableViewCellId"
+        static let customAcceptRejectTableviewcellId = "CustomButtonsTableViewCellid"
     }
     
     struct UserTypeString {

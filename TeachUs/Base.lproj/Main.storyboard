@@ -4896,7 +4896,7 @@ Form Library</string>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="90t-UZ-5tb">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="90t-UZ-5tb">
                                 <rect key="frame" x="15" y="44" width="290" height="524"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
@@ -4918,6 +4918,36 @@ Form Library</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="erN-QI-XBz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3758" y="10215"/>
+        </scene>
+        <!--Attendance Delete Request View Controller-->
+        <scene sceneID="lWz-k8-ITj">
+            <objects>
+                <viewController storyboardIdentifier="AttendanceDeleteRequestViewControllerId" id="LSO-bQ-ouz" customClass="AttendanceDeleteRequestViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vGJ-pC-hbx">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sbk-Ue-bJD">
+                                <rect key="frame" x="15" y="15" width="290" height="553"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="7ls-ae-8zJ" firstAttribute="trailing" secondItem="sbk-Ue-bJD" secondAttribute="trailing" constant="15" id="ATW-EZ-e7A"/>
+                            <constraint firstItem="sbk-Ue-bJD" firstAttribute="top" secondItem="7ls-ae-8zJ" secondAttribute="top" constant="15" id="cWd-yl-Y5f"/>
+                            <constraint firstItem="sbk-Ue-bJD" firstAttribute="leading" secondItem="7ls-ae-8zJ" secondAttribute="leading" constant="15" id="vTT-sb-IaZ"/>
+                            <constraint firstItem="7ls-ae-8zJ" firstAttribute="bottom" secondItem="sbk-Ue-bJD" secondAttribute="bottom" id="zzz-R3-DEe"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="7ls-ae-8zJ"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableviewDeleteLog" destination="sbk-Ue-bJD" id="pL6-Ha-6tw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vh3-Tx-ktw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4776" y="10215"/>
         </scene>
         <!--Professor Notes Subject List View Controller-->
         <scene sceneID="iLX-6u-XYn">

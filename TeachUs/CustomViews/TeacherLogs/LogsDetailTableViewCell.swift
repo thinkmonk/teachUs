@@ -10,6 +10,7 @@ import UIKit
 
 protocol LogsDetailCellDelegate{
     func actionDidEditAttendance(_ indexpath:IndexPath)
+    func actionDidDeleteAttendance(_ indexpath:IndexPath)
 }
 
 class LogsDetailTableViewCell: UITableViewCell {
@@ -29,7 +30,10 @@ class LogsDetailTableViewCell: UITableViewCell {
     @IBOutlet weak var viewTimeOfSubject: UIView!
     @IBOutlet weak var labelTimeOfSubmission: UILabel!
     @IBOutlet weak var buttonEditAttendance:ButtonWithIndexPath!
+    @IBOutlet weak var buttonDelete: ButtonWithIndexPath!
     
+    @IBOutlet weak var layoutTopViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var layoutHeaderHeight: NSLayoutConstraint!
     
     var delegate:LogsDetailCellDelegate!
     override func awakeFromNib() {
@@ -54,5 +58,10 @@ class LogsDetailTableViewCell: UITableViewCell {
         }
     }
     
+    @IBAction func actionDeleteAttendance(_ sender: Any) {
+        if let senderButton = sender as? ButtonWithIndexPath{
+            self.delegate.actionDidDeleteAttendance(senderButton.indexPath)
+        }
+    }
     
 }
