@@ -9,7 +9,7 @@
 import UIKit
 
 protocol DeleteRequestDelegate:class {
-    func requestUpdated()
+    func updateRequestData(_ isApproved:Bool, requestType:ChangeRequestType, id requestId: Int)
 }
 
 
@@ -83,39 +83,18 @@ class AttendanceDeleteRequestViewController: BaseViewController {
     }
     
     @objc func approve() {
-        self.updateRequestData(true)
+        self.dismiss(animated: true) {
+            guard let attendanceId = self.logDetails.deleteRequestAttId, let id = Int(attendanceId) else { return }
+            self.delegate?.updateRequestData(true, requestType: .DeleteAttendance, id: id)
+        }
     }
     
     @objc func reject() {
-        self.updateRequestData(false)
-    }
-    
-    func updateRequestData(_ isApproved:Bool){
-        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow ?? self.view)
-        guard  let requestIdString = logDetails.deleteRequestAttId ,
-                let requestId = Int(requestIdString) else {
-            return
-        }
-        let manager = NetworkHandler()
-        manager.url = URLConstants.CollegeURL.updateRequestDetails
-        var parameters = [String:Any]()
-        parameters["college_code"] = "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code ?? "")"
-        parameters["delete_request_att_id"]  = requestId
-        parameters["request_type"] = 2
-        
-        parameters["status"] = isApproved ? 1 : 2
-        manager.apiPost(apiName: "Update profile change request", parameters: parameters, completionHandler: {[weak self] (result, code, reponse) in
-            LoadingActivityHUD.hideProgressHUD()
-            if code == 200{
-                self?.dismiss(animated: true) {
-                    self?.delegate?.requestUpdated()
-                }
-            }
-        }) { (result, code, errorString) in
-            LoadingActivityHUD.hideProgressHUD()
+        self.dismiss(animated: true) {
+            guard let attendanceId = self.logDetails.deleteRequestAttId, let id = Int(attendanceId) else { return }
+            self.delegate?.updateRequestData(false, requestType: .DeleteAttendance, id: id)
         }
     }
-
     
 }
 

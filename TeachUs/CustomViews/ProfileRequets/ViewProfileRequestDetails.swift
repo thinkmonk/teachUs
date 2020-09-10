@@ -10,8 +10,8 @@ import UIKit
 
 protocol ViewProfileRequestDetailsDelegate {
     func downloadProof()
-    func approve()
-    func reject()
+    func approve(_ requestType:ChangeRequestType, id requestId: Int)
+    func reject(_ requestType:ChangeRequestType,  id requestId: Int)
     func close()
 }
 
@@ -30,7 +30,7 @@ class ViewProfileRequestDetails: UIView {
     @IBOutlet weak var viewWrapper: UIView!
     
     var delegate:ViewProfileRequestDetailsDelegate!
-    
+    private(set) var requestData:RequestData!
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         self.viewWrapper.makeEdgesRounded()
@@ -46,13 +46,13 @@ class ViewProfileRequestDetails: UIView {
     }
     
     @IBAction func actionApproveChangeRequest(_ sender: Any) {
-        if self.delegate != nil{
-            self.delegate.approve()
+        if self.delegate != nil, let idString = requestData.verifyDocumentsId, let id = Int(idString){
+            self.delegate.approve(.ChangeName, id: id)
         }
     }
     @IBAction func actionRejectRequest(_ sender: Any) {
-        if self.delegate != nil{
-            self.delegate.reject()
+        if self.delegate != nil, let idString = requestData.verifyDocumentsId, let id = Int(idString){
+            self.delegate.reject(.ChangeName, id: id)
         }
     }
     
@@ -64,6 +64,7 @@ class ViewProfileRequestDetails: UIView {
     
     
     func setUpRequestData(data:RequestData){
+        self.requestData = data
         self.labelRequestType.text = data.userType ?? ""
         self.labelRequestDetails.text = data.requestType ?? ""
         self.labelExisitingDetails.text = data.existingData ?? ""

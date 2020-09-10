@@ -9,14 +9,20 @@
 import UIKit
 import XLPagerTabStrip
 
+enum ChangeRequestType:Int{
+    case ChangeName = 1
+    case DeleteAttendance = 2
+    case DeleteScheudle = 3
+}
 
-class ProfileChangeRequestsViewController: BaseViewController {
+
+class ProfileChangeRequestsViewController: BaseViewController, DeleteRequestDelegate {
 
     @IBOutlet weak var tableViewRequestLIst: UITableView!
     var changeRequestObject:ChangeRequest!
     var parentNavigationController : UINavigationController?
     var selectedDetailsObject:RequestData!
-    var viewRequestDetails:ViewProfileRequestDetails!
+    var viewRequestDetails:ViewProfileRequestDetails?
     var arrayDataSource = [ChangeRequestsDataSource]()
 
     override func viewDidLoad() {
@@ -64,12 +70,15 @@ class ProfileChangeRequestsViewController: BaseViewController {
     func setupUpDetailView(){
         if self.viewRequestDetails == nil{
             self.viewRequestDetails =  ViewProfileRequestDetails.instanceFromNib() as? ViewProfileRequestDetails
-            self.viewRequestDetails.delegate = self
+            self.viewRequestDetails?.delegate = self
         }
-        self.viewRequestDetails.frame = CGRect(x: 0.0, y: 0.0, width: self.view.width(), height: self.view.height())
-        self.viewRequestDetails.setUpRequestData(data: self.selectedDetailsObject)
-        if !self.view.subviews.contains(self.viewRequestDetails){
-            self.view.addSubview(self.viewRequestDetails)
+        guard let viewRequestDetails = self.viewRequestDetails else {
+            return
+        }
+        viewRequestDetails.frame = CGRect(x: 0.0, y: 0.0, width: self.view.width(), height: self.view.height())
+        viewRequestDetails.setUpRequestData(data: self.selectedDetailsObject)
+        if !self.view.subviews.contains(viewRequestDetails){
+            self.view.addSubview(viewRequestDetails)
         }
     }
     
@@ -91,24 +100,28 @@ class ProfileChangeRequestsViewController: BaseViewController {
         self.tableViewRequestLIst.reloadData()
     }
     
-    func updateRequestData(_ isApproved:Bool){
+    func updateRequestData(_ isApproved:Bool, requestType:ChangeRequestType, id requestId:Int){
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()
         manager.url = URLConstants.CollegeURL.updateRequestDetails
         var parameters = [String:Any]()
         parameters["college_code"] = "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code ?? "")"
-        parameters["request_id"]  = Int(self.selectedDetailsObject?.verifyDocumentsId ?? "0")
+        parameters["request_id"]  = requestId
         parameters["status"] = isApproved ? 1 : 2
-        manager.apiPost(apiName: "Update profile change request", parameters: parameters, completionHandler: { (result, code, reponse) in
+        parameters["request_type"] = requestType.rawValue
+        manager.apiPost(apiName: "Update profile change request", parameters: parameters, completionHandler: { [weak self] (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             if code == 200{
-                self.viewRequestDetails.removeFromSuperview()
-                self.getRequestChangeData()
+                self?.viewRequestDetails?.removeFromSuperview()
+                self?.getRequestChangeData()
+                if let message:String = response["message"] as? String{
+                    self?.showAlertWithTitle(nil, alertMessage: message)
+                }
             }
-        }) { (result, code, errorString) in
+        }) { [weak self] (result, code, errorString) in
             LoadingActivityHUD.hideProgressHUD()
-            self.viewRequestDetails.removeFromSuperview()
-            self.getRequestChangeData()
+            self?.viewRequestDetails?.removeFromSuperview()
+            self?.showAlertWithTitle("FAILED", alertMessage: errorString)
         }
     }
     
@@ -211,20 +224,19 @@ extension ProfileChangeRequestsViewController:ViewProfileRequestDetailsDelegate{
             }else{// save file
                 GlobalFunction.downloadFileAndSaveToDisk(fileUrl: imageURL)
             }
-            
         }
     }
     
-    func approve() {
-        self.updateRequestData(true)
+    func approve(_ requestType:ChangeRequestType, id requestId: Int) {
+        self.updateRequestData(true, requestType: requestType, id: requestId)
     }
     
-    func reject() {
-        self.updateRequestData(false)
+    func reject(_ requestType:ChangeRequestType, id requestId: Int) {
+        self.updateRequestData(false, requestType: requestType, id: requestId)
     }
     
     func close() {
-        self.viewRequestDetails.removeFromSuperview()
+        self.viewRequestDetails?.removeFromSuperview()
     }
     
     
@@ -233,11 +245,5 @@ extension ProfileChangeRequestsViewController:ViewProfileRequestDetailsDelegate{
 extension ProfileChangeRequestsViewController:IndicatorInfoProvider{
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "Request")
-    }
-}
-
-extension ProfileChangeRequestsViewController:DeleteRequestDelegate{
-    func requestUpdated() {
-        self.getRequestChangeData()
     }
 }

@@ -337,7 +337,7 @@ extension MarkCompletedPortionViewController:UITableViewDelegate, UITableViewDat
                 cell.buttonCompleted.selectedDefaultButton()
                 cell.labelStatus.textColor = UIColor.rgbColor(299.0, 0.0, 0.0)   //#E50000
                 cell.viewDisableCell.alpha = 0
-                let topicList = ["topic_id":"\(chapterCell.topicId)",
+                let topicList = ["topic_id":"\(chapterCell.topicId ?? "")",
                     "status":"1" ]
                 self.updateUnitListArray(list: topicList)
                 self.updatedTopicList.append(topicList)
@@ -428,7 +428,7 @@ extension MarkCompletedPortionViewController:UITableViewDelegate, UITableViewDat
             chapterObj.status = "1"
             chapterObj.chapterStatusTheme = .InProgress
             chapterObj.isUpdated = true
-            let topicList = ["topic_id":"\(chapterObj.topicId)",
+            let topicList = ["topic_id":"\(chapterObj.topicId ?? "")",
                 "status":"1" ] //status 2 is for completed topic / 1 is for inprogress
             self.updateUnitListArray(list: topicList)
             self.updatedTopicList.append(topicList)
@@ -438,7 +438,7 @@ extension MarkCompletedPortionViewController:UITableViewDelegate, UITableViewDat
             chapterObj.chapterStatusTheme = .NotStarted
             chapterObj.status = "0"
             chapterObj.isUpdated = true
-            let topicList = ["topic_id":"\(chapterObj.topicId)",
+            let topicList = ["topic_id":"\(chapterObj.topicId ?? "")",
                 "status":"1" ]
             self.updateUnitListArray(list: topicList)
             self.tableviewTopics.reloadRows(at: [indexpath], with: .fade)
@@ -468,7 +468,7 @@ extension MarkCompletedPortionViewController:UITableViewDelegate, UITableViewDat
             chapterObj.chapterStatusTheme = .Completed
             chapterObj.status = "2"
             chapterObj.isUpdated = true
-            let topicList = ["topic_id":"\(chapterObj.topicId)",
+            let topicList = ["topic_id":"\(chapterObj.topicId ?? "")",
                 "status":"2" ] //status 2 is for completed topic / 1 is for inprogress
             self.updateUnitListArray(list: topicList)
             self.updatedTopicList.append(topicList)
@@ -478,7 +478,7 @@ extension MarkCompletedPortionViewController:UITableViewDelegate, UITableViewDat
             chapterObj.chapterStatusTheme = .NotStarted
             chapterObj.status = "0"
             chapterObj.isUpdated = true
-            let topicList = ["topic_id":"\(chapterObj.topicId)",
+            let topicList = ["topic_id":"\(chapterObj.topicId ?? "")",
                     "status":"1" ]
                 self.updateUnitListArray(list: topicList)
             self.tableviewTopics.reloadRows(at: [indexpath], with: .fade)
