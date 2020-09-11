@@ -233,6 +233,12 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
                     requestListVC.title = "\(tab.titleName)"
                     requestListVC.parentNavigationController = self.parentNavigationController
                     controllersArray.append(requestListVC)
+                    
+                case .scheduler: //"Request"
+                    let requestListVC:CollegeSchedulerListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.collegeScheduler) as! CollegeSchedulerListViewController
+                    requestListVC.title = "\(tab.titleName)"
+                    requestListVC.parentNavigationController = self.parentNavigationController
+                    controllersArray.append(requestListVC)
                 case .logout:
                     break
                 }

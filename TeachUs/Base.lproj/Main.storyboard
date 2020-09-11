@@ -5664,6 +5664,129 @@ Form Library</string>
             </objects>
             <point key="canvasLocation" x="3784" y="15032"/>
         </scene>
+        <!--College Scheduler List View Controller-->
+        <scene sceneID="TdU-gC-brk">
+            <objects>
+                <viewController storyboardIdentifier="SchedulerListViewControllerId" id="2OY-44-UPg" customClass="CollegeSchedulerListViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eLP-Ul-4sK">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="b7w-39-1oo">
+                                <rect key="frame" x="15" y="44" width="290" height="35"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Class List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bg9-Xf-hBb">
+                                        <rect key="frame" x="0.0" y="0.0" width="116" height="35"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" red="0.4941176471" green="0.51764705879999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="WrE-Yz-BOH">
+                                        <rect key="frame" x="121" y="0.0" width="169" height="35"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today's Schedule" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Gg-oQ-l68">
+                                                <rect key="frame" x="0.0" y="2" width="82" height="31.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <color key="textColor" red="0.4941176471" green="0.51764705879999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Schedules" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PnE-tB-gQk">
+                                                <rect key="frame" x="87" y="2" width="82" height="31.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <color key="textColor" red="0.4941176471" green="0.51764705879999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="9u7-Nf-cr3"/>
+                                    <constraint firstItem="Bg9-Xf-hBb" firstAttribute="width" secondItem="b7w-39-1oo" secondAttribute="width" multiplier="0.4" id="Dr4-hr-fKe"/>
+                                </constraints>
+                            </stackView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JJN-qr-No0">
+                                <rect key="frame" x="15" y="84" width="290" height="444"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C9R-91-qsz">
+                                <rect key="frame" x="0.0" y="528" width="320" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="kQy-9v-IaY"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="actionShowLiveLectures:" destination="2OY-44-UPg" eventType="touchUpInside" id="C7N-82-OOh"/>
+                                    <segue destination="KNh-dg-GTJ" kind="presentation" id="bRL-gT-AAe"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="JJN-qr-No0" firstAttribute="trailing" secondItem="b7w-39-1oo" secondAttribute="trailing" id="9gc-q7-iJ3"/>
+                            <constraint firstItem="ws5-IC-h2o" firstAttribute="trailing" secondItem="C9R-91-qsz" secondAttribute="trailing" id="MUC-yb-3jc"/>
+                            <constraint firstItem="b7w-39-1oo" firstAttribute="top" secondItem="ws5-IC-h2o" secondAttribute="top" id="Puo-VH-dhn"/>
+                            <constraint firstItem="C9R-91-qsz" firstAttribute="leading" secondItem="ws5-IC-h2o" secondAttribute="leading" id="Rlu-ZM-OBM"/>
+                            <constraint firstItem="JJN-qr-No0" firstAttribute="top" secondItem="b7w-39-1oo" secondAttribute="bottom" constant="5" id="RvV-6J-fpn"/>
+                            <constraint firstItem="C9R-91-qsz" firstAttribute="top" secondItem="JJN-qr-No0" secondAttribute="bottom" id="S1c-FT-oAj"/>
+                            <constraint firstItem="ws5-IC-h2o" firstAttribute="bottom" secondItem="C9R-91-qsz" secondAttribute="bottom" id="UBI-8M-yFn"/>
+                            <constraint firstItem="JJN-qr-No0" firstAttribute="leading" secondItem="b7w-39-1oo" secondAttribute="leading" id="VRB-t3-U5S"/>
+                            <constraint firstItem="b7w-39-1oo" firstAttribute="leading" secondItem="ws5-IC-h2o" secondAttribute="leading" constant="15" id="Zxy-uD-s9h"/>
+                            <constraint firstItem="ws5-IC-h2o" firstAttribute="trailing" secondItem="b7w-39-1oo" secondAttribute="trailing" constant="15" id="hKG-8J-RVR"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ws5-IC-h2o"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="2ue-Sg-bOa"/>
+                    <connections>
+                        <outlet property="buttonLiveLectures" destination="C9R-91-qsz" id="6cb-LE-dkQ"/>
+                        <outlet property="tableviewScheduleList" destination="JJN-qr-No0" id="Yok-1f-fIB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O0I-Jl-Kod" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3783.75" y="15970.774647887323"/>
+        </scene>
+        <!--College Schedule Details View Controller-->
+        <scene sceneID="62S-9t-koh">
+            <objects>
+                <viewController id="KNh-dg-GTJ" customClass="CollegeScheduleDetailsViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Lwv-XJ-mqM">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YF6-UX-k8g">
+                                <rect key="frame" x="0.0" y="0.0" width="59" height="38"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                <state key="normal" title="Close">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="actionCloseView:" destination="KNh-dg-GTJ" eventType="touchUpInside" id="0Cz-QV-iqa"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gfZ-4y-aDM">
+                                <rect key="frame" x="15" y="40" width="290" height="508"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="YF6-UX-k8g" firstAttribute="leading" secondItem="Adp-Wk-6cy" secondAttribute="leading" id="8Dx-0h-W9a"/>
+                            <constraint firstItem="Adp-Wk-6cy" firstAttribute="bottom" secondItem="gfZ-4y-aDM" secondAttribute="bottom" id="EnS-aN-Ljh"/>
+                            <constraint firstItem="YF6-UX-k8g" firstAttribute="top" secondItem="Adp-Wk-6cy" secondAttribute="top" id="FSM-4h-ueC"/>
+                            <constraint firstItem="gfZ-4y-aDM" firstAttribute="leading" secondItem="Adp-Wk-6cy" secondAttribute="leading" constant="15" id="G3z-WO-l7d"/>
+                            <constraint firstItem="Adp-Wk-6cy" firstAttribute="trailing" secondItem="gfZ-4y-aDM" secondAttribute="trailing" constant="15" id="LT1-kh-eZG"/>
+                            <constraint firstItem="gfZ-4y-aDM" firstAttribute="top" secondItem="Adp-Wk-6cy" secondAttribute="top" constant="40" id="gqW-MF-rCb"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Adp-Wk-6cy"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableviewScheduleDetails" destination="gfZ-4y-aDM" id="5Sx-9o-jeQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mqG-Jl-67L" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4743" y="15975"/>
+        </scene>
         <!--College Notification Details View Controller-->
         <scene sceneID="ANq-pM-ZC5">
             <objects>
@@ -6070,6 +6193,24 @@ Form Library</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Rr-CX-4q7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2100" y="1391"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="6DQ-gu-SmV">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BPo-cf-Vzi" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ECV-1O-Q2N">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="2OY-44-UPg" kind="relationship" relationship="rootViewController" id="q3c-9c-EIT"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TCH-Vl-zTb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2831" y="15971"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

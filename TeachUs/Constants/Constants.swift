@@ -113,6 +113,7 @@ public struct Constants {
         static let rollNumberGridVC = "StudentListGridViewControllerId"
         static let addmissionStatusViewControlelr = "AdmissionStatusViewControllerId"
         static let attendanceDeleteRequest = "AttendanceDeleteRequestViewControllerId"
+        static let collegeScheduler =  "SchedulerListViewControllerId"
         
     }
     

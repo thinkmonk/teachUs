@@ -173,7 +173,10 @@ public struct URLConstants{
         static let collegAdminClassList =               BaseUrl.baseURLV1 + "/syllabus/class_list"
         static let collegeAuth =                        BaseUrl.baseURLV1 + "/auth/Professor_college_logs_verify_auth_password"
         static let deleteEvent =                        BaseUrl.baseURLV1 + "/events/delete_event"
-        static let getTabsForAdminProfile  =                 BaseUrl.baseURLV1 + "/Admin/user_control_list"
+        static let getTabsForAdminProfile  =            BaseUrl.baseURLV1 + "/admin/user_control_list"
+        static let collegeschedule =                    BaseUrl.baseURLV1 + "/college/schedule"
+        static let collegeScheduleDetails =             BaseUrl.baseURLV1 + "/college/schedule_details"
+
     }
     
     struct SyllabusURL {

@@ -58,6 +58,10 @@
 		81165BE922330078003EE106 /* VerifyEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81165BE822330078003EE106 /* VerifyEmail.swift */; };
 		811BD5FF229DC03800FDFEB6 /* notesDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811BD5FD229DC03800FDFEB6 /* notesDetailsTableViewCell.swift */; };
 		811BD600229DC03800FDFEB6 /* notesDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 811BD5FE229DC03800FDFEB6 /* notesDetailsTableViewCell.xib */; };
+		811C1DF8250C00350048EE19 /* CollegeSchedulerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811C1DF7250C00350048EE19 /* CollegeSchedulerListViewController.swift */; };
+		811C1DFB250C09000048EE19 /* CollegeSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811C1DFA250C09000048EE19 /* CollegeSchedule.swift */; };
+		811C1DFD250C0F2B0048EE19 /* CollegeScheduleDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811C1DFC250C0F2B0048EE19 /* CollegeScheduleDetailsViewController.swift */; };
+		811C1DFF250C0F750048EE19 /* ClassScheduleDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811C1DFE250C0F750048EE19 /* ClassScheduleDetails.swift */; };
 		811E527F24FB90A200C49DE0 /* AttendanceDeleteRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811E527E24FB90A200C49DE0 /* AttendanceDeleteRequestViewController.swift */; };
 		811E528224FB910000C49DE0 /* ChangeRequestsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811E528124FB910000C49DE0 /* ChangeRequestsDataSource.swift */; };
 		811EA459223D173A00D55899 /* CollegeLogsProfessorListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811EA458223D173A00D55899 /* CollegeLogsProfessorListViewController.swift */; };
@@ -449,6 +453,10 @@
 		81165BE822330078003EE106 /* VerifyEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyEmail.swift; sourceTree = "<group>"; };
 		811BD5FD229DC03800FDFEB6 /* notesDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = notesDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		811BD5FE229DC03800FDFEB6 /* notesDetailsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = notesDetailsTableViewCell.xib; sourceTree = "<group>"; };
+		811C1DF7250C00350048EE19 /* CollegeSchedulerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeSchedulerListViewController.swift; sourceTree = "<group>"; };
+		811C1DFA250C09000048EE19 /* CollegeSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeSchedule.swift; sourceTree = "<group>"; };
+		811C1DFC250C0F2B0048EE19 /* CollegeScheduleDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeScheduleDetailsViewController.swift; sourceTree = "<group>"; };
+		811C1DFE250C0F750048EE19 /* ClassScheduleDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassScheduleDetails.swift; sourceTree = "<group>"; };
 		811E527E24FB90A200C49DE0 /* AttendanceDeleteRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceDeleteRequestViewController.swift; sourceTree = "<group>"; };
 		811E528124FB910000C49DE0 /* ChangeRequestsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeRequestsDataSource.swift; sourceTree = "<group>"; };
 		811EA458223D173A00D55899 /* CollegeLogsProfessorListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeLogsProfessorListViewController.swift; sourceTree = "<group>"; };
@@ -990,6 +998,24 @@
 			path = "Custom DataSource";
 			sourceTree = "<group>";
 		};
+		811C1DF4250BF9EF0048EE19 /* Schedular */ = {
+			isa = PBXGroup;
+			children = (
+				811C1DF7250C00350048EE19 /* CollegeSchedulerListViewController.swift */,
+				811C1DFC250C0F2B0048EE19 /* CollegeScheduleDetailsViewController.swift */,
+			);
+			path = Schedular;
+			sourceTree = "<group>";
+		};
+		811C1DF9250C08F70048EE19 /* Scheduler */ = {
+			isa = PBXGroup;
+			children = (
+				811C1DFA250C09000048EE19 /* CollegeSchedule.swift */,
+				811C1DFE250C0F750048EE19 /* ClassScheduleDetails.swift */,
+			);
+			path = Scheduler;
+			sourceTree = "<group>";
+		};
 		811E528024FB90ED00C49DE0 /* Request */ = {
 			isa = PBXGroup;
 			children = (
@@ -1255,6 +1281,7 @@
 		813EC76D1F9BA4FD00F11A12 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				811C1DF9250C08F70048EE19 /* Scheduler */,
 				819E393D244B3DA000625F4F /* Attendance */,
 				81B1034124438DF200A7E9F6 /* UserControls */,
 				8136CBE0243A28F100A9C464 /* Admin */,
@@ -1950,6 +1977,7 @@
 		81E4BCE5205E9E2B00674FD4 /* College */ = {
 			isa = PBXGroup;
 			children = (
+				811C1DF4250BF9EF0048EE19 /* Schedular */,
 				8194881F22A462CA0006CB86 /* Notifictions */,
 				81B4E90422A2B5E0005AA5F7 /* Notice */,
 				81D2774622A074C6003CFC51 /* Notes */,
@@ -2351,6 +2379,7 @@
 				81B203DD1FD551FF00936F0F /* SuperAdmin+CoreDataProperties.swift in Sources */,
 				81FEC7FB20F10436003FBDBE /* Reachability.swift in Sources */,
 				819E393F244B3DBC00625F4F /* AttendanceTimeSlots.swift in Sources */,
+				811C1DFD250C0F2B0048EE19 /* CollegeScheduleDetailsViewController.swift in Sources */,
 				81B2E2DB1FC35B0600E9E852 /* DropDown+Appearance.swift in Sources */,
 				81D7CE811FAB8E5D00C4375E /* CAPSPageMenu+UIScrollViewDelegate.swift in Sources */,
 				81727B8D1F9E6CB8006433E8 /* MFSideMenuContainerViewController.m in Sources */,
@@ -2444,6 +2473,7 @@
 				81C1D8AB1FCF34F10091DA6E /* DatabaseManager.swift in Sources */,
 				81E3E3B82077AF55002CFC1D /* VerifyAuthPasswordView.swift in Sources */,
 				81DC5C7722462D0500D9F3B7 /* StudentDetailsDataSource.swift in Sources */,
+				811C1DFF250C0F750048EE19 /* ClassScheduleDetails.swift in Sources */,
 				8163EB0720557AD9003E4B1D /* CollegeDetails+CoreDataClass.swift in Sources */,
 				8123F3C62155681300A15182 /* LectureReportTableViewCell.swift in Sources */,
 				818C26081FB6FAFF002638E5 /* MarkStudentAttendance.swift in Sources */,
@@ -2457,6 +2487,7 @@
 				81AC9F9320AA051900DEECB1 /* CollegeSyllabusList.swift in Sources */,
 				810BECDA206ED5B000F560C6 /* CollegeSubjects.swift in Sources */,
 				819BDA521FC4A0C500DD7D2D /* TeachersRatingViewController.swift in Sources */,
+				811C1DFB250C09000048EE19 /* CollegeSchedule.swift in Sources */,
 				81E4BCEB205EA47900674FD4 /* CollegeAttendanceList.swift in Sources */,
 				8194882622A465210006CB86 /* CollegeNotificationList.swift in Sources */,
 				81F78EAC1FB0DFE600A016B0 /* AttendanceCalenderTableViewCell.swift in Sources */,
@@ -2555,6 +2586,7 @@
 				81DC5C73224614BB00D9F3B7 /* StudentAttendanceDetails.swift in Sources */,
 				81FFB0BE1FBF468000C32097 /* SyllabusChapter.swift in Sources */,
 				81B4E90A22A2B818005AA5F7 /* CollegeNoticeListTableViewCell.swift in Sources */,
+				811C1DF8250C00350048EE19 /* CollegeSchedulerListViewController.swift in Sources */,
 				813C0DA021EB7C7100B04E61 /* GlobalFunction.swift in Sources */,
 				81B4E90E22A2C14E005AA5F7 /* CollegeNoticeList.swift in Sources */,
 				81BC49B32299DEEC00549867 /* ViewProfileRequestDetails.swift in Sources */,
