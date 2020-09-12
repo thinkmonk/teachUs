@@ -51,6 +51,38 @@ extension String{
 
     }
     
+    func convert24hrTimeto12Hr() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm:ss"
+        let date = dateFormatter.date(from: self)
+        dateFormatter.dateFormat = "h:mm a"
+        return dateFormatter.string(from: date ?? Date())
+
+    }
+    
+    func getDateDisplayString() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "YYYY-MM-dd"
+        formatter.timeZone = .current
+        formatter.calendar = .current
+        let todaysDateString = formatter.string(from: Date())
+        let todaysDate = formatter.date(from: todaysDateString)
+        let finalDate = formatter.date(from: self)
+        if let todaysDate = todaysDate, let finalDate = finalDate {
+            let numberOfDays = finalDate.days(from: todaysDate)
+            switch numberOfDays {
+            case 0:
+                return "Today"
+            case 1:
+                return "Tommorrow"
+            default:
+                return self
+            }
+        } else {
+            return "NA"
+        }
+    }
+    
     func addColorForString(_ string:String, stringColor:UIColor) -> NSAttributedString{
         
         let range = (self.lowercased() as NSString).range(of: string.lowercased())

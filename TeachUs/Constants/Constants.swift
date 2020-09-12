@@ -49,6 +49,7 @@ public struct Constants {
         
         static let profileTomaintainence = "profileToMaintainence"
         static let rootToMaintainence = "rootToMaintainence"
+        static let toSecheduleDetails = "toSecheduleDetails"
     }
     
     struct Images {
@@ -195,6 +196,9 @@ public struct Constants {
         static let documentsImageCell   =  "AdmissionDocumentPicketTableViewCellId"
         static let customKeyValueTableViewCellId = "CustomKeyValueTableViewCellId"
         static let customAcceptRejectTableviewcellId = "CustomButtonsTableViewCellid"
+        static let schdeduleDetailsCellId = "scheduleDetailsCellId"
+        static let scheduleDetailsDateCellId = "detailsDateCellId"
+        static let collegeAddNewSchedule = "addNewScheduleCellId"
     }
     
     struct UserTypeString {
