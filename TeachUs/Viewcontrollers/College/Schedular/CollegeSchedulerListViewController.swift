@@ -102,6 +102,10 @@ extension CollegeSchedulerListViewController:UITableViewDelegate, UITableViewDat
         footerView.backgroundColor = UIColor.clear
         return footerView
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        <#code#>
+    }
 
     
 }

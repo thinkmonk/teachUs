@@ -34,7 +34,6 @@ extension String{
     
     func convertToDate() -> Date? {
         let strDate = self
-        print(strDate)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let date = dateFormatter.date(from: strDate)
@@ -43,7 +42,6 @@ extension String{
     
     func convertTimeStringToDate() -> Date? {
         let strDate = self
-        print(strDate)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "hh:mm:ss"
         let date = dateFormatter.date(from: strDate)

@@ -13,6 +13,11 @@ class CollegeScheduleDetailsViewController: BaseViewController {
     @IBOutlet weak var tableviewScheduleDetails: UITableView!
     var scheduleDetails:ClassScheduleDetails?
     var arrayDataSource = [ScheduleDetailDataSource]()
+    var schedule : Schedule!
+    
+    let locale = NSLocale.current
+    var datePicker : UIDatePicker!
+    let toolBar = UIToolbar()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,17 +30,20 @@ class CollegeScheduleDetailsViewController: BaseViewController {
         tableviewScheduleDetails.estimatedRowHeight = 44.0
         tableviewScheduleDetails.rowHeight = UITableViewAutomaticDimension
         tableviewScheduleDetails.addSubview(refreshControl)
-        getScheduleDetails()
+        getScheduleDetails(between: Date().getDateString(format: "YYYY-MM-DD"), Date().addDays(7).getDateString(format: "YYYY-MM-DD"))
     }
     
     
     
-    func getScheduleDetails() {
+    func getScheduleDetails(between toDate:String, _ fromDate:String) {
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()
         manager.url = URLConstants.CollegeURL.collegeScheduleDetails
         let parameters = [
-            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)"
+            "college_code" : "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+            "class_id" : schedule.classId ?? "",
+            "to_date" : toDate,
+            "from_date" : fromDate
         ]
         
         manager.apiPostWithDataResponse(apiName: "Get College Schedules Details", parameters:parameters, completionHandler: { [weak self] (result, code, response)  in
@@ -77,10 +85,51 @@ class CollegeScheduleDetailsViewController: BaseViewController {
         self.tableviewScheduleDetails.reloadData()
     }
     
+    @IBAction func actionDatePicker(_ sender: Any) {
+        // DatePicker
+        self.datePicker = UIDatePicker(frame:CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 200))
+        self.datePicker?.backgroundColor = UIColor.white
+        self.datePicker?.datePickerMode = UIDatePickerMode.dateAndTime
+        datePicker.center = view.center
+        view.addSubview(self.datePicker)
+
+        // ToolBar
+
+        toolBar.barStyle = .default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = UIColor(red: 92/255, green: 216/255, blue: 255/255, alpha: 1)
+        toolBar.sizeToFit()
+
+        // Adding Button ToolBar
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneClick))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelClick))
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: true)
+        toolBar.isUserInteractionEnabled = true
+
+        self.view.addSubview(toolBar)
+        self.toolBar.isHidden = false
+
+    }
     
-//    @IBAction func actionCloseView(_ sender: Any) {
-//        self.dismiss(animated: true, completion: nil)
-//    }
+    @objc func doneClick() {
+        let dateFormatter1 = DateFormatter()
+        dateFormatter1.dateStyle = .medium
+        dateFormatter1.timeStyle = .none
+        //self.datePicker.resignFirstResponder()
+        datePicker.isHidden = true
+        self.toolBar.isHidden = true
+
+
+    }
+
+    @objc func cancelClick() {
+        datePicker.isHidden = true
+        self.toolBar.isHidden = true
+
+    }
+
+    
     
 }
 

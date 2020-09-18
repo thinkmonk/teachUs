@@ -5768,7 +5768,13 @@ Form Library</string>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Adp-Wk-6cy"/>
                     </view>
-                    <navigationItem key="navigationItem" id="uDL-E0-mZR"/>
+                    <navigationItem key="navigationItem" id="uDL-E0-mZR">
+                        <barButtonItem key="rightBarButtonItem" title="Date" id="RK6-Me-HRx">
+                            <connections>
+                                <action selector="actionDatePicker:" destination="KNh-dg-GTJ" id="I9c-3g-oh7"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableviewScheduleDetails" destination="gfZ-4y-aDM" id="5Sx-9o-jeQ"/>
                     </connections>
