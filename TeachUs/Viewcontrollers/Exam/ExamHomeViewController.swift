@@ -131,7 +131,7 @@ extension ExamHomeViewController:UITableViewDelegate, UITableViewDataSource {
         }
         
         //check for date difference
-        let calendar = NSCalendar.current
+        let calendar = Calendar.current
         let components = calendar.dateComponents([.day], from: Date(), to: endDate)
         if components.day != 0 {
             return true //allowing student to visit the exam section
@@ -143,8 +143,8 @@ extension ExamHomeViewController:UITableViewDelegate, UITableViewDataSource {
 
         let timeComponents = calendar.dateComponents([.hour, .minute], from: timeDate)
         let nowComponents = calendar.dateComponents([.hour, .minute], from: Date())
-        let difference = calendar.dateComponents([.minute], from: timeComponents, to: nowComponents).minute!
-        return difference > 15 // this willl allow the student to enter the exam only before 15 mins.
+        let difference = calendar.dateComponents([.minute], from: nowComponents, to: timeComponents).minute!
+        return difference <= 15 // this willl allow the student to enter the exam only before 15 mins.
     }
 }
 
