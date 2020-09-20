@@ -51,6 +51,18 @@ extension String{
 
     }
     
+    func convertToDateString(format:String) -> String {
+        let strDate = self
+        print(strDate)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        guard let date = dateFormatter.date(from: strDate) else {
+            return ""
+        }
+        dateFormatter.dateFormat = format
+        return dateFormatter.string(from: date)
+    }
+    
     func addColorForString(_ string:String, stringColor:UIColor) -> NSAttributedString{
         
         let range = (self.lowercased() as NSString).range(of: string.lowercased())
@@ -77,6 +89,20 @@ extension String{
     
     func boolValuefromYesNo() -> Bool{
         return self.lowercased() == "Yes".lowercased()
+    }
+    
+    mutating func addQueryParamsToUrl(queryParams: [URLQueryItem]){
+        guard  let url = URL(string: self) else {
+            return
+        }
+        
+        let urlComponents = NSURLComponents.init(url: url, resolvingAgainstBaseURL: false)
+        guard urlComponents != nil else { return  }
+        if (urlComponents?.queryItems == nil) {
+            urlComponents!.queryItems = [];
+        }
+        urlComponents?.queryItems?.append(contentsOf: queryParams)
+        self = urlComponents?.url?.absoluteString ?? ""
     }
 }
 

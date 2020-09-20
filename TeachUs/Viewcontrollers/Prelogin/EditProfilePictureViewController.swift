@@ -28,7 +28,7 @@ class EditProfilePictureViewController: BaseViewController{
     @IBOutlet weak var buttonSelectPhotoFromCamera: UIButton!
     let picker = UIImagePickerController()
     var delegate:editProfilePictureDelegate?
-    var profileImageUrl:String = UserManager.sharedUserManager.appUserDetails.profilePicUrl!
+    var profileImageUrl:String = UserManager.sharedUserManager.appUserDetails.profilePicUrl ?? ""
     
     override func viewDidLoad() {
         super.viewDidLoad()

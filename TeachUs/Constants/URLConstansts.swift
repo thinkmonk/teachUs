@@ -27,7 +27,16 @@ public struct URLConstants{
         static let baseURLHome = Bundle.main.object(forInfoDictionaryKey: AppUrl.baseURLHome) as! String
         static let baseURL = Bundle.main.object(forInfoDictionaryKey: AppUrl.baseURL) as! String
         static var baseURLV1 = (Bundle.main.object(forInfoDictionaryKey: AppUrl.baseUrlV1) as? String)!
+        static var baseURLParshvaa = "https://staff.parshvaa.com/web_services/version_teach_us"
+        static var baseURLParshvaaStudent = "https://exam.parshvaa.com/student-app"
 
+    }
+
+    struct Exam {
+        static let verifyExamProfile =  BaseUrl.baseURLParshvaa + "/web_services/check_student"
+        static let getExamList       =  BaseUrl.baseURLParshvaa + "/evaluator_web_services/get_recent_mcq_paper"
+        static let examUrl           =  BaseUrl.baseURLParshvaaStudent + "/mcq-test-paper/start_test/"
+        static let examCompletionURL     =  BaseUrl.baseURLParshvaaStudent + "/mcq-test-paper/test-result"
     }
     
     struct Login {
@@ -40,6 +49,7 @@ public struct URLConstants{
         static let updateUserProfile =  BaseUrl.baseURLV1 + "/login/update_user_profile"
         static let saveDeviceToken =    BaseUrl.baseURLV1 + "/auth/notification_save_token"
         static let deleteDeviceToken =  BaseUrl.baseURLV1 + "/auth/notification_token_delete"
+        static let examLog =            BaseUrl.baseURLV1 + "/login/student_exam_log"
     }
     
     struct StudentURL {

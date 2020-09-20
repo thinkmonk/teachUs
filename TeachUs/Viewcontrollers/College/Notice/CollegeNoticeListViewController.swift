@@ -66,6 +66,7 @@ class CollegeNoticeListViewController: BaseViewController {
         case .parents:
             manager.url = URLConstants.ParentsURL.getParentsNotice
             parameters["email"] = UserManager.sharedUserManager.appUserCollegeDetails.studentEmail ?? ""
+        case .exam: break
         }
 
         manager.apiPostWithDataResponse(apiName: "Get Notice List", parameters:parameters, completionHandler: { (result, code, response) in

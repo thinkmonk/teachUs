@@ -36,6 +36,9 @@ class AttendanceDeleteRequestViewController: BaseViewController {
         makeDataSource()
         
     }
+    @IBAction func actionClose(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     func makeDataSource(){
         arrayDataSource.removeAll()
@@ -149,6 +152,7 @@ extension AttendanceDeleteRequestViewController: UITableViewDelegate, UITableVie
             let cell:CustomKeyValueTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.customKeyValueTableViewCellId, for: indexPath) as! CustomKeyValueTableViewCell
             cell.labelCustomKey.text = dataSource.logsCellType?.keyName ?? "NA"
             cell.labelCustomValue.text = dataSource.attachedObject as? String ?? "NA"
+            cell.selectionStyle = .none
             cell.backgroundColor = .clear
             
             return cell

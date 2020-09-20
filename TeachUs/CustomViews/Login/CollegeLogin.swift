@@ -10,6 +10,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 protocol CollegeLoginDelegate {
+    func verifyExamProfile(mobileNumber:String)
     func sendCollegeOtp(mobileNumber:String)
     func verifyCollegeOtp()
 }
@@ -88,6 +89,8 @@ class CollegeLogin: UIView {
             
         case .parents:
             self.labelTitle.text = "PARENT"
+        case .exam:
+            self.labelTitle.text = "EXAM"
         default:
             break
         }
@@ -98,7 +101,11 @@ class CollegeLogin: UIView {
     @IBAction func sendOtp(_ sender: UIButton) {
         self.mobileNumber = self.textFieldMobileNumber.text!
         if(delegate != nil){
-            self.delegate.sendCollegeOtp(mobileNumber: self.mobileNumber)
+            if UserManager.sharedUserManager.user == .exam {
+                self.delegate.verifyExamProfile(mobileNumber: self.mobileNumber)
+            }else{
+                self.delegate.sendCollegeOtp(mobileNumber: self.mobileNumber)
+            }
         }
     }
     

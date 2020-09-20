@@ -35,6 +35,10 @@ class LoginViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.addGradientToNavBar()
@@ -61,7 +65,7 @@ class LoginViewController: BaseViewController {
             studentLoginView.showView(inView: self.view)
             studentLoginView.delegate = self
             break
-        case .student,.college,.parents:
+        case .student,.college,.parents, .exam:
             collegeLogin = (CollegeLogin.instanceFromNib() as! CollegeLogin)
             collegeLogin.userType = UserManager.sharedUserManager.user!
             collegeLogin.delegate = self
@@ -252,7 +256,8 @@ extension LoginViewController:OtpDelegate{
     
 }
 //MARK:- College Login Delegate
-extension LoginViewController:CollegeLoginDelegate{
+extension LoginViewController:CollegeLoginDelegate {
+    
     func sendCollegeOtp(mobileNumber:String) {
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()
@@ -272,6 +277,30 @@ extension LoginViewController:CollegeLoginDelegate{
                 self.showunavailableUSerView()
             }
         }) { (error, code, message) in
+            LoadingActivityHUD.hideProgressHUD()
+            print(message)
+        }
+    }
+    
+    func verifyExamProfile(mobileNumber:String) {
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        let manager = NetworkHandler()
+        
+        manager.url = URLConstants.Exam.verifyExamProfile
+        let queryParams = URLQueryItem(name: "register_mobile", value: "\(mobileNumber)")
+        manager.url?.addQueryParamsToUrl(queryParams: [queryParams])
+        
+        manager.apiGet(apiName: "verify exam user", completionHandler: { (response, code) in
+            LoadingActivityHUD.hideProgressHUD()
+            guard let status = response["status"] as? Bool,
+                status,
+                let studentId = response["student_id"] as? String else {
+                    self.showAlertWithTitle(nil, alertMessage: "Exam profile not found")
+                    return
+            }
+            UserManager.sharedUserManager.setStudentExamId(studentId)
+            self.sendCollegeOtp(mobileNumber: mobileNumber)
+        }) { (_, _, message) in
             LoadingActivityHUD.hideProgressHUD()
             print(message)
         }

@@ -113,6 +113,8 @@ public struct Constants {
         static let rollNumberGridVC = "StudentListGridViewControllerId"
         static let addmissionStatusViewControlelr = "AdmissionStatusViewControllerId"
         static let attendanceDeleteRequest = "AttendanceDeleteRequestViewControllerId"
+        static let examHomeView = "ExamHomeViewControllerId"
+        static let examWebView = "ExamWebViewControllerId"
         
     }
     
@@ -140,6 +142,7 @@ public struct Constants {
         static let notesFile             = "notesFile"
         static let notesFileName         = "notesFileName"
         static let notifiocationReceived = "notifiocationReceived"
+        static let examStudentId         = "examStudentId"
         
     }
     
@@ -194,6 +197,7 @@ public struct Constants {
         static let documentsImageCell   =  "AdmissionDocumentPicketTableViewCellId"
         static let customKeyValueTableViewCellId = "CustomKeyValueTableViewCellId"
         static let customAcceptRejectTableviewcellId = "CustomButtonsTableViewCellid"
+        static let examSchedule = "ExamScheduleTableViewCellId"
     }
     
     struct UserTypeString {
@@ -202,6 +206,7 @@ public struct Constants {
         static let College = "COLLEGE"
         static let SuperAdmin = "SUPERADMIN"
         static let Parents = "PARENTS"
+        static let Exam = "EXAM"
     }
     
     struct  CustomErrorCodes {

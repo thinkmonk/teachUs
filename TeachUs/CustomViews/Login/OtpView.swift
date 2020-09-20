@@ -67,6 +67,11 @@ class OtpView: UIView {
             break
         case .college:
             break
+            
+        case .exam:
+            self.labelTitle.text = "EXAM"
+            break
+            
         }
         self.buttonSendOtp.isHidden = true
         self.labelOtpTimeLeft.backgroundColor = UIColor.lightGray
