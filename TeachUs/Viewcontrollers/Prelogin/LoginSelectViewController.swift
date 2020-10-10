@@ -46,7 +46,6 @@ class LoginSelectViewController: BaseViewController {
             self.isModalInPresentation = true
         }
         self.getRoleList()
-        self.buttonExam.roundedBlueButton()
     }
 
     override func didReceiveMemoryWarning() {

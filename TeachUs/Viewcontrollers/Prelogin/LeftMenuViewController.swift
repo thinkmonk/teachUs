@@ -303,7 +303,7 @@ extension LeftMenuViewController:UITableViewDelegate, UITableViewDataSource{
         self.present(alert, animated: true, completion: nil)
     }
     
-    func performLogoutActions(){
+    func performLogoutActions() {
         self.deregisterUserAccessToken()
         UserManager.sharedUserManager.setAccessToken("")
         DatabaseManager.deleteAllEntitiesForEntityName(name: "CollegeDetails")
