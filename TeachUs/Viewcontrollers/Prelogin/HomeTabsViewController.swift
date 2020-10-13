@@ -244,6 +244,16 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
                 }
             }
             break
+            
+        case .exam:
+            controllersArray.removeAll()
+            
+            guard  let examVc: ExamHomeViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.examHomeView) as? ExamHomeViewController else {
+                return controllersArray
+            }
+            examVc.title = "Exam"
+            examVc.parentNavigationController = self.parentNavigationController
+            controllersArray.append(examVc)
         }
         return controllersArray
 

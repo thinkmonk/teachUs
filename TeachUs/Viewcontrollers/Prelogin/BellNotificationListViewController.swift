@@ -83,6 +83,7 @@ class BellNotificationListViewController: BaseViewController {
         case .parents:
             manager.url = URLConstants.ParentsURL.getBellNotifications
             parameters["email"] = UserManager.sharedUserManager.appUserCollegeDetails.studentEmail ?? ""
+        case .exam: break
         }
         
         manager.apiPostWithDataResponse(apiName: "Get bell notification List", parameters:parameters, completionHandler: { (result, code, response) in
@@ -121,11 +122,13 @@ class BellNotificationListViewController: BaseViewController {
             manager.url = URLConstants.ProfessorURL.markReadNotification
         case .student:
             manager.url = URLConstants.StudentURL.markReadNotification
-        
+            
         case .parents:
             manager.url = URLConstants.ParentsURL.markReadNotification
             parameters["email"] = UserManager.sharedUserManager.appUserCollegeDetails.studentEmail ?? ""
-
+            
+        case .exam: break
+            
         }
         
         

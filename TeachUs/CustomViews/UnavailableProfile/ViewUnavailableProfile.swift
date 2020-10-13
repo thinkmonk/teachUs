@@ -83,19 +83,22 @@ class ViewUnavailableProfile:UIView, MFMailComposeViewControllerDelegate{
     }
     
     private func getErrorHeaderText() -> String{
-               switch UserManager.sharedUserManager.user{
+        switch UserManager.sharedUserManager.user{
         case .student:
             return "Facing Login Issue-Student!"
             
         case .professor:
-                return "Facing Login Issue-Lecturer!"
+            return "Facing Login Issue-Lecturer!"
             
         case .college:
             return "Facing Login Issue-College!"
             
         case .parents:
             return "Facing Login Issue-Parent!"
-
+            
+        case .exam:
+            return "Facing Login Issue-Exam!"
+            
         case .none:
             return ""
         }
@@ -109,14 +112,16 @@ class ViewUnavailableProfile:UIView, MFMailComposeViewControllerDelegate{
             return "\n\r\nHello!\r\n\r\nKindly provide following details to resolve your issue.\r\n\r\nCollege Name :- \r\n\r\nYour Name :- \r\n\r\nContact Number :- \r\n\r\nEmail Address :- \r\n\r\nCourse :- \r\n\r\nYear :- \r\n\r\nSemester :- \r\n\r\nRoll No :-"
             
         case .professor:
-                return "\n\r\nHello!\r\n\r\nKindly provide following details to resolve your issue.\r\n\r\nCollege Name :- \r\n\r\nYour Name :- \r\n\r\nContact Number :- \r\n\r\nEmail Address :-"
+            return "\n\r\nHello!\r\n\r\nKindly provide following details to resolve your issue.\r\n\r\nCollege Name :- \r\n\r\nYour Name :- \r\n\r\nContact Number :- \r\n\r\nEmail Address :-"
             
         case .college:
             return "\n\r\nHello!\r\n\r\nKindly provide following details to resolve your issue.\r\n\r\nCollege Name :- \r\n\r\nYour Name :- \r\n\r\nContact Number :- \r\n\r\nEmail Address :-"
             
         case .parents:
             return "\n\r\nHello!\r\n\r\nKindly provide following details to resolve your issue.\r\n\r\nCollege Name :- \r\n\r\nYour Name :- \r\n\r\nContact Number :- \r\n\r\nEmail Address :-"
-
+            
+        case .exam:
+            return "\n\r\nHello!\r\n\r\nKindly provide following details to resolve your issue.\r\n\r\nCollege Name :- \r\n\r\nYour Name :- \r\n\r\nContact Number :- \r\n\r\nEmail Address :-"
         case .none:
             return ""
         }

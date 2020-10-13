@@ -54,7 +54,8 @@ class LeftMenuViewController: BaseViewController, UIGestureRecognizerDelegate {
     var parentsDataSource = ["Attendance", "Syllabus","Notice", "Notification", "Logout"]
     var parentImageDataSource = ["attendanceReport", "syllabus", "notice", "notification", "logout"]
 
-    
+    var examDataSource = ["Exam", "Logout"]
+    var examImageDataSource = ["logs", "Logout"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,10 +73,11 @@ class LeftMenuViewController: BaseViewController, UIGestureRecognizerDelegate {
         tableViewMenu.dataSource = self
         buttonDropDown.alpha=0
         self.arrayCollegeDetailsDataSource = UserManager.sharedUserManager.appUserCollegeArray
-        let tap = UITapGestureRecognizer(target: self, action: #selector(LeftMenuViewController.showProfileDropDown))
-        self.labelProfile.isUserInteractionEnabled = true
-        self.labelProfile.addGestureRecognizer(tap)
-        
+        if  UserManager.sharedUserManager.user != .exam {
+            let tap = UITapGestureRecognizer(target: self, action: #selector(LeftMenuViewController.showProfileDropDown))
+            self.labelProfile.isUserInteractionEnabled = true
+            self.labelProfile.addGestureRecognizer(tap)
+        }
         // Do any additional setup after loading the view.
     }
     
@@ -110,7 +112,7 @@ class LeftMenuViewController: BaseViewController, UIGestureRecognizerDelegate {
             imageDataSource = parentImageDataSource
             self.buttonEditProfile.isHidden = false
             break
-
+            
         case .student:
             arrayDataSource = studentDataSource
             imageDataSource = studentImageDataSource
@@ -119,17 +121,19 @@ class LeftMenuViewController: BaseViewController, UIGestureRecognizerDelegate {
         case .college://1 is for super admin, 2 is for admin
             arrayDataSource = collegeSuperAdminDataSource
             imageDataSource = collegeSuperAdminImageDataSource
-//            if let privilege = UserManager.sharedUserManager.appUserCollegeDetails.privilege{
-//            }
-            //                arrayDataSource = UserManager.sharedUserManager.appUserCollegeDetails.privilege! == "2" ? collegeSuperAdminDataSource : collegeSuperAdminDataSource
             self.buttonEditProfile.isHidden = true
             break
+        case .exam:
+            arrayDataSource = examDataSource
+            imageDataSource = examImageDataSource
+            self.buttonEditProfile.isHidden = true
+            
         }
         self.tableViewMenu.reloadData()
     }
     
     func getAndSetUserImage(){
-        Alamofire.request(UserManager.sharedUserManager.appUserDetails.profilePicUrl!).responseImage { response in
+        Alamofire.request(UserManager.sharedUserManager.appUserDetails.profilePicUrl ?? "").responseImage { response in
             if let image = response.result.value {
                 print("image downloaded: \(image)")
                 self.buttonProfile.setImage(image, for: UIControlState.normal)
@@ -159,18 +163,21 @@ class LeftMenuViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     //WHEN USER CHANGES THE PROFILE from DropDown
     func updateUserDetails(){
-        if(UserManager.sharedUserManager.appUserCollegeDetails.role_id == "3")
-        {
+        if let collegeObj = UserManager.sharedUserManager.appUserCollegeDetails, collegeObj.role_id == "3" {
             let collegeImage = UIImage(named: Constants.Images.collegeDefault)
             self.buttonProfile.setImage(collegeImage, for: .normal)
             self.labelName.text = "College"
             self.labelRole.text = ""
         }
-        else{
+        else {
             //            self.labelProfile.text = "\(UserManager.sharedUserManager.appUserCollegeDetails.college_name!)"
             self.labelProfile.text = "Profile"
             self.labelName.text = "\(UserManager.sharedUserManager.appUserDetails.firstName ?? "") \(UserManager.sharedUserManager.appUserDetails.lastName ?? "")"
-            self.labelRole.text = "\(UserManager.sharedUserManager.appUserCollegeDetails.college_name!) (\(UserManager.sharedUserManager.appUserCollegeDetails.role_name!))"
+            if let collegeObj = UserManager.sharedUserManager.appUserCollegeDetails {
+                self.labelRole.text = "\(collegeObj.college_name ?? "") (\(collegeObj.role_name ?? ""))"
+            }else{
+                self.labelRole.text = ""
+            }
             self.getAndSetUserImage()
         }
         
@@ -179,7 +186,7 @@ class LeftMenuViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     @IBAction func editProfle(_ sender:Any){
         self.menuContainerViewController.setMenuState(MFSideMenuStateClosed, completion: {
-            if self.delegate != nil{
+            if self.delegate != nil, UserManager.sharedUserManager.user != .exam {
                 self.delegate.editProfileClicked()
             }
         })
@@ -205,11 +212,13 @@ class LeftMenuViewController: BaseViewController, UIGestureRecognizerDelegate {
     }
     
     @IBAction  func showModal() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let modalViewController:EditProfilePictureViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.EditProfilePictureViewControllerId) as! EditProfilePictureViewController
-        modalViewController.delegate = self
-        modalViewController.modalPresentationStyle = .overCurrentContext
-        present(modalViewController, animated: true, completion: nil)
+        if UserManager.sharedUserManager.user != .exam {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let modalViewController:EditProfilePictureViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.EditProfilePictureViewControllerId) as! EditProfilePictureViewController
+            modalViewController.delegate = self
+            modalViewController.modalPresentationStyle = .overCurrentContext
+            present(modalViewController, animated: true, completion: nil)
+        }
     }    
 }
 
@@ -234,6 +243,7 @@ extension LeftMenuViewController:UITableViewDelegate, UITableViewDataSource{
             cell.textLabel?.text = arrayDataSource[indexPath.row]
             cell.imageView?.image = UIImage(named: "\(self.imageDataSource[indexPath.row])")
             cell.backgroundColor = UIColor.clear
+            cell.selectionStyle = .none
             return cell
         }
         else{
@@ -293,13 +303,15 @@ extension LeftMenuViewController:UITableViewDelegate, UITableViewDataSource{
         self.present(alert, animated: true, completion: nil)
     }
     
-    func performLogoutActions(){
+    func performLogoutActions() {
         self.deregisterUserAccessToken()
         UserManager.sharedUserManager.setAccessToken("")
         DatabaseManager.deleteAllEntitiesForEntityName(name: "CollegeDetails")
         DatabaseManager.deleteAllEntitiesForEntityName(name: "UserDetails")
         DatabaseManager.deleteAllEntitiesForEntityName(name: "OfflineUserData")
         DatabaseManager.saveDbContext()
+        UserManager.sharedUserManager.appUserCollegeArray.removeAll()
+        UserManager.sharedUserManager.appUserCollegeDetails = nil
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         UserDefaults.standard.set(nil, forKey: Constants.UserDefaults.collegeName)
         UserDefaults.standard.set(nil, forKey: Constants.UserDefaults.roleName)

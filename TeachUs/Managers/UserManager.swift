@@ -28,7 +28,7 @@ class UserManager{
     var appUserCollegeArray:[CollegeDetails]! = []
     var allowedCollegeUserTabs:[UserTabControls]{
         var availableControlTabs = [UserTabControls]()
-        if let controlObj = self.appUserCollegeDetails.userControlTabs{
+        if let collegeObj = self.appUserCollegeDetails, let controlObj = collegeObj.userControlTabs {
             let controlArray = controlObj.components(separatedBy: ",").map({Int($0) ?? 0})
             for control in controlArray{
                 if control == 0 {
@@ -51,7 +51,7 @@ class UserManager{
     var unauthorisedUser = UnauthorisedUser()
     /// Return the type of the role type of the user logged in
     var user:LoginUserType! {
-    if let user = UserDefaults.standard.value(forKey: Constants.UserDefaults.loginUserType) as? String {
+        if let user = UserDefaults.standard.value(forKey: Constants.UserDefaults.loginUserType) as? String {
             switch user {
             case Constants.UserTypeString.College:
                 return LoginUserType.college
@@ -61,6 +61,8 @@ class UserManager{
                 return LoginUserType.student
             case Constants.UserTypeString.Parents:
                 return LoginUserType.parents
+            case Constants.UserTypeString.Exam:
+                return LoginUserType.exam
             default:
                 return nil
             }
@@ -115,35 +117,38 @@ class UserManager{
             
         case .parents:
             UserDefaults.standard.set(Constants.UserTypeString.Parents, forKey: Constants.UserDefaults.loginUserType)
-
+            
+        case .exam:
+            UserDefaults.standard.set(Constants.UserTypeString.Exam, forKey: Constants.UserDefaults.loginUserType)
 
         }
         UserDefaults.standard.synchronize()
     }
     
     
-    func initLoggedInUser(){
+    func initLoggedInUser() {
         self.userProfilesArray.removeAll()
         let user = DatabaseManager.getEntitesForEntityName("UserDetails", sortindId: "firstName")
-        if(user.count > 0){
+        if(user.count > 0) {
             self.appUserDetails = user.last as! UserDetails
-            self.userName = self.appUserDetails.firstName!
-            self.userLastName = self.appUserDetails.lastName!
+            self.userName = self.appUserDetails.firstName ?? ""
+            self.userLastName = self.appUserDetails.lastName ?? ""
             let collegeDetailsArray = DatabaseManager.getEntitesForEntityName("CollegeDetails", sortindId: "college_name")
-            if(collegeDetailsArray.count > 0){
+            if(collegeDetailsArray.count > 0) {
                 self.appUserCollegeArray = collegeDetailsArray as! [CollegeDetails]
             }
             /*
-            if(self.appUserCollegeArray.contains(where: {$0.role_id! == "1" }) && ((self.appUserCollegeArray.contains(where: { $0.role_id! == "2"})) || (self.appUserCollegeArray.contains(where: { $0.role_id! == "3"})))){
-                self.appUserCollegeArray = self.appUserCollegeArray.filter {$0.role_id != "1"}
-            }
- */
+             if(self.appUserCollegeArray.contains(where: {$0.role_id! == "1" }) && ((self.appUserCollegeArray.contains(where: { $0.role_id! == "2"})) || (self.appUserCollegeArray.contains(where: { $0.role_id! == "3"})))){
+             self.appUserCollegeArray = self.appUserCollegeArray.filter {$0.role_id != "1"}
+             }
+             */
             //remove student profile from when professor and college are logged in
-            if(self.appUserCollegeArray.contains(where: {$0.role_id! == "1" }) && ((self.appUserCollegeArray.contains(where: { $0.role_id! == "2"})) || (self.appUserCollegeArray.contains(where: { $0.role_id! == "3"})))){
+            if(self.appUserCollegeArray.contains(where: {$0.role_id ?? "" == "1" }) && ((self.appUserCollegeArray.contains(where: { $0.role_id ?? "" == "2"})) || (self.appUserCollegeArray.contains(where: { $0.role_id ?? "" == "3"})))){
                 self.appUserCollegeArray = self.appUserCollegeArray.filter {$0.role_id != "1"}
             }
             
-            guard let defaultCollegeName = UserDefaults.standard.value(forKey: Constants.UserDefaults.collegeName) as? String, let defaultRoleName = UserDefaults.standard.value(forKey: Constants.UserDefaults.roleName) as? String
+            guard let defaultCollegeName = UserDefaults.standard.value(forKey: Constants.UserDefaults.collegeName) as? String,
+                let defaultRoleName = UserDefaults.standard.value(forKey: Constants.UserDefaults.roleName) as? String
                 else {
                     if(self.user == nil) {
                         self.appUserCollegeDetails = self.appUserCollegeArray.first!
@@ -184,7 +189,7 @@ class UserManager{
                             }
                         }
                     }
-                return
+                    return
             }
             
             //when default user type is available
@@ -213,33 +218,67 @@ class UserManager{
     }
     
     //When user role is changed
-    func setUserBasedOnRole(){
-                    switch self.appUserCollegeDetails.role_id!{
-                    case "1":
-                        UserManager.sharedUserManager.setLoginUserType(.student)
-                        break
-                    case "2":
-                        UserManager.sharedUserManager.setLoginUserType(.professor)
-                        break
-                    case "3":
-                        UserManager.sharedUserManager.setLoginUserType(.college)
-                        break
-                    case "4":
-                        UserManager.sharedUserManager.setLoginUserType(.parents)
-                        break
-
-                    default:
-                        break
-                    }
+    func setUserBasedOnRole() {
+        switch self.user {
+        case .student:
+            UserManager.sharedUserManager.setLoginUserType(.student)
+            
+        case .parents:
+            UserManager.sharedUserManager.setLoginUserType(.parents)
+            
+        case .college:
+            UserManager.sharedUserManager.setLoginUserType(.college)
+            
+        case .professor:
+            UserManager.sharedUserManager.setLoginUserType(.professor)
+            
+        case .exam:
+            UserManager.sharedUserManager.setLoginUserType(.exam)
+            
+        default:
+            break
+        }
+/*
+        switch self.appUserCollegeDetails.role_id! {
+        case "1":
+            UserManager.sharedUserManager.setLoginUserType(.student)
+            break
+        case "2":
+            UserManager.sharedUserManager.setLoginUserType(.professor)
+            break
+        case "3":
+            UserManager.sharedUserManager.setLoginUserType(.college)
+            break
+        case "4":
+            UserManager.sharedUserManager.setLoginUserType(.parents)
+            break
+            
+        default:
+            break
+        }
+ */
     }
     
-    func setUserId(_ id:String){
+    func setUserId(_ id:String) {
         UserDefaults.standard.set(id, forKey: Constants.UserDefaults.userId)
         UserDefaults.standard.synchronize()
     }
     
     func getUserId() -> String{
         guard let userId = UserDefaults.standard.value(forKey: Constants.UserDefaults.userId) as? String else {
+            return "0"
+        }
+        return userId
+    }
+    
+    
+    func setStudentExamId(_ id:String) {
+        UserDefaults.standard.set(id, forKey: Constants.UserDefaults.examStudentId)
+        UserDefaults.standard.synchronize()
+    }
+    
+    func getStudentExamId() -> String{
+        guard let userId = UserDefaults.standard.value(forKey: Constants.UserDefaults.examStudentId) as? String else {
             return "0"
         }
         return userId
@@ -292,6 +331,7 @@ class UserManager{
         self.appUserDetails.lastName = appUser["l_name"] as? String
         self.appUserDetails.email = appUser["email"] as? String
         self.appUserDetails.contact = appUser["contact"] as? String
+        self.appUserDetails.roleId = UserManager.sharedUserManager.user.rawValue
 //        self.appUserDetails.roleId = appUser["role_id"] as? String
         self.appUserDetails.profilePicUrl = appUser["profile"] as? String
         guard let userCollegeArray = userResponse["colleges"] as? [[String:Any]] else {
@@ -439,6 +479,8 @@ class UserManager{
         DatabaseManager.deleteAllEntitiesForEntityName(name: "UserDetails")
         DatabaseManager.deleteAllEntitiesForEntityName(name: "OfflineUserData")
         DatabaseManager.saveDbContext()
+        self.appUserCollegeArray = nil
+        self.appUserCollegeDetails = nil
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         UserDefaults.standard.set(nil, forKey: Constants.UserDefaults.collegeName)
         UserDefaults.standard.set(nil, forKey: Constants.UserDefaults.roleName)

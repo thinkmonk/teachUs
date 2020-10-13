@@ -115,7 +115,10 @@ public struct Constants {
         static let addmissionStatusViewControlelr = "AdmissionStatusViewControllerId"
         static let attendanceDeleteRequest = "AttendanceDeleteRequestViewControllerId"
         static let collegeScheduler =  "SchedulerListViewControllerId"
-        
+        static let scheduleDetials = "CollegeScheduleDetailsViewControllerId"
+        static let scheduleDatePickerVc = "datePickerVcId"
+        static let examHomeView = "ExamHomeViewControllerId"
+        static let examWebView = "ExamWebViewControllerId"        
     }
     
     struct UserDefaults {
@@ -142,6 +145,7 @@ public struct Constants {
         static let notesFile             = "notesFile"
         static let notesFileName         = "notesFileName"
         static let notifiocationReceived = "notifiocationReceived"
+        static let examStudentId         = "examStudentId"
         
     }
     
@@ -199,6 +203,7 @@ public struct Constants {
         static let schdeduleDetailsCellId = "scheduleDetailsCellId"
         static let scheduleDetailsDateCellId = "detailsDateCellId"
         static let collegeAddNewSchedule = "addNewScheduleCellId"
+        static let examSchedule = "ExamScheduleTableViewCellId"
     }
     
     struct UserTypeString {
@@ -207,6 +212,7 @@ public struct Constants {
         static let College = "COLLEGE"
         static let SuperAdmin = "SUPERADMIN"
         static let Parents = "PARENTS"
+        static let Exam = "EXAM"
     }
     
     struct  CustomErrorCodes {

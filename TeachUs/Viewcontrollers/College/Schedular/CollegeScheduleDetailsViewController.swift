@@ -18,11 +18,13 @@ class CollegeScheduleDetailsViewController: BaseViewController {
     let locale = NSLocale.current
     var datePicker : UIDatePicker!
     let toolBar = UIToolbar()
+    lazy var slideInTransitioningDelegate = SlideInPresentationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.addGradientToNavBar()
         tableviewScheduleDetails.register(UINib(nibName: "ScheduleDetailsTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.schdeduleDetailsCellId)
-        tableviewScheduleDetails.register(UINib(nibName: "ScheduleDateTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.schdeduleDetailsCellId)//AddNewScheduleTableViewCell
+        tableviewScheduleDetails.register(UINib(nibName: "ScheduleDateTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.scheduleDetailsDateCellId)
         tableviewScheduleDetails.register(UINib(nibName: "AddNewScheduleTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.collegeAddNewSchedule)
 
         tableviewScheduleDetails.dataSource = self
@@ -30,7 +32,7 @@ class CollegeScheduleDetailsViewController: BaseViewController {
         tableviewScheduleDetails.estimatedRowHeight = 44.0
         tableviewScheduleDetails.rowHeight = UITableViewAutomaticDimension
         tableviewScheduleDetails.addSubview(refreshControl)
-        getScheduleDetails(between: Date().getDateString(format: "YYYY-MM-DD"), Date().addDays(7).getDateString(format: "YYYY-MM-DD"))
+        getScheduleDetails(between: Date().getDateString(format: "YYYY-MM-dd"), Date().addDays(7).getDateString(format: "YYYY-MM-dd"))
     }
     
     
@@ -43,7 +45,7 @@ class CollegeScheduleDetailsViewController: BaseViewController {
             "college_code" : "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
             "class_id" : schedule.classId ?? "",
             "to_date" : toDate,
-            "from_date" : fromDate
+            "from_date" : "2020-8-18"
         ]
         
         manager.apiPostWithDataResponse(apiName: "Get College Schedules Details", parameters:parameters, completionHandler: { [weak self] (result, code, response)  in
@@ -86,30 +88,17 @@ class CollegeScheduleDetailsViewController: BaseViewController {
     }
     
     @IBAction func actionDatePicker(_ sender: Any) {
-        // DatePicker
-        self.datePicker = UIDatePicker(frame:CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 200))
-        self.datePicker?.backgroundColor = UIColor.white
-        self.datePicker?.datePickerMode = UIDatePickerMode.dateAndTime
-        datePicker.center = view.center
-        view.addSubview(self.datePicker)
-
-        // ToolBar
-
-        toolBar.barStyle = .default
-        toolBar.isTranslucent = true
-        toolBar.tintColor = UIColor(red: 92/255, green: 216/255, blue: 255/255, alpha: 1)
-        toolBar.sizeToFit()
-
-        // Adding Button ToolBar
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneClick))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelClick))
-        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: true)
-        toolBar.isUserInteractionEnabled = true
-
-        self.view.addSubview(toolBar)
-        self.toolBar.isHidden = false
-
+        // DatePicker //datePickerVcId
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let detailsViewController:SchedularDatePickerViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.scheduleDatePickerVc) as! SchedularDatePickerViewController
+        detailsViewController.modalPresentationStyle = .custom
+        slideInTransitioningDelegate.direction = .bottom
+        slideInTransitioningDelegate.disableCompactHeight = true
+        detailsViewController.transitioningDelegate = slideInTransitioningDelegate
+        detailsViewController.modalPresentationStyle = .custom
+        detailsViewController.delegate = self
+        present(detailsViewController, animated: true, completion: nil)
+        
     }
     
     @objc func doneClick() {
@@ -128,8 +117,6 @@ class CollegeScheduleDetailsViewController: BaseViewController {
         self.toolBar.isHidden = true
 
     }
-
-    
     
 }
 
@@ -148,6 +135,7 @@ extension CollegeScheduleDetailsViewController: UITableViewDataSource, UITableVi
         case .AddSchedule:
             let cell:AddNewScheduleTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.collegeAddNewSchedule, for: indexPath)  as! AddNewScheduleTableViewCell
             cell.delegate = self
+            cell.selectionStyle = .none
             
             return cell
 
@@ -155,6 +143,7 @@ extension CollegeScheduleDetailsViewController: UITableViewDataSource, UITableVi
             let cell:ScheduleDateTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.scheduleDetailsDateCellId, for: indexPath)  as! ScheduleDateTableViewCell
             let dateString = dataSource.attachedObject as? String ?? "NA"
             cell.labelDate.text = dateString
+            cell.selectionStyle = .none
             return cell
             
         case .SchdeuleDetails:
@@ -162,6 +151,7 @@ extension CollegeScheduleDetailsViewController: UITableViewDataSource, UITableVi
             guard let scheduleObj = dataSource.attachedObject as? ScheduleDetail else { return UITableViewCell() }
             cell.setUpCell(details: scheduleObj, cellType: .lectureDetails)
             cell.delegate = self
+            cell.selectionStyle = .none
             return cell
             
         case .none:
@@ -203,6 +193,14 @@ extension CollegeScheduleDetailsViewController: ScheduleDetailCellDelegate{
         #if DEBUG
         self.showAlertWithTitle("DEBUG MESSAGE", alertMessage: "Implement this: actionJoinSchedule")
         #endif
+    }
+    
+    
+}
+
+extension CollegeScheduleDetailsViewController: DatePickerDelegate {
+    func dateSelected(from fromDate: Date, to toDate: Date) {
+        getScheduleDetails(between: fromDate.getDateString(format: "YYYY-MM-dd"), toDate.getDateString(format: "YYYY-MM-dd"))
     }
     
     

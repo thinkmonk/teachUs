@@ -94,6 +94,9 @@ class LoginView: UIView, UITextFieldDelegate {
             
         case .college:
             break
+            
+        case .exam:
+            self.labelTitle.text = "EXAM"
         }
         self.textfieldFirstName.delegate = self
         self.textFieldEmailId.delegate = self

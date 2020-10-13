@@ -197,10 +197,11 @@ class BaseViewController: UIViewController {
             LoadingActivityHUD.hideProgressHUD()
             UserManager.sharedUserManager.saveUserDetailsToDb(response)
             UserManager.sharedUserManager.initLoggedInUser()
-            if let userRoleId = UserManager.sharedUserManager.appUserCollegeDetails.role_id{
+            if let collegeObj = UserManager.sharedUserManager.appUserCollegeDetails,
+                let userRoleId = collegeObj.role_id{
                 if(userRoleId == AppUserRole.professor){//check if logged-in user is a professor and fetch offline data
                     self.getOfflineData()
-                }else{
+                } else {
                     NotificationCenter.default.post(name: .notificationLoginSuccess, object: nil)
                 }
             }

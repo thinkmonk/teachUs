@@ -9,11 +9,12 @@
 import UIKit
 import ObjectMapper
 
-enum LoginUserType {
-    case student
-    case professor
-    case college
-    case parents
+enum LoginUserType:String {
+    case student = "1"
+    case professor = "2"
+    case college = "3"
+    case parents = "4"
+    case exam = "5"
     
     var userTypeString:String{
         switch self {
@@ -21,7 +22,7 @@ enum LoginUserType {
         case .professor: return Constants.UserTypeString.Professor
         case .college: return Constants.UserTypeString.College
         case .parents: return Constants.UserTypeString.Parents
-            
+        case .exam: return Constants.UserTypeString.Parents
         }
     }
 }
@@ -33,7 +34,9 @@ class LoginSelectViewController: BaseViewController {
     var roleProfessor:UserRole!
     var roleCollege:UserRole!
     var roleParents:UserRole!
+    var roleExam:UserRole!
     
+    @IBOutlet weak var buttonExam: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,19 +68,23 @@ class LoginSelectViewController: BaseViewController {
             let userRoleDict:[Any] = response["roles"] as! [Any]
             for user in userRoleDict{
                 let userRoleDict:[String:Any] = user as! [String:Any]
-                let userRoleString:String = userRoleDict["role_name"] as! String
-                switch userRoleString{
-                case "Student":
+                let userRoleIdString:String = userRoleDict["role_id"] as! String
+                switch userRoleIdString{
+                case "1":
                     self.roleStudent = Mapper<UserRole>().map(JSONObject: user)!
                     break
-                case "Lecturer":
+                case "2":
                     self.roleProfessor = Mapper<UserRole>().map(JSONObject: user)!
                     break
-                case "College":
+                case "3":
                     self.roleCollege = Mapper<UserRole>().map(JSONObject: user)!
                     break
-                case "Parent":
+                case "4":
                     self.roleParents = Mapper<UserRole>().map(JSONObject: user)!
+                    break
+                case "5":
+                    self.roleExam = Mapper<UserRole>().map(JSONObject: user)!
+                    break
                 default:
                     break
                 }
@@ -90,6 +97,8 @@ class LoginSelectViewController: BaseViewController {
                 UserManager.sharedUserManager.unauthorisedUser.email   = email
                 UserManager.sharedUserManager.unauthorisedUser.body    = body
             }
+            
+            self.buttonExam.isHidden = self.roleExam == nil
         }) { (error, code, errorMessage) in
             LoadingActivityHUD.hideProgressHUD()
             if(code == Constants.CustomErrorCodes.noInternet){
@@ -138,6 +147,17 @@ class LoginSelectViewController: BaseViewController {
     @IBAction func loginParents(_ sender:Any){
         UserManager.sharedUserManager.setLoginUserType(.parents)
         UserManager.sharedUserManager.userRole = roleParents
+        if ForceUpdateManager.sharedForceUpdateManager.checkMaintainenceFlag(){
+            self.performSegue(withIdentifier: Constants.segues.profileTomaintainence, sender: self)
+        }else{
+            self.performSegue(withIdentifier: Constants.segues.toLoginView, sender: self)
+        }
+
+    }
+    
+    @IBAction func loginExam(_ sender:Any){
+        UserManager.sharedUserManager.setLoginUserType(.exam)
+        UserManager.sharedUserManager.userRole = roleExam
         if ForceUpdateManager.sharedForceUpdateManager.checkMaintainenceFlag(){
             self.performSegue(withIdentifier: Constants.segues.profileTomaintainence, sender: self)
         }else{

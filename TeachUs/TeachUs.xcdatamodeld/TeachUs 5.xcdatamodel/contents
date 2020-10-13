@@ -34,6 +34,7 @@
         <attribute name="login_id" optional="YES" attributeType="String"/>
         <attribute name="notificationCount" optional="YES" attributeType="String"/>
         <attribute name="profilePicUrl" optional="YES" attributeType="String"/>
+        <attribute name="roleId" optional="YES" attributeType="String"/>
         <relationship name="college" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CollegeDetails"/>
     </entity>
     <elements>
@@ -41,6 +42,6 @@
         <element name="CollegeDetails" positionX="-128" positionY="-108" width="128" height="223"/>
         <element name="OfflineApiRequest" positionX="-135" positionY="-54" width="128" height="75"/>
         <element name="OfflineUserData" positionX="-135" positionY="-54" width="128" height="60"/>
-        <element name="UserDetails" positionX="-324" positionY="-108" width="128" height="165"/>
+        <element name="UserDetails" positionX="-324" positionY="-108" width="128" height="178"/>
     </elements>
 </model>

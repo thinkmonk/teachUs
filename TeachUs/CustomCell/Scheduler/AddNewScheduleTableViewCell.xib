@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -31,6 +31,8 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="AWD-jo-Yov" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="0jo-sH-T4V"/>
+                    <constraint firstAttribute="bottom" secondItem="AWD-jo-Yov" secondAttribute="bottom" constant="14" id="E3n-ws-bSU"/>
+                    <constraint firstItem="AWD-jo-Yov" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="PLH-oE-GBF"/>
                     <constraint firstItem="AWD-jo-Yov" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="bVH-pr-xwY"/>
                 </constraints>
             </tableViewCellContentView>

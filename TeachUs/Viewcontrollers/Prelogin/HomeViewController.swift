@@ -75,19 +75,22 @@ class HomeViewController: BaseViewController{
             notificaitonLabel.font = UIFont.systemFont(ofSize: 10)
             notificaitonLabel.textColor = .white
             notificaitonLabel.backgroundColor = .red
-            if let count = Int(UserManager.sharedUserManager.appUserCollegeDetails.notificationCount ?? "0"){
+            if let collegeDetails = UserManager.sharedUserManager.appUserCollegeDetails, let count = Int(collegeDetails.notificationCount ?? "0"){
                 notificaitonLabel.text = count > 100 ? "99+" : "\(count)"
             }
             // button
-            let rightButton = UIButton(frame: CGRect(x: 0, y: 0, width: 20, height: 20 ))
-            rightButton.setBackgroundImage(UIImage(named: "bellNotification"), for: .normal)
-            rightButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-            rightButton.addTarget(self, action: #selector(bellNotificationAction), for: .touchUpInside)
-            rightButton.addSubview(notificaitonLabel)
             
-            // Bar button item
-            let bellButtomItem = UIBarButtonItem(customView: rightButton)
-            navigationItem.rightBarButtonItems  = [bellButtomItem]
+            if UserManager.sharedUserManager.user != .exam{
+                let rightButton = UIButton(frame: CGRect(x: 0, y: 0, width: 20, height: 20 ))
+                rightButton.setBackgroundImage(UIImage(named: "bellNotification"), for: .normal)
+                rightButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+                rightButton.addTarget(self, action: #selector(bellNotificationAction), for: .touchUpInside)
+                rightButton.addSubview(notificaitonLabel)
+                
+                // Bar button item
+                let bellButtomItem = UIBarButtonItem(customView: rightButton)
+                navigationItem.rightBarButtonItems  = [bellButtomItem]
+            }
         }
 
         
@@ -196,7 +199,8 @@ extension HomeViewController:LeftMenuDeleagte{
     
     @objc func updateBellNotificaitonCount(){
         if let label = self.notificaitonLabel{
-            if let count = Int(UserManager.sharedUserManager.appUserCollegeDetails.notificationCount ?? "0"){
+            if let collegeDetails = UserManager.sharedUserManager.appUserCollegeDetails,
+                let count = Int(collegeDetails.notificationCount ?? "0"){
                 label.text = count > 100 ? "99+" : "\(count)"
             }
         }

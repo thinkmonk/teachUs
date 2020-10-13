@@ -70,6 +70,8 @@ class SyllabusStatusListViewController: BaseViewController {
         case .parents:
             manager.url = URLConstants.ParentsURL.syllabusSubjectStatus
             parameters["email"] = UserManager.sharedUserManager.appUserCollegeDetails.studentEmail ?? ""
+            
+        case .exam: break
         }
         
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)

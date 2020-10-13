@@ -46,6 +46,7 @@ class CollegeNotificationListViewController: BaseViewController {
             manager.url = URLConstants.StudentURL.getNotificationList
         case .parents:
             manager.url = URLConstants.ParentsURL.getNotificationList
+        case .exam: break
         }
         
         let parameters = [

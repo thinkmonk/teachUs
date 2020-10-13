@@ -104,7 +104,12 @@ extension CollegeSchedulerListViewController:UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        <#code#>
+        if let selectedSchedule = self.collegeScheduleList?.schedules?[indexPath.section] {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let detailsViewController:CollegeScheduleDetailsViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.scheduleDetials) as! CollegeScheduleDetailsViewController
+            detailsViewController.schedule = selectedSchedule
+            self.navigationController?.pushViewController(detailsViewController, animated: true)
+        }
     }
 
     
