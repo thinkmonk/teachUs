@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pVO-0S-wfc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pVO-0S-wfc">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -163,12 +164,12 @@
                                 </subviews>
                             </stackView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="dnG-HM-QY1"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="AhD-TY-wH5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dMT-rM-Nqe"/>
                             <constraint firstItem="AhD-TY-wH5" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="wzk-AM-f4c"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="dnG-HM-QY1"/>
                     </view>
                     <navigationItem key="navigationItem" title="Select Login" id="HbF-6v-pXG"/>
                     <connections>
@@ -188,8 +189,8 @@
                     <view key="view" contentMode="scaleToFill" id="T5p-ae-4H1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="uyZ-3K-n2D"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Qs-AY-HHv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -203,8 +204,8 @@
                     <view key="view" contentMode="scaleToFill" id="J09-fV-yer">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="3Um-aB-i1y"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="lJf-MS-1we"/>
                 </viewController>
@@ -334,6 +335,7 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="Lp6-cd-RGU"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="eU9-ki-WaB" firstAttribute="leading" secondItem="she-Ex-G8J" secondAttribute="leading" id="0sp-Ig-yNp"/>
@@ -359,7 +361,6 @@
                             <constraint firstItem="eU9-ki-WaB" firstAttribute="top" secondItem="she-Ex-G8J" secondAttribute="top" id="mck-fR-Y2c"/>
                             <constraint firstItem="eU9-ki-WaB" firstAttribute="width" secondItem="she-Ex-G8J" secondAttribute="width" id="xcO-gs-okS"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Lp6-cd-RGU"/>
                     </view>
                     <navigationItem key="navigationItem" id="WPu-dc-VR2"/>
                     <connections>
@@ -390,6 +391,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="tmq-rX-3PS"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="tmq-rX-3PS" firstAttribute="trailing" secondItem="8jm-su-nAB" secondAttribute="trailing" constant="15" id="7t9-xV-fQ6"/>
@@ -397,7 +399,6 @@
                             <constraint firstItem="8jm-su-nAB" firstAttribute="top" secondItem="tmq-rX-3PS" secondAttribute="top" id="fQR-bK-jaD"/>
                             <constraint firstItem="8jm-su-nAB" firstAttribute="leading" secondItem="tmq-rX-3PS" secondAttribute="leading" constant="15" id="xXR-sn-hQF"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="tmq-rX-3PS"/>
                     </view>
                     <connections>
                         <outlet property="tableStudentProfileDetails" destination="8jm-su-nAB" id="Jwc-5Q-2ef"/>
@@ -490,7 +491,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SWP-w6-1Ki">
                                                 <rect key="frame" x="0.0" y="0.0" width="217" height="30"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xkq-yU-ptW">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xkq-yU-ptW">
                                                         <rect key="frame" x="0.0" y="0.0" width="97.333333333333329" height="30"/>
                                                         <state key="normal" title="Send OTP"/>
                                                         <connections>
@@ -519,7 +520,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mj3-OB-IFE">
                                                 <rect key="frame" x="0.0" y="0.0" width="217" height="30"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h7p-bF-KtH">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h7p-bF-KtH">
                                                         <rect key="frame" x="0.0" y="0.0" width="97.333333333333329" height="30"/>
                                                         <state key="normal" title="Upload"/>
                                                         <connections>
@@ -557,7 +558,7 @@
                                             <constraint firstAttribute="trailing" secondItem="SWP-w6-1Ki" secondAttribute="trailing" id="pU9-Ro-xVD"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3hV-Lp-E94">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3hV-Lp-E94">
                                         <rect key="frame" x="76.999999999999986" y="199" width="79.000000000000014" height="28"/>
                                         <inset key="contentEdgeInsets" minX="15" minY="5" maxX="15" maxY="5"/>
                                         <state key="normal" title="Submit"/>
@@ -599,12 +600,12 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="MkZ-tF-qzL"/>
                         <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="b13-8O-rcV" firstAttribute="centerY" secondItem="nZ0-M3-4fg" secondAttribute="centerY" id="0Xe-RL-tSG"/>
                             <constraint firstItem="b13-8O-rcV" firstAttribute="centerX" secondItem="MkZ-tF-qzL" secondAttribute="centerX" id="GVc-BE-X6U"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="MkZ-tF-qzL"/>
                     </view>
                     <connections>
                         <outlet property="buttonCloseView" destination="0sm-s0-eZJ" id="ccj-In-C08"/>
@@ -647,7 +648,7 @@
                                             <constraint firstAttribute="width" secondItem="Obl-Dm-LkJ" secondAttribute="height" multiplier="1:1" id="Xfl-gv-KDa"/>
                                         </constraints>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="bk1-oi-jhw">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="bk1-oi-jhw">
                                         <rect key="frame" x="75" y="305" width="112.66666666666669" height="48"/>
                                         <state key="normal">
                                             <string key="title">Select Image 
@@ -658,7 +659,7 @@ Form Library</string>
                                             <action selector="photofromLibrary:" destination="A6P-jv-rKv" eventType="touchUpInside" id="rXd-FD-iuU"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="yEh-1v-SOr">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="yEh-1v-SOr">
                                         <rect key="frame" x="187.66666666666666" y="305" width="112.33333333333334" height="30"/>
                                         <state key="normal" title="Take Photo">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -667,7 +668,7 @@ Form Library</string>
                                             <action selector="takePhoto:" destination="A6P-jv-rKv" eventType="touchUpInside" id="CFc-Bi-XWp"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vPD-K9-jf5">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vPD-K9-jf5">
                                         <rect key="frame" x="75" y="373" width="225" height="30"/>
                                         <color key="backgroundColor" red="0.77647058820000003" green="0.0" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
@@ -709,6 +710,7 @@ Form Library</string>
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="IN5-c8-W4x"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="gbQ-iB-1oy" firstAttribute="leading" secondItem="IN5-c8-W4x" secondAttribute="leading" id="02y-fJ-Bvi"/>
@@ -716,7 +718,6 @@ Form Library</string>
                             <constraint firstItem="IN5-c8-W4x" firstAttribute="bottom" secondItem="gbQ-iB-1oy" secondAttribute="bottom" id="Zvb-ht-Oxn"/>
                             <constraint firstItem="gbQ-iB-1oy" firstAttribute="top" secondItem="vHv-Qp-XU4" secondAttribute="top" id="ith-lg-AeI"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="IN5-c8-W4x"/>
                     </view>
                     <connections>
                         <outlet property="buttonSelectPhotoFromCamera" destination="yEh-1v-SOr" id="gOc-Zy-HHy"/>
@@ -744,6 +745,7 @@ Form Library</string>
                                 </connections>
                             </containerView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="lMx-eA-Ncf"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="lMx-eA-Ncf" firstAttribute="trailing" secondItem="gDm-o4-G2E" secondAttribute="trailing" id="1gV-zd-ioZ"/>
@@ -751,7 +753,6 @@ Form Library</string>
                             <constraint firstItem="gDm-o4-G2E" firstAttribute="leading" secondItem="lMx-eA-Ncf" secondAttribute="leading" id="K7j-Cx-yw1"/>
                             <constraint firstItem="gDm-o4-G2E" firstAttribute="top" secondItem="lMx-eA-Ncf" secondAttribute="top" id="Wr6-uD-ncT"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="lMx-eA-Ncf"/>
                     </view>
                     <navigationItem key="navigationItem" id="OUp-tZ-i5g"/>
                     <connections>
@@ -856,6 +857,7 @@ Form Library</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="aOv-kb-Hji"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="aOv-kb-Hji" firstAttribute="bottom" secondItem="hmm-Ep-FzF" secondAttribute="bottom" id="4sh-bv-55Y"/>
@@ -866,7 +868,6 @@ Form Library</string>
                             <constraint firstItem="hmm-Ep-FzF" firstAttribute="leading" secondItem="aOv-kb-Hji" secondAttribute="leading" constant="15" id="dW2-kI-vUI"/>
                             <constraint firstItem="aOv-kb-Hji" firstAttribute="trailing" secondItem="hmm-Ep-FzF" secondAttribute="trailing" constant="15" id="qr9-3J-lD2"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="aOv-kb-Hji"/>
                     </view>
                     <navigationItem key="navigationItem" id="Z28-fH-EvD"/>
                     <connections>
@@ -889,7 +890,7 @@ Form Library</string>
                                 <rect key="frame" x="15" y="88" width="345" height="650"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mlR-yJ-0wp">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mlR-yJ-0wp">
                                 <rect key="frame" x="0.0" y="738" width="375" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="HZd-6M-REt"/>
@@ -900,6 +901,7 @@ Form Library</string>
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="4wU-c9-8CX"/>
                         <color key="backgroundColor" red="0.92549019610000005" green="0.95294117649999999" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="4wU-c9-8CX" firstAttribute="bottom" secondItem="mlR-yJ-0wp" secondAttribute="bottom" id="MjZ-av-1Cd"/>
@@ -910,7 +912,6 @@ Form Library</string>
                             <constraint firstItem="XWp-cD-bd7" firstAttribute="top" secondItem="4wU-c9-8CX" secondAttribute="top" id="vs5-ub-Ock"/>
                             <constraint firstItem="4wU-c9-8CX" firstAttribute="trailing" secondItem="mlR-yJ-0wp" secondAttribute="trailing" id="w1L-bQ-Hfd"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="4wU-c9-8CX"/>
                     </view>
                     <navigationItem key="navigationItem" id="2ya-P9-nWy"/>
                     <connections>
@@ -935,7 +936,7 @@ Form Library</string>
                                 <rect key="frame" x="15" y="88" width="345" height="690"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fpk-g3-i0s">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fpk-g3-i0s">
                                 <rect key="frame" x="0.0" y="786" width="375" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Cse-K3-B28"/>
@@ -947,6 +948,7 @@ Form Library</string>
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="rZm-Tt-Qxq"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="CXL-DI-gCU" firstAttribute="top" secondItem="rZm-Tt-Qxq" secondAttribute="top" id="JHQ-yC-Kd9"/>
@@ -957,7 +959,6 @@ Form Library</string>
                             <constraint firstItem="CXL-DI-gCU" firstAttribute="leading" secondItem="rZm-Tt-Qxq" secondAttribute="leading" constant="15" id="w57-cM-jfU"/>
                             <constraint firstItem="fpk-g3-i0s" firstAttribute="top" secondItem="CXL-DI-gCU" secondAttribute="bottom" constant="8" symbolic="YES" id="yEr-9S-8DR"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="rZm-Tt-Qxq"/>
                     </view>
                     <navigationItem key="navigationItem" id="m9U-S7-nGK">
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="SVe-RH-yTN"/>
@@ -985,7 +986,7 @@ Form Library</string>
                                 <rect key="frame" x="0.0" y="136" width="375" height="602"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vp5-uU-h6G">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vp5-uU-h6G">
                                 <rect key="frame" x="0.0" y="738" width="375" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="BNT-sI-hgs"/>
@@ -1013,6 +1014,7 @@ Form Library</string>
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="04D-am-fJO"/>
                         <color key="backgroundColor" red="0.92549019610000005" green="0.95294117649999999" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="cX6-cB-34O" firstAttribute="leading" secondItem="04D-am-fJO" secondAttribute="leading" id="0ai-kL-9C0"/>
@@ -1026,7 +1028,6 @@ Form Library</string>
                             <constraint firstItem="04D-am-fJO" firstAttribute="bottom" secondItem="vp5-uU-h6G" secondAttribute="bottom" id="t0c-Pg-rsa"/>
                             <constraint firstItem="cX6-cB-34O" firstAttribute="top" secondItem="jO0-e6-fLe" secondAttribute="bottom" constant="-2" id="xsD-WO-7Lq"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="04D-am-fJO"/>
                     </view>
                     <connections>
                         <outlet property="buttonSubmit" destination="vp5-uU-h6G" id="jdM-gE-V15"/>
@@ -1066,19 +1067,19 @@ Form Library</string>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Class:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ebw-ky-PHk">
-                                                    <rect key="frame" x="45" y="15" width="270" height="16"/>
+                                                    <rect key="frame" x="45" y="15" width="269" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1y7-KV-JkO">
-                                                    <rect key="frame" x="45" y="31" width="270" height="18"/>
+                                                    <rect key="frame" x="45" y="31" width="269" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                     <color key="textColor" red="0.019607843140000001" green="0.019607843140000001" blue="0.019607843140000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kbc-SW-wJL" userLabel="seperator">
-                                                    <rect key="frame" x="15" y="64" width="300" height="1"/>
+                                                    <rect key="frame" x="15" y="64" width="299" height="1"/>
                                                     <color key="backgroundColor" red="0.69803921570000005" green="0.70980392160000005" blue="0.76470588240000004" alpha="0.50070479740061158" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="afz-D1-Mmn"/>
@@ -1121,25 +1122,25 @@ Form Library</string>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Class:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="obg-Bp-mzW">
-                                                    <rect key="frame" x="45" y="15" width="270" height="16"/>
+                                                    <rect key="frame" x="45" y="15" width="269" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D7Z-MA-SZl">
-                                                    <rect key="frame" x="45" y="31" width="270" height="18"/>
+                                                    <rect key="frame" x="45" y="31" width="269" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                     <color key="textColor" red="0.019607843140000001" green="0.019607843140000001" blue="0.019607843140000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Class:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hu4-Vs-AKx">
-                                                    <rect key="frame" x="45" y="54" width="270" height="16"/>
+                                                    <rect key="frame" x="45" y="54" width="269" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ddg-m7-7kl">
-                                                    <rect key="frame" x="45" y="70" width="270" height="18"/>
+                                                    <rect key="frame" x="45" y="70" width="269" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                     <color key="textColor" red="0.019607843140000001" green="0.019607843140000001" blue="0.019607843140000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1173,7 +1174,7 @@ Form Library</string>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t5d-AU-ocX">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t5d-AU-ocX">
                                 <rect key="frame" x="112.66666666666669" y="713" width="150" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="KaM-7X-Gc4"/>
@@ -1181,6 +1182,7 @@ Form Library</string>
                                 <state key="normal" title="Go to home"/>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="ui4-zn-JNC"/>
                         <color key="backgroundColor" red="0.92549019610000005" green="0.95294117649999999" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="FGU-Uo-CbP" firstAttribute="leading" secondItem="ui4-zn-JNC" secondAttribute="leading" constant="15" id="CAe-2S-dJe"/>
@@ -1190,7 +1192,6 @@ Form Library</string>
                             <constraint firstItem="ui4-zn-JNC" firstAttribute="trailing" secondItem="FGU-Uo-CbP" secondAttribute="trailing" constant="15" id="v7s-hF-JmW"/>
                             <constraint firstItem="t5d-AU-ocX" firstAttribute="centerX" secondItem="ui4-zn-JNC" secondAttribute="centerX" id="zSy-vv-vyp"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="ui4-zn-JNC"/>
                     </view>
                     <connections>
                         <outlet property="buttonGoToDashboard" destination="t5d-AU-ocX" id="aKV-PI-nAt"/>
@@ -1256,6 +1257,7 @@ Form Library</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="j2p-bt-tUa"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="j2p-bt-tUa" firstAttribute="bottom" secondItem="hXi-W6-LoY" secondAttribute="bottom" id="4Yb-44-0XA"/>
@@ -1266,7 +1268,6 @@ Form Library</string>
                             <constraint firstItem="jIf-fg-0cU" firstAttribute="top" secondItem="j2p-bt-tUa" secondAttribute="top" id="rza-dd-etc"/>
                             <constraint firstItem="hXi-W6-LoY" firstAttribute="leading" secondItem="j2p-bt-tUa" secondAttribute="leading" constant="10" id="ykG-oB-hD3"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="j2p-bt-tUa"/>
                     </view>
                     <navigationItem key="navigationItem" id="AXH-wq-7lM"/>
                     <connections>
@@ -1290,7 +1291,7 @@ Form Library</string>
                                 <rect key="frame" x="10" y="88" width="355" height="650"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8cJ-Bj-xdk">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8cJ-Bj-xdk">
                                 <rect key="frame" x="0.0" y="738" width="375" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="SvO-WC-A7f"/>
@@ -1301,6 +1302,7 @@ Form Library</string>
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="mPF-lN-Ieu"/>
                         <color key="backgroundColor" red="0.92549019610000005" green="0.95294117649999999" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="mPF-lN-Ieu" firstAttribute="bottom" secondItem="8cJ-Bj-xdk" secondAttribute="bottom" id="ZCn-b7-9xR"/>
@@ -1311,7 +1313,6 @@ Form Library</string>
                             <constraint firstItem="W32-jw-wdP" firstAttribute="top" secondItem="mPF-lN-Ieu" secondAttribute="top" id="ujt-Q0-Uip"/>
                             <constraint firstItem="W32-jw-wdP" firstAttribute="leading" secondItem="mPF-lN-Ieu" secondAttribute="leading" constant="10" id="xQ5-Js-w92"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="mPF-lN-Ieu"/>
                     </view>
                     <navigationItem key="navigationItem" id="VyG-9R-6XT"/>
                     <connections>
@@ -1339,7 +1340,7 @@ Form Library</string>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="f5p-u7-aLQ">
                                 <rect key="frame" x="0.0" y="738" width="375" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3jx-5A-9Rx">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3jx-5A-9Rx">
                                         <rect key="frame" x="0.0" y="0.0" width="187.66666666666666" height="40"/>
                                         <color key="backgroundColor" red="0.77647058823529413" green="0.0" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Previous Subject">
@@ -1349,7 +1350,7 @@ Form Library</string>
                                             <action selector="showLogsForPreviousSubject:" destination="1iW-gl-mHV" eventType="touchUpInside" id="obZ-AG-aEx"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pcL-QC-JkP">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pcL-QC-JkP">
                                         <rect key="frame" x="187.66666666666663" y="0.0" width="187.33333333333337" height="40"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal" title="Next Subject">
@@ -1365,6 +1366,7 @@ Form Library</string>
                                 </constraints>
                             </stackView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="ELe-2E-8Cn"/>
                         <color key="backgroundColor" red="0.92549019610000005" green="0.95294117649999999" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="8kb-5F-kIe" firstAttribute="top" secondItem="ELe-2E-8Cn" secondAttribute="top" id="Ety-db-qeJ"/>
@@ -1375,7 +1377,6 @@ Form Library</string>
                             <constraint firstItem="ELe-2E-8Cn" firstAttribute="trailing" secondItem="f5p-u7-aLQ" secondAttribute="trailing" id="i1v-88-ZKJ"/>
                             <constraint firstItem="ELe-2E-8Cn" firstAttribute="bottom" secondItem="f5p-u7-aLQ" secondAttribute="bottom" id="uUd-OJ-e82"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="ELe-2E-8Cn"/>
                     </view>
                     <connections>
                         <outlet property="buttonNextSubject" destination="pcL-QC-JkP" id="dAY-HT-xbt"/>
@@ -1498,6 +1499,7 @@ Form Library</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="K14-HK-TNT"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="hqZ-cd-eTx" firstAttribute="trailing" secondItem="K14-HK-TNT" secondAttribute="trailing" id="AKo-Ri-oSs"/>
@@ -1511,7 +1513,6 @@ Form Library</string>
                             <constraint firstItem="Fr5-gF-bhg" firstAttribute="top" secondItem="hqZ-cd-eTx" secondAttribute="bottom" id="gul-LJ-F5H"/>
                             <constraint firstItem="Nz7-er-7A4" firstAttribute="leading" secondItem="K14-HK-TNT" secondAttribute="leading" id="xhN-5n-zPg"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="K14-HK-TNT"/>
                     </view>
                     <navigationItem key="navigationItem" id="ruX-Ar-qoX"/>
                     <connections>
@@ -1541,6 +1542,7 @@ Form Library</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="cS0-Mt-NaM"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="cS0-Mt-NaM" firstAttribute="bottom" secondItem="lza-Y4-18m" secondAttribute="bottom" id="Egt-gf-cZX"/>
@@ -1548,7 +1550,6 @@ Form Library</string>
                             <constraint firstItem="lza-Y4-18m" firstAttribute="leading" secondItem="cS0-Mt-NaM" secondAttribute="leading" constant="10" id="oBN-NX-13q"/>
                             <constraint firstItem="lza-Y4-18m" firstAttribute="top" secondItem="cS0-Mt-NaM" secondAttribute="top" id="q5S-2y-h89"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="cS0-Mt-NaM"/>
                     </view>
                     <connections>
                         <outlet property="tableviewAttendanceDetails" destination="lza-Y4-18m" id="oZ6-be-JA5"/>
@@ -1571,6 +1572,7 @@ Form Library</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="6jt-Ta-yha"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="6jt-Ta-yha" firstAttribute="bottom" secondItem="9hh-rg-Mgw" secondAttribute="bottom" constant="10" id="ELZ-58-ffX"/>
@@ -1578,7 +1580,6 @@ Form Library</string>
                             <constraint firstItem="6jt-Ta-yha" firstAttribute="trailing" secondItem="9hh-rg-Mgw" secondAttribute="trailing" constant="15" id="Y8F-Ki-TtF"/>
                             <constraint firstItem="9hh-rg-Mgw" firstAttribute="top" secondItem="6jt-Ta-yha" secondAttribute="top" id="nI9-tI-Vlv"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6jt-Ta-yha"/>
                     </view>
                     <navigationItem key="navigationItem" id="JaS-ji-0NK"/>
                     <connections>
@@ -1861,7 +1862,7 @@ Form Library</string>
                                     <constraint firstItem="HbS-h5-juF" firstAttribute="leading" secondItem="oen-nc-4nE" secondAttribute="leading" id="uf9-1l-BBP"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hLf-iA-lJh">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hLf-iA-lJh">
                                 <rect key="frame" x="0.0" y="738" width="375" height="40"/>
                                 <color key="backgroundColor" red="0.77647058823529413" green="0.0" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -1875,6 +1876,7 @@ Form Library</string>
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="n3X-LG-LzY"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="n3X-LG-LzY" firstAttribute="bottom" secondItem="hLf-iA-lJh" secondAttribute="bottom" id="9pK-Fk-8fp"/>
@@ -1891,7 +1893,6 @@ Form Library</string>
                             <constraint firstItem="Ry2-QF-GQa" firstAttribute="top" secondItem="Zo7-J7-yDe" secondAttribute="bottom" id="nre-jS-3MV"/>
                             <constraint firstItem="n3X-LG-LzY" firstAttribute="trailing" secondItem="hLf-iA-lJh" secondAttribute="trailing" id="q09-AD-dpg"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="n3X-LG-LzY"/>
                     </view>
                     <navigationItem key="navigationItem" id="TAZ-YB-4wt">
                         <barButtonItem key="backBarButtonItem" title=" " id="trw-Sf-VuY"/>
@@ -2060,6 +2061,7 @@ Form Library</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="fKb-gS-DJj"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="fKb-gS-DJj" firstAttribute="trailing" secondItem="efy-eZ-l5e" secondAttribute="trailing" constant="15" id="1a5-AM-8Uq"/>
@@ -2070,7 +2072,6 @@ Form Library</string>
                             <constraint firstItem="efy-eZ-l5e" firstAttribute="leading" secondItem="fKb-gS-DJj" secondAttribute="leading" constant="15" id="vKB-DW-TxM"/>
                             <constraint firstItem="efy-eZ-l5e" firstAttribute="top" secondItem="vXF-gi-fbY" secondAttribute="bottom" constant="10" id="zAQ-nN-UKB"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="fKb-gS-DJj"/>
                     </view>
                     <navigationItem key="navigationItem" id="N3m-im-f0K"/>
                     <connections>
@@ -2120,7 +2121,7 @@ Form Library</string>
                                 <rect key="frame" x="15" y="123.66666666666669" width="345" height="609.33333333333326"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OJW-Ax-4DA">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OJW-Ax-4DA">
                                 <rect key="frame" x="0.0" y="738" width="375" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="dI4-2t-H8e"/>
@@ -2128,6 +2129,7 @@ Form Library</string>
                                 <state key="normal" title="Confirm"/>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="V0U-M6-Cwd"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="V0U-M6-Cwd" firstAttribute="trailing" secondItem="1gm-ga-whk" secondAttribute="trailing" constant="15" id="2Rn-Bt-KxA"/>
@@ -2141,7 +2143,6 @@ Form Library</string>
                             <constraint firstItem="9d8-Je-ZLt" firstAttribute="leading" secondItem="V0U-M6-Cwd" secondAttribute="leading" constant="15" id="rzR-V2-mq8"/>
                             <constraint firstItem="OJW-Ax-4DA" firstAttribute="top" secondItem="1gm-ga-whk" secondAttribute="bottom" constant="5" id="zoh-5m-h3K"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="V0U-M6-Cwd"/>
                     </view>
                     <connections>
                         <outlet property="buttonConfirm" destination="OJW-Ax-4DA" id="V5j-sf-SeZ"/>
@@ -2165,7 +2166,7 @@ Form Library</string>
                                 <rect key="frame" x="15" y="88" width="345" height="645"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FqH-Jn-9Tg">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FqH-Jn-9Tg">
                                 <rect key="frame" x="112.66666666666669" y="733" width="150" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="ccW-8p-EcG"/>
@@ -2177,6 +2178,7 @@ Form Library</string>
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="cw5-nl-euW"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="FqH-Jn-9Tg" firstAttribute="bottom" secondItem="cw5-nl-euW" secondAttribute="bottom" constant="-5" id="4Ae-NJ-zgd"/>
@@ -2186,7 +2188,6 @@ Form Library</string>
                             <constraint firstItem="fDZ-2Z-OLG" firstAttribute="leading" secondItem="cw5-nl-euW" secondAttribute="leading" constant="15" id="qFE-6L-KVr"/>
                             <constraint firstItem="FqH-Jn-9Tg" firstAttribute="centerX" secondItem="cw5-nl-euW" secondAttribute="centerX" id="sAN-iP-aWn"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="cw5-nl-euW"/>
                     </view>
                     <connections>
                         <outlet property="butonSubmit" destination="FqH-Jn-9Tg" id="5GW-dI-zgZ"/>
@@ -2204,8 +2205,8 @@ Form Library</string>
                     <view key="view" contentMode="scaleToFill" id="Pnn-DI-6hX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="jHp-iJ-S6M"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="Dzi-49-4jZ"/>
                     <connections>
@@ -2245,9 +2246,10 @@ Form Library</string>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0Es-Bo-kws">
                                 <rect key="frame" x="15" y="88" width="345" height="690"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="OTL-Nq-6Bu"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="0Es-Bo-kws" firstAttribute="top" secondItem="OTL-Nq-6Bu" secondAttribute="top" id="1WY-Gz-G9a"/>
@@ -2255,7 +2257,6 @@ Form Library</string>
                             <constraint firstItem="0Es-Bo-kws" firstAttribute="leading" secondItem="OTL-Nq-6Bu" secondAttribute="leading" constant="15" id="bV9-rM-Mrs"/>
                             <constraint firstItem="OTL-Nq-6Bu" firstAttribute="trailing" secondItem="0Es-Bo-kws" secondAttribute="trailing" constant="15" id="oVe-BQ-Cdc"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="OTL-Nq-6Bu"/>
                     </view>
                     <navigationItem key="navigationItem" id="ogj-Vm-Zy8"/>
                     <connections>
@@ -2274,8 +2275,8 @@ Form Library</string>
                     <view key="view" contentMode="scaleToFill" id="TzN-QN-SQd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="qqD-s8-2HF"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="kMU-Sp-tyt"/>
                 </viewController>
@@ -2349,6 +2350,7 @@ Form Library</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="LA1-Aj-2BI"/>
                         <color key="backgroundColor" red="0.92549019610000005" green="0.95294117649999999" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="LA1-Aj-2BI" firstAttribute="bottom" secondItem="Rsh-eL-kPQ" secondAttribute="bottom" id="AgZ-J4-GaE"/>
@@ -2359,7 +2361,6 @@ Form Library</string>
                             <constraint firstItem="h9p-qc-hfz" firstAttribute="top" secondItem="LA1-Aj-2BI" secondAttribute="top" id="m95-Ef-WgO"/>
                             <constraint firstItem="LA1-Aj-2BI" firstAttribute="trailing" secondItem="Rsh-eL-kPQ" secondAttribute="trailing" constant="10" id="m9N-PP-tBf"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="LA1-Aj-2BI"/>
                     </view>
                     <navigationItem key="navigationItem" id="OIg-v8-kR4"/>
                     <connections>
@@ -2391,7 +2392,7 @@ Form Library</string>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dbm-Rb-Jdi">
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dbm-Rb-Jdi">
                                         <rect key="frame" x="123.66666666666669" y="70.333333333333343" width="128" height="28"/>
                                         <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
                                         <state key="normal" title="Download Form"/>
@@ -2408,7 +2409,7 @@ Form Library</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES" smartInsertDeleteType="yes" textContentType="email"/>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qpX-vB-0wa">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qpX-vB-0wa">
                                                 <rect key="frame" x="139.66666666666666" y="39" width="96" height="28"/>
                                                 <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
                                                 <state key="normal" title="Email Form"/>
@@ -2457,7 +2458,7 @@ Form Library</string>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RGd-l3-0Hv">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RGd-l3-0Hv">
                                                         <rect key="frame" x="309" y="0.0" width="30" height="24"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                         <state key="normal" title="Copy"/>
@@ -2476,7 +2477,7 @@ Form Library</string>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHF-ZN-rBa">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHF-ZN-rBa">
                                                         <rect key="frame" x="309" y="0.0" width="30" height="24"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                         <state key="normal" title="Copy"/>
@@ -2495,7 +2496,7 @@ Form Library</string>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vdi-e1-gKG">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vdi-e1-gKG">
                                                         <rect key="frame" x="309" y="0.0" width="30" height="24"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                         <state key="normal" title="Copy"/>
@@ -2514,7 +2515,7 @@ Form Library</string>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="knE-La-etZ">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="knE-La-etZ">
                                                         <rect key="frame" x="309" y="0.0" width="30" height="24"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                         <state key="normal" title="Copy"/>
@@ -2533,7 +2534,7 @@ Form Library</string>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7uo-sm-am8">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7uo-sm-am8">
                                                         <rect key="frame" x="309" y="0.0" width="30" height="24"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                         <state key="normal" title="Copy"/>
@@ -2552,7 +2553,7 @@ Form Library</string>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8kC-af-JIG">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8kC-af-JIG">
                                                         <rect key="frame" x="309" y="0.0" width="30" height="24"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                         <state key="normal" title="Copy"/>
@@ -2584,7 +2585,7 @@ Form Library</string>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="L0d-pI-7Wj">
                                                 <rect key="frame" x="32" y="39.000000000000057" width="287" height="25"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yoU-cK-ONQ">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yoU-cK-ONQ">
                                                         <rect key="frame" x="0.0" y="0.0" width="176" height="25"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
@@ -2593,7 +2594,7 @@ Form Library</string>
                                                             <action selector="actionAddTransactionImage:" destination="zgX-Aj-ohK" eventType="touchUpInside" id="eXo-x7-ocY"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zL8-uB-qcC">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zL8-uB-qcC">
                                                         <rect key="frame" x="181" y="0.0" width="106" height="25"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
@@ -2622,7 +2623,7 @@ Form Library</string>
                                     <constraint firstItem="BCY-nY-3lC" firstAttribute="leading" secondItem="YOb-Gh-mps" secondAttribute="leading" id="ziL-b7-kya"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pft-RM-kdW">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pft-RM-kdW">
                                 <rect key="frame" x="20" y="728" width="335" height="30"/>
                                 <state key="normal" title="Proceed to form"/>
                                 <connections>
@@ -2630,7 +2631,8 @@ Form Library</string>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="NCe-eP-IMn"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="NCe-eP-IMn" firstAttribute="bottom" secondItem="Pft-RM-kdW" secondAttribute="bottom" constant="20" id="Hm5-xd-LP2"/>
                             <constraint firstItem="YOb-Gh-mps" firstAttribute="leading" secondItem="CzI-08-5ZA" secondAttribute="leading" id="NFX-RP-XNi"/>
@@ -2640,7 +2642,6 @@ Form Library</string>
                             <constraint firstItem="Pft-RM-kdW" firstAttribute="leading" secondItem="NCe-eP-IMn" secondAttribute="leading" constant="20" id="oRB-tL-GTl"/>
                             <constraint firstItem="Pft-RM-kdW" firstAttribute="top" relation="greaterThanOrEqual" secondItem="YOb-Gh-mps" secondAttribute="bottom" constant="5" id="vNU-aa-b9v"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="NCe-eP-IMn"/>
                     </view>
                     <navigationItem key="navigationItem" id="dj2-Ac-fer"/>
                     <connections>
@@ -2678,7 +2679,7 @@ Form Library</string>
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" id="UmE-Yq-ALT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <connections>
                             <outlet property="dataSource" destination="5Ac-bl-w11" id="49H-6Z-1Oa"/>
                             <outlet property="delegate" destination="5Ac-bl-w11" id="Lps-mG-F8U"/>
@@ -2700,7 +2701,7 @@ Form Library</string>
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" id="Eoo-FC-M5c">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <connections>
                             <outlet property="dataSource" destination="Tyi-Im-dLF" id="69s-nP-on4"/>
                             <outlet property="delegate" destination="Tyi-Im-dLF" id="Vxt-6x-AyS"/>
@@ -2722,7 +2723,7 @@ Form Library</string>
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="n4W-UB-YeO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="4qF-Db-eto">
                                 <rect key="frame" x="0.0" y="28" width="375" height="43.666667938232422"/>
@@ -2808,8 +2809,8 @@ Form Library</string>
                     <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="Eoj-5h-R0g">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="690"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="JFQ-uq-vMA"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oLa-k0-CZO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2823,7 +2824,7 @@ Form Library</string>
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="vDK-2S-Bgg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="rhc-S7-uqO">
                                 <rect key="frame" x="0.0" y="28" width="375" height="43.666667938232422"/>
@@ -2855,7 +2856,7 @@ Form Library</string>
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="h2X-1Z-yHS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="3fn-AS-nEO">
                                 <rect key="frame" x="0.0" y="28" width="375" height="43.666667938232422"/>
@@ -2895,25 +2896,25 @@ Form Library</string>
                                         <rect key="frame" x="165.66666666666666" y="0.0" width="20" height="20"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Giw-Hb-26a">
-                                        <rect key="frame" x="154.66666666666666" y="35" width="41.666666666666657" height="20.333333333333329"/>
+                                        <rect key="frame" x="155" y="35" width="41.333333333333343" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="Jd9-ZJ-PSA">
-                                        <rect key="frame" x="49.666666666666657" y="70.333333333333343" width="251.99999999999997" height="81.333333333333343"/>
+                                        <rect key="frame" x="50.666666666666657" y="70.333333333333343" width="249.99999999999997" height="81.333333333333343"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pdf" translatesAutoresizingMaskIntoConstraints="NO" id="VZj-nJ-VHE">
                                                 <rect key="frame" x="0.0" y="0.0" width="16" height="81.333333333333329"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Document Name Document Name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uzn-Ch-WPF">
-                                                <rect key="frame" x="57.333333333333343" y="0.0" width="84" height="81.333333333333329"/>
+                                                <rect key="frame" x="56.666666666666664" y="0.0" width="83.333333333333343" height="81.333333333333329"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lTw-rt-FtH">
-                                                <rect key="frame" x="183" y="0.0" width="69" height="81.333333333333329"/>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lTw-rt-FtH">
+                                                <rect key="frame" x="181" y="0.0" width="69" height="81.333333333333329"/>
                                                 <state key="normal" title="Download"/>
                                                 <connections>
                                                     <action selector="actionDownloadDocument:" destination="MYX-XM-XvO" eventType="touchUpInside" id="W41-1r-1NI"/>
@@ -2929,7 +2930,7 @@ Form Library</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES" smartInsertDeleteType="yes" textContentType="email"/>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o65-lH-3Zm">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o65-lH-3Zm">
                                                 <rect key="frame" x="132.66666666666666" y="39" width="86" height="28"/>
                                                 <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                                 <state key="normal" title="Send Email"/>
@@ -2951,7 +2952,8 @@ Form Library</string>
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="7ks-XI-pqY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="oQ3-Xv-fyM" secondAttribute="trailing" constant="12" id="5MZ-mY-i4A"/>
                             <constraint firstItem="oQ3-Xv-fyM" firstAttribute="top" secondItem="7ks-XI-pqY" secondAttribute="top" constant="20" id="Gu1-Rs-d0M"/>
@@ -2959,7 +2961,6 @@ Form Library</string>
                             <constraint firstItem="7ks-XI-pqY" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="oQ3-Xv-fyM" secondAttribute="bottom" constant="20" id="daN-r0-JQ3"/>
                             <constraint firstItem="oQ3-Xv-fyM" firstAttribute="centerX" secondItem="uXO-Lb-zKz" secondAttribute="centerX" id="is8-6i-hYB"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="7ks-XI-pqY"/>
                     </view>
                     <navigationItem key="navigationItem" id="v79-Mo-b0U"/>
                     <connections>
@@ -3175,7 +3176,7 @@ Form Library</string>
                                                     </view>
                                                 </subviews>
                                             </stackView>
-                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cHh-1J-dBK">
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cHh-1J-dBK">
                                                 <rect key="frame" x="0.0" y="150" width="345" height="28"/>
                                                 <inset key="contentEdgeInsets" minX="15" minY="5" maxX="15" maxY="5"/>
                                                 <state key="normal" title="Add"/>
@@ -3199,6 +3200,7 @@ Form Library</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="MeE-gV-pVu"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="MeE-gV-pVu" firstAttribute="bottom" secondItem="Lm3-fT-XIt" secondAttribute="bottom" id="Cvz-My-bHd"/>
@@ -3214,7 +3216,6 @@ Form Library</string>
                             <constraint firstItem="1Yu-mt-0P2" firstAttribute="trailing" secondItem="hNO-od-jAn" secondAttribute="trailing" id="qRM-nZ-bFi"/>
                             <constraint firstItem="MeE-gV-pVu" firstAttribute="trailing" secondItem="hNO-od-jAn" secondAttribute="trailing" constant="15" id="qe6-EB-6nL"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="MeE-gV-pVu"/>
                     </view>
                     <navigationItem key="navigationItem" id="THL-iL-blL"/>
                     <connections>
@@ -3285,7 +3286,7 @@ Form Library</string>
                                 <rect key="frame" x="15" y="138" width="345" height="600"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6L9-jz-P3a">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6L9-jz-P3a">
                                 <rect key="frame" x="0.0" y="738" width="375" height="40"/>
                                 <color key="backgroundColor" red="0.77647058823529413" green="0.0" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -3299,6 +3300,7 @@ Form Library</string>
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="vkO-C3-0UL"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="393-QH-iGh" firstAttribute="leading" secondItem="vkO-C3-0UL" secondAttribute="leading" constant="15" id="1b0-B1-umf"/>
@@ -3312,7 +3314,6 @@ Form Library</string>
                             <constraint firstItem="vkO-C3-0UL" firstAttribute="top" secondItem="Cyq-wH-JRg" secondAttribute="top" id="saQ-SW-8Dm"/>
                             <constraint firstItem="6L9-jz-P3a" firstAttribute="top" secondItem="393-QH-iGh" secondAttribute="bottom" id="zQk-5z-I9W"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="vkO-C3-0UL"/>
                     </view>
                     <navigationItem key="navigationItem" id="t7I-zq-92M"/>
                     <connections>
@@ -3392,7 +3393,7 @@ Form Library</string>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="0eO-Rp-mXM">
                                 <rect key="frame" x="0.0" y="738" width="375" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r24-Kv-LWF">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r24-Kv-LWF">
                                         <rect key="frame" x="0.0" y="0.0" width="187.66666666666666" height="40"/>
                                         <color key="backgroundColor" red="0.77647058820000003" green="0.0" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Previous Course">
@@ -3403,7 +3404,7 @@ Form Library</string>
                                             <action selector="showRatingForPreviousCourse:" destination="2Z3-rN-TUc" eventType="touchUpInside" id="72B-OD-f0r"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W16-BU-KuR">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W16-BU-KuR">
                                         <rect key="frame" x="187.66666666666663" y="0.0" width="187.33333333333337" height="40"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal" title="Next Course">
@@ -3420,6 +3421,7 @@ Form Library</string>
                                 </constraints>
                             </stackView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="PFz-Gx-pOC"/>
                         <color key="backgroundColor" red="0.92549019610000005" green="0.95294117649999999" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="PFz-Gx-pOC" firstAttribute="trailing" secondItem="yvf-Ch-Wh0" secondAttribute="trailing" id="23w-EC-Q7X"/>
@@ -3433,7 +3435,6 @@ Form Library</string>
                             <constraint firstItem="Fhb-2H-UeB" firstAttribute="top" secondItem="yvf-Ch-Wh0" secondAttribute="bottom" id="tl2-2Y-RvA"/>
                             <constraint firstItem="yvf-Ch-Wh0" firstAttribute="top" secondItem="PFz-Gx-pOC" secondAttribute="top" id="u8U-AO-v8a"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="PFz-Gx-pOC"/>
                     </view>
                     <connections>
                         <outlet property="buttonNextCourse" destination="W16-BU-KuR" id="gLl-Jc-ldr"/>
@@ -3461,7 +3462,7 @@ Form Library</string>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="lhW-SF-ZHP">
                                 <rect key="frame" x="0.0" y="738" width="375" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ApD-sp-kW4">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ApD-sp-kW4">
                                         <rect key="frame" x="0.0" y="0.0" width="187.66666666666666" height="40"/>
                                         <color key="backgroundColor" red="0.77647058820000003" green="0.0" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Previous Lecturer">
@@ -3473,7 +3474,7 @@ Form Library</string>
                                             <action selector="showRatingForPreviousProfessor:" destination="gxf-3W-YDi" eventType="touchUpInside" id="t9X-m6-Xc8"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8wn-sD-qR8">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8wn-sD-qR8">
                                         <rect key="frame" x="187.66666666666663" y="0.0" width="187.33333333333337" height="40"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal" title="Next Lecturer">
@@ -3491,6 +3492,7 @@ Form Library</string>
                                 </constraints>
                             </stackView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="uX8-LR-VEi"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="lhW-SF-ZHP" firstAttribute="bottom" secondItem="uX8-LR-VEi" secondAttribute="bottom" id="0jZ-RS-BM3"/>
@@ -3501,7 +3503,6 @@ Form Library</string>
                             <constraint firstItem="bRv-lD-At7" firstAttribute="leading" secondItem="uX8-LR-VEi" secondAttribute="leading" constant="15" id="tzy-YH-Sgy"/>
                             <constraint firstItem="uX8-LR-VEi" firstAttribute="trailing" secondItem="bRv-lD-At7" secondAttribute="trailing" constant="15" id="wmL-tF-hfY"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="uX8-LR-VEi"/>
                     </view>
                     <connections>
                         <outlet property="buttonNextProfessor" destination="8wn-sD-qR8" id="qhh-kQ-FIm"/>
@@ -3575,7 +3576,7 @@ Form Library</string>
                                             <constraint firstItem="qXh-an-fyb" firstAttribute="centerY" secondItem="ABb-UY-aKz" secondAttribute="centerY" id="zad-cH-KcG"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="emp-Nj-4JL">
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="emp-Nj-4JL">
                                         <rect key="frame" x="182.33333333333334" y="0.0" width="47" height="30"/>
                                         <color key="backgroundColor" red="0.77647058820000003" green="0.0" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <inset key="contentEdgeInsets" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
@@ -3646,7 +3647,7 @@ Form Library</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No records found for this Subject" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="53l-p9-iQf">
-                                <rect key="frame" x="60.666666666666671" y="430.33333333333331" width="253.66666666666663" height="20.333333333333314"/>
+                                <rect key="frame" x="61.333333333333329" y="430.33333333333331" width="252.33333333333337" height="20.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -3700,7 +3701,7 @@ Form Library</string>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="drn-eR-pdc">
                                 <rect key="frame" x="10" y="743" width="355" height="30"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SqN-Sl-gsD">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SqN-Sl-gsD">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="30"/>
                                         <color key="backgroundColor" red="0.77647058820000003" green="0.0" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Submit">
@@ -3713,6 +3714,7 @@ Form Library</string>
                                 </subviews>
                             </stackView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="ND6-NW-mg1"/>
                         <color key="backgroundColor" red="0.92549019610000005" green="0.95294117649999999" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="qlV-b9-A0K" firstAttribute="top" secondItem="0di-OD-Cdb" secondAttribute="bottom" constant="5" id="9Kn-2p-ybp"/>
@@ -3734,7 +3736,6 @@ Form Library</string>
                             <constraint firstItem="53l-p9-iQf" firstAttribute="centerY" secondItem="rHd-Z8-EFU" secondAttribute="centerY" id="vEF-bt-xis"/>
                             <constraint firstItem="0di-OD-Cdb" firstAttribute="trailing" secondItem="ND6-NW-mg1" secondAttribute="trailing" id="vvV-hw-CnB"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="ND6-NW-mg1"/>
                     </view>
                     <navigationItem key="navigationItem" id="yjd-CD-cch"/>
                     <connections>
@@ -3856,7 +3857,7 @@ Form Library</string>
                                                     <constraint firstItem="gnz-Zn-Fay" firstAttribute="leading" secondItem="Ozp-x9-BNN" secondAttribute="leading" constant="20" id="Tjr-vj-PiK"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0cp-pi-tFx">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0cp-pi-tFx">
                                                 <rect key="frame" x="15" y="210" width="325" height="30"/>
                                                 <state key="normal" title="Submit"/>
                                                 <connections>
@@ -3899,6 +3900,7 @@ Form Library</string>
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="tMC-J5-hoZ"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="tMC-J5-hoZ" firstAttribute="trailing" secondItem="crv-Ve-1g4" secondAttribute="trailing" id="8nW-7f-JbF"/>
@@ -3906,7 +3908,6 @@ Form Library</string>
                             <constraint firstItem="crv-Ve-1g4" firstAttribute="top" secondItem="tMC-J5-hoZ" secondAttribute="top" constant="-20" id="cnx-um-Mjn"/>
                             <constraint firstItem="tMC-J5-hoZ" firstAttribute="bottom" secondItem="crv-Ve-1g4" secondAttribute="bottom" id="gKb-dS-dfT"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="tMC-J5-hoZ"/>
                     </view>
                     <connections>
                         <outlet property="ViewFormBg" destination="1ZO-qE-QUq" id="sAo-5q-I6z"/>
@@ -3961,7 +3962,7 @@ Form Library</string>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kM8-Op-b0C">
                                                 <rect key="frame" x="0.0" y="0.0" width="355" height="45"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lJ9-WB-JXY">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lJ9-WB-JXY">
                                                         <rect key="frame" x="310" y="7.3333333333333144" width="30" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="30" id="gkI-pC-mha"/>
@@ -4020,7 +4021,7 @@ Form Library</string>
                                                     <constraint firstItem="JTa-B6-cku" firstAttribute="leading" secondItem="Sio-yf-Hl9" secondAttribute="leading" constant="20" id="l8z-NF-hbr"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="au1-Hb-Vtp">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="au1-Hb-Vtp">
                                                 <rect key="frame" x="102.66666666666669" y="135" width="150" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="150" id="qgo-Gg-cTX"/>
@@ -4057,6 +4058,7 @@ Form Library</string>
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="Fgt-xC-9WY"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="3Ep-jQ-qFe" firstAttribute="leading" secondItem="Fgt-xC-9WY" secondAttribute="leading" id="C9c-lZ-3Qy"/>
@@ -4064,7 +4066,6 @@ Form Library</string>
                             <constraint firstItem="Fgt-xC-9WY" firstAttribute="bottom" secondItem="3Ep-jQ-qFe" secondAttribute="bottom" id="tyv-aJ-gaD"/>
                             <constraint firstItem="3Ep-jQ-qFe" firstAttribute="top" secondItem="Fgt-xC-9WY" secondAttribute="top" constant="-20" id="zP7-jR-JrZ"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Fgt-xC-9WY"/>
                     </view>
                     <connections>
                         <outlet property="buttonSubmit" destination="au1-Hb-Vtp" id="bH8-U8-Yw2"/>
@@ -4172,7 +4173,7 @@ Form Library</string>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tzF-et-EAT">
                                                         <rect key="frame" x="0.0" y="0.0" width="46" height="40"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BSs-Vm-pki" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BSs-Vm-pki" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
                                                                 <rect key="frame" x="8" y="5" width="30" height="30"/>
                                                                 <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <constraints>
@@ -4218,7 +4219,7 @@ Form Library</string>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M8h-Sy-P7f">
                                                         <rect key="frame" x="92" y="0.0" width="46" height="40"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="unc-zF-Uap" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="unc-zF-Uap" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
                                                                 <rect key="frame" x="8" y="5" width="30" height="30"/>
                                                                 <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <constraints>
@@ -4271,7 +4272,7 @@ Form Library</string>
                                     <constraint firstItem="hTy-rw-w9X" firstAttribute="top" secondItem="kDj-xb-ZPt" secondAttribute="top" id="pwE-Ns-lLU"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8B7-xE-8Yl">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8B7-xE-8Yl">
                                 <rect key="frame" x="0.0" y="738" width="375" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="ZkK-Wg-TSU"/>
@@ -4282,6 +4283,7 @@ Form Library</string>
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="bJy-iv-wwx"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="bJy-iv-wwx" firstAttribute="bottom" secondItem="8B7-xE-8Yl" secondAttribute="bottom" id="3aC-4g-hua"/>
@@ -4295,7 +4297,6 @@ Form Library</string>
                             <constraint firstItem="8B7-xE-8Yl" firstAttribute="top" secondItem="kDj-xb-ZPt" secondAttribute="bottom" constant="10" id="glO-o9-6ps"/>
                             <constraint firstItem="bJy-iv-wwx" firstAttribute="trailing" secondItem="lbu-va-b3p" secondAttribute="trailing" constant="15" id="wKX-5x-Ovu"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="bJy-iv-wwx"/>
                     </view>
                     <connections>
                         <outlet property="buttonConfirm" destination="8B7-xE-8Yl" id="q6Y-1R-4or"/>
@@ -4363,6 +4364,7 @@ Form Library</string>
                                 </connections>
                             </containerView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="06K-5e-F25"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="06K-5e-F25" firstAttribute="bottom" secondItem="zMc-2A-sm4" secondAttribute="bottom" id="2I2-5m-LPY"/>
@@ -4370,7 +4372,6 @@ Form Library</string>
                             <constraint firstItem="zMc-2A-sm4" firstAttribute="leading" secondItem="06K-5e-F25" secondAttribute="leading" id="Nnr-4Q-3Md"/>
                             <constraint firstItem="06K-5e-F25" firstAttribute="trailing" secondItem="zMc-2A-sm4" secondAttribute="trailing" id="Rv7-cZ-coE"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="06K-5e-F25"/>
                     </view>
                     <navigationItem key="navigationItem" id="leu-aE-73E"/>
                 </viewController>
@@ -4490,6 +4491,7 @@ Form Library</string>
                                 </prototypes>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="JNK-rc-7mX"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Z4V-3B-Sa3" firstAttribute="leading" secondItem="JNK-rc-7mX" secondAttribute="leading" id="0iG-oS-cbK"/>
@@ -4514,7 +4516,6 @@ Form Library</string>
                             <constraint firstItem="xwc-FN-gyn" firstAttribute="top" secondItem="O3g-OS-TOz" secondAttribute="top" id="oVR-Nh-vqT"/>
                             <constraint firstItem="Z4V-3B-Sa3" firstAttribute="top" secondItem="irZ-Ho-RBX" secondAttribute="bottom" id="tGQ-f7-gIe"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="JNK-rc-7mX"/>
                     </view>
                     <connections>
                         <outlet property="buttonDropDown" destination="RqC-88-quk" id="T67-uW-GsX"/>
@@ -4543,6 +4544,7 @@ Form Library</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="MIk-ev-odi"/>
                         <color key="backgroundColor" red="0.92549019610000005" green="0.95294117649999999" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="ejU-rz-YDV" firstAttribute="leading" secondItem="MIk-ev-odi" secondAttribute="leading" constant="15" id="5sc-Lw-g83"/>
@@ -4550,7 +4552,6 @@ Form Library</string>
                             <constraint firstAttribute="bottom" secondItem="ejU-rz-YDV" secondAttribute="bottom" id="TeI-0L-zOZ"/>
                             <constraint firstItem="MIk-ev-odi" firstAttribute="trailing" secondItem="ejU-rz-YDV" secondAttribute="trailing" constant="15" id="byJ-16-oRs"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="MIk-ev-odi"/>
                     </view>
                     <navigationItem key="navigationItem" id="cix-C5-Ywy"/>
                     <connections>
@@ -4574,7 +4575,7 @@ Form Library</string>
                                 <rect key="frame" x="15" y="88" width="345" height="690"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kkD-Hr-LPS">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kkD-Hr-LPS">
                                 <rect key="frame" x="0.0" y="778" width="375" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="KI5-1z-JU3"/>
@@ -4587,6 +4588,7 @@ Form Library</string>
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="cid-oH-1fM"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="cid-oH-1fM" firstAttribute="trailing" secondItem="uTZ-qg-fjp" secondAttribute="trailing" constant="15" id="AWm-wG-0dw"/>
@@ -4597,7 +4599,6 @@ Form Library</string>
                             <constraint firstItem="kkD-Hr-LPS" firstAttribute="leading" secondItem="cid-oH-1fM" secondAttribute="leading" id="ngI-yw-p1e"/>
                             <constraint firstItem="uTZ-qg-fjp" firstAttribute="leading" secondItem="cid-oH-1fM" secondAttribute="leading" constant="15" id="pLn-zs-JPT"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="cid-oH-1fM"/>
                     </view>
                     <connections>
                         <outlet property="buttonSubmit" destination="kkD-Hr-LPS" id="pUC-cn-lBt"/>
@@ -4622,7 +4623,7 @@ Form Library</string>
                                 <rect key="frame" x="15" y="88" width="345" height="650"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LFY-FS-3tF">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LFY-FS-3tF">
                                 <rect key="frame" x="0.0" y="738" width="375" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="L1w-AL-tsa"/>
@@ -4634,6 +4635,7 @@ Form Library</string>
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="2vG-gP-9BQ"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="LFY-FS-3tF" firstAttribute="leading" secondItem="2vG-gP-9BQ" secondAttribute="leading" id="Cjz-JH-6Mx"/>
@@ -4644,7 +4646,6 @@ Form Library</string>
                             <constraint firstItem="2vG-gP-9BQ" firstAttribute="trailing" secondItem="LFY-FS-3tF" secondAttribute="trailing" id="QCB-Ax-NbH"/>
                             <constraint firstItem="2vG-gP-9BQ" firstAttribute="trailing" secondItem="IIJ-7p-Nac" secondAttribute="trailing" constant="15" id="WpU-ap-094"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="2vG-gP-9BQ"/>
                     </view>
                     <connections>
                         <outlet property="buttonSubmit" destination="LFY-FS-3tF" id="gVB-pF-Oxv"/>
@@ -4663,8 +4664,8 @@ Form Library</string>
                     <view key="view" contentMode="scaleToFill" id="rOx-pf-ivE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <viewLayoutGuide key="safeArea" id="Hzy-ni-lfD"/>
+                        <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GjB-wm-xUH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4693,6 +4694,7 @@ Form Library</string>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="kim-jD-Wgp"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="j7f-uS-Aa0" firstAttribute="top" secondItem="LzD-1r-AbJ" secondAttribute="bottom" constant="8.5" id="9ku-Vc-17M"/>
@@ -4700,7 +4702,6 @@ Form Library</string>
                             <constraint firstItem="j7f-uS-Aa0" firstAttribute="centerY" secondItem="JwC-wD-IdP" secondAttribute="centerY" id="Lij-pX-2gF"/>
                             <constraint firstItem="j7f-uS-Aa0" firstAttribute="centerX" secondItem="kim-jD-Wgp" secondAttribute="centerX" id="qv5-ge-RpT"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="kim-jD-Wgp"/>
                     </view>
                     <connections>
                         <outlet property="labelStatus" destination="LzD-1r-AbJ" id="bOF-w4-32R"/>
@@ -4754,8 +4755,8 @@ Form Library</string>
                     <view key="view" contentMode="scaleToFill" id="awP-62-wOn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="690"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="2gc-Ct-2PQ"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Obn-zA-ggF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4809,6 +4810,7 @@ Form Library</string>
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="8DT-yi-AAQ"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="qOy-Bc-c0K" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ap7-m9-9rC" secondAttribute="leading" id="4RI-dQ-VL7"/>
@@ -4823,7 +4825,6 @@ Form Library</string>
                             <constraint firstItem="Ap7-m9-9rC" firstAttribute="leading" secondItem="8DT-yi-AAQ" secondAttribute="leading" constant="15" id="pnT-Hi-uk7"/>
                             <constraint firstItem="qOy-Bc-c0K" firstAttribute="top" secondItem="8DT-yi-AAQ" secondAttribute="top" constant="15" id="t2z-BI-jUS"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="8DT-yi-AAQ"/>
                     </view>
                     <connections>
                         <outlet property="labelNoNotification" destination="u0c-jW-z3c" id="8aJ-MQ-EUQ"/>
@@ -4901,7 +4902,7 @@ Form Library</string>
                                 <rect key="frame" x="15" y="179" width="345" height="559"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hFO-Uz-r1B">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hFO-Uz-r1B">
                                 <rect key="frame" x="0.0" y="738" width="375" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="wrD-tN-wFD"/>
@@ -4913,6 +4914,7 @@ Form Library</string>
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="cdM-pt-TsS"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="UhE-tx-3d5" firstAttribute="top" secondItem="d3q-GY-vIB" secondAttribute="bottom" id="0bb-Rz-wRA"/>
@@ -4929,7 +4931,6 @@ Form Library</string>
                             <constraint firstItem="evN-BB-KP6" firstAttribute="trailing" secondItem="cdM-pt-TsS" secondAttribute="trailing" id="kfV-f3-mPm"/>
                             <constraint firstItem="cdM-pt-TsS" firstAttribute="trailing" secondItem="UhE-tx-3d5" secondAttribute="trailing" constant="15" id="lCD-7M-IrY"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="cdM-pt-TsS"/>
                     </view>
                     <navigationItem key="navigationItem" id="cmA-hl-kwM"/>
                     <connections>
@@ -4955,6 +4956,7 @@ Form Library</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="WCK-Ps-T1m"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="WCK-Ps-T1m" firstAttribute="bottom" secondItem="90t-UZ-5tb" secondAttribute="bottom" id="ERF-jJ-HWX"/>
@@ -4962,7 +4964,6 @@ Form Library</string>
                             <constraint firstItem="90t-UZ-5tb" firstAttribute="leading" secondItem="WCK-Ps-T1m" secondAttribute="leading" constant="15" id="hx3-yC-ky8"/>
                             <constraint firstItem="90t-UZ-5tb" firstAttribute="top" secondItem="WCK-Ps-T1m" secondAttribute="top" id="iAz-aZ-ecZ"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="WCK-Ps-T1m"/>
                     </view>
                     <navigationItem key="navigationItem" id="fD0-1r-5am"/>
                     <connections>
@@ -4983,9 +4984,9 @@ Form Library</string>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sbk-Ue-bJD">
                                 <rect key="frame" x="15" y="92" width="345" height="686"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJc-EI-9oq">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJc-EI-9oq">
                                 <rect key="frame" x="5" y="44" width="62" height="38"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
@@ -4997,6 +4998,7 @@ Form Library</string>
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="7ls-ae-8zJ"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="LJc-EI-9oq" firstAttribute="top" secondItem="7ls-ae-8zJ" secondAttribute="top" id="63v-4q-E2o"/>
@@ -5006,7 +5008,6 @@ Form Library</string>
                             <constraint firstItem="sbk-Ue-bJD" firstAttribute="leading" secondItem="7ls-ae-8zJ" secondAttribute="leading" constant="15" id="vTT-sb-IaZ"/>
                             <constraint firstItem="7ls-ae-8zJ" firstAttribute="bottom" secondItem="sbk-Ue-bJD" secondAttribute="bottom" id="zzz-R3-DEe"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="7ls-ae-8zJ"/>
                     </view>
                     <connections>
                         <outlet property="tableviewDeleteLog" destination="sbk-Ue-bJD" id="pL6-Ha-6tw"/>
@@ -5072,6 +5073,7 @@ Form Library</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="8wa-np-tkB"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="8wa-np-tkB" firstAttribute="trailing" secondItem="ki2-Db-yUa" secondAttribute="trailing" constant="15" id="0hJ-aJ-Ogd"/>
@@ -5082,7 +5084,6 @@ Form Library</string>
                             <constraint firstItem="9PC-e7-hr1" firstAttribute="top" secondItem="8wa-np-tkB" secondAttribute="top" id="bwq-79-erp"/>
                             <constraint firstItem="8wa-np-tkB" firstAttribute="bottom" secondItem="ki2-Db-yUa" secondAttribute="bottom" id="tS0-gh-Qls"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="8wa-np-tkB"/>
                     </view>
                     <navigationItem key="navigationItem" id="UnE-QY-LOe"/>
                     <connections>
@@ -5150,6 +5151,7 @@ Form Library</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="BZN-lZ-dZa"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="YhL-hd-n1P" firstAttribute="leading" secondItem="BZN-lZ-dZa" secondAttribute="leading" constant="15" id="7tX-ah-Tb4"/>
@@ -5160,7 +5162,6 @@ Form Library</string>
                             <constraint firstItem="YhL-hd-n1P" firstAttribute="top" secondItem="pky-pq-2pK" secondAttribute="bottom" id="owb-a1-RVB"/>
                             <constraint firstItem="pky-pq-2pK" firstAttribute="top" secondItem="BZN-lZ-dZa" secondAttribute="top" id="rtA-GA-aHk"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="BZN-lZ-dZa"/>
                     </view>
                     <navigationItem key="navigationItem" id="6T5-lQ-KQx"/>
                     <connections>
@@ -5228,6 +5229,7 @@ Form Library</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="AZ7-ks-xca"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="6Qb-Ij-Ra4" firstAttribute="bottom" secondItem="AZ7-ks-xca" secondAttribute="bottom" id="JZD-8Q-sNI"/>
@@ -5238,7 +5240,6 @@ Form Library</string>
                             <constraint firstItem="6Qb-Ij-Ra4" firstAttribute="top" secondItem="AzL-bR-o55" secondAttribute="bottom" id="p9r-bS-a3X"/>
                             <constraint firstItem="AzL-bR-o55" firstAttribute="trailing" secondItem="AZ7-ks-xca" secondAttribute="trailing" id="tZ9-be-nup"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="AZ7-ks-xca"/>
                     </view>
                     <navigationItem key="navigationItem" id="QKf-9k-Om9"/>
                     <connections>
@@ -5306,6 +5307,7 @@ Form Library</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="Hqb-hu-gTQ"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="iWE-R2-SkF" firstAttribute="leading" secondItem="Hqb-hu-gTQ" secondAttribute="leading" constant="15" id="JO6-cR-mYQ"/>
@@ -5316,7 +5318,6 @@ Form Library</string>
                             <constraint firstItem="iWE-R2-SkF" firstAttribute="bottom" secondItem="Hqb-hu-gTQ" secondAttribute="bottom" id="dQH-Fv-Yk5"/>
                             <constraint firstItem="0zP-1W-a0U" firstAttribute="top" secondItem="Hqb-hu-gTQ" secondAttribute="top" id="tMR-yb-Ukm"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Hqb-hu-gTQ"/>
                     </view>
                     <connections>
                         <outlet property="tableViewLecturerNotesCount" destination="iWE-R2-SkF" id="Fxb-ur-0b7"/>
@@ -5358,6 +5359,7 @@ Form Library</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="5gC-aq-2mL"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="QdQ-jv-g11" firstAttribute="leading" secondItem="5gC-aq-2mL" secondAttribute="leading" constant="15" id="Auh-4g-cmk"/>
@@ -5368,7 +5370,6 @@ Form Library</string>
                             <constraint firstItem="QdQ-jv-g11" firstAttribute="top" secondItem="5gC-aq-2mL" secondAttribute="top" id="bg1-mB-Anl"/>
                             <constraint firstItem="hXH-sM-xDg" firstAttribute="top" secondItem="QdQ-jv-g11" secondAttribute="bottom" id="tVT-8m-Tdo"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="5gC-aq-2mL"/>
                     </view>
                     <connections>
                         <outlet property="labelSubjectName" destination="DF8-Yk-laU" id="aLZ-fg-ycW"/>
@@ -5392,6 +5393,7 @@ Form Library</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="9BV-cn-oxb"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="9BV-cn-oxb" firstAttribute="bottom" secondItem="ts2-rl-Cta" secondAttribute="bottom" id="G1H-1Z-Fhv"/>
@@ -5399,7 +5401,6 @@ Form Library</string>
                             <constraint firstItem="ts2-rl-Cta" firstAttribute="leading" secondItem="9BV-cn-oxb" secondAttribute="leading" constant="15" id="hbX-fe-oSn"/>
                             <constraint firstItem="ts2-rl-Cta" firstAttribute="top" secondItem="9BV-cn-oxb" secondAttribute="top" id="yQb-41-Pom"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="9BV-cn-oxb"/>
                     </view>
                     <connections>
                         <outlet property="tableViewStudentNotes" destination="ts2-rl-Cta" id="Wzn-uP-l18"/>
@@ -5444,7 +5445,7 @@ Form Library</string>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ycb-2w-kEn">
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ycb-2w-kEn">
                                         <rect key="frame" x="290" y="43.666666666666657" width="45" height="30"/>
                                         <state key="normal" title="Attach"/>
                                         <connections>
@@ -5457,7 +5458,7 @@ Form Library</string>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eaG-NA-HFz">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eaG-NA-HFz">
                                         <rect key="frame" x="10" y="78.666666666666657" width="325" height="30"/>
                                         <state key="normal" title="Upload"/>
                                         <connections>
@@ -5489,6 +5490,7 @@ Form Library</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="TnO-11-vgc"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="B92-pc-KZl" firstAttribute="leading" secondItem="h1M-sm-ySS" secondAttribute="leading" id="15K-De-Pb5"/>
@@ -5499,7 +5501,6 @@ Form Library</string>
                             <constraint firstItem="TnO-11-vgc" firstAttribute="trailing" secondItem="h1M-sm-ySS" secondAttribute="trailing" constant="15" id="WUz-qn-jWk"/>
                             <constraint firstItem="h1M-sm-ySS" firstAttribute="leading" secondItem="TnO-11-vgc" secondAttribute="leading" constant="15" id="nE2-Ra-oJR"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="TnO-11-vgc"/>
                     </view>
                     <connections>
                         <outlet property="buttonAttachFile" destination="Ycb-2w-kEn" id="4Ly-vB-5Pz"/>
@@ -5614,7 +5615,7 @@ Form Library</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Y1-d2-UXT">
-                                <rect key="frame" x="120" y="98" width="135" height="42"/>
+                                <rect key="frame" x="120.66666666666669" y="98" width="134" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="Fha-qk-hqp"/>
                                 </constraints>
@@ -5631,6 +5632,7 @@ Form Library</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="TqV-uc-8mi"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="5Y1-d2-UXT" firstAttribute="top" secondItem="TqV-uc-8mi" secondAttribute="top" constant="10" id="1Rr-aw-OXt"/>
@@ -5640,7 +5642,6 @@ Form Library</string>
                             <constraint firstItem="KzQ-vK-DlH" firstAttribute="top" secondItem="5Y1-d2-UXT" secondAttribute="bottom" constant="5" id="TKF-AH-shK"/>
                             <constraint firstItem="TqV-uc-8mi" firstAttribute="bottom" secondItem="KzQ-vK-DlH" secondAttribute="bottom" id="us0-Ng-DH3"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="TqV-uc-8mi"/>
                     </view>
                     <navigationItem key="navigationItem" id="Z2f-GL-dNd"/>
                     <connections>
@@ -5667,6 +5668,7 @@ Form Library</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="qH1-bX-1HS"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="qH1-bX-1HS" firstAttribute="bottom" secondItem="BtV-Ot-pKB" secondAttribute="bottom" id="nDW-ha-4Pg"/>
@@ -5674,7 +5676,6 @@ Form Library</string>
                             <constraint firstItem="qH1-bX-1HS" firstAttribute="trailing" secondItem="BtV-Ot-pKB" secondAttribute="trailing" constant="15" id="sJm-33-DG7"/>
                             <constraint firstItem="BtV-Ot-pKB" firstAttribute="top" secondItem="qH1-bX-1HS" secondAttribute="top" id="x3O-4H-OQb"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="qH1-bX-1HS"/>
                     </view>
                     <connections>
                         <outlet property="tableviewNoticeDetails" destination="BtV-Ot-pKB" id="MYe-xx-YJs"/>
@@ -5691,8 +5692,8 @@ Form Library</string>
                     <view key="view" contentMode="scaleToFill" id="nrI-Cv-g4N">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="9Yg-pR-7Vb"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P6f-a5-NWN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -5712,6 +5713,7 @@ Form Library</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="5UK-4G-K0t"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="5UK-4G-K0t" firstAttribute="bottom" secondItem="7uF-6E-PbJ" secondAttribute="bottom" id="1RI-ck-ry1"/>
@@ -5719,7 +5721,6 @@ Form Library</string>
                             <constraint firstItem="5UK-4G-K0t" firstAttribute="trailing" secondItem="7uF-6E-PbJ" secondAttribute="trailing" id="aOO-Ph-rPp"/>
                             <constraint firstItem="7uF-6E-PbJ" firstAttribute="leading" secondItem="5UK-4G-K0t" secondAttribute="leading" id="z0T-NF-HSw"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="5UK-4G-K0t"/>
                     </view>
                     <navigationItem key="navigationItem" id="zjR-Pb-w3x"/>
                     <connections>
@@ -5775,7 +5776,7 @@ Form Library</string>
                                 <rect key="frame" x="15" y="128" width="345" height="610"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C9R-91-qsz">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C9R-91-qsz">
                                 <rect key="frame" x="0.0" y="738" width="375" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="kQy-9v-IaY"/>
@@ -5787,6 +5788,7 @@ Form Library</string>
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="ws5-IC-h2o"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="JJN-qr-No0" firstAttribute="trailing" secondItem="b7w-39-1oo" secondAttribute="trailing" id="9gc-q7-iJ3"/>
@@ -5800,7 +5802,6 @@ Form Library</string>
                             <constraint firstItem="b7w-39-1oo" firstAttribute="leading" secondItem="ws5-IC-h2o" secondAttribute="leading" constant="15" id="Zxy-uD-s9h"/>
                             <constraint firstItem="ws5-IC-h2o" firstAttribute="trailing" secondItem="b7w-39-1oo" secondAttribute="trailing" constant="15" id="hKG-8J-RVR"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="ws5-IC-h2o"/>
                     </view>
                     <navigationItem key="navigationItem" id="2ue-Sg-bOa"/>
                     <connections>
@@ -5826,6 +5827,7 @@ Form Library</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="Adp-Wk-6cy"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Adp-Wk-6cy" firstAttribute="bottom" secondItem="gfZ-4y-aDM" secondAttribute="bottom" id="EnS-aN-Ljh"/>
@@ -5833,7 +5835,6 @@ Form Library</string>
                             <constraint firstItem="Adp-Wk-6cy" firstAttribute="trailing" secondItem="gfZ-4y-aDM" secondAttribute="trailing" constant="15" id="LT1-kh-eZG"/>
                             <constraint firstItem="gfZ-4y-aDM" firstAttribute="top" secondItem="Adp-Wk-6cy" secondAttribute="top" constant="10" id="gqW-MF-rCb"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Adp-Wk-6cy"/>
                     </view>
                     <navigationItem key="navigationItem" id="uDL-E0-mZR">
                         <barButtonItem key="rightBarButtonItem" title="Date" id="RK6-Me-HRx">
@@ -5844,6 +5845,7 @@ Form Library</string>
                     </navigationItem>
                     <connections>
                         <outlet property="tableviewScheduleDetails" destination="gfZ-4y-aDM" id="5Sx-9o-jeQ"/>
+                        <segue destination="k1V-o6-ZrP" kind="show" identifier="addSchedule" id="b9X-NU-rFr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mqG-Jl-67L" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -5858,7 +5860,7 @@ Form Library</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0qo-df-Rdv">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0qo-df-Rdv">
                                 <rect key="frame" x="0.0" y="0.0" width="59" height="38"/>
                                 <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                 <state key="normal" title="Close">
@@ -5870,6 +5872,7 @@ Form Library</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="Lup-cE-fKE"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="0qo-df-Rdv" firstAttribute="top" secondItem="Lup-cE-fKE" secondAttribute="top" id="5bV-NB-qIr"/>
@@ -5879,7 +5882,6 @@ Form Library</string>
                             <constraint firstItem="0qo-df-Rdv" firstAttribute="leading" secondItem="AQS-jL-6We" secondAttribute="leading" id="XDY-zT-4Cp"/>
                             <constraint firstItem="Eh2-g9-gOc" firstAttribute="leading" secondItem="Lup-cE-fKE" secondAttribute="leading" constant="15" id="nGE-s5-m70"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Lup-cE-fKE"/>
                     </view>
                     <navigationItem key="navigationItem" id="uhE-ep-8D5"/>
                 </viewController>
@@ -5900,6 +5902,7 @@ Form Library</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="jCY-6F-jwc"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="GJD-mY-jYB" firstAttribute="bottom" secondItem="jCY-6F-jwc" secondAttribute="bottom" id="GeU-EB-mKA"/>
@@ -5907,7 +5910,6 @@ Form Library</string>
                             <constraint firstItem="jCY-6F-jwc" firstAttribute="trailing" secondItem="GJD-mY-jYB" secondAttribute="trailing" id="dEw-Jh-qpB"/>
                             <constraint firstItem="GJD-mY-jYB" firstAttribute="top" secondItem="jCY-6F-jwc" secondAttribute="top" id="oTm-vd-Bc8"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="jCY-6F-jwc"/>
                     </view>
                     <connections>
                         <outlet property="tableviewNotificationDetails" destination="GJD-mY-jYB" id="aae-gs-aGy"/>
@@ -5987,13 +5989,13 @@ Form Library</string>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Attachment: Doc, PDF, Image" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hdf-Bk-YpB">
-                                        <rect key="frame" x="10" y="212.66666666666666" width="201" height="18"/>
+                                        <rect key="frame" x="10" y="212.66666666666666" width="200.66666666666666" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.43137254901960786" green="0.43137254901960786" blue="0.43137254901960786" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5s4-Lm-rEN">
-                                        <rect key="frame" x="226" y="206.66666666666666" width="99" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5s4-Lm-rEN">
+                                        <rect key="frame" x="225.66666666666666" y="206.66666666666666" width="99.333333333333343" height="30"/>
                                         <state key="normal" title="Add"/>
                                         <connections>
                                             <action selector="actionUploadDocument:" destination="um7-4p-3vh" eventType="touchUpInside" id="sI9-5w-0zl"/>
@@ -6054,7 +6056,7 @@ Form Library</string>
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rUE-Ub-BeR">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rUE-Ub-BeR">
                                         <rect key="frame" x="133" y="347.66666666666663" width="69" height="28"/>
                                         <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
                                         <state key="normal" title="Submit"/>
@@ -6093,6 +6095,7 @@ Form Library</string>
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="rSh-WO-oR4"/>
                         <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="gtp-wr-2W3" firstAttribute="centerX" secondItem="rSh-WO-oR4" secondAttribute="centerX" id="J7E-HN-DPV"/>
@@ -6100,7 +6103,6 @@ Form Library</string>
                             <constraint firstItem="rSh-WO-oR4" firstAttribute="trailing" secondItem="gtp-wr-2W3" secondAttribute="trailing" constant="20" id="WN8-hi-Mgb"/>
                             <constraint firstItem="gtp-wr-2W3" firstAttribute="leading" secondItem="rSh-WO-oR4" secondAttribute="leading" constant="20" id="eUQ-DO-hpm"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="rSh-WO-oR4"/>
                     </view>
                     <connections>
                         <outlet property="buttonClose" destination="zqd-28-ntu" id="13f-YE-KI0"/>
@@ -6184,7 +6186,7 @@ Form Library</string>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uow-P5-ToJ">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uow-P5-ToJ">
                                 <rect key="frame" x="0.0" y="812" width="375" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="kUM-Dt-1XT"/>
@@ -6215,12 +6217,13 @@ Form Library</string>
                                 </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All Present" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kcy-kK-jT9">
-                                <rect key="frame" x="219" y="64" width="82" height="20.333333333333329"/>
+                                <rect key="frame" x="219.33333333333334" y="64" width="81.666666666666657" height="20.333333333333329"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.043137254899999998" green="0.20000000000000001" blue="0.5450980392" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="YoO-I0-E6Z"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Kcy-kK-jT9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vl0-bG-i7R" secondAttribute="trailing" constant="8" symbolic="YES" id="DBe-nh-IZA"/>
@@ -6238,7 +6241,6 @@ Form Library</string>
                             <constraint firstAttribute="bottom" secondItem="Uow-P5-ToJ" secondAttribute="bottom" constant="-40" id="s3x-rh-tns"/>
                             <constraint firstItem="Uow-P5-ToJ" firstAttribute="trailing" secondItem="Qw5-eA-7ae" secondAttribute="trailing" id="uJh-LD-F8n"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="YoO-I0-E6Z"/>
                     </view>
                     <connections>
                         <outlet property="buttonSubmit" destination="Uow-P5-ToJ" id="f7L-O1-qE5"/>
@@ -6271,7 +6273,7 @@ Form Library</string>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Application is currently under maintenance  It will be up soon!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CKP-xl-mK1">
-                                        <rect key="frame" x="9.3333333333333428" y="50" width="326.33333333333326" height="61"/>
+                                        <rect key="frame" x="10.333333333333343" y="50" width="324.66666666666663" height="61"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -6279,14 +6281,14 @@ Form Library</string>
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="RPh-lg-mPD"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="yQP-pW-qmA" firstAttribute="centerY" secondItem="iJg-jf-XNI" secondAttribute="centerY" id="Btp-fJ-6I7"/>
                             <constraint firstItem="yQP-pW-qmA" firstAttribute="centerX" secondItem="iJg-jf-XNI" secondAttribute="centerX" id="RZt-Ed-2EE"/>
                             <constraint firstAttribute="trailing" secondItem="yQP-pW-qmA" secondAttribute="trailing" constant="15" id="TDW-ND-dMe"/>
                             <constraint firstItem="yQP-pW-qmA" firstAttribute="leading" secondItem="iJg-jf-XNI" secondAttribute="leading" constant="15" id="YuP-iH-yqG"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="RPh-lg-mPD"/>
                     </view>
                     <navigationItem key="navigationItem" id="RTW-Mx-fqd"/>
                 </viewController>
@@ -6330,6 +6332,41 @@ Form Library</string>
             </objects>
             <point key="canvasLocation" x="3783.75" y="-800.70422535211264"/>
         </scene>
+        <!--Repeat Schedule View Controller-->
+        <scene sceneID="No8-Pi-ZfW">
+            <objects>
+                <viewController storyboardIdentifier="RepeatScheduleViewControllerId" id="iHG-o9-G98" customClass="RepeatScheduleViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ctc-QX-jWF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4g0-Pr-WYY">
+                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="iHG-o9-G98" id="XlB-Kg-Ert"/>
+                                    <outlet property="delegate" destination="iHG-o9-G98" id="hz4-E1-1WC"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="evl-OE-VpP"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="evl-OE-VpP" firstAttribute="trailing" secondItem="4g0-Pr-WYY" secondAttribute="trailing" id="c5i-3c-nHO"/>
+                            <constraint firstItem="evl-OE-VpP" firstAttribute="bottom" secondItem="4g0-Pr-WYY" secondAttribute="bottom" id="vKB-xH-oDl"/>
+                            <constraint firstItem="4g0-Pr-WYY" firstAttribute="top" secondItem="evl-OE-VpP" secondAttribute="top" id="vhl-eE-fax"/>
+                            <constraint firstItem="4g0-Pr-WYY" firstAttribute="leading" secondItem="evl-OE-VpP" secondAttribute="leading" id="yK7-d6-fmK"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="vze-rb-rKn"/>
+                    <connections>
+                        <outlet property="tableView" destination="4g0-Pr-WYY" id="CQn-t7-g07"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Kp-M3-Upo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6834" y="15971"/>
+        </scene>
         <!--Schedular Date Picker View Controller-->
         <scene sceneID="RwK-8C-Jtm">
             <objects>
@@ -6341,7 +6378,7 @@ Form Library</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UVZ-Qk-Jxc">
                                 <rect key="frame" x="0.0" y="43.999999999999986" width="375" height="193.66666666666663"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ag-Wk-gNi">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ag-Wk-gNi">
                                         <rect key="frame" x="0.0" y="0.0" width="49" height="32"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
                                         <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
@@ -6359,13 +6396,13 @@ Form Library</string>
                                                 <rect key="frame" x="0.0" y="0.0" width="355" height="21.666666666666668"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cmx-jX-FXt">
-                                                        <rect key="frame" x="0.0" y="0.0" width="87" height="21.666666666666668"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="86.333333333333329" height="21.666666666666668"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="dd-mm-yyyy" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ujg-x0-hSr">
-                                                        <rect key="frame" x="97" y="0.0" width="258" height="21.666666666666668"/>
+                                                        <rect key="frame" x="96.333333333333343" y="0.0" width="258.66666666666663" height="21.666666666666668"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
@@ -6375,13 +6412,13 @@ Form Library</string>
                                                 <rect key="frame" x="0.0" y="41.666666666666657" width="355" height="21.666666666666671"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Utj-ld-8sI">
-                                                        <rect key="frame" x="0.0" y="0.0" width="65" height="21.666666666666668"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="64.666666666666671" height="21.666666666666668"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="dd-mm-yyyy" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="onk-QP-W3B">
-                                                        <rect key="frame" x="75" y="0.0" width="280" height="21.666666666666668"/>
+                                                        <rect key="frame" x="74.666666666666657" y="0.0" width="280.33333333333337" height="21.666666666666668"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
@@ -6391,12 +6428,12 @@ Form Library</string>
                                                 <rect key="frame" x="0.0" y="83.333333333333343" width="355" height="63.333333333333343"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Message" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tAm-zc-o5w">
-                                                        <rect key="frame" x="122" y="0.0" width="111" height="20.333333333333332"/>
+                                                        <rect key="frame" x="122.33333333333334" y="0.0" width="110.66666666666666" height="20.333333333333332"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="textColor" systemColor="systemRedColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ayh-9Y-Bha">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ayh-9Y-Bha">
                                                         <rect key="frame" x="143" y="25.333333333333314" width="69" height="38"/>
                                                         <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                                         <state key="normal" title="Submit"/>
@@ -6409,7 +6446,7 @@ Form Library</string>
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="2ag-Wk-gNi" firstAttribute="top" secondItem="UVZ-Qk-Jxc" secondAttribute="top" id="CpL-CJ-mYW"/>
                                     <constraint firstAttribute="bottom" secondItem="UV1-ZZ-Tkv" secondAttribute="bottom" id="ElT-aE-WAv"/>
@@ -6421,13 +6458,13 @@ Form Library</string>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="uyz-e2-KNb"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="UVZ-Qk-Jxc" firstAttribute="top" secondItem="uyz-e2-KNb" secondAttribute="top" id="3Nw-7Z-55u"/>
                             <constraint firstAttribute="trailing" secondItem="UVZ-Qk-Jxc" secondAttribute="trailing" id="dcv-Ey-gwQ"/>
                             <constraint firstItem="UVZ-Qk-Jxc" firstAttribute="leading" secondItem="KUU-hZ-oZM" secondAttribute="leading" id="eRY-wH-cq1"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="uyz-e2-KNb"/>
                     </view>
                     <navigationItem key="navigationItem" id="ige-Uf-yYL"/>
                     <connections>
@@ -6439,7 +6476,56 @@ Form Library</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="48Y-d8-rSg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5745" y="15971"/>
+            <point key="canvasLocation" x="7839" y="15975"/>
+        </scene>
+        <!--Add New Schedule View Controller-->
+        <scene sceneID="FZn-5j-DwY">
+            <objects>
+                <viewController id="k1V-o6-ZrP" customClass="AddNewScheduleViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Sqb-ho-UQE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Kez-0t-A5a">
+                                <rect key="frame" x="0.0" y="88" width="375" height="650"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="k1V-o6-ZrP" id="1xr-AF-Dlf"/>
+                                    <outlet property="delegate" destination="k1V-o6-ZrP" id="zOd-Tg-tWg"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mhf-0W-HYI">
+                                <rect key="frame" x="0.0" y="738" width="375" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="QGp-ZA-qMq"/>
+                                </constraints>
+                                <state key="normal" title="Submit"/>
+                                <connections>
+                                    <action selector="actionAdd:" destination="k1V-o6-ZrP" eventType="touchUpInside" id="4CH-yn-A9x"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="7Lc-9j-Jxn"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Kez-0t-A5a" firstAttribute="top" secondItem="7Lc-9j-Jxn" secondAttribute="top" id="aNL-vW-FL9"/>
+                            <constraint firstItem="Kez-0t-A5a" firstAttribute="leading" secondItem="7Lc-9j-Jxn" secondAttribute="leading" id="ciC-Wd-0wb"/>
+                            <constraint firstItem="mhf-0W-HYI" firstAttribute="top" secondItem="Kez-0t-A5a" secondAttribute="bottom" id="gMx-Jy-Htu"/>
+                            <constraint firstItem="7Lc-9j-Jxn" firstAttribute="trailing" secondItem="mhf-0W-HYI" secondAttribute="trailing" id="i8I-2P-e0n"/>
+                            <constraint firstItem="mhf-0W-HYI" firstAttribute="leading" secondItem="7Lc-9j-Jxn" secondAttribute="leading" id="lgT-qi-2Yx"/>
+                            <constraint firstItem="7Lc-9j-Jxn" firstAttribute="bottom" secondItem="mhf-0W-HYI" secondAttribute="bottom" id="luJ-4f-Mty"/>
+                            <constraint firstItem="7Lc-9j-Jxn" firstAttribute="trailing" secondItem="Kez-0t-A5a" secondAttribute="trailing" id="xAV-eV-JxF"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Q4z-re-osq"/>
+                    <connections>
+                        <outlet property="buttonAddSchedule" destination="mhf-0W-HYI" id="6rt-GP-702"/>
+                        <outlet property="tableview" destination="Kez-0t-A5a" id="OJt-Pa-xO2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hoV-fe-4u1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5812" y="15971"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
@@ -6466,5 +6552,11 @@ Form Library</string>
         <image name="professor_selection" width="114" height="114"/>
         <image name="student_default" width="68" height="68"/>
         <image name="student_selection" width="114" height="114"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

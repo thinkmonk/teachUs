@@ -135,6 +135,9 @@
 		8137EF551FA10AD400045D97 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8137EF541FA10AD400045D97 /* Constants.swift */; };
 		8137EF5C1FA10D6A00045D97 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8137EF5B1FA10D6A00045D97 /* UIView.swift */; };
 		813C0DA021EB7C7100B04E61 /* GlobalFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813C0D9F21EB7C7100B04E61 /* GlobalFunction.swift */; };
+		8143D5D62548A9A8001D5B4E /* RepeatScheduleOptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8143D5D42548A9A8001D5B4E /* RepeatScheduleOptionTableViewCell.swift */; };
+		8143D5D72548A9A8001D5B4E /* RepeatScheduleOptionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8143D5D52548A9A8001D5B4E /* RepeatScheduleOptionTableViewCell.xib */; };
+		8143D5DC2548B702001D5B4E /* RepeatScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8143D5DB2548B702001D5B4E /* RepeatScheduleViewController.swift */; };
 		81511A3722AC4D0400B50F44 /* DocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81511A3622AC4D0400B50F44 /* DocumentsViewController.swift */; };
 		8151C3CE22ED7EE300680951 /* BellNotificationReadStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8151C3CD22ED7EE300680951 /* BellNotificationReadStatus.swift */; };
 		81539C792362244100306974 /* CollegeDetails+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81539C782362244100306974 /* CollegeDetails+CoreDataProperties.swift */; };
@@ -321,6 +324,11 @@
 		81CCAE581FC82E310070907A /* RatingDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CCAE571FC82E310070907A /* RatingDataSource.swift */; };
 		81CCAE5A1FC99C170070907A /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CCAE591FC99C170070907A /* UIImageView.swift */; };
 		81D020252059A131003742FD /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D020242059A131003742FD /* RootViewController.swift */; };
+		81D02D36253B31660078F680 /* AddNewScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D02D35253B31660078F680 /* AddNewScheduleViewController.swift */; };
+		81D02D39253B343A0078F680 /* ScheduleSubjectList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D02D38253B343A0078F680 /* ScheduleSubjectList.swift */; };
+		81D02D3B253B35D90078F680 /* ScheduleProfessorList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D02D3A253B35D90078F680 /* ScheduleProfessorList.swift */; };
+		81D02D3F253B43F80078F680 /* ScheduleTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D02D3D253B43F80078F680 /* ScheduleTextTableViewCell.swift */; };
+		81D02D40253B43F80078F680 /* ScheduleTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81D02D3E253B43F80078F680 /* ScheduleTextTableViewCell.xib */; };
 		81D2774122A05FF6003CFC51 /* StudentNotesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D2774022A05FF6003CFC51 /* StudentNotesListViewController.swift */; };
 		81D2774322A064DA003CFC51 /* StudentNotesSubjectList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D2774222A064DA003CFC51 /* StudentNotesSubjectList.swift */; };
 		81D2774522A069F4003CFC51 /* StudentNotesDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D2774422A069F4003CFC51 /* StudentNotesDetailsViewController.swift */; };
@@ -547,6 +555,9 @@
 		8137EF541FA10AD400045D97 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8137EF5B1FA10D6A00045D97 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		813C0D9F21EB7C7100B04E61 /* GlobalFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunction.swift; sourceTree = "<group>"; };
+		8143D5D42548A9A8001D5B4E /* RepeatScheduleOptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatScheduleOptionTableViewCell.swift; sourceTree = "<group>"; };
+		8143D5D52548A9A8001D5B4E /* RepeatScheduleOptionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RepeatScheduleOptionTableViewCell.xib; sourceTree = "<group>"; };
+		8143D5DB2548B702001D5B4E /* RepeatScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatScheduleViewController.swift; sourceTree = "<group>"; };
 		81511A3622AC4D0400B50F44 /* DocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsViewController.swift; sourceTree = "<group>"; };
 		8151C3CD22ED7EE300680951 /* BellNotificationReadStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellNotificationReadStatus.swift; sourceTree = "<group>"; };
 		81539C782362244100306974 /* CollegeDetails+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollegeDetails+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -746,6 +757,11 @@
 		81CCAE591FC99C170070907A /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		81CE9FFD23365D2900320DFB /* TeachUs 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeachUs 3.xcdatamodel"; sourceTree = "<group>"; };
 		81D020242059A131003742FD /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		81D02D35253B31660078F680 /* AddNewScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewScheduleViewController.swift; sourceTree = "<group>"; };
+		81D02D38253B343A0078F680 /* ScheduleSubjectList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleSubjectList.swift; sourceTree = "<group>"; };
+		81D02D3A253B35D90078F680 /* ScheduleProfessorList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleProfessorList.swift; sourceTree = "<group>"; };
+		81D02D3D253B43F80078F680 /* ScheduleTextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTextTableViewCell.swift; sourceTree = "<group>"; };
+		81D02D3E253B43F80078F680 /* ScheduleTextTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScheduleTextTableViewCell.xib; sourceTree = "<group>"; };
 		81D2774022A05FF6003CFC51 /* StudentNotesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentNotesListViewController.swift; sourceTree = "<group>"; };
 		81D2774222A064DA003CFC51 /* StudentNotesSubjectList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentNotesSubjectList.swift; sourceTree = "<group>"; };
 		81D2774422A069F4003CFC51 /* StudentNotesDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentNotesDetailsViewController.swift; sourceTree = "<group>"; };
@@ -1076,6 +1092,8 @@
 				811C1DF7250C00350048EE19 /* CollegeSchedulerListViewController.swift */,
 				811C1DFC250C0F2B0048EE19 /* CollegeScheduleDetailsViewController.swift */,
 				81EEBCE625335009002BCA0C /* SchedularDatePickerViewController.swift */,
+				81D02D35253B31660078F680 /* AddNewScheduleViewController.swift */,
+				8143D5DB2548B702001D5B4E /* RepeatScheduleViewController.swift */,
 			);
 			path = Schedular;
 			sourceTree = "<group>";
@@ -1083,6 +1101,7 @@
 		811C1DF9250C08F70048EE19 /* Scheduler */ = {
 			isa = PBXGroup;
 			children = (
+				81D02D37253B342A0078F680 /* AddSchedule */,
 				811C1DFA250C09000048EE19 /* CollegeSchedule.swift */,
 				811C1DFE250C0F750048EE19 /* ClassScheduleDetails.swift */,
 			);
@@ -1296,6 +1315,7 @@
 		813EC7691F9BA46200F11A12 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				81D02D3C253B43DA0078F680 /* Schdeuler */,
 				810A382A25165D9500CD8358 /* Exam */,
 				816C5AD522351AB400B6A7B3 /* Add_Remove Admin */,
 				81E3E3AC207778D0002CFC1D /* AttendanceReport */,
@@ -1985,6 +2005,26 @@
 			path = Notes;
 			sourceTree = "<group>";
 		};
+		81D02D37253B342A0078F680 /* AddSchedule */ = {
+			isa = PBXGroup;
+			children = (
+				81D02D38253B343A0078F680 /* ScheduleSubjectList.swift */,
+				81D02D3A253B35D90078F680 /* ScheduleProfessorList.swift */,
+			);
+			path = AddSchedule;
+			sourceTree = "<group>";
+		};
+		81D02D3C253B43DA0078F680 /* Schdeuler */ = {
+			isa = PBXGroup;
+			children = (
+				81D02D3D253B43F80078F680 /* ScheduleTextTableViewCell.swift */,
+				81D02D3E253B43F80078F680 /* ScheduleTextTableViewCell.xib */,
+				8143D5D42548A9A8001D5B4E /* RepeatScheduleOptionTableViewCell.swift */,
+				8143D5D52548A9A8001D5B4E /* RepeatScheduleOptionTableViewCell.xib */,
+			);
+			path = Schdeuler;
+			sourceTree = "<group>";
+		};
 		81D2773F22A05FD4003CFC51 /* Student_Notes */ = {
 			isa = PBXGroup;
 			children = (
@@ -2309,6 +2349,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8143D5D72548A9A8001D5B4E /* RepeatScheduleOptionTableViewCell.xib in Resources */,
 				8133E935250D6079007D3105 /* ScheduleDateTableViewCell.xib in Resources */,
 				811BD600229DC03800FDFEB6 /* notesDetailsTableViewCell.xib in Resources */,
 				81A7D05A208B75710032A1BC /* ProfessorRatingProfileTableViewCell.xib in Resources */,
@@ -2324,6 +2365,7 @@
 				81E3E3B62077AF46002CFC1D /* VerifyAuthPasswordView.xib in Resources */,
 				8126312B1FB2289200CD80D6 /* AttendanceStudentListTableViewCell.xib in Resources */,
 				81F78EAD1FB0DFE600A016B0 /* AttendanceCalenderTableViewCell.xib in Resources */,
+				81D02D40253B43F80078F680 /* ScheduleTextTableViewCell.xib in Resources */,
 				8188E573248BCEF9005BD92E /* AdmissionDocumentPicketTableViewCell.xib in Resources */,
 				816C5AD922351B2E00B6A7B3 /* AddRemoveAdminTableViewCell.xib in Resources */,
 				810BECDF206EDEE900F560C6 /* StudentProfileTableViewCell.xib in Resources */,
@@ -2506,6 +2548,7 @@
 				81316DE32165575200820481 /* OfflineLeftMenuViewController.swift in Sources */,
 				8194882122A462E40006CB86 /* CollegeNotificationListViewController.swift in Sources */,
 				81AEE7EA251525C300921906 /* ExamHomeViewController.swift in Sources */,
+				81D02D36253B31660078F680 /* AddNewScheduleViewController.swift in Sources */,
 				8194882322A462F40006CB86 /* CollegeNotificationDetailsViewController.swift in Sources */,
 				810610C21FA660890067273E /* Connectivity.swift in Sources */,
 				81A769D120A88A7200A4A2B7 /* CollegeSyllabusTableViewCell.swift in Sources */,
@@ -2625,6 +2668,7 @@
 				81C44304248570A4006D7C3E /* AdmissionAcademicRecordTableViewController.swift in Sources */,
 				816522BA22340F9B00C1BA29 /* CouseList.swift in Sources */,
 				810610BE1FA65EE00067273E /* Loader.swift in Sources */,
+				8143D5DC2548B702001D5B4E /* RepeatScheduleViewController.swift in Sources */,
 				81C208541FAF4EF9003D366D /* UIColor.swift in Sources */,
 				81727B941F9E70EE006433E8 /* HomeViewController.swift in Sources */,
 				81930B321FCDE2590002CDBE /* ProfessorLogs.swift in Sources */,
@@ -2652,6 +2696,7 @@
 				81E54B9E24FBB8A6002DC664 /* CustomKeyValueTableViewCell.swift in Sources */,
 				812B152F20BAA65C00693183 /* Ring.swift in Sources */,
 				81D7CE941FAB988500C4375E /* ProfessorAttedanceViewController.swift in Sources */,
+				81D02D39253B343A0078F680 /* ScheduleSubjectList.swift in Sources */,
 				816345BC248CD085001FF04B /* AdmissionBaseManager.swift in Sources */,
 				81CCAE511FC805F70070907A /* RatingTitleTableViewCell.swift in Sources */,
 				812298CD2108F61C003C2EE3 /* OfflineApiRequest+CoreDataClass.swift in Sources */,
@@ -2720,6 +2765,7 @@
 				81A80EDF1FAF3DAD00DDFFA1 /* CollegeList.swift in Sources */,
 				8136E5A620F7C6880080AECA /* Offline_Unit_syllabus_array.swift in Sources */,
 				81BC49A82299D0F100549867 /* ProfileChangeRequestTableViewCell.swift in Sources */,
+				8143D5D62548A9A8001D5B4E /* RepeatScheduleOptionTableViewCell.swift in Sources */,
 				8126BC061FD2CB45007B6B3B /* StudentProfile.swift in Sources */,
 				8136E5B020F7CD740080AECA /* OfflineYesNo.swift in Sources */,
 				81A523971FA7956100B3B557 /* CollegeLogin.swift in Sources */,
@@ -2755,10 +2801,12 @@
 				81F92A4A22B5294700395413 /* BellNotificationList.swift in Sources */,
 				816CE20C23C7A12500CB9769 /* SyllabusStatusData.swift in Sources */,
 				81E4BCE7205E9E7E00674FD4 /* CollegeAttendanceListViewController.swift in Sources */,
+				81D02D3F253B43F80078F680 /* ScheduleTextTableViewCell.swift in Sources */,
 				81E54BA224FBD2A8002DC664 /* CustomButtonsTableViewCell.swift in Sources */,
 				817667682482FE7A00DDF3EB /* AdmissionSubject.swift in Sources */,
 				81A6BC08229C6F5100615EDD /* NotesSubjectDetails.swift in Sources */,
 				819EEC2220A60BF400487467 /* ViewLectureReport.swift in Sources */,
+				81D02D3B253B35D90078F680 /* ScheduleProfessorList.swift in Sources */,
 				8161AF67222C5922001F73B5 /* CollegeClassManager.swift in Sources */,
 				815E1D8B248ABD5D00E5E91C /* AdmissionFamilyDetailsDataSource.swift in Sources */,
 				8161AF69222C5B63001F73B5 /* Array.swift in Sources */,

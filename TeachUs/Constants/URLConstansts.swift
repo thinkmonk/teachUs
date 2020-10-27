@@ -186,6 +186,10 @@ public struct URLConstants{
         static let getTabsForAdminProfile  =            BaseUrl.baseURLV1 + "/admin/user_control_list"
         static let collegeschedule =                    BaseUrl.baseURLV1 + "/college/schedule"
         static let collegeScheduleDetails =             BaseUrl.baseURLV1 + "/college/schedule_details"
+        static let deleteScheduleDelete =               BaseUrl.baseURLV1 + "/college/schedule_delete"
+        static let getScheduleSubject   =               BaseUrl.baseURLV1 + "/college/schedule_subject"
+        static let getScheduleProfessor   =             BaseUrl.baseURLV1 + "/college/schedule_professor"
+        static let addSchedule  =                       BaseUrl.baseURLV1 + "/college/add_schedule"
 
     }
     

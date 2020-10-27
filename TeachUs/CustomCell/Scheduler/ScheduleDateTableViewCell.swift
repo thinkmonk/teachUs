@@ -15,6 +15,7 @@ class ScheduleDateTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         labelDate.textColor = UIColor.rgbColor(110, 110, 110)
+        self.backgroundColor = UIColor.clear
         // Initialization code
     }
 

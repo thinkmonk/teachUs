@@ -19,6 +19,8 @@ class CollegeScheduleDetailsViewController: BaseViewController {
     var datePicker : UIDatePicker!
     let toolBar = UIToolbar()
     lazy var slideInTransitioningDelegate = SlideInPresentationManager()
+    private var currentToDate:String? = ""
+    private var currentFromDate:String? = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,38 +35,6 @@ class CollegeScheduleDetailsViewController: BaseViewController {
         tableviewScheduleDetails.rowHeight = UITableViewAutomaticDimension
         tableviewScheduleDetails.addSubview(refreshControl)
         getScheduleDetails(between: Date().getDateString(format: "YYYY-MM-dd"), Date().addDays(7).getDateString(format: "YYYY-MM-dd"))
-    }
-    
-    
-    
-    func getScheduleDetails(between toDate:String, _ fromDate:String) {
-        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
-        let manager = NetworkHandler()
-        manager.url = URLConstants.CollegeURL.collegeScheduleDetails
-        let parameters = [
-            "college_code" : "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
-            "class_id" : schedule.classId ?? "",
-            "to_date" : toDate,
-            "from_date" : "2020-8-18"
-        ]
-        
-        manager.apiPostWithDataResponse(apiName: "Get College Schedules Details", parameters:parameters, completionHandler: { [weak self] (result, code, response)  in
-            LoadingActivityHUD.hideProgressHUD()
-            guard let `self` = self else { return }
-            do{
-                let decoder = JSONDecoder()
-                self.scheduleDetails = try decoder.decode(ClassScheduleDetails.self, from: response)
-                if !(self.scheduleDetails?.schedules?.isEmpty ?? true) {
-                    self.makeDataSource()
-                }
-            } catch let error{
-                print("err", error)
-            }
-        }) { (error, code, message) in
-            print(message)
-            LoadingActivityHUD.hideProgressHUD()
-        }
-
     }
     
     func makeDataSource(){
@@ -118,6 +88,15 @@ class CollegeScheduleDetailsViewController: BaseViewController {
 
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Constants.segues.toAddNewSchedule {
+            if let destinationVc = segue.destination as? AddNewScheduleViewController {
+                guard let classId = schedule.classId , let className = schedule.scheduleClass else { return }
+                destinationVc.scheduleData = SchedularData(classId: classId, className: className)
+            }
+        }
+    }
+    
 }
 
 extension CollegeScheduleDetailsViewController: UITableViewDataSource, UITableViewDelegate {
@@ -169,21 +148,35 @@ extension CollegeScheduleDetailsViewController: UITableViewDataSource, UITableVi
 
 extension CollegeScheduleDetailsViewController: AddNewScheduleDelegate {
     func addNewSchdule() {
-        #if DEBUG
-        self.showAlertWithTitle("DEBUG MESSAGE", alertMessage: "Implement this: addNewSchdule")
-        #endif
+        self.performSegue(withIdentifier: Constants.segues.toAddNewSchedule, sender: self)
     }
 }
 
 extension CollegeScheduleDetailsViewController: ScheduleDetailCellDelegate{
     func actionDeleteSchedule(_ sender: ButtonWithIndexPath) {
-        #if DEBUG
-        self.showAlertWithTitle("DEBUG MESSAGE", alertMessage: "Implement this: actionDeleteSchedule")
-        #endif
-
+        guard let indexPath = sender.indexPath else {
+            return
+        }
+        
+        
+        let dataSource = arrayDataSource[indexPath.section]
+        guard let scheduleObj = dataSource.attachedObject as? ScheduleDetail else { return }
+        
+        self.deleteSchedule(for: scheduleObj)
+        
+        self.showAlertWithTitleAndCompletionHandlers("Delete Schedule!",
+                                                     alertMessage: "Are you sure you want to delete this schedule",
+                                                     okButtonString: "YES",
+                                                     canelString: "CANCEL",
+                                                     okAction: { self.deleteSchedule(for: scheduleObj) },
+                                                     cancelAction: {} )
     }
     
     func actionEditSchedule(_ sender: ButtonWithIndexPath) {
+        
+        
+        
+        
         #if DEBUG
         self.showAlertWithTitle("DEBUG MESSAGE", alertMessage: "Implement this: actionEditSchedule")
         #endif
@@ -203,5 +196,63 @@ extension CollegeScheduleDetailsViewController: DatePickerDelegate {
         getScheduleDetails(between: fromDate.getDateString(format: "YYYY-MM-dd"), toDate.getDateString(format: "YYYY-MM-dd"))
     }
     
+    
+}
+
+extension CollegeScheduleDetailsViewController {
+    func getScheduleDetails(between toDate:String, _ fromDate:String) {
+        self.currentToDate = toDate
+        self.currentFromDate = fromDate
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        let manager = NetworkHandler()
+        manager.url = URLConstants.CollegeURL.collegeScheduleDetails
+        let parameters = [
+            "college_code" : "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+            "class_id" : schedule.classId ?? "",
+            "to_date" : toDate,
+            "from_date" : fromDate        ]
+        
+        manager.apiPostWithDataResponse(apiName: "Get College Schedules Details", parameters:parameters, completionHandler: { [weak self] (result, code, response)  in
+            LoadingActivityHUD.hideProgressHUD()
+            guard let `self` = self else { return }
+            do{
+                let decoder = JSONDecoder()
+                self.scheduleDetails = try decoder.decode(ClassScheduleDetails.self, from: response)
+                if !(self.scheduleDetails?.schedules?.isEmpty ?? true) {
+                    self.makeDataSource()
+                }
+            } catch let error{
+                print("err", error)
+            }
+        }) { (error, code, message) in
+            print(message)
+            LoadingActivityHUD.hideProgressHUD()
+        }
+    }
+    
+    func deleteSchedule(for schedule: ScheduleDetail) {
+        guard let scheduleId = schedule.attendanceScheduleId else {
+            return
+        }
+        let manager = NetworkHandler()
+        manager.url = URLConstants.CollegeURL.deleteScheduleDelete
+        let parameters = [
+            "college_code" : "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+            "attendance_schedule_id" : scheduleId
+        ]
+        
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        manager.apiPostWithDataResponse(apiName: "Delete Schedule", parameters:parameters, completionHandler: { [weak self] (result, code, response)  in
+            LoadingActivityHUD.hideProgressHUD()
+            guard let `self` = self,
+                let toDate = self.currentToDate,
+                let fromDate = self.currentFromDate
+                else { return }
+            self.getScheduleDetails(between: toDate, fromDate)
+        }) { (error, code, message) in
+            print(message)
+            LoadingActivityHUD.hideProgressHUD()
+        }
+    }
     
 }

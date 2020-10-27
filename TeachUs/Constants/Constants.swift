@@ -50,6 +50,8 @@ public struct Constants {
         static let profileTomaintainence = "profileToMaintainence"
         static let rootToMaintainence = "rootToMaintainence"
         static let toSecheduleDetails = "toSecheduleDetails"
+        static let toAddNewSchedule = "addSchedule"
+        static let repeatScheduleList = "toScheduleList"
     }
     
     struct Images {
@@ -118,7 +120,8 @@ public struct Constants {
         static let scheduleDetials = "CollegeScheduleDetailsViewControllerId"
         static let scheduleDatePickerVc = "datePickerVcId"
         static let examHomeView = "ExamHomeViewControllerId"
-        static let examWebView = "ExamWebViewControllerId"        
+        static let examWebView = "ExamWebViewControllerId"
+        static let repeatScheduleList = "RepeatScheduleViewControllerId"
     }
     
     struct UserDefaults {
@@ -204,6 +207,8 @@ public struct Constants {
         static let scheduleDetailsDateCellId = "detailsDateCellId"
         static let collegeAddNewSchedule = "addNewScheduleCellId"
         static let examSchedule = "ExamScheduleTableViewCellId"
+        static let addScheduleCell = "ScheduleTextTableViewCellId"
+        static let scheduleOptionsCellId = "scheduleOptionsCellId"
     }
     
     struct UserTypeString {
