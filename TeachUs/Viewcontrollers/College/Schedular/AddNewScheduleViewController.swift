@@ -68,7 +68,10 @@ class AddNewScheduleViewController: BaseViewController {
     @IBOutlet weak var buttonAddSchedule: UIButton!
     private var subjectList:ScheduleSubjectList!
     private var professorList:ScheduleProfessorList!
-//    private var repeatScheduleDataSource:[String] = ["Of a Day", "Of a week"]
+    private var repeatScheduleDataSource = [RescheduleWeeks]()
+    private var selectedScheduleWeek : RescheduleWeeks? = nil
+    private var rescheduleFlowType : RescheduleFlowType? = nil
+
     private var modeDataSource: [String] = ["Online", "Offline"]
     
 //    var classId:String!
@@ -80,6 +83,11 @@ class AddNewScheduleViewController: BaseViewController {
     private let picker = UIPickerView()
     private var datepicker = UIDatePicker()
     var scheduleData : SchedularData!
+    
+    enum RescheduleFlowType {
+        case date
+        case week
+    }
     
 //MARK:-  Life Cycle methods
     
@@ -117,20 +125,44 @@ class AddNewScheduleViewController: BaseViewController {
         toolBar.isUserInteractionEnabled = true
     }
     
-    func showRepeatScheduleView(for date:Date){
+    func showRepeatScheduleView(from dateFrom:Date, to dateTo:Date){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let destinationViewContoller:RepeatScheduleViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.repeatScheduleList) as! RepeatScheduleViewController
-        destinationViewContoller.dateSelected = date
+        destinationViewContoller.fromDate = dateFrom
+        destinationViewContoller.toDate = dateTo
         destinationViewContoller.classId = self.scheduleData.classId
         self.navigationController?.pushViewController(destinationViewContoller, animated: true)
     }
     
     @objc func donePicker() {
         guard  let textField = activeTextField, let indexPath = textField.indexpath else {
-            self.showRepeatScheduleView(for: datepicker.date)
-            toolBar.removeFromSuperview()
-            datepicker.removeFromSuperview()
+            switch self.rescheduleFlowType {
+            case .date:
+                toolBar.removeFromSuperview()
+                datepicker.removeFromSuperview()
+                self.showRepeatScheduleView(from: datepicker.date, to: datepicker.date)
+
+            case .week:
+                guard let startDate = selectedScheduleWeek?.startDate,
+                      let endDate = selectedScheduleWeek?.endDate else {
+                    return
+                }
+                picker.removeFromSuperview()
+                toolBar.removeFromSuperview()
+                self.showRepeatScheduleView(from: startDate, to: endDate)
+                
+            case .none:
+                break
+            }
             
+//            guard let startDate = selectedScheduleWeek?.startDate,
+//                  let endDate = selectedScheduleWeek?.endDate else {
+//                toolBar.removeFromSuperview()
+//                datepicker.removeFromSuperview()
+//                self.showRepeatScheduleView(from: datepicker.date, to: datepicker.date)
+//                return
+//            }
+//
             return
         }
         
@@ -302,7 +334,6 @@ extension AddNewScheduleViewController:UITextFieldDelegate, UIPickerViewDelegate
             textField.inputAccessoryView = toolBar
             picker.tag = dataSource.cellType.rawValue
             picker.reloadAllComponents()
-            picker.selectRow(0, inComponent: 0, animated: false)
             self.pickerView(self.picker, didSelectRow: 0, inComponent: 0)
         }
     }
@@ -322,8 +353,8 @@ extension AddNewScheduleViewController:UITextFieldDelegate, UIPickerViewDelegate
         case PickerTag.Mode.rawValue:
             return self.modeDataSource.count
             
-//        case PickerTag.RepeatSchedule.rawValue:
-//            return self.repeatScheduleDataSource.count
+        case PickerTag.RepeatSchedule.rawValue:
+            return self.repeatScheduleDataSource.count
             
         default: return 0
         }
@@ -342,8 +373,8 @@ extension AddNewScheduleViewController:UITextFieldDelegate, UIPickerViewDelegate
         case PickerTag.Mode.rawValue:
             scheduleData.attendanceType = modeDataSource[row]
             
-//        case PickerTag.RepeatSchedule.rawValue:
-//            dataSource.selectedObj = repeatScheduleDataSource[row]
+        case PickerTag.RepeatSchedule.rawValue:
+            selectedScheduleWeek = repeatScheduleDataSource[row]
             
         default: break
         }
@@ -358,7 +389,7 @@ extension AddNewScheduleViewController:UITextFieldDelegate, UIPickerViewDelegate
             pickerLabel = UILabel()
 
             pickerLabel?.textAlignment = .center
-            pickerLabel?.minimumScaleFactor = 0.5
+            pickerLabel?.minimumScaleFactor = 0.8
             pickerLabel?.adjustsFontSizeToFitWidth = true
             pickerLabel?.numberOfLines = 0
         }
@@ -386,9 +417,14 @@ extension AddNewScheduleViewController:UITextFieldDelegate, UIPickerViewDelegate
         case PickerTag.Mode.rawValue:
             return self.modeDataSource[row]
             
-//        case PickerTag.RepeatSchedule.rawValue:
-//            return self.repeatScheduleDataSource[row]
-            
+        case PickerTag.RepeatSchedule.rawValue:
+            guard let startDate =  self.repeatScheduleDataSource[row].startDate,
+                  let endDate = self.repeatScheduleDataSource[row].endDate else {
+                return ""
+            }
+            let week = "Week \(row+1): "
+            let dates = "\(startDate.getDateString(format: "MMM-dd")) to \(endDate.getDateString(format: "MMM-dd"))"
+            return week + dates
         default: return "NA"
         }
     }
@@ -454,7 +490,7 @@ extension AddNewScheduleViewController {
         }
     }
     
-    private func addNewSchedule(){
+    private func addNewSchedule() {
         guard scheduleData.isNotNil else {
             return
         }
@@ -522,6 +558,10 @@ extension AddNewScheduleViewController {
 
 extension AddNewScheduleViewController : RepeatScheduleDelegate{
     func actionDay() {
+        rescheduleFlowType = .date
+        picker.removeFromSuperview()
+        toolBar.removeFromSuperview()
+
         datepicker.datePickerMode = .date
         datepicker.maximumDate = Date()
         datepicker.autoresizingMask = .flexibleWidth
@@ -532,8 +572,38 @@ extension AddNewScheduleViewController : RepeatScheduleDelegate{
         self.view.addSubview(toolBar)
     }
     
+    struct RescheduleWeeks {
+        var startDate:Date?
+        var endDate:Date?
+    }
+    
     func actionWeek() {
+        rescheduleFlowType = .week
+        datepicker.removeFromSuperview()
+        toolBar.removeFromSuperview()
+        var endate = Date()
         
+        for _ in 0..<12 {
+            let startDate = endate.addDays(-6)
+            let week = RescheduleWeeks(startDate: startDate, endDate: endate)
+            repeatScheduleDataSource.append(week)
+            endate = startDate.addDays(-1)
+        }
+        
+        for (index,element) in repeatScheduleDataSource.enumerated() {
+            print("Week \(index+1):")
+            print("\(element.startDate?.getDateString(format: "MMM-dd") ?? "NA") to \(element.endDate?.getDateString(format: "MMM-dd") ?? "NA")")
+        }
+        
+        let pickerHeight:CGFloat = 250.0
+        picker.frame = CGRect(x: 0.0, y: UIScreen.main.bounds.size.height - pickerHeight, width: UIScreen.main.bounds.size.width, height: pickerHeight)
+        toolBar.frame = CGRect(x: 0, y: UIScreen.main.bounds.size.height - pickerHeight, width: UIScreen.main.bounds.size.width, height: 50)
+        self.view.addSubview(picker)
+        self.view.addSubview(toolBar)
+        picker.tag = PickerTag.RepeatSchedule.rawValue
+        picker.reloadAllComponents()
+        self.pickerView(self.picker, didSelectRow: 0, inComponent: 0)
+
     }
     
     

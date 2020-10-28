@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -87,7 +87,7 @@
                                 <rect key="frame" x="8" y="127.5" width="304" height="54.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="tNa-kh-SLR">
-                                        <rect key="frame" x="0.0" y="0.0" width="101.5" height="54.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="76" height="54.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="D4n-aK-56F">
                                                 <rect key="frame" x="0.0" y="17" width="20" height="20"/>
@@ -97,25 +97,37 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Professor Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uwz-dd-b97">
-                                                <rect key="frame" x="25" y="9" width="76.5" height="36"/>
+                                                <rect key="frame" x="25" y="0.0" width="51" height="54"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="jZi-F7-v4d">
-                                        <rect key="frame" x="101.5" y="0.0" width="101" height="54.5"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Awy-nF-eEV">
+                                        <rect key="frame" x="76" y="0.0" width="76" height="54.5"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XPo-9G-Db4" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="57" height="54.5"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Xp-8m-5cZ" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="76" height="54.5"/>
+                                                <state key="normal" title="Schedule"/>
+                                                <connections>
+                                                    <action selector="actionReschedule:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="3lo-sh-Dzx"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="jZi-F7-v4d">
+                                        <rect key="frame" x="152" y="0.0" width="76" height="54.5"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XPo-9G-Db4" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="43" height="54.5"/>
                                                 <state key="normal" title="Delete"/>
                                                 <connections>
                                                     <action selector="actionDeleteSchedule:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="3wf-ex-akz"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vd4-nR-TM0" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
-                                                <rect key="frame" x="62" y="0.0" width="39" height="54.5"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vd4-nR-TM0" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
+                                                <rect key="frame" x="48" y="0.0" width="28" height="54.5"/>
                                                 <state key="normal" title="Edit"/>
                                                 <connections>
                                                     <action selector="actionEditSchedule:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="HdT-Id-m38"/>
@@ -124,10 +136,10 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="7Bg-Qc-K5B">
-                                        <rect key="frame" x="202.5" y="0.0" width="101.5" height="54.5"/>
+                                        <rect key="frame" x="228" y="0.0" width="76" height="54.5"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ay-6K-U8E" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="101.5" height="54.5"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ay-6K-U8E" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="76" height="54.5"/>
                                                 <state key="normal" title="Join"/>
                                                 <connections>
                                                     <action selector="actionJoinSchedule:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Abk-P9-Ro0"/>
@@ -153,6 +165,7 @@
                 <outlet property="buttonDelete" destination="XPo-9G-Db4" id="0Ru-97-9uk"/>
                 <outlet property="buttonEdit" destination="9Ay-6K-U8E" id="wkD-E0-wVo"/>
                 <outlet property="buttonJoin" destination="vd4-nR-TM0" id="bzp-rF-X2H"/>
+                <outlet property="buttonReschedule" destination="3Xp-8m-5cZ" id="rcD-a2-v2d"/>
                 <outlet property="labelLectureMode" destination="5PA-13-Wfr" id="Gpb-np-tru"/>
                 <outlet property="labelLectureTiming" destination="gJI-UE-Njq" id="CZs-Kp-trD"/>
                 <outlet property="labelProfessorName" destination="uwz-dd-b97" id="Qc4-Mt-KEj"/>

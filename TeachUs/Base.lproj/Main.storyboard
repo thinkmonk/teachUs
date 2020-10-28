@@ -5633,7 +5633,7 @@ Form Library</string>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="TqV-uc-8mi"/>
-                        <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.92941176470588238" green="0.95294117647058818" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="5Y1-d2-UXT" firstAttribute="top" secondItem="TqV-uc-8mi" secondAttribute="top" constant="10" id="1Rr-aw-OXt"/>
                             <constraint firstItem="5Y1-d2-UXT" firstAttribute="centerX" secondItem="TqV-uc-8mi" secondAttribute="centerX" id="BhB-Ea-vkd"/>
@@ -5789,7 +5789,7 @@ Form Library</string>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ws5-IC-h2o"/>
-                        <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.92941176470588238" green="0.95294117647058818" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="JJN-qr-No0" firstAttribute="trailing" secondItem="b7w-39-1oo" secondAttribute="trailing" id="9gc-q7-iJ3"/>
                             <constraint firstItem="ws5-IC-h2o" firstAttribute="trailing" secondItem="C9R-91-qsz" secondAttribute="trailing" id="MUC-yb-3jc"/>
@@ -5828,7 +5828,7 @@ Form Library</string>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Adp-Wk-6cy"/>
-                        <color key="backgroundColor" red="0.92549019607843142" green="0.95294117647058818" blue="0.97254901960784312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.92941176470588238" green="0.95294117647058818" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Adp-Wk-6cy" firstAttribute="bottom" secondItem="gfZ-4y-aDM" secondAttribute="bottom" id="EnS-aN-Ljh"/>
                             <constraint firstItem="gfZ-4y-aDM" firstAttribute="leading" secondItem="Adp-Wk-6cy" secondAttribute="leading" constant="15" id="G3z-WO-l7d"/>
@@ -6341,7 +6341,7 @@ Form Library</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4g0-Pr-WYY">
-                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
+                                <rect key="frame" x="15" y="44" width="345" height="734"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="iHG-o9-G98" id="XlB-Kg-Ert"/>
@@ -6350,12 +6350,12 @@ Form Library</string>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="evl-OE-VpP"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.92941176470588238" green="0.95294117647058818" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="evl-OE-VpP" firstAttribute="trailing" secondItem="4g0-Pr-WYY" secondAttribute="trailing" id="c5i-3c-nHO"/>
+                            <constraint firstItem="evl-OE-VpP" firstAttribute="trailing" secondItem="4g0-Pr-WYY" secondAttribute="trailing" constant="15" id="c5i-3c-nHO"/>
                             <constraint firstItem="evl-OE-VpP" firstAttribute="bottom" secondItem="4g0-Pr-WYY" secondAttribute="bottom" id="vKB-xH-oDl"/>
                             <constraint firstItem="4g0-Pr-WYY" firstAttribute="top" secondItem="evl-OE-VpP" secondAttribute="top" id="vhl-eE-fax"/>
-                            <constraint firstItem="4g0-Pr-WYY" firstAttribute="leading" secondItem="evl-OE-VpP" secondAttribute="leading" id="yK7-d6-fmK"/>
+                            <constraint firstItem="4g0-Pr-WYY" firstAttribute="leading" secondItem="evl-OE-VpP" secondAttribute="leading" constant="15" id="yK7-d6-fmK"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="vze-rb-rKn"/>

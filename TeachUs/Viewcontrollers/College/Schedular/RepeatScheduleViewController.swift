@@ -8,40 +8,112 @@
 
 import UIKit
 
-class RepeatScheduleViewController: UIViewController {
+class RepeatScheduleViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    var dateSelected:Date?
+    var fromDate:Date?
+    var toDate:Date?
     var classId:String?
     var scheduleDetails:ClassScheduleDetails?
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.addGradientToNavBar()
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
-        guard let dateObjs = dateSelected else {
+        tableView.register(UINib(nibName: "ScheduleDetailsTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.schdeduleDetailsCellId)
+
+        guard let fromDateObjs = fromDate, let toDate = toDate else {
             return
         }
-        getScheduleDetails(between: dateObjs.getDateString(format: "YYYY-MM-dd"), dateObjs.getDateString(format: "YYYY-MM-dd"))
+        getScheduleDetails(between: fromDateObjs.getDateString(format: "YYYY-MM-dd"), toDate.getDateString(format: "YYYY-MM-dd"))
     }
     
-    func makeDataSource() {
-        
-    }
 
 }
 
+extension RepeatScheduleViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        self.scheduleDetails?.schedules?.count ?? 0
+
+    }
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        self.scheduleDetails?.schedules?[section].scheduleDetails?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell:ScheduleDetailsTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.schdeduleDetailsCellId, for: indexPath)  as! ScheduleDetailsTableViewCell
+        guard let scheduleObj = self.scheduleDetails?.schedules?[indexPath.section].scheduleDetails?[indexPath.row] else { return UITableViewCell() }
+        cell.setUpCell(details: scheduleObj, cellType: .reschedule)
+        cell.delegate = self
+        cell.buttonEdit.indexPath = indexPath
+        cell.buttonReschedule.indexPath = indexPath
+
+        cell.selectionStyle = .none
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 15
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.width(), height: 15))
+        headerView.backgroundColor = UIColor.clear
+        return headerView
+        
+    }
+}
+
+extension RepeatScheduleViewController: ScheduleDetailCellDelegate{
+    
+    func actionEditSchedule(_ sender: ButtonWithIndexPath) {
+        #if DEBUG
+        self.showAlertWithTitle("DEBUG MESSAGE", alertMessage: "Implement this: actionEditSchedule")
+        #endif
+    }
+    
+    func actionReschedule(_ sender: ButtonWithIndexPath) {
+        guard let indexPath = sender.indexPath, let schedule = self.scheduleDetails?.schedules?[indexPath.section].scheduleDetails?[indexPath.row] else {
+            return
+        }
+        let okAction = {
+            self.addNewSchedule(for: schedule)
+        }
+        let cancelAction = { }
+        
+        self.showAlertWithTitleAndCompletionHandlers(nil, alertMessage: "Are you sure you want to schdule this lecture?", okButtonString: "Schedule", canelString: "Cancel", okAction: okAction, cancelAction: cancelAction)
+    }
+    
+    func actionJoinSchedule(_ sender: ButtonWithIndexPath) {
+        /*
+         Abstract method, do nothing
+         */
+    }
+    
+    func actionDeleteSchedule(_ sender: ButtonWithIndexPath) {
+        /*
+         Abstract method, do nothing
+         */
+    }
+    
+}
+
+
 extension RepeatScheduleViewController {
-    func getScheduleDetails(between toDate:String, _ fromDate:String) {
+    func getScheduleDetails(between fromDate:String, _ toDate:String) {
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()
         manager.url = URLConstants.CollegeURL.collegeScheduleDetails
-        let parameters = [
+        let parameters:[String:Any] = [
             "college_code" : "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
             "class_id" : self.classId ?? "",
             "to_date" : toDate,
-            "from_date" : fromDate        ] as [String : Any]
+            "from_date" : fromDate ]
         
         manager.apiPostWithDataResponse(apiName: "Get College Schedules Details", parameters:parameters, completionHandler: { [weak self] (result, code, response)  in
             LoadingActivityHUD.hideProgressHUD()
@@ -50,7 +122,17 @@ extension RepeatScheduleViewController {
                 let decoder = JSONDecoder()
                 self.scheduleDetails = try decoder.decode(ClassScheduleDetails.self, from: response)
                 if !(self.scheduleDetails?.schedules?.isEmpty ?? true) {
-                    self.makeDataSource()
+                    self.tableView.reloadData()
+                }else {
+                    _ = { self.navigationController?.popViewController(animated: true) }
+                    _ = {  }
+                    self.showAlertWithTitleAndCompletionHandlers(nil, alertMessage: "No schedules available for selected date", okButtonString: "Ok", canelString: nil) {
+                        self.navigationController?.popViewController(animated: true)
+                    } cancelAction: {
+                        /* a strack method*/
+                    }
+
+                    
                 }
             } catch let error{
                 print("err", error)
@@ -61,4 +143,76 @@ extension RepeatScheduleViewController {
         }
     }
     
+}
+
+extension RepeatScheduleViewController {
+    private func addNewSchedule(for scheduleData:ScheduleDetail) {
+        guard let classId = self.classId else {
+            return
+        }
+
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        
+        let manager = NetworkHandler()
+        manager.url = URLConstants.CollegeURL.addSchedule
+        
+        let scheduleParams:[String:Any] = [
+            "lecture_date": "\(Date().getDateString(format: "YYYY-MM-dd"))",
+            "from_time": "\(scheduleData.fromTime ?? "")",
+            "to_time": "\(scheduleData.toTime ?? "")",
+            "class_id": scheduleData.classId ?? "",
+            "class_name": scheduleData.className ?? "",
+            "subject_id" : scheduleData.subjectId ?? "",
+            "subject_name" : scheduleData.subjectName ?? "",
+            "professor_id" : "\(scheduleData.professorId ?? "")",
+            "professor_name" : "\(scheduleData.professorName ?? "")",
+            "professor_email" : "\(scheduleData.professorEmail ?? "")",
+            "attendance_type" : "\(scheduleData.attendanceType ?? "")"
+        ]
+        
+        var requestString  =  ""
+        if let theJSONData = try? JSONSerialization.data(withJSONObject: [scheduleParams],options: []) {
+            let theJSONText = String(data: theJSONData,encoding: .ascii)
+            requestString = theJSONText!
+            print("requestString = \(theJSONText!)")
+        }
+        
+        let parameters: [String:Any] = [
+            "college_code" : "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+            "class_id" : classId,
+            "schedule_list" : requestString
+        ]
+        //apiPostWithDataResponse apiPostResponseString
+        manager.apiPostWithDataResponse(apiName: "Add new schedule", parameters:parameters, completionHandler: { [weak self] (result, code, response)  in
+            LoadingActivityHUD.hideProgressHUD()
+            guard let `self` = self else { return }
+            if code == 200 {
+                do {
+                    let dictionary = try JSONSerialization.jsonObject(with: response, options: .allowFragments) as? [String:Any]
+                    let message = dictionary?["message"] as? String
+                    let okAction: () -> () = {
+                        for controller in self.navigationController!.viewControllers as Array {
+                            if controller.isKind(of: CollegeScheduleDetailsViewController.self) {
+                                self.navigationController?.popToViewController(controller, animated: true)
+                                break
+                            }
+                        }
+                    }
+                    let cancelAction: () -> () = { }
+                    self.showAlertWithTitleAndCompletionHandlers("Success",
+                                                                 alertMessage: message ?? "",
+                                                                 okButtonString: "Ok",
+                                                                 canelString: nil,
+                                                                 okAction: okAction,
+                                                                 cancelAction: cancelAction)
+                }
+                catch {
+                }
+            }
+        }) { (error, code, message) in
+            LoadingActivityHUD.hideProgressHUD()
+            print(message)
+        }
+
+    }
 }

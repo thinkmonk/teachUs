@@ -11,12 +11,14 @@ import UIKit
 enum DetaillCellType{
     case lectureDetails
     case liveLecture
+    case reschedule
 }
 
 protocol ScheduleDetailCellDelegate:class {
     func actionDeleteSchedule(_ sender: ButtonWithIndexPath)
     func actionEditSchedule(_ sender: ButtonWithIndexPath)
     func actionJoinSchedule(_ sender: ButtonWithIndexPath)
+    func actionReschedule(_ sender: ButtonWithIndexPath)
 }
 
 class ScheduleDetailsTableViewCell: UITableViewCell {
@@ -30,21 +32,43 @@ class ScheduleDetailsTableViewCell: UITableViewCell {
     @IBOutlet weak var buttonDelete: ButtonWithIndexPath!
     @IBOutlet weak var buttonJoin: ButtonWithIndexPath!
     @IBOutlet weak var buttonEdit: ButtonWithIndexPath!
+    @IBOutlet weak var buttonReschedule: ButtonWithIndexPath!
     
     weak var delegate : ScheduleDetailCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        buttonReschedule.makeButtonwith(background: Constants.colors.themeBlue, fontColor: .white, cornerRadius: 0, borderColor: UIColor.white.cgColor, borderWidth: 0)
+    }
+    
+    func setUpUI(for cellType:DetaillCellType) {
+        buttonReschedule.isHidden = true
+        buttonEdit.isHidden = true
+        buttonDelete.isHidden = true
+        stackViewJoin.isHidden = true
+
+        switch cellType {
+        case .lectureDetails:
+            buttonEdit.isHidden = false
+            buttonDelete.isHidden = false
+
+        case .reschedule:
+            buttonEdit.isHidden = false
+            buttonReschedule.isHidden = false
+            
+        case .liveLecture:
+            stackViewJoin.isHidden = false
+        }
     }
     
     func setUpCell(details: ScheduleDetail, cellType: DetaillCellType) {
-        stackViewJoin.isHidden = cellType == .lectureDetails
+        self.setUpUI(for: cellType)
         
         if let fromTime = details.fromTime, let toTime = details.toTime{
-            let font = UIFont.boldSystemFont(ofSize: 14)
+            let font = UIFont.boldSystemFont(ofSize: 15)
             let attributes: [NSAttributedString.Key: Any] = [
                 .font: font,
-                .foregroundColor: UIColor.darkGray,
+                .foregroundColor: UIColor.black,
             ]
 
             let firstString = NSMutableAttributedString(string: fromTime.convert24hrTimeto12Hr(), attributes: attributes)
@@ -74,5 +98,8 @@ class ScheduleDetailsTableViewCell: UITableViewCell {
 
     }
 
-
+    @IBAction func actionReschedule(_ sender: ButtonWithIndexPath) {
+        delegate?.actionReschedule(sender)
+    }
+    
 }

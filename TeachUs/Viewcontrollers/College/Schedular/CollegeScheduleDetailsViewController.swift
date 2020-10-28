@@ -37,6 +37,11 @@ class CollegeScheduleDetailsViewController: BaseViewController {
         getScheduleDetails(between: Date().getDateString(format: "YYYY-MM-dd"), Date().addDays(7).getDateString(format: "YYYY-MM-dd"))
     }
     
+    override func refresh(sender: AnyObject) {
+        getScheduleDetails(between: Date().getDateString(format: "YYYY-MM-dd"), Date().addDays(7).getDateString(format: "YYYY-MM-dd"))
+        super.refresh(sender: sender)
+    }
+    
     func makeDataSource(){
         arrayDataSource.removeAll()
         
@@ -129,6 +134,11 @@ extension CollegeScheduleDetailsViewController: UITableViewDataSource, UITableVi
             let cell:ScheduleDetailsTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.schdeduleDetailsCellId, for: indexPath)  as! ScheduleDetailsTableViewCell
             guard let scheduleObj = dataSource.attachedObject as? ScheduleDetail else { return UITableViewCell() }
             cell.setUpCell(details: scheduleObj, cellType: .lectureDetails)
+            cell.buttonDelete.indexPath = indexPath
+            cell.buttonEdit.indexPath = indexPath
+            cell.buttonReschedule.indexPath = indexPath
+            cell.buttonJoin.indexPath = indexPath
+            
             cell.delegate = self
             cell.selectionStyle = .none
             return cell
@@ -161,9 +171,6 @@ extension CollegeScheduleDetailsViewController: ScheduleDetailCellDelegate{
         
         let dataSource = arrayDataSource[indexPath.section]
         guard let scheduleObj = dataSource.attachedObject as? ScheduleDetail else { return }
-        
-        self.deleteSchedule(for: scheduleObj)
-        
         self.showAlertWithTitleAndCompletionHandlers("Delete Schedule!",
                                                      alertMessage: "Are you sure you want to delete this schedule",
                                                      okButtonString: "YES",
@@ -173,9 +180,6 @@ extension CollegeScheduleDetailsViewController: ScheduleDetailCellDelegate{
     }
     
     func actionEditSchedule(_ sender: ButtonWithIndexPath) {
-        
-        
-        
         
         #if DEBUG
         self.showAlertWithTitle("DEBUG MESSAGE", alertMessage: "Implement this: actionEditSchedule")
@@ -188,7 +192,12 @@ extension CollegeScheduleDetailsViewController: ScheduleDetailCellDelegate{
         #endif
     }
     
-    
+    func actionReschedule(_ sender: ButtonWithIndexPath) {
+        #if DEBUG
+        self.showAlertWithTitle("DEBUG MESSAGE", alertMessage: "Implement this: actionReschedule")
+        #endif
+
+    }
 }
 
 extension CollegeScheduleDetailsViewController: DatePickerDelegate {
@@ -210,7 +219,7 @@ extension CollegeScheduleDetailsViewController {
             "college_code" : "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
             "class_id" : schedule.classId ?? "",
             "to_date" : toDate,
-            "from_date" : fromDate        ]
+            "from_date" : "2020-8-18"        ]
         
         manager.apiPostWithDataResponse(apiName: "Get College Schedules Details", parameters:parameters, completionHandler: { [weak self] (result, code, response)  in
             LoadingActivityHUD.hideProgressHUD()
