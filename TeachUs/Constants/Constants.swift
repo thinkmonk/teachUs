@@ -77,6 +77,7 @@ public struct Constants {
         static let themePurple = UIColor(red: 108/255, green: 96/255, blue: 200/255, alpha: 1)
         static let themeLightBlue = UIColor(red: 237/255, green: 243/255, blue: 247/255, alpha: 1)
         static let themeMainBlue = UIColor(red: 12/255, green: 28/255, blue: 95/255, alpha: 1)
+        static let backgroundColor = UIColor.rgbColor(237,243,247)
 
     }
     
@@ -122,6 +123,9 @@ public struct Constants {
         static let examHomeView = "ExamHomeViewControllerId"
         static let examWebView = "ExamWebViewControllerId"
         static let repeatScheduleList = "RepeatScheduleViewControllerId"
+        static let addNewScheduleId = "AddNewScheduleViewControllerId"
+        static let lecturerScheduleDetails = "lecturerScheduleDetails"
+        static let lecturerScheduleList = "lecturerScheduleList"
     }
     
     struct UserDefaults {

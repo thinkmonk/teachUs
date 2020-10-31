@@ -15,7 +15,7 @@ class CollegeSchedulerListViewController: BaseViewController {
     @IBOutlet weak var tableviewScheduleList: UITableView!
     @IBOutlet weak var buttonLiveLectures: UIButton!
     var parentNavigationController : UINavigationController?
-    var collegeScheduleList:CollegeSchedule?
+    var collegeScheduleList:ClassScheduleDetails?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +43,7 @@ class CollegeSchedulerListViewController: BaseViewController {
 
     
     
-    func getClassSchedule(){
+    func getClassSchedule() {
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()
         manager.url = URLConstants.CollegeURL.collegeschedule
@@ -56,7 +56,7 @@ class CollegeSchedulerListViewController: BaseViewController {
             guard let `self` = self else { return }
             do{
                 let decoder = JSONDecoder()
-                self.collegeScheduleList = try decoder.decode(CollegeSchedule.self, from: response)
+                self.collegeScheduleList = try decoder.decode(ClassScheduleDetails.self, from: response)
                 if !(self.collegeScheduleList?.schedules?.isEmpty ?? true){
                     self.tableviewScheduleList.reloadData()
                     self.buttonLiveLectures.isHidden = false

@@ -1,39 +1,35 @@
 //
-//  CollegeScheduleDetailsViewController.swift
+//  ScheduleDetailsViewController.swift
 //  TeachUs
 //
-//  Created by iOS on 12/09/20.
+//  Created by iOS on 31/10/20.
 //  Copyright © 2020 TeachUs. All rights reserved.
 //
 
 import UIKit
 
-class CollegeScheduleDetailsViewController: BaseViewController {
+class ScheduleDetailsViewController: BaseViewController {
 
-    @IBOutlet weak var tableviewScheduleDetails: UITableView!
-    var scheduleDetails:ClassScheduleDetails?
-    var arrayDataSource = [ScheduleDetailDataSource]()
+    @IBOutlet weak var tableview: UITableView!
     var schedule : Schedule!
-    
-    let locale = NSLocale.current
-    var datePicker : UIDatePicker!
-    let toolBar = UIToolbar()
-    lazy var slideInTransitioningDelegate = SlideInPresentationManager()
+    var scheduleDetails:ClassScheduleDetails?
     private var currentToDate:String!
     private var currentFromDate:String!
+    var arrayDataSource = [ScheduleDetailDataSource]()
+    lazy var slideInTransitioningDelegate = SlideInPresentationManager()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addGradientToNavBar()
-        tableviewScheduleDetails.register(UINib(nibName: "ScheduleDetailsTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.schdeduleDetailsCellId)
-        tableviewScheduleDetails.register(UINib(nibName: "ScheduleDateTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.scheduleDetailsDateCellId)
-        tableviewScheduleDetails.register(UINib(nibName: "AddNewScheduleTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.collegeAddNewSchedule)
+        view.backgroundColor = Constants.colors.backgroundColor
+        tableview.register(UINib(nibName: "ScheduleDateTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.scheduleDetailsDateCellId)
 
-        tableviewScheduleDetails.dataSource = self
-        tableviewScheduleDetails.delegate  = self
-        tableviewScheduleDetails.estimatedRowHeight = 44.0
-        tableviewScheduleDetails.rowHeight = UITableViewAutomaticDimension
-        tableviewScheduleDetails.addSubview(refreshControl)
+        tableview.register(UINib(nibName: "ScheduleDetailsTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.schdeduleDetailsCellId)
+        tableview.estimatedRowHeight = 44.0
+        tableview.rowHeight = UITableViewAutomaticDimension
+        tableview.addSubview(refreshControl)
+
     }
     
     override func refresh(sender: AnyObject) {
@@ -48,13 +44,10 @@ class CollegeScheduleDetailsViewController: BaseViewController {
         super.viewDidAppear(animated)
         self.refresh(sender: self)
     }
-    
+
     func makeDataSource() {
         arrayDataSource.removeAll()
-        
-        let addbuttonDs = ScheduleDetailDataSource(detailsCell: .AddSchedule, detailsObject: nil)
-        arrayDataSource.append(addbuttonDs)
-        
+                
         for schedule in self.scheduleDetails?.schedules ?? [] {
             let dateString = schedule.date?.getDateDisplayString()
             let dateDs = ScheduleDetailDataSource(detailsCell: .ScheduleDate, detailsObject: dateString)
@@ -65,9 +58,9 @@ class CollegeScheduleDetailsViewController: BaseViewController {
                 arrayDataSource.append(scheduleDS)
             }
         }
-        self.tableviewScheduleDetails.reloadData()
+        self.tableview.reloadData()
     }
-    
+
     @IBAction func actionDatePicker(_ sender: Any) {
         // DatePicker //datePickerVcId
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -81,19 +74,17 @@ class CollegeScheduleDetailsViewController: BaseViewController {
         present(detailsViewController, animated: true, completion: nil)
         
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Constants.segues.toAddNewSchedule {
-            if let destinationVc = segue.destination as? AddNewScheduleViewController {
-                guard let classId = schedule.classId , let className = schedule.scheduleClass else { return }
-                destinationVc.scheduleData = SchedularData(classId: classId, className: className, flowType: .collegeAdd)
-            }
-        }
-    }
-    
+
 }
 
-extension CollegeScheduleDetailsViewController: UITableViewDataSource, UITableViewDelegate {
+extension ScheduleDetailsViewController: DatePickerDelegate {
+    func dateSelected(from fromDate: Date, to toDate: Date) {
+        getScheduleDetails(to: toDate.getDateString(format: "YYYY-MM-dd"), from: fromDate.getDateString(format: "YYYY-MM-dd"))
+    }
+}
+
+
+extension ScheduleDetailsViewController : UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return arrayDataSource.count
     }
@@ -105,13 +96,7 @@ extension CollegeScheduleDetailsViewController: UITableViewDataSource, UITableVi
         let dataSource = arrayDataSource[indexPath.section]
         
         switch dataSource.cellType {
-        case .AddSchedule:
-            let cell:AddNewScheduleTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.collegeAddNewSchedule, for: indexPath)  as! AddNewScheduleTableViewCell
-            cell.delegate = self
-            cell.selectionStyle = .none
-            
-            return cell
-
+        
         case .ScheduleDate:
             let cell:ScheduleDateTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.scheduleDetailsDateCellId, for: indexPath)  as! ScheduleDateTableViewCell
             let dateString = dataSource.attachedObject as? String ?? "NA"
@@ -122,36 +107,30 @@ extension CollegeScheduleDetailsViewController: UITableViewDataSource, UITableVi
         case .SchdeuleDetails:
             let cell:ScheduleDetailsTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.schdeduleDetailsCellId, for: indexPath)  as! ScheduleDetailsTableViewCell
             guard let scheduleObj = dataSource.attachedObject as? ScheduleDetail else { return UITableViewCell() }
-            cell.setUpCell(details: scheduleObj, cellType: .lectureDetails)
+            cell.setUpCell(details: scheduleObj, cellType: scheduleObj.cellType)
             cell.buttonDelete.indexPath = indexPath
             cell.buttonEdit.indexPath = indexPath
-            cell.buttonReschedule.indexPath = indexPath
             cell.buttonJoin.indexPath = indexPath
             
             cell.delegate = self
             cell.selectionStyle = .none
             return cell
             
-        case .none:
+        default:
             return UITableViewCell()
         }
+        
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: tableviewScheduleDetails.width(), height: 15))
+        let footerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: tableview.width(), height: 15))
         footerView.backgroundColor = UIColor.clear
         return footerView
     }
-    
-}
 
-extension CollegeScheduleDetailsViewController: AddNewScheduleDelegate {
-    func addNewSchdule() {
-        self.performSegue(withIdentifier: Constants.segues.toAddNewSchedule, sender: self)
-    }
 }
-
-extension CollegeScheduleDetailsViewController: ScheduleDetailCellDelegate{
+// MARK:- ScheduleDetailCellDelegate
+extension ScheduleDetailsViewController: ScheduleDetailCellDelegate {
     func actionDeleteSchedule(_ sender: ButtonWithIndexPath) {
         guard let indexPath = sender.indexPath else {
             return
@@ -192,37 +171,44 @@ extension CollegeScheduleDetailsViewController: ScheduleDetailCellDelegate{
                                               professor: professor,
                                               attendanceType: "Online",
                                               editScheduleId: id,
-                                              flowType: .collegeUpdate)
+                                              flowType: .professorUpdate)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let detailsVc:AddNewScheduleViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.addNewScheduleId) as! AddNewScheduleViewController
         detailsVc.scheduleData = schdeulardDetails
         self.navigationController?.pushViewController(detailsVc, animated: true)
     }
-}
-
-extension CollegeScheduleDetailsViewController: DatePickerDelegate {
-    func dateSelected(from fromDate: Date, to toDate: Date) {
-        getScheduleDetails(to: toDate.getDateString(format: "YYYY-MM-dd"), from: fromDate.getDateString(format: "YYYY-MM-dd"))
+    
+    func actionJoinSchedule(_ sender: ButtonWithIndexPath) {
+        guard let indexPath = sender.indexPath,
+              let schedule = arrayDataSource[indexPath.section].attachedObject as? ScheduleDetail,
+              let scheduleURL = schedule.scheduleHostURL,
+              let url = URL(string: scheduleURL) else {
+            return
+        }
+        UIApplication.shared.open(url)
     }
-    
-    
+
 }
 
-extension CollegeScheduleDetailsViewController {
+
+//MARK:- API CALL
+
+extension ScheduleDetailsViewController {
     func getScheduleDetails(to toDate:String, from fromDate:String) {
         self.currentToDate = toDate
         self.currentFromDate = fromDate
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()
-        manager.url = URLConstants.CollegeURL.collegeScheduleDetails
+        manager.url = URLConstants.ProfessorURL.professorScheduleDetails
         let parameters = [
             "college_code" : "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
             "class_id" : schedule.classId ?? "",
+            "subject_id": schedule.subjectId ?? "",
             "to_date" : toDate,
             "from_date" : fromDate
         ]
         
-        manager.apiPostWithDataResponse(apiName: "Get College Schedules Details", parameters:parameters, completionHandler: { [weak self] (result, code, response)  in
+        manager.apiPostWithDataResponse(apiName: "Get Professor Schedules Details", parameters:parameters, completionHandler: { [weak self] (result, code, response)  in
             LoadingActivityHUD.hideProgressHUD()
             guard let `self` = self else { return }
             do{
@@ -241,11 +227,14 @@ extension CollegeScheduleDetailsViewController {
     }
     
     func deleteSchedule(for schedule: ScheduleDetail) {
-        guard let scheduleId = schedule.attendanceScheduleId else {
+        guard let scheduleId = schedule.attendanceScheduleId,
+              let deleteFlagString = schedule.deleteFlag,
+              let deleteFlag = Int(deleteFlagString) else {
             return
         }
         let manager = NetworkHandler()
-        manager.url = URLConstants.CollegeURL.deleteScheduleDelete
+        
+        manager.url = deleteFlag.boolValue ? URLConstants.ProfessorURL.scheduleDelete : URLConstants.ProfessorURL.scheduleRejectRequest
         let parameters = [
             "college_code" : "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
             "attendance_schedule_id" : scheduleId
@@ -258,6 +247,18 @@ extension CollegeScheduleDetailsViewController {
                 let toDate = self.currentToDate,
                 let fromDate = self.currentFromDate
                 else { return }
+            
+            if code == 200 {
+                do {
+                    let dictionary = try JSONSerialization.jsonObject(with: response, options: .allowFragments) as? [String:Any]
+                    let message = dictionary?["message"] as? String
+                    self.showAlertWithTitle("Success", alertMessage: message ?? "")
+                }
+                catch let error{
+                    print(error.localizedDescription)
+                }
+            }
+            
             self.getScheduleDetails(to: toDate, from: fromDate)
         }) { (error, code, message) in
             print(message)

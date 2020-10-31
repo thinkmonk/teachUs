@@ -30,4 +30,21 @@ extension String {
         return dateFormatter.string(from: date)
 
     }
+    
+    func timeToDate(format:String,for dateObj:Date = Date()) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        guard let dateWithTime = dateFormatter.date(from: self) else {
+            print("Date Conversion Failed")
+            return Date()
+        }
+        dateFormatter.timeZone = TimeZone.current
+        let calendare = Calendar.current
+        let actualDate = calendare.dateComponents([.hour, .minute, .second], from: dateWithTime)
+        let hour = actualDate.hour ?? 0
+        let mins = actualDate.minute ?? 0
+        let secs = actualDate.second ?? 0
+        return Calendar.current.date(bySettingHour: hour, minute: mins, second: secs, of: dateObj) ?? Date()
+
+    }
 }

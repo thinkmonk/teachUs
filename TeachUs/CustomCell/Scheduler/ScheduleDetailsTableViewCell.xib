@@ -10,31 +10,31 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="scheduleDetailsCellId" rowHeight="190" id="KGk-i7-Jjw" customClass="ScheduleDetailsTableViewCell" customModule="TeachUs" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="190"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="scheduleDetailsCellId" rowHeight="194" id="KGk-i7-Jjw" customClass="ScheduleDetailsTableViewCell" customModule="TeachUs" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="559" height="194"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="190"/>
+                <rect key="frame" x="0.0" y="0.0" width="559" height="194"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="zvv-eZ-GTK">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="190"/>
+                        <rect key="frame" x="0.0" y="0.0" width="559" height="194"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="R91-zL-gKI">
-                                <rect key="frame" x="8" y="8" width="304" height="54.5"/>
+                                <rect key="frame" x="8" y="8" width="543" height="56"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="YVs-LA-d4O">
-                                        <rect key="frame" x="0.0" y="0.0" width="147" height="54.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="266.5" height="56"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xbH-bv-UpQ">
-                                                <rect key="frame" x="0.0" y="17.5" width="20" height="20"/>
+                                                <rect key="frame" x="0.0" y="18" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="CdG-ca-mig"/>
                                                     <constraint firstAttribute="width" constant="20" id="k6F-Dz-y4G"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lecture timing" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJI-UE-Njq">
-                                                <rect key="frame" x="25" y="18.5" width="122" height="18"/>
+                                                <rect key="frame" x="25" y="19" width="241.5" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -42,16 +42,16 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C98-r3-1xb">
-                                        <rect key="frame" x="157" y="0.0" width="147" height="54.5"/>
+                                        <rect key="frame" x="276.5" y="0.0" width="266.5" height="56"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Mode:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bQM-5L-QJt">
-                                                <rect key="frame" x="0.0" y="0.0" width="43.5" height="54.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="43.5" height="56"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" red="0.46666666666666667" green="0.46666666666666667" blue="0.46666666666666667" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Online" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5PA-13-Wfr">
-                                                <rect key="frame" x="43.5" y="0.0" width="103.5" height="54.5"/>
+                                                <rect key="frame" x="43.5" y="0.0" width="223" height="56"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -61,20 +61,20 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="syL-lz-YhP">
-                                <rect key="frame" x="8" y="67.5" width="304" height="55"/>
+                                <rect key="frame" x="8" y="69" width="543" height="56"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Trm-NB-bFm">
-                                        <rect key="frame" x="0.0" y="0.0" width="304" height="55"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="543" height="56"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="371-9c-MSa">
-                                                <rect key="frame" x="0.0" y="17.5" width="20" height="20"/>
+                                                <rect key="frame" x="0.0" y="18" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" id="2UP-fK-MdL"/>
                                                     <constraint firstAttribute="height" constant="20" id="ckE-sa-3gp"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RBY-LF-h5g">
-                                                <rect key="frame" x="25" y="18.5" width="279" height="18"/>
+                                                <rect key="frame" x="25" y="19" width="518" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -83,66 +83,76 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Jcw-L4-FMz">
-                                <rect key="frame" x="8" y="127.5" width="304" height="54.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Jcw-L4-FMz">
+                                <rect key="frame" x="8" y="130" width="543" height="56"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="tNa-kh-SLR">
-                                        <rect key="frame" x="0.0" y="0.0" width="76" height="54.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="36.5" height="56"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="D4n-aK-56F">
-                                                <rect key="frame" x="0.0" y="17" width="20" height="20"/>
+                                                <rect key="frame" x="0.0" y="18" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="Jzl-d1-mIK"/>
                                                     <constraint firstAttribute="width" constant="20" id="tru-DO-wfF"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Professor Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uwz-dd-b97">
-                                                <rect key="frame" x="25" y="0.0" width="51" height="54"/>
+                                                <rect key="frame" x="25" y="0.0" width="11.5" height="56"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Awy-nF-eEV">
-                                        <rect key="frame" x="76" y="0.0" width="76" height="54.5"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="yao-PS-T0I">
+                                        <rect key="frame" x="41.5" y="0.0" width="501.5" height="56"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Xp-8m-5cZ" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="76" height="54.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="79.5" height="56"/>
+                                                <inset key="contentEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
                                                 <state key="normal" title="Schedule"/>
                                                 <connections>
                                                     <action selector="actionReschedule:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="3lo-sh-Dzx"/>
                                                 </connections>
                                             </button>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="jZi-F7-v4d">
-                                        <rect key="frame" x="152" y="0.0" width="76" height="54.5"/>
-                                        <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XPo-9G-Db4" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="43" height="54.5"/>
+                                                <rect key="frame" x="84.5" y="0.0" width="79.5" height="56"/>
+                                                <inset key="contentEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
                                                 <state key="normal" title="Delete"/>
                                                 <connections>
                                                     <action selector="actionDeleteSchedule:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="3wf-ex-akz"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vd4-nR-TM0" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
-                                                <rect key="frame" x="48" y="0.0" width="28" height="54.5"/>
+                                                <rect key="frame" x="169" y="0.0" width="79.5" height="56"/>
+                                                <inset key="contentEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
                                                 <state key="normal" title="Edit"/>
                                                 <connections>
-                                                    <action selector="actionEditSchedule:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="HdT-Id-m38"/>
+                                                    <action selector="actionEdit:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="jZu-Gd-0Tt"/>
                                                 </connections>
                                             </button>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="7Bg-Qc-K5B">
-                                        <rect key="frame" x="228" y="0.0" width="76" height="54.5"/>
-                                        <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ay-6K-U8E" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="76" height="54.5"/>
+                                                <rect key="frame" x="253.5" y="0.0" width="79" height="56"/>
+                                                <inset key="contentEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
                                                 <state key="normal" title="Join"/>
                                                 <connections>
                                                     <action selector="actionJoinSchedule:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Abk-P9-Ro0"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iwE-Ea-eKb" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
+                                                <rect key="frame" x="337.5" y="0.0" width="79.5" height="56"/>
+                                                <inset key="contentEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
+                                                <state key="normal" title="Attendance"/>
+                                                <connections>
+                                                    <action selector="actionRecordAttendance:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="iSB-3k-JeF"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hr1-aI-qVQ" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
+                                                <rect key="frame" x="422" y="0.0" width="79.5" height="56"/>
+                                                <inset key="contentEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
+                                                <state key="normal" title="Start Lecture"/>
+                                                <connections>
+                                                    <action selector="actionStartLecture:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="qWD-ck-XCD"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -163,17 +173,17 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="buttonDelete" destination="XPo-9G-Db4" id="0Ru-97-9uk"/>
-                <outlet property="buttonEdit" destination="9Ay-6K-U8E" id="wkD-E0-wVo"/>
-                <outlet property="buttonJoin" destination="vd4-nR-TM0" id="bzp-rF-X2H"/>
+                <outlet property="buttonEdit" destination="vd4-nR-TM0" id="fIc-C5-wB3"/>
+                <outlet property="buttonJoin" destination="9Ay-6K-U8E" id="ULh-I4-oET"/>
+                <outlet property="buttonRecordAttendance" destination="iwE-Ea-eKb" id="d5N-Y9-JCo"/>
                 <outlet property="buttonReschedule" destination="3Xp-8m-5cZ" id="rcD-a2-v2d"/>
+                <outlet property="buttonStartLecture" destination="hr1-aI-qVQ" id="mGs-st-vfe"/>
                 <outlet property="labelLectureMode" destination="5PA-13-Wfr" id="Gpb-np-tru"/>
                 <outlet property="labelLectureTiming" destination="gJI-UE-Njq" id="CZs-Kp-trD"/>
                 <outlet property="labelProfessorName" destination="uwz-dd-b97" id="Qc4-Mt-KEj"/>
                 <outlet property="labelSubjectName" destination="RBY-LF-h5g" id="GoC-A9-qtx"/>
-                <outlet property="stackViewJoin" destination="7Bg-Qc-K5B" id="Yei-rU-rOn"/>
-                <outlet property="stactViewEditAndDelete" destination="jZi-F7-v4d" id="aY2-y4-3B1"/>
             </connections>
-            <point key="canvasLocation" x="137.68115942028987" y="165.40178571428569"/>
+            <point key="canvasLocation" x="263.04347826086956" y="192.85714285714286"/>
         </tableViewCell>
     </objects>
 </document>

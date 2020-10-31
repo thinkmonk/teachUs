@@ -12,20 +12,43 @@ struct SchedularData {
     var date: Date? = nil
     var fromTime: Date?  = nil
     var toTime: Date? = nil
-    var classId: String
-    var className: String
+    var classId: String?
+    var className: String?
     var subject: ScheduleSubject? = nil
     var professor: ScheduleProfessor? = nil
     var attendanceType: String? = nil
+    var editScheduleId: Int?
+    var flowType: AddUpdateType
     
     var isNotNil : Bool {
-        return date != nil &&
-        fromTime != nil &&
-        toTime != nil &&
-        subject != nil &&
-        professor != nil &&
-        attendanceType != nil
+        switch flowType {
+        case .collegeAdd, .collegeUpdate:
+            return date != nil &&
+            fromTime != nil &&
+            toTime != nil &&
+            subject != nil &&
+            professor != nil &&
+            attendanceType != nil
+
+        case .professorAdd, .professorUpdate:
+            return date != nil &&
+            fromTime != nil &&
+            toTime != nil &&
+            subject != nil &&
+            attendanceType != nil
+
+        default:
+            return false
+        }
+        
     }
+}
+
+enum AddUpdateType {
+    case collegeAdd
+    case collegeUpdate
+    case professorAdd
+    case professorUpdate
 }
 
 enum PickerTag:Int, CaseIterable {
@@ -101,7 +124,7 @@ class AddNewScheduleViewController: BaseViewController {
         tableview.rowHeight = UITableViewAutomaticDimension
         tableview.separatorStyle = .none
         buttonAddSchedule.themeRedButton()
-        buttonAddSchedule.isHidden = true
+        buttonAddSchedule.isHidden = !scheduleData.isNotNil
         getScheduleSubject()
         setUpToolBar()
     }
@@ -166,27 +189,29 @@ class AddNewScheduleViewController: BaseViewController {
             return
         }
         
-        switch indexPath.section {
-        case PickerTag.Date.rawValue:
+        let dataSource = arrayDataSource[indexPath.section]
+        
+        switch dataSource.cellType {
+        case .Date:
             scheduleData.date = datepicker.date
             validateAndReloadTable(row: indexPath.section)
             
-        case PickerTag.FromTime.rawValue:
+        case .FromTime:
             scheduleData.fromTime = datepicker.date
             validateAndReloadTable(row: indexPath.section)
             
-        case PickerTag.ToTime.rawValue:
+        case .ToTime:
             scheduleData.toTime = datepicker.date
             validateAndReloadTable(row: indexPath.section)
             
-        case PickerTag.SubjectName.rawValue:
+        case .SubjectName:
             guard let subject = scheduleData.subject else { return }
             scheduleData.professor = nil
             tableview.reloadData()
             self.getScheduleProfessor(for: subject)
             
         default:
-            validateAndReloadTable(row: picker.tag)
+            validateAndReloadTable(row: indexPath.section)
         }
 
         activeTextField.resignFirstResponder()
@@ -194,9 +219,10 @@ class AddNewScheduleViewController: BaseViewController {
     
     func makeDataSource() {
         arrayDataSource.removeAll()
-        
+        if scheduleData.flowType == .professorUpdate ||  scheduleData.flowType == .collegeUpdate {
         let repeatDS = AddNewScheduleDataSource(detailsCell: .RepeatSchedule, detailsObject: nil)
         arrayDataSource.append(repeatDS)
+        }
         
         let dateDs = AddNewScheduleDataSource(detailsCell: .Date, detailsObject: nil)
         arrayDataSource.append(dateDs)
@@ -210,7 +236,7 @@ class AddNewScheduleViewController: BaseViewController {
         let subjectName = AddNewScheduleDataSource(detailsCell: .SubjectName, detailsObject: subjectList)
         arrayDataSource.append(subjectName)
         
-        if !(professorList?.scheduleProfessor?.isEmpty ?? true) {
+        if !(professorList?.scheduleProfessor?.isEmpty ?? true) && (scheduleData.flowType == .collegeAdd || scheduleData.flowType == .collegeUpdate) {
             let professorName = AddNewScheduleDataSource(detailsCell: .ProfessorName, detailsObject: professorList)
             arrayDataSource.append(professorName)
         }
@@ -221,8 +247,22 @@ class AddNewScheduleViewController: BaseViewController {
         self.tableview.reloadData()
     }
     
-    @IBAction func actionAdd(_ sender: Any) {
-        self.addNewSchedule()
+    @IBAction func actionAdd(_ sender: Any) {        
+        switch scheduleData.flowType {
+        case .collegeAdd:
+            addNewSchedule()
+            
+        case .collegeUpdate:
+            updateSchedule()
+            
+        case .professorAdd:
+            break
+            
+            
+        case .professorUpdate:
+            break
+        }
+        
     }
     
 }
@@ -316,26 +356,38 @@ extension AddNewScheduleViewController:UITextFieldDelegate, UIPickerViewDelegate
         
         let dataSource = arrayDataSource[indexPath.section]
         
-        if dataSource.cellType == .Date {
+        switch dataSource.cellType {
+        case .Date:
             datepicker.datePickerMode = .date
             datepicker.minimumDate = Date()
+            datepicker.tag = dataSource.cellType.rawValue
             textField.inputView = datepicker
             textField.inputAccessoryView = toolBar
-        }
-        else if dataSource.cellType == .FromTime || dataSource.cellType == .ToTime {
+            
+        case .FromTime:
             datepicker.datePickerMode = .time
+            datepicker.date = scheduleData.fromTime ?? Date()
+            datepicker.tag = dataSource.cellType.rawValue
             textField.inputView = datepicker
             textField.inputAccessoryView = toolBar
             datepicker.minimumDate = Calendar.current.date(byAdding: .day, value: -1, to: Date())
-
-        }
-        else {
+            
+        case .ToTime:
+            datepicker.datePickerMode = .time
+            datepicker.date = scheduleData.toTime ?? Date()
+            textField.inputView = datepicker
+            datepicker.tag = dataSource.cellType.rawValue
+            textField.inputAccessoryView = toolBar
+            datepicker.minimumDate = Calendar.current.date(byAdding: .day, value: -1, to: Date())
+            
+        default:
             textField.inputView = picker
             textField.inputAccessoryView = toolBar
             picker.tag = dataSource.cellType.rawValue
             picker.reloadAllComponents()
             self.pickerView(self.picker, didSelectRow: 0, inComponent: 0)
         }
+        
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -438,12 +490,20 @@ extension AddNewScheduleViewController {
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         
         let manager = NetworkHandler()
-        manager.url = URLConstants.CollegeURL.getScheduleSubject
+        var parameters:[String:Any] = [String:Any]()
         
-        let parameters = [
-            "college_code" : "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
-            "class_id" : "\(scheduleData.classId)",
-        ]
+        switch scheduleData.flowType {
+        case .collegeUpdate, .collegeAdd:
+            manager.url = URLConstants.CollegeURL.getScheduleSubject
+            parameters["college_code"] = "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)"
+            parameters["class_id"] = "\(scheduleData.classId ?? "")"
+
+            
+        case .professorUpdate,.professorAdd:
+            manager.url = URLConstants.ProfessorURL.getScheduleSubject
+            parameters["college_code"] = "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)"
+        }
+        
         manager.apiPostWithDataResponse(apiName: "Get Schedule Class", parameters:parameters, completionHandler: { [weak self] (result, code, response)  in
             LoadingActivityHUD.hideProgressHUD()
             guard let `self` = self else { return }
@@ -453,7 +513,13 @@ extension AddNewScheduleViewController {
             } catch let error{
                 print("err", error)
             }
-            self.makeDataSource()
+            guard let subject =  self.scheduleData.subject else {
+                self.makeDataSource()
+                return
+            }
+            if self.scheduleData.flowType == .collegeAdd || self.scheduleData.flowType == .collegeUpdate {
+                self.getScheduleProfessor(for: subject)
+            }
         }) { (error, code, message) in
             LoadingActivityHUD.hideProgressHUD()
             print(message)
@@ -471,10 +537,10 @@ extension AddNewScheduleViewController {
         
         let parameters = [
             "college_code" : "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
-            "class_id" : "\(scheduleData.classId)",
+            "class_id" : "\(scheduleData.classId ?? "")",
             "subject_id": "\(subjectId)"
         ]
-        manager.apiPostWithDataResponse(apiName: "Get Schedule Class", parameters:parameters, completionHandler: { [weak self] (result, code, response)  in
+        manager.apiPostWithDataResponse(apiName: "Get Professor for subject", parameters:parameters, completionHandler: { [weak self] (result, code, response)  in
             LoadingActivityHUD.hideProgressHUD()
             guard let `self` = self else { return }
             do{
@@ -501,10 +567,10 @@ extension AddNewScheduleViewController {
         
         let scheduleParams:[String:Any] = [
             "lecture_date": "\(scheduleData.date?.getDateString(format: "YYYY-MM-dd") ?? "")",
-            "from_time": "\(scheduleData.fromTime?.getDateString(format: "HH:MM:SS") ?? "")",
-            "to_time": "\(scheduleData.toTime?.getDateString(format: "HH:MM:SS") ?? "")",
-            "class_id": "\(scheduleData.classId)",
-            "class_name": "\(scheduleData.className)",
+            "from_time": "\(scheduleData.fromTime?.getDateString(format: "HH:mm:ss") ?? "")",
+            "to_time": "\(scheduleData.toTime?.getDateString(format: "HH:mm:ss") ?? "")",
+            "class_id": "\(scheduleData.classId ?? "")",
+            "class_name": "\(scheduleData.className ?? "")",
             "subject_id" : scheduleData.subject?.subjectId ?? "",
             "subject_name" : scheduleData.subject?.subjectName ?? "",
             "professor_id" : "\(scheduleData.professor?.professorId ?? "")",
@@ -544,6 +610,59 @@ extension AddNewScheduleViewController {
                                                                  okAction: okAction,
                                                                  cancelAction: cancelAction)
                 }
+                catch let error{
+                    print(error.localizedDescription)
+                }
+            }
+            self.makeDataSource()
+        }) { (error, code, message) in
+            LoadingActivityHUD.hideProgressHUD()
+            print(message)
+        }
+    }
+    
+    private func updateSchedule() {
+        guard scheduleData.isNotNil else {
+            return
+        }
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        
+        let manager = NetworkHandler()
+        manager.url = URLConstants.CollegeURL.updateSchedule
+        
+        let scheduleParams:[String:Any] = [
+            "lecture_date": "\(scheduleData.date?.getDateString(format: "YYYY-MM-dd") ?? "")",
+            "from_time": "\(scheduleData.fromTime?.getDateString(format: "HH:mm:ss") ?? "")",
+            "to_time": "\(scheduleData.toTime?.getDateString(format: "HH:mm:ss") ?? "")",
+            "class_id": "\(scheduleData.classId)",
+            "subject_id" : scheduleData.subject?.subjectId ?? "",
+            "subject_name" : scheduleData.subject?.subjectName ?? "",
+            "professor_id" : "\(scheduleData.professor?.professorId ?? "")",
+            "professor_name" : "\(scheduleData.professor?.professorName ?? "")",
+            "professor_email" : "\(scheduleData.professor?.email ?? "")",
+            "attendance_type" : "\(scheduleData.attendanceType ?? "")",
+            "attendance_schedule_id" : "\(scheduleData.editScheduleId ?? 0)",
+            "college_code" : "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)"
+        ]
+        
+        manager.apiPostWithDataResponse(apiName: "update schedule", parameters:scheduleParams, completionHandler: { [weak self] (result, code, response)  in
+            LoadingActivityHUD.hideProgressHUD()
+            guard let `self` = self else { return }
+            if code == 200 {
+                do {
+                    let dictionary = try JSONSerialization.jsonObject(with: response, options: .allowFragments) as? [String:Any]
+                    let message = dictionary?["message"] as? String
+                    let okAction: () -> () = {
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                    let cancelAction: () -> () = { }
+                    self.showAlertWithTitleAndCompletionHandlers("Success",
+                                                                 alertMessage: message ?? "",
+                                                                 okButtonString: "Ok",
+                                                                 canelString: nil,
+                                                                 okAction: okAction,
+                                                                 cancelAction: cancelAction)
+                }
                 catch {
                 }
             }
@@ -552,7 +671,6 @@ extension AddNewScheduleViewController {
             LoadingActivityHUD.hideProgressHUD()
             print(message)
         }
-
     }
 }
 

@@ -41,8 +41,8 @@ class LeftMenuViewController: BaseViewController, UIGestureRecognizerDelegate {
     var studentImageDataSource = ["attendanceReport", "syllabus", "feedback", "notice", "notification", "notes", "logout"]
     
     //    var professorDataSource = ["Attendance", "Syllabus Status", "Logs", "Logout"]
-    var professorDataSource = ["Attendance", "Syllabus", "My Logs", "Notice", "Notification" ,"Notes", "Logout"]
-    var professorImageDataSource = ["attendanceReport", "syllabus", "logs", "notice", "notification", "notes", "logout"]
+    var professorDataSource = ["Attendance", "Syllabus", "My Logs", "Notice", "Notification" ,"Notes", "Schedule", "Logout"]
+    var professorImageDataSource = ["attendanceReport", "syllabus", "logs", "notice", "notification", "notes", "notes", "logout"]
     
 //    var collegeSuperAdminDataSource = ["Attendance(Reports)","Attendance(Events)", "Syllabus Status","Add/Remove Admin","Feedback", "Logs", "Notice", "Notification" , "Notes","Request","Logout" ]
     var collegeSuperAdminDataSource = UserManager.sharedUserManager.allowedCollegeUserTabs.map({$0.titleName })

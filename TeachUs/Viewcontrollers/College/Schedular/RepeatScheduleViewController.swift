@@ -49,9 +49,9 @@ extension RepeatScheduleViewController: UITableViewDataSource, UITableViewDelega
         let cell:ScheduleDetailsTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.schdeduleDetailsCellId, for: indexPath)  as! ScheduleDetailsTableViewCell
         guard let scheduleObj = self.scheduleDetails?.schedules?[indexPath.section].scheduleDetails?[indexPath.row] else { return UITableViewCell() }
         cell.setUpCell(details: scheduleObj, cellType: .reschedule)
-        cell.delegate = self
         cell.buttonEdit.indexPath = indexPath
         cell.buttonReschedule.indexPath = indexPath
+        cell.delegate = self
 
         cell.selectionStyle = .none
         return cell
@@ -72,9 +72,33 @@ extension RepeatScheduleViewController: UITableViewDataSource, UITableViewDelega
 extension RepeatScheduleViewController: ScheduleDetailCellDelegate{
     
     func actionEditSchedule(_ sender: ButtonWithIndexPath) {
-        #if DEBUG
-        self.showAlertWithTitle("DEBUG MESSAGE", alertMessage: "Implement this: actionEditSchedule")
-        #endif
+        guard let indexPath = sender.indexPath,
+              let scheduleObj = scheduleDetails?.schedules?[indexPath.section].scheduleDetails?[indexPath.row],
+              let classId = scheduleObj.classId,
+              let className = scheduleObj.className,
+              let idString = scheduleObj.attendanceScheduleId,
+              let id = Int(idString)
+        else {
+            return
+        }
+        let fromTime = scheduleObj.fromTime?.timeToDate(format: "HH:mm:ss")
+        let toTime = scheduleObj.toTime?.timeToDate(format: "HH:mm:ss")
+        let subject = ScheduleSubject(subjectId: scheduleObj.subjectId, subjectName: scheduleObj.subjectName)
+        let professor = ScheduleProfessor(professorId: scheduleObj.professorId, professorName: scheduleObj.professorName, email: scheduleObj.professorEmail)
+        let schdeulardDetails = SchedularData(date: Date(),
+                                              fromTime: fromTime,
+                                              toTime:toTime ,
+                                              classId: classId,
+                                              className: className,
+                                              subject: subject,
+                                              professor: professor,
+                                              attendanceType: "Online",
+                                              editScheduleId: id,
+                                              flowType: .collegeUpdate)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let detailsVc:AddNewScheduleViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.addNewScheduleId) as! AddNewScheduleViewController
+        detailsVc.scheduleData = schdeulardDetails
+        self.navigationController?.pushViewController(detailsVc, animated: true)
     }
     
     func actionReschedule(_ sender: ButtonWithIndexPath) {
@@ -127,7 +151,12 @@ extension RepeatScheduleViewController {
                     _ = { self.navigationController?.popViewController(animated: true) }
                     _ = {  }
                     self.showAlertWithTitleAndCompletionHandlers(nil, alertMessage: "No schedules available for selected date", okButtonString: "Ok", canelString: nil) {
-                        self.navigationController?.popViewController(animated: true)
+                        for controller in self.navigationController!.viewControllers as Array {
+                            if controller.isKind(of: CollegeScheduleDetailsViewController.self) {
+                                self.navigationController!.popToViewController(controller, animated: true)
+                                break
+                            }
+                        }
                     } cancelAction: {
                         /* a strack method*/
                     }

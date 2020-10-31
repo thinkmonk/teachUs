@@ -21,6 +21,6 @@ extension Date{
     
     func addDays(_ value:Int) -> Date{
          return Calendar.current.date(byAdding: .day, value: value, to: self) ?? Date()
-        
     }
+
 }

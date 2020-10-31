@@ -12,6 +12,9 @@ enum DetaillCellType{
     case lectureDetails
     case liveLecture
     case reschedule
+    case professorHost
+    case professorRecordAttendance
+    case professorDefault
 }
 
 protocol ScheduleDetailCellDelegate:class {
@@ -19,6 +22,48 @@ protocol ScheduleDetailCellDelegate:class {
     func actionEditSchedule(_ sender: ButtonWithIndexPath)
     func actionJoinSchedule(_ sender: ButtonWithIndexPath)
     func actionReschedule(_ sender: ButtonWithIndexPath)
+    func actionStart(_ sender: ButtonWithIndexPath)
+    func actionRecordAttendance(_ sender: ButtonWithIndexPath)
+}
+
+extension ScheduleDetailCellDelegate {
+    func actionDeleteSchedule(_ sender: ButtonWithIndexPath)
+    {
+        /*
+         base method
+         */
+    }
+    
+    func actionEditSchedule(_ sender: ButtonWithIndexPath) {
+        /*
+         base method
+         */
+    }
+    
+    func actionJoinSchedule(_ sender: ButtonWithIndexPath) {
+        /*
+         base method
+         */
+    }
+    
+    func actionReschedule(_ sender: ButtonWithIndexPath) {
+        /*
+         base method
+         */
+    }
+    
+    func actionStart(_ sender: ButtonWithIndexPath) {
+        /*
+         base method
+        */
+    }
+    
+    func actionRecordAttendance(_ sender: ButtonWithIndexPath) {
+        /*
+         base method
+        */
+    }
+
 }
 
 class ScheduleDetailsTableViewCell: UITableViewCell {
@@ -27,25 +72,41 @@ class ScheduleDetailsTableViewCell: UITableViewCell {
     @IBOutlet weak var labelLectureMode: UILabel!
     @IBOutlet weak var labelSubjectName: UILabel!
     @IBOutlet weak var labelProfessorName: UILabel!
-    @IBOutlet weak var stactViewEditAndDelete: UIStackView!
-    @IBOutlet weak var stackViewJoin: UIStackView!
     @IBOutlet weak var buttonDelete: ButtonWithIndexPath!
     @IBOutlet weak var buttonJoin: ButtonWithIndexPath!
     @IBOutlet weak var buttonEdit: ButtonWithIndexPath!
     @IBOutlet weak var buttonReschedule: ButtonWithIndexPath!
+    @IBOutlet weak var buttonRecordAttendance: ButtonWithIndexPath!
+    @IBOutlet weak var buttonStartLecture: ButtonWithIndexPath!
     
     weak var delegate : ScheduleDetailCellDelegate?
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        buttonReschedule.indexPath = nil
+        buttonDelete.indexPath = nil
+        buttonJoin.indexPath = nil
+        buttonEdit.indexPath = nil
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        buttonReschedule.makeButtonwith(background: Constants.colors.themeBlue, fontColor: .white, cornerRadius: 0, borderColor: UIColor.white.cgColor, borderWidth: 0)
+        buttonDelete.themeRedButton()
+        buttonReschedule.makeButtonwith(background: Constants.colors.themePurple, fontColor: .white, cornerRadius: 0, borderColor: UIColor.white.cgColor, borderWidth: 0)
+        buttonJoin.makeButtonwith(background: Constants.colors.themePurple, fontColor: .white, cornerRadius: 0, borderColor: UIColor.white.cgColor, borderWidth: 0)
+        buttonRecordAttendance.makeButtonwith(background: Constants.colors.themePurple, fontColor: .white, cornerRadius: 0, borderColor: UIColor.white.cgColor, borderWidth: 0)
+        buttonStartLecture.makeButtonwith(background: Constants.colors.themePurple, fontColor: .white, cornerRadius: 0, borderColor: UIColor.white.cgColor, borderWidth: 0)
+        buttonEdit.makeButtonwith(background: Constants.colors.themeBlue, fontColor: .white, cornerRadius: 0, borderColor: UIColor.white.cgColor, borderWidth: 0)
+
     }
     
     func setUpUI(for cellType:DetaillCellType) {
         buttonReschedule.isHidden = true
         buttonEdit.isHidden = true
         buttonDelete.isHidden = true
-        stackViewJoin.isHidden = true
+        buttonJoin.isHidden = true
+        buttonRecordAttendance.isHidden = true
+        buttonStartLecture.isHidden = true
 
         switch cellType {
         case .lectureDetails:
@@ -57,14 +118,32 @@ class ScheduleDetailsTableViewCell: UITableViewCell {
             buttonReschedule.isHidden = false
             
         case .liveLecture:
-            stackViewJoin.isHidden = false
+            buttonJoin.isHidden = false
+            
+        case .professorHost:
+            buttonEdit.isHidden = false
+            buttonDelete.isHidden = false
+            labelProfessorName.isHidden = true
+            buttonStartLecture.isHidden = false
+            
+        case .professorRecordAttendance:
+            buttonEdit.isHidden = false
+            buttonDelete.isHidden = false
+            labelProfessorName.isHidden = true
+            buttonRecordAttendance.isHidden = false
+
+        case .professorDefault:
+            buttonEdit.isHidden = false
+            buttonDelete.isHidden = false
+            labelProfessorName.isHidden = true
+
         }
     }
     
     func setUpCell(details: ScheduleDetail, cellType: DetaillCellType) {
         self.setUpUI(for: cellType)
         
-        if let fromTime = details.fromTime, let toTime = details.toTime{
+        if let fromTime = details.fromTime, let toTime = details.toTime {
             let font = UIFont.boldSystemFont(ofSize: 15)
             let attributes: [NSAttributedString.Key: Any] = [
                 .font: font,
@@ -88,11 +167,6 @@ class ScheduleDetailsTableViewCell: UITableViewCell {
         delegate?.actionDeleteSchedule(sender)
     }
     
-    @IBAction func actionEditSchedule(_ sender: ButtonWithIndexPath) {
-        delegate?.actionEditSchedule(sender)
-
-    }
-    
     @IBAction func actionJoinSchedule(_ sender: ButtonWithIndexPath) {
         delegate?.actionJoinSchedule(sender)
 
@@ -102,4 +176,15 @@ class ScheduleDetailsTableViewCell: UITableViewCell {
         delegate?.actionReschedule(sender)
     }
     
+    @IBAction func actionEdit(_ sender: ButtonWithIndexPath) {
+        delegate?.actionEditSchedule(sender)
+    }
+    
+    @IBAction func actionRecordAttendance(_ sender: ButtonWithIndexPath) {
+        delegate?.actionStart(sender)
+    }
+    
+    @IBAction func actionStartLecture(_ sender: ButtonWithIndexPath) {
+        delegate?.actionRecordAttendance(sender)
+    }
 }

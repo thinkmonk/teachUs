@@ -219,24 +219,24 @@ class UserManager{
     
     //When user role is changed
     func setUserBasedOnRole() {
-        switch self.user {
-        case .student:
+        switch self.appUserCollegeDetails.role_id {
+        case LoginUserType.student.rawValue:
             UserManager.sharedUserManager.setLoginUserType(.student)
             
-        case .parents:
+        case LoginUserType.parents.rawValue:
             UserManager.sharedUserManager.setLoginUserType(.parents)
             
-        case .college:
+        case LoginUserType.college.rawValue:
             UserManager.sharedUserManager.setLoginUserType(.college)
             
-        case .professor:
+        case LoginUserType.professor.rawValue:
             UserManager.sharedUserManager.setLoginUserType(.professor)
             
-        case .exam:
+        case LoginUserType.exam.rawValue:
             UserManager.sharedUserManager.setLoginUserType(.exam)
             
         default:
-            break
+            logOutUser()
         }
 /*
         switch self.appUserCollegeDetails.role_id! {

@@ -85,6 +85,10 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
             professorNotes.parentNavigationController = self.parentNavigationController
             controllersArray.append(professorNotes)
 
+            let requestListVC:ScheduleListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.lecturerScheduleList) as! ScheduleListViewController
+            requestListVC.title = "Notes"
+            requestListVC.parentNavigationController = self.parentNavigationController
+            controllersArray.append(requestListVC)
             
             break
 
@@ -234,7 +238,7 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
                     requestListVC.parentNavigationController = self.parentNavigationController
                     controllersArray.append(requestListVC)
                     
-                case .scheduler: //"Request"
+                case .scheduler: //"Scheduler"
                     let requestListVC:CollegeSchedulerListViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.collegeScheduler) as! CollegeSchedulerListViewController
                     requestListVC.title = "\(tab.titleName)"
                     requestListVC.parentNavigationController = self.parentNavigationController
@@ -254,6 +258,8 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
             examVc.title = "Exam"
             examVc.parentNavigationController = self.parentNavigationController
             controllersArray.append(examVc)
+            break
+            
         }
         return controllersArray
 

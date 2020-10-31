@@ -32,10 +32,10 @@ extension String {
         return  returnValue
     }
     
-    func convertToDate() -> Date? {
+    func convertToDate(_ format:String? = "yyyy-MM-dd") -> Date? {
         let strDate = self
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.dateFormat = format
         let date = dateFormatter.date(from: strDate)
         return date ?? Date()
     }
