@@ -49,6 +49,12 @@ class StudentsListViewController: BaseViewController {
     var selectedAttendanceId:Int?
     var lectureDetails:EditAttendanceLectureInfo!
     var previousLectureAttendanceList:LastLectureAttendance?
+    
+    //For Scheduler Attendance flow
+    var isSchedularFlow:Bool = false
+
+    
+    
     var dispatchGroup = DispatchGroup()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -141,15 +147,25 @@ class StudentsListViewController: BaseViewController {
     
     func getListForAttendanceEdit(){
         let manager = NetworkHandler()
-        manager.url = URLConstants.ProfessorURL.getEditAttendanceData
         DispatchQueue.main.async {
             LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         }
+        var parameters = [String:String]()
+        if isSchedularFlow {
+            manager.url = URLConstants.ProfessorURL.scheduleAddAttendance
+            parameters = [
+                "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+                "attendance_schedule_id":"\(self.selectedAttendanceId ?? 0)"
+            ]
+        }
         
-        let parameters = [
-            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
-            "attendance_id":"\(self.selectedAttendanceId ?? 0)"
-        ]
+        if isEditAttendanceFlow{
+            manager.url = URLConstants.ProfessorURL.getEditAttendanceData
+            parameters = [
+                "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+                "attendance_id":"\(self.selectedAttendanceId ?? 0)"
+            ]
+        }
         manager.apiPost(apiName: "Get Edit Attendance data", parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
             if(code == 200){
@@ -183,6 +199,61 @@ class StudentsListViewController: BaseViewController {
                 self.showErrorAlert(ErrorType.ServerCallFailed, retry: { (retry) in
                     if(retry){
                         self.getListForAttendanceEdit()
+                    }
+                })
+            }
+            
+        }) { (error, code, errorMessage) in
+            LoadingActivityHUD.hideProgressHUD()
+            print(errorMessage)
+        }
+        
+    }
+    
+    func getListForSchedulerAttendance(){
+        let manager = NetworkHandler()
+        DispatchQueue.main.async {
+            LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        }
+        
+        manager.url = URLConstants.ProfessorURL.scheduleAddAttendance
+        let parameters = [
+            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+            "attendance_schedule_id":"\(self.selectedAttendanceId ?? 0)"
+        ]
+        manager.apiPost(apiName: "Get Edit Attendance data", parameters:parameters, completionHandler: { (result, code, response) in
+            LoadingActivityHUD.hideProgressHUD()
+            if(code == 200){
+                if let lectureInfo = response["lecture_info"] as? [String:Any]{
+                    self.lectureDetails = Mapper<EditAttendanceLectureInfo>().map(JSON:lectureInfo)
+                    
+                }
+                
+                if let studentDetailArray = response["attendance_data"] as? [[String:Any]]{
+                    for student in studentDetailArray{
+                        let studentDetail = Mapper<EnrolledStudentDetail>().map(JSON: student)
+                        self.arrayStudentsDetails.append(studentDetail!)
+                    }
+                }
+                
+                if (Int((self.arrayStudentsDetails.first?.studentRollNo)!)) != nil{
+                    self.arrayStudentsDetails.sort(by: {Int($0.studentRollNo!)! < Int($1.studentRollNo!)!})
+                }
+                else{
+                    self.arrayStudentsDetails.sort( by: {$0.studentRollNo!.localizedStandardCompare($1.studentRollNo!) == .orderedAscending})
+                    
+                }
+                if(self.arrayStudentsDetails.count > 0){
+                    self.numberOfLectures.value = Int(self.lectureDetails.numberOfLectures) ?? 1
+                    self.initDatPicker()
+                    self.initTimePickers()
+                    self.setUpTableView()
+                }
+            }
+            else{
+                self.showErrorAlert(ErrorType.ServerCallFailed, retry: { (retry) in
+                    if(retry){
+                        self.getListForSchedulerAttendance()
                     }
                 })
             }

@@ -188,6 +188,23 @@ extension ScheduleDetailsViewController: ScheduleDetailCellDelegate {
         }
         UIApplication.shared.open(url)
     }
+    
+    func actionRecordAttendance(_ sender: ButtonWithIndexPath) {
+        guard let indexPath = sender.indexPath,
+              let schedule = arrayDataSource[indexPath.section].attachedObject as? ScheduleDetail
+        else {
+            return
+        }
+
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let destinationVC:StudentsListViewController =  storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.studentList) as! StudentsListViewController
+        destinationVC.selectedAttendanceId = Int(schedule.attendanceScheduleId ?? "")
+        destinationVC.isSchedularFlow = true
+        self.navigationController?.pushViewController(destinationVC, animated: true)
+
+    }
+
 
 }
 
