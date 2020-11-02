@@ -106,6 +106,7 @@ class AddNewScheduleViewController: BaseViewController {
     private let picker = UIPickerView()
     private var datepicker = UIDatePicker()
     var scheduleData : SchedularData!
+    var isScheduleEditing:Bool = false
     
     enum RescheduleFlowType {
         case date
@@ -154,6 +155,7 @@ class AddNewScheduleViewController: BaseViewController {
         destinationViewContoller.fromDate = dateFrom
         destinationViewContoller.toDate = dateTo
         destinationViewContoller.classId = self.scheduleData.classId
+        destinationViewContoller.flowType = self.scheduleData.flowType
         self.navigationController?.pushViewController(destinationViewContoller, animated: true)
     }
     
@@ -208,7 +210,9 @@ class AddNewScheduleViewController: BaseViewController {
             guard let subject = scheduleData.subject else { return }
             scheduleData.professor = nil
             tableview.reloadData()
-            self.getScheduleProfessor(for: subject)
+            if self.scheduleData.flowType == .collegeAdd || self.scheduleData.flowType == .collegeUpdate {
+                self.getScheduleProfessor(for: subject)
+            }
             
         default:
             validateAndReloadTable(row: indexPath.section)
@@ -219,9 +223,9 @@ class AddNewScheduleViewController: BaseViewController {
     
     func makeDataSource() {
         arrayDataSource.removeAll()
-        if scheduleData.flowType == .professorUpdate ||  scheduleData.flowType == .collegeUpdate {
-        let repeatDS = AddNewScheduleDataSource(detailsCell: .RepeatSchedule, detailsObject: nil)
-        arrayDataSource.append(repeatDS)
+        if !isScheduleEditing {
+            let repeatDS = AddNewScheduleDataSource(detailsCell: .RepeatSchedule, detailsObject: nil)
+            arrayDataSource.append(repeatDS)
         }
         
         let dateDs = AddNewScheduleDataSource(detailsCell: .Date, detailsObject: nil)
@@ -249,18 +253,13 @@ class AddNewScheduleViewController: BaseViewController {
     
     @IBAction func actionAdd(_ sender: Any) {        
         switch scheduleData.flowType {
-        case .collegeAdd:
+        case .collegeAdd,
+             .professorAdd:
             addNewSchedule()
             
-        case .collegeUpdate:
+        case .collegeUpdate,
+             .professorUpdate:
             updateSchedule()
-            
-        case .professorAdd:
-            break
-            
-            
-        case .professorUpdate:
-            break
         }
         
     }
@@ -519,6 +518,8 @@ extension AddNewScheduleViewController {
             }
             if self.scheduleData.flowType == .collegeAdd || self.scheduleData.flowType == .collegeUpdate {
                 self.getScheduleProfessor(for: subject)
+            }else {
+                self.makeDataSource()
             }
         }) { (error, code, message) in
             LoadingActivityHUD.hideProgressHUD()
@@ -560,12 +561,13 @@ extension AddNewScheduleViewController {
         guard scheduleData.isNotNil else {
             return
         }
+        
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         
         let manager = NetworkHandler()
-        manager.url = URLConstants.CollegeURL.addSchedule
         
-        let scheduleParams:[String:Any] = [
+        
+        var scheduleParams:[String:Any] = [
             "lecture_date": "\(scheduleData.date?.getDateString(format: "YYYY-MM-dd") ?? "")",
             "from_time": "\(scheduleData.fromTime?.getDateString(format: "HH:mm:ss") ?? "")",
             "to_time": "\(scheduleData.toTime?.getDateString(format: "HH:mm:ss") ?? "")",
@@ -573,11 +575,20 @@ extension AddNewScheduleViewController {
             "class_name": "\(scheduleData.className ?? "")",
             "subject_id" : scheduleData.subject?.subjectId ?? "",
             "subject_name" : scheduleData.subject?.subjectName ?? "",
-            "professor_id" : "\(scheduleData.professor?.professorId ?? "")",
-            "professor_name" : "\(scheduleData.professor?.professorName ?? "")",
-            "professor_email" : "\(scheduleData.professor?.email ?? "")",
             "attendance_type" : "\(scheduleData.attendanceType ?? "")"
         ]
+
+        if scheduleData.flowType == .collegeAdd {
+            manager.url = URLConstants.CollegeURL.addSchedule
+            scheduleParams["professor_id"] = "\(scheduleData.professor?.professorId ?? "")"
+            scheduleParams["professor_name"] = "\(scheduleData.professor?.professorName ?? "")"
+            scheduleParams["professor_email"] = "\(scheduleData.professor?.email ?? "")"
+        }
+        
+        if scheduleData.flowType == .professorAdd {
+            manager.url = URLConstants.ProfessorURL.addSchedule
+        }
+
         
         var requestString  =  ""
         if let theJSONData = try? JSONSerialization.data(withJSONObject: [scheduleParams],options: []) {
@@ -586,11 +597,14 @@ extension AddNewScheduleViewController {
             print("requestString = \(theJSONText!)")
         }
         
-        let parameters: [String:Any] = [
+        var parameters: [String:Any] = [
             "college_code" : "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
-            "class_id" : "\(scheduleData.classId)",
             "schedule_list" : requestString
         ]
+        
+        if scheduleData.flowType == .collegeAdd {
+            parameters["class_id"] = "\(scheduleData.classId ?? "")"
+        }
         //apiPostWithDataResponse apiPostResponseString
         manager.apiPostWithDataResponse(apiName: "Add new schedule", parameters:parameters, completionHandler: { [weak self] (result, code, response)  in
             LoadingActivityHUD.hideProgressHUD()
@@ -628,22 +642,31 @@ extension AddNewScheduleViewController {
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         
         let manager = NetworkHandler()
-        manager.url = URLConstants.CollegeURL.updateSchedule
         
-        let scheduleParams:[String:Any] = [
-            "lecture_date": "\(scheduleData.date?.getDateString(format: "YYYY-MM-dd") ?? "")",
+        var scheduleParams:[String:Any] = [
+            "college_code" : "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+            "class_id": "\(scheduleData.classId ?? "")",
+            "subject_id" : scheduleData.subject?.subjectId ?? "",
             "from_time": "\(scheduleData.fromTime?.getDateString(format: "HH:mm:ss") ?? "")",
             "to_time": "\(scheduleData.toTime?.getDateString(format: "HH:mm:ss") ?? "")",
-            "class_id": "\(scheduleData.classId)",
-            "subject_id" : scheduleData.subject?.subjectId ?? "",
-            "subject_name" : scheduleData.subject?.subjectName ?? "",
-            "professor_id" : "\(scheduleData.professor?.professorId ?? "")",
-            "professor_name" : "\(scheduleData.professor?.professorName ?? "")",
-            "professor_email" : "\(scheduleData.professor?.email ?? "")",
-            "attendance_type" : "\(scheduleData.attendanceType ?? "")",
+            "lecture_date": "\(scheduleData.date?.getDateString(format: "YYYY-MM-dd") ?? "")",
             "attendance_schedule_id" : "\(scheduleData.editScheduleId ?? 0)",
-            "college_code" : "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)"
+            "attendance_type" : "\(scheduleData.attendanceType ?? "")",
+            "subject_name" : scheduleData.subject?.subjectName ?? "",
+            "class_name":"\(scheduleData.className ?? "")"
         ]
+        
+        if scheduleData.flowType == .collegeUpdate {
+            manager.url = URLConstants.CollegeURL.updateSchedule
+            scheduleParams["professor_id"] = "\(scheduleData.professor?.professorId ?? "")"
+            scheduleParams["professor_name"] = "\(scheduleData.professor?.professorName ?? "")"
+            scheduleParams["professor_email"] = "\(scheduleData.professor?.email ?? "")"
+        }
+        
+        if scheduleData.flowType == .professorUpdate {
+            manager.url = URLConstants.ProfessorURL.updateSchedule
+        }
+        
         
         manager.apiPostWithDataResponse(apiName: "update schedule", parameters:scheduleParams, completionHandler: { [weak self] (result, code, response)  in
             LoadingActivityHUD.hideProgressHUD()

@@ -175,6 +175,7 @@ extension ScheduleDetailsViewController: ScheduleDetailCellDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let detailsVc:AddNewScheduleViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.addNewScheduleId) as! AddNewScheduleViewController
         detailsVc.scheduleData = schdeulardDetails
+        detailsVc.isScheduleEditing = true
         self.navigationController?.pushViewController(detailsVc, animated: true)
     }
     

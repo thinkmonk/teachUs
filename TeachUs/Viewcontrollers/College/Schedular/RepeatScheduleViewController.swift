@@ -15,7 +15,7 @@ class RepeatScheduleViewController: BaseViewController {
     var toDate:Date?
     var classId:String?
     var scheduleDetails:ClassScheduleDetails?
-
+    var flowType:AddUpdateType!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,9 +94,10 @@ extension RepeatScheduleViewController: ScheduleDetailCellDelegate{
                                               professor: professor,
                                               attendanceType: "Online",
                                               editScheduleId: id,
-                                              flowType: .collegeUpdate)
+                                              flowType: self.flowType)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let detailsVc:AddNewScheduleViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.addNewScheduleId) as! AddNewScheduleViewController
+        detailsVc.isScheduleEditing = true
         detailsVc.scheduleData = schdeulardDetails
         self.navigationController?.pushViewController(detailsVc, animated: true)
     }
@@ -183,21 +184,43 @@ extension RepeatScheduleViewController {
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         
         let manager = NetworkHandler()
-        manager.url = URLConstants.CollegeURL.addSchedule
         
-        let scheduleParams:[String:Any] = [
-            "lecture_date": "\(Date().getDateString(format: "YYYY-MM-dd"))",
+//        let scheduleParams:[String:Any] = [
+//            "lecture_date": "\(Date().getDateString(format: "YYYY-MM-dd"))",
+//            "from_time": "\(scheduleData.fromTime ?? "")",
+//            "to_time": "\(scheduleData.toTime ?? "")",
+//            "class_id": scheduleData.classId ?? "",
+//            "class_name": scheduleData.className ?? "",
+//            "subject_id" : scheduleData.subjectId ?? "",
+//            "subject_name" : scheduleData.subjectName ?? "",
+//            "professor_id" : "\(scheduleData.professorId ?? "")",
+//            "professor_name" : "\(scheduleData.professorName ?? "")",
+//            "professor_email" : "\(scheduleData.professorEmail ?? "")",
+//            "attendance_type" : "\(scheduleData.attendanceType ?? "")"
+//        ]
+        
+        
+        var scheduleParams:[String:Any] = [
+            "lecture_date": "\(Date().getDateString(format: "YYYY-MM-dd") )",
             "from_time": "\(scheduleData.fromTime ?? "")",
             "to_time": "\(scheduleData.toTime ?? "")",
-            "class_id": scheduleData.classId ?? "",
-            "class_name": scheduleData.className ?? "",
+            "class_id": "\(scheduleData.classId ?? "")",
+            "class_name": "\(scheduleData.className ?? "")",
             "subject_id" : scheduleData.subjectId ?? "",
             "subject_name" : scheduleData.subjectName ?? "",
-            "professor_id" : "\(scheduleData.professorId ?? "")",
-            "professor_name" : "\(scheduleData.professorName ?? "")",
-            "professor_email" : "\(scheduleData.professorEmail ?? "")",
             "attendance_type" : "\(scheduleData.attendanceType ?? "")"
         ]
+        
+        if flowType == .collegeAdd || flowType == .collegeUpdate {
+            manager.url = URLConstants.CollegeURL.addSchedule
+            scheduleParams["professor_id"] = "\(scheduleData.professorId ?? "")"
+            scheduleParams["professor_name"] = "\(scheduleData.professorName ?? "")"
+            scheduleParams["professor_email"] = "\(scheduleData.professorEmail ?? "")"
+        }
+        
+        if flowType == .professorAdd || flowType == .professorUpdate {
+            manager.url = URLConstants.ProfessorURL.addSchedule
+        }
         
         var requestString  =  ""
         if let theJSONData = try? JSONSerialization.data(withJSONObject: [scheduleParams],options: []) {
@@ -206,12 +229,16 @@ extension RepeatScheduleViewController {
             print("requestString = \(theJSONText!)")
         }
         
-        let parameters: [String:Any] = [
+        var parameters: [String:Any] = [
             "college_code" : "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
             "class_id" : classId,
             "schedule_list" : requestString
         ]
-        //apiPostWithDataResponse apiPostResponseString
+        
+        if flowType == .collegeAdd {
+            parameters["class_id"] = "\(classId)"
+        }
+
         manager.apiPostWithDataResponse(apiName: "Add new schedule", parameters:parameters, completionHandler: { [weak self] (result, code, response)  in
             LoadingActivityHUD.hideProgressHUD()
             guard let `self` = self else { return }
@@ -222,6 +249,10 @@ extension RepeatScheduleViewController {
                     let okAction: () -> () = {
                         for controller in self.navigationController!.viewControllers as Array {
                             if controller.isKind(of: CollegeScheduleDetailsViewController.self) {
+                                self.navigationController?.popToViewController(controller, animated: true)
+                                break
+                            }
+                            if controller.isKind(of: ScheduleListViewController.self) {
                                 self.navigationController?.popToViewController(controller, animated: true)
                                 break
                             }

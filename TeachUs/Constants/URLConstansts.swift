@@ -139,7 +139,9 @@ public struct URLConstants{
         static let scheduleRejectRequest =              BaseUrl.baseURLV1 + "/professor/schedule_rejectrequest"
         static let scheduleDelete =                     BaseUrl.baseURLV1 + "/professor/schedule_delete"
         static let getScheduleSubject =                 BaseUrl.baseURLV1 + "/professor/schedule_subject"
-        
+        static let addSchedule  =                       BaseUrl.baseURLV1 + "/professor/add_schedule"
+        static let updateSchedule =                     BaseUrl.baseURLV1 + "/professor/update_schedule"
+
 
 
     }
