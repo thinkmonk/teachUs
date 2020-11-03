@@ -111,7 +111,7 @@ extension RepeatScheduleViewController: ScheduleDetailCellDelegate{
         }
         let cancelAction = { }
         
-        self.showAlertWithTitleAndCompletionHandlers(nil, alertMessage: "Are you sure you want to schdule this lecture?", okButtonString: "Schedule", canelString: "Cancel", okAction: okAction, cancelAction: cancelAction)
+        self.showAlertWithTitleAndCompletionHandlers(nil, alertMessage: "Are you sure you want to schedule this lecture?", okButtonString: "Schedule", canelString: "Cancel", okAction: okAction, cancelAction: cancelAction)
     }
     
     func actionJoinSchedule(_ sender: ButtonWithIndexPath) {
@@ -133,7 +133,13 @@ extension RepeatScheduleViewController {
     func getScheduleDetails(between fromDate:String, _ toDate:String) {
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()
-        manager.url = URLConstants.CollegeURL.collegeScheduleDetails
+        
+        if flowType == .professorUpdate || flowType == .professorAdd {
+            manager.url = URLConstants.ProfessorURL.professorScheduleDetails
+        }else {
+            manager.url = URLConstants.CollegeURL.collegeScheduleDetails
+        }
+        
         let parameters:[String:Any] = [
             "college_code" : "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
             "class_id" : self.classId ?? "",

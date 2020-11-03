@@ -417,7 +417,10 @@ extension AddNewScheduleViewController:UITextFieldDelegate, UIPickerViewDelegate
         switch pickerView.tag {
         case PickerTag.SubjectName.rawValue:
             scheduleData.subject = subjectList.scheduleSubject?[row]
-            
+            if scheduleData.flowType == .professorAdd || scheduleData.flowType == .professorUpdate {
+                scheduleData.classId = scheduleData.subject?.classId ?? ""
+                scheduleData.className = scheduleData.subject?.className ?? ""
+            }
         case PickerTag.ProfessorName.rawValue:
             scheduleData.professor = professorList.scheduleProfessor?[row]
             
