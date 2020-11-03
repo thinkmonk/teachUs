@@ -130,6 +130,13 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
             studentNotesVC.parentNavigationController = self.parentNavigationController
             controllersArray.append(studentNotesVC)
             
+            //StudentsScheduleViewController
+            let scheduleVc:StudentsScheduleViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.studentScheduleListId) as! StudentsScheduleViewController
+            scheduleVc.title = "Schedule"
+            scheduleVc.isParentsProfileFlow = false
+            scheduleVc.parentNavigationController = self.parentNavigationController
+            controllersArray.append(scheduleVc)
+
             break
             
             
@@ -157,6 +164,13 @@ class HomeTabsViewController: ButtonBarPagerTabStripViewController {
             collegeNotificationListVC.title = "Notification"
             collegeNotificationListVC.parentNavigationController = self.parentNavigationController
             controllersArray.append(collegeNotificationListVC)
+            
+            let scheduleVc:StudentsScheduleViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.studentScheduleListId) as! StudentsScheduleViewController
+            scheduleVc.title = "Schedule"
+            scheduleVc.isParentsProfileFlow = true
+            scheduleVc.parentNavigationController = self.parentNavigationController
+            controllersArray.append(scheduleVc)
+
             break
 
             

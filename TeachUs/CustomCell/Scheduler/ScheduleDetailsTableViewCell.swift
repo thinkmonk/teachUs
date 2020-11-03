@@ -15,6 +15,8 @@ enum DetaillCellType{
     case professorHost
     case professorRecordAttendance
     case professorDefault
+    case studentSchedule
+    case parentsSchedule
 }
 
 protocol ScheduleDetailCellDelegate:class {
@@ -137,6 +139,11 @@ class ScheduleDetailsTableViewCell: UITableViewCell {
             buttonDelete.isHidden = false
             labelProfessorName.isHidden = true
 
+        case .studentSchedule:
+            buttonJoin.isHidden = false
+            
+        case .parentsSchedule:
+            break
         }
     }
     

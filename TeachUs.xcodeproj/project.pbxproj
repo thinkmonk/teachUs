@@ -76,6 +76,7 @@
 		811F28FF2104D7AC002B810F /* OfflineAttendanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811F28FE2104D7AC002B810F /* OfflineAttendanceManager.swift */; };
 		812298CD2108F61C003C2EE3 /* OfflineApiRequest+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812298CB2108F61C003C2EE3 /* OfflineApiRequest+CoreDataClass.swift */; };
 		812298CE2108F61C003C2EE3 /* OfflineApiRequest+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812298CC2108F61C003C2EE3 /* OfflineApiRequest+CoreDataProperties.swift */; };
+		8122EBC92551FCCF00EB723B /* StudentsScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8122EBC82551FCCF00EB723B /* StudentsScheduleViewController.swift */; };
 		8123F3C52155681300A15182 /* LectureReportSubjectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8123F3C32155681300A15182 /* LectureReportSubjectTableViewCell.swift */; };
 		8123F3C62155681300A15182 /* LectureReportTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8123F3C42155681300A15182 /* LectureReportTableViewCell.swift */; };
 		8126312A1FB2289200CD80D6 /* AttendanceStudentListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812631281FB2289200CD80D6 /* AttendanceStudentListTableViewCell.swift */; };
@@ -498,6 +499,7 @@
 		811F28FE2104D7AC002B810F /* OfflineAttendanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineAttendanceManager.swift; sourceTree = "<group>"; };
 		812298CB2108F61C003C2EE3 /* OfflineApiRequest+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OfflineApiRequest+CoreDataClass.swift"; sourceTree = "<group>"; };
 		812298CC2108F61C003C2EE3 /* OfflineApiRequest+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OfflineApiRequest+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		8122EBC82551FCCF00EB723B /* StudentsScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsScheduleViewController.swift; sourceTree = "<group>"; };
 		8123F3C32155681300A15182 /* LectureReportSubjectTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LectureReportSubjectTableViewCell.swift; sourceTree = "<group>"; };
 		8123F3C42155681300A15182 /* LectureReportTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LectureReportTableViewCell.swift; sourceTree = "<group>"; };
 		812631281FB2289200CD80D6 /* AttendanceStudentListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceStudentListTableViewCell.swift; sourceTree = "<group>"; };
@@ -1137,6 +1139,14 @@
 				817C28A8223D50D8000E0544 /* CollegeProfSubjectDetials.swift */,
 			);
 			path = CollegeProfessor;
+			sourceTree = "<group>";
+		};
+		8122EBC72551FCBD00EB723B /* Schedule */ = {
+			isa = PBXGroup;
+			children = (
+				8122EBC82551FCCF00EB723B /* StudentsScheduleViewController.swift */,
+			);
+			path = Schedule;
 			sourceTree = "<group>";
 		};
 		8123F3C2215567F100A15182 /* LectureReport */ = {
@@ -2076,6 +2086,7 @@
 		81D7CE8B1FAB980300C4375E /* Students */ = {
 			isa = PBXGroup;
 			children = (
+				8122EBC72551FCBD00EB723B /* Schedule */,
 				8188FCB1247BF6B60013B54D /* Admission */,
 				81D2773F22A05FD4003CFC51 /* Student_Notes */,
 				81CE9FFA2336499500320DFB /* Attendance */,
@@ -2749,6 +2760,7 @@
 				81E3E3A920776057002CFC1D /* CollegeAttendanceMailReportViewController.swift in Sources */,
 				811F28FF2104D7AC002B810F /* OfflineAttendanceManager.swift in Sources */,
 				81930B301FCDD7700002CDBE /* TeacherProfile.swift in Sources */,
+				8122EBC92551FCCF00EB723B /* StudentsScheduleViewController.swift in Sources */,
 				81727B921F9E70CC006433E8 /* LeftMenuViewController.swift in Sources */,
 				81D7CE801FAB8E5D00C4375E /* CAPSPageMenu.swift in Sources */,
 				811EA459223D173A00D55899 /* CollegeLogsProfessorListViewController.swift in Sources */,

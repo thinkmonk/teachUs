@@ -5992,6 +5992,52 @@ Form Library</string>
             </objects>
             <point key="canvasLocation" x="3783" y="17543"/>
         </scene>
+        <!--Students Schedule View Controller-->
+        <scene sceneID="8Q8-U4-Vlz">
+            <objects>
+                <viewController storyboardIdentifier="StudentsScheduleViewId" id="IvQ-XO-Q6K" customClass="StudentsScheduleViewController" customModule="TeachUs" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iqp-WR-LTW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hep-03-kzk">
+                                <rect key="frame" x="15" y="131" width="345" height="632"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="IvQ-XO-Q6K" id="VXC-Zo-WmP"/>
+                                    <outlet property="delegate" destination="IvQ-XO-Q6K" id="6I4-z2-Tzc"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OOg-hj-TDd">
+                                <rect key="frame" x="300" y="93" width="60" height="38"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                <state key="normal" title="Dates"/>
+                                <connections>
+                                    <action selector="actionDatePicker:" destination="IvQ-XO-Q6K" eventType="touchUpInside" id="ETH-jD-I0m"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="WoE-eO-dBX"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="hep-03-kzk" firstAttribute="leading" secondItem="WoE-eO-dBX" secondAttribute="leading" constant="15" id="11t-VM-yBQ"/>
+                            <constraint firstItem="WoE-eO-dBX" firstAttribute="trailing" secondItem="OOg-hj-TDd" secondAttribute="trailing" constant="15" id="CdD-vE-qpQ"/>
+                            <constraint firstItem="WoE-eO-dBX" firstAttribute="trailing" secondItem="hep-03-kzk" secondAttribute="trailing" constant="15" id="QaS-eA-c9w"/>
+                            <constraint firstItem="OOg-hj-TDd" firstAttribute="top" secondItem="WoE-eO-dBX" secondAttribute="top" constant="5" id="STA-OL-kLt"/>
+                            <constraint firstItem="WoE-eO-dBX" firstAttribute="bottom" secondItem="hep-03-kzk" secondAttribute="bottom" constant="15" id="UAP-6L-wu2"/>
+                            <constraint firstItem="hep-03-kzk" firstAttribute="trailing" secondItem="OOg-hj-TDd" secondAttribute="trailing" id="cEP-DC-csX"/>
+                            <constraint firstItem="hep-03-kzk" firstAttribute="top" secondItem="OOg-hj-TDd" secondAttribute="bottom" id="dZC-lv-1Wa"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="GMu-Rj-xTI"/>
+                    <connections>
+                        <outlet property="tableView" destination="hep-03-kzk" id="0Qb-av-WOw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B1h-Kd-zfZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3783" y="18338"/>
+        </scene>
         <!--Schedule Details View Controller-->
         <scene sceneID="YHj-pb-UJo">
             <objects>
@@ -6688,6 +6734,24 @@ Form Library</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="99h-eB-iPg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2788" y="17543"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="zZt-ot-piK">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VE0-SJ-oZW" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Q4c-ED-eOn">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="IvQ-XO-Q6K" kind="relationship" relationship="rootViewController" id="ruX-qf-Cm6"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4B0-R0-rjZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2788" y="18338"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

@@ -71,6 +71,7 @@ public struct URLConstants{
         static let getNotificationList =            BaseUrl.baseURLV1 + "/student/notifications"
         static let getBellNotifications =           BaseUrl.baseURLV1 + "/student/firebasenotification"
         static let markReadNotification =           BaseUrl.baseURLV1 + "/student/firebasenotification_readstatus"
+        static let studentSchedule =                BaseUrl.baseURLV1 + "/student/schedule"
 
 
     }
@@ -94,6 +95,8 @@ public struct URLConstants{
         static let getNotificationList =            BaseUrl.baseURLV1 + "/parents/notifications"
         static let getBellNotifications =           BaseUrl.baseURLV1 + "/parents/firebasenotification"
         static let markReadNotification =           BaseUrl.baseURLV1 + "/parents/firebasenotification_readstatus"
+        static let parentsSchedule =                BaseUrl.baseURLV1 + "/parents/schedule"
+
         
         
     }

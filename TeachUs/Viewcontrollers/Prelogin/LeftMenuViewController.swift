@@ -37,8 +37,8 @@ class LeftMenuViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     
     //    var studentDataSource = ["Attendance", "Syllabus Status", "Feedback / Ratings", "Logout"]
-    var studentDataSource = ["Attendance", "Syllabus","Ratings","Notice", "Notification" ,"Notes" ,"Logout"]
-    var studentImageDataSource = ["attendanceReport", "syllabus", "feedback", "notice", "notification", "notes", "logout"]
+    var studentDataSource = ["Attendance", "Syllabus","Ratings","Notice", "Notification" ,"Notes", "Schedule" ,"Logout"]
+    var studentImageDataSource = ["attendanceReport", "syllabus", "feedback", "notice", "notification", "notes", "notes", "logout"]
     
     //    var professorDataSource = ["Attendance", "Syllabus Status", "Logs", "Logout"]
     var professorDataSource = ["Attendance", "Syllabus", "My Logs", "Notice", "Notification" ,"Notes", "Schedule", "Logout"]
@@ -51,8 +51,8 @@ class LeftMenuViewController: BaseViewController, UIGestureRecognizerDelegate {
     var collegeAdminDataSource = ["Attendance(Reports)", "Attendance(Events)", "Notice", "Request" ,"Logout"]
     var collegeAdminImageDataSource = ["attendanceReport","syllabusStatusEvent", "notice","request","logout"]
     
-    var parentsDataSource = ["Attendance", "Syllabus","Notice", "Notification", "Logout"]
-    var parentImageDataSource = ["attendanceReport", "syllabus", "notice", "notification", "logout"]
+    var parentsDataSource = ["Attendance", "Syllabus","Notice", "Notification", "Schedule", "Logout"]
+    var parentImageDataSource = ["attendanceReport", "syllabus", "notice", "notification","notice", "logout"]
 
     var examDataSource = ["Exam", "Logout"]
     var examImageDataSource = ["logs", "Logout"]

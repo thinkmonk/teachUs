@@ -204,8 +204,6 @@ extension CollegeScheduleDetailsViewController: DatePickerDelegate {
     func dateSelected(from fromDate: Date, to toDate: Date) {
         getScheduleDetails(to: toDate.getDateString(format: "YYYY-MM-dd"), from: fromDate.getDateString(format: "YYYY-MM-dd"))
     }
-    
-    
 }
 
 extension CollegeScheduleDetailsViewController {

@@ -126,6 +126,7 @@ public struct Constants {
         static let addNewScheduleId = "AddNewScheduleViewControllerId"
         static let lecturerScheduleDetails = "lecturerScheduleDetails"
         static let lecturerScheduleList = "lecturerScheduleList"
+        static let studentScheduleListId = "StudentsScheduleViewId"
     }
     
     struct UserDefaults {
