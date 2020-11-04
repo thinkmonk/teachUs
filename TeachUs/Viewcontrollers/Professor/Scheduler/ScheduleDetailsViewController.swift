@@ -110,7 +110,8 @@ extension ScheduleDetailsViewController : UITableViewDelegate, UITableViewDataSo
             cell.setUpCell(details: scheduleObj, cellType: scheduleObj.cellType)
             cell.buttonDelete.indexPath = indexPath
             cell.buttonEdit.indexPath = indexPath
-            cell.buttonJoin.indexPath = indexPath
+            cell.buttonStartLecture.indexPath = indexPath
+            cell.buttonRecordAttendance.indexPath = indexPath
             
             cell.delegate = self
             cell.selectionStyle = .none
@@ -179,7 +180,7 @@ extension ScheduleDetailsViewController: ScheduleDetailCellDelegate {
         self.navigationController?.pushViewController(detailsVc, animated: true)
     }
     
-    func actionJoinSchedule(_ sender: ButtonWithIndexPath) {
+    func actionStart(_ sender: ButtonWithIndexPath) {
         guard let indexPath = sender.indexPath,
               let schedule = arrayDataSource[indexPath.section].attachedObject as? ScheduleDetail,
               let scheduleURL = schedule.scheduleHostURL,
@@ -187,6 +188,7 @@ extension ScheduleDetailsViewController: ScheduleDetailCellDelegate {
             return
         }
         UIApplication.shared.open(url)
+
     }
     
     func actionRecordAttendance(_ sender: ButtonWithIndexPath) {

@@ -82,7 +82,7 @@ class ScheduleDetailsTableViewCell: UITableViewCell {
     @IBOutlet weak var buttonStartLecture: ButtonWithIndexPath!
     
     weak var delegate : ScheduleDetailCellDelegate?
-    
+    private var details:ScheduleDetail?
     override func prepareForReuse() {
         super.prepareForReuse()
         buttonReschedule.indexPath = nil
@@ -140,7 +140,7 @@ class ScheduleDetailsTableViewCell: UITableViewCell {
             labelProfessorName.isHidden = true
 
         case .studentSchedule:
-            buttonJoin.isHidden = false
+            buttonJoin.isHidden = !((details?.scheduleStatus ?? "") == "1")
             
         case .parentsSchedule:
             break
@@ -149,7 +149,7 @@ class ScheduleDetailsTableViewCell: UITableViewCell {
     
     func setUpCell(details: ScheduleDetail, cellType: DetaillCellType) {
         self.setUpUI(for: cellType)
-        
+        self.details = details
         if let fromTime = details.fromTime, let toTime = details.toTime {
             let font = UIFont.boldSystemFont(ofSize: 15)
             let attributes: [NSAttributedString.Key: Any] = [
@@ -188,10 +188,11 @@ class ScheduleDetailsTableViewCell: UITableViewCell {
     }
     
     @IBAction func actionRecordAttendance(_ sender: ButtonWithIndexPath) {
-        delegate?.actionStart(sender)
+        delegate?.actionRecordAttendance(sender)
     }
     
     @IBAction func actionStartLecture(_ sender: ButtonWithIndexPath) {
-        delegate?.actionRecordAttendance(sender)
+        delegate?.actionStart(sender)
+
     }
 }

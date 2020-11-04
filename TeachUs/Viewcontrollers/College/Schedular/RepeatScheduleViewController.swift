@@ -134,17 +134,19 @@ extension RepeatScheduleViewController {
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         let manager = NetworkHandler()
         
-        if flowType == .professorUpdate || flowType == .professorAdd {
-            manager.url = URLConstants.ProfessorURL.professorScheduleDetails
-        }else {
-            manager.url = URLConstants.CollegeURL.collegeScheduleDetails
-        }
         
-        let parameters:[String:Any] = [
+        var parameters:[String:Any] = [
             "college_code" : "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
-            "class_id" : self.classId ?? "",
             "to_date" : toDate,
             "from_date" : fromDate ]
+        
+        if flowType == .professorUpdate || flowType == .professorAdd {
+            manager.url = URLConstants.ProfessorURL.professorRepeatScheduleDetails
+        }else {
+            manager.url = URLConstants.CollegeURL.collegeScheduleDetails
+            parameters["class_id" ] = self.classId ?? ""
+        }
+
         
         manager.apiPostWithDataResponse(apiName: "Get College Schedules Details", parameters:parameters, completionHandler: { [weak self] (result, code, response)  in
             LoadingActivityHUD.hideProgressHUD()
@@ -183,28 +185,16 @@ extension RepeatScheduleViewController {
 
 extension RepeatScheduleViewController {
     private func addNewSchedule(for scheduleData:ScheduleDetail) {
-        guard let classId = self.classId else {
-            return
+        if flowType == .collegeUpdate || flowType == .collegeAdd {
+            guard self.classId != nil else {
+                return
+            }
         }
 
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         
         let manager = NetworkHandler()
-        
-//        let scheduleParams:[String:Any] = [
-//            "lecture_date": "\(Date().getDateString(format: "YYYY-MM-dd"))",
-//            "from_time": "\(scheduleData.fromTime ?? "")",
-//            "to_time": "\(scheduleData.toTime ?? "")",
-//            "class_id": scheduleData.classId ?? "",
-//            "class_name": scheduleData.className ?? "",
-//            "subject_id" : scheduleData.subjectId ?? "",
-//            "subject_name" : scheduleData.subjectName ?? "",
-//            "professor_id" : "\(scheduleData.professorId ?? "")",
-//            "professor_name" : "\(scheduleData.professorName ?? "")",
-//            "professor_email" : "\(scheduleData.professorEmail ?? "")",
-//            "attendance_type" : "\(scheduleData.attendanceType ?? "")"
-//        ]
-        
+            
         
         var scheduleParams:[String:Any] = [
             "lecture_date": "\(Date().getDateString(format: "YYYY-MM-dd") )",

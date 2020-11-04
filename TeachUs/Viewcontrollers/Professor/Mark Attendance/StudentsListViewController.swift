@@ -59,7 +59,7 @@ class StudentsListViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if self.isEditAttendanceFlow{
+        if self.isEditAttendanceFlow || isSchedularFlow {
             self.getListForAttendanceEdit()
         }else{
             if(selectedCollege != nil)
@@ -189,7 +189,8 @@ class StudentsListViewController: BaseViewController {
                     
                 }
                 if(self.arrayStudentsDetails.count > 0){
-                    self.numberOfLectures.value = Int(self.lectureDetails.numberOfLectures) ?? 1
+                    
+                    self.numberOfLectures.value = self.lectureDetails.numberOfLectures != nil ? Int(self.lectureDetails.numberOfLectures) ?? 1 : 1
                     self.initDatPicker()
                     self.initTimePickers()
                     self.setUpTableView()
@@ -509,15 +510,27 @@ class StudentsListViewController: BaseViewController {
         let manager = NetworkHandler()
         manager.url = URLConstants.ProfessorURL.duplicateAttendanceCheck
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
-        parameters = [
-            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
-            "class_id":"\(self.selectedCollege.classId!)",
-            "subject_id":"\(self.selectedCollege.subjectId!)",
-            "from_time":"\(fromTimePicker.postJsonTimeString)",
-            "to_time":"\(toTimePicker.postJsonTimeString)",
-            "lecture_date":"\(datePicker.postJsonDateString)",
-            "course_id":"\(self.selectedCollege.courseId!)",
-        ]
+        if !isSchedularFlow {
+            parameters = [
+                "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+                "class_id":"\(self.selectedCollege.classId ?? "")",
+                "subject_id":"\(self.selectedCollege.subjectId!)",
+                "from_time":"\(fromTimePicker.postJsonTimeString)",
+                "to_time":"\(toTimePicker.postJsonTimeString)",
+                "lecture_date":"\(datePicker.postJsonDateString)",
+                "course_id":"\(self.selectedCollege.courseId!)",
+            ]
+        }else{
+            parameters = [
+                "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+                "class_id":"\(self.lectureDetails.classId ?? "")",
+                "subject_id":"\(self.lectureDetails.subjectId!)",
+                "from_time":"\(fromTimePicker.postJsonTimeString)",
+                "to_time":"\(toTimePicker.postJsonTimeString)",
+                "lecture_date":"\(datePicker.postJsonDateString)",
+                "course_id":"\(self.lectureDetails.courseId!)",
+            ]
+        }
         
         manager.apiPost(apiName: "Check for duplicate Attendance entry" , parameters:parameters, completionHandler: { (result, code, response) in
             LoadingActivityHUD.hideProgressHUD()
@@ -810,7 +823,7 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
             datePicker = ViewDatePicker.instanceFromNib() as? ViewDatePicker
             datePicker.setUpPicker(type: .date)
             datePicker.buttonOk.addTarget(self, action: #selector(StudentsListViewController.dismissDatePicker), for: .touchUpInside)
-            if self.isEditAttendanceFlow{
+            if self.isEditAttendanceFlow || isSchedularFlow{
                 let formatter = DateFormatter()
                 formatter.dateFormat = "YYYY-MM-dd" //2018-12-01
                 let lectureDate = formatter.date(from: self.lectureDetails.lectureDate)
@@ -831,7 +844,7 @@ extension StudentsListViewController: UITableViewDelegate, UITableViewDataSource
     //MARK:- Time picker methods
     
     func initTimePickers(){
-        if self.isEditAttendanceFlow{
+        if self.isEditAttendanceFlow || isSchedularFlow{
             let formatter = DateFormatter()
             formatter.dateFormat = "HH:mm" //7:22 Am
             let lectureFromTime = formatter.date(from: self.lectureDetails.fromTime)
@@ -1106,20 +1119,38 @@ extension StudentsListViewController:ViewConfirmAttendanceDelegate{
             self.submitEditedAttendance()
             
         }else{
-            self.checkForDuplicateAttendance { (isAttendancePresent) in
+            self.checkForDuplicateAttendance { [weak self] (isAttendancePresent) in
+                guard let `self` = self else  { return }
                 if !isAttendancePresent{
-                    self.parameters = [
-                        "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
-                        "class_id":"\(self.selectedCollege.classId!)",
-                        "course_id":"\(self.selectedCollege.courseId!)",
-                        "subject_id":"\(self.selectedCollege.subjectId!)",
-                        "topics_covered":"1",
-                        "no_of_lecture":"\(self.numberOfLectures.value)",
-                        "lecture_date":"\(self.datePicker.postJsonDateString)",
-                        "from_time":"\(self.fromTimePicker.postJsonTimeString)",
-                        "to_time":"\(self.toTimePicker.postJsonTimeString)",
-                        "attendance_list":"\(AttendanceManager.sharedAttendanceManager.attendanceList)"
-                    ]
+                    
+                    if !self.isSchedularFlow {
+                        self.parameters = [
+                            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+                            "class_id":"\(self.selectedCollege.classId!)",
+                            "course_id":"\(self.selectedCollege.courseId!)",
+                            "subject_id":"\(self.selectedCollege.subjectId!)",
+                            "topics_covered":"1",
+                            "no_of_lecture":"\(self.numberOfLectures.value)",
+                            "lecture_date":"\(self.datePicker.postJsonDateString)",
+                            "from_time":"\(self.fromTimePicker.postJsonTimeString)",
+                            "to_time":"\(self.toTimePicker.postJsonTimeString)",
+                            "attendance_list":"\(AttendanceManager.sharedAttendanceManager.attendanceList)"
+                        ]
+                    }else {
+                        self.parameters = [
+                            "college_code":"\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+                            "class_id":"\(self.lectureDetails.classId!)",
+                            "course_id":"\(self.lectureDetails.courseId!)",
+                            "subject_id":"\(self.lectureDetails.subjectId!)",
+                            "topics_covered":"1",
+                            "no_of_lecture":"\(self.numberOfLectures.value)",
+                            "lecture_date":"\(self.datePicker.postJsonDateString)",
+                            "from_time":"\(self.fromTimePicker.postJsonTimeString)",
+                            "to_time":"\(self.toTimePicker.postJsonTimeString)",
+                            "attendance_list":"\(AttendanceManager.sharedAttendanceManager.attendanceList)"
+                        ]
+
+                    }
                     
                     let alert = UIAlertController(title: nil, message: "Attendance Recorded", preferredStyle: UIAlertControllerStyle.alert)
                     
@@ -1142,6 +1173,7 @@ extension StudentsListViewController:ViewConfirmAttendanceDelegate{
             destinationVC.isEditAttendanceFlow  = self.isEditAttendanceFlow
             destinationVC.attendanceParameters  = self.parameters
             destinationVC.lectureDetails        = self.lectureDetails
+            destinationVC.isSchedularFlow       = self.isSchedularFlow
             self.navigationItem.backBarButtonItem?.title = ""
         }
     }

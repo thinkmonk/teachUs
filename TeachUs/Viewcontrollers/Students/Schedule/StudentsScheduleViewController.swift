@@ -162,7 +162,7 @@ extension StudentsScheduleViewController {
         ]
         if isParentsProfileFlow {
             manager.url = URLConstants.ParentsURL.parentsSchedule
-            parameters["email"] = UserManager.sharedUserManager.appUserDetails.email ?? ""
+            parameters["email"] = "axistesting@gmail.com"
             
         }else {
             manager.url = URLConstants.StudentURL.studentSchedule

@@ -38,6 +38,8 @@ class MarkCompletedPortionViewController: BaseViewController {
     var attendanceDate:String = ""
     var lectureDetails:EditAttendanceLectureInfo! //for edit attendance,syllabusaflow
     var isEditAttendanceFlow:Bool = false
+    var isSchedularFlow:Bool = false
+
     var customTopicString = Variable<String>("")
     var doneToolbarButton:UIToolbar!
     private var myDisposeBag = DisposeBag()
@@ -125,18 +127,22 @@ class MarkCompletedPortionViewController: BaseViewController {
         let manager = NetworkHandler()
         manager.url = URLConstants.ProfessorURL.getSyllabusAttendanceStatus
         var parameters = [String:Any]()
-        parameters["subject_id"]    = "\(selectedCollege.subjectId!)"
-        parameters["class_id"]      = "\(selectedCollege.classId!)"
+        if !isSchedularFlow {
+            parameters["subject_id"]    = "\(selectedCollege.subjectId!)"
+            parameters["class_id"]      = "\(selectedCollege.classId!)"
+        }else {
+            parameters["subject_id"]    = "\(lectureDetails.subjectId!)"
+            parameters["class_id"]      = "\(lectureDetails.classId!)"
+        }
         parameters["college_code"]  = UserManager.sharedUserManager.appUserCollegeDetails.college_code
         if let lectureDate = attendanceParameters["lecture_date"] as? String,
-            let fromTIme = attendanceParameters["from_time"] as? String,
-            let toTIme = attendanceParameters["to_time"] as? String
+           let fromTIme = attendanceParameters["from_time"] as? String,
+           let toTIme = attendanceParameters["to_time"] as? String
         {
             parameters["lecture_date"]  = lectureDate
             parameters["to_time"]       = fromTIme
             parameters["from_time"]     = toTIme
         }
-        
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         manager.apiPostWithDataResponse(apiName: "Get syllabus status for attendance marking", parameters: parameters, completionHandler: { (sucess, code, response) in
             LoadingActivityHUD.hideProgressHUD()

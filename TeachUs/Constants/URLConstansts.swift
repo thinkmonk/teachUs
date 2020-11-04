@@ -145,6 +145,7 @@ public struct URLConstants{
         static let addSchedule  =                       BaseUrl.baseURLV1 + "/professor/add_schedule"
         static let updateSchedule =                     BaseUrl.baseURLV1 + "/professor/update_schedule"
         static let scheduleAddAttendance =              BaseUrl.baseURLV1 + "/professor/schedule_student_attendance_list"
+        static let professorRepeatScheduleDetails =     BaseUrl.baseURLV1 + "/professor/repeat_schedule"
 
 
 
