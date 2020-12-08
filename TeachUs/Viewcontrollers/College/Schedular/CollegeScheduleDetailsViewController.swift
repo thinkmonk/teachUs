@@ -178,11 +178,15 @@ extension CollegeScheduleDetailsViewController: ScheduleDetailCellDelegate{
               let classId = scheduleObj.classId,
               let className = scheduleObj.className,
               let idString = scheduleObj.attendanceScheduleId,
-              let id = Int(idString)  else { return }
+              let id = Int(idString),
+              let attendanceType = scheduleObj.attendanceType,
+              let scheduleType = scheduleObj.scheduleType else { return }
         let fromTime = scheduleObj.fromTime?.timeToDate(format: "HH:mm:ss")
         let toTime = scheduleObj.toTime?.timeToDate(format: "HH:mm:ss")
         let subject = ScheduleSubject(subjectId: scheduleObj.subjectId, subjectName: scheduleObj.subjectName)
         let professor = ScheduleProfessor(professorId: scheduleObj.professorId, professorName: scheduleObj.professorName, email: scheduleObj.professorEmail)
+        let url = scheduleObj.scheduleHostURL ?? ""
+
         let schdeulardDetails = SchedularData(date: scheduleObj.lectureDate?.convertToDate("YYYY-MM-dd"),//2020-10-16
                                               fromTime: fromTime,
                                               toTime:toTime ,
@@ -190,9 +194,11 @@ extension CollegeScheduleDetailsViewController: ScheduleDetailCellDelegate{
                                               className: className,
                                               subject: subject,
                                               professor: professor,
-                                              attendanceType: "Online",
+                                              attendanceType: attendanceType,
                                               editScheduleId: id,
-                                              flowType: .collegeUpdate)
+                                              flowType: .collegeUpdate,
+                                              platformType: scheduleType,
+                                              scheduleLink: url)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let detailsVc:AddNewScheduleViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.addNewScheduleId) as! AddNewScheduleViewController
         detailsVc.scheduleData = schdeulardDetails

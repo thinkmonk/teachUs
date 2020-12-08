@@ -11,6 +11,7 @@ import UIKit
 class ScheduleDetailsViewController: BaseViewController {
 
     @IBOutlet weak var tableview: UITableView!
+    @IBOutlet weak var labelErrorMessage: UILabel!
     var schedule : Schedule!
     var scheduleDetails:ClassScheduleDetails?
     private var currentToDate:String!
@@ -29,6 +30,7 @@ class ScheduleDetailsViewController: BaseViewController {
         tableview.estimatedRowHeight = 44.0
         tableview.rowHeight = UITableViewAutomaticDimension
         tableview.addSubview(refreshControl)
+        labelErrorMessage.isHidden = true
 
     }
     
@@ -163,6 +165,9 @@ extension ScheduleDetailsViewController: ScheduleDetailCellDelegate {
         let toTime = scheduleObj.toTime?.timeToDate(format: "HH:mm:ss")
         let subject = ScheduleSubject(subjectId: scheduleObj.subjectId, subjectName: scheduleObj.subjectName)
         let professor = ScheduleProfessor(professorId: scheduleObj.professorId, professorName: scheduleObj.professorName, email: scheduleObj.professorEmail)
+        let attendanceType = scheduleObj.attendanceType
+        let scheduleMode = scheduleObj.scheduleType
+        let url = scheduleObj.scheduleHostURL ?? ""
         let schdeulardDetails = SchedularData(date: scheduleObj.lectureDate?.convertToDate("YYYY-MM-dd"),//2020-10-16
                                               fromTime: fromTime,
                                               toTime:toTime ,
@@ -170,9 +175,11 @@ extension ScheduleDetailsViewController: ScheduleDetailCellDelegate {
                                               className: className,
                                               subject: subject,
                                               professor: professor,
-                                              attendanceType: "Online",
+                                              attendanceType: attendanceType,
                                               editScheduleId: id,
-                                              flowType: .professorUpdate)
+                                              flowType: .professorUpdate,
+                                              platformType: scheduleMode,
+                                              scheduleLink: url)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let detailsVc:AddNewScheduleViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.addNewScheduleId) as! AddNewScheduleViewController
         detailsVc.scheduleData = schdeulardDetails
@@ -235,7 +242,11 @@ extension ScheduleDetailsViewController {
                 let decoder = JSONDecoder()
                 self.scheduleDetails = try decoder.decode(ClassScheduleDetails.self, from: response)
                 if !(self.scheduleDetails?.schedules?.isEmpty ?? true) {
+                    self.labelErrorMessage.isHidden = true
                     self.makeDataSource()
+                }else{
+                    self.labelErrorMessage.isHidden = false
+                    self.labelErrorMessage.text = "No schedules are available for the selected date range!"
                 }
             } catch let error{
                 print("err", error)

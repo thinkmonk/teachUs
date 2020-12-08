@@ -206,6 +206,7 @@ public struct URLConstants{
         static let addSchedule  =                       BaseUrl.baseURLV1 + "/college/add_schedule"
         static let updateSchedule =                     BaseUrl.baseURLV1 + "/college/update_schedule"
         static let getCurrentSchedule =                 BaseUrl.baseURLV1 + "/college/schedule_current"
+        static let getScheduleType =                    BaseUrl.baseURLV1 + "/auth/get_schedule_type"
     }
     
     struct SyllabusURL {

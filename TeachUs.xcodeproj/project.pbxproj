@@ -141,6 +141,7 @@
 		81511A3722AC4D0400B50F44 /* DocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81511A3622AC4D0400B50F44 /* DocumentsViewController.swift */; };
 		8151C3CE22ED7EE300680951 /* BellNotificationReadStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8151C3CD22ED7EE300680951 /* BellNotificationReadStatus.swift */; };
 		81539C792362244100306974 /* CollegeDetails+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81539C782362244100306974 /* CollegeDetails+CoreDataProperties.swift */; };
+		8155F01F257D2CA3009D03FE /* ModeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8155F01E257D2CA3009D03FE /* ModeType.swift */; };
 		815E1D87248ABB0E00E5E91C /* AmissionFamilyDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815E1D86248ABB0E00E5E91C /* AmissionFamilyDetailsTableViewController.swift */; };
 		815E1D89248ABC5600E5E91C /* AdmissionFamilyDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815E1D88248ABC5600E5E91C /* AdmissionFamilyDetails.swift */; };
 		815E1D8B248ABD5D00E5E91C /* AdmissionFamilyDetailsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815E1D8A248ABD5D00E5E91C /* AdmissionFamilyDetailsDataSource.swift */; };
@@ -564,6 +565,7 @@
 		81511A3622AC4D0400B50F44 /* DocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsViewController.swift; sourceTree = "<group>"; };
 		8151C3CD22ED7EE300680951 /* BellNotificationReadStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellNotificationReadStatus.swift; sourceTree = "<group>"; };
 		81539C782362244100306974 /* CollegeDetails+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollegeDetails+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		8155F01E257D2CA3009D03FE /* ModeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeType.swift; sourceTree = "<group>"; };
 		815E1D86248ABB0E00E5E91C /* AmissionFamilyDetailsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmissionFamilyDetailsTableViewController.swift; sourceTree = "<group>"; };
 		815E1D88248ABC5600E5E91C /* AdmissionFamilyDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdmissionFamilyDetails.swift; sourceTree = "<group>"; };
 		815E1D8A248ABD5D00E5E91C /* AdmissionFamilyDetailsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdmissionFamilyDetailsDataSource.swift; sourceTree = "<group>"; };
@@ -1110,6 +1112,7 @@
 			children = (
 				81D02D37253B342A0078F680 /* AddSchedule */,
 				811C1DFE250C0F750048EE19 /* ClassScheduleDetails.swift */,
+				8155F01E257D2CA3009D03FE /* ModeType.swift */,
 			);
 			path = Scheduler;
 			sourceTree = "<group>";
@@ -2863,6 +2866,7 @@
 				810E0CDB1FD03F0A006AE5BE /* LogsDetailTableViewCell.swift in Sources */,
 				81316DE52165575200820481 /* OfflineClassAttendanceViewController.swift in Sources */,
 				81316DE12165575200820481 /* OfflineHomeViewController.swift in Sources */,
+				8155F01F257D2CA3009D03FE /* ModeType.swift in Sources */,
 				81E3E3B220777BE1002CFC1D /* AttendanceReport.swift in Sources */,
 				8188FCB3247BF6D70013B54D /* AdmissionsViewController.swift in Sources */,
 				81B203DB1FD551FF00936F0F /* Student+CoreDataProperties.swift in Sources */,

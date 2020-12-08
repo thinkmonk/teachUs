@@ -6046,6 +6046,12 @@ Form Library</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Message" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fbV-vd-aDh">
+                                <rect key="frame" x="132.33333333333334" y="396" width="110.66666666666666" height="20.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7hy-7U-rTf">
                                 <rect key="frame" x="15" y="103" width="345" height="694"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -6060,7 +6066,11 @@ Form Library</string>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="7hy-7U-rTf" secondAttribute="trailing" constant="15" id="0UI-Oi-tyj"/>
                             <constraint firstAttribute="bottom" secondItem="7hy-7U-rTf" secondAttribute="bottom" constant="15" id="3Uu-2G-Try"/>
+                            <constraint firstItem="fbV-vd-aDh" firstAttribute="centerX" secondItem="Ss3-mN-U91" secondAttribute="centerX" id="JkF-cl-KlV"/>
+                            <constraint firstItem="fbV-vd-aDh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="RwG-Mz-lTq" secondAttribute="leading" constant="15" id="Mq5-Cu-Ckk"/>
+                            <constraint firstItem="RwG-Mz-lTq" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fbV-vd-aDh" secondAttribute="trailing" constant="15" id="Pcx-fT-OTR"/>
                             <constraint firstItem="7hy-7U-rTf" firstAttribute="top" secondItem="RwG-Mz-lTq" secondAttribute="top" constant="15" id="Z2R-6E-u8e"/>
+                            <constraint firstItem="fbV-vd-aDh" firstAttribute="centerY" secondItem="Ss3-mN-U91" secondAttribute="centerY" id="hVZ-E6-mBX"/>
                             <constraint firstItem="7hy-7U-rTf" firstAttribute="leading" secondItem="RwG-Mz-lTq" secondAttribute="leading" constant="15" id="yiK-s4-4Fc"/>
                         </constraints>
                     </view>
@@ -6072,6 +6082,7 @@ Form Library</string>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="labelErrorMessage" destination="fbV-vd-aDh" id="8tD-dh-0XY"/>
                         <outlet property="tableview" destination="7hy-7U-rTf" id="9eS-bP-CZV"/>
                     </connections>
                 </viewController>

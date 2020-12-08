@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum LectureMode:String,CaseIterable {
+    case online = "Online"
+    case offline = "Offline"
+}
+
 struct SchedularData {
     var date: Date? = nil
     var fromTime: Date?  = nil
@@ -19,28 +24,29 @@ struct SchedularData {
     var attendanceType: String? = nil
     var editScheduleId: Int?
     var flowType: AddUpdateType
+    var platformType: String? = nil
+    var platformName: String? = nil
+    var scheduleLink: String? = nil
     
     var isNotNil : Bool {
         switch flowType {
         case .collegeAdd, .collegeUpdate:
             return date != nil &&
-            fromTime != nil &&
-            toTime != nil &&
-            subject != nil &&
-            professor != nil &&
-            attendanceType != nil
-
+                fromTime != nil &&
+                toTime != nil &&
+                subject != nil &&
+                professor != nil &&
+                attendanceType != nil &&
+                platformType != nil
+            
         case .professorAdd, .professorUpdate:
             return date != nil &&
-            fromTime != nil &&
-            toTime != nil &&
-            subject != nil &&
-            attendanceType != nil
-
-        default:
-            return false
+                fromTime != nil &&
+                toTime != nil &&
+                subject != nil &&
+                attendanceType != nil &&
+                platformType != nil
         }
-        
     }
 }
 
@@ -59,6 +65,8 @@ enum PickerTag:Int, CaseIterable {
     case SubjectName
     case ProfessorName
     case Mode
+    case ModePlatform
+    case ModeLink
     
     var title:String {
         switch self {
@@ -69,6 +77,8 @@ enum PickerTag:Int, CaseIterable {
         case .SubjectName : return "Subject Name"
         case .ProfessorName : return "Professor Name"
         case .Mode : return "Mode"
+        case .ModePlatform : return "Platform"
+        case .ModeLink : return " link"
         }
     }
 }
@@ -95,18 +105,22 @@ class AddNewScheduleViewController: BaseViewController {
     private var selectedScheduleWeek : RescheduleWeeks? = nil
     private var rescheduleFlowType : RescheduleFlowType? = nil
 
-    private var modeDataSource: [String] = ["Online", "Offline"]
+    private var modeDataSource: [String] {
+        return LectureMode.allCases.map({$0.rawValue})
+    }
     
 //    var classId:String!
 //    var className:String!
     private var arrayDataSource = [AddNewScheduleDataSource]()
     private var activeTextField:CustomTextField!
     private var toolBar = UIToolbar()
+    private var scheduleModeData:ScheduleModeType?
 
     private let picker = UIPickerView()
     private var datepicker = UIDatePicker()
     var scheduleData : SchedularData!
     var isScheduleEditing:Bool = false
+
     
     enum RescheduleFlowType {
         case date
@@ -127,8 +141,19 @@ class AddNewScheduleViewController: BaseViewController {
         buttonAddSchedule.themeRedButton()
         buttonAddSchedule.isHidden = !scheduleData.isNotNil
         getScheduleSubject()
+        if let scheduleType = self.scheduleData.platformType, !scheduleType.isEmpty {
+            getScheduleModes()
+        }
         setUpToolBar()
+        setUpKeyboardObservers()
     }
+    
+    func setUpKeyboardObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+
+    }
+
         
     func setUpToolBar() {
         
@@ -214,6 +239,10 @@ class AddNewScheduleViewController: BaseViewController {
                 self.getScheduleProfessor(for: subject)
             }
             
+        case .Mode, .ModePlatform:
+            self.makeDataSource()
+            validateAndReloadTable(row: indexPath.section)
+            
         default:
             validateAndReloadTable(row: indexPath.section)
         }
@@ -247,6 +276,22 @@ class AddNewScheduleViewController: BaseViewController {
         
         let modeDs = AddNewScheduleDataSource(detailsCell: .Mode, detailsObject: nil)
         arrayDataSource.append(modeDs)
+        
+        
+        if let mode = scheduleData.attendanceType, !mode.isEmpty, mode == LectureMode.online.rawValue {
+            if (self.scheduleModeData != nil){
+                let platform = AddNewScheduleDataSource(detailsCell: .ModePlatform, detailsObject: professorList)
+                arrayDataSource.append(platform)
+            }else{
+                getScheduleModes()
+            }
+        }
+        
+        if let platform = scheduleData.platformType, platform == "2" {
+            let link = AddNewScheduleDataSource(detailsCell: .ModeLink, detailsObject: professorList)
+            arrayDataSource.append(link)
+
+        }
         
         self.tableview.reloadData()
     }
@@ -325,6 +370,16 @@ extension AddNewScheduleViewController: UITableViewDelegate, UITableViewDataSour
                 cell.textFieldValue.text = object
             }
 
+        case .ModePlatform:
+            if let object = scheduleData.platformName  {
+                cell.textFieldValue.text = object
+            }
+            
+        case .ModeLink:
+            if let object = scheduleData.scheduleLink {
+                cell.textFieldValue.text = object
+            }
+
         default:
             cell.textFieldValue.text = ""
         }
@@ -352,7 +407,7 @@ extension AddNewScheduleViewController:UITextFieldDelegate, UIPickerViewDelegate
             return
         }
         activeTextField = textField
-        
+        activeTextField.tag = -1
         let dataSource = arrayDataSource[indexPath.section]
         
         switch dataSource.cellType {
@@ -379,6 +434,10 @@ extension AddNewScheduleViewController:UITextFieldDelegate, UIPickerViewDelegate
             textField.inputAccessoryView = toolBar
             datepicker.minimumDate = Calendar.current.date(byAdding: .day, value: -1, to: Date())
             
+        case .ModeLink:
+            activeTextField.tag = dataSource.cellType.rawValue
+            break
+            
         default:
             textField.inputView = picker
             textField.inputAccessoryView = toolBar
@@ -387,6 +446,18 @@ extension AddNewScheduleViewController:UITextFieldDelegate, UIPickerViewDelegate
             self.pickerView(self.picker, didSelectRow: 0, inComponent: 0)
         }
         
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textField.resignFirstResponder()
+        if textField.tag == PickerTag.ModeLink.rawValue {
+            scheduleData.scheduleLink = activeTextField.text
+        }
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -406,6 +477,9 @@ extension AddNewScheduleViewController:UITextFieldDelegate, UIPickerViewDelegate
             
         case PickerTag.RepeatSchedule.rawValue:
             return self.repeatScheduleDataSource.count
+            
+        case PickerTag.ModePlatform.rawValue:
+            return self.scheduleModeData?.scheduleModes?.count ?? 0
             
         default: return 0
         }
@@ -430,29 +504,32 @@ extension AddNewScheduleViewController:UITextFieldDelegate, UIPickerViewDelegate
         case PickerTag.RepeatSchedule.rawValue:
             selectedScheduleWeek = repeatScheduleDataSource[row]
             
+        case PickerTag.ModePlatform.rawValue:
+            scheduleData.platformType = self.scheduleModeData?.scheduleModes?[row].scheduleType ?? ""
+            scheduleData.platformName = self.scheduleModeData?.scheduleModes?[row].name ?? ""
+            
         default: break
         }
     }
-    
+        
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-
-        var pickerLabel = view as? UILabel;
-
-        if (pickerLabel == nil)
-        {
-            pickerLabel = UILabel()
-
-            pickerLabel?.textAlignment = .center
-            pickerLabel?.minimumScaleFactor = 0.8
-            pickerLabel?.adjustsFontSizeToFitWidth = true
-            pickerLabel?.numberOfLines = 0
+        var label : UILabel
+        if view == nil {
+            label = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: UIFont.systemFont(ofSize: UIFont.systemFontSize).lineHeight * 2 * UIScreen.main.scale))
+            label.textAlignment = .center
+            label.numberOfLines = 0
+            label.autoresizingMask = .flexibleWidth
+        } else {
+            label = view as! UILabel
         }
-
-        pickerLabel?.text = getLabelText(for: row, with: pickerView.tag)
-
-        return pickerLabel!;
+        label.text = getLabelText(for: row, with: pickerView.tag)
+        
+        return label
     }
 
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return UIFont.systemFont(ofSize: UIFont.systemFontSize).lineHeight * 2 * UIScreen.main.scale
+   }
     
     func validateAndReloadTable(row:Int) {
         buttonAddSchedule.isHidden = !scheduleData.isNotNil
@@ -463,7 +540,9 @@ extension AddNewScheduleViewController:UITextFieldDelegate, UIPickerViewDelegate
     func getLabelText(for row:Int, with tag:Int) -> String {
         switch tag {
         case PickerTag.SubjectName.rawValue:
-            return self.subjectList.scheduleSubject?[row].subjectName ?? "NA"
+            let subjectName = self.subjectList.scheduleSubject?[row].subjectName ?? "NA"
+            let className = self.subjectList.scheduleSubject?[row].className ?? "NA"
+            return "\(subjectName) - \(className)"
             
         case PickerTag.ProfessorName.rawValue:
             return self.professorList.scheduleProfessor?[row].professorName ?? "NA"
@@ -479,6 +558,9 @@ extension AddNewScheduleViewController:UITextFieldDelegate, UIPickerViewDelegate
             let week = "Week \(row+1): "
             let dates = "\(startDate.getDateString(format: "MMM-dd")) to \(endDate.getDateString(format: "MMM-dd"))"
             return week + dates
+            
+        case PickerTag.ModePlatform.rawValue: return self.scheduleModeData?.scheduleModes?[row].name ?? ""
+            
         default: return "NA"
         }
     }
@@ -560,6 +642,32 @@ extension AddNewScheduleViewController {
         }
     }
     
+    private func getScheduleModes() {
+        //TODO:- Implement this
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        
+        let manager = NetworkHandler()
+        manager.url = URLConstants.CollegeURL.getScheduleType
+        
+        manager.apiGetWithDataResponse(apiName: "get all schedule modes", completionHandler: { [weak self] (response, code) in
+            LoadingActivityHUD.hideProgressHUD()
+            guard let `self` = self else { return }
+            do{
+                let decoder = JSONDecoder()
+                self.scheduleModeData = try decoder.decode(ScheduleModeType.self, from: response)
+                self.scheduleData.platformName = self.scheduleModeData?.scheduleModes?.first(where: {$0.scheduleType == self.scheduleData.platformType})?.name ?? ""
+            } catch let error{
+                print("err", error)
+            }
+            self.makeDataSource()
+            
+        }, failure: { (error, code, message) in
+            LoadingActivityHUD.hideProgressHUD()
+            print(message)
+            
+        })
+    }
+    
     private func addNewSchedule() {
         guard scheduleData.isNotNil else {
             return
@@ -578,7 +686,9 @@ extension AddNewScheduleViewController {
             "class_name": "\(scheduleData.className ?? "")",
             "subject_id" : scheduleData.subject?.subjectId ?? "",
             "subject_name" : scheduleData.subject?.subjectName ?? "",
-            "attendance_type" : "\(scheduleData.attendanceType ?? "")"
+            "attendance_type" : "\(scheduleData.attendanceType ?? "")",
+            "schedule_type" : "\(scheduleData.platformType ?? "")",
+            "schedule_url" : "\(scheduleData.scheduleLink ?? "")"
         ]
 
         if scheduleData.flowType == .collegeAdd {
@@ -656,7 +766,9 @@ extension AddNewScheduleViewController {
             "attendance_schedule_id" : "\(scheduleData.editScheduleId ?? 0)",
             "attendance_type" : "\(scheduleData.attendanceType ?? "")",
             "subject_name" : scheduleData.subject?.subjectName ?? "",
-            "class_name":"\(scheduleData.className ?? "")"
+            "class_name":"\(scheduleData.className ?? "")",
+            "schedule_type" : "\(scheduleData.platformType ?? "")",
+            "schedule_url" : "\(scheduleData.scheduleLink ?? "")"
         ]
         
         if scheduleData.flowType == .collegeUpdate {
@@ -734,11 +846,6 @@ extension AddNewScheduleViewController : RepeatScheduleDelegate{
             endate = startDate.addDays(-1)
         }
         
-        for (index,element) in repeatScheduleDataSource.enumerated() {
-            print("Week \(index+1):")
-            print("\(element.startDate?.getDateString(format: "MMM-dd") ?? "NA") to \(element.endDate?.getDateString(format: "MMM-dd") ?? "NA")")
-        }
-        
         let pickerHeight:CGFloat = 250.0
         picker.frame = CGRect(x: 0.0, y: UIScreen.main.bounds.size.height - pickerHeight, width: UIScreen.main.bounds.size.width, height: pickerHeight)
         toolBar.frame = CGRect(x: 0, y: UIScreen.main.bounds.size.height - pickerHeight, width: UIScreen.main.bounds.size.width, height: 50)
@@ -751,4 +858,20 @@ extension AddNewScheduleViewController : RepeatScheduleDelegate{
     }
     
     
+}
+
+//MARK:- Keyboard delegate methods
+extension AddNewScheduleViewController {
+    @objc func keyboardWillShow(notification: NSNotification) {
+        
+        if let keyboardSize = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size{
+            let newContentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0)
+            self.tableview.contentInset = newContentInsets
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        let newContentInsets = UIEdgeInsets.zero
+        self.tableview.contentInset = newContentInsets
+    }
 }

@@ -85,6 +85,10 @@ extension RepeatScheduleViewController: ScheduleDetailCellDelegate{
         let toTime = scheduleObj.toTime?.timeToDate(format: "HH:mm:ss")
         let subject = ScheduleSubject(subjectId: scheduleObj.subjectId, subjectName: scheduleObj.subjectName)
         let professor = ScheduleProfessor(professorId: scheduleObj.professorId, professorName: scheduleObj.professorName, email: scheduleObj.professorEmail)
+        let attendanceType = scheduleObj.attendanceType
+        let scheduleMode = scheduleObj.scheduleType
+        let url = scheduleObj.scheduleHostURL ?? ""
+
         let schdeulardDetails = SchedularData(date: Date(),
                                               fromTime: fromTime,
                                               toTime:toTime ,
@@ -92,9 +96,11 @@ extension RepeatScheduleViewController: ScheduleDetailCellDelegate{
                                               className: className,
                                               subject: subject,
                                               professor: professor,
-                                              attendanceType: "Online",
+                                              attendanceType: attendanceType,
                                               editScheduleId: id,
-                                              flowType: self.flowType)
+                                              flowType: self.flowType,
+                                              platformType: scheduleMode,
+                                              scheduleLink: url)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let detailsVc:AddNewScheduleViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.addNewScheduleId) as! AddNewScheduleViewController
         detailsVc.isScheduleEditing = true
