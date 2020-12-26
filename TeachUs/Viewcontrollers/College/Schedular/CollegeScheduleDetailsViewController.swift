@@ -232,9 +232,8 @@ extension CollegeScheduleDetailsViewController {
             do{
                 let decoder = JSONDecoder()
                 self.scheduleDetails = try decoder.decode(ClassScheduleDetails.self, from: response)
-                if !(self.scheduleDetails?.schedules?.isEmpty ?? true) {
                     self.makeDataSource()
-                }
+                
             } catch let error{
                 print("err", error)
             }
