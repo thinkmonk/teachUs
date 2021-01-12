@@ -26,7 +26,7 @@ class StudentsScheduleViewController: BaseViewController {
         view.backgroundColor = Constants.colors.backgroundColor
         tableView.register(UINib(nibName: "ScheduleDateTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.scheduleDetailsDateCellId)
         tableView.register(UINib(nibName: "ScheduleDetailsTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CustomCellId.schdeduleDetailsCellId)
-        tableView.estimatedRowHeight = 44.0
+        tableView.estimatedRowHeight = 60.0
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.addSubview(refreshControl)
     }

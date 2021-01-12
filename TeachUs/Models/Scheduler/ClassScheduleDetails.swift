@@ -105,7 +105,7 @@ struct ScheduleDetail: Codable {
         case 0:
             if date <= startTimeDate {
                 let difference = (calendar.dateComponents([.minute], from: nowComponents, to: startTimeComponents).minute ?? 0)
-                return difference <= 15 ?  .professorHost : .professorDefault
+                return difference <= 15  && difference >= 0 ?  .professorHost : .professorLectureWillStart
             }
             else if date > startTimeDate && date < endTimeDate {
                 return .professorHost

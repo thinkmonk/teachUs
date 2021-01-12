@@ -14,6 +14,7 @@ enum DetaillCellType{
     case reschedule
     case professorHost
     case professorRecordAttendance
+    case professorLectureWillStart
     case professorDefault
     case studentSchedule
     case parentsSchedule
@@ -70,6 +71,7 @@ extension ScheduleDetailCellDelegate {
 
 class ScheduleDetailsTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var imageviewProfessor: UIImageView!
     @IBOutlet weak var labelLectureTiming: UILabel!
     @IBOutlet weak var labelLectureMode: UILabel!
     @IBOutlet weak var labelSubjectName: UILabel!
@@ -93,12 +95,10 @@ class ScheduleDetailsTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        buttonDelete.themeRedButton()
-        buttonReschedule.makeButtonwith(background: Constants.colors.themePurple, fontColor: .white, cornerRadius: 0, borderColor: UIColor.white.cgColor, borderWidth: 0)
-        buttonJoin.makeButtonwith(background: Constants.colors.themePurple, fontColor: .white, cornerRadius: 0, borderColor: UIColor.white.cgColor, borderWidth: 0)
-        buttonRecordAttendance.makeButtonwith(background: Constants.colors.themePurple, fontColor: .white, cornerRadius: 0, borderColor: UIColor.white.cgColor, borderWidth: 0)
-        buttonStartLecture.makeButtonwith(background: Constants.colors.themePurple, fontColor: .white, cornerRadius: 0, borderColor: UIColor.white.cgColor, borderWidth: 0)
-        buttonEdit.makeButtonwith(background: Constants.colors.themeBlue, fontColor: .white, cornerRadius: 0, borderColor: UIColor.white.cgColor, borderWidth: 0)
+        buttonReschedule.makeButtonwith(background: Constants.colors.themeMainBlue, fontColor: .white, cornerRadius: 0, borderColor: UIColor.white.cgColor, borderWidth: 0)
+        buttonJoin.makeButtonwith(background: Constants.colors.themeMainBlue, fontColor: .white, cornerRadius: 0, borderColor: UIColor.white.cgColor, borderWidth: 0)
+        buttonRecordAttendance.makeButtonwith(background: Constants.colors.themeRed, fontColor: .white, cornerRadius: 0, borderColor: UIColor.white.cgColor, borderWidth: 0)
+        buttonStartLecture.makeButtonwith(background: Constants.colors.themeMainBlue, fontColor: .white, cornerRadius: 0, borderColor: UIColor.white.cgColor, borderWidth: 0)
 
     }
     
@@ -109,11 +109,14 @@ class ScheduleDetailsTableViewCell: UITableViewCell {
         buttonJoin.isHidden = true
         buttonRecordAttendance.isHidden = true
         buttonStartLecture.isHidden = true
+        imageviewProfessor.isHidden = true
+
 
         switch cellType {
         case .lectureDetails:
             buttonEdit.isHidden = false
             buttonDelete.isHidden = false
+            imageviewProfessor.isHidden = false
 
         case .reschedule:
             buttonEdit.isHidden = false
@@ -123,8 +126,6 @@ class ScheduleDetailsTableViewCell: UITableViewCell {
             buttonJoin.isHidden = false
             
         case .professorHost:
-            buttonEdit.isHidden = false
-            buttonDelete.isHidden = false
             labelProfessorName.isHidden = true
             buttonStartLecture.isHidden = false
             
@@ -133,10 +134,13 @@ class ScheduleDetailsTableViewCell: UITableViewCell {
             buttonDelete.isHidden = false
             labelProfessorName.isHidden = true
             buttonRecordAttendance.isHidden = false
-
-        case .professorDefault:
+            
+        case .professorLectureWillStart:
             buttonEdit.isHidden = false
             buttonDelete.isHidden = false
+            labelProfessorName.isHidden = true
+
+        case .professorDefault:
             labelProfessorName.isHidden = true
 
         case .studentSchedule:
