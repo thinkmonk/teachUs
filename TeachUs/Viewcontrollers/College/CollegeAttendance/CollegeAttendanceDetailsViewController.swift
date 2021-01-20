@@ -191,11 +191,10 @@ class CollegeAttendanceDetailsViewController: BaseViewController {
             fromDatePicker = ViewDatePicker.instanceFromNib() as! ViewDatePicker
             fromDatePicker.setUpPicker(type: .date)
             fromDatePicker.buttonOk.addTarget(self, action: #selector(CollegeAttendanceDetailsViewController.dismissDatePicker), for: .touchUpInside)
-            fromDatePicker.picker.minimumDate = NSCalendar.current.date(byAdding: .month, value: -6, to: Date())
             fromDatePicker.picker.maximumDate = NSCalendar.current.date(byAdding: .month, value: 0, to: Date())
             self.toDate = Date()
             self.labelToDate.text = self.dateFormatter.string(from: self.toDate!)
-            self.fromDate = NSCalendar.current.date(byAdding: .month, value: -1, to: Date())
+            self.fromDate = NSCalendar.current.date(byAdding: .month, value: -6, to: Date())
             self.labelFromDate.text = self.dateFormatter.string(from: self.fromDate!)
             
             

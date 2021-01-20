@@ -88,7 +88,6 @@ class ViewProfessorMailReport: UIView {
             fromDatePicker.setUpPicker(type: .date)
             fromDatePicker.buttonOk.addTarget(self, action: #selector(ViewLogsCalender.dismissFromDatePicker), for: .touchUpInside)
             fromDatePicker.picker.date = self.fromDate
-            fromDatePicker.picker.minimumDate = NSCalendar.current.date(byAdding: .month, value: -6, to: Date())
             fromDatePicker.picker.maximumDate = NSCalendar.current.date(byAdding: .month, value: 0, to: Date())
         }
     }
@@ -99,7 +98,6 @@ class ViewProfessorMailReport: UIView {
             toDatePicker.setUpPicker(type: .date)
             toDatePicker.buttonOk.addTarget(self, action: #selector(ViewLogsCalender.dismissToDatePicker), for: .touchUpInside)
             toDatePicker.picker.date = self.toDate
-            toDatePicker.picker.minimumDate = NSCalendar.current.date(byAdding: .month, value: -6, to: Date())
             toDatePicker.picker.maximumDate = NSCalendar.current.date(byAdding: .month, value: 0, to: Date())
         }
     }
