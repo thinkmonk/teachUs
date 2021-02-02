@@ -143,6 +143,10 @@ extension CollegeScheduleDetailsViewController: UITableViewDataSource, UITableVi
         return footerView
     }
     
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return section == 0 ? 0 : 15
+    }
+    
 }
 
 extension CollegeScheduleDetailsViewController: AddNewScheduleDelegate {

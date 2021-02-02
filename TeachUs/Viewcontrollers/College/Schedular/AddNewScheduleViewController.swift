@@ -823,7 +823,7 @@ extension AddNewScheduleViewController : RepeatScheduleDelegate{
         datepicker.autoresizingMask = .flexibleWidth
         let pickerHeight:CGFloat = 250.0
         datepicker.frame = CGRect(x: 0.0, y: UIScreen.main.bounds.size.height - pickerHeight, width: UIScreen.main.bounds.size.width, height: pickerHeight)
-        toolBar.frame = CGRect(x: 0, y: UIScreen.main.bounds.size.height - pickerHeight, width: UIScreen.main.bounds.size.width, height: 50)
+        toolBar.frame = CGRect(x: 0, y: UIScreen.main.bounds.size.height - datepicker.height(), width: UIScreen.main.bounds.size.width, height: 50)
         self.view.addSubview(datepicker)
         self.view.addSubview(toolBar)
     }
@@ -848,7 +848,7 @@ extension AddNewScheduleViewController : RepeatScheduleDelegate{
         
         let pickerHeight:CGFloat = 250.0
         picker.frame = CGRect(x: 0.0, y: UIScreen.main.bounds.size.height - pickerHeight, width: UIScreen.main.bounds.size.width, height: pickerHeight)
-        toolBar.frame = CGRect(x: 0, y: UIScreen.main.bounds.size.height - pickerHeight, width: UIScreen.main.bounds.size.width, height: 50)
+        toolBar.frame = CGRect(x: 0, y: UIScreen.main.bounds.size.height - picker.height(), width: UIScreen.main.bounds.size.width, height: 50)
         self.view.addSubview(picker)
         self.view.addSubview(toolBar)
         picker.tag = PickerTag.RepeatSchedule.rawValue

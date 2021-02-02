@@ -1174,6 +1174,7 @@ extension StudentsListViewController:ViewConfirmAttendanceDelegate{
             destinationVC.attendanceParameters  = self.parameters
             destinationVC.lectureDetails        = self.lectureDetails
             destinationVC.isSchedularFlow       = self.isSchedularFlow
+            destinationVC.scheduleAttendanceid  = self.selectedAttendanceId
             self.navigationItem.backBarButtonItem?.title = ""
         }
     }

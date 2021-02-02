@@ -112,7 +112,9 @@ struct ScheduleDetail: Codable {
             }
             return .professorDefault
         case 1:
-            if date > endTimeDate {
+            if date > startTimeDate && date < endTimeDate {
+                return .professorLiveLecture
+            }else if date > endTimeDate {
                 return .professorRecordAttendance
             }
             return .professorHost

@@ -37,8 +37,12 @@ class MarkCompletedPortionViewController: BaseViewController {
     var syllabusData:SyllabusStatusData!
     var attendanceDate:String = ""
     var lectureDetails:EditAttendanceLectureInfo! //for edit attendance,syllabusaflow
+    
     var isEditAttendanceFlow:Bool = false
+    
+    //For schedular flow
     var isSchedularFlow:Bool = false
+    var scheduleAttendanceid: Int?
 
     var customTopicString = Variable<String>("")
     var doneToolbarButton:UIToolbar!
@@ -234,7 +238,10 @@ class MarkCompletedPortionViewController: BaseViewController {
         self.attendanceParameters["topic_list"] = requestString
         self.attendanceParameters["otherstopic"] = self.customTopicString.value
         
-        manager.apiPost(apiName: "mark syllabus professor", parameters: self.attendanceParameters, completionHandler: { (sucess, code, response) in
+        manager.apiPost(apiName: "mark syllabus professor", parameters: self.attendanceParameters, completionHandler: {[weak self] (sucess, code, response) in
+            guard let `self` = self else {
+                return
+            }
             LoadingActivityHUD.hideProgressHUD()
             guard let status = response["status"] as? NSNumber else{
                 return
@@ -242,23 +249,29 @@ class MarkCompletedPortionViewController: BaseViewController {
             if (status == 200){
                 Vibration.success.vibrate()
                 self.attendanceId = response["att_id"] as? NSNumber
-                let alert = UIAlertController(title: nil, message: response["message"] as? String, preferredStyle: UIAlertControllerStyle.alert)
-                // add an action (button)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { _ in
-                    if self.isEditAttendanceFlow{
-                        for controller in self.navigationController!.viewControllers as Array {
-                            if controller.isKind(of: LogsDetailViewController.self) {
-                                self.navigationController!.popToViewController(controller, animated: true)
-                                break
+                let successMessage = response["message"] as? String
+                if self.isSchedularFlow {
+                    self.updateSchdeuleStatus(message: successMessage)
+                }
+                else {
+                    let alert = UIAlertController(title: nil, message: response["message"] as? String, preferredStyle: UIAlertControllerStyle.alert)
+                    // add an action (button)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { _ in
+                        if self.isEditAttendanceFlow{
+                            for controller in self.navigationController!.viewControllers as Array {
+                                if controller.isKind(of: LogsDetailViewController.self) {
+                                    self.navigationController!.popToViewController(controller, animated: true)
+                                    break
+                                }
                             }
+                            
+                        }else{
+                            self.performSegue(withIdentifier: Constants.segues.toLectureReport, sender: self)
                         }
-
-                    }else{
-                        self.performSegue(withIdentifier: Constants.segues.toLectureReport, sender: self)
-                    }
-                }))
-                self.present(alert, animated: true, completion:nil)
-                self.buttonSubmit.isEnabled = true
+                    }))
+                    self.present(alert, animated: true, completion:nil)
+                    self.buttonSubmit.isEnabled = true
+                }
             }
         }) { [weak self] (error, code, message) in
             LoadingActivityHUD.hideProgressHUD()
@@ -266,6 +279,50 @@ class MarkCompletedPortionViewController: BaseViewController {
             self?.showAlertWithTitle("Error", alertMessage: message)
             self?.buttonSubmit.isEnabled = true
         }
+    }
+    
+    func updateSchdeuleStatus(message: String?){
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        let manager = NetworkHandler()
+        manager.url = URLConstants.ProfessorURL.updateScheduleStatus
+        let parameters = [
+            "college_code" : "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+            "attendance_schedule_id" : "\(self.scheduleAttendanceid ?? 0)",
+            "schedule_status": "2" //schedule status = 1 while starting the lecture, schedule status = 2 after submitting attendance
+        ]
+        
+        manager.apiPostWithDataResponse(apiName: "update schedule status", parameters:parameters, completionHandler: { (result, code, response)  in
+            
+            if code == 200 {
+                let alert = UIAlertController(title: nil,
+                                              message: message,
+                                              preferredStyle: UIAlertControllerStyle.alert)
+                // add an action (button)
+                alert.addAction(UIAlertAction(title: "OK",
+                                              style: UIAlertActionStyle.default,
+                                              handler: { _ in
+                    if self.isEditAttendanceFlow {
+                        for controller in self.navigationController!.viewControllers as Array {
+                            if controller.isKind(of: LogsDetailViewController.self) {
+                                self.navigationController!.popToViewController(controller, animated: true)
+                                break
+                            }
+                        }
+                        
+                    }else{
+                        self.performSegue(withIdentifier: Constants.segues.toLectureReport, sender: self)
+                    }
+                }))
+                self.present(alert, animated: true, completion:nil)
+                self.buttonSubmit.isEnabled = true
+            }
+            LoadingActivityHUD.hideProgressHUD()
+
+        }) { (error, code, message) in
+            print(message)
+            LoadingActivityHUD.hideProgressHUD()
+        }
+        
     }
     
     func saveAttendanceAndSyllabusToDb(){

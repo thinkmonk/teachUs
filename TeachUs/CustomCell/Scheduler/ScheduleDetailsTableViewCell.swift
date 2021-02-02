@@ -13,6 +13,7 @@ enum DetaillCellType{
     case liveLecture
     case reschedule
     case professorHost
+    case professorLiveLecture
     case professorRecordAttendance
     case professorLectureWillStart
     case professorDefault
@@ -130,8 +131,6 @@ class ScheduleDetailsTableViewCell: UITableViewCell {
             buttonStartLecture.isHidden = false
             
         case .professorRecordAttendance:
-            buttonEdit.isHidden = false
-            buttonDelete.isHidden = false
             labelProfessorName.isHidden = true
             buttonRecordAttendance.isHidden = false
             
@@ -139,6 +138,11 @@ class ScheduleDetailsTableViewCell: UITableViewCell {
             buttonEdit.isHidden = false
             buttonDelete.isHidden = false
             labelProfessorName.isHidden = true
+            
+        case .professorLiveLecture:
+            labelProfessorName.isHidden = true
+            buttonJoin.isHidden = false
+            buttonRecordAttendance.isHidden = false
 
         case .professorDefault:
             labelProfessorName.isHidden = true

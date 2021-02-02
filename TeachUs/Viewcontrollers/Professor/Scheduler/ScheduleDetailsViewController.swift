@@ -114,6 +114,7 @@ extension ScheduleDetailsViewController : UITableViewDelegate, UITableViewDataSo
             cell.buttonEdit.indexPath = indexPath
             cell.buttonStartLecture.indexPath = indexPath
             cell.buttonRecordAttendance.indexPath = indexPath
+            cell.buttonJoin.indexPath = indexPath
             
             cell.delegate = self
             cell.selectionStyle = .none
@@ -194,8 +195,37 @@ extension ScheduleDetailsViewController: ScheduleDetailCellDelegate {
               let url = URL(string: scheduleURL) else {
             return
         }
-        UIApplication.shared.open(url)
+        
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        let manager = NetworkHandler()
+        manager.url = URLConstants.ProfessorURL.updateScheduleStatus
+        let parameters = [
+            "college_code" : "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+            "attendance_schedule_id" : "\(schedule.attendanceScheduleId ?? "")",
+            "schedule_status": "1" //schedule status = 1 while starting the lecture, schedule status = 2 after submitting attendance
+        ]
+        
+        manager.apiPostWithDataResponse(apiName: "Start Scheduled lecture", parameters:parameters, completionHandler: { (result, code, response)  in
+            
+            if code == 200 {
+                UIApplication.shared.open(url)
+            }
+            LoadingActivityHUD.hideProgressHUD()
 
+        }) { (error, code, message) in
+            print(message)
+            LoadingActivityHUD.hideProgressHUD()
+        }
+    }
+    
+    func actionJoinSchedule(_ sender: ButtonWithIndexPath) {
+        guard let indexPath = sender.indexPath,
+              let schedule = arrayDataSource[indexPath.section].attachedObject as? ScheduleDetail,
+              let scheduleURL = schedule.scheduleHostURL,
+              let url = URL(string: scheduleURL) else {
+            return
+        }
+        UIApplication.shared.open(url)
     }
     
     func actionRecordAttendance(_ sender: ButtonWithIndexPath) {
