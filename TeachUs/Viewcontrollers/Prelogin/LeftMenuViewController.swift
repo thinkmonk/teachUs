@@ -62,7 +62,7 @@ class LeftMenuViewController: BaseViewController, UIGestureRecognizerDelegate {
         if  UserManager.sharedUserManager.user == .college,  !collegeSuperAdminDataSource.contains(UserTabControls.logout.titleName){
             let newTab = UserTabControls.logout
             collegeSuperAdminDataSource.append(newTab.titleName)
-            collegeAdminImageDataSource.append(newTab.imageName)
+            collegeSuperAdminImageDataSource.append(newTab.imageName)
         }
         self.navigationController?.isNavigationBarHidden = true
         self.updateUserDetails()
