@@ -156,8 +156,8 @@ class ScheduleDetailsTableViewCell: UITableViewCell {
     }
     
     func setUpCell(details: ScheduleDetail, cellType: DetaillCellType) {
-        self.setUpUI(for: cellType)
         self.details = details
+        self.setUpUI(for: cellType)
         if let fromTime = details.fromTime, let toTime = details.toTime {
             let font = UIFont.boldSystemFont(ofSize: 15)
             let attributes: [NSAttributedString.Key: Any] = [

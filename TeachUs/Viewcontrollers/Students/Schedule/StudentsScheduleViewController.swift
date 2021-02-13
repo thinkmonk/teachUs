@@ -141,10 +141,32 @@ extension StudentsScheduleViewController: ScheduleDetailCellDelegate {
         let dataSource = arrayDataSource[indexPath.section]
         guard let scheduleObj = dataSource.attachedObject as? ScheduleDetail,
               let urlString = scheduleObj.scheduleURL,
+              let scheduleId = scheduleObj.attendanceScheduleId,
               let url = URL(string: urlString) else {
             return
         }
-        UIApplication.shared.open(url)
+        
+        let manager = NetworkHandler()
+        
+        manager.url =  URLConstants.StudentURL.studentScheduleAttendance
+        let parameters = [
+            "college_code" : "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
+            "attendance_schedule_id" : scheduleId
+        ]
+        
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        manager.apiPostWithDataResponse(apiName: "Mark student present", parameters:parameters, completionHandler: { (result, code, response)  in
+            LoadingActivityHUD.hideProgressHUD()
+            
+            if code == 200 {
+                UIApplication.shared.open(url)
+                
+            }
+        }) { (error, code, message) in
+            print(message)
+            LoadingActivityHUD.hideProgressHUD()
+        }
+
     }
 }
 
