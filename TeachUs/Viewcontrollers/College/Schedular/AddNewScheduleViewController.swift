@@ -861,16 +861,32 @@ extension AddNewScheduleViewController {
                 do {
                     let dictionary = try JSONSerialization.jsonObject(with: response, options: .allowFragments) as? [String:Any]
                     let message = dictionary?["message"] as? String
-                    let okAction: () -> () = {
-                        self.navigationController?.popViewController(animated: true)
+                    guard let status = dictionary?["status"] as? Int else {
+                        return
                     }
-                    let cancelAction: () -> () = { }
-                    self.showAlertWithTitleAndCompletionHandlers("Success",
-                                                                 alertMessage: message ?? "",
-                                                                 okButtonString: "Ok",
-                                                                 canelString: nil,
-                                                                 okAction: okAction,
-                                                                 cancelAction: cancelAction)
+                    if status == 200 {
+                        let okAction: () -> () = {
+                            for controller in self.navigationController!.viewControllers as Array {
+                                if controller.isKind(of: CollegeScheduleDetailsViewController.self) {
+                                    self.navigationController?.popToViewController(controller, animated: true)
+                                    break
+                                }
+                                if controller.isKind(of: ScheduleListViewController.self) {
+                                    self.navigationController?.popToViewController(controller, animated: true)
+                                    break
+                                }
+                            }
+                        }
+                        let cancelAction: () -> () = { }
+                        self.showAlertWithTitleAndCompletionHandlers("Success",
+                                                                     alertMessage: message ?? "",
+                                                                     okButtonString: "Ok",
+                                                                     canelString: nil,
+                                                                     okAction: okAction,
+                                                                     cancelAction: cancelAction)
+                    }else{
+                        self.showAlertWithTitle("Error", alertMessage: message ?? "")
+                    }
                 }
                 catch let error{
                     print(error.localizedDescription)
