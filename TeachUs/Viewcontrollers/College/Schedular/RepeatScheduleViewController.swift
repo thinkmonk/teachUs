@@ -218,6 +218,9 @@ extension RepeatScheduleViewController {
             scheduleParams["professor_id"] = "\(scheduleData.professorId ?? "")"
             scheduleParams["professor_name"] = "\(scheduleData.professorName ?? "")"
             scheduleParams["professor_email"] = "\(scheduleData.professorEmail ?? "")"
+            scheduleParams["schedule_type"] = "\(scheduleData.scheduleType ?? "")"
+            scheduleParams["schedule_url"] = "\(scheduleData.scheduleURL ?? "")"
+            scheduleParams["schedule_profile_details_id"] = "\(scheduleData.scheduleProfileDetailsId ?? "")"
         }
         
         if flowType == .professorAdd || flowType == .professorUpdate {
@@ -248,6 +251,10 @@ extension RepeatScheduleViewController {
                 do {
                     let dictionary = try JSONSerialization.jsonObject(with: response, options: .allowFragments) as? [String:Any]
                     let message = dictionary?["message"] as? String
+                    guard let status = dictionary?["status"] as? Int else {
+                        return
+                    }
+                    if status == 200 {
                     let okAction: () -> () = {
                         for controller in self.navigationController!.viewControllers as Array {
                             if controller.isKind(of: CollegeScheduleDetailsViewController.self) {
@@ -267,12 +274,17 @@ extension RepeatScheduleViewController {
                                                                  canelString: nil,
                                                                  okAction: okAction,
                                                                  cancelAction: cancelAction)
+                    }else{
+                        self.showAlertWithTitle("Error", alertMessage: message ?? "")
+                    }
                 }
-                catch {
+                catch let error {
+                    print(error)
                 }
             }
         }) { (error, code, message) in
             LoadingActivityHUD.hideProgressHUD()
+            self.showAlertWithTitle("Error", alertMessage: "Lecture not schdeuled")
             print(message)
         }
 

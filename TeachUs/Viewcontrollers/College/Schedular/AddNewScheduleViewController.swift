@@ -27,6 +27,14 @@ struct SchedularData {
     var platformType: String? = nil
     var platformName: String? = nil
     var scheduleLink: String? = nil
+    var zoomEmail: SchedulesProfile?
+    var isPlatformSelectionValid: Bool {
+        if let platform = platformType, platform == "1" { //if the platform selected is zoom then validate wether the zoomid is selcted or
+            return zoomEmail != nil
+
+        }
+        return platformType != nil
+    }
     
     var isNotNil : Bool {
         switch flowType {
@@ -37,7 +45,7 @@ struct SchedularData {
                 subject != nil &&
                 professor != nil &&
                 attendanceType != nil &&
-                platformType != nil
+                isPlatformSelectionValid
             
         case .professorAdd, .professorUpdate:
             return date != nil &&
@@ -45,7 +53,7 @@ struct SchedularData {
                 toTime != nil &&
                 subject != nil &&
                 attendanceType != nil &&
-                platformType != nil
+                isPlatformSelectionValid
         }
     }
 }
@@ -67,6 +75,7 @@ enum PickerTag:Int, CaseIterable {
     case Mode
     case ModePlatform
     case ModeLink
+    case ZoomId
     
     var title:String {
         switch self {
@@ -78,7 +87,8 @@ enum PickerTag:Int, CaseIterable {
         case .ProfessorName : return "Professor Name"
         case .Mode : return "Mode"
         case .ModePlatform : return "Platform"
-        case .ModeLink : return " link"
+        case .ModeLink : return "Link"
+        case .ZoomId : return "Zoom Id"
         }
     }
 }
@@ -115,6 +125,7 @@ class AddNewScheduleViewController: BaseViewController {
     private var activeTextField:CustomTextField!
     private var toolBar = UIToolbar()
     private var scheduleModeData:ScheduleModeType?
+    private var zoomProfiles:ScheduleProfiles?
 
     private let picker = UIPickerView()
     private var datepicker = UIDatePicker()
@@ -174,7 +185,7 @@ class AddNewScheduleViewController: BaseViewController {
         toolBar.isUserInteractionEnabled = true
     }
     
-    func showRepeatScheduleView(from dateFrom:Date, to dateTo:Date){
+    func showRepeatScheduleView(from dateFrom:Date, to dateTo:Date) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let destinationViewContoller:RepeatScheduleViewController = storyboard.instantiateViewController(withIdentifier: Constants.viewControllerId.repeatScheduleList) as! RepeatScheduleViewController
         destinationViewContoller.fromDate = dateFrom
@@ -232,16 +243,43 @@ class AddNewScheduleViewController: BaseViewController {
             validateAndReloadTable(row: indexPath.section)
             
         case .SubjectName:
-            guard let subject = scheduleData.subject else { return }
+            guard let subject = scheduleData.subject else { break }
             scheduleData.professor = nil
-            tableview.reloadData()
+            self.zoomProfiles = nil
             if self.scheduleData.flowType == .collegeAdd || self.scheduleData.flowType == .collegeUpdate {
                 self.getScheduleProfessor(for: subject)
+            }else {
+                tableview.reloadData()
             }
             
-        case .Mode, .ModePlatform:
-            self.makeDataSource()
+        case .ProfessorName:
+            self.scheduleData.zoomEmail = nil
+            self.zoomProfiles = nil //professor and zoom profiles are linked so reset them when the professor is chaged
             validateAndReloadTable(row: indexPath.section)
+            makeDataSource()
+            
+        case .Mode:
+            self.scheduleData.zoomEmail = nil
+            self.zoomProfiles = nil
+            validateAndReloadTable(row: indexPath.section)
+            self.makeDataSource()
+            
+        case .ModePlatform:
+            guard let platform = scheduleData.platformType else { break }
+            scheduleData.zoomEmail = nil
+            self.zoomProfiles = nil
+            if platform == "1" {
+                if self.scheduleData.flowType == .collegeAdd || self.scheduleData.flowType == .collegeUpdate {
+                    if  let professorId = scheduleData.professor?.professorId {
+                        self.getProfessorZoomId(with: professorId)
+                    }
+                }else {
+                    self.getProfessorZoomId()
+                }
+            }else {
+                self.makeDataSource()
+                validateAndReloadTable(row: indexPath.section)
+            }
             
         default:
             validateAndReloadTable(row: indexPath.section)
@@ -251,7 +289,9 @@ class AddNewScheduleViewController: BaseViewController {
     }
     
     func makeDataSource() {
+        buttonAddSchedule.isHidden = !scheduleData.isNotNil
         arrayDataSource.removeAll()
+        
         if !isScheduleEditing {
             let repeatDS = AddNewScheduleDataSource(detailsCell: .RepeatSchedule, detailsObject: nil)
             arrayDataSource.append(repeatDS)
@@ -270,8 +310,14 @@ class AddNewScheduleViewController: BaseViewController {
         arrayDataSource.append(subjectName)
         
         if !(professorList?.scheduleProfessor?.isEmpty ?? true) && (scheduleData.flowType == .collegeAdd || scheduleData.flowType == .collegeUpdate) {
-            let professorName = AddNewScheduleDataSource(detailsCell: .ProfessorName, detailsObject: professorList)
-            arrayDataSource.append(professorName)
+            if self.professorList != nil {
+                let professorName = AddNewScheduleDataSource(detailsCell: .ProfessorName, detailsObject: professorList)
+                arrayDataSource.append(professorName)
+            }else{
+                if let subject = scheduleData.subject {
+                    self.getScheduleProfessor(for: subject)
+                }
+            }
         }
         
         let modeDs = AddNewScheduleDataSource(detailsCell: .Mode, detailsObject: nil)
@@ -280,17 +326,41 @@ class AddNewScheduleViewController: BaseViewController {
         
         if let mode = scheduleData.attendanceType, !mode.isEmpty, mode == LectureMode.online.rawValue {
             if (self.scheduleModeData != nil){
-                let platform = AddNewScheduleDataSource(detailsCell: .ModePlatform, detailsObject: professorList)
+                let platform = AddNewScheduleDataSource(detailsCell: .ModePlatform, detailsObject: nil)
                 arrayDataSource.append(platform)
             }else{
                 getScheduleModes()
             }
-        }
-        
-        if let platform = scheduleData.platformType, platform == "2" {
-            let link = AddNewScheduleDataSource(detailsCell: .ModeLink, detailsObject: professorList)
-            arrayDataSource.append(link)
-
+            
+            if let platform = scheduleData.platformType, platform == "1" {//1: Zoom, 2: Google meet, 3: Microsoft teams
+                
+                if self.scheduleData.flowType == .collegeAdd || self.scheduleData.flowType == .collegeUpdate {
+                    
+                    if !(professorList?.scheduleProfessor?.isEmpty ?? true) { //proceed only if professor is selected
+                        
+                        if zoomProfiles != nil { //proceed only if zoom profiles are availble else fetch them
+                            let link = AddNewScheduleDataSource(detailsCell: .ZoomId, detailsObject: nil)
+                            arrayDataSource.append(link)
+                        }else{
+                            if let professorId = scheduleData.professor?.professorId {
+                                self.getProfessorZoomId(with: professorId)
+                            }
+                        }
+                    }
+                }else{
+                    if zoomProfiles != nil {
+                        let link = AddNewScheduleDataSource(detailsCell: .ZoomId, detailsObject: nil)
+                        arrayDataSource.append(link)
+                    }else{
+                        self.getProfessorZoomId()
+                    }
+                }
+            }
+            if let platform = scheduleData.platformType, platform == "2" {
+                let link = AddNewScheduleDataSource(detailsCell: .ModeLink, detailsObject: nil)
+                arrayDataSource.append(link)
+                
+            }
         }
         
         self.tableview.reloadData()
@@ -341,23 +411,17 @@ extension AddNewScheduleViewController: UITableViewDelegate, UITableViewDataSour
             return cell
             
         case .Date:
-            if let date = scheduleData.date  {
-                cell.textFieldValue.text = "\(date.getDateString(format: "dd MMMM yyyy"))"
-            }
-
+            cell.textFieldValue.text = scheduleData.date?.getDateString(format: "dd MMMM yyyy") ?? ""
+            
         case .FromTime:
-            if let time = scheduleData.fromTime {
-                cell.textFieldValue.text = "\(time.getDateString(format: "h:mm a"))"
-            }
+            cell.textFieldValue.text = scheduleData.fromTime?.getDateString(format: "h:mm a") ?? ""
+            
         case .ToTime:
-            if let time = scheduleData.toTime {
-                cell.textFieldValue.text = "\(time.getDateString(format: "h:mm a"))"
-            }
+            cell.textFieldValue.text = scheduleData.toTime?.getDateString(format: "h:mm a") ?? ""
             
         case .SubjectName:
-            if let selectedSubject = scheduleData.subject {
-                cell.textFieldValue.text = selectedSubject.subjectName ?? ""
-            }
+            cell.textFieldValue.text = scheduleData.subject?.subjectName ?? ""
+            
         case .ProfessorName:
             if let selectedProfessor = scheduleData.professor {
                 cell.textFieldValue.text = selectedProfessor.professorName ?? ""
@@ -366,20 +430,21 @@ extension AddNewScheduleViewController: UITableViewDelegate, UITableViewDataSour
             }
             
         case .Mode:
-            if let object = scheduleData.attendanceType {
-                cell.textFieldValue.text = object
-            }
-
+            cell.textFieldValue.text = scheduleData.attendanceType ?? ""
+            
         case .ModePlatform:
-            if let object = scheduleData.platformName  {
-                cell.textFieldValue.text = object
-            }
+            cell.textFieldValue.text = scheduleData.platformName ?? ""
+            
             
         case .ModeLink:
-            if let object = scheduleData.scheduleLink {
-                cell.textFieldValue.text = object
+            cell.textFieldValue.text = scheduleData.scheduleLink ?? ""
+            
+        case .ZoomId:
+            if let object = scheduleData.zoomEmail, let email = object.email {
+                cell.textFieldValue.text = email
+            }else {
+                cell.textFieldValue.text = ""
             }
-
         default:
             cell.textFieldValue.text = ""
         }
@@ -481,6 +546,9 @@ extension AddNewScheduleViewController:UITextFieldDelegate, UIPickerViewDelegate
         case PickerTag.ModePlatform.rawValue:
             return self.scheduleModeData?.scheduleModes?.count ?? 0
             
+        case PickerTag.ZoomId.rawValue:
+            return self.zoomProfiles?.arraySchedulesProfile?.count ?? 0
+            
         default: return 0
         }
     }
@@ -507,6 +575,9 @@ extension AddNewScheduleViewController:UITextFieldDelegate, UIPickerViewDelegate
         case PickerTag.ModePlatform.rawValue:
             scheduleData.platformType = self.scheduleModeData?.scheduleModes?[row].scheduleType ?? ""
             scheduleData.platformName = self.scheduleModeData?.scheduleModes?[row].name ?? ""
+            
+        case PickerTag.ZoomId.rawValue:
+            scheduleData.zoomEmail = self.zoomProfiles?.arraySchedulesProfile?[row]
             
         default: break
         }
@@ -540,8 +611,8 @@ extension AddNewScheduleViewController:UITextFieldDelegate, UIPickerViewDelegate
     func getLabelText(for row:Int, with tag:Int) -> String {
         switch tag {
         case PickerTag.SubjectName.rawValue:
-            let subjectName = self.subjectList.scheduleSubject?[row].subjectName ?? "NA"
-            let className = self.subjectList.scheduleSubject?[row].className ?? "NA"
+            let subjectName = self.subjectList.scheduleSubject?[row].subjectName ?? ""
+            let className = self.subjectList.scheduleSubject?[row].className ?? ""
             return "\(subjectName) - \(className)"
             
         case PickerTag.ProfessorName.rawValue:
@@ -560,6 +631,9 @@ extension AddNewScheduleViewController:UITextFieldDelegate, UIPickerViewDelegate
             return week + dates
             
         case PickerTag.ModePlatform.rawValue: return self.scheduleModeData?.scheduleModes?[row].name ?? ""
+            
+        case PickerTag.ZoomId.rawValue:
+            return self.zoomProfiles?.arraySchedulesProfile?[row].email ?? ""
             
         default: return "NA"
         }
@@ -643,7 +717,6 @@ extension AddNewScheduleViewController {
     }
     
     private func getScheduleModes() {
-        //TODO:- Implement this
         LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
         
         let manager = NetworkHandler()
@@ -668,6 +741,66 @@ extension AddNewScheduleViewController {
         })
     }
     
+    private func getProfessorZoomId(with professorId:String) {
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        
+        let manager = NetworkHandler()
+        manager.url = URLConstants.CollegeURL.getZoomEmails
+        
+        let parameters:[String:Any] = [
+            "class_id": "\(scheduleData.classId ?? "")",
+            "professor_id" : "\(scheduleData.professor?.professorId ?? "")",
+            "college_code" : "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code ?? "")"
+        ]
+
+        manager.apiPostWithDataResponse(apiName: "get all zoom email for id \(professorId)", parameters:parameters, completionHandler: { [weak self] (result, code, response)  in
+            LoadingActivityHUD.hideProgressHUD()
+            guard let `self` = self else { return }
+            do{
+                let decoder = JSONDecoder()
+                self.zoomProfiles = try decoder.decode(ScheduleProfiles.self, from: response)
+                self.makeDataSource()
+            } catch let error{
+                print("err", error)
+            }
+            self.makeDataSource()
+            
+        }, failure: { (error, code, message) in
+            LoadingActivityHUD.hideProgressHUD()
+            print(message)
+        })
+    }
+    
+    private func getProfessorZoomId() {
+        LoadingActivityHUD.showProgressHUD(view: UIApplication.shared.keyWindow!)
+        
+        let manager = NetworkHandler()
+        manager.url = URLConstants.ProfessorURL.getZoomEmails
+        
+        let parameters:[String:Any] = [
+            "class_id": "\(scheduleData.classId ?? "")",
+            "college_code" : "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code ?? "")"
+        ]
+
+        manager.apiPostWithDataResponse(apiName: "get all zoom email for id professor", parameters:parameters, completionHandler: { [weak self] (result, code, response)  in
+            LoadingActivityHUD.hideProgressHUD()
+            guard let `self` = self else { return }
+            do{
+                let decoder = JSONDecoder()
+                self.zoomProfiles = try decoder.decode(ScheduleProfiles.self, from: response)
+                self.makeDataSource()
+            } catch let error{
+                print("err", error)
+            }
+            self.makeDataSource()
+            
+        }, failure: { (error, code, message) in
+            LoadingActivityHUD.hideProgressHUD()
+            print(message)
+        })
+    }
+
+    
     private func addNewSchedule() {
         guard scheduleData.isNotNil else {
             return
@@ -688,7 +821,9 @@ extension AddNewScheduleViewController {
             "subject_name" : scheduleData.subject?.subjectName ?? "",
             "attendance_type" : "\(scheduleData.attendanceType ?? "")",
             "schedule_type" : "\(scheduleData.platformType ?? "")",
-            "schedule_url" : "\(scheduleData.scheduleLink ?? "")"
+            "schedule_url" : "\(scheduleData.scheduleLink ?? "")",
+            "schedule_profile_details_id" : "\(scheduleData.zoomEmail?.scheduleProfileDetailsId ?? "")"
+
         ]
 
         if scheduleData.flowType == .collegeAdd {
@@ -768,7 +903,8 @@ extension AddNewScheduleViewController {
             "subject_name" : scheduleData.subject?.subjectName ?? "",
             "class_name":"\(scheduleData.className ?? "")",
             "schedule_type" : "\(scheduleData.platformType ?? "")",
-            "schedule_url" : "\(scheduleData.scheduleLink ?? "")"
+            "schedule_url" : "\(scheduleData.scheduleLink ?? "")",
+            "schedule_profile_details_id" : "\(scheduleData.zoomEmail?.scheduleProfileDetailsId ?? "")"
         ]
         
         if scheduleData.flowType == .collegeUpdate {
@@ -776,6 +912,8 @@ extension AddNewScheduleViewController {
             scheduleParams["professor_id"] = "\(scheduleData.professor?.professorId ?? "")"
             scheduleParams["professor_name"] = "\(scheduleData.professor?.professorName ?? "")"
             scheduleParams["professor_email"] = "\(scheduleData.professor?.email ?? "")"
+            scheduleParams["schedule_profile_mail"] = "\(scheduleData.zoomEmail?.email ?? "")"
+
         }
         
         if scheduleData.flowType == .professorUpdate {

@@ -67,7 +67,8 @@ struct ScheduleDetail: Codable {
     var deleteFlag:String?
     var scheduleStatus:String?
     var scheduleType:String?
-    
+    var scheduleProfileDetailsId: String?
+
     enum CodingKeys: String, CodingKey {
         case attendanceScheduleId = "attendance_schedule_id"
         case lectureDate = "lecture_date"
@@ -86,6 +87,7 @@ struct ScheduleDetail: Codable {
         case deleteFlag = "delete_flag"
         case scheduleStatus = "schedule_status"
         case scheduleType = "schedule_type"
+        case scheduleProfileDetailsId = "schedule_profile_details_id"
     }
     
     var cellType:DetaillCellType {

@@ -6688,7 +6688,7 @@ Form Library</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Kez-0t-A5a">
-                                <rect key="frame" x="0.0" y="88" width="375" height="650"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="645"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="k1V-o6-ZrP" id="1xr-AF-Dlf"/>
@@ -6711,7 +6711,7 @@ Form Library</string>
                         <constraints>
                             <constraint firstItem="Kez-0t-A5a" firstAttribute="top" secondItem="7Lc-9j-Jxn" secondAttribute="top" id="aNL-vW-FL9"/>
                             <constraint firstItem="Kez-0t-A5a" firstAttribute="leading" secondItem="7Lc-9j-Jxn" secondAttribute="leading" id="ciC-Wd-0wb"/>
-                            <constraint firstItem="mhf-0W-HYI" firstAttribute="top" secondItem="Kez-0t-A5a" secondAttribute="bottom" id="gMx-Jy-Htu"/>
+                            <constraint firstItem="mhf-0W-HYI" firstAttribute="top" secondItem="Kez-0t-A5a" secondAttribute="bottom" constant="5" id="gMx-Jy-Htu"/>
                             <constraint firstItem="7Lc-9j-Jxn" firstAttribute="trailing" secondItem="mhf-0W-HYI" secondAttribute="trailing" id="i8I-2P-e0n"/>
                             <constraint firstItem="mhf-0W-HYI" firstAttribute="leading" secondItem="7Lc-9j-Jxn" secondAttribute="leading" id="lgT-qi-2Yx"/>
                             <constraint firstItem="7Lc-9j-Jxn" firstAttribute="bottom" secondItem="mhf-0W-HYI" secondAttribute="bottom" id="luJ-4f-Mty"/>

@@ -148,8 +148,7 @@ public struct URLConstants{
         static let scheduleAddAttendance =              BaseUrl.baseURLV1 + "/professor/schedule_student_attendance_list"
         static let professorRepeatScheduleDetails =     BaseUrl.baseURLV1 + "/professor/repeat_schedule"
         static let updateScheduleStatus =               BaseUrl.baseURLV1 + "/professor/update_attendance_status"
-
-
+        static let getZoomEmails =                      BaseUrl.baseURLV1 + "/professor/get_zoomprofile"
 
     }
     
@@ -209,6 +208,7 @@ public struct URLConstants{
         static let updateSchedule =                     BaseUrl.baseURLV1 + "/college/update_schedule"
         static let getCurrentSchedule =                 BaseUrl.baseURLV1 + "/college/schedule_current"
         static let getScheduleType =                    BaseUrl.baseURLV1 + "/auth/get_schedule_type"
+        static let getZoomEmails =                      BaseUrl.baseURLV1 + "/college/get_zoomprofile"
     }
     
     struct SyllabusURL {

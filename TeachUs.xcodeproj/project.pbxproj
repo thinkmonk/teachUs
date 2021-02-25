@@ -40,6 +40,7 @@
 		810610BE1FA65EE00067273E /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810610BD1FA65EE00067273E /* Loader.swift */; };
 		810610C01FA65FB30067273E /* LoadingActivityHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810610BF1FA65FB30067273E /* LoadingActivityHUD.swift */; };
 		810610C21FA660890067273E /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810610C11FA660890067273E /* Connectivity.swift */; };
+		8108AFF925E290BD00A18A49 /* ScheduleProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8108AFF825E290BD00A18A49 /* ScheduleProfile.swift */; };
 		810A382925165A7600CD8358 /* ExamSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810A382825165A7600CD8358 /* ExamSchedule.swift */; };
 		810A382D25165DAB00CD8358 /* ExamScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810A382B25165DAB00CD8358 /* ExamScheduleTableViewCell.swift */; };
 		810A382E25165DAB00CD8358 /* ExamScheduleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 810A382C25165DAB00CD8358 /* ExamScheduleTableViewCell.xib */; };
@@ -464,6 +465,7 @@
 		810610BD1FA65EE00067273E /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		810610BF1FA65FB30067273E /* LoadingActivityHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingActivityHUD.swift; sourceTree = "<group>"; };
 		810610C11FA660890067273E /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
+		8108AFF825E290BD00A18A49 /* ScheduleProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleProfile.swift; sourceTree = "<group>"; };
 		810A382825165A7600CD8358 /* ExamSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamSchedule.swift; sourceTree = "<group>"; };
 		810A382B25165DAB00CD8358 /* ExamScheduleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamScheduleTableViewCell.swift; sourceTree = "<group>"; };
 		810A382C25165DAB00CD8358 /* ExamScheduleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExamScheduleTableViewCell.xib; sourceTree = "<group>"; };
@@ -2027,6 +2029,7 @@
 			children = (
 				81D02D38253B343A0078F680 /* ScheduleSubjectList.swift */,
 				81D02D3A253B35D90078F680 /* ScheduleProfessorList.swift */,
+				8108AFF825E290BD00A18A49 /* ScheduleProfile.swift */,
 			);
 			path = AddSchedule;
 			sourceTree = "<group>";
@@ -2771,6 +2774,7 @@
 				8128163422A1CD2A005DD071 /* CollegeNotesDetails.swift in Sources */,
 				812CB758206FA01200D31C05 /* CALayer.swift in Sources */,
 				811EA45E223D17DD00D55899 /* CollegeProfessorList.swift in Sources */,
+				8108AFF925E290BD00A18A49 /* ScheduleProfile.swift in Sources */,
 				810610C01FA65FB30067273E /* LoadingActivityHUD.swift in Sources */,
 				81316DE72165575200820481 /* OfflineTabsViewController.swift in Sources */,
 				8137EF5C1FA10D6A00045D97 /* UIView.swift in Sources */,
@@ -3045,12 +3049,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jaimin  Shah (S67CV8442W)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 04;
+				CURRENT_PROJECT_VERSION = 05;
 				DEVELOPMENT_TEAM = NF22W73YAU;
 				INFOPLIST_FILE = TeachUs/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.5.04;
+				MARKETING_VERSION = 1.5.05;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thinkmonk.teachus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "aeddf05d-0430-4eea-8aa6-29bd99785f74";
@@ -3076,12 +3080,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: ThinkMonk Info LLP (NF22W73YAU)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 04;
+				CURRENT_PROJECT_VERSION = 05;
 				DEVELOPMENT_TEAM = NF22W73YAU;
 				INFOPLIST_FILE = TeachUs/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.5.04;
+				MARKETING_VERSION = 1.5.05;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thinkmonk.teachus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c97490f5-6a8f-4e89-b72d-9ba422aad757";

@@ -288,6 +288,7 @@ class MarkCompletedPortionViewController: BaseViewController {
         let parameters = [
             "college_code" : "\(UserManager.sharedUserManager.appUserCollegeDetails.college_code!)",
             "attendance_schedule_id" : "\(self.scheduleAttendanceid ?? 0)",
+            "attendance_id" : "\(self.attendanceId.intValue)",
             "schedule_status": "2" //schedule status = 1 while starting the lecture, schedule status = 2 after submitting attendance
         ]
         
