@@ -122,7 +122,7 @@ extension CollegeScheduleDetailsViewController: UITableViewDataSource, UITableVi
         case .SchdeuleDetails:
             let cell:ScheduleDetailsTableViewCell = tableView.dequeueReusableCell(withIdentifier: Constants.CustomCellId.schdeduleDetailsCellId, for: indexPath)  as! ScheduleDetailsTableViewCell
             guard let scheduleObj = dataSource.attachedObject as? ScheduleDetail else { return UITableViewCell() }
-            cell.setUpCell(details: scheduleObj, cellType: .lectureDetails)
+            cell.setUpCell(details: scheduleObj, cellType: scheduleObj.cellType)
             cell.buttonDelete.indexPath = indexPath
             cell.buttonEdit.indexPath = indexPath
             cell.buttonReschedule.indexPath = indexPath

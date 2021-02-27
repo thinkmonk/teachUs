@@ -115,7 +115,7 @@
                                                     <action selector="actionReschedule:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="3lo-sh-Dzx"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XPo-9G-Db4" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XPo-9G-Db4" customClass="ButtonWithIndexPath" customModule="TeachUs" customModuleProvider="target">
                                                 <rect key="frame" x="78.5" y="0.0" width="74" height="32"/>
                                                 <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
                                                 <state key="normal" image="delete"/>
